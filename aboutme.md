@@ -1,16 +1,17 @@
 ---
 layout: page
 title: About me
-subtitle: Why you'd want to go on a date with me
+subtitle: Me, Myself, and We
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+My name is Alan Cromlish. I have the following qualities:
 
-- I rock a great mustache
-- I'm extremely loyal to my family
+- I am a nerd who likes table top and PC games.
+- I enjoy baking cookies.
+- Former gym lover who is trying to get back into a routine
+- I am focused about education, sharing educational and job opportunities, and supporting peoples mental health.  
 
 What else do you need?
 
 ### My story
-
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+I grew up in Atlanta, GA loving soccer.  I refereed a decade then went to graduate school to be a therapist.  Burned out and started traveling.  I lived in four countries, traveled to 30+ (I will count it later), and feel grateful to have met amazing people and go through so many wonderful experiences.  
