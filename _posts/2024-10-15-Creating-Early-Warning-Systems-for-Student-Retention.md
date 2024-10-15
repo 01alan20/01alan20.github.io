@@ -2,9 +2,10 @@
 layout: post
 title: Creating Early Warning Systems for Student Retention
 subtitle: Letting data guide how to respond
+thumbnail-img: earlywarningsystems.png
 share-img: earlywarningsystems.png
 tags: [data, student retention]
 author: Alan Cromlish
 ---
 
-![Predictive Analytics](/assets/img/earlywarningsystem.png)
+[Predictive Analytics](earlywarningsystems.png)
