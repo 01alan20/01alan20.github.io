@@ -8,4 +8,4 @@ tags: [data, student retention]
 author: Alan Cromlish
 ---
 
-[Predictive Analytics](earlywarningsystems.png)
+![Predictive Analytics](earlywarningsystems.png)
