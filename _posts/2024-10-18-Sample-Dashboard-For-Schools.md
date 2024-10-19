@@ -7,7 +7,132 @@ share-img:
 tags: [data, student retention, dashboard]
 author: Alan Cromlish
 ---
+<h1>Admin View Sample</h1>
+<!-- Admin Dashboard HTML Structure -->
+<div class="container mx-auto">
+  <div class="card w-full max-w-2xl mx-auto">
+    <h2>University Student Risk Dashboard</h2>
+    <p>Overview of student risk assessments</p>
 
+    <!-- Summary Section -->
+    <div class="summary-section">
+      <div class="card">
+        <h3>Total Students: <span id="total-students">0</span></h3>
+      </div>
+      <div class="card">
+        <h3>High Risk Students: <span id="high-risk-students">0</span></h3>
+        <p id="high-risk-percentage">0% of total</p>
+      </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="space-y-2">
+      <label for="search">Search students or advisors</label>
+      <input id="search" type="text" placeholder="Search students or advisors..." />
+    </div>
+
+    <!-- Student Risk Table -->
+    <table class="table" id="student-table">
+      <thead>
+        <tr>
+          <th data-sort="name">Name &#x21C5;</th>
+          <th data-sort="year">Year &#x21C5;</th>
+          <th data-sort="gpa">GPA &#x21C5;</th>
+          <th data-sort="riskScore">Risk Score &#x21C5;</th>
+          <th data-sort="advisor">Academic Advisor &#x21C5;</th>
+          <th>Risk Level</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <!-- Rows will be inserted dynamically -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const students = [
+    { id: 1, name: "Alice Johnson", year: 2, gpa: 3.8, riskScore: 15, advisor: "Dr. Emily Parker" },
+    { id: 2, name: "Bob Smith", year: 3, gpa: 2.1, riskScore: 65, advisor: "Prof. Michael Brown" },
+    { id: 3, name: "Charlie Brown", year: 1, gpa: 3.2, riskScore: 25, advisor: "Dr. Sarah Lee" },
+    { id: 4, name: "Diana Ross", year: 4, gpa: 3.9, riskScore: 10, advisor: "Prof. David Wilson" },
+    { id: 5, name: "Ethan Hunt", year: 2, gpa: 2.7, riskScore: 45, advisor: "Dr. Emily Parker" },
+    { id: 6, name: "Fiona Apple", year: 3, gpa: 3.5, riskScore: 20, advisor: "Prof. Michael Brown" },
+    { id: 7, name: "George Michael", year: 1, gpa: 2.0, riskScore: 70, advisor: "Dr. Sarah Lee" },
+    { id: 8, name: "Hannah Montana", year: 4, gpa: 3.3, riskScore: 30, advisor: "Prof. David Wilson" },
+    { id: 9, name: "Ian McKellen", year: 2, gpa: 3.7, riskScore: 15, advisor: "Dr. Emily Parker" },
+    { id: 10, name: "Julia Roberts", year: 3, gpa: 2.5, riskScore: 55, advisor: "Prof. Michael Brown" },
+  ];
+
+  // Render table rows
+  function renderTable(data) {
+    const tableBody = document.getElementById('table-body');
+    tableBody.innerHTML = '';  // Clear previous rows
+    data.forEach(student => {
+      const riskLevel = student.riskScore < 30 ? 'Low' : student.riskScore < 60 ? 'Medium' : 'High';
+      const riskColor = riskLevel === 'Low' ? 'green' : riskLevel === 'Medium' ? 'yellow' : 'red';
+      const row = `
+        <tr>
+          <td>${student.name}</td>
+          <td>${student.year}</td>
+          <td>${student.gpa.toFixed(2)}</td>
+          <td>${student.riskScore}</td>
+          <td>${student.advisor}</td>
+          <td><span style="color: ${riskColor}; font-weight: bold;">${riskLevel}</span></td>
+        </tr>
+      `;
+      tableBody.innerHTML += row;
+    });
+  }
+
+  // Update the summary section
+  function updateSummary(data) {
+    const totalStudents = data.length;
+    const highRiskStudents = data.filter(student => student.riskScore >= 60).length;
+    document.getElementById('total-students').innerText = totalStudents;
+    document.getElementById('high-risk-students').innerText = highRiskStudents;
+    document.getElementById('high-risk-percentage').innerText = `${((highRiskStudents / totalStudents) * 100).toFixed(1)}% of total`;
+  }
+
+  // Sort students by a given key
+  function sortTable(key, direction = 'asc') {
+    const sortedStudents = [...students].sort((a, b) => {
+      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
+      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+    renderTable(sortedStudents);
+  }
+
+  // Search functionality
+  document.getElementById('search').addEventListener('input', function () {
+    const searchTerm = this.value.toLowerCase();
+    const filteredStudents = students.filter(student => {
+      return student.name.toLowerCase().includes(searchTerm) ||
+             student.advisor.toLowerCase().includes(searchTerm);
+    });
+    renderTable(filteredStudents);
+  });
+
+  // Attach sort functionality to table headers
+  document.querySelectorAll('th[data-sort]').forEach(th => {
+    th.addEventListener('click', function () {
+      const sortKey = this.getAttribute('data-sort');
+      const direction = this.classList.contains('asc') ? 'desc' : 'asc';
+      sortTable(sortKey, direction);
+      this.classList.toggle('asc', direction === 'asc');
+      this.classList.toggle('desc', direction === 'desc');
+    });
+  });
+
+  // Initialize the table and summary
+  document.addEventListener('DOMContentLoaded', function () {
+    renderTable(students);
+    updateSummary(students);
+  });
+</script>
+
+<h1>Student Risk</h1>
 <!-- Student Risk Assessment HTML Structure -->
 
 <div class="container mx-auto">
