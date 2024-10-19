@@ -8,9 +8,6 @@ tags: [data, student retention, dashboard]
 author: Alan Cromlish
 ---
 
-<h1>{{ page.title }}</h1>
-<p>Here’s a sample dashboard for predicting student risk and the admin view.</p>
-
 <!-- Student Risk Assessment HTML Structure -->
 
 <div class="container mx-auto">
@@ -21,8 +18,8 @@ author: Alan Cromlish
     <!-- GPA Input -->
     <div class="space-y-2">
       <label for="gpa">GPA (0.0 - 4.0)</label>
-      <input type="range" id="gpa" min="0" max="4" step="0.1" value="2.5">
-      <p id="gpa-display" class="text-sm">Current GPA: 2.5</p>
+      <input type="range" id="gpa" min="0" max="4" step="0.1" value="0">
+      <p id="gpa-display" class="text-sm">Current GPA: 0.0</p>
     </div>
 
     <!-- Attendance Input -->
@@ -84,7 +81,7 @@ author: Alan Cromlish
 <script>
   // JavaScript state management for student data
   const studentData = {
-    gpa: 2.5,
+    gpa: 0,  // Set initial GPA to 0
     attendance: 80,
     extracurricular: "none",
     financialAid: "no",
@@ -128,15 +125,28 @@ author: Alan Cromlish
   // Function to calculate risk score
   function calculateRiskScore(data) {
     let score = 0;
+
+    // GPA-based risk
     if (data.gpa < 2.0) score += 30;
     else if (data.gpa < 3.0) score += 15;
+
+    // Attendance-based risk
     if (data.attendance < 70) score += 30;
     else if (data.attendance < 85) score += 15;
+
+    // Extracurricular activities risk
     if (data.extracurricular === "none") score += 10;
+
+    // Financial aid risk
     if (data.financialAid === "no") score += 15;
+
+    // Year and credit risk
     if (data.year > 2 && data.totalCredits < 60) score += 20;
+
+    // Current credit load risk
     if (data.currentCredits < 12) score += 15;
     else if (data.currentCredits > 18) score += 10;
+
     return score;
   }
 
