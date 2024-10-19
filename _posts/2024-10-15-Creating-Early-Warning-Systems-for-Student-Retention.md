@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Creating Early Warning Systems for Student Retention
-subtitle: Letting data guide how to educators respond
+subtitle: Letting data guide how to educators respond and sample webapps
 thumbnail-img: /assets/img/earlywarningsystem.png
 share-img: /assets/img/earlywarningsystem.png
 tags: [data, student retention, dashboard]

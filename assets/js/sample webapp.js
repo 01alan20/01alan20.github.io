@@ -1,32 +1,96 @@
-"use client"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Risk Assessment</title>
+  <style>
+    /* Add your styles here */
+    .card { border: 1px solid #ddd; padding: 16px; margin-bottom: 16px; }
+    .text-green-500 { color: green; }
+    .text-yellow-500 { color: yellow; }
+    .text-red-500 { color: red; }
+    .space-y-2 { margin-bottom: 8px; }
+    .border-l-4 { border-left-width: 4px; }
+    .w-full { width: 100%; }
+    .max-w-2xl { max-width: 768px; margin: auto; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .container { padding: 16px; }
+  </style>
+</head>
+<body>
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
-import { AlertCircle, CheckCircle2 } from "lucide-react"
+<div class="container mx-auto">
+  <div class="card w-full max-w-2xl mx-auto">
+    <h2>Student Risk Assessment</h2>
+    <p>Enter student information to calculate dropout risk</p>
 
-interface StudentData {
-  gpa: number
-  attendance: number
-  extracurricular: string
-  financialAid: string
-  year: number
-  totalCredits: number
-  currentCredits: number
-}
+    <!-- GPA Input -->
+    <div class="space-y-2">
+      <label for="gpa">GPA (0.0 - 4.0)</label>
+      <input type="range" id="gpa" min="0" max="4" step="0.1" value="2.5">
+      <p id="gpa-display" class="text-sm">Current GPA: 2.5</p>
+    </div>
 
-interface Risk {
-  name: string
-  level: "high" | "medium" | "low"
-  recommendation: string
-}
+    <!-- Attendance Input -->
+    <div class="space-y-2">
+      <label for="attendance">Attendance Rate (%)</label>
+      <input type="range" id="attendance" min="0" max="100" step="1" value="80">
+      <p id="attendance-display" class="text-sm">Current Attendance: 80%</p>
+    </div>
 
-export default function StudentRiskAssessment() {
-  const [studentData, setStudentData] = useState<StudentData>({
+    <!-- Extracurricular Activities -->
+    <div class="space-y-2">
+      <label for="extracurricular">Extracurricular Activities</label>
+      <select id="extracurricular">
+        <option value="none">None</option>
+        <option value="some">Some</option>
+        <option value="active">Active</option>
+      </select>
+    </div>
+
+    <!-- Financial Aid -->
+    <div class="space-y-2">
+      <label for="financialAid">Financial Aid</label>
+      <select id="financialAid">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
+    </div>
+
+    <!-- Year in University -->
+    <div class="space-y-2">
+      <label for="year">Year in University</label>
+      <select id="year">
+        <option value="1">1st Year</option>
+        <option value="2">2nd Year</option>
+        <option value="3">3rd Year</option>
+        <option value="4">4th Year</option>
+        <option value="5">5th Year or more</option>
+      </select>
+    </div>
+
+    <!-- Total Credits -->
+    <div class="space-y-2">
+      <label for="totalCredits">Total Credit Hours Taken</label>
+      <input id="totalCredits" type="number" value="0">
+    </div>
+
+    <!-- Current Credits -->
+    <div class="space-y-2">
+      <label for="currentCredits">Current Credit Load</label>
+      <input id="currentCredits" type="number" value="12">
+    </div>
+
+    <button id="assess-button" class="w-full">Assess Risk</button>
+  </div>
+
+  <div id="assessment-result"></div>
+</div>
+
+<script>
+  // JavaScript State Management
+  const studentData = {
     gpa: 2.5,
     attendance: 80,
     extracurricular: "none",
@@ -34,232 +98,115 @@ export default function StudentRiskAssessment() {
     year: 1,
     totalCredits: 0,
     currentCredits: 12,
-  })
+  };
 
-  const [riskScore, setRiskScore] = useState<number | null>(null)
-  const [risks, setRisks] = useState<Risk[]>([])
+  // Update the display of GPA and Attendance sliders
+  document.getElementById('gpa').addEventListener('input', function() {
+    studentData.gpa = parseFloat(this.value);
+    document.getElementById('gpa-display').innerText = `Current GPA: ${studentData.gpa.toFixed(1)}`;
+  });
 
-  const calculateRiskScore = (data: StudentData): number => {
-    let score = 0
-    if (data.gpa < 2.0) score += 30
-    else if (data.gpa < 3.0) score += 15
-    if (data.attendance < 70) score += 30
-    else if (data.attendance < 85) score += 15
-    if (data.extracurricular === "none") score += 10
-    if (data.financialAid === "no") score += 15
-    if (data.year > 2 && data.totalCredits < 60) score += 20
-    if (data.currentCredits < 12) score += 15
-    else if (data.currentCredits > 18) score += 10
-    return score
+  document.getElementById('attendance').addEventListener('input', function() {
+    studentData.attendance = parseInt(this.value);
+    document.getElementById('attendance-display').innerText = `Current Attendance: ${studentData.attendance}%`;
+  });
+
+  // Update other form fields
+  document.getElementById('extracurricular').addEventListener('change', function() {
+    studentData.extracurricular = this.value;
+  });
+
+  document.getElementById('financialAid').addEventListener('change', function() {
+    studentData.financialAid = this.value;
+  });
+
+  document.getElementById('year').addEventListener('change', function() {
+    studentData.year = parseInt(this.value);
+  });
+
+  document.getElementById('totalCredits').addEventListener('input', function() {
+    studentData.totalCredits = parseInt(this.value);
+  });
+
+  document.getElementById('currentCredits').addEventListener('input', function() {
+    studentData.currentCredits = parseInt(this.value);
+  });
+
+  // Function to calculate risk score
+  function calculateRiskScore(data) {
+    let score = 0;
+    if (data.gpa < 2.0) score += 30;
+    else if (data.gpa < 3.0) score += 15;
+    if (data.attendance < 70) score += 30;
+    else if (data.attendance < 85) score += 15;
+    if (data.extracurricular === "none") score += 10;
+    if (data.financialAid === "no") score += 15;
+    if (data.year > 2 && data.totalCredits < 60) score += 20;
+    if (data.currentCredits < 12) score += 15;
+    else if (data.currentCredits > 18) score += 10;
+    return score;
   }
 
-  const identifyRisks = (data: StudentData): Risk[] => {
-    const risks: Risk[] = []
+  // Function to identify risks
+  function identifyRisks(data) {
+    const risks = [];
     if (data.gpa < 2.0) {
-      risks.push({
-        name: "Low GPA",
-        level: "high",
-        recommendation: "Provide academic tutoring and study skills workshops",
-      })
+      risks.push({ name: "Low GPA", level: "high", recommendation: "Provide academic tutoring and study skills workshops" });
     } else if (data.gpa < 3.0) {
-      risks.push({
-        name: "Moderate GPA",
-        level: "medium",
-        recommendation: "Offer optional study groups and academic counseling",
-      })
+      risks.push({ name: "Moderate GPA", level: "medium", recommendation: "Offer optional study groups and academic counseling" });
     }
     if (data.attendance < 70) {
-      risks.push({
-        name: "Poor Attendance",
-        level: "high",
-        recommendation: "Implement attendance improvement plan and regular check-ins",
-      })
+      risks.push({ name: "Poor Attendance", level: "high", recommendation: "Implement attendance improvement plan and regular check-ins" });
     } else if (data.attendance < 85) {
-      risks.push({
-        name: "Moderate Attendance",
-        level: "medium",
-        recommendation: "Send attendance reminders and offer incentives for improvement",
-      })
+      risks.push({ name: "Moderate Attendance", level: "medium", recommendation: "Send attendance reminders and offer incentives for improvement" });
     }
     if (data.extracurricular === "none") {
-      risks.push({
-        name: "No Extracurricular Activities",
-        level: "low",
-        recommendation: "Encourage participation in clubs or sports",
-      })
+      risks.push({ name: "No Extracurricular Activities", level: "low", recommendation: "Encourage participation in clubs or sports" });
     }
     if (data.financialAid === "no") {
-      risks.push({
-        name: "No Financial Aid",
-        level: "medium",
-        recommendation: "Provide information on scholarship opportunities and financial counseling",
-      })
+      risks.push({ name: "No Financial Aid", level: "medium", recommendation: "Provide information on scholarship opportunities and financial counseling" });
     }
     if (data.year > 2 && data.totalCredits < 60) {
-      risks.push({
-        name: "Insufficient Credits for Year Level",
-        level: "high",
-        recommendation: "Schedule academic advising to create a credit catch-up plan",
-      })
+      risks.push({ name: "Insufficient Credits for Year Level", level: "high", recommendation: "Schedule academic advising to create a credit catch-up plan" });
     }
     if (data.currentCredits < 12) {
-      risks.push({
-        name: "Low Current Credit Load",
-        level: "medium",
-        recommendation: "Discuss potential for adding courses or addressing barriers to full-time enrollment",
-      })
+      risks.push({ name: "Low Current Credit Load", level: "medium", recommendation: "Discuss potential for adding courses or addressing barriers to full-time enrollment" });
     } else if (data.currentCredits > 18) {
-      risks.push({
-        name: "High Current Credit Load",
-        level: "low",
-        recommendation: "Monitor for signs of academic stress and offer time management resources",
-      })
+      risks.push({ name: "High Current Credit Load", level: "low", recommendation: "Monitor for signs of academic stress and offer time management resources" });
     }
-    return risks
+    return risks;
   }
 
-  const handleAssess = () => {
-    const score = calculateRiskScore(studentData)
-    setRiskScore(score)
-    setRisks(identifyRisks(studentData))
+  // Event handler for the "Assess Risk" button
+  document.getElementById('assess-button').addEventListener('click', function() {
+    const riskScore = calculateRiskScore(studentData);
+    const risks = identifyRisks(studentData);
+    renderAssessmentResults(riskScore, risks);
+  });
+
+  // Render risk assessment results
+  function renderAssessmentResults(score, risks) {
+    const resultContainer = document.getElementById('assessment-result');
+    let resultHTML = `
+      <div class="card w-full max-w-2xl mx-auto mt-4">
+        <h3>Overall Risk Score: ${score}</h3>
+        <p class="${score < 30 ? 'text-green-500' : score < 60 ? 'text-yellow-500' : 'text-red-500'}">
+          ${score < 30 ? 'Low Risk' : score < 60 ? 'Medium Risk' : 'High Risk'}
+        </p>
+      </div>
+      <div class="card w-full max-w-2xl mx-auto mt-4">
+        <h3>Identified Risks and Recommendations:</h3>
+        ${risks.map(risk => `
+          <div class="border-l-4 pl-4 py-2" style="border-color: ${risk.level === 'high' ? 'red' : risk.level === 'medium' ? 'yellow' : 'green'};">
+            <h4>${risk.name}</h4>
+            <p>${risk.recommendation}</p>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    resultContainer.innerHTML = resultHTML;
   }
+</script>
 
-  return (
-    <div className="container mx-auto p-4">
-      <Card className="w-full max-w-2xl mx-auto">
-        <CardHeader>
-          <CardTitle>Student Risk Assessment</CardTitle>
-          <CardDescription>Enter student information to calculate dropout risk</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="gpa">GPA (0.0 - 4.0)</Label>
-            <Slider
-              id="gpa"
-              min={0}
-              max={4}
-              step={0.1}
-              value={[studentData.gpa]}
-              onValueChange={(value) => setStudentData({ ...studentData, gpa: value[0] })}
-            />
-            <p className="text-sm text-muted-foreground">Current GPA: {studentData.gpa.toFixed(1)}</p>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="attendance">Attendance Rate (%)</Label>
-            <Slider
-              id="attendance"
-              min={0}
-              max={100}
-              step={1}
-              value={[studentData.attendance]}
-              onValueChange={(value) => setStudentData({ ...studentData, attendance: value[0] })}
-            />
-            <p className="text-sm text-muted-foreground">Current Attendance: {studentData.attendance}%</p>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="extracurricular">Extracurricular Activities</Label>
-            <Select
-              value={studentData.extracurricular}
-              onValueChange={(value) => setStudentData({ ...studentData, extracurricular: value })}
-            >
-              <SelectTrigger id="extracurricular">
-                <SelectValue placeholder="Select extracurricular involvement" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">None</SelectItem>
-                <SelectItem value="some">Some</SelectItem>
-                <SelectItem value="active">Active</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="financialAid">Financial Aid</Label>
-            <Select
-              value={studentData.financialAid}
-              onValueChange={(value) => setStudentData({ ...studentData, financialAid: value })}
-            >
-              <SelectTrigger id="financialAid">
-                <SelectValue placeholder="Select financial aid status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="yes">Yes</SelectItem>
-                <SelectItem value="no">No</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="year">Year in University</Label>
-            <Select
-              value={studentData.year.toString()}
-              onValueChange={(value) => setStudentData({ ...studentData, year: parseInt(value) })}
-            >
-              <SelectTrigger id="year">
-                <SelectValue placeholder="Select year" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="1">1st Year</SelectItem>
-                <SelectItem value="2">2nd Year</SelectItem>
-                <SelectItem value="3">3rd Year</SelectItem>
-                <SelectItem value="4">4th Year</SelectItem>
-                <SelectItem value="5">5th Year or more</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="totalCredits">Total Credit Hours Taken</Label>
-            <Input
-              id="totalCredits"
-              type="number"
-              value={studentData.totalCredits}
-              onChange={(e) => setStudentData({ ...studentData, totalCredits: parseInt(e.target.value) })}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="currentCredits">Current Credit Load</Label>
-            <Input
-              id="currentCredits"
-              type="number"
-              value={studentData.currentCredits}
-              onChange={(e) => setStudentData({ ...studentData, currentCredits: parseInt(e.target.value) })}
-            />
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button onClick={handleAssess} className="w-full">Assess Risk</Button>
-        </CardFooter>
-      </Card>
-
-      {riskScore !== null && (
-        <Card className="w-full max-w-2xl mx-auto mt-4">
-          <CardHeader>
-            <CardTitle>Risk Assessment Results</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-4">
-              <h3 className="text-lg font-semibold mb-2">Overall Risk Score: {riskScore}</h3>
-              <div className={`text-lg font-bold ${
-                riskScore < 30 ? "text-green-500" : riskScore < 60 ? "text-yellow-500" : "text-red-500"
-              }`}>
-                {riskScore < 30 ? "Low Risk" : riskScore < 60 ? "Medium Risk" : "High Risk"}
-              </div>
-            </div>
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Identified Risks and Recommendations:</h3>
-              {risks.map((risk, index) => (
-                <div key={index} className="border-l-4 pl-4 py-2 space-y-1" style={{
-                  borderColor: risk.level === "high" ? "red" : risk.level === "medium" ? "yellow" : "green"
-                }}>
-                  <h4 className="font-semibold flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4" />
-                    {risk.name}
-                  </h4>
-                  <p className="text-sm text-muted-foreground">{risk.recommendation}</p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
-    </div>
-  )
-}
+</body>
+</html>
