@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Sample webapps for predicting student risk and an admin view
+title: Sample webapps for an admins to understand student risk
 subtitle: 
 thumbnail-img: 
 share-img: 
@@ -10,123 +10,22 @@ author: Alan Cromlish
 
 <h1>Admin View Sample</h1>
 
-<!-- Admin Dashboard HTML Structure -->
-<div class="container mx-auto" id="admin-dashboard">
-  <div class="card w-full max-w-2xl mx-auto">
-    <h2>University Student Risk Dashboard</h2>
-    <p>Overview of student risk assessments</p>
+<!-- Styles for Cards and Table -->
+<style>
+  .card { border: 1px solid #ddd; padding: 16px; margin-bottom: 16px; }
+  .risk-low { background-color: lightgreen; }
+  .risk-medium { background-color: yellow; }
+  .risk-high { background-color: lightcoral; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+  th { cursor: pointer; }
+</style>
 
-    <!-- Summary Section -->
-    <div class="summary-section">
-      <div class="card">
-        <h3>Total Students: <span id="total-students-admin">0</span></h3>
-      </div>
-      <div class="card">
-        <h3>High Risk Students: <span id="high-risk-students-admin">0</span></h3>
-        <p id="high-risk-percentage-admin">0% of total</p>
-      </div>
-    </div>
-
-    <!-- Search and Filter Section -->
-    <div class="space-y-2">
-      <label for="search-admin">Search students or advisors</label>
-      <input id="search-admin" type="text" placeholder="Search students or advisors..." />
-    </div>
-
-    <!-- Student Risk Table -->
-    <table class="table" id="student-table-admin">
-      <thead>
-        <tr>
-          <th data-sort="name">Name &#x21C5;</th>
-          <th data-sort="year">Year &#x21C5;</th>
-          <th data-sort="gpa">GPA &#x21C5;</th>
-          <th data-sort="riskScore">Risk Score &#x21C5;</th>
-          <th data-sort="advisor">Academic Advisor &#x21C5;</th>
-          <th>Risk Level</th>
-        </tr>
-      </thead>
-      <tbody id="table-body-admin">
-        <!-- Rows will be inserted dynamically -->
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<h1>Student Risk</h1>
-
-<!-- Student Risk Assessment HTML Structure -->
-<div class="container mx-auto" id="student-risk">
-  <div class="card w-full max-w-2xl mx-auto">
-    <h2>Student Risk Assessment</h2>
-    <p>Enter student information to calculate dropout risk</p>
-
-    <!-- GPA Input -->
-    <div class="space-y-2">
-      <label for="gpa-student">GPA (0.0 - 4.0)</label>
-      <input type="range" id="gpa-student" min="0" max="4" step="0.1" value="0">
-      <p id="gpa-display-student" class="text-sm">Current GPA: 0.0</p>
-    </div>
-
-    <!-- Attendance Input -->
-    <div class="space-y-2">
-      <label for="attendance-student">Attendance Rate (%)</label>
-      <input type="range" id="attendance-student" min="0" max="100" step="1" value="80">
-      <p id="attendance-display-student" class="text-sm">Current Attendance: 80%</p>
-    </div>
-
-    <!-- Extracurricular Activities -->
-    <div class="space-y-2">
-      <label for="extracurricular-student">Extracurricular Activities</label>
-      <select id="extracurricular-student">
-        <option value="none">None</option>
-        <option value="some">Some</option>
-        <option value="active">Active</option>
-      </select>
-    </div>
-
-    <!-- Financial Aid -->
-    <div class="space-y-2">
-      <label for="financialAid-student">Financial Aid</label>
-      <select id="financialAid-student">
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
-    </div>
-
-    <!-- Year in University -->
-    <div class="space-y-2">
-      <label for="year-student">Year in University</label>
-      <select id="year-student">
-        <option value="1">1st Year</option>
-        <option value="2">2nd Year</option>
-        <option value="3">3rd Year</option>
-        <option value="4">4th Year</option>
-        <option value="5">5th Year or more</option>
-      </select>
-    </div>
-
-    <!-- Total Credits -->
-    <div class="space-y-2">
-      <label for="totalCredits-student">Total Credit Hours Taken</label>
-      <input id="totalCredits-student" type="number" value="0">
-    </div>
-
-    <!-- Current Credits -->
-    <div class="space-y-2">
-      <label for="currentCredits-student">Current Credit Load</label>
-      <input id="currentCredits-student" type="number" value="12">
-    </div>
-
-    <button id="assess-button-student" class="w-full">Assess Risk</button>
-  </div>
-
-  <div id="assessment-result-student"></div>
-</div>
+<!-- Dashboard Content -->
+<div id="dashboard"></div>
 
 <script>
-  // Separate scripts for Admin Dashboard and Student Risk Assessment
-
-  const students = [
+  const mockStudents = [
     { id: 1, name: "Alice Johnson", year: 2, gpa: 3.8, riskScore: 15, advisor: "Dr. Emily Parker" },
     { id: 2, name: "Bob Smith", year: 3, gpa: 2.1, riskScore: 65, advisor: "Prof. Michael Brown" },
     { id: 3, name: "Charlie Brown", year: 1, gpa: 3.2, riskScore: 25, advisor: "Dr. Sarah Lee" },
@@ -139,39 +38,102 @@ author: Alan Cromlish
     { id: 10, name: "Julia Roberts", year: 3, gpa: 2.5, riskScore: 55, advisor: "Prof. Michael Brown" },
   ];
 
-  // Render table rows for Admin Dashboard
-  function renderTableAdmin(data) {
-    const tableBody = document.getElementById('table-body-admin');
-    tableBody.innerHTML = '';  // Clear previous rows
-    data.forEach(student => {
-      const riskLevel = student.riskScore < 30 ? 'Low' : student.riskScore < 60 ? 'Medium' : 'High';
-      const riskColor = riskLevel === 'Low' ? 'green' : riskLevel === 'Medium' ? 'yellow' : 'red';
-      const row = `
-        <tr>
-          <td>${student.name}</td>
-          <td>${student.year}</td>
-          <td>${student.gpa.toFixed(2)}</td>
-          <td>${student.riskScore}</td>
-          <td>${student.advisor}</td>
-          <td><span style="color: ${riskColor}; font-weight: bold;">${riskLevel}</span></td>
-        </tr>
-      `;
-      tableBody.innerHTML += row;
+  let sortConfig = { key: 'name', direction: 'asc' };
+  let searchTerm = '';
+
+  function renderDashboard() {
+    const highRiskCount = mockStudents.filter(student => student.riskScore >= 60).length;
+
+    const dashboard = `
+      <div class="card">
+        <h2>University Student Risk Dashboard</h2>
+        <p>Total Students: ${mockStudents.length}</p>
+        <p>High Risk Students: ${highRiskCount} (${((highRiskCount / mockStudents.length) * 100).toFixed(1)}%)</p>
+      </div>
+      <div>
+        <input id="search" type="text" placeholder="Search students or advisors..." />
+        <table>
+          <thead>
+            <tr>
+              <th onclick="sortTable('name')">Name</th>
+              <th onclick="sortTable('year')">Year</th>
+              <th onclick="sortTable('gpa')">GPA</th>
+              <th onclick="sortTable('riskScore')">Risk Score</th>
+              <th onclick="sortTable('advisor')">Advisor</th>
+              <th>Risk Level</th>
+            </tr>
+          </thead>
+          <tbody id="students-table">
+          ${renderStudents(mockStudents)}
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    document.getElementById('dashboard').innerHTML = dashboard;
+
+    // Attach event listener for search input
+    document.getElementById('search').addEventListener('input', function(e) {
+      searchTerm = e.target.value.toLowerCase();
+      renderStudents(mockStudents);
     });
   }
 
-  // Update the summary section for Admin Dashboard
-  function updateSummaryAdmin(data) {
-    const totalStudents = data.length;
-    const highRiskStudents = data.filter(student => student.riskScore >= 60).length;
-    document.getElementById('total-students-admin').innerText = totalStudents;
-    document.getElementById('high-risk-students-admin').innerText = highRiskStudents;
-    document.getElementById('high-risk-percentage-admin').innerText = `${((highRiskStudents / totalStudents) * 100).toFixed(1)}% of total`;
+  function renderStudents(students) {
+    let filteredStudents = students.filter(student =>
+      student.name.toLowerCase().includes(searchTerm) || 
+      student.advisor.toLowerCase().includes(searchTerm)
+    );
+
+    filteredStudents = sortStudents(filteredStudents);
+
+    const studentRows = filteredStudents.map(student => `
+      <tr>
+        <td>${student.name}</td>
+        <td>${student.year}</td>
+        <td>${student.gpa.toFixed(2)}</td>
+        <td>${student.riskScore}</td>
+        <td>${student.advisor}</td>
+        <td class="${getRiskClass(student.riskScore)}">
+          ${getRiskLevel(student.riskScore)}
+        </td>
+      </tr>
+    `).join('');
+
+    document.getElementById('students-table').innerHTML = studentRows;
   }
 
-  // Initialize Admin Dashboard on page load
-  document.addEventListener('DOMContentLoaded', function () {
-    renderTableAdmin(students);
-    updateSummaryAdmin(students);
-  });
+  function sortStudents(students) {
+    const { key, direction } = sortConfig;
+    return students.sort((a, b) => {
+      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
+      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  function sortTable(key) {
+    if (sortConfig.key === key) {
+      sortConfig.direction = sortConfig.direction === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortConfig.key = key;
+      sortConfig.direction = 'asc';
+    }
+    renderStudents(mockStudents);
+  }
+
+  function getRiskClass(riskScore) {
+    if (riskScore < 30) return 'risk-low';
+    if (riskScore < 60) return 'risk-medium';
+    return 'risk-high';
+  }
+
+  function getRiskLevel(riskScore) {
+    if (riskScore < 30) return 'Low';
+    if (riskScore < 60) return 'Medium';
+    return 'High';
+  }
+
+  // Initialize the dashboard on page load
+  document.addEventListener('DOMContentLoaded', renderDashboard);
 </script>
