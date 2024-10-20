@@ -91,7 +91,7 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         <!-- Enrollment Level -->
         <label for="enrollment">Enrollment Level:</label>
         <select id="enrollment">
-            <option value="all">All</option>
+            <option value="">Select Enrollment Level</option> <!-- Make sure they choose an option -->
             <option value="college junior">College Junior</option>
             <option value="college freshman">College Freshman</option>
             <option value="high school senior">High School Senior</option>
@@ -101,10 +101,10 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         <button onclick="addSelectedOption('enrollment')">Add</button>
         <div class="selected-options" id="enrollment-selected"></div>
 
-        <!-- Race (previously Nationality) -->
+        <!-- Race -->
         <label for="race">Race:</label>
         <select id="race">
-            <option value="all">All</option>
+            <option value="">Select Race</option> <!-- Make sure they choose an option -->
             <option value="black/african american">Black/African American</option>
             <option value="hispanic/latino">Hispanic/Latino</option>
             <option value="asian">Asian</option>
@@ -117,7 +117,7 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         <!-- Major -->
         <label for="major">Major:</label>
         <select id="major">
-            <option value="all">All</option>
+            <option value="">Select Major</option> <!-- Make sure they choose an option -->
             <option value="engineering">Engineering</option>
             <option value="medicine">Medicine</option>
             <option value="law">Law</option>
@@ -130,7 +130,7 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         <!-- Ethnicity -->
         <label for="ethnicity">Ethnicity:</label>
         <select id="ethnicity">
-            <option value="all">All</option>
+            <option value="">Select Ethnicity</option> <!-- Make sure they choose an option -->
             <option value="black/african american">Black/African American</option>
             <option value="hispanic/latino">Hispanic/Latino</option>
             <option value="asian">Asian</option>
@@ -140,7 +140,7 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         <button onclick="addSelectedOption('ethnicity')">Add</button>
         <div class="selected-options" id="ethnicity-selected"></div>
 
-        <button onclick="searchScholarships()">Search</button>
+        <button onclick="validateAndSearch()">Search</button>
     </div>
 
     <div id="results"></div>
@@ -165,7 +165,7 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         // Store selected options for each category
         const selectedOptions = {
             enrollment: [],
-            race: [],  // Changed from nationality to race
+            race: [],
             major: [],
             ethnicity: []
         };
@@ -175,7 +175,7 @@ This is just a sample of available scholarships. For me, it was an opportunity t
             const select = document.getElementById(selectId);
             const value = select.value.toLowerCase();
 
-            if (!selectedOptions[selectId].includes(value) && value !== 'all') {
+            if (value && !selectedOptions[selectId].includes(value)) {
                 selectedOptions[selectId].push(value);
 
                 const selectedDiv = document.getElementById(`${selectId}-selected`);
@@ -185,9 +185,6 @@ This is just a sample of available scholarships. For me, it was an opportunity t
                         <span class="remove-option" onclick="removeSelectedOption('${selectId}', '${value}')">x</span>
                     </div>
                 `;
-            } else if (value === 'all') {
-                selectedOptions[selectId] = ['all'];  // Set to 'all' and ignore other options
-                document.getElementById(`${selectId}-selected`).innerHTML = '<div class="selected-option">All</div>';
             }
         }
 
@@ -203,32 +200,42 @@ This is just a sample of available scholarships. For me, it was an opportunity t
             `).join('');
         }
 
+        // Validate that the user has made a selection in each area before searching
+        function validateAndSearch() {
+            const isValid = selectedOptions.enrollment.length > 0 &&
+                            selectedOptions.race.length > 0 &&
+                            selectedOptions.major.length > 0 &&
+                            selectedOptions.ethnicity.length > 0;
+
+            if (isValid) {
+                searchScholarships();
+            } else {
+                alert("Please make a selection in each category.");
+            }
+        }
+
         // Search scholarships and paginate the results
         function searchScholarships() {
             console.log('Search button clicked');
-
-            // Get selected values from the selectedOptions object
-            const enrollmentLevels = selectedOptions.enrollment.length ? selectedOptions.enrollment : ['all'];
-            const races = selectedOptions.race.length ? selectedOptions.race : ['all'];
-            const majors = selectedOptions.major.length ? selectedOptions.major : ['all'];
-            const ethnicities = selectedOptions.ethnicity.length ? selectedOptions.ethnicity : ['all'];
+            
+            const enrollmentLevels = selectedOptions.enrollment;
+            const races = selectedOptions.race;
+            const majors = selectedOptions.major;
+            const ethnicities = selectedOptions.ethnicity;
 
             console.log('Filters applied: ', { enrollmentLevels, races, majors, ethnicities });
 
-            // Filter results based on inputs
             const filteredResults = scholarshipsData.filter(scholarship => {
-                // Check each field, if the value is 'all', we include everything, otherwise we filter
-                const matchesEnrollment = enrollmentLevels.includes('all') || enrollmentLevels.some(level => (scholarship['Enrollment level'] && scholarship['Enrollment level'].toLowerCase().includes(level.toLowerCase())));
-                const matchesRace = races.includes('all') || races.some(race => (scholarship['Race'] && scholarship['Race'].toLowerCase().includes(race.toLowerCase())));
-                const matchesMajor = majors.includes('all') || majors.some(major => (scholarship['Major'] && scholarship['Major'].toLowerCase().includes(major.toLowerCase())));
-                const matchesEthnicity = ethnicities.includes('all') || ethnicities.some(ethnicity => (scholarship['Ethnicity'] && scholarship['Ethnicity'].toLowerCase().includes(ethnicity.toLowerCase())));
+                const matchesEnrollment = enrollmentLevels.some(level => scholarship['Enrollment level'] && scholarship['Enrollment level'].toLowerCase().includes(level));
+                const matchesRace = races.some(race => scholarship['Race'] && scholarship['Race'].toLowerCase().includes(race));
+                const matchesMajor = majors.some(major => scholarship['Major'] && scholarship['Major'].toLowerCase().includes(major));
+                const matchesEthnicity = ethnicities.some(ethnicity => scholarship['Ethnicity'] && scholarship['Ethnicity'].toLowerCase().includes(ethnicity));
 
-                // If all filters match, return true to include the scholarship
                 return matchesEnrollment && matchesRace && matchesMajor && matchesEthnicity;
             });
 
-            console.log('Filtered results:', filteredResults);  // Debug the filtering process
-            paginateResults(filteredResults);  // Paginate and display filtered results
+            console.log('Filtered results:', filteredResults);
+            paginateResults(filteredResults);
         }
 
         // Paginate results and display only a portion of the data
@@ -273,7 +280,7 @@ This is just a sample of available scholarships. For me, it was an opportunity t
                             <p><strong>Description:</strong> ${scholarship['Description']}</p>
                             <p><strong>Average Award:</strong> ${scholarship['Average award'] || 'N/A'}</p>
                             <p><strong>Deadline:</strong> ${scholarship['Deadline'] || 'N/A'}</p>
-                            <p><strong>URL:</strong> <a href="${scholarship['URL']}" target="_blank">${scholarship['URL']}</a></p>
+                            <p><strong>Apply URL:</strong> <a href="${scholarship['Apply URL']}" target="_blank">${scholarship['Apply URL']}</a></p>
                         </div>
                     `;
                     resultsDiv.innerHTML += resultItem;
