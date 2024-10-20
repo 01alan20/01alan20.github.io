@@ -23,6 +23,18 @@ author: Alan Cromlish
 
 This is just a sample of available scholarships. For me, it was an opportunity to create a sample database that people can search.  
 
+---
+layout: post
+title: Finding Scholarships for Students Studying at USA Universities
+subtitle: creating a database for students to search
+thumbnail-img: 
+share-img: 
+tags: [data, student retention, dashboard]
+author: Alan Cromlish
+---
+
+This is just a sample of available scholarships. For me, it was an opportunity to create a sample database that people can search.  
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -158,6 +170,7 @@ This is just a sample of available scholarships. For me, it was an opportunity t
                 .then(response => response.json())
                 .then(data => {
                     scholarshipsData = data;
+                    console.log("Data loaded: ", scholarshipsData);  // Check if data is being loaded
                 })
                 .catch(error => console.error('Error loading JSON:', error));
         };
@@ -204,23 +217,37 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         }
 
         function searchScholarships() {
+            console.log('Search button clicked');  // Debug if search is triggered
+
             // Get selected values from selectedOptions object
             const enrollmentLevels = selectedOptions.enrollment.length ? selectedOptions.enrollment : ['all'];
             const nationalities = selectedOptions.nationality.length ? selectedOptions.nationality : ['all'];
             const majors = selectedOptions.major.length ? selectedOptions.major : ['all'];
             const ethnicities = selectedOptions.ethnicity.length ? selectedOptions.ethnicity : ['all'];
 
+            console.log('Filters applied: ', {
+                enrollmentLevels,
+                nationalities,
+                majors,
+                ethnicities
+            });
+
             // Filter results based on inputs
             const filteredResults = scholarshipsData.filter(scholarship => {
-                const matchesEnrollment = enrollmentLevels.includes('all') || enrollmentLevels.some(level => scholarship['Enrollment level']?.toLowerCase().includes(level) || !scholarship['Enrollment level']);
-                const matchesNationality = nationalities.includes('all') || nationalities.some(nation => scholarship['Nationality']?.toLowerCase().includes(nation) || !scholarship['Nationality']);
-                const matchesMajor = majors.includes('all') || majors.some(major => scholarship['Major']?.toLowerCase().includes(major) || !scholarship['Major']);
-                const matchesEthnicity = ethnicities.includes('all') || ethnicities.some(ethnicity => scholarship['Ethnicity']?.toLowerCase().includes(ethnicity) || !scholarship['Ethnicity']);
+                const matchesEnrollment = enrollmentLevels.includes('all') || enrollmentLevels.some(level => (scholarship['Enrollment level'] && scholarship['Enrollment level'].toLowerCase().includes(level)) || scholarship['Enrollment level'] === "NaN" || !scholarship['Enrollment level']);
+                const matchesNationality = nationalities.includes('all') || nationalities.some(nation => (scholarship['Nationality'] && scholarship['Nationality'].toLowerCase().includes(nation)) || scholarship['Nationality'] === "NaN" || !scholarship['Nationality']);
+                const matchesMajor = majors.includes('all') || majors.some(major => (scholarship['Major'] && scholarship['Major'].toLowerCase().includes(major)) || scholarship['Major'] === "NaN" || !scholarship['Major']);
+                const matchesEthnicity = ethnicities.includes('all') || ethnicities.some(ethnicity => (scholarship['Ethnicity'] && scholarship['Ethnicity'].toLowerCase().includes(ethnicity)) || scholarship['Ethnicity'] === "NaN" || !scholarship['Ethnicity']);
 
                 return matchesEnrollment && matchesNationality && matchesMajor && matchesEthnicity;
             });
 
-            // Display the results
+            console.log('Filtered results:', filteredResults);  // Debug the filtering process
+            displayResults(filteredResults);  // Call the function to display results
+        }
+
+        // Function to display the filtered results
+        function displayResults(filteredResults) {
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = '';  // Clear previous results
 
