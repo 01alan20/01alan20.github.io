@@ -101,18 +101,18 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         <button onclick="addSelectedOption('enrollment')">Add</button>
         <div class="selected-options" id="enrollment-selected"></div>
 
-        <!-- Nationality -->
-        <label for="nationality">Nationality:</label>
-        <select id="nationality">
+        <!-- Race (previously Nationality) -->
+        <label for="race">Race:</label>
+        <select id="race">
             <option value="all">All</option>
-            <option value="american">American</option>
-            <option value="canadian">Canadian</option>
-            <option value="british">British</option>
-            <option value="indian">Indian</option>
-            <option value="chinese">Chinese</option>
+            <option value="black/african american">Black/African American</option>
+            <option value="hispanic/latino">Hispanic/Latino</option>
+            <option value="asian">Asian</option>
+            <option value="native american">Native American</option>
+            <option value="white">White</option>
         </select>
-        <button onclick="addSelectedOption('nationality')">Add</button>
-        <div class="selected-options" id="nationality-selected"></div>
+        <button onclick="addSelectedOption('race')">Add</button>
+        <div class="selected-options" id="race-selected"></div>
 
         <!-- Major -->
         <label for="major">Major:</label>
@@ -165,7 +165,7 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         // Store selected options for each category
         const selectedOptions = {
             enrollment: [],
-            nationality: [],
+            race: [],  // Changed from nationality to race
             major: [],
             ethnicity: []
         };
@@ -208,19 +208,19 @@ This is just a sample of available scholarships. For me, it was an opportunity t
             console.log('Search button clicked');
             
             const enrollmentLevels = selectedOptions.enrollment.length ? selectedOptions.enrollment : ['all'];
-            const nationalities = selectedOptions.nationality.length ? selectedOptions.nationality : ['all'];
+            const races = selectedOptions.race.length ? selectedOptions.race : ['all'];  // Changed from nationality to race
             const majors = selectedOptions.major.length ? selectedOptions.major : ['all'];
             const ethnicities = selectedOptions.ethnicity.length ? selectedOptions.ethnicity : ['all'];
 
-            console.log('Filters applied: ', { enrollmentLevels, nationalities, majors, ethnicities });
+            console.log('Filters applied: ', { enrollmentLevels, races, majors, ethnicities });
 
             const filteredResults = scholarshipsData.filter(scholarship => {
                 const matchesEnrollment = enrollmentLevels.includes('all') || enrollmentLevels.some(level => (scholarship['Enrollment level'] && scholarship['Enrollment level'].toLowerCase().includes(level)) || scholarship['Enrollment level'] === "NaN" || !scholarship['Enrollment level']);
-                const matchesNationality = nationalities.includes('all') || nationalities.some(nation => (scholarship['Nationality'] && scholarship['Nationality'].toLowerCase().includes(nation)) || scholarship['Nationality'] === "NaN" || !scholarship['Nationality']);
+                const matchesRace = races.includes('all') || races.some(race => (scholarship['Race'] && scholarship['Race'].toLowerCase().includes(race)) || scholarship['Race'] === "NaN" || !scholarship['Race']);  // Changed from nationality to race
                 const matchesMajor = majors.includes('all') || majors.some(major => (scholarship['Major'] && scholarship['Major'].toLowerCase().includes(major)) || scholarship['Major'] === "NaN" || !scholarship['Major']);
                 const matchesEthnicity = ethnicities.includes('all') || ethnicities.some(ethnicity => (scholarship['Ethnicity'] && scholarship['Ethnicity'].toLowerCase().includes(ethnicity)) || scholarship['Ethnicity'] === "NaN" || !scholarship['Ethnicity']);
 
-                return matchesEnrollment && matchesNationality && matchesMajor && matchesEthnicity;
+                return matchesEnrollment && matchesRace && matchesMajor && matchesEthnicity;
             });
 
             paginateResults(filteredResults);  // Paginate and display filtered results
