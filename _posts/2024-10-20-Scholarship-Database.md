@@ -11,6 +11,19 @@ author: Alan Cromlish
 This is just a sample of available scholarships.  For me, it was an opportunity to create a sample database that people can search.  
 
 
+---
+layout: post
+title: Finding Scholarships for Students Studying at USA Universities
+subtitle: creating a database for students to search
+thumbnail-img: 
+share-img: 
+tags: [data, student retention, dashboard]
+author: Alan Cromlish
+---
+
+This is just a sample of available scholarships. For me, it was an opportunity to create a sample database that people can search.  
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
