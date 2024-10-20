@@ -8,35 +8,9 @@ tags: [data, student retention, dashboard]
 author: Alan Cromlish
 ---
 
-This is just a sample of available scholarships.  For me, it was an opportunity to create a sample database that people can search.  
-
-
----
-layout: post
-title: Finding Scholarships for Students Studying at USA Universities
-subtitle: creating a database for students to search
-thumbnail-img: 
-share-img: 
-tags: [data, student retention, dashboard]
-author: Alan Cromlish
----
-
-This is just a sample of available scholarships. For me, it was an opportunity to create a sample database that people can search.  
-
----
-layout: post
-title: Finding Scholarships for Students Studying at USA Universities
-subtitle: creating a database for students to search
-thumbnail-img: 
-share-img: 
-tags: [data, student retention, dashboard]
-author: Alan Cromlish
----
-
 This is just a sample of available scholarships. For me, it was an opportunity to create a sample database that people can search.  
 
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -166,7 +140,7 @@ This is just a sample of available scholarships. For me, it was an opportunity t
 
         // Load JSON data on page load
         window.onload = function () {
-            fetch('assets/json/scholarships_data_truncated.json')  // Pointing to truncated JSON file
+            fetch('https://01alan20.github.io/assets/json/scholarships_data_truncated.json') // Pointing to truncated JSON file
                 .then(response => response.json())
                 .then(data => {
                     scholarshipsData = data;
