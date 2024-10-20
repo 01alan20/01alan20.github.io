@@ -9,6 +9,8 @@ author: Alan Cromlish
 ---
 
 This is just a sample of available scholarships.  For me, it was an opportunity to create a sample database that people can search.  
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -226,4 +228,6 @@ This is just a sample of available scholarships.  For me, it was an opportunity 
                 });
             }
         }
-   
+    </script>
+</body>
+</html>
