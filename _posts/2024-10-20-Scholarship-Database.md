@@ -8,6 +8,7 @@ tags: [data, student retention, dashboard]
 author: Alan Cromlish
 ---
 
+This is just a sample of available scholarships.  For me, it was an opportunity to create a sample database that people can search.  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,51 +55,79 @@ author: Alan Cromlish
         .result-item p {
             margin: 0 0 10px;
         }
+        .selected-options {
+            margin: 10px 0;
+        }
+        .selected-option {
+            display: inline-block;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .remove-option {
+            margin-left: 10px;
+            color: red;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>Scholarship Search</h1>
 
     <div id="searchForm">
+        <!-- Enrollment Level -->
         <label for="enrollment">Enrollment Level:</label>
-        <select id="enrollment" multiple>
+        <select id="enrollment">
+            <option value="all">All</option>
             <option value="college junior">College Junior</option>
             <option value="college freshman">College Freshman</option>
             <option value="high school senior">High School Senior</option>
             <option value="doctoral-level study">Doctoral-Level Study</option>
             <option value="master's-level study">Master's-Level Study</option>
-            <!-- Add more options as needed -->
-        </select><br>
+        </select>
+        <button onclick="addSelectedOption('enrollment')">Add</button>
+        <div class="selected-options" id="enrollment-selected"></div>
 
+        <!-- Nationality -->
         <label for="nationality">Nationality:</label>
-        <select id="nationality" multiple>
+        <select id="nationality">
+            <option value="all">All</option>
             <option value="american">American</option>
             <option value="canadian">Canadian</option>
             <option value="british">British</option>
             <option value="indian">Indian</option>
             <option value="chinese">Chinese</option>
-            <!-- Add more options as needed -->
-        </select><br>
+        </select>
+        <button onclick="addSelectedOption('nationality')">Add</button>
+        <div class="selected-options" id="nationality-selected"></div>
 
+        <!-- Major -->
         <label for="major">Major:</label>
-        <select id="major" multiple>
+        <select id="major">
+            <option value="all">All</option>
             <option value="engineering">Engineering</option>
             <option value="medicine">Medicine</option>
             <option value="law">Law</option>
             <option value="computer science">Computer Science</option>
             <option value="business">Business</option>
-            <!-- Add more options as needed -->
-        </select><br>
+        </select>
+        <button onclick="addSelectedOption('major')">Add</button>
+        <div class="selected-options" id="major-selected"></div>
 
+        <!-- Ethnicity -->
         <label for="ethnicity">Ethnicity:</label>
-        <select id="ethnicity" multiple>
+        <select id="ethnicity">
+            <option value="all">All</option>
             <option value="black/african american">Black/African American</option>
             <option value="hispanic/latino">Hispanic/Latino</option>
             <option value="asian">Asian</option>
             <option value="native american">Native American</option>
             <option value="white">White</option>
-            <!-- Add more options as needed -->
-        </select><br>
+        </select>
+        <button onclick="addSelectedOption('ethnicity')">Add</button>
+        <div class="selected-options" id="ethnicity-selected"></div>
 
         <button onclick="searchScholarships()">Search</button>
     </div>
@@ -118,24 +147,60 @@ author: Alan Cromlish
                 .catch(error => console.error('Error loading JSON:', error));
         };
 
-        function getSelectedValues(selectId) {
-            const selectedOptions = Array.from(document.getElementById(selectId).selectedOptions);
-            return selectedOptions.map(option => option.value.toLowerCase());
+        // Store selected options for each category
+        const selectedOptions = {
+            enrollment: [],
+            nationality: [],
+            major: [],
+            ethnicity: []
+        };
+
+        // Add selected option to the confirmation list below the select box
+        function addSelectedOption(selectId) {
+            const select = document.getElementById(selectId);
+            const value = select.value.toLowerCase();
+
+            if (!selectedOptions[selectId].includes(value) && value !== 'all') {
+                selectedOptions[selectId].push(value);
+
+                const selectedDiv = document.getElementById(`${selectId}-selected`);
+                selectedDiv.innerHTML += `
+                    <div class="selected-option">
+                        ${value}
+                        <span class="remove-option" onclick="removeSelectedOption('${selectId}', '${value}')">x</span>
+                    </div>
+                `;
+            } else if (value === 'all') {
+                selectedOptions[selectId] = ['all'];  // Set to 'all' and ignore other options
+                document.getElementById(`${selectId}-selected`).innerHTML = '<div class="selected-option">All</div>';
+            }
+        }
+
+        // Remove selected option
+        function removeSelectedOption(selectId, value) {
+            selectedOptions[selectId] = selectedOptions[selectId].filter(opt => opt !== value);
+            const selectedDiv = document.getElementById(`${selectId}-selected`);
+            selectedDiv.innerHTML = selectedOptions[selectId].map(opt => `
+                <div class="selected-option">
+                    ${opt}
+                    <span class="remove-option" onclick="removeSelectedOption('${selectId}', '${opt}')">x</span>
+                </div>
+            `).join('');
         }
 
         function searchScholarships() {
-            // Get selected options
-            const enrollmentLevels = getSelectedValues('enrollment');
-            const nationalities = getSelectedValues('nationality');
-            const majors = getSelectedValues('major');
-            const ethnicities = getSelectedValues('ethnicity');
+            // Get selected values from selectedOptions object
+            const enrollmentLevels = selectedOptions.enrollment.length ? selectedOptions.enrollment : ['all'];
+            const nationalities = selectedOptions.nationality.length ? selectedOptions.nationality : ['all'];
+            const majors = selectedOptions.major.length ? selectedOptions.major : ['all'];
+            const ethnicities = selectedOptions.ethnicity.length ? selectedOptions.ethnicity : ['all'];
 
             // Filter results based on inputs
             const filteredResults = scholarshipsData.filter(scholarship => {
-                const matchesEnrollment = enrollmentLevels.length === 0 || enrollmentLevels.some(level => scholarship['Enrollment level']?.toLowerCase().includes(level));
-                const matchesNationality = nationalities.length === 0 || nationalities.some(nation => scholarship['Nationality']?.toLowerCase().includes(nation));
-                const matchesMajor = majors.length === 0 || majors.some(major => scholarship['Major']?.toLowerCase().includes(major));
-                const matchesEthnicity = ethnicities.length === 0 || ethnicities.some(ethnicity => scholarship['Ethnicity']?.toLowerCase().includes(ethnicity));
+                const matchesEnrollment = enrollmentLevels.includes('all') || enrollmentLevels.some(level => scholarship['Enrollment level']?.toLowerCase().includes(level) || !scholarship['Enrollment level']);
+                const matchesNationality = nationalities.includes('all') || nationalities.some(nation => scholarship['Nationality']?.toLowerCase().includes(nation) || !scholarship['Nationality']);
+                const matchesMajor = majors.includes('all') || majors.some(major => scholarship['Major']?.toLowerCase().includes(major) || !scholarship['Major']);
+                const matchesEthnicity = ethnicities.includes('all') || ethnicities.some(ethnicity => scholarship['Ethnicity']?.toLowerCase().includes(ethnicity) || !scholarship['Ethnicity']);
 
                 return matchesEnrollment && matchesNationality && matchesMajor && matchesEthnicity;
             });
@@ -161,6 +226,4 @@ author: Alan Cromlish
                 });
             }
         }
-    </script>
-</body>
-</html>
+   
