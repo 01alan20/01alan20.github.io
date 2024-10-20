@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Sample webapps for predicting student risk
-subtitle: 
+subtitle: individual risk risk calculator 
 thumbnail-img: 
 share-img: 
 tags: [data, student retention, dashboard]

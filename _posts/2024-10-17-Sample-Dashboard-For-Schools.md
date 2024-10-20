@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Sample webapps for predicting student risk
-subtitle: 
+title: Sample webapps for Admins to Track Student Risk
+subtitle: holistic view of risk by charts
 thumbnail-img: 
 share-img: 
 tags: [data, student retention, dashboard]
