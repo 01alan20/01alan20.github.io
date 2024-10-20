@@ -1,15 +1,14 @@
 ---
 layout: post
 title: Finding Scholarships for Students Studying at USA Universities
-subtitle: creating a database to for students to search
+subtitle: creating a database for students to search
 thumbnail-img: 
 share-img: 
 tags: [data, student retention, dashboard]
 author: Alan Cromlish
 ---
 
-This is just a sample of available scholarships. For me, it was an opportunity to create a sample database that people can search.  
-
+This is just a sample of available scholarships. For me, it was an opportunity to create a sample database that people can search.
 
 <html lang="en">
 <head>
@@ -71,6 +70,17 @@ This is just a sample of available scholarships. For me, it was an opportunity t
             margin-left: 10px;
             color: red;
             cursor: pointer;
+        }
+        #pagination button {
+            padding: 5px 10px;
+            margin: 2px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #pagination button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -134,17 +144,20 @@ This is just a sample of available scholarships. For me, it was an opportunity t
     </div>
 
     <div id="results"></div>
+    <div id="pagination"></div> <!-- Pagination buttons will be rendered here -->
 
     <script>
         let scholarshipsData = [];
+        let currentPage = 1;
+        const itemsPerPage = 50;  // Set number of items to display per page
 
         // Load JSON data on page load
         window.onload = function () {
-            fetch('https://01alan20.github.io/assets/json/scholarships_data_truncated.json') // Pointing to truncated JSON file
+            fetch('https://01alan20.github.io/assets/json/scholarships_data_truncated.json')
                 .then(response => response.json())
                 .then(data => {
                     scholarshipsData = data;
-                    console.log("Data loaded: ", scholarshipsData);  // Check if data is being loaded
+                    console.log("Data loaded: ", scholarshipsData);
                 })
                 .catch(error => console.error('Error loading JSON:', error));
         };
@@ -190,23 +203,17 @@ This is just a sample of available scholarships. For me, it was an opportunity t
             `).join('');
         }
 
+        // Search scholarships and paginate the results
         function searchScholarships() {
-            console.log('Search button clicked');  // Debug if search is triggered
-
-            // Get selected values from selectedOptions object
+            console.log('Search button clicked');
+            
             const enrollmentLevels = selectedOptions.enrollment.length ? selectedOptions.enrollment : ['all'];
             const nationalities = selectedOptions.nationality.length ? selectedOptions.nationality : ['all'];
             const majors = selectedOptions.major.length ? selectedOptions.major : ['all'];
             const ethnicities = selectedOptions.ethnicity.length ? selectedOptions.ethnicity : ['all'];
 
-            console.log('Filters applied: ', {
-                enrollmentLevels,
-                nationalities,
-                majors,
-                ethnicities
-            });
+            console.log('Filters applied: ', { enrollmentLevels, nationalities, majors, ethnicities });
 
-            // Filter results based on inputs
             const filteredResults = scholarshipsData.filter(scholarship => {
                 const matchesEnrollment = enrollmentLevels.includes('all') || enrollmentLevels.some(level => (scholarship['Enrollment level'] && scholarship['Enrollment level'].toLowerCase().includes(level)) || scholarship['Enrollment level'] === "NaN" || !scholarship['Enrollment level']);
                 const matchesNationality = nationalities.includes('all') || nationalities.some(nation => (scholarship['Nationality'] && scholarship['Nationality'].toLowerCase().includes(nation)) || scholarship['Nationality'] === "NaN" || !scholarship['Nationality']);
@@ -216,14 +223,40 @@ This is just a sample of available scholarships. For me, it was an opportunity t
                 return matchesEnrollment && matchesNationality && matchesMajor && matchesEthnicity;
             });
 
-            console.log('Filtered results:', filteredResults);  // Debug the filtering process
-            displayResults(filteredResults);  // Call the function to display results
+            paginateResults(filteredResults);  // Paginate and display filtered results
         }
 
-        // Function to display the filtered results
+        // Paginate results and display only a portion of the data
+        function paginateResults(filteredResults) {
+            const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedResults = filteredResults.slice(startIndex, endIndex);
+
+            displayResults(paginatedResults);
+            displayPagination(totalPages);
+        }
+
+        // Display pagination buttons
+        function displayPagination(totalPages) {
+            const paginationDiv = document.getElementById('pagination');
+            paginationDiv.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.innerText = i;
+                pageButton.onclick = function() {
+                    currentPage = i;
+                    searchScholarships();  // Re-filter results and show the current page
+                };
+                paginationDiv.appendChild(pageButton);
+            }
+        }
+
+        // Display filtered results
         function displayResults(filteredResults) {
             const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '';  // Clear previous results
+            resultsDiv.innerHTML = '';
 
             if (filteredResults.length === 0) {
                 resultsDiv.innerHTML = '<p>No scholarships found matching the criteria.</p>';
