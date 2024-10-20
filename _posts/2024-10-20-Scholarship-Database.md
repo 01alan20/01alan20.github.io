@@ -131,11 +131,12 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         <label for="ethnicity">Ethnicity:</label>
         <select id="ethnicity">
             <option value="">Select Ethnicity</option> <!-- Make sure they choose an option -->
-            <option value="black/african american">Black/African American</option>
-            <option value="hispanic/latino">Hispanic/Latino</option>
-            <option value="asian">Asian</option>
-            <option value="native american">Native American</option>
-            <option value="white">White</option>
+            <option value="italian">Italian</option>
+            <option value="armenian">Armenian</option>
+            <option value="jewish">Jewish</option>
+            <option value="chinese">Chinese</option>
+            <option value="caribbean">Caribbean</option>
+            <option value="spanish">Spanish</option>
         </select>
         <button onclick="addSelectedOption('ethnicity')">Add</button>
         <div class="selected-options" id="ethnicity-selected"></div>
