@@ -206,23 +206,28 @@ This is just a sample of available scholarships. For me, it was an opportunity t
         // Search scholarships and paginate the results
         function searchScholarships() {
             console.log('Search button clicked');
-            
+
+            // Get selected values from the selectedOptions object
             const enrollmentLevels = selectedOptions.enrollment.length ? selectedOptions.enrollment : ['all'];
-            const races = selectedOptions.race.length ? selectedOptions.race : ['all'];  // Changed from nationality to race
+            const races = selectedOptions.race.length ? selectedOptions.race : ['all'];
             const majors = selectedOptions.major.length ? selectedOptions.major : ['all'];
             const ethnicities = selectedOptions.ethnicity.length ? selectedOptions.ethnicity : ['all'];
 
             console.log('Filters applied: ', { enrollmentLevels, races, majors, ethnicities });
 
+            // Filter results based on inputs
             const filteredResults = scholarshipsData.filter(scholarship => {
-                const matchesEnrollment = enrollmentLevels.includes('all') || enrollmentLevels.some(level => (scholarship['Enrollment level'] && scholarship['Enrollment level'].toLowerCase().includes(level)) || scholarship['Enrollment level'] === "NaN" || !scholarship['Enrollment level']);
-                const matchesRace = races.includes('all') || races.some(race => (scholarship['Race'] && scholarship['Race'].toLowerCase().includes(race)) || scholarship['Race'] === "NaN" || !scholarship['Race']);  // Changed from nationality to race
-                const matchesMajor = majors.includes('all') || majors.some(major => (scholarship['Major'] && scholarship['Major'].toLowerCase().includes(major)) || scholarship['Major'] === "NaN" || !scholarship['Major']);
-                const matchesEthnicity = ethnicities.includes('all') || ethnicities.some(ethnicity => (scholarship['Ethnicity'] && scholarship['Ethnicity'].toLowerCase().includes(ethnicity)) || scholarship['Ethnicity'] === "NaN" || !scholarship['Ethnicity']);
+                // Check each field, if the value is 'all', we include everything, otherwise we filter
+                const matchesEnrollment = enrollmentLevels.includes('all') || enrollmentLevels.some(level => (scholarship['Enrollment level'] && scholarship['Enrollment level'].toLowerCase().includes(level.toLowerCase())));
+                const matchesRace = races.includes('all') || races.some(race => (scholarship['Race'] && scholarship['Race'].toLowerCase().includes(race.toLowerCase())));
+                const matchesMajor = majors.includes('all') || majors.some(major => (scholarship['Major'] && scholarship['Major'].toLowerCase().includes(major.toLowerCase())));
+                const matchesEthnicity = ethnicities.includes('all') || ethnicities.some(ethnicity => (scholarship['Ethnicity'] && scholarship['Ethnicity'].toLowerCase().includes(ethnicity.toLowerCase())));
 
+                // If all filters match, return true to include the scholarship
                 return matchesEnrollment && matchesRace && matchesMajor && matchesEthnicity;
             });
 
+            console.log('Filtered results:', filteredResults);  // Debug the filtering process
             paginateResults(filteredResults);  // Paginate and display filtered results
         }
 
