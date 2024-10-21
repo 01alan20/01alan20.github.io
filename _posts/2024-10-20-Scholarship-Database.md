@@ -1,20 +1,20 @@
 ---
 layout: post
-title: Scholarship Search by Interests and Majors
-subtitle: Find scholarships tailored to your interests and field of study
+title: Scholarship Search by Interests, Major, Race, and Ethnicity
+subtitle: Find scholarships tailored to your preferences
 thumbnail-img: 
 share-img: 
 tags: [scholarships, education, database]
 author: Alan Cromlish
 ---
 
-This database allows students to search for scholarships based on their interests and major fields of study. The results are paginated, showing 10 scholarships per page.
+This database allows students to search for scholarships based on their interests, major, race, and ethnicity. The results are paginated, showing 10 scholarships per page.
 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarship Search by Interests and Majors</title>
+    <title>Scholarship Search by Interests, Major, Race, and Ethnicity</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -69,7 +69,7 @@ This database allows students to search for scholarships based on their interest
     </style>
 </head>
 <body>
-    <h1>Scholarship Search by Interests and Majors</h1>
+    <h1>Scholarship Search</h1>
 
     <div id="searchForm">
         <!-- Interests -->
@@ -94,6 +94,29 @@ This database allows students to search for scholarships based on their interest
             <option value="business">Business</option>
         </select>
 
+        <!-- Race -->
+        <label for="race">Race:</label>
+        <select id="race">
+            <option value="all">All Races</option>
+            <option value="black/african american">Black/African American</option>
+            <option value="hispanic/latino">Hispanic/Latino</option>
+            <option value="american indian/alaskan native">American Indian/Alaskan Native</option>
+            <option value="asian">Asian</option>
+            <option value="white">White</option>
+        </select>
+
+        <!-- Ethnicity -->
+        <label for="ethnicity">Ethnicity:</label>
+        <select id="ethnicity">
+            <option value="all">All Ethnicities</option>
+            <option value="italian">Italian</option>
+            <option value="jewish">Jewish</option>
+            <option value="armenian">Armenian</option>
+            <option value="caribbean">Caribbean</option>
+            <option value="chinese">Chinese</option>
+            <option value="spanish">Spanish</option>
+        </select>
+
         <button onclick="validateAndSearch()">Search</button>
     </div>
 
@@ -105,6 +128,7 @@ This database allows students to search for scholarships based on their interest
         let currentPage = 1;
         const itemsPerPage = 10;  // Display 10 scholarships per page
 
+        // Load JSON data on page load
         // Load JSON data on page load
         window.onload = function () {
             fetch('https://01alan20.github.io/assets/json/scholarships_data_truncated.json')
@@ -120,19 +144,25 @@ This database allows students to search for scholarships based on their interest
         function validateAndSearch() {
             const selectedInterest = document.getElementById('interests').value.toLowerCase();
             const selectedMajor = document.getElementById('major').value.toLowerCase();
-            searchScholarships(selectedInterest, selectedMajor);
+            const selectedRace = document.getElementById('race').value.toLowerCase();
+            const selectedEthnicity = document.getElementById('ethnicity').value.toLowerCase();
+            searchScholarships(selectedInterest, selectedMajor, selectedRace, selectedEthnicity);
         }
 
-        // Search scholarships based on interests and majors
-        function searchScholarships(selectedInterest, selectedMajor) {
+        // Search scholarships based on interests, major, race, and ethnicity
+        function searchScholarships(selectedInterest, selectedMajor, selectedRace, selectedEthnicity) {
             const filteredResults = scholarshipsData.filter(scholarship => {
                 const interests = (scholarship['Interests'] || 'all').toLowerCase().split(',');
                 const majors = (scholarship['Major'] || 'all').toLowerCase().split(',');
+                const race = (scholarship['Race'] || 'all').toLowerCase();
+                const ethnicity = (scholarship['Ethnicity'] || 'all').toLowerCase();
 
                 const matchesInterest = selectedInterest === 'all' || interests.includes(selectedInterest);
                 const matchesMajor = selectedMajor === 'all' || majors.includes(selectedMajor);
+                const matchesRace = selectedRace === 'all' || race === selectedRace;
+                const matchesEthnicity = selectedEthnicity === 'all' || ethnicity === selectedEthnicity;
 
-                return matchesInterest && matchesMajor;
+                return matchesInterest && matchesMajor && matchesRace && matchesEthnicity;
             });
 
             paginateResults(filteredResults);
@@ -163,8 +193,7 @@ This database allows students to search for scholarships based on their interest
                             <h3>${scholarship['Title']}</h3>
                             <p><strong>Apply URL:</strong> <a href="${scholarship['Apply URL']}" target="_blank">${scholarship['Apply URL']}</a></p>
                             <p><strong>Average Award:</strong> ${scholarship['Average award'] || 'N/A'}</p>
-                            <p><strong>Ethnicity:</strong> ${scholarship['Ethnicity'] || 'N/A'}</p>
-                            <p><strong>Race:</strong> ${scholarship['Race'] || 'N/A'}</p>
+                            <p><strong>Deadline:</strong> ${scholarship['Deadline'] || 'N/A'}</p>
                         </div>
                     `;
                     resultsDiv.innerHTML += resultItem;
