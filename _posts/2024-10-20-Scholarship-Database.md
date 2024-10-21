@@ -1,20 +1,20 @@
 ---
 layout: post
-title: Finding Scholarships for Students Studying at USA Universities
-subtitle: Creating a searchable database for students
+title: Scholarship Search by Interests and Majors
+subtitle: Find scholarships tailored to your interests and field of study
 thumbnail-img: 
 share-img: 
-tags: [data, student retention, dashboard]
+tags: [scholarships, education, database]
 author: Alan Cromlish
 ---
 
-This is a curated database of available scholarships for students studying at USA universities. It allows users to search scholarships by enrollment level, race, major, and ethnicity, with easy pagination to browse through the results.
+This database allows students to search for scholarships based on their interests and major fields of study. The results are paginated, showing 10 scholarships per page.
 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarship Search</title>
+    <title>Scholarship Search by Interests and Majors</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,22 +55,6 @@ This is a curated database of available scholarships for students studying at US
         .result-item p {
             margin: 0 0 10px;
         }
-        .selected-options {
-            margin: 10px 0;
-        }
-        .selected-option {
-            display: inline-block;
-            padding: 5px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            margin-right: 5px;
-            cursor: pointer;
-        }
-        .remove-option {
-            margin-left: 10px;
-            color: red;
-            cursor: pointer;
-        }
         #pagination button {
             padding: 5px 10px;
             margin: 2px;
@@ -85,52 +69,29 @@ This is a curated database of available scholarships for students studying at US
     </style>
 </head>
 <body>
-    <h1>Scholarship Search</h1>
+    <h1>Scholarship Search by Interests and Majors</h1>
 
     <div id="searchForm">
-        <!-- Enrollment Level -->
-        <label for="enrollment">Enrollment Level:</label>
-        <select id="enrollment">
-            <option value="all">All Enrollment Levels</option> <!-- Default is "all" -->
-            <option value="college junior">College Junior</option>
-            <option value="college freshman">College Freshman</option>
-            <option value="high school senior">High School Senior</option>
-            <option value="doctoral-level study">Doctoral-Level Study</option>
-            <option value="master's-level study">Master's-Level Study</option>
-        </select>
-
-        <!-- Race -->
-        <label for="race">Race:</label>
-        <select id="race">
-            <option value="all">All Races</option> <!-- Default is "all" -->
-            <option value="black/african american">Black/African American</option>
-            <option value="hispanic/latino">Hispanic/Latino</option>
-            <option value="asian">Asian</option>
-            <option value="native american">Native American</option>
-            <option value="white">White</option>
+        <!-- Interests -->
+        <label for="interests">Interests:</label>
+        <select id="interests">
+            <option value="all">All Interests</option>
+            <option value="arts">Arts</option>
+            <option value="sports">Sports</option>
+            <option value="technology">Technology</option>
+            <option value="science">Science</option>
+            <option value="community service">Community Service</option>
         </select>
 
         <!-- Major -->
         <label for="major">Major:</label>
         <select id="major">
-            <option value="all">All Majors</option> <!-- Default is "all" -->
+            <option value="all">All Majors</option>
             <option value="engineering">Engineering</option>
             <option value="medicine">Medicine</option>
             <option value="law">Law</option>
             <option value="computer science">Computer Science</option>
             <option value="business">Business</option>
-        </select>
-
-        <!-- Ethnicity -->
-        <label for="ethnicity">Ethnicity:</label>
-        <select id="ethnicity">
-            <option value="all">All Ethnicities</option> <!-- Default is "all" -->
-            <option value="italian">Italian</option>
-            <option value="armenian">Armenian</option>
-            <option value="jewish">Jewish</option>
-            <option value="chinese">Chinese</option>
-            <option value="caribbean">Caribbean</option>
-            <option value="spanish">Spanish</option>
         </select>
 
         <button onclick="validateAndSearch()">Search</button>
@@ -142,7 +103,7 @@ This is a curated database of available scholarships for students studying at US
     <script>
         let scholarshipsData = [];
         let currentPage = 1;
-        const itemsPerPage = 50;  // Number of items per page
+        const itemsPerPage = 10;  // Display 10 scholarships per page
 
         // Load JSON data on page load
         window.onload = function () {
@@ -150,44 +111,34 @@ This is a curated database of available scholarships for students studying at US
                 .then(response => response.json())
                 .then(data => {
                     scholarshipsData = data;
-                    paginateResults(scholarshipsData); // Initial load with default settings
+                    paginateResults(scholarshipsData); // Show first page by default
                 })
                 .catch(error => console.error('Error loading JSON:', error));
         };
 
-        // Default options for each category
-        const selectedOptions = {
-            enrollment: ['all'],
-            race: ['all'],
-            major: ['all'],
-            ethnicity: ['all']
-        };
-
-        // Validate and search scholarships based on selected criteria
+        // Validate and search scholarships based on selected filters
         function validateAndSearch() {
-            selectedOptions.enrollment = [document.getElementById('enrollment').value.toLowerCase()];
-            selectedOptions.race = [document.getElementById('race').value.toLowerCase()];
-            selectedOptions.major = [document.getElementById('major').value.toLowerCase()];
-            selectedOptions.ethnicity = [document.getElementById('ethnicity').value.toLowerCase()];
-
-            searchScholarships();
+            const selectedInterest = document.getElementById('interests').value.toLowerCase();
+            const selectedMajor = document.getElementById('major').value.toLowerCase();
+            searchScholarships(selectedInterest, selectedMajor);
         }
 
-        // Search scholarships and paginate results
-        function searchScholarships() {
+        // Search scholarships based on interests and majors
+        function searchScholarships(selectedInterest, selectedMajor) {
             const filteredResults = scholarshipsData.filter(scholarship => {
-                const matchesEnrollment = selectedOptions.enrollment.includes('all') || selectedOptions.enrollment.some(level => scholarship['Enrollment level'] && scholarship['Enrollment level'].toLowerCase().includes(level));
-                const matchesRace = selectedOptions.race.includes('all') || selectedOptions.race.some(race => scholarship['Race'] && scholarship['Race'].toLowerCase().includes(race));
-                const matchesMajor = selectedOptions.major.includes('all') || selectedOptions.major.some(major => scholarship['Major'] && scholarship['Major'].toLowerCase().includes(major));
-                const matchesEthnicity = selectedOptions.ethnicity.includes('all') || selectedOptions.ethnicity.some(ethnicity => scholarship['Ethnicity'] && scholarship['Ethnicity'].toLowerCase().includes(ethnicity));
+                const interests = (scholarship['Interests'] || 'all').toLowerCase().split(',');
+                const majors = (scholarship['Major'] || 'all').toLowerCase().split(',');
 
-                return matchesEnrollment && matchesRace && matchesMajor && matchesEthnicity;
+                const matchesInterest = selectedInterest === 'all' || interests.includes(selectedInterest);
+                const matchesMajor = selectedMajor === 'all' || majors.includes(selectedMajor);
+
+                return matchesInterest && matchesMajor;
             });
 
             paginateResults(filteredResults);
         }
 
-        // Paginate and display results
+        // Paginate the filtered results
         function paginateResults(filteredResults) {
             const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
             const startIndex = (currentPage - 1) * itemsPerPage;
@@ -198,7 +149,7 @@ This is a curated database of available scholarships for students studying at US
             displayPagination(totalPages);
         }
 
-        // Display the results
+        // Display filtered scholarships
         function displayResults(paginatedResults) {
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = '';
@@ -210,10 +161,10 @@ This is a curated database of available scholarships for students studying at US
                     const resultItem = `
                         <div class="result-item">
                             <h3>${scholarship['Title']}</h3>
-                            <p><strong>Description:</strong> ${scholarship['Description']}</p>
-                            <p><strong>Average Award:</strong> ${scholarship['Average award'] || 'N/A'}</p>
-                            <p><strong>Deadline:</strong> ${scholarship['Deadline'] || 'N/A'}</p>
                             <p><strong>Apply URL:</strong> <a href="${scholarship['Apply URL']}" target="_blank">${scholarship['Apply URL']}</a></p>
+                            <p><strong>Average Award:</strong> ${scholarship['Average award'] || 'N/A'}</p>
+                            <p><strong>Ethnicity:</strong> ${scholarship['Ethnicity'] || 'N/A'}</p>
+                            <p><strong>Race:</strong> ${scholarship['Race'] || 'N/A'}</p>
                         </div>
                     `;
                     resultsDiv.innerHTML += resultItem;
@@ -231,7 +182,7 @@ This is a curated database of available scholarships for students studying at US
                 pageButton.innerText = i;
                 pageButton.onclick = function() {
                     currentPage = i;
-                    searchScholarships();  // Re-filter results and show the current page
+                    validateAndSearch();  // Re-search and show the current page
                 };
                 paginationDiv.appendChild(pageButton);
             }
