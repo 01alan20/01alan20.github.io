@@ -20,20 +20,24 @@ This database allows students to search for scholarships based on their interest
             font-family: Arial, sans-serif;
         }
         #searchForm {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
             margin: 20px 0;
+            max-width: 600px;
         }
         label {
-            display: inline-block;
-            width: 150px;
-            margin-bottom: 10px;
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
-        select {
-            width: 300px;
-            padding: 5px;
+        select, button {
+            width: 100%;
+            padding: 10px;
             margin-bottom: 10px;
+            box-sizing: border-box;
         }
         button {
-            padding: 10px 15px;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -73,51 +77,62 @@ This database allows students to search for scholarships based on their interest
 
     <div id="searchForm">
         <!-- Interests -->
-        <label for="interests">Interests:</label>
-        <select id="interests">
-            <option value="all">All Interests</option>
-            <option value="arts">Arts</option>
-            <option value="sports">Sports</option>
-            <option value="technology">Technology</option>
-            <option value="science">Science</option>
-            <option value="community service">Community Service</option>
-        </select>
+        <div>
+            <label for="interests">Interests:</label>
+            <select id="interests">
+                <option value="all">All Interests</option>
+                <option value="arts">Arts</option>
+                <option value="sports">Sports</option>
+                <option value="technology">Technology</option>
+                <option value="science">Science</option>
+                <option value="community service">Community Service</option>
+            </select>
+        </div>
 
         <!-- Major -->
-        <label for="major">Major:</label>
-        <select id="major">
-            <option value="all">All Majors</option>
-            <option value="engineering">Engineering</option>
-            <option value="medicine">Medicine</option>
-            <option value="law">Law</option>
-            <option value="computer science">Computer Science</option>
-            <option value="business">Business</option>
-        </select>
+        <div>
+            <label for="major">Major:</label>
+            <select id="major">
+                <option value="all">All Majors</option>
+                <option value="engineering">Engineering</option>
+                <option value="medicine">Medicine</option>
+                <option value="law">Law</option>
+                <option value="computer science">Computer Science</option>
+                <option value="business">Business</option>
+            </select>
+        </div>
 
         <!-- Race -->
-        <label for="race">Race:</label>
-        <select id="race">
-            <option value="all">All Races</option>
-            <option value="black/african american">Black/African American</option>
-            <option value="hispanic/latino">Hispanic/Latino</option>
-            <option value="american indian/alaskan native">American Indian/Alaskan Native</option>
-            <option value="asian">Asian</option>
-            <option value="white">White</option>
-        </select>
+        <div>
+            <label for="race">Race:</label>
+            <select id="race">
+                <option value="all">All Races</option>
+                <option value="black/african american">Black/African American</option>
+                <option value="hispanic/latino">Hispanic/Latino</option>
+                <option value="american indian/alaskan native">American Indian/Alaskan Native</option>
+                <option value="asian">Asian</option>
+                <option value="white">White</option>
+            </select>
+        </div>
 
         <!-- Ethnicity -->
-        <label for="ethnicity">Ethnicity:</label>
-        <select id="ethnicity">
-            <option value="all">All Ethnicities</option>
-            <option value="italian">Italian</option>
-            <option value="jewish">Jewish</option>
-            <option value="armenian">Armenian</option>
-            <option value="caribbean">Caribbean</option>
-            <option value="chinese">Chinese</option>
-            <option value="spanish">Spanish</option>
-        </select>
+        <div>
+            <label for="ethnicity">Ethnicity:</label>
+            <select id="ethnicity">
+                <option value="all">All Ethnicities</option>
+                <option value="italian">Italian</option>
+                <option value="jewish">Jewish</option>
+                <option value="armenian">Armenian</option>
+                <option value="caribbean">Caribbean</option>
+                <option value="chinese">Chinese</option>
+                <option value="spanish">Spanish</option>
+            </select>
+        </div>
 
-        <button onclick="validateAndSearch()">Search</button>
+        <!-- Search Button -->
+        <div style="grid-column: span 2;">
+            <button onclick="validateAndSearch()">Search</button>
+        </div>
     </div>
 
     <div id="results"></div>
@@ -128,7 +143,6 @@ This database allows students to search for scholarships based on their interest
         let currentPage = 1;
         const itemsPerPage = 10;  // Display 10 scholarships per page
 
-        // Load JSON data on page load
         // Load JSON data on page load
         window.onload = function () {
             fetch('https://01alan20.github.io/assets/json/scholarships_data_truncated.json')
@@ -147,6 +161,20 @@ This database allows students to search for scholarships based on their interest
             const selectedRace = document.getElementById('race').value.toLowerCase();
             const selectedEthnicity = document.getElementById('ethnicity').value.toLowerCase();
             searchScholarships(selectedInterest, selectedMajor, selectedRace, selectedEthnicity);
+        }
+
+        // Check if a value is a number and convert it to a date
+        function convertToDate(value) {
+            if (!isNaN(value)) {
+                // Convert the numeric value (assuming it's a Unix timestamp) to a human-readable date
+                const date = new Date(Number(value) * 1000); // multiply by 1000 to convert seconds to milliseconds
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            }
+            return value; // If not a number, return the value as it is
         }
 
         // Search scholarships based on interests, major, race, and ethnicity
@@ -188,12 +216,15 @@ This database allows students to search for scholarships based on their interest
                 resultsDiv.innerHTML = '<p>No scholarships found matching the criteria.</p>';
             } else {
                 paginatedResults.forEach(scholarship => {
+                    // Convert the deadline to a date if it's a number
+                    const deadline = convertToDate(scholarship['Deadline']);
+
                     const resultItem = `
                         <div class="result-item">
                             <h3>${scholarship['Title']}</h3>
                             <p><strong>Apply URL:</strong> <a href="${scholarship['Apply URL']}" target="_blank">${scholarship['Apply URL']}</a></p>
                             <p><strong>Average Award:</strong> ${scholarship['Average award'] || 'N/A'}</p>
-                            <p><strong>Deadline:</strong> ${scholarship['Deadline'] || 'N/A'}</p>
+                            <p><strong>Deadline:</strong> ${deadline || 'N/A'}</p>
                         </div>
                     `;
                     resultsDiv.innerHTML += resultItem;
