@@ -20,8 +20,8 @@ author: Alan Cromlish
     <!-- GPA Input -->
     <div class="space-y-2">
       <label for="gpa-student">GPA (0.0 - 4.0)</label>
-      <input type="range" id="gpa-student" min="0" max="4" step="0.1" value="0">
-      <p id="gpa-display-student" class="text-sm">Current GPA: 0.0</p>
+      <input type="number" id="gpa-student" min="0.0" max="4.0" step="0.1" value="2.5">
+      <p id="gpa-display-student" class="text-sm">Current GPA: 2.5</p>
     </div>
 
     <!-- Attendance Input -->
@@ -79,3 +79,5 @@ author: Alan Cromlish
 
   <div id="assessment-result-student"></div>
 </div>
+
+<script src="studentRiskAssessment.js"></script>
