@@ -20,14 +20,14 @@ author: Alan Cromlish
     <div class="space-y-2">
       <label for="gpa-student">GPA (0.0 - 4.0)</label>
       <input type="number" id="gpa-student" min="0.0" max="4.0" step="0.1" value="2.5">
-      <p id="gpa-display-student" class="text-sm">Current GPA: 2.5</p>
+      <p id="gpa-error" class="text-sm text-red-600"></p>
     </div>
 
     <!-- Attendance Input -->
     <div class="space-y-2">
       <label for="attendance-student">Attendance Rate (%)</label>
-      <input type="range" id="attendance-student" min="0" max="100" step="1" value="80">
-      <p id="attendance-display-student" class="text-sm">Current Attendance: 80%</p>
+      <input type="number" id="attendance-student" min="0" max="100" step="1" value="80">
+      <p id="attendance-error" class="text-sm text-red-600"></p>
     </div>
 
     <!-- Extracurricular Activities -->
@@ -90,6 +90,31 @@ function assessRisk() {
   const year = parseInt(document.getElementById('year-student').value);
   const totalCredits = parseInt(document.getElementById('totalCredits-student').value);
   const currentCredits = parseInt(document.getElementById('currentCredits-student').value);
+
+  const gpaError = document.getElementById('gpa-error');
+  const attendanceError = document.getElementById('attendance-error');
+
+  let valid = true;
+
+  // Validate GPA
+  if (isNaN(gpa) || gpa < 0.0 || gpa > 4.0) {
+    gpaError.textContent = "Please enter a GPA between 0.0 and 4.0.";
+    valid = false;
+  } else {
+    gpaError.textContent = "";
+  }
+
+  // Validate Attendance
+  if (isNaN(attendance) || attendance < 0 || attendance > 100) {
+    attendanceError.textContent = "Please enter an attendance rate between 0 and 100.";
+    valid = false;
+  } else {
+    attendanceError.textContent = "";
+  }
+
+  if (!valid) {
+    return;
+  }
 
   let riskScore = calculateRiskScore(gpa, attendance, extracurricular, financialAid, year, totalCredits, currentCredits);
   let risks = identifyRisks(gpa, attendance, extracurricular, financialAid, year, totalCredits, currentCredits);
