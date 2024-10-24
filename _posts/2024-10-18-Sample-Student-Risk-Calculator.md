@@ -170,9 +170,10 @@ function displayResults(riskScore, risks) {
   let riskLevel = riskScore < 30 ? 'Low Risk' : riskScore < 60 ? 'Medium Risk' : 'High Risk';
   let riskColor = riskScore < 30 ? 'green' : riskScore < 60 ? 'yellow' : 'red';
 
-  let html = `<h3>Overall Risk Score: ${riskScore}</h3>
-              <p style="color:${riskColor}; font-weight:bold;">${riskLevel}</p>
-              <h3>Identified Risks and Recommendations:</h3>`;
+  let html = `<div style="background-color: #f0f0f0; padding: 15px; border-radius: 5px;">
+                <h3>Overall Risk Score: ${riskScore}</h3>
+                <p style="color:${riskColor}; font-weight:bold;">${riskLevel}</p>
+                <h3>Identified Risks and Recommendations:</h3>`;
 
   risks.forEach(risk => {
     html += `<div style="border-left: 4px solid ${risk.level === 'high' ? 'red' : risk.level === 'medium' ? 'yellow' : 'green'}; padding-left: 10px;">
@@ -181,6 +182,7 @@ function displayResults(riskScore, risks) {
              </div>`;
   });
 
+  html += `</div>`;
   resultDiv.innerHTML = html;
 }
 </script>
