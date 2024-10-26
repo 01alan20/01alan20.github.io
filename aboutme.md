@@ -6,10 +6,10 @@ subtitle: Me, Myself, and We
 
 My name is Alan Cromlish. I have the following qualities:
 
-- I am a nerd who likes table top and PC games.
-- I enjoy baking cookies.
-- Former gym lover who is trying to get back into a routine
-- I am focused about education, sharing educational and job opportunities, and supporting peoples wellbeing.  
+- A nerd who likes table top and PC games.
+- Enjoy baking cookies.
+- Former / Current gym lover who is trying to get back into a routine
+- Focused about education, sharing educational and job opportunities, and supporting peoples wellbeing.  
 
 What else do you need?
 
