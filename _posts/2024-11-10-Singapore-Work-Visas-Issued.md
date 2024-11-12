@@ -4,7 +4,7 @@ title: Singapore Work Visas Issued
 subtitle: Many people are moving out but visas are continuing to be issued
 thumbnail-img: 
 share-img: 
-tags: [scholarships, education, database]
+tags: [data, singapore]
 author: Alan Cromlish
 ---
 
