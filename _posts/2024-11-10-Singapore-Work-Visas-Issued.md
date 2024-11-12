@@ -29,7 +29,10 @@ author: Alan Cromlish
                         borderColor: 'rgba(54, 162, 235, 1)',
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                         fill: false,
-                        tension: 0.1
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        borderWidth: 2
                     },
                     {
                         label: 'S Pass',
@@ -37,7 +40,10 @@ author: Alan Cromlish
                         borderColor: 'rgba(255, 99, 132, 1)',
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         fill: false,
-                        tension: 0.1
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        borderWidth: 2
                     },
                     {
                         label: 'Work Permit (Total)',
@@ -45,7 +51,10 @@ author: Alan Cromlish
                         borderColor: 'rgba(75, 192, 192, 1)',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         fill: false,
-                        tension: 0.1
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        borderWidth: 2
                     },
                     {
                         label: 'Other work passes',
@@ -53,7 +62,10 @@ author: Alan Cromlish
                         borderColor: 'rgba(153, 102, 255, 1)',
                         backgroundColor: 'rgba(153, 102, 255, 0.2)',
                         fill: false,
-                        tension: 0.1
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        borderWidth: 2
                     },
                     {
                         label: 'Total foreign workforce',
@@ -61,7 +73,11 @@ author: Alan Cromlish
                         borderColor: 'rgba(255, 206, 86, 1)',
                         backgroundColor: 'rgba(255, 206, 86, 0.2)',
                         fill: false,
-                        tension: 0.1
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        borderWidth: 3,
+                        borderDash: [5, 5]
                     }
                 ]
             },
@@ -70,10 +86,22 @@ author: Alan Cromlish
                 plugins: {
                     legend: {
                         position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        }
                     },
                     tooltip: {
                         mode: 'index',
                         intersect: false,
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return `${tooltipItem.dataset.label}: ${tooltipItem.formattedValue.toLocaleString()}`;
+                            }
+                        }
                     }
                 },
                 interaction: {
@@ -85,13 +113,27 @@ author: Alan Cromlish
                     x: {
                         title: {
                             display: true,
-                            text: 'Time Period'
+                            text: 'Time Period',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            display: false
                         }
                     },
                     y: {
                         title: {
                             display: true,
-                            text: 'Number of Workers'
+                            text: 'Number of Workers',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(200, 200, 200, 0.3)'
                         }
                     }
                 }
@@ -102,7 +144,8 @@ author: Alan Cromlish
 
 <style>
     canvas {
-        max-width: 800px;
+        max-width: 1000px;
         margin: 20px auto;
+        display: block;
     }
 </style>
