@@ -3,211 +3,85 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SG Condo Investment ROI</title>
+<title>SG Condo ROI – quick search</title>
 
-<!-- ── libraries ─────────────────────────────────────────────────── -->
-<link rel="stylesheet"
-      href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-
-<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
-
-<!-- ── styling ───────────────────────────────────────────────────── -->
 <style>
-:root{--accent:#007bff;--bg:#f8f9fa;--txt:#1a1a1a;--muted:#6c757d}
-@media(prefers-color-scheme:dark){
-  :root{--accent:#4dabf7;--bg:#1a1a1a;--txt:#f1f1f1;--muted:#a0a0a0}
-}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);
-          font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif}
-h1{margin:.6rem 0 1rem;text-align:center;font-size:1.9rem}
-#controls{max-width:960px;margin:0 auto 1rem;
-          display:grid;gap:1rem 2rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-label{display:block;font-size:.9rem;font-weight:600;margin-bottom:.25rem}
-input,select{width:100%;padding:.45rem .6rem;font-size:1rem;
-             border:1px solid #ccc;border-radius:4px;background:#fff;color:var(--txt)}
-input[type=range]{padding:0;height:2.2rem}
-#tableWrapper{max-width:960px;margin:0 auto 1.4rem}
-.dataTables_wrapper .dataTables_paginate .paginate_button{padding:.1em .6em}
-#chart{height:520px;max-width:1000px;margin:0 auto;border:1px solid #ddd;border-radius:8px;background:#fff}
-#summary{text-align:center;margin-top:1rem;font-size:1rem;color:var(--muted)}
-a{color:var(--accent)}
+body{font-family:system-ui,-apple-system,sans-serif;margin:0;padding:2rem;background:#f8f9fa;color:#222}
+h1{margin-top:0}
+label{display:block;margin:.5rem 0 .25rem;font-weight:600}
+input{padding:.4rem .6rem;font-size:1rem;width:100%;max-width:200px}
+#results{margin-top:1.5rem}
+table{border-collapse:collapse;width:100%;max-width:800px;margin-top:.5rem}
+th,td{border:1px solid #ccc;padding:.35rem .6rem;text-align:left}
+th{background:#007bff;color:#fff}
+tr:nth-child(even){background:#eef2f8}
 </style>
 </head>
 <body>
+<h1>Quick Condo Search</h1>
 
-<h1>Singapore Condo Investment ROI Explorer</h1>
+<label> Desired size (sqm)
+  <input id="size" type="number" step="1" value="60">
+</label>
 
-<!-- ── SIZE & BUDGET FILTERS ─────────────────────────────────────── -->
-<div id="controls">
-  <div>
-    <label for="size">Size (sqm): <span id="sizeVal">60</span></label>
-    <input id="size" type="range" min="20" max="300" step="1" value="60">
-  </div>
-  <div>
-    <label for="budget">Budget (SGD, max buy price)</label>
-    <input id="budget" type="number" step="10000" value="800000">
-  </div>
-</div>
+<label> Max price (SGD)
+  <input id="price" type="number" step="10000" value="800000">
+</label>
 
-<!-- ── DATA TABLE ────────────────────────────────────────────────── -->
-<div id="tableWrapper">
-  <table id="condoTable" class="display" style="width:100%">
-    <thead>
-      <tr>
-        <th>Project</th><th>District</th><th>Last Buy Price</th><th>ROI %</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
+<button id="btn">Search</button>
 
-<!-- ── CHART ─────────────────────────────────────────────────────── -->
-<div id="chart">Pick a project row…</div>
-<p id="summary"></p>
+<div id="results"></div>
 
-<!-- ── SCRIPT ────────────────────────────────────────────────────── -->
 <script>
-/* ---------- CONFIG ---------- */
-const CSV_PATH = "pmi_roi_agg.csv";   // change to "pmi_roi_agg.csv" if you move the file
-const YEARS    = [2020,2021,2022,2023,2024,2025];
+const CSV_PATH = "pmi_roi_agg.csv";   // adjust if the CSV lives elsewhere
+let ROWS = [];
 
-/* ---------- GLOBALS ---------- */
-let ALL = [];      // full dataset
-let table;         // DataTable instance
+fetch(CSV_PATH)
+  .then(r => r.text())
+  .then(t => {
+      const {data} = Papa.parse(t,{header:true,dynamicTyping:true,skipEmptyLines:true});
+      ROWS = data.filter(r => r.project && r.most_recent_buy);
+      document.getElementById('btn').disabled = false;
+  })
+  .catch(err => document.getElementById('results').textContent =
+        "Failed to load CSV: "+err);
 
-/* ---------- 1. Load CSV  (with diagnostics) ---------- */
-Papa.parse(CSV_PATH, {
-  download      : true,
-  header        : true,
-  dynamicTyping : true,
-  skipEmptyLines: true,   // handles blank lines
-  worker        : true,   // parse in a Web-Worker
+document.getElementById('btn').onclick = () => {
+  const size   = +document.getElementById('size').value;
+  const budget = +document.getElementById('price').value;
 
-  complete: ({data, errors}) => {
-    console.log(`Papa ✅ parsed ${data.length} rows | ${errors.length} errors`);
-    console.log("first row object:", data[0]);           // <-- inspect header names
-
-    // keep only rows that actually have a project name
-    ALL = data.filter(r => r.project && r.project.trim());
-    console.log("rows with a non-blank project:", ALL.length);
-
-    if (!ALL.length) {
-      console.warn("⚠️ 0 usable rows – header might be 'Project' (capital P) or similar.");
-      return;                 // stop here so you can read the warning
-    }
-
-    preprocess();
-    makeTable();
-    bindUI();
-  },
-
-  error: err => console.error("Papa ❌ error:", err)
-});
-
-
-/* ---------- 2. Enrich rows ---------- */
-function preprocess(){
-  ALL.forEach(r=>{
-      const nums=(r.area_bucket||"").split("-").map(Number);
-      r.lo=nums[0]||NaN; r.hi=nums[1]||NaN; r.mid=(r.lo+r.hi)/2;
-  });
-}
-
-/* ---------- 3. Build DataTable ---------- */
-function makeTable(){
-  table = $('#condoTable').DataTable({
-    data:[],                   // filled in refresh()
-    columns:[
-      {data:'project'},
-      {data:'district'},
-      {data:'most_recent_buy', render:$.fn.dataTable.render.number(',', '.', 0, '$')},
-      {data:'ROI', render: d=>d!=null ? d.toFixed(2) : ''}
-    ],
-    pageLength:10,lengthChange:false,order:[],deferRender:true
-  });
-
-  // click row → chart
-  $('#condoTable tbody').on('click','tr',function(){
-    const row = table.row(this).data();
-    if(row) drawChart(row.project, currentSize());
-  });
-
-  refresh();        // first fill
-}
-
-/* ---------- 4. UI helpers ---------- */
-const sizeInput   = document.getElementById('size');
-const budgetInput = document.getElementById('budget');
-const sizeValSpan = document.getElementById('sizeVal');
-
-function currentSize(){ return +sizeInput.value }
-function currentBudget(){ const b=+budgetInput.value; return isFinite(b)&&b>0?b:Infinity }
-
-/* ---------- 5. Bind controls ---------- */
-function bindUI(){
-  sizeInput.oninput = ()=>{
-    sizeValSpan.textContent = currentSize();
-    refresh();
+  // helper:  "50-60" → [50,60]   ">300" → [300, Infinity]
+  const bucketRange = b => {
+    if (!b) return [NaN,NaN];
+    if (b.startsWith(">")) return [+b.slice(1), Infinity];
+    const [lo,hi] = b.split("-").map(Number);
+    return [lo,hi];
   };
-  budgetInput.oninput = refresh;
-}
 
-/* ---------- 6. Refresh table (matches first) ---------- */
-function rowMatches(r, size, budget){
-  return (r.lo<=size && size<=r.hi) && (r.most_recent_buy<=budget);
-}
-
-function refresh(){
-  const size   = currentSize();
-  const budget = currentBudget();
-
-  const matches = ALL.filter(r=>rowMatches(r,size,budget));
-  const others  = ALL.filter(r=>!rowMatches(r,size,budget));
-
-  table.clear().rows.add([...matches, ...others]).draw(false);
-  $('#chart').html('Pick a project row…');
-  $('#summary').text('');
-}
-
-/* ---------- 7. Chart ---------- */
-function drawChart(project,size){
-  const rows = ALL.filter(r=>r.project===project);
-  rows.sort((a,b)=>{
-     const da=(a.lo<=size&&size<=a.hi)?0:Math.abs(a.mid-size);
-     const db=(b.lo<=size&&size<=b.hi)?0:Math.abs(b.mid-size);
-     return da-db;
+  const matches = ROWS.filter(r => {
+      const [lo,hi] = bucketRange(r.area_bucket);
+      return lo<=size && size<=hi && r.most_recent_buy<=budget;
   });
-  const r = rows[0];
-  if(!r){return;}
 
-  const buy  = YEARS.map(y=>r['avg_buy_'+y]);
-  const rent = YEARS.map(y=>r['avg_rent_'+y]);
-  const budget=currentBudget();
+  // render
+  const out = document.getElementById('results');
+  if (!matches.length) { out.textContent = "No matching units."; return; }
 
-  Plotly.newPlot('chart',[
-     {x:YEARS,y:buy ,name:'Avg Buy Price', mode:'lines+markers',yaxis:'y1'},
-     {x:YEARS,y:rent,name:'Avg Rent',      mode:'lines+markers',yaxis:'y2'}
-  ],{
-     title:`${project} (${r.area_bucket||'-'} sqm)`,
-     margin:{t:40,l:50,r:50,b:40},
-     xaxis:{title:'Year',dtick:1},
-     yaxis:{title:'Avg Buy (SGD)',tickprefix:'$'},
-     yaxis2:{title:'Avg Rent (SGD)',overlaying:'y',side:'right',tickprefix:'$'},
-     shapes:isFinite(budget)?[{
-        type:'line',x0:YEARS[0],x1:YEARS.at(-1),y0:budget,y1:budget,
-        line:{dash:'dot',width:2,color:'grey'}
-     }]:[]
-  },{responsive:true});
+  let html = `<p>Found ${matches.length} matching units:</p><table><thead>
+      <tr><th>Project</th><th>Size bucket</th><th>Last buy&nbsp;price</th><th>ROI&nbsp;%</th></tr></thead><tbody>`;
 
-  const units = isFinite(budget)&&r.most_recent_buy
-              ? (budget/r.most_recent_buy).toFixed(2) : '';
-  $('#summary').html(
-     units ? `With&nbsp;S$${budget.toLocaleString()} you could buy about <strong>${units}</strong> unit(s).` : ''
-  );
-}
+  matches.slice(0,100).forEach(r => {
+      html += `<tr>
+         <td>${r.project}</td>
+         <td>${r.area_bucket}</td>
+         <td>${Number(r.most_recent_buy).toLocaleString()}</td>
+         <td>${r.ROI!=null ? Number(r.ROI).toFixed(2) : ""}</td>
+      </tr>`;
+  });
+  html += "</tbody></table>";
+  out.innerHTML = html;
+};
 </script>
 </body>
 </html>
