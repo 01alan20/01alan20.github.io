@@ -33,58 +33,48 @@ th{background:#007bff;color:#fff} tr:nth-child(even){background:#eef2f8}
 
 <script>
 const CSV_PATH = "pmi_roi_agg.csv";      // file sits in same folder
-let ROWS = [];
+let ROWS = [], COL = {};
 
+/* ---- 1  fetch & parse CSV ---- */
 fetch(CSV_PATH)
   .then(r => r.text())
   .then(txt => {
-      const {data} = Papa.parse(txt,{header:true,dynamicTyping:true,skipEmptyLines:true});
-      ROWS = data.filter(r => r.project && r.most_recent_buy && r.area_bucket);
+     /* If your CSV is semicolon-delimited, add delimiter:";" */
+     const {data} = Papa.parse(txt,{
+         header:true, dynamicTyping:true, skipEmptyLines:true
+     });
+     if(!data.length){ show("CSV parsed 0 rows – wrong delimiter?"); return; }
 
-      // populate size-bucket dropdown
-      const buckets = [...new Set(ROWS.map(r => r.area_bucket))].sort((a,b)=>{
-          // numeric sort by lower bound if possible
-          const na = parseFloat(a), nb = parseFloat(b);
-          return isNaN(na)||isNaN(nb) ? a.localeCompare(b) : na-nb;
-      });
-      const sel = document.getElementById('bucket');
-      sel.innerHTML = buckets.map(b=>`<option value="${b}">${b}</option>`).join("");
-      sel.disabled = false;
-      document.getElementById('btn').disabled = false;
+     // detect real header names (case-insensitive)
+     const hdr = n => Object.keys(data[0]).find(k=>k.toLowerCase()===n);
+     COL.project = hdr("project");        // "Project" in your file
+     COL.bucket  = hdr("area_bucket");    // "area_bucket"
+     COL.price   = Object.keys(data[0]).find(k=>k.toLowerCase().includes("most_recent_buy"));
+     COL.roi     = hdr("roi");
+
+     if(!COL.project||!COL.bucket||!COL.price){
+        show("Cannot find expected columns in CSV."); return;
+     }
+
+     ROWS = data.filter(r => r[COL.project] && r[COL.price]);
+
+     // fill dropdown with unique buckets
+     const buckets = [...new Set(ROWS.map(r=>r[COL.bucket]))]
+                    .sort((a,b)=>parseFloat(a)-parseFloat(b));
+     const sel = document.getElementById('bucket');
+     sel.innerHTML = buckets.map(b=>`<option value="${b}">${b}</option>`).join("");
+     sel.disabled = false;
+     document.getElementById('btn').disabled = false;
   })
-  .catch(err => document.getElementById('results').textContent =
-        "Failed to load CSV: "+err);
+  .catch(err => show("Failed to load CSV: "+err));
 
-/* ---------- helper: convert bucket → [lo,hi] ----------- */
+/* ---- 2  helper ---- */
 function range(bucket){
   if(bucket.startsWith(">")) return [+bucket.slice(1), Infinity];
-  const [lo,hi]=bucket.split("-").map(Number);
-  return [lo,hi];
+  const [lo,hi]=bucket.split("-").map(Number); return [lo,hi];
 }
+function show(msg){ document.getElementById('results').textContent = msg; }
 
-/* ---------- search ---------- */
+/* ---- 3  search ---- */
 document.getElementById('btn').onclick = ()=>{
-  const bucket = document.getElementById('bucket').value;
-  const [lo,hi] = range(bucket);
-  const budget  = +document.getElementById('price').value || Infinity;
-
-  const matches = ROWS.filter(r=>{
-      const [blo,bhi]=range(r.area_bucket);
-      return blo===lo && bhi===hi && r.most_recent_buy<=budget;
-  });
-
-  const out = document.getElementById('results');
-  if(!matches.length){ out.textContent="No matching units."; return; }
-
-  let html=`<p>Found ${matches.length} units in ${bucket} sqm bucket:</p><table><tr>
-            <th>Project</th><th>Bucket</th><th>Last buy price</th><th>ROI %</th></tr>`;
-  matches.slice(0,500).forEach(r=>{
-     html+=`<tr><td>${r.project}</td><td>${r.area_bucket}</td>
-              <td>${Number(r.most_recent_buy).toLocaleString()}</td>
-              <td>${r.ROI!=null?Number(r.ROI).toFixed(2):""}</td></tr>`;
-  });
-  out.innerHTML=html+"</table>";
-};
-</script>
-</body>
-</html>
+  const bucket = docu
