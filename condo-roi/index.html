@@ -1,128 +1,181 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Singapore Condo Investment ROI</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SG Condo Investment ROI</title>
 
-  <!-- Plotly (dual-axis line charts) -->
-  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<!-- ====  libraries  ============================================== -->
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
 
-  <!-- Papa Parse (browser-side CSV loader) -->
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
 
-  <style>
-    :root{
-      --accent:#007bff;--bg:#f8f9fa;--txt:#1a1a1a;--muted:#6c757d
-    }
-    @media(prefers-color-scheme:dark){
-      :root{--accent:#4dabf7;--bg:#1a1a1a;--txt:#f1f1f1;--muted:#a0a0a0}
-    }
-
-    html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:var(--bg);color:var(--txt)}
-    h1{margin:.5rem 0 1rem;font-size:1.8rem;text-align:center}
-    #controls{max-width:960px;margin:1rem auto;display:grid;gap:1rem 2rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    label{font-weight:600;font-size:.9rem;margin-bottom:.25rem;display:block}
-    input,select{width:100%;padding:.4rem .6rem;font-size:1rem;border:1px solid #ccc;border-radius:4px;background:#fff;color:var(--txt)}
-    input[type=range]{padding:0;height:2.2rem}
-    #chart{height:480px;max-width:960px;margin:0 auto;border:1px solid #ddd;border-radius:8px;background:#fff}
-    #summary{text-align:center;margin-top:1rem;font-size:1rem;color:var(--muted)}
-    a{color:var(--accent)}
-  </style>
+<!-- ====  styling  ================================================= -->
+<style>
+:root{--accent:#007bff;--bg:#f8f9fa;--txt:#1a1a1a;--muted:#6c757d}
+@media(prefers-color-scheme:dark){
+  :root{--accent:#4dabf7;--bg:#1a1a1a;--txt:#f1f1f1;--muted:#a0a0a0}
+}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);
+          font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif}
+h1{margin:.6rem 0 1rem;text-align:center;font-size:1.9rem}
+#controls{max-width:960px;margin:0 auto 1rem;
+          display:grid;gap:1rem 2rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+label{display:block;font-size:.9rem;font-weight:600;margin-bottom:.25rem}
+input,select{width:100%;padding:.45rem .6rem;font-size:1rem;
+             border:1px solid #ccc;border-radius:4px;background:#fff;color:var(--txt)}
+input[type=range]{padding:0;height:2.2rem}
+#tableWrapper{max-width:960px;margin:0 auto 1.2rem}
+.dataTables_wrapper .dataTables_paginate .paginate_button{padding:.1em .6em}
+#chart{height:480px;max-width:960px;margin:0 auto;border:1px solid #ddd;border-radius:8px;background:#fff}
+#summary{text-align:center;margin-top:1rem;font-size:1rem;color:var(--muted)}
+a{color:var(--accent)}
+</style>
 </head>
 <body>
-  <h1>Singapore Condo Investment ROI Explorer</h1>
 
-  <div id="controls">
-    <div>
-      <label for="proj">Project</label>
-      <select id="proj"></select>
-    </div>
-    <div>
-      <label for="size">Size (sqm): <span id="sizeVal">60</span></label>
-      <input id="size" type="range" min="20" max="300" step="1" value="60">
-    </div>
-    <div>
-      <label for="budget">Budget (SGD)</label>
-      <input id="budget" type="number" step="10000" value="800000">
-    </div>
+<h1>Singapore Condo Investment ROI Explorer</h1>
+
+<!-- ==========  SIZE & BUDGET FILTERS  ========== -->
+<div id="controls">
+  <div>
+    <label for="size">Size (sqm): <span id="sizeVal">60</span></label>
+    <input id="size" type="range" min="20" max="300" step="1" value="60">
   </div>
+  <div>
+    <label for="budget">Budget (SGD, max buy price)</label>
+    <input id="budget" type="number" step="10000" value="800000">
+  </div>
+</div>
 
-  <div id="chart">Loading data…</div>
-  <p id="summary"></p>
+<!-- ==========  DATA TABLE  ========== -->
+<div id="tableWrapper">
+  <table id="condoTable" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th>Project</th><th>District</th><th>Last Buy Price</th><th>ROI %</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 
-  <script>
-  /* ------------ 1. Load CSV -------------- */
-  Papa.parse("../pmi_roi_agg.csv", {        // <- CSV is one level up; change to "pmi_roi_agg.csv" if you move the file inside this folder
-    download:true, header:true, dynamicTyping:true,
-    complete: ({data}) => init(data.filter(r => r.project))
+<!-- ==========  CHART  ========== -->
+<div id="chart">Pick a project row…</div>
+<p id="summary"></p>
+
+<!-- ==========  SCRIPT  =========================================== -->
+<script>
+/* -------------- 1. Load CSV ---------------- */
+const CSV_PATH = "../condo-roi/pmi_roi_agg.csv";          // change to "pmi_roi_agg.csv" if you move the file
+let ALL_ROWS = [];                              // full data set
+let table;                                      // DataTable instance
+
+Papa.parse(CSV_PATH,{
+  download:true,header:true,dynamicTyping:true,
+  complete:({data})=>{ ALL_ROWS = data.filter(r=>r.project); prepRows(); initTable(); bindControls(); }
+});
+
+/* -------------- 2. Prep helper fields ---------------- */
+function prepRows(){
+  ALL_ROWS.forEach(r=>{
+    const m=(r.area_bucket||"").split("-").map(Number);
+    r.lo=m[0]||NaN;r.hi=m[1]||NaN;r.mid=(r.lo+r.hi)/2;
+  });
+}
+
+/* -------------- 3. Build DataTable ---------------- */
+function initTable(){
+  table = $('#condoTable').DataTable({
+    data: [],                                    // we’ll load via refreshTable()
+    columns: [
+      {data:'project'},
+      {data:'district'},
+      {data:'most_recent_buy', render: $.fn.dataTable.render.number(',', '.', 0, '$')},
+      {data:'ROI', render:data=> data!=null?data.toFixed(2):""}
+    ],
+    pageLength:10,lengthChange:false,order:[[2,'asc']],
+    deferRender:true,scrollY:false              // let DT handle pagination, not scrolling
   });
 
-  function init(rows){
-    /* --- split bucket "50-60" into numbers for quick math --- */
-    rows.forEach(r=>{
-      const m = (r.area_bucket||"").split("-").map(Number);
-      r.lo = m[0]||NaN; r.hi = m[1]||NaN; r.mid = (r.lo+r.hi)/2;
-    });
+  // click-a-row → draw chart
+  $('#condoTable tbody').on('click','tr',function(){
+    const rowData = table.row(this).data();
+    if(rowData) drawChart(rowData.project, getSize());
+  });
 
-    const projSel  = document.getElementById("proj");
-    const sizeIn   = document.getElementById("size");
-    const sizeVal  = document.getElementById("sizeVal");
-    const budgetIn = document.getElementById("budget");
+  refreshTable();                               // first fill
+}
 
-    /* --- populate dropdown --- */
-    [...new Set(rows.map(r=>r.project))].sort()
-      .forEach(p=>projSel.add(new Option(p,p)));
+/* -------------- 4. Controls & filtering ---------------- */
+function getSize(){ return +document.getElementById('size').value }
+function getBudget(){ return +document.getElementById('budget').value || Infinity }
 
-    /* --- redraw when any control changes --- */
-    [projSel,sizeIn,budgetIn].forEach(el=>el.oninput=refresh);
-    refresh();
+function bindControls(){
+  document.getElementById('size').oninput = ()=>{
+    document.getElementById('sizeVal').textContent = getSize();
+    refreshTable();
+  };
+  document.getElementById('budget').oninput = refreshTable;
+}
 
-    function refresh(){
-      sizeVal.textContent = sizeIn.value;
-      const project = projSel.value;
-      const size    = +sizeIn.value;
-      const budget  = +budgetIn.value;
+function refreshTable(){
+  const size   = getSize();
+  const budget = getBudget();
 
-      /* pick nearest bucket */
-      const projRows = rows.filter(r=>r.project===project);
-      projRows.sort((a,b)=> {
-        const da = (a.lo<=size&&size<=a.hi)?0:Math.abs(a.mid-size);
-        const db = (b.lo<=size&&size<=b.hi)?0:Math.abs(b.mid-size);
-        return da-db;
-      });
-      const r = projRows[0] || {};
-      const years=[2020,2021,2022,2023,2024,2025];
-      const buy = years.map(y=>r["avg_buy_"+y]);
-      const rent= years.map(y=>r["avg_rent_"+y]);
+  // rows whose bucket CONTAINS the size, and last price ≤ budget
+  const filtered = ALL_ROWS.filter(r =>
+       (r.lo<=size && size<=r.hi) &&
+       (!budget || r.most_recent_buy<=budget));
 
-      /* plot */
-      Plotly.newPlot("chart",[
-        {x:years,y:buy, name:"Avg Buy Price", mode:"lines+markers", yaxis:"y1"},
-        {x:years,y:rent,name:"Avg Rent",      mode:"lines+markers", yaxis:"y2"}
-      ],{
-        title:`${project} (${r.area_bucket||"-"} sqm)`,
-        margin:{t:40,l:50,r:50,b:50},
-        xaxis:{dtick:1,title:"Year"},
-        yaxis:{title:"Avg Buy Price (SGD)",tickprefix:"$"},
-        yaxis2:{title:"Avg Monthly Rent (SGD)",overlaying:"y",side:"right",tickprefix:"$"},
-        shapes: budget ? [{
-          type:"line", x0:years[0], x1:years.at(-1), y0:budget, y1:budget,
-          line:{dash:"dot",width:2,color:"grey"}
-        }] : []
-      },{responsive:true});
+  table.clear().rows.add(filtered).draw(false); // false = hold paging, we’re already at page 1
+  $('#condoTable').trigger('focus');            // accessibility: announce redraw
+  $('#chart').html('Pick a project row…');      // reset chart
+  $('#summary').text('');
+}
 
-      /* summary */
-      const units = budget && r.most_recent_buy ? (budget/r.most_recent_buy).toFixed(2) : "";
-      document.getElementById("summary").innerHTML =
-        units ? `With&nbsp;S$${budget.toLocaleString()} you could buy roughly <strong>${units}</strong> unit(s) at today’s price.` : "";
-    }
-  }
-  </script>
+/* -------------- 5. Chart draw ---------------- */
+function drawChart(project,size){
+  // choose the row whose bucket best matches the size
+  const candidates = ALL_ROWS.filter(r=>r.project===project);
+  if(!candidates.length) return;
 
-  <p style="text-align:center;margin-top:3rem;font-size:.85rem;color:var(--muted)">
-    Built with <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a> &amp;
-    <a href="https://www.papaparse.com/" target="_blank">Papa Parse</a>. Data: <code>pmi_roi_agg.csv</code>
-  </p>
+  candidates.sort((a,b)=>{
+    const da=(a.lo<=size && size<=a.hi)?0:Math.abs(a.mid-size);
+    const db=(b.lo<=size && size<=b.hi)?0:Math.abs(b.mid-size);
+    return da-db;
+  });
+  const r=candidates[0];
+  const years=[2020,2021,2022,2023,2024,2025];
+  const buy = years.map(y=>r["avg_buy_"+y]);
+  const rent= years.map(y=>r["avg_rent_"+y]);
+  const budget=getBudget();
+
+  Plotly.newPlot('chart',[
+    {x:years,y:buy ,name:'Avg Buy Price', mode:'lines+markers',yaxis:'y1'},
+    {x:years,y:rent,name:'Avg Rent',      mode:'lines+markers',yaxis:'y2'}
+  ],{
+    title:`${project} (${r.area_bucket||'-'} sqm)`,
+    margin:{t:40,l:50,r:50,b:40},
+    xaxis:{title:'Year',dtick:1},
+    yaxis:{title:'Avg Buy Price (SGD)',tickprefix:'$'},
+    yaxis2:{title:'Avg Monthly Rent (SGD)',overlaying:'y',side:'right',tickprefix:'$'},
+    shapes: isFinite(budget)?[{
+      type:'line',x0:years[0],x1:years.at(-1),y0:budget,y1:budget,
+      line:{dash:'dot',width:2,color:'grey'}
+    }]:[]
+  },{responsive:true});
+
+  const units = isFinite(budget)&&r.most_recent_buy? (budget/r.most_recent_buy).toFixed(2):"";
+  $('#summary').html(
+    units?`With&nbsp;S$${budget.toLocaleString()} you could buy about <strong>${units}</strong> unit(s).`:""
+  );
+}
+</script>
+
 </body>
 </html>
