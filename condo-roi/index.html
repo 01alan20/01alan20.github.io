@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SG Condo Investment ROI</title>
 
-<!-- ====  libraries  ============================================== -->
+<!-- ── libraries ─────────────────────────────────────────────────── -->
 <link rel="stylesheet"
       href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -14,7 +14,7 @@
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
 
-<!-- ====  styling  ================================================= -->
+<!-- ── styling ───────────────────────────────────────────────────── -->
 <style>
 :root{--accent:#007bff;--bg:#f8f9fa;--txt:#1a1a1a;--muted:#6c757d}
 @media(prefers-color-scheme:dark){
@@ -29,9 +29,9 @@ label{display:block;font-size:.9rem;font-weight:600;margin-bottom:.25rem}
 input,select{width:100%;padding:.45rem .6rem;font-size:1rem;
              border:1px solid #ccc;border-radius:4px;background:#fff;color:var(--txt)}
 input[type=range]{padding:0;height:2.2rem}
-#tableWrapper{max-width:960px;margin:0 auto 1.2rem}
+#tableWrapper{max-width:960px;margin:0 auto 1.4rem}
 .dataTables_wrapper .dataTables_paginate .paginate_button{padding:.1em .6em}
-#chart{height:480px;max-width:960px;margin:0 auto;border:1px solid #ddd;border-radius:8px;background:#fff}
+#chart{height:520px;max-width:1000px;margin:0 auto;border:1px solid #ddd;border-radius:8px;background:#fff}
 #summary{text-align:center;margin-top:1rem;font-size:1rem;color:var(--muted)}
 a{color:var(--accent)}
 </style>
@@ -40,7 +40,7 @@ a{color:var(--accent)}
 
 <h1>Singapore Condo Investment ROI Explorer</h1>
 
-<!-- ==========  SIZE & BUDGET FILTERS  ========== -->
+<!-- ── SIZE & BUDGET FILTERS ─────────────────────────────────────── -->
 <div id="controls">
   <div>
     <label for="size">Size (sqm): <span id="sizeVal">60</span></label>
@@ -52,7 +52,7 @@ a{color:var(--accent)}
   </div>
 </div>
 
-<!-- ==========  DATA TABLE  ========== -->
+<!-- ── DATA TABLE ────────────────────────────────────────────────── -->
 <div id="tableWrapper">
   <table id="condoTable" class="display" style="width:100%">
     <thead>
@@ -64,118 +64,131 @@ a{color:var(--accent)}
   </table>
 </div>
 
-<!-- ==========  CHART  ========== -->
+<!-- ── CHART ─────────────────────────────────────────────────────── -->
 <div id="chart">Pick a project row…</div>
 <p id="summary"></p>
 
-<!-- ==========  SCRIPT  =========================================== -->
+<!-- ── SCRIPT ────────────────────────────────────────────────────── -->
 <script>
-/* -------------- 1. Load CSV ---------------- */
-const CSV_PATH = "../condo-roi/pmi_roi_agg.csv";          // change to "pmi_roi_agg.csv" if you move the file
-let ALL_ROWS = [];                              // full data set
-let table;                                      // DataTable instance
+/* ---------- CONFIG ---------- */
+const CSV_PATH = "../pmi_roi_agg.csv";   // change to "pmi_roi_agg.csv" if you move the file
+const YEARS    = [2020,2021,2022,2023,2024,2025];
 
+/* ---------- GLOBALS ---------- */
+let ALL = [];      // full dataset
+let table;         // DataTable instance
+
+/* ---------- 1. Load CSV ---------- */
 Papa.parse(CSV_PATH,{
   download:true,header:true,dynamicTyping:true,
-  complete:({data})=>{ ALL_ROWS = data.filter(r=>r.project); prepRows(); initTable(); bindControls(); }
+  complete:({data})=>{
+     ALL = data.filter(r=>r.project);
+     preprocess();
+     makeTable();
+     bindUI();
+  }
 });
 
-/* -------------- 2. Prep helper fields ---------------- */
-function prepRows(){
-  ALL_ROWS.forEach(r=>{
-    const m=(r.area_bucket||"").split("-").map(Number);
-    r.lo=m[0]||NaN;r.hi=m[1]||NaN;r.mid=(r.lo+r.hi)/2;
+/* ---------- 2. Enrich rows ---------- */
+function preprocess(){
+  ALL.forEach(r=>{
+      const nums=(r.area_bucket||"").split("-").map(Number);
+      r.lo=nums[0]||NaN; r.hi=nums[1]||NaN; r.mid=(r.lo+r.hi)/2;
   });
 }
 
-/* -------------- 3. Build DataTable ---------------- */
-function initTable(){
+/* ---------- 3. Build DataTable ---------- */
+function makeTable(){
   table = $('#condoTable').DataTable({
-    data: [],                                    // we’ll load via refreshTable()
-    columns: [
+    data:[],                   // filled in refresh()
+    columns:[
       {data:'project'},
       {data:'district'},
-      {data:'most_recent_buy', render: $.fn.dataTable.render.number(',', '.', 0, '$')},
-      {data:'ROI', render:data=> data!=null?data.toFixed(2):""}
+      {data:'most_recent_buy', render:$.fn.dataTable.render.number(',', '.', 0, '$')},
+      {data:'ROI', render: d=>d!=null ? d.toFixed(2) : ''}
     ],
-    pageLength:10,lengthChange:false,order:[[2,'asc']],
-    deferRender:true,scrollY:false              // let DT handle pagination, not scrolling
+    pageLength:10,lengthChange:false,order:[],deferRender:true
   });
 
-  // click-a-row → draw chart
+  // click row → chart
   $('#condoTable tbody').on('click','tr',function(){
-    const rowData = table.row(this).data();
-    if(rowData) drawChart(rowData.project, getSize());
+    const row = table.row(this).data();
+    if(row) drawChart(row.project, currentSize());
   });
 
-  refreshTable();                               // first fill
+  refresh();        // first fill
 }
 
-/* -------------- 4. Controls & filtering ---------------- */
-function getSize(){ return +document.getElementById('size').value }
-function getBudget(){ return +document.getElementById('budget').value || Infinity }
+/* ---------- 4. UI helpers ---------- */
+const sizeInput   = document.getElementById('size');
+const budgetInput = document.getElementById('budget');
+const sizeValSpan = document.getElementById('sizeVal');
 
-function bindControls(){
-  document.getElementById('size').oninput = ()=>{
-    document.getElementById('sizeVal').textContent = getSize();
-    refreshTable();
+function currentSize(){ return +sizeInput.value }
+function currentBudget(){ const b=+budgetInput.value; return isFinite(b)&&b>0?b:Infinity }
+
+/* ---------- 5. Bind controls ---------- */
+function bindUI(){
+  sizeInput.oninput = ()=>{
+    sizeValSpan.textContent = currentSize();
+    refresh();
   };
-  document.getElementById('budget').oninput = refreshTable;
+  budgetInput.oninput = refresh;
 }
 
-function refreshTable(){
-  const size   = getSize();
-  const budget = getBudget();
+/* ---------- 6. Refresh table (matches first) ---------- */
+function rowMatches(r, size, budget){
+  return (r.lo<=size && size<=r.hi) && (r.most_recent_buy<=budget);
+}
 
-  // rows whose bucket CONTAINS the size, and last price ≤ budget
-  const filtered = ALL_ROWS.filter(r =>
-       (r.lo<=size && size<=r.hi) &&
-       (!budget || r.most_recent_buy<=budget));
+function refresh(){
+  const size   = currentSize();
+  const budget = currentBudget();
 
-  table.clear().rows.add(filtered).draw(false); // false = hold paging, we’re already at page 1
-  $('#condoTable').trigger('focus');            // accessibility: announce redraw
-  $('#chart').html('Pick a project row…');      // reset chart
+  const matches = ALL.filter(r=>rowMatches(r,size,budget));
+  const others  = ALL.filter(r=>!rowMatches(r,size,budget));
+
+  table.clear().rows.add([...matches, ...others]).draw(false);
+  $('#chart').html('Pick a project row…');
   $('#summary').text('');
 }
 
-/* -------------- 5. Chart draw ---------------- */
+/* ---------- 7. Chart ---------- */
 function drawChart(project,size){
-  // choose the row whose bucket best matches the size
-  const candidates = ALL_ROWS.filter(r=>r.project===project);
-  if(!candidates.length) return;
-
-  candidates.sort((a,b)=>{
-    const da=(a.lo<=size && size<=a.hi)?0:Math.abs(a.mid-size);
-    const db=(b.lo<=size && size<=b.hi)?0:Math.abs(b.mid-size);
-    return da-db;
+  const rows = ALL.filter(r=>r.project===project);
+  rows.sort((a,b)=>{
+     const da=(a.lo<=size&&size<=a.hi)?0:Math.abs(a.mid-size);
+     const db=(b.lo<=size&&size<=b.hi)?0:Math.abs(b.mid-size);
+     return da-db;
   });
-  const r=candidates[0];
-  const years=[2020,2021,2022,2023,2024,2025];
-  const buy = years.map(y=>r["avg_buy_"+y]);
-  const rent= years.map(y=>r["avg_rent_"+y]);
-  const budget=getBudget();
+  const r = rows[0];
+  if(!r){return;}
+
+  const buy  = YEARS.map(y=>r['avg_buy_'+y]);
+  const rent = YEARS.map(y=>r['avg_rent_'+y]);
+  const budget=currentBudget();
 
   Plotly.newPlot('chart',[
-    {x:years,y:buy ,name:'Avg Buy Price', mode:'lines+markers',yaxis:'y1'},
-    {x:years,y:rent,name:'Avg Rent',      mode:'lines+markers',yaxis:'y2'}
+     {x:YEARS,y:buy ,name:'Avg Buy Price', mode:'lines+markers',yaxis:'y1'},
+     {x:YEARS,y:rent,name:'Avg Rent',      mode:'lines+markers',yaxis:'y2'}
   ],{
-    title:`${project} (${r.area_bucket||'-'} sqm)`,
-    margin:{t:40,l:50,r:50,b:40},
-    xaxis:{title:'Year',dtick:1},
-    yaxis:{title:'Avg Buy Price (SGD)',tickprefix:'$'},
-    yaxis2:{title:'Avg Monthly Rent (SGD)',overlaying:'y',side:'right',tickprefix:'$'},
-    shapes: isFinite(budget)?[{
-      type:'line',x0:years[0],x1:years.at(-1),y0:budget,y1:budget,
-      line:{dash:'dot',width:2,color:'grey'}
-    }]:[]
+     title:`${project} (${r.area_bucket||'-'} sqm)`,
+     margin:{t:40,l:50,r:50,b:40},
+     xaxis:{title:'Year',dtick:1},
+     yaxis:{title:'Avg Buy (SGD)',tickprefix:'$'},
+     yaxis2:{title:'Avg Rent (SGD)',overlaying:'y',side:'right',tickprefix:'$'},
+     shapes:isFinite(budget)?[{
+        type:'line',x0:YEARS[0],x1:YEARS.at(-1),y0:budget,y1:budget,
+        line:{dash:'dot',width:2,color:'grey'}
+     }]:[]
   },{responsive:true});
 
-  const units = isFinite(budget)&&r.most_recent_buy? (budget/r.most_recent_buy).toFixed(2):"";
+  const units = isFinite(budget)&&r.most_recent_buy
+              ? (budget/r.most_recent_buy).toFixed(2) : '';
   $('#summary').html(
-    units?`With&nbsp;S$${budget.toLocaleString()} you could buy about <strong>${units}</strong> unit(s).`:""
+     units ? `With&nbsp;S$${budget.toLocaleString()} you could buy about <strong>${units}</strong> unit(s).` : ''
   );
 }
 </script>
-
 </body>
 </html>
