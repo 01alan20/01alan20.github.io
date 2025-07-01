@@ -78,16 +78,35 @@ const YEARS    = [2020,2021,2022,2023,2024,2025];
 let ALL = [];      // full dataset
 let table;         // DataTable instance
 
-/* ---------- 1. Load CSV ---------- */
-Papa.parse(CSV_PATH,{
-  download:true,header:true,dynamicTyping:true,
-  complete:({data})=>{
-     ALL = data.filter(r=>r.project);
-     preprocess();
-     makeTable();
-     bindUI();
-  }
+/* ---------- 1. Load CSV  (with diagnostics) ---------- */
+Papa.parse(CSV_PATH, {
+  download      : true,
+  header        : true,
+  dynamicTyping : true,
+  skipEmptyLines: true,   // handles blank lines
+  worker        : true,   // parse in a Web-Worker
+
+  complete: ({data, errors}) => {
+    console.log(`Papa ✅ parsed ${data.length} rows | ${errors.length} errors`);
+    console.log("first row object:", data[0]);           // <-- inspect header names
+
+    // keep only rows that actually have a project name
+    ALL = data.filter(r => r.project && r.project.trim());
+    console.log("rows with a non-blank project:", ALL.length);
+
+    if (!ALL.length) {
+      console.warn("⚠️ 0 usable rows – header might be 'Project' (capital P) or similar.");
+      return;                 // stop here so you can read the warning
+    }
+
+    preprocess();
+    makeTable();
+    bindUI();
+  },
+
+  error: err => console.error("Papa ❌ error:", err)
 });
+
 
 /* ---------- 2. Enrich rows ---------- */
 function preprocess(){
