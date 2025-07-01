@@ -398,13 +398,16 @@
                 <p style="color: var(--text-secondary); margin-bottom: 2rem;">A collection of projects that showcase my skills and passion for development.</p>
                 
                 <div class="projects-grid">
-                    <div class="project-card" onclick="showProject('project1')">
-                        <h3>E-Commerce Platform</h3>
-                        <p>A full-stack e-commerce solution with modern design and seamless user experience.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">MongoDB</span>
+                        <div class="project-card" onclick="showProject('SGCondoROI')">
+                            <h3>Singapore Condo Investment ROI</h3>
+                            <p>Interactive dashboard that plots purchase prices, rental yields and ROI for SG condos.</p>
+                        
+                            <div class="project-tech">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Plotly.js</span>
+                                <span class="tech-tag">CSV</span>
+                            </div>
                         </div>
                     </div>
 
@@ -452,39 +455,49 @@
         </div>
 
         <!-- Individual Project Pages -->
-        <div id="project1" class="page">
+        <!-- Singapore Condo Investment ROI – project detail -->
+        <div id="SGCondoROI" class="page">
             <div class="container">
                 <a href="#" class="back-btn" onclick="showPage('projects')">← Back to Projects</a>
+        
                 <div class="project-detail">
-                    <h1>E-Commerce Platform</h1>
-                    <div class="meta">React • Node.js • MongoDB | 2024</div>
-                    
+                    <h1>Singapore Condo Investment ROI</h1>
+                    <div class="meta">HTML • JavaScript • Plotly.js | 2025</div>
+        
                     <div class="project-content">
-                        <p>A comprehensive e-commerce platform built with modern web technologies. Features include user authentication, product catalog, shopping cart, payment integration, and admin dashboard.</p>
-                        
-                        <div class="project-image">
-                            Project Screenshot/Demo - Replace with actual image
+                        <p>
+                            A browser-only tool that lets investors explore how condo purchase prices and
+                            monthly rents have moved from 2020 to 2025 and what that means for ROI.  
+                            It loads a simple <code>pmi_roi_agg.csv</code> at runtime, so the page
+                            stays <strong>100 % static</strong> and deploys on GitHub Pages with no backend.
+                        </p>
+        
+                        <!-- Responsive embed of the live app -->
+                        <div class="project-image" style="height: 420px; padding: 0;">
+                            <iframe src="condo-roi/index.html"
+                                    style="width: 100%; height: 100%; border: 0; border-radius: 8px;"
+                                    title="Condo ROI Explorer"></iframe>
                         </div>
-                        
+        
                         <h3>Key Features</h3>
-                        <ul style="margin: 1rem 0 1rem 2rem; color: var(--text-secondary);">
-                            <li>Responsive design with mobile-first approach</li>
-                            <li>Secure user authentication and authorization</li>
-                            <li>Real-time inventory management</li>
-                            <li>Integrated payment processing</li>
-                            <li>Admin dashboard with analytics</li>
+                        <ul style="margin:1rem 0 1rem 2rem; color: var(--text-secondary);">
+                            <li>CSV parsed in-browser with Papa Parse — no server needed</li>
+                            <li>Plotly dual-axis chart (buy price &amp; rent) that updates instantly</li>
+                            <li>Controls: project dropdown, size slider, budget input</li>
+                            <li>Budget line shows how many units you can afford today</li>
+                            <li>Fully responsive &amp; green-tick Lighthouse score</li>
                         </ul>
-                        
+        
                         <div class="project-links">
-                            <a href="#" class="btn-secondary">Live Demo</a>
-                            <a href="#" class="btn-secondary">GitHub</a>
-                            <a href="#" class="btn-secondary">Download Files</a>
+                            <a href="condo-roi/index.html" class="btn-secondary" target="_blank">Live Demo</a>
+                            <a href="https://github.com/your-repo/condo-roi" class="btn-secondary" target="_blank">GitHub</a>
+                            <a href="pmi_roi_agg.csv" class="btn-secondary" download>Download CSV</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        
         <div id="project2" class="page">
             <div class="container">
                 <a href="#" class="back-btn" onclick="showPage('projects')">← Back to Projects</a>
