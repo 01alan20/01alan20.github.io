@@ -1,11 +1,11 @@
 /* global Papa, DataTable, Plotly */
 const CSV_PATH = 'pmi_roi_agg.csv';
 
-let rawData = [];     // full CSV rows
-let filtered = [];    // rows after sidebar filters
+let rawData = [];   // full CSV rows
+let filtered = [];  // rows after filters
 let dataTable = null;
 
-// DOM helpers
+// DOM shortcuts
 const $ = id => document.getElementById(id);
 const controls = {
   maxPrice: $('maxPrice'),
@@ -15,49 +15,51 @@ const controls = {
   size: $('size')
 };
 
-// 1. Load CSV & bootstrap UI -----------------------------------
+/* ─────────────────────────── 1. LOAD CSV ─────────────────────────── */
 Papa.parse(CSV_PATH, {
   download: true,
   header: true,
   complete: res => {
-    rawData = res.data.filter(r => r.project); // drop potential blank row
+    rawData = res.data.filter(r => r.project);   // drop blank row from CSV end
+
+    // numeric casting
     rawData.forEach(r => {
       r.most_recent_buy = +String(r.most_recent_buy).replace(/,/g, '');
       r.ROI = +r.ROI;
     });
 
     buildSelectors();
-    applyFilters();   // initial render
+    applyFilters();   // first render
   }
 });
 
-// 2. Build sidebar multiselects -------------------------------
+/* ────────────────────────── 2. BUILD FILTERS ─────────────────────── */
 function buildSelectors () {
-  // areas
+  // Area buckets
   const areas = [...new Set(rawData.map(d => d.area_bucket))]
     .filter(Boolean)
     .sort((a, b) => +a.split('-')[0] - +b.split('-')[0]);
-  areas.forEach(a => controls.area.add(new Option(a, a, false, true))); // preselect all
+  areas.forEach(a => controls.area.add(new Option(a, a, false, true))); // select all
 
-  // property types (default “Condominium”)
-  const props = [...new Set(rawData.map(d => d.propertyType))].filter(Boolean).sort();
+  // Property types (default Condominium)
+  const props = [...new Set(rawData.map(d => d.propertyType))]
+    .filter(Boolean)
+    .sort();
   props.forEach(p =>
     controls.propertyType.add(new Option(p, p, false, p === 'Condominium'))
   );
 
-  // set sensible default for max price
-  const prices = rawData.map(d => d.most_recent_buy);
-  controls.maxPrice.value = Math.round(
-    prices.sort((a, b) => a - b)[Math.floor(prices.length * 0.75)]
-  );
+  // Default max-price ~75th percentile
+  const prices = rawData.map(d => d.most_recent_buy).sort((a, b) => a - b);
+  controls.maxPrice.value = Math.round(prices[Math.floor(prices.length * 0.75)]);
 
-  // listeners
+  // Listeners
   ['maxPrice', 'area', 'propertyType'].forEach(id =>
     controls[id].addEventListener('input', applyFilters)
   );
 }
 
-// 3. Filter data & update table / pickers ----------------------
+/* ────────────────────────── 3. APPLY FILTERS ─────────────────────── */
 function applyFilters () {
   const maxPrice = +controls.maxPrice.value || Infinity;
   const selAreas = [...controls.area.options].filter(o => o.selected).map(o => o.value);
@@ -67,66 +69,67 @@ function applyFilters () {
     d.most_recent_buy <= maxPrice &&
     selAreas.includes(d.area_bucket) &&
     selProps.includes(d.propertyType) &&
-   d.ROI > 0                      // ➊ exclude zero-ROI rows
+    d.ROI > 0 // ✨ exclude zero-ROI rows
   );
 
   renderTable();
   rebuildProjectDropdown();
-  clearChart(); // reset chart when filters change
+  clearChart(); // reset when filters change
 }
 
+/* ────────────────────────── 4. RENDER TABLE ──────────────────────── */
 function renderTable () {
-  // Destroy old DataTable (if any)
   if (dataTable) dataTable.destroy();
 
-  // Rebuild tbody
   const tbody = $('results').querySelector('tbody');
   tbody.innerHTML = filtered.map(row => `
-    <tr>
-      <td>${row.project}</td>
-      <td>${row.district}</td>
-      <td>${row.most_recent_buy.toLocaleString()}</td>
-      <td>${row.ROI.toFixed(2)}</td>
-      <td>${row.propertyType}</td>
-    </tr>
+      <tr>
+        <td>${row.project}</td>
+        <td>${row.district}</td>
+        <td>${row.most_recent_buy.toLocaleString()}</td>
+        <td>${row.ROI.toFixed(2)}</td>
+        <td>${row.propertyType}</td>
+      </tr>
   `).join('');
 
-  // Init DataTable
+  // DataTables with initial sort by ROI desc
   dataTable = new DataTable('#results', {
-   paging: false,
+    paging: false,
     scrollY: 300,
     info: false,
-    order: [[3, 'desc']]           // ➋ default sort by ROI (col 3)
- });
+    order: [[3, 'desc']]  // ROI column
+  });
 }
 
+/* ─────────────────── 5. PROJECT & SIZE PICKERS ───────────────────── */
 function rebuildProjectDropdown () {
   const projects = [...new Set(filtered.map(d => d.project))].sort();
   controls.project.innerHTML = '<option value="">— choose —</option>';
   projects.forEach(p => controls.project.add(new Option(p, p)));
 
   controls.project.onchange = rebuildSizeDropdown;
-  controls.size.innerHTML = ''; // reset
+  controls.size.innerHTML = '';
 }
 
 function rebuildSizeDropdown () {
   const proj = controls.project.value;
+  controls.size.innerHTML = '';
   if (!proj) return;
 
   const sizes = [...new Set(filtered.filter(d => d.project === proj).map(d => d.area_bucket))];
-  controls.size.innerHTML = '<option value="">— choose —</option>';
+  controls.size.add(new Option('— choose —', ''));
   sizes.forEach(s => controls.size.add(new Option(s, s)));
 
   controls.size.onchange = drawChart;
 }
 
+/* ─────────────────────────── 6. CHARTING ─────────────────────────── */
 function clearChart () {
   Plotly.purge('chart');
   controls.project.value = '';
   controls.size.innerHTML = '';
 }
 
-// 4. Draw dual-axis chart -------------------------------------
 function drawChart () {
   const proj = controls.project.value;
   const size = controls.size.value;
@@ -146,7 +149,9 @@ function drawChart () {
     },
     {
       x: years, y: rent, name: 'Avg Rent (SGD)',
-      mode: 'lines+markers', line: { color: 'red' }, yaxis: 'y2'
+      mode: 'lines+markers',
+      line: { color: 'red' },
+      yaxis: 'y2'
     }
   ];
 
@@ -160,7 +165,7 @@ function drawChart () {
       overlaying: 'y',
       side: 'right'
     },
-    legend: { orientation: 'h', x: 0.5, xanchor: 'center', y: -0.2 },
+    legend: { orientation: 'h', x: 0.5, xanchor: 'center', y: -0.25 },
     margin: { t: 60 }
   };
 
