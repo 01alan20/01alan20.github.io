@@ -3,41 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SG Condo ROI Explorer</title>
+  <title>Singapore Condo ROI Explorer</title>
 
-  <!-- Plotly & Papa Parse from CDN -->
+  <!-- Plotly & Papa Parse CDN -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-  <!-- optional tiny stylesheet -->
+  <!-- DataTables (pretty sortable table) -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.min.css">
+  <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>Singapore Condo ROI Explorer (2020-2025)</h1>
 
+  <!-- ── Controls bar ───────────────────────────────────────────── -->
   <section id="controls">
     <label>Max price (SGD):
       <input type="number" id="maxPrice" step="50000" />
     </label>
 
     <label>Area bucket:
-      <select id="area" multiple size="5"></select>
+      <select id="area" multiple size="6"></select>
     </label>
 
     <label>Property type:
-      <select id="propertyType" multiple size="5"></select>
-    </label>
-
-    <label>Project:
-      <select id="project"></select>
-    </label>
-
-    <label>Size bucket:
-      <select id="size"></select>
+      <select id="propertyType" multiple size="6"></select>
     </label>
   </section>
 
-  <div id="chart" style="width:100%;height:500px;"></div>
+  <!-- ── Results table ──────────────────────────────────────────── -->
+  <table id="results" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>District</th>
+        <th>Last Buy (SGD)</th>
+        <th>ROI</th>
+        <th>Property Type</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- ── Pickers & chart ────────────────────────────────────────── -->
+  <div id="pickers">
+    <label style="margin-right:1rem">
+      Project:
+      <select id="project"></select>
+    </label>
+
+    <label>
+      Size bucket (sqm):
+      <select id="size"></select>
+    </label>
+  </div>
+
+  <div id="chart" style="width:100%;height:500px;margin-top:1rem"></div>
 
   <script src="condo-roi.js"></script>
 </body>
