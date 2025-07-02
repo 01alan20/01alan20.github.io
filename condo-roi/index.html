@@ -1,80 +1,128 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Condo quick search</title>
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
-<style>
-body{font-family:system-ui,-apple-system,sans-serif;margin:0;padding:2rem;background:#f8f9fa;color:#222}
-h1{margin-top:0} label{display:block;margin:.6rem 0 .25rem;font-weight:600}
-select,input{padding:.4rem .6rem;font-size:1rem;width:100%;max-width:220px}
-button{margin-top:.7rem;padding:.45rem .9rem;font-size:1rem}
-#results{margin-top:1.6rem}
-table{border-collapse:collapse;width:100%;max-width:820px;margin-top:.8rem}
-th,td{border:1px solid #ccc;padding:.35rem .6rem;text-align:left}
-th{background:#007bff;color:#fff} tr:nth-child(even){background:#eef2f8}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Singapore Condo Investment ROI</title>
+
+  <!-- Plotly (dual-axis line charts) -->
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+
+  <!-- Papa Parse (browser-side CSV loader) -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
+
+  <style>
+    :root{
+      --accent:#007bff;--bg:#f8f9fa;--txt:#1a1a1a;--muted:#6c757d
+    }
+    @media(prefers-color-scheme:dark){
+      :root{--accent:#4dabf7;--bg:#1a1a1a;--txt:#f1f1f1;--muted:#a0a0a0}
+    }
+
+    html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:var(--bg);color:var(--txt)}
+    h1{margin:.5rem 0 1rem;font-size:1.8rem;text-align:center}
+    #controls{max-width:960px;margin:1rem auto;display:grid;gap:1rem 2rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    label{font-weight:600;font-size:.9rem;margin-bottom:.25rem;display:block}
+    input,select{width:100%;padding:.4rem .6rem;font-size:1rem;border:1px solid #ccc;border-radius:4px;background:#fff;color:var(--txt)}
+    input[type=range]{padding:0;height:2.2rem}
+    #chart{height:480px;max-width:960px;margin:0 auto;border:1px solid #ddd;border-radius:8px;background:#fff}
+    #summary{text-align:center;margin-top:1rem;font-size:1rem;color:var(--muted)}
+    a{color:var(--accent)}
+  </style>
 </head>
 <body>
+  <h1>Singapore Condo Investment ROI Explorer</h1>
 
-<h1>Quick Condo Search</h1>
+  <div id="controls">
+    <div>
+      <label for="proj">Project</label>
+      <select id="proj"></select>
+    </div>
+    <div>
+      <label for="size">Size (sqm): <span id="sizeVal">60</span></label>
+      <input id="size" type="range" min="20" max="300" step="1" value="60">
+    </div>
+    <div>
+      <label for="budget">Budget (SGD)</label>
+      <input id="budget" type="number" step="10000" value="800000">
+    </div>
+  </div>
 
-<label> Size bucket
-  <select id="bucket" disabled><option>Loading…</option></select>
-</label>
+  <div id="chart">Loading data…</div>
+  <p id="summary"></p>
 
-<label> Max price (SGD)
-  <input id="price" type="number" step="10000" value="800000">
-</label>
+  <script>
+  /* ------------ 1. Load CSV -------------- */
+  Papa.parse("../pmi_roi_agg.csv", {        // <- CSV is one level up; change to "pmi_roi_agg.csv" if you move the file inside this folder
+    download:true, header:true, dynamicTyping:true,
+    complete: ({data}) => init(data.filter(r => r.project))
+  });
 
-<button id="btn" disabled>Search</button>
+  function init(rows){
+    /* --- split bucket "50-60" into numbers for quick math --- */
+    rows.forEach(r=>{
+      const m = (r.area_bucket||"").split("-").map(Number);
+      r.lo = m[0]||NaN; r.hi = m[1]||NaN; r.mid = (r.lo+r.hi)/2;
+    });
 
-<div id="results"></div>
+    const projSel  = document.getElementById("proj");
+    const sizeIn   = document.getElementById("size");
+    const sizeVal  = document.getElementById("sizeVal");
+    const budgetIn = document.getElementById("budget");
 
-<script>
-const CSV_PATH = "pmi_roi_agg.csv";      // file sits in same folder
-let ROWS = [], COL = {};
+    /* --- populate dropdown --- */
+    [...new Set(rows.map(r=>r.project))].sort()
+      .forEach(p=>projSel.add(new Option(p,p)));
 
-/* ---- 1  fetch & parse CSV ---- */
-fetch(CSV_PATH)
-  .then(r => r.text())
-  .then(txt => {
-     /* If your CSV is semicolon-delimited, add delimiter:";" */
-     const {data} = Papa.parse(txt,{
-         header:true, dynamicTyping:true, skipEmptyLines:true
-     });
-     if(!data.length){ show("CSV parsed 0 rows – wrong delimiter?"); return; }
+    /* --- redraw when any control changes --- */
+    [projSel,sizeIn,budgetIn].forEach(el=>el.oninput=refresh);
+    refresh();
 
-     // detect real header names (case-insensitive)
-     const hdr = n => Object.keys(data[0]).find(k=>k.toLowerCase()===n);
-     COL.project = hdr("project");        // "Project" in your file
-     COL.bucket  = hdr("area_bucket");    // "area_bucket"
-     COL.price   = Object.keys(data[0]).find(k=>k.toLowerCase().includes("most_recent_buy"));
-     COL.roi     = hdr("roi");
+    function refresh(){
+      sizeVal.textContent = sizeIn.value;
+      const project = projSel.value;
+      const size    = +sizeIn.value;
+      const budget  = +budgetIn.value;
 
-     if(!COL.project||!COL.bucket||!COL.price){
-        show("Cannot find expected columns in CSV."); return;
-     }
+      /* pick nearest bucket */
+      const projRows = rows.filter(r=>r.project===project);
+      projRows.sort((a,b)=> {
+        const da = (a.lo<=size&&size<=a.hi)?0:Math.abs(a.mid-size);
+        const db = (b.lo<=size&&size<=b.hi)?0:Math.abs(b.mid-size);
+        return da-db;
+      });
+      const r = projRows[0] || {};
+      const years=[2020,2021,2022,2023,2024,2025];
+      const buy = years.map(y=>r["avg_buy_"+y]);
+      const rent= years.map(y=>r["avg_rent_"+y]);
 
-     ROWS = data.filter(r => r[COL.project] && r[COL.price]);
+      /* plot */
+      Plotly.newPlot("chart",[
+        {x:years,y:buy, name:"Avg Buy Price", mode:"lines+markers", yaxis:"y1"},
+        {x:years,y:rent,name:"Avg Rent",      mode:"lines+markers", yaxis:"y2"}
+      ],{
+        title:`${project} (${r.area_bucket||"-"} sqm)`,
+        margin:{t:40,l:50,r:50,b:50},
+        xaxis:{dtick:1,title:"Year"},
+        yaxis:{title:"Avg Buy Price (SGD)",tickprefix:"$"},
+        yaxis2:{title:"Avg Monthly Rent (SGD)",overlaying:"y",side:"right",tickprefix:"$"},
+        shapes: budget ? [{
+          type:"line", x0:years[0], x1:years.at(-1), y0:budget, y1:budget,
+          line:{dash:"dot",width:2,color:"grey"}
+        }] : []
+      },{responsive:true});
 
-     // fill dropdown with unique buckets
-     const buckets = [...new Set(ROWS.map(r=>r[COL.bucket]))]
-                    .sort((a,b)=>parseFloat(a)-parseFloat(b));
-     const sel = document.getElementById('bucket');
-     sel.innerHTML = buckets.map(b=>`<option value="${b}">${b}</option>`).join("");
-     sel.disabled = false;
-     document.getElementById('btn').disabled = false;
-  })
-  .catch(err => show("Failed to load CSV: "+err));
+      /* summary */
+      const units = budget && r.most_recent_buy ? (budget/r.most_recent_buy).toFixed(2) : "";
+      document.getElementById("summary").innerHTML =
+        units ? `With&nbsp;S$${budget.toLocaleString()} you could buy roughly <strong>${units}</strong> unit(s) at today’s price.` : "";
+    }
+  }
+  </script>
 
-/* ---- 2  helper ---- */
-function range(bucket){
-  if(bucket.startsWith(">")) return [+bucket.slice(1), Infinity];
-  const [lo,hi]=bucket.split("-").map(Number); return [lo,hi];
-}
-function show(msg){ document.getElementById('results').textContent = msg; }
-
-/* ---- 3  search ---- */
-document.getElementById('btn').onclick = ()=>{
-  const bucket = docu
+  <p style="text-align:center;margin-top:3rem;font-size:.85rem;color:var(--muted)">
+    Built with <a href="https://plotly.com/javascript/" target="_blank">Plotly.js</a> &amp;
+    <a href="https://www.papaparse.com/" target="_blank">Papa Parse</a>. Data: <code>pmi_roi_agg.csv</code>
+  </p>
+</body>
+</html>
