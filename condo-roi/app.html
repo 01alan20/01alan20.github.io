@@ -1,68 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>SG Condo ROI — Quick Demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SG Condo ROI Explorer</title>
 
-  <!-- CSV loader + 1‑file sortable table (DataTables v2, no jQuery) -->
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
-  <link  rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
-  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  <!-- Plotly & Papa Parse from CDN -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-  <style>
-    html,body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a1a}
-    h1{margin:1.2rem;text-align:center;font-size:1.6rem}
-    #controls{display:flex;gap:.5rem;justify-content:center;margin-bottom:.8rem}
-    #controls label{font-weight:600;font-size:.9rem}
-    #controls input{width:70px;padding:.25rem .4rem;border:1px solid #ccc;border-radius:4px}
-    button{padding:.3rem .9rem;border:none;border-radius:4px;background:#007bff;color:#fff;cursor:pointer}
-    #tbl{width:90%;max-width:960px;margin:0 auto 2rem;background:#fff}
-  </style>
+  <!-- optional tiny stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>SG Condo ROI — Quick Table</h1>
+  <h1>Singapore Condo ROI Explorer (2020-2025)</h1>
 
-  <div id="controls">
-    <label for="size">Size (sqm)</label>
-    <input id="size" type="number" min="20" max="300" step="1" placeholder="60"/>
-    <button id="apply">Filter</button>
-  </div>
+  <section id="controls">
+    <label>Max price (SGD):
+      <input type="number" id="maxPrice" step="50000" />
+    </label>
 
-  <table id="tbl" class="display compact"></table>
+    <label>Area bucket:
+      <select id="area" multiple size="5"></select>
+    </label>
 
-  <script>
-  // ---------- 1. Load CSV (must live in SAME folder) ----------
-  Papa.parse('pmi_roi_agg.csv', {
-    download:true, header:true, dynamicTyping:true,
-    complete: ({data}) => buildTable(data.filter(r=>r.project))
-  });
+    <label>Property type:
+      <select id="propertyType" multiple size="5"></select>
+    </label>
 
-  function buildTable(rows){
-    const table = new DataTable('#tbl',{
-      data: rows,
-      paging:false,
-      columns:[
-        {title:'Project',     data:'project'},
-        {title:'Area Bucket', data:'area_bucket'}
-      ],
-      order:[[0,'asc']],
-      layout:{top:'search'}
-    });
+    <label>Project:
+      <select id="project"></select>
+    </label>
 
-    // ---------- 2. Size filter ----------
-    document.getElementById('apply').onclick = ()=>{
-      const size = +document.getElementById('size').value || 0;
-      const pass = r => {
-        if(!size) return true;                  // show all if no size entered
-        const [lo,hi] = (r.area_bucket||'').split('-').map(Number);
-        return !isNaN(lo)&&!isNaN(hi) && lo<=size && size<=hi;
-      };
-      const filtered = rows.filter(pass);
-      table.clear();
-      table.rows.add(filtered).draw();
-    };
-  }
-  </script>
+    <label>Size bucket:
+      <select id="size"></select>
+    </label>
+  </section>
+
+  <div id="chart" style="width:100%;height:500px;"></div>
+
+  <script src="condo-roi.js"></script>
 </body>
 </html>
