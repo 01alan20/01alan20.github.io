@@ -66,7 +66,8 @@ function applyFilters () {
   filtered = rawData.filter(d =>
     d.most_recent_buy <= maxPrice &&
     selAreas.includes(d.area_bucket) &&
-    selProps.includes(d.propertyType)
+    selProps.includes(d.propertyType) &&
+   d.ROI > 0                      // ➊ exclude zero-ROI rows
   );
 
   renderTable();
@@ -92,10 +93,11 @@ function renderTable () {
 
   // Init DataTable
   dataTable = new DataTable('#results', {
-    paging: false,
+   paging: false,
     scrollY: 300,
-    info: false
-  });
+    info: false,
+    order: [[3, 'desc']]           // ➋ default sort by ROI (col 3)
+ });
 }
 
 function rebuildProjectDropdown () {
