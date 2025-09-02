@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Singapore Condo ROI Explorer</title>
+  <link rel="stylesheet" href="condo.app.css" />
+  <!-- PapaParse for fast CSV loading. Works fine on Netlify. -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <h1>Singapore Condo ROI Explorer</h1>
+      <p class="muted">Filter and sort projects by property type, area, district, price, and ROI. Data loads from <code>pmi_roi_agg.csv</code>.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Filters -->
+    <section class="filters">
+      <div class="field">
+        <label for="propertyType">Property Type</label>
+        <select id="propertyType">
+          <option value="">All</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="area">Area</label>
+        <select id="area">
+          <option value="">All</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="district">District</label>
+        <select id="district">
+          <option value="">All</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="minPrice">Min Price (Most Recent Buy)</label>
+        <input id="minPrice" type="number" min="0" step="1000" placeholder="e.g., 800000" />
+      </div>
+
+      <div class="field">
+        <label for="maxPrice">Max Price (Most Recent Buy)</label>
+        <input id="maxPrice" type="number" min="0" step="1000" placeholder="e.g., 1500000" />
+      </div>
+
+      <div class="field">
+        <label for="minRoi">Min ROI (%)</label>
+        <input id="minRoi" type="number" step="0.1" placeholder="e.g., 3.5" />
+      </div>
+
+      <div class="actions">
+        <button id="resetBtn" class="btn">Reset</button>
+        <button id="downloadBtn" class="btn btn-outline">Download filtered CSV</button>
+      </div>
+    </section>
+
+    <!-- Status -->
+    <div class="status">
+      <span id="rowCount">0 rows</span>
+      <span id="avgRoi">Avg ROI: –</span>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table id="resultsTable">
+        <thead>
+          <tr>
+            <th data-key="project">Project</th>
+            <th data-key="propertyType">Property Type</th>
+            <th data-key="area_bucket">Area</th>
+            <th data-key="district">District</th>
+            <th data-key="tenure">Tenure</th>
+            <th data-key="most_recent_buy" class="num">Most Recent Buy</th>
+            <th data-key="most_recent_rent" class="num">Most Recent Rent</th>
+            <th data-key="ROI" class="num">ROI (%)</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="wrap footer">
+    <small class="muted">
+      Tip: Click any header to sort. Price filters use <strong>most_recent_buy</strong>.
+    </small>
+  </footer>
+
+  <script src="condo.app.js" defer></script>
+</body>
+</html>
