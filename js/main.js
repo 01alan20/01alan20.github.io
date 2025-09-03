@@ -1,188 +1,150 @@
-/* --------------------------
-   Tiny SPA Router + Blog
----------------------------*/
+/* Simple hash router + Projects data
+   Routes:
+     #home | #projects | #projects/<slug> | #cv | #contact
+*/
 
-// 👉 Edit your posts here.
-// - If `external_url` is present, the card opens that link.
-// - If not, clicking opens an internal post page at #/post/<slug>.
-const POSTS = [
+const PROJECTS = [
   {
-    id: 1,
-    slug: "sg-condo-roi",
-    title: "Singapore Condo ROI: What the Data Says (2020–2025)",
-    date: "2025-08-20",
-    excerpt:
-      "I built a Plotly-based explorer to visualize purchase prices, rental yields, and ROI for SG condos—fully static, CSV-powered.",
-    tags: ["real estate", "singapore", "plotly", "csv"],
-    external_url: "https://example.com/condo-roi" // ← replace with your live app
-  },
-  {
-    id: 2,
-    slug: "enrollment-predictive-model",
-    title: "Practical Notes on Enrollment Forecasting",
-    date: "2025-07-14",
-    excerpt:
-      "Quick overview of features, leakage points, and a lightweight approach to forecasting using logistic models and clean funnel definitions.",
-    tags: ["enrollment", "higher ed", "analytics"],
+    slug: "condo-roi",
+    title: "Singapore Condo Investment ROI",
+    summary:
+      "Interactive dashboard showing purchase prices, rental levels, and estimated ROI in years.",
+    badges: ["Plotly", "JS", "CSV"],
+    // Update this to your deployed path (GitHub Pages/Netlify)
+    externalUrl: "projects/condo-roi/condo.index.html",
+    repoUrl: "https://sg-condo-roi.streamlit.app/", // optional
     content: `
-      <p>Forecasting enrollment doesn't require a massive stack. Start with a clean funnel: clearly defined MQL/SQL, agreed SLAs, and a deduped source of truth.</p>
-      <p>From there, a simple logistic regression (offer -> enroll) with cohorts by channel and term can outperform complex, opaque models—especially when paired with an early-warning layer.</p>
-      <p>I’ll share a simplified workbook and code in a future post. For now, the key: <em>own the definitions</em>, audit the data weekly, and socialize the insights in ops standups.</p>
+      <p>What it is</p>
+      <p>A simple, interactive website that helps anyone quickly gauge payback time (ROI in years) for Singapore condos.</p>
+
+      <p>How you use it</p>
+      <p>Pick what you care about—Property Type, Area, District, and Tenure (99, 999, 9999, or Freehold). You can also narrow leasehold homes by Year of Lease Start. The charts and the projects table update instantly, showing typical buy and rent levels plus estimated ROI.</p>
+
+      <p>What we did under the hood</p>
+      <p>We cleaned the raw dataset, simplified area ranges into a single starting number (e.g., “200–300” → 200), grouped tenure into clear buckets (99/999/9999/Freehold), and pulled the lease start year out of the text when available. Then we built the interactive views in Streamlit and deployed it to Streamlit Community Cloud—so it loads fast and works anywhere.</p>
     `
   },
-  {
-    id: 3,
-    slug: "kaust-partnership-notes",
-    title: "Notes on Building International Partnerships",
-    date: "2025-06-29",
-    excerpt:
-      "Governance, quality assurance, and a simple MOU checklist that speeds up evaluation while protecting academic standards.",
-    tags: ["partnerships", "qa", "mobility"],
-    content: `
-      <p>When evaluating a partnership, I start with context: mission fit, student value, and operational feasibility.</p>
-      <p>My one-pager includes: governance contacts, assessment alignment, advising implications, CRM tagging, and a draft outcomes dashboard.</p>
-    `
-  }
+  // Add more projects here…
+  // {
+  //   slug: "task-app",
+  //   title: "Lightweight Team Task App",
+  //   summary: "Tiny project board with real-time updates.",
+  //   badges: ["Vue", "Firebase"],
+  //   externalUrl: "https://example.com/task-app",
+  //   repoUrl: "https://github.com/...",
+  //   content: "<p>Details about the project…</p>"
+  // },
+
+    // Add more projects here…
+  // {
+  //   slug: "task-app",
+  //   title: "Lightweight Team Task App",
+  //   summary: "Tiny project board with real-time updates.",
+  //   badges: ["Vue", "Firebase"],
+  //   externalUrl: "https://example.com/task-app",
+  //   repoUrl: "https://github.com/...",
+  //   content: "<p>Details about the project…</p>"
+  // },
+
+    // Add more projects here…
+  // {
+  //   slug: "task-app",
+  //   title: "Lightweight Team Task App",
+  //   summary: "Tiny project board with real-time updates.",
+  //   badges: ["Vue", "Firebase"],
+  //   externalUrl: "https://example.com/task-app",
+  //   repoUrl: "https://github.com/...",
+  //   content: "<p>Details about the project…</p>"
+  // },
+
+    // Add more projects here…
+  // {
+  //   slug: "task-app",
+  //   title: "Lightweight Team Task App",
+  //   summary: "Tiny project board with real-time updates.",
+  //   badges: ["Vue", "Firebase"],
+  //   externalUrl: "https://example.com/task-app",
+  //   repoUrl: "https://github.com/...",
+  //   content: "<p>Details about the project…</p>"
+  // },
 ];
 
-// ---------- Utilities ----------
-const byId = (id) => document.getElementById(id);
-const pages = ["home", "blog", "post", "projects", "cv", "contact"];
+/* ---------- utils ---------- */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 
-function setActiveNav(pageId){
-  document.querySelectorAll(".nav-link").forEach(a=>{
-    a.classList.toggle("active", a.dataset.page === pageId);
-    if (a.dataset.page === pageId) a.setAttribute("aria-current","page");
-    else a.removeAttribute("aria-current");
-  });
+function setActive(pageId) {
+  $$(".page").forEach(s => s.classList.remove("active"));
+  const sec = document.getElementById(pageId);
+  if (sec) sec.classList.add("active");
+  // nav highlight
+  $$(".nav-link").forEach(a => a.classList.toggle("active", a.dataset.page === pageId));
 }
 
-function showPage(pageId){
-  pages.forEach(id => byId(id)?.classList.remove("active"));
-  const target = byId(pageId);
-  if (target){ target.classList.add("active"); window.scrollTo({top:0,behavior:"smooth"}); }
-  setActiveNav(pageId);
-}
-
-// ---------- Blog rendering ----------
-function formatDate(iso){ return new Date(iso).toLocaleDateString(undefined, {year:"numeric", month:"short", day:"numeric"}); }
-
-function uniqueTags(posts){
-  const all = new Set();
-  posts.forEach(p => (p.tags||[]).forEach(t => all.add(t)));
-  return Array.from(all).sort();
-}
-
-function renderTagPills(posts){
-  const wrap = byId("tag-list");
-  wrap.innerHTML = "";
-  const tags = uniqueTags(posts);
-  tags.forEach(tag=>{
-    const btn = document.createElement("button");
-    btn.className = "tag";
-    btn.textContent = tag;
-    btn.addEventListener("click", ()=>{
-      btn.classList.toggle("active");
-      filterAndRender();
-    });
-    wrap.appendChild(btn);
-  });
-}
-
-function getActiveTags(){
-  return Array.from(document.querySelectorAll(".tag.active")).map(b=>b.textContent);
-}
-
-function filterAndRender(){
-  const q = byId("search").value.trim().toLowerCase();
-  const activeTags = getActiveTags();
-  const filtered = POSTS.filter(p=>{
-    const inText = (p.title + " " + (p.excerpt||"")).toLowerCase().includes(q);
-    const tagOK = activeTags.length ? activeTags.every(t => (p.tags||[]).includes(t)) : true;
-    return inText && tagOK;
-  }).sort((a,b)=> b.date.localeCompare(a.date));
-  renderBlogList(filtered);
-}
-
-function renderBlogList(list = POSTS){
-  const el = byId("blog-list");
-  el.innerHTML = "";
-  if (!list.length){
-    el.innerHTML = `<p class="muted">No posts found.</p>`;
-    return;
-  }
-  list.forEach(p=>{
-    const card = document.createElement("div");
-    card.className = "post-card";
-    const href = p.external_url ? p.external_url : `#/post/${p.slug}`;
-    const target = p.external_url ? ` target="_blank" rel="noopener"` : "";
-    const tags = (p.tags||[]).map(t=>`<span class="post-tag">${t}</span>`).join("");
-    card.innerHTML = `
-      <a href="${href}"${target}>
-        <h3>${p.title}</h3>
-        <div class="post-meta">${formatDate(p.date)}</div>
-        <p>${p.excerpt||""}</p>
-        <div class="post-tags">${tags}</div>
+/* ---------- projects list ---------- */
+function buildProjects() {
+  const grid = $("#projects-grid");
+  if (!grid) return;
+  grid.innerHTML = PROJECTS.map(p => {
+    const badges = (p.badges || []).map(b => `<span class="tech-tag">${b}</span>`).join("");
+    return `
+      <a class="card" href="#projects/${p.slug}">
+        <div class="card-body">
+          <h3 class="card-title">${p.title}</h3>
+          <p class="card-excerpt">${p.summary}</p>
+          <div class="project-tech">${badges}</div>
+        </div>
       </a>
     `;
-    // For internal posts, intercept click to route without full reload
-    if (!p.external_url) {
-      card.querySelector("a").addEventListener("click", (e)=>{
-        e.preventDefault();
-        location.hash = `#/post/${p.slug}`;
-      });
-    }
-    el.appendChild(card);
-  });
+  }).join("");
 }
 
-function renderPost(slug){
-  const post = POSTS.find(p => p.slug === slug);
-  const wrap = byId("post-article");
-  if (!post){
-    wrap.innerHTML = `<p>Post not found.</p>`;
+function showProject(slug) {
+  const proj = PROJECTS.find(p => p.slug === slug);
+  const article = $("#project-article");
+  if (!proj || !article) {
+    location.hash = "#projects";
     return;
   }
-  // If it's an external link post, just go there
-  if (post.external_url){
-    window.location.href = post.external_url;
-    return;
-  }
-  wrap.innerHTML = `
-    <h1>${post.title}</h1>
-    <div class="post-meta">${formatDate(post.date)} · ${(post.tags||[]).join(" • ")}</div>
-    ${post.content || "<p>No content yet.</p>"}
+  article.innerHTML = `
+    <header class="post-header">
+      <h1>${proj.title}</h1>
+      <div class="post-meta">
+        ${(proj.badges || []).map(b => `<span class="tech-tag">${b}</span>`).join(" ")}
+      </div>
+    </header>
+    <div class="post-content">
+      <p>${proj.summary}</p>
+      ${proj.content || ""}
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
+        ${proj.externalUrl ? `<a class="btn" href="${proj.externalUrl}" target="_blank" rel="noopener">Open Project</a>` : ""}
+        ${proj.repoUrl     ? `<a class="btn btn-secondary" href="${proj.repoUrl}" target="_blank" rel="noopener">View Code</a>` : ""}
+      </div>
+    </div>
   `;
+  setActive("project");
 }
 
-// ---------- Routing ----------
-function route(){
-  // routes: #home, #blog, #projects, #cv, #contact, #/post/<slug>
-  const hash = location.hash || "#home";
-  const [, first, second] = hash.split("/"); // e.g. ["#","post","slug"]
-  const page = hash.startsWith("#/post/") ? "post" : hash.replace("#","");
-
-  if (page === "post" && second){
-    showPage("post"); renderPost(second);
-  } else if (pages.includes(page)) {
-    showPage(page);
-    if (page === "blog") filterAndRender();
-  } else {
-    showPage("home");
+/* ---------- router ---------- */
+function handleRoute() {
+  const hash = (location.hash || "#home").replace(/^#/, "");
+  if (hash.startsWith("projects/")) {
+    const slug = hash.split("/")[1];
+    showProject(slug);
+    return;
   }
+  const page = hash || "home";
+  const section = document.getElementById(page);
+  if (!section) {
+    location.hash = "#home";
+    return;
+  }
+  setActive(page);
 }
 
-// ---------- Init ----------
+/* ---------- init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
-  // Build tag pills and blog list UI once
-  renderTagPills(POSTS);
-  renderBlogList(POSTS);
-
-  // Search binding
-  const search = byId("search");
-  if (search) search.addEventListener("input", filterAndRender);
-
-  // Initial route + update on hash change
-  route();
-  window.addEventListener("hashchange", route);
+  buildProjects();
+  handleRoute();
 });
+window.addEventListener("hashchange", handleRoute);
