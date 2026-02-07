@@ -1,0 +1,285 @@
+:root {
+  --bg: #edf3f5;
+  --panel: #ffffff;
+  --ink: #0f1f29;
+  --muted: #426071;
+  --line: #d5e1e8;
+  --accent: #0b8a8f;
+  --accent-2: #1766b1;
+  --warning-bg: #fff8db;
+  --warning-ink: #724f00;
+  --shadow: 0 10px 30px rgba(15, 31, 41, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 10%, #c8e8ef 0%, transparent 32%),
+    radial-gradient(circle at 95% 0%, #d7edff 0%, transparent 26%),
+    var(--bg);
+}
+
+.container {
+  width: min(1200px, 92vw);
+  margin: 2rem auto 3rem;
+}
+
+.hero {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 1rem 1.1rem;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.hero h1 {
+  margin: 0.25rem 0 0.45rem;
+  font-size: clamp(1.5rem, 2vw + 1rem, 2.25rem);
+}
+
+.lede {
+  margin: 0;
+  max-width: 74ch;
+  color: var(--muted);
+}
+
+.source {
+  margin: 0.55rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.notice {
+  margin: 0.65rem 0 0;
+  border: 1px solid #f4d77d;
+  border-radius: 9px;
+  padding: 0.65rem 0.75rem;
+  background: var(--warning-bg);
+  color: var(--warning-ink);
+  font-size: 0.9rem;
+}
+
+.status {
+  margin: 0.7rem 0 0;
+  font-weight: 700;
+}
+
+.stage-nav {
+  margin-top: 0.8rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.stage-nav a {
+  text-decoration: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: #f9fbfc;
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.stage-nav a:hover {
+  border-color: var(--accent-2);
+}
+
+.panel {
+  margin-top: 0.9rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+.panel h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.summary {
+  margin: 0.45rem 0 0.85rem;
+  color: var(--muted);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.7rem;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #f9fcfd;
+  padding: 0.7rem 0.75rem;
+}
+
+.card .label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.card .value {
+  margin: 0.3rem 0 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.chart-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.chart-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.chart-panel {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.7rem;
+  background: #fcfeff;
+}
+
+.chart-panel h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+}
+
+.chart {
+  width: 100%;
+  min-height: 300px;
+}
+
+.chart.tall {
+  min-height: 620px;
+}
+
+.subhead {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.subhead h3 {
+  margin-right: auto;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.2rem 0 0.9rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  background: #f2f8fb;
+  cursor: pointer;
+  font-weight: 700;
+  color: #10435f;
+}
+
+.tab.active {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+  color: #ffffff;
+}
+
+select {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.3rem 0.45rem;
+  font-size: 0.9rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  padding: 0.5rem 0.45rem;
+  white-space: nowrap;
+}
+
+th {
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.uplift {
+  margin: 0.7rem 0 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #f4f9fc;
+  padding: 0.6rem 0.7rem;
+}
+
+#chart-ranked-factors {
+  min-height: 430px;
+}
+
+#chart-heatmap {
+  min-height: 700px;
+}
+
+@media (max-width: 900px) {
+  .chart-grid.two {
+    grid-template-columns: 1fr;
+  }
+
+  .chart.tall {
+    min-height: 390px;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: 95vw;
+    margin-top: 1rem;
+  }
+
+  .panel,
+  .hero {
+    padding: 0.8rem;
+  }
+}
