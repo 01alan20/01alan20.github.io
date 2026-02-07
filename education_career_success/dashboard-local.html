@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Career Success Dashboard</title>
+  <link rel="stylesheet" href="./dashboard-local.css?v=20260207b">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <p class="kicker">Student Guidance Tool</p>
+      <h1>Education to Career Success</h1>
+      <p class="lede">
+        A staged dashboard to help students understand what signals are associated with stronger offers, higher satisfaction, and better starting salary outcomes.
+      </p>
+      <p class="source">Source file: <code>education_career_success.csv</code></p>
+      <p class="notice">
+        Synthetic dataset notice: This dataset is synthetic and intended for exploration. Results show association patterns, not proof of causation.
+      </p>
+      <p id="status" class="status">Loading data...</p>
+    </header>
+
+    <nav class="stage-nav">
+      <a href="#stage-1">Stage 1: Know The Data</a>
+      <a href="#stage-2">Stage 2: What Drives Outcomes</a>
+      <a href="#stage-3">Stage 3: Journey Map</a>
+    </nav>
+
+    <section id="stage-1" class="panel">
+      <h2>Stage 1: What This Dataset Is</h2>
+      <div class="cards" id="kpi-cards"></div>
+
+      <div class="chart-grid two">
+        <article class="chart-panel">
+          <h3>Age Distribution: Most Students Are 21-25</h3>
+          <div id="chart-age-hist" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3>Starting Salary Distribution: Spread From Entry To High-Offer Outcomes</h3>
+          <div id="chart-salary-hist" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3>Job Offers Distribution: Typical Student Gets 2-3 Offers</h3>
+          <div id="chart-offers-hist" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3>Field of Study Mix: Student Sample By Major</h3>
+          <div id="chart-field-bar" class="chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="stage-2" class="panel">
+      <h2>Stage 2: What Is Associated With Better Outcomes</h2>
+      <p class="summary">
+        Switch outcomes to see top associated factors, relationship charts, and segment-level differences.
+      </p>
+
+      <div class="tabs" id="outcome-tabs">
+        <button class="tab active" data-outcome="Job_Offers">Job Offers</button>
+        <button class="tab" data-outcome="Career_Satisfaction">Career Satisfaction</button>
+        <button class="tab" data-outcome="Starting_Salary">Starting Salary</button>
+      </div>
+
+      <div class="chart-grid two">
+        <article class="chart-panel">
+          <h3 id="ranked-title">Top Associated Factors</h3>
+          <div id="chart-ranked-factors" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <div class="subhead">
+            <h3 id="scatter-title">Factor vs Outcome</h3>
+            <label for="factor-select">Factor</label>
+            <select id="factor-select"></select>
+          </div>
+          <div id="chart-scatter" class="chart"></div>
+        </article>
+      </div>
+
+      <div class="chart-grid two">
+        <article class="chart-panel">
+          <h3 id="box-field-title">Outcome by Field of Study</h3>
+          <div id="chart-box-field" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3 id="box-level-title">Outcome by Current Job Level</h3>
+          <div id="chart-box-level" class="chart"></div>
+        </article>
+      </div>
+
+      <article class="chart-panel">
+        <h3>Correlation Heatmap (Numeric Variables): Relationship Strength Matrix</h3>
+        <div id="chart-heatmap" class="chart tall"></div>
+      </article>
+    </section>
+
+    <section id="stage-3" class="panel">
+      <h2>Stage 3: Journey Map</h2>
+      <p class="summary">
+        Journey stages are built from a readiness index using internships, projects, certifications, soft skills, and networking.
+      </p>
+
+      <div class="chart-grid">
+        <article class="chart-panel">
+          <h3>Readiness Quintile Progression (Q1 Lowest Readiness, Q5 Highest Readiness)</h3>
+          <div id="chart-quintile-progress" class="chart"></div>
+        </article>
+      </div>
+
+      <article class="chart-panel">
+        <h3>Readiness Quintile Summary</h3>
+        <div class="table-wrap">
+          <table id="journey-table">
+            <thead>
+              <tr>
+                <th>Quintile</th>
+                <th>Readiness Band</th>
+                <th>Students</th>
+                <th>Avg Job Offers</th>
+                <th>Avg Satisfaction</th>
+                <th>Avg Starting Salary</th>
+                <th>Salary IQR</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p id="journey-uplift" class="uplift"></p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>Student Guidance Evidence</h2>
+      <p class="summary">
+        Each chart answers one key student guidance question with data evidence.
+      </p>
+      <div class="chart-grid two">
+        <article class="chart-panel">
+          <h3>1. Which Actions Are High Return?</h3>
+          <div id="insight-chart-actions" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3>2. Minimum Profile For >=3 Job Offers</h3>
+          <div id="insight-chart-min-profile" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3>3. Best Salary-to-Satisfaction Balance By Field</h3>
+          <div id="insight-chart-balance" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3>4. Where Is High Effort, Low Return?</h3>
+          <div id="insight-chart-effort-return" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3>5. Do Soft Skills/Networking Matter At Similar GPA?</h3>
+          <div id="insight-chart-social-gpa" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3>6. Which Profiles Are Most At Risk?</h3>
+          <div id="insight-chart-risk" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3>7. How Does Job Level Shift Outcomes?</h3>
+          <div id="insight-chart-levels" class="chart"></div>
+        </article>
+        <article class="chart-panel">
+          <h3>8. Likely Range By Pathway (Q1 vs Q5)</h3>
+          <div id="insight-chart-range" class="chart"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="./dashboard-local.js?v=20260207d"></script>
+</body>
+</html>
