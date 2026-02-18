@@ -8,16 +8,6 @@
 const POSTS = [
   {
     id: 1,
-    slug: "sg-condo-roi",
-    title: "Singapore Condo ROI: What the Data Says (2020-2025)",
-    date: "2025-08-20",
-    excerpt:
-      "I built a Plotly-based explorer to visualize purchase prices, rental yields, and ROI for Singapore properties.",
-    tags: ["real estate", "singapore", "plotly", "csv"],
-    external_url: "projects/condo-roi/index.html"
-  },
-  {
-    id: 2,
     slug: "enrollment-predictive-model",
     title: "Practical Notes on Enrollment Forecasting",
     date: "2025-07-14",
@@ -31,7 +21,7 @@ const POSTS = [
     `
   },
   {
-    id: 3,
+    id: 2,
     slug: "kaust-partnership-notes",
     title: "Notes on Building International Partnerships",
     date: "2025-06-29",
@@ -46,6 +36,11 @@ const POSTS = [
 ];
 
 const WRITINGS = [
+  {
+    bucket: "Dissertation",
+    title: "USC Dissertation",
+    url: "https://digitallibrary.usc.edu/asset-management/2A3BF1W21RX8?&WS"
+  },
   {
     bucket: "Finals",
     title: "Anonymity and Online Learning",
@@ -78,7 +73,7 @@ const WRITINGS = [
   }
 ];
 
-const WRITING_BUCKET_ORDER = ["Finals", "Newspaper", "Times Higher Education"];
+const WRITING_BUCKET_ORDER = ["Dissertation", "Finals", "Newspaper", "Times Higher Education"];
 
 // ---------- Utilities ----------
 const byId = (id) => document.getElementById(id);
@@ -247,7 +242,9 @@ function renderWritings() {
       const entries = grouped.get(bucket);
       const cards = entries
         .map((item) => {
-          const year = parseYearFromPath(item.path);
+          const linkTarget = item.url || encodeURI(item.path);
+          const linkLabel = item.url ? "Open Link" : "Open PDF";
+          const year = item.year || parseYearFromPath(item.path || item.url || "");
           const yearMarkup = year ? `<span class="writing-year">${year}</span>` : "";
           return `
             <article class="writing-card">
@@ -256,7 +253,7 @@ function renderWritings() {
                 ${yearMarkup}
               </div>
               <p class="writing-source">${item.bucket}</p>
-              <a class="writing-link" href="${encodeURI(item.path)}" target="_blank" rel="noopener">Open PDF</a>
+              <a class="writing-link" href="${linkTarget}" target="_blank" rel="noopener">${linkLabel}</a>
             </article>
           `;
         })
