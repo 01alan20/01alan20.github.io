@@ -37,8 +37,9 @@ const POSTS = [
 
 const WRITINGS = [
   {
-    bucket: "Dissertation",
-    title: "USC Dissertation",
+    bucket: "Academic Journals",
+    title: "Assessing student burnout using the AllWell? survey at Aalto University: an evaluation study",
+    year: "2019",
     url: "https://digitallibrary.usc.edu/asset-management/2A3BF1W21RX8?&WS"
   },
   {
@@ -73,7 +74,7 @@ const WRITINGS = [
   }
 ];
 
-const WRITING_BUCKET_ORDER = ["Dissertation", "Academic Journals", "Newspaper", "Times Higher Education"];
+const WRITING_BUCKET_ORDER = ["Academic Journals", "Newspaper", "Times Higher Education"];
 
 // ---------- Utilities ----------
 const byId = (id) => document.getElementById(id);
