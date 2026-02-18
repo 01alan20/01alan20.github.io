@@ -1,20 +1,20 @@
-/* --------------------------
-   Tiny SPA Router + Blog
+﻿/* --------------------------
+   Tiny SPA Router + Insights
 ---------------------------*/
 
-// 👉 Edit your posts here.
+// Edit insights posts here.
 // - If `external_url` is present, the card opens that link.
 // - If not, clicking opens an internal post page at #/post/<slug>.
 const POSTS = [
   {
     id: 1,
     slug: "sg-condo-roi",
-    title: "Singapore Condo ROI: What the Data Says (2020–2025)",
+    title: "Singapore Condo ROI: What the Data Says (2020-2025)",
     date: "2025-08-20",
     excerpt:
-      "I built a Plotly-based explorer to visualize purchase prices, rental yields, and ROI for SG properties.",
+      "I built a Plotly-based explorer to visualize purchase prices, rental yields, and ROI for Singapore properties.",
     tags: ["real estate", "singapore", "plotly", "csv"],
-    external_url: "https://example.com/condo-roi" // ← replace with your live app
+    external_url: "projects/condo-roi/index.html"
   },
   {
     id: 2,
@@ -25,9 +25,9 @@ const POSTS = [
       "Quick overview of features, leakage points, and a lightweight approach to forecasting using logistic models and clean funnel definitions.",
     tags: ["enrollment", "higher ed", "analytics"],
     content: `
-      <p>Forecasting enrollment doesn't require a massive stack. Start with a clean funnel: clearly defined MQL/SQL, agreed SLAs, and a deduped source of truth.</p>
-      <p>From there, a simple logistic regression (offer -> enroll) with cohorts by channel and term can outperform complex, opaque models—especially when paired with an early-warning layer.</p>
-      <p>I’ll share a simplified workbook and code in a future post. For now, the key: <em>own the definitions</em>, audit the data weekly, and socialize the insights in ops standups.</p>
+      <p>Forecasting enrollment does not require a massive stack. Start with a clean funnel: clearly defined stages, agreed SLAs, and a deduped source of truth.</p>
+      <p>From there, a simple logistic model can outperform complex, opaque models when paired with an early-warning layer and weekly governance.</p>
+      <p>The key is to own the definitions, audit the data every week, and socialize insights in operations standups.</p>
     `
   },
   {
@@ -36,153 +36,291 @@ const POSTS = [
     title: "Notes on Building International Partnerships",
     date: "2025-06-29",
     excerpt:
-      "Governance, quality assurance, and a simple MOU checklist that speeds up evaluation while protecting academic standards.",
+      "Governance, quality assurance, and a practical MOU checklist that speeds evaluation while protecting academic standards.",
     tags: ["partnerships", "qa", "mobility"],
     content: `
-      <p>When evaluating a partnership, I start with context: mission fit, student value, and operational feasibility.</p>
-      <p>My one-pager includes: governance contacts, assessment alignment, advising implications, CRM tagging, and a draft outcomes dashboard.</p>
+      <p>When evaluating a partnership, start with mission fit, student value, and operational feasibility.</p>
+      <p>A practical one-pager should include governance contacts, assessment alignment, advising implications, CRM tagging, and expected outcomes.</p>
     `
   }
 ];
 
+const WRITINGS = [
+  {
+    bucket: "Finals",
+    title: "Anonymity and Online Learning",
+    path: "writings/Finals/Anony_Online_Learning_FINAL.pdf"
+  },
+  {
+    bucket: "Finals",
+    title: "Coaching Based on Hope Theory to Address Hopelessness",
+    path: "writings/Finals/Coach_Based_on_Hope_Theory_Address_Hopelessness_June_4_2017.pdf"
+  },
+  {
+    bucket: "Finals",
+    title: "Reframing Solutions to Mental Health in Higher Education",
+    path: "writings/Finals/Reframing Solutions to Mental Health in Higher Education.pdf"
+  },
+  {
+    bucket: "Newspaper",
+    title: "PERMA and Well-Being",
+    path: "writings/Newspaper/2018 11 PERMA - Well-Being_Alan Cromlish.pdf"
+  },
+  {
+    bucket: "Newspaper",
+    title: "Take a Break",
+    path: "writings/Newspaper/2018 12 Take a Break_Alan Cromlish.pdf"
+  },
+  {
+    bucket: "Times Higher Education",
+    title: "Universities Must Shift from Treating Mental Illness to Promoting Mental Health",
+    path: "writings/times higher education/2019 june 5 cromlish - final - Universities must shift from treating mental illness to promoting mental health.pdf"
+  }
+];
+
+const WRITING_BUCKET_ORDER = ["Finals", "Newspaper", "Times Higher Education"];
+
 // ---------- Utilities ----------
 const byId = (id) => document.getElementById(id);
-const pages = ["home", "blog", "post", "projects", "cv", "contact"];
+const pages = ["home", "about", "projects", "writings", "insights", "post", "contact"];
 
-function setActiveNav(pageId){
-  document.querySelectorAll(".nav-link").forEach(a=>{
+function setActiveNav(pageId) {
+  document.querySelectorAll(".nav-link").forEach((a) => {
     a.classList.toggle("active", a.dataset.page === pageId);
-    if (a.dataset.page === pageId) a.setAttribute("aria-current","page");
-    else a.removeAttribute("aria-current");
+    if (a.dataset.page === pageId) {
+      a.setAttribute("aria-current", "page");
+    } else {
+      a.removeAttribute("aria-current");
+    }
   });
 }
 
-function showPage(pageId){
-  pages.forEach(id => byId(id)?.classList.remove("active"));
+function showPage(pageId, navPageId = pageId) {
+  pages.forEach((id) => byId(id)?.classList.remove("active"));
   const target = byId(pageId);
-  if (target){ target.classList.add("active"); window.scrollTo({top:0,behavior:"smooth"}); }
-  setActiveNav(pageId);
+  if (target) {
+    target.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  setActiveNav(navPageId);
 }
 
-// ---------- Blog rendering ----------
-function formatDate(iso){ return new Date(iso).toLocaleDateString(undefined, {year:"numeric", month:"short", day:"numeric"}); }
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+}
 
-function uniqueTags(posts){
+function uniqueTags(posts) {
   const all = new Set();
-  posts.forEach(p => (p.tags||[]).forEach(t => all.add(t)));
+  posts.forEach((p) => (p.tags || []).forEach((t) => all.add(t)));
   return Array.from(all).sort();
 }
 
-function renderTagPills(posts){
-  const wrap = byId("tag-list");
+function parseYearFromPath(path) {
+  const m = path.match(/(19|20)\d{2}/);
+  return m ? m[0] : "";
+}
+
+// ---------- Insights rendering ----------
+function renderTagPills(posts) {
+  const wrap = byId("insights-tag-list");
+  if (!wrap) {
+    return;
+  }
   wrap.innerHTML = "";
   const tags = uniqueTags(posts);
-  tags.forEach(tag=>{
+  tags.forEach((tag) => {
     const btn = document.createElement("button");
     btn.className = "tag";
     btn.textContent = tag;
-    btn.addEventListener("click", ()=>{
+    btn.addEventListener("click", () => {
       btn.classList.toggle("active");
-      filterAndRender();
+      filterAndRenderInsights();
     });
     wrap.appendChild(btn);
   });
 }
 
-function getActiveTags(){
-  return Array.from(document.querySelectorAll(".tag.active")).map(b=>b.textContent);
+function getActiveTags() {
+  return Array.from(document.querySelectorAll(".tag.active")).map((b) => b.textContent);
 }
 
-function filterAndRender(){
-  const q = byId("search").value.trim().toLowerCase();
+function filterAndRenderInsights() {
+  const search = byId("insights-search");
+  const q = (search?.value || "").trim().toLowerCase();
   const activeTags = getActiveTags();
-  const filtered = POSTS.filter(p=>{
-    const inText = (p.title + " " + (p.excerpt||"")).toLowerCase().includes(q);
-    const tagOK = activeTags.length ? activeTags.every(t => (p.tags||[]).includes(t)) : true;
+
+  const filtered = POSTS.filter((p) => {
+    const inText = (p.title + " " + (p.excerpt || "")).toLowerCase().includes(q);
+    const tagOK = activeTags.length ? activeTags.every((t) => (p.tags || []).includes(t)) : true;
     return inText && tagOK;
-  }).sort((a,b)=> b.date.localeCompare(a.date));
-  renderBlogList(filtered);
+  }).sort((a, b) => b.date.localeCompare(a.date));
+
+  renderInsightsList(filtered);
 }
 
-function renderBlogList(list = POSTS){
-  const el = byId("blog-list");
-  el.innerHTML = "";
-  if (!list.length){
-    el.innerHTML = `<p class="muted">No posts found.</p>`;
+function renderInsightsList(list = POSTS) {
+  const el = byId("insights-list");
+  if (!el) {
     return;
   }
-  list.forEach(p=>{
+
+  el.innerHTML = "";
+  if (!list.length) {
+    el.innerHTML = `<p class="muted">No insights found.</p>`;
+    return;
+  }
+
+  list.forEach((p) => {
     const card = document.createElement("div");
     card.className = "post-card";
     const href = p.external_url ? p.external_url : `#/post/${p.slug}`;
     const target = p.external_url ? ` target="_blank" rel="noopener"` : "";
-    const tags = (p.tags||[]).map(t=>`<span class="post-tag">${t}</span>`).join("");
+    const tags = (p.tags || []).map((t) => `<span class="post-tag">${t}</span>`).join("");
+
     card.innerHTML = `
       <a href="${href}"${target}>
         <h3>${p.title}</h3>
         <div class="post-meta">${formatDate(p.date)}</div>
-        <p>${p.excerpt||""}</p>
+        <p>${p.excerpt || ""}</p>
         <div class="post-tags">${tags}</div>
       </a>
     `;
-    // For internal posts, intercept click to route without full reload
+
     if (!p.external_url) {
-      card.querySelector("a").addEventListener("click", (e)=>{
+      card.querySelector("a").addEventListener("click", (e) => {
         e.preventDefault();
         location.hash = `#/post/${p.slug}`;
       });
     }
+
     el.appendChild(card);
   });
 }
 
-function renderPost(slug){
-  const post = POSTS.find(p => p.slug === slug);
+function renderPost(slug) {
+  const post = POSTS.find((p) => p.slug === slug);
   const wrap = byId("post-article");
-  if (!post){
+
+  if (!wrap) {
+    return;
+  }
+
+  if (!post) {
     wrap.innerHTML = `<p>Post not found.</p>`;
     return;
   }
-  // If it's an external link post, just go there
-  if (post.external_url){
+
+  if (post.external_url) {
     window.location.href = post.external_url;
     return;
   }
+
   wrap.innerHTML = `
     <h1>${post.title}</h1>
-    <div class="post-meta">${formatDate(post.date)} · ${(post.tags||[]).join(" • ")}</div>
+    <div class="post-meta">${formatDate(post.date)} | ${(post.tags || []).join(" | ")}</div>
     ${post.content || "<p>No content yet.</p>"}
   `;
 }
 
-// ---------- Routing ----------
-function route(){
-  // routes: #home, #blog, #projects, #cv, #contact, #/post/<slug>
-  const hash = location.hash || "#home";
-  const [, first, second] = hash.split("/"); // e.g. ["#","post","slug"]
-  const page = hash.startsWith("#/post/") ? "post" : hash.replace("#","");
-
-  if (page === "post" && second){
-    showPage("post"); renderPost(second);
-  } else if (pages.includes(page)) {
-    showPage(page);
-    if (page === "blog") filterAndRender();
-  } else {
-    showPage("home");
+// ---------- Writings rendering ----------
+function renderWritings() {
+  const wrap = byId("writings-groups");
+  if (!wrap) {
+    return;
   }
+
+  const grouped = new Map();
+  WRITINGS.forEach((item) => {
+    if (!grouped.has(item.bucket)) {
+      grouped.set(item.bucket, []);
+    }
+    grouped.get(item.bucket).push(item);
+  });
+
+  const sections = WRITING_BUCKET_ORDER
+    .filter((bucket) => grouped.has(bucket))
+    .map((bucket) => {
+      const entries = grouped.get(bucket);
+      const cards = entries
+        .map((item) => {
+          const year = parseYearFromPath(item.path);
+          const yearMarkup = year ? `<span class="writing-year">${year}</span>` : "";
+          return `
+            <article class="writing-card">
+              <div class="writing-head">
+                <h3>${item.title}</h3>
+                ${yearMarkup}
+              </div>
+              <p class="writing-source">${item.bucket}</p>
+              <a class="writing-link" href="${encodeURI(item.path)}" target="_blank" rel="noopener">Open PDF</a>
+            </article>
+          `;
+        })
+        .join("");
+
+      return `
+        <section class="writing-group">
+          <h2>${bucket} <span class="writing-count">(${entries.length})</span></h2>
+          <div class="writings-grid">${cards}</div>
+        </section>
+      `;
+    })
+    .join("");
+
+  wrap.innerHTML = sections;
+}
+
+// ---------- Routing ----------
+function route() {
+  const hash = location.hash || "#home";
+
+  if (hash === "#blog") {
+    location.hash = "#insights";
+    return;
+  }
+
+  if (hash === "#cv") {
+    location.hash = "#contact";
+    return;
+  }
+
+  if (hash.startsWith("#/post/")) {
+    const slug = decodeURIComponent(hash.slice("#/post/".length));
+    showPage("post", "insights");
+    renderPost(slug);
+    return;
+  }
+
+  const page = hash.replace("#", "");
+  if (pages.includes(page)) {
+    showPage(page);
+    if (page === "insights") {
+      filterAndRenderInsights();
+    }
+    if (page === "writings") {
+      renderWritings();
+    }
+    return;
+  }
+
+  showPage("home");
 }
 
 // ---------- Init ----------
 document.addEventListener("DOMContentLoaded", () => {
-  // Build tag pills and blog list UI once
   renderTagPills(POSTS);
-  renderBlogList(POSTS);
+  renderInsightsList(POSTS);
+  renderWritings();
 
-  // Search binding
-  const search = byId("search");
-  if (search) search.addEventListener("input", filterAndRender);
+  const search = byId("insights-search");
+  if (search) {
+    search.addEventListener("input", filterAndRenderInsights);
+  }
 
-  // Initial route + update on hash change
   route();
   window.addEventListener("hashchange", route);
 });
