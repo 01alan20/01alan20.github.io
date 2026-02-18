@@ -12,13 +12,13 @@
   <!-- NAV -->
   <nav class="navbar">
     <div class="nav-container">
-      <a class="logo" href="#home">Alan Cromlish</a>
+      <a class="logo" href="/">Alan Cromlish</a>
       <ul class="nav-menu">
-        <li><a class="nav-link" href="#about" data-page="about">About</a></li>
-        <li><a class="nav-link" href="#projects" data-page="projects">Projects</a></li>
-        <li><a class="nav-link" href="#writings" data-page="writings">Writings</a></li>
-        <li><a class="nav-link" href="#insights" data-page="insights">Insights</a></li>
-        <li><a class="nav-link" href="#contact" data-page="contact">Contact</a></li>
+        <li><a class="nav-link" href="/about" data-page="about">About</a></li>
+        <li><a class="nav-link" href="/projects" data-page="projects">Projects</a></li>
+        <li><a class="nav-link" href="/writings" data-page="writings">Writings</a></li>
+        <li><a class="nav-link" href="/insights" data-page="insights">Insights</a></li>
+        <li><a class="nav-link" href="/contact" data-page="contact">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -30,7 +30,7 @@
         <h1>Alan Cromlish</h1>
         <p>Higher-Ed Strategy + Analytics Leader</p>
         <p>I build practical strategies that connect student success operations, enrollment intelligence, and partnership quality into measurable outcomes.</p>
-        <a class="cta-button" href="#projects">View My Work</a>
+        <a class="cta-button" href="/projects">View My Work</a>
       </header>
     </section>
 
@@ -109,7 +109,7 @@
     <!-- POST (detail) -->
     <section id="post" class="page">
       <div class="container">
-        <a href="#insights" class="back-btn"><- Back to Insights</a>
+        <a href="/insights" class="back-btn"><- Back to Insights</a>
         <article id="post-article" class="post-article"></article>
       </div>
     </section>
@@ -149,6 +149,15 @@
     </div>
   </noscript>
 
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var p = params.get("p");
+      if (p && p.charAt(0) === "/") {
+        window.history.replaceState(null, "", p);
+      }
+    })();
+  </script>
   <script src="js/main.js" defer></script>
 </body>
 </html>

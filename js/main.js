@@ -4,7 +4,7 @@
 
 // Edit insights posts here.
 // - If `external_url` is present, the card opens that link.
-// - If not, clicking opens an internal post page at #/post/<slug>.
+// - If not, clicking opens an internal post page at /post/<slug>.
 const POSTS = [
   {
     id: 1,
@@ -173,7 +173,7 @@ function renderInsightsList(list = POSTS) {
   list.forEach((p) => {
     const card = document.createElement("div");
     card.className = "post-card";
-    const href = p.external_url ? p.external_url : `#/post/${p.slug}`;
+    const href = p.external_url ? p.external_url : `/post/${encodeURIComponent(p.slug)}`;
     const target = p.external_url ? ` target="_blank" rel="noopener"` : "";
     const tags = (p.tags || []).map((t) => `<span class="post-tag">${t}</span>`).join("");
 
@@ -189,7 +189,7 @@ function renderInsightsList(list = POSTS) {
     if (!p.external_url) {
       card.querySelector("a").addEventListener("click", (e) => {
         e.preventDefault();
-        location.hash = `#/post/${p.slug}`;
+        navigate(`/post/${encodeURIComponent(p.slug)}`);
       });
     }
 
@@ -274,26 +274,29 @@ function renderWritings() {
 
 // ---------- Routing ----------
 function route() {
-  const hash = location.hash || "#home";
-
-  if (hash === "#blog") {
-    location.hash = "#insights";
+  if (redirectLegacyHash()) {
     return;
   }
 
-  if (hash === "#cv") {
-    location.hash = "#contact";
+  const path = currentPath();
+  if (path === "/cv") {
+    navigate("/contact", true);
     return;
   }
 
-  if (hash.startsWith("#/post/")) {
-    const slug = decodeURIComponent(hash.slice("#/post/".length));
+  if (path.startsWith("/post/")) {
+    const slug = decodeURIComponent(path.slice("/post/".length));
     showPage("post", "insights");
     renderPost(slug);
     return;
   }
 
-  const page = hash.replace("#", "");
+  if (path === "/" || path === "/home") {
+    showPage("home");
+    return;
+  }
+
+  const page = path.slice(1);
   if (pages.includes(page)) {
     showPage(page);
     if (page === "insights") {
@@ -305,7 +308,74 @@ function route() {
     return;
   }
 
-  showPage("home");
+  navigate("/", true);
+}
+
+function currentPath() {
+  const raw = window.location.pathname || "/";
+  if (raw.length > 1 && raw.endsWith("/")) {
+    return raw.slice(0, -1);
+  }
+  return raw;
+}
+
+function navigate(path, replace = false) {
+  const next = path.startsWith("/") ? path : `/${path}`;
+  if (replace) {
+    window.history.replaceState({}, "", next);
+  } else {
+    window.history.pushState({}, "", next);
+  }
+  route();
+}
+
+function redirectLegacyHash() {
+  const hash = window.location.hash;
+  if (!hash) {
+    return false;
+  }
+
+  if (hash === "#blog") {
+    navigate("/insights", true);
+    return true;
+  }
+
+  if (hash === "#cv") {
+    navigate("/contact", true);
+    return true;
+  }
+
+  if (hash.startsWith("#/post/")) {
+    const slug = hash.slice("#/post/".length);
+    navigate(`/post/${slug}`, true);
+    return true;
+  }
+
+  const page = hash.replace("#", "");
+  if (page === "home") {
+    navigate("/", true);
+    return true;
+  }
+  if (pages.includes(page)) {
+    navigate(`/${page}`, true);
+    return true;
+  }
+
+  return false;
+}
+
+function isAppPath(pathname) {
+  return (
+    pathname === "/" ||
+    pathname === "/home" ||
+    pathname === "/about" ||
+    pathname === "/projects" ||
+    pathname === "/writings" ||
+    pathname === "/insights" ||
+    pathname === "/contact" ||
+    pathname === "/cv" ||
+    pathname.startsWith("/post/")
+  );
 }
 
 // ---------- Init ----------
@@ -319,6 +389,31 @@ document.addEventListener("DOMContentLoaded", () => {
     search.addEventListener("input", filterAndRenderInsights);
   }
 
+  document.addEventListener("click", (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+      return;
+    }
+
+    const link = e.target.closest("a[href]");
+    if (!link) {
+      return;
+    }
+    if (link.target === "_blank" || link.hasAttribute("download")) {
+      return;
+    }
+
+    const url = new URL(link.href, window.location.origin);
+    if (url.origin !== window.location.origin) {
+      return;
+    }
+    if (!isAppPath(url.pathname)) {
+      return;
+    }
+
+    e.preventDefault();
+    navigate(url.pathname);
+  });
+
   route();
-  window.addEventListener("hashchange", route);
+  window.addEventListener("popstate", route);
 });
