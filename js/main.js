@@ -44,7 +44,8 @@ const WRITINGS = [
   },
   {
     bucket: "Academic Journals",
-    title: "Anonymity and Online Learning",
+    title: "Anonymous Online Learning in Korea: Considerations and Approaches to Integrating Anonymous Learning Elements into Online, Blended and Face to Face Courses",
+    year: "2018",
     path: "writings/Finals/Anony_Online_Learning_FINAL.pdf"
   },
   {
@@ -55,6 +56,7 @@ const WRITINGS = [
   {
     bucket: "Academic Journals",
     title: "Reframing Solutions to Mental Health in Higher Education",
+    year: "2020",
     path: "writings/Finals/Reframing Solutions to Mental Health in Higher Education.pdf"
   },
   {
@@ -66,6 +68,16 @@ const WRITINGS = [
     bucket: "Newspaper",
     title: "Take a Break",
     path: "writings/Newspaper/2018 12 Take a Break_Alan Cromlish.pdf"
+  },
+  {
+    bucket: "Newspaper",
+    title: "Strait Times - Health Promotion",
+    path: "writings/Newspaper/2018 12 18 Strait Times - Health Promotion.docx"
+  },
+  {
+    bucket: "Newspaper",
+    title: "Strait Times - Reduce Healthcare Costs Through Health Promotion",
+    path: "writings/Newspaper/2019 02 16 Strait Times - Reduce healthcare costs through health promotion.docx"
   },
   {
     bucket: "Times Higher Education",
@@ -244,7 +256,11 @@ function renderWritings() {
       const cards = entries
         .map((item) => {
           const linkTarget = item.url || encodeURI(item.path);
-          const linkLabel = item.url ? "Open Link" : "Open PDF";
+          const linkLabel = item.url
+            ? "Open Link"
+            : /\.docx?$/i.test(item.path || "")
+            ? "Open Word"
+            : "Open PDF";
           const year = item.year || parseYearFromPath(item.path || item.url || "");
           const yearMarkup = year ? `<span class="writing-year">${year}</span>` : "";
           return `
