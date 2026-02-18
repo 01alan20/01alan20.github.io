@@ -842,10 +842,6 @@
       .filter((d) => d.n >= 20)
       .sort((a, b) => b.rate - a.rate);
 
-    const riskDefinition =
-      "Student-level flag<br>" +
-      "A student is marked at-risk if either condition is true:<br>" +
-      "Job_Offers <= 1 OR Career_Satisfaction <= 6";
     plot("insight-chart-risk", [
       {
         type: "bar",
@@ -856,19 +852,7 @@
     ], {
       xaxis: { title: "Field of Study", tickangle: -28 },
       yaxis: { title: "At-Risk Rate (%)" },
-      annotations: [
-        {
-          xref: "paper",
-          yref: "paper",
-          x: 0,
-          y: 1.16,
-          text: riskDefinition,
-          showarrow: false,
-          align: "left",
-          font: { size: 12, color: "#426071" },
-        },
-      ],
-      margin: { l: 72, r: 24, t: 58, b: 110 },
+      margin: { l: 72, r: 24, t: 38, b: 110 },
     });
 
     const levelOrder = ["Entry", "Mid", "Senior"];
@@ -942,7 +926,7 @@
         mode: "markers+lines",
         x: ["Q1 (Lowest)", "Q5 (Highest)"],
         y: [q1.salaryMean, q5.salaryMean],
-        name: "Salary Mean",
+        name: "Salary",
         yaxis: "y2",
         error_y: {
           type: "data",
@@ -1011,7 +995,6 @@
       renderGuidanceCharts();
       wire();
 
-      el.status.textContent = `Loaded ${state.rows.length} records. Dashboard ready.`;
     } catch (e) {
       el.status.textContent = `Error: ${e.message}`;
       el.status.style.color = "#b3001b";

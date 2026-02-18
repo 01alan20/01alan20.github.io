@@ -84,6 +84,10 @@ body {
   font-weight: 700;
 }
 
+.status:empty {
+  display: none;
+}
+
 .stage-nav {
   margin-top: 0.8rem;
   display: flex;
