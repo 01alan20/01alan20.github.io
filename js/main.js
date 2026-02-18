@@ -42,17 +42,17 @@ const WRITINGS = [
     url: "https://digitallibrary.usc.edu/asset-management/2A3BF1W21RX8?&WS"
   },
   {
-    bucket: "Finals",
+    bucket: "Academic Journals",
     title: "Anonymity and Online Learning",
     path: "writings/Finals/Anony_Online_Learning_FINAL.pdf"
   },
   {
-    bucket: "Finals",
+    bucket: "Academic Journals",
     title: "Coaching Based on Hope Theory to Address Hopelessness",
     path: "writings/Finals/Coach_Based_on_Hope_Theory_Address_Hopelessness_June_4_2017.pdf"
   },
   {
-    bucket: "Finals",
+    bucket: "Academic Journals",
     title: "Reframing Solutions to Mental Health in Higher Education",
     path: "writings/Finals/Reframing Solutions to Mental Health in Higher Education.pdf"
   },
@@ -73,7 +73,7 @@ const WRITINGS = [
   }
 ];
 
-const WRITING_BUCKET_ORDER = ["Dissertation", "Finals", "Newspaper", "Times Higher Education"];
+const WRITING_BUCKET_ORDER = ["Dissertation", "Academic Journals", "Newspaper", "Times Higher Education"];
 
 // ---------- Utilities ----------
 const byId = (id) => document.getElementById(id);
