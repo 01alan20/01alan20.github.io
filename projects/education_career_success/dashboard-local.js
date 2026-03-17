@@ -13,6 +13,401 @@
     "Certifications",
     "Soft_Skills_Score",
     "Networking_Score",
+  ];
+
+  const LABEL = {
+    Age: "Age",
+    High_School_GPA: "HS GPA",
+    SAT_Score: "SAT",
+    University_GPA: "University GPA",
+    Internships_Completed: "Internships",
+    Projects_Completed: "Projects",
+    Certifications: "Certifications",
+    Soft_Skills_Score: "Soft Skills",
+    Networking_Score: "Networking",
+    Job_Offers: "Job Offers",
+    Career_Satisfaction: "Career Satisfaction",
+    Starting_Salary: "Starting Salary",
+  };
+
+  const state = {
+    rows: [],
+    numeric: [],
+    currentOutcome: "Job_Offers",
+    correlations: {},
+  };
+
+  const miss = (v) => v === undefined || v === null || String(v).trim() === "";
+  const num = (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  };
+  const fmt = (v, d = 2) =>
+    v === null || v === undefined
+      ? "-"
+      : Number(v).toLocaleString(undefined, { maximumFractionDigits: d });
+  const money = (v) =>
+    v === null || v === undefined ? "-" : `$${Math.round(v).toLocaleString()}`;
+
+  const mean = (a) => (a.length ? a.reduce((s, v) => s + v, 0) / a.length : null);
+  const median = (a) => {
+    if (!a.length) return null;
+    const s = [...a].sort((x, y) => x - y);
+    const m = Math.floor(s.length / 2);
+    return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+  };
+
+  const corr = (xa, ya) => {
+    if (!xa.length || xa.length !== ya.length) return 0;
+    const mx = mean(xa);
+    const my = mean(ya);
+    let n = 0, vx = 0, vy = 0;
+    for (let i = 0; i < xa.length; i += 1) {
+      const dx = xa[i] - mx;
+      const dy = ya[i] - my;
+      n += dx * dy;
+      vx += dx * dx;
+      vy += dy * dy;
+    }
+    return vx && vy ? n / Math.sqrt(vx * vy) : 0;
+  };
+
+  const slope = (xa, ya) => {
+    if (!xa.length || xa.length !== ya.length) return 0;
+    const mx = mean(xa);
+    const my = mean(ya);
+    let n = 0, d = 0;
+    for (let i = 0; i < xa.length; i += 1) {
+      n += (xa[i] - mx) * (ya[i] - my);
+      d += (xa[i] - mx) ** 2;
+    }
+    return d ? n / d : 0;
+  };
+
+  const values = (rows, col) =>
+    rows.map((r) => num(r[col])).filter((v) => v !== null);
+
+  function baseLayout(extra) {
+    return {
+      margin: { l: 60, r: 20, t: 20, b: 50 },
+      paper_bgcolor: "#fcfeff",
+      plot_bgcolor: "transparent",
+      font: { family: "Segoe UI, sans-serif", size: 12, color: "#1a2332" },
+      ...extra,
+    };
+  }
+
+  function plot(id, data, config) {
+    Plotly.newPlot(id, data, baseLayout(config), {
+      responsive: true,
+      displayModeBar: false,
+    });
+  }
+
+  function renderSection1() {
+    const rows = state.rows;
+    
+    // Job Offers histogram
+    plot(
+      "chart-offers",
+      [
+        {
+          type: "histogram",
+          x: values(rows, "Job_Offers"),
+          marker: { color: "#2563eb" },
+          nbinsx: 6,
+        },
+      ],
+      {
+        xaxis: { title: "Number of Offers" },
+        yaxis: { title: "Students" },
+      }
+    );
+
+    // Starting Salary histogram
+    plot(
+      "chart-salary",
+      [
+        {
+          type: "histogram",
+          x: values(rows, "Starting_Salary"),
+          marker: { color: "#8b5cf6" },
+          nbinsx: 14,
+        },
+      ],
+      {
+        xaxis: { title: "Starting Salary", tickformat: "$,.0f" },
+        yaxis: { title: "Students" },
+      }
+    );
+  }
+
+  function computeCorrelations() {
+    OUTCOMES.forEach((outcome) => {
+      state.correlations[outcome] = FACTORS.map((f) => {
+        const valid = state.rows
+          .map((r) => ({ x: num(r[f]), y: num(r[outcome]) }))
+          .filter((d) => d.x !== null && d.y !== null);
+        return {
+          factor: f,
+          r: corr(
+            valid.map((d) => d.x),
+            valid.map((d) => d.y)
+          ),
+        };
+      })
+        .sort((a, b) => Math.abs(b.r) - Math.abs(a.r))
+        .slice(0, 7);
+    });
+  }
+
+  function renderOutcome(outcome) {
+    state.currentOutcome = outcome;
+    const top = state.correlations[outcome];
+    const outcomeLabel = LABEL[outcome] || outcome;
+
+    document.getElementById("factors-title").textContent = `Top Associated Factors for ${outcomeLabel}`;
+    document.getElementById("scatter-title").textContent = `${outcomeLabel} vs Selected Factor`;
+
+    // Top factors bar chart
+    plot(
+      "chart-factors",
+      [
+        {
+          type: "bar",
+          orientation: "h",
+          y: [...top].reverse().map((d) => LABEL[d.factor] || d.factor),
+          x: [...top].reverse().map((d) => d.r),
+          marker: {
+            color: [...top].reverse().map((d) => (d.r >= 0 ? "#2563eb" : "#dc2626")),
+          },
+        },
+      ],
+      {
+        xaxis: { title: "Correlation (r)" },
+        yaxis: { tickfont: { size: 12 } },
+        margin: { l: 140, r: 20, t: 20, b: 40 },
+      }
+    );
+
+    // Update factor dropdown
+    const factorSelect = document.getElementById("factor-select");
+    const options = top.map((d) => d.factor);
+    factorSelect.innerHTML = options
+      .map((o) => `<option value="${o}">${LABEL[o] || o}</option>`)
+      .join("");
+    const selected = options[0] || FACTORS[0];
+    factorSelect.value = selected;
+
+    renderScatter(outcome, selected);
+  }
+
+  function renderScatter(outcome, factor) {
+    const valid = state.rows
+      .map((r) => ({ x: num(r[factor]), y: num(r[outcome]) }))
+      .filter((d) => d.x !== null && d.y !== null);
+
+    const xa = valid.map((d) => d.x);
+    const ya = valid.map((d) => d.y);
+    const m = slope(xa, ya);
+    const b = mean(ya) - m * mean(xa);
+    const minX = Math.min(...xa);
+    const maxX = Math.max(...xa);
+    const r = corr(xa, ya);
+
+    plot(
+      "chart-scatter",
+      [
+        {
+          type: "scatter",
+          mode: "markers",
+          x: xa,
+          y: ya,
+          marker: { color: "#2563eb", size: 5, opacity: 0.6 },
+          hovertemplate: `${LABEL[factor] || factor}: %{x:.2f}<br>${LABEL[outcome] || outcome}: %{y:.2f}<extra></extra>`,
+        },
+        {
+          type: "scatter",
+          mode: "lines",
+          x: [minX, maxX],
+          y: [b + m * minX, b + m * maxX],
+          line: { color: "#f97316", width: 2 },
+          hoverinfo: "skip",
+        },
+      ],
+      {
+        xaxis: { title: LABEL[factor] || factor },
+        yaxis: {
+          title: LABEL[outcome] || outcome,
+          tickformat: outcome === "Starting_Salary" ? "$,.0f" : undefined,
+        },
+      }
+    );
+  }
+
+  function renderInsights() {
+    const rows = state.rows;
+
+    // Highest Returns - correlation strength across all outcomes
+    const actionFactors = [
+      "Internships_Completed",
+      "Projects_Completed",
+      "Certifications",
+      "Soft_Skills_Score",
+    ];
+    const actionStrength = actionFactors.map((f) => {
+      const strength = OUTCOMES.map((o) => {
+        const valid = rows
+          .map((r) => ({ x: num(r[f]), y: num(r[o]) }))
+          .filter((d) => d.x !== null && d.y !== null);
+        return corr(
+          valid.map((d) => d.x),
+          valid.map((d) => d.y)
+        );
+      });
+      return { label: LABEL[f] || f, strength: mean(strength) };
+    });
+    actionStrength.sort((a, b) => b.strength - a.strength);
+
+    const highest = document.getElementById("insight-highest");
+    highest.innerHTML =
+      `<ul style="margin: 0; padding-left: 1.25rem; line-height: 1.6;">` +
+      actionStrength
+        .slice(0, 4)
+        .map(
+          (d) =>
+            `<li style="color: #5a6b7d;">${d.label}: r = ${fmt(d.strength, 3)}</li>`
+        )
+        .join("") +
+      `</ul>`;
+
+    // Salary Range by Field
+    const fields = [...new Set(rows.map((r) => r.Field_of_Study))].filter((f) => !miss(f));
+    const fieldStats = fields.map((f) => {
+      const g = rows.filter((r) => r.Field_of_Study === f);
+      const sal = values(g, "Starting_Salary");
+      return {
+        field: f,
+        min: Math.min(...sal),
+        max: Math.max(...sal),
+        mean: mean(sal),
+      };
+    });
+    fieldStats.sort((a, b) => b.mean - a.mean);
+
+    const salaryField = document.getElementById("insight-salary-field");
+    salaryField.innerHTML =
+      `<ul style="margin: 0; padding-left: 1.25rem; line-height: 1.8;">` +
+      fieldStats
+        .slice(0, 4)
+        .map(
+          (d) =>
+            `<li style="color: #5a6b7d;"><strong>${d.field}</strong><br>Range: ${money(d.min)} - ${money(d.max)}</li>`
+        )
+        .join("") +
+      `</ul>`;
+
+    // Career Satisfaction Leaders
+    const sat = mean(values(rows, "Career_Satisfaction"));
+    const satisfied = rows.filter((r) => num(r.Career_Satisfaction) >= sat + 1);
+    const satisfiedStats = satisfied.length
+      ? {
+          count: satisfied.length,
+          avgOffers: mean(values(satisfied, "Job_Offers")),
+          avgSalary: mean(values(satisfied, "Starting_Salary")),
+        }
+      : { count: 0, avgOffers: 0, avgSalary: 0 };
+
+    const satisfaction = document.getElementById("insight-satisfaction");
+    satisfaction.innerHTML =
+      `<p style="margin: 0; color: #5a6b7d; line-height: 1.6;">` +
+      `<strong>High Satisfaction Students</strong><br>` +
+      `Count: ${satisfiedStats.count}<br>` +
+      `Avg Offers: ${fmt(satisfiedStats.avgOffers, 1)}<br>` +
+      `Avg Salary: ${money(satisfiedStats.avgSalary)}` +
+      `</p>`;
+
+    // Entry Level Reality
+    const entryLevel = rows.filter((r) => r.Current_Job_Level === "Entry");
+    const entryStats = entryLevel.length
+      ? {
+          count: entryLevel.length,
+          avgSalary: mean(values(entryLevel, "Starting_Salary")),
+          avgSat: mean(values(entryLevel, "Career_Satisfaction")),
+        }
+      : { count: 0, avgSalary: 0, avgSat: 0 };
+
+    const entry = document.getElementById("insight-entry");
+    entry.innerHTML =
+      `<p style="margin: 0; color: #5a6b7d; line-height: 1.6;">` +
+      `<strong>Entry Level Insight</strong><br>` +
+      `Students in Entry: ${entryStats.count}<br>` +
+      `Median Salary: ${money(entryStats.avgSalary)}<br>` +
+      `Avg Satisfaction: ${fmt(entryStats.avgSat, 1)}/10` +
+      `</p>`;
+  }
+
+  function wireInteractivity() {
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderOutcome(btn.dataset.outcome);
+      });
+    });
+
+    document.getElementById("factor-select").addEventListener("change", (e) => {
+      renderScatter(state.currentOutcome, e.target.value);
+    });
+  }
+
+  async function init() {
+    const status = document.getElementById("status");
+    try {
+      if (!window.Plotly) throw new Error("Plotly did not load.");
+      if (!window.Papa) throw new Error("PapaParse did not load.");
+
+      const res = await fetch(DATA_FILE);
+      if (!res.ok) throw new Error(`Could not fetch ${DATA_FILE}.`);
+
+      const csv = await res.text();
+      const parsed = Papa.parse(csv, { header: true });
+      state.rows = parsed.data.filter((r) => r.Student_ID && !r.Student_ID.startsWith("__"));
+
+      if (!state.rows.length) throw new Error("No data rows found.");
+
+      state.numeric = Object.keys(state.rows[0]).filter((h) => {
+        const obs = state.rows.map((r) => r[h]).filter((v) => !miss(v));
+        return obs.length && obs.every((v) => Number.isFinite(Number(v)));
+      });
+
+      computeCorrelations();
+      renderSection1();
+      renderOutcome("Job_Offers");
+      renderInsights();
+      wireInteractivity();
+
+      status.textContent = `Loaded ${state.rows.length} student records`;
+      status.style.color = "#2563eb";
+    } catch (e) {
+      status.textContent = `Error: ${e.message}`;
+      status.style.color = "#dc2626";
+    }
+  }
+
+  init();
+})();
+  const OUTCOMES = ["Job_Offers", "Career_Satisfaction", "Starting_Salary"];
+  const FACTORS = [
+    "Age",
+    "High_School_GPA",
+    "SAT_Score",
+    "University_GPA",
+    "Internships_Completed",
+    "Projects_Completed",
+    "Certifications",
+    "Soft_Skills_Score",
+    "Networking_Score",
     "Work_Life_Balance",
   ];
   const READINESS = [
