@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Funnel Benchmark Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="navbar-custom">
+        <div class="container-fluid">
+            <h1 class="navbar-title">📊 Enrollment Funnel Benchmark</h1>
+            <p class="navbar-subtitle">Synthetic + Real Benchmark Hybrid Analysis</p>
+        </div>
+    </div>
+
+    <div class="container-fluid main-container">
+        <!-- KPI Summary Section -->
+        <section class="kpi-section">
+            <div class="row g-3 mb-4">
+                <div class="col-md-3 col-sm-6">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Total Inquiries</div>
+                        <div class="kpi-value" id="kpi-inquiries">—</div>
+                        <div class="kpi-change">Active Cycle</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Application Rate</div>
+                        <div class="kpi-value" id="kpi-app-rate">—</div>
+                        <div class="kpi-benchmark">Benchmark: 20-40%</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Offer Rate</div>
+                        <div class="kpi-value" id="kpi-offer-rate">—</div>
+                        <div class="kpi-benchmark">Benchmark: 60-80%</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Enrollment Rate</div>
+                        <div class="kpi-value" id="kpi-enroll-rate">—</div>
+                        <div class="kpi-benchmark">Benchmark: 20-50%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab Navigation -->
+        <ul class="nav nav-tabs custom-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary-pane" type="button" role="tab">Executive Summary</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="funnel-tab" data-bs-toggle="tab" data-bs-target="#funnel-pane" type="button" role="tab">Funnel Analysis</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="source-tab" data-bs-toggle="tab" data-bs-target="#source-pane" type="button" role="tab">Source & Geography</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="segment-tab" data-bs-toggle="tab" data-bs-target="#segment-pane" type="button" role="tab">Segment Drilldown</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="scenario-tab" data-bs-toggle="tab" data-bs-target="#scenario-pane" type="button" role="tab">Scenario Modeling</button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Executive Summary Tab -->
+            <div class="tab-pane fade show active" id="summary-pane" role="tabpanel">
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="chart-container">
+                            <h5>Funnel Waterfall (Inquiry → Enrollment)</h5>
+                            <div id="waterfall-chart"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="chart-container">
+                            <h5>Enrollment Velocity (Days in Pipeline)</h5>
+                            <div id="velocity-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="chart-container">
+                            <h5>Conversion Rates vs. Benchmarks</h5>
+                            <div id="benchmark-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Funnel Analysis Tab -->
+            <div class="tab-pane fade" id="funnel-pane" role="tabpanel">
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="chart-container">
+                            <h5>Stage Progression</h5>
+                            <div id="funnel-bar-chart"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="chart-container">
+                            <h5>Exit Rate by Stage</h5>
+                            <div id="exit-rate-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="chart-container">
+                            <h5>Funnel Detail Breakdown</h5>
+                            <div id="funnel-detail-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Source & Geography Tab -->
+            <div class="tab-pane fade" id="source-pane" role="tabpanel">
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="chart-container">
+                            <h5>Conversion by Source Channel</h5>
+                            <div id="source-chart"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="chart-container">
+                            <h5>Geographic Distribution</h5>
+                            <div id="geography-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="chart-container">
+                            <h5>Source Performance Matrix</h5>
+                            <div id="source-performance-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segment Drilldown Tab -->
+            <div class="tab-pane fade" id="segment-pane" role="tabpanel">
+                <div class="row mt-4 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label"><strong>Filter by Student Type:</strong></label>
+                        <select id="segment-filter" class="form-select">
+                            <option value="all">All Student Types</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label"><strong>Filter by Program:</strong></label>
+                        <select id="program-filter" class="form-select">
+                            <option value="all">All Programs</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="chart-container">
+                            <h5>Conversion by Student Type</h5>
+                            <div id="segment-type-chart"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="chart-container">
+                            <h5>Academic Index Impact</h5>
+                            <div id="academic-index-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="chart-container">
+                            <h5>Program Performance Comparison</h5>
+                            <div id="program-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario Modeling Tab -->
+            <div class="tab-pane fade" id="scenario-pane" role="tabpanel">
+                <div class="row mt-4 mb-4">
+                    <div class="col-lg-8">
+                        <div class="scenario-controls">
+                            <h5 class="mb-4">Adjust Conversion Rates to Model Outcomes</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Inquiry → Application Rate: <strong id="scenario-app-display">25%</strong></label>
+                                    <input type="range" class="form-range" id="scenario-app-rate" min="0.1" max="0.5" step="0.01" value="0.25">
+                                    <small class="text-muted">Benchmark: 20-40%</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Application → Offer Rate: <strong id="scenario-offer-display">70%</strong></label>
+                                    <input type="range" class="form-range" id="scenario-offer-rate" min="0.6" max="0.8" step="0.01" value="0.70">
+                                    <small class="text-muted">Benchmark: 60-80%</small>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label">Offer → Enrollment Rate: <strong id="scenario-enroll-display">35%</strong></label>
+                                    <input type="range" class="form-range" id="scenario-enroll-rate" min="0.2" max="0.5" step="0.01" value="0.35">
+                                    <small class="text-muted">Benchmark: 20-50%</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Starting Inquiries</label>
+                                    <input type="number" class="form-control" id="scenario-inquiries" value="1000" min="100" max="100000" step="100">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" id="scenario-update-btn">Update Scenario</button>
+                            <button class="btn btn-secondary" id="scenario-reset-btn">Reset to Current</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="scenario-results-box">
+                            <h6>Projected Outcomes</h6>
+                            <div class="scenario-result-item">
+                                <span>Applications:</span>
+                                <strong id="scenario-apps-result">—</strong>
+                            </div>
+                            <div class="scenario-result-item">
+                                <span>Offers:</span>
+                                <strong id="scenario-offers-result">—</strong>
+                            </div>
+                            <div class="scenario-result-item">
+                                <span>Enrollments:</span>
+                                <strong id="scenario-enrollments-result">—</strong>
+                            </div>
+                            <div class="scenario-result-item">
+                                <span>Overall Conversion:</span>
+                                <strong id="scenario-overall-result">—</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="chart-container">
+                            <h5>Scenario Comparison</h5>
+                            <div id="scenario-comparison-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loading-spinner" class="loading-spinner" style="display:none;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

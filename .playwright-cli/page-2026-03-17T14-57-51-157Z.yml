@@ -1,0 +1,285 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - generic "Official government website" [ref=e7]:
+      - generic [ref=e8]:
+        - img [ref=e9]
+        - paragraph [ref=e11]:
+          - generic [ref=e12]:
+            - text: An official website of the United States government
+            - button "Here's how you know " [ref=e13] [cursor=pointer]:
+              - generic [ref=e14]:
+                - text: Here's how you know
+                - generic [ref=e15]: 
+      - text: 
+    - link "Skip to main content" [ref=e17] [cursor=pointer]:
+      - /url: "#"
+    - generic [ref=e18]:
+      - link "US Department of Education College Scorecard" [ref=e20] [cursor=pointer]:
+        - /url: /
+        - img "US Department of Education College Scorecard" [ref=e22]
+      - navigation [ref=e24]:
+        - list [ref=e25]:
+          - listitem [ref=e26]:
+            - link "Home" [ref=e27] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e28]:
+            - button "Search" [ref=e29] [cursor=pointer]:
+              - text: Search
+              - generic [ref=e30]: 󰍝
+          - listitem [ref=e31]:
+            - button "Compare" [ref=e32] [cursor=pointer]:
+              - text: Compare
+              - generic [ref=e33]: 󰍝
+          - listitem [ref=e34]:
+            - link "Resources" [ref=e35] [cursor=pointer]:
+              - /url: /resources/
+          - listitem [ref=e36]:
+            - button "About the Data" [ref=e37] [cursor=pointer]:
+              - text: About the Data
+              - generic [ref=e38]: 󰍝
+    - navigation [ref=e39]
+  - main [ref=e41]:
+    - generic [ref=e42]:
+      - tablist [ref=e46]:
+        - generic [ref=e48]:
+          - tab "Download the Data" [selected] [ref=e49] [cursor=pointer]:
+            - generic [ref=e50]: Download the Data
+          - tab "Data Documentation" [ref=e51] [cursor=pointer]:
+            - generic [ref=e52]: Data Documentation
+          - tab "API Documentation" [ref=e53] [cursor=pointer]:
+            - generic [ref=e54]: API Documentation
+          - tab "Change Log" [ref=e55] [cursor=pointer]:
+            - generic [ref=e56]: Change Log
+          - tab "Technical Definitions" [ref=e57] [cursor=pointer]:
+            - generic [ref=e58]: Technical Definitions
+      - generic [ref=e62]:
+        - heading "Data Home" [level=1] [ref=e63]
+        - separator [ref=e64]
+        - paragraph [ref=e65]: Download the data that appear on the College Scorecard, as well as supporting data on student completion, debt and repayment, earnings, and more.
+        - paragraph [ref=e66]:
+          - text: This data was
+          - strong [ref=e67]: last updated November 17, 2025
+          - text: .
+        - heading "All Data Files Download (.zip, 450 MB)" [level=2] [ref=e68]:
+          - text: All Data Files
+          - link "Download (.zip, 450 MB)" [ref=e69] [cursor=pointer]:
+            - /url: https://ed-public-download.scorecard.network/downloads/College_Scorecard_Raw_Data_10032025.zip
+            - generic [ref=e70]:
+              - text: Download (.zip, 450 MB)
+              - generic [ref=e71]: 
+        - list [ref=e72]:
+          - listitem [ref=e73]: Institution-level data files for 1996-97 through 2022-23 containing aggregate data for each institution. Includes information on institutional characteristics, enrollment, student aid, costs, and student outcomes.
+          - listitem [ref=e74]: Field of study-level data files for the pooled 2014-15, 2015-16 award years through the pooled 2018-19, 2019-20 award years containing data at the credential level and 4-digit CIP code combination for each institution. Includes information on cumulative debt at graduation and earnings one year after graduation.
+          - listitem [ref=e75]: Crosswalk files for 2000-01 through 2022-23 that link the Department’s OPEID with an IPEDS UNITID for each institution.
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - heading "Most Recent Institution-Level Data" [level=4] [ref=e78]
+            - link "Download (.zip, 24 MB)" [ref=e79] [cursor=pointer]:
+              - /url: https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Institution_10032025.zip
+              - generic [ref=e80]:
+                - text: Download (.zip, 24 MB)
+                - generic [ref=e81]: 
+          - generic [ref=e82]:
+            - heading "Most Recent Data by Field of Study" [level=4] [ref=e83]
+            - link "Download (.zip, 15 MB)" [ref=e84] [cursor=pointer]:
+              - /url: https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Field-of-Study_10032025.zip
+              - generic [ref=e85]:
+                - text: Download (.zip, 15 MB)
+                - generic [ref=e86]: 
+        - separator [ref=e87]
+        - paragraph [ref=e88]:
+          - strong [ref=e89]: Looking for Help?
+        - paragraph [ref=e90]:
+          - text: Visit
+          - link "StackExchange" [ref=e91] [cursor=pointer]:
+            - /url: http://opendata.stackexchange.com/questions/tagged/collegescorecard
+            - text: StackExchange
+            - generic [ref=e92]: 󰏌
+          - text: or email the help desk at
+          - link "scorecarddata@rti.org" [ref=e93] [cursor=pointer]:
+            - /url: mailto:scorecarddata@rti.org
+          - text: .
+        - paragraph [ref=e94]:
+          - text: For inquiries by members of the press, please contact
+          - link "press@ed.gov" [ref=e95] [cursor=pointer]:
+            - /url: mailto:press@ed.gov
+          - text: .
+  - generic [ref=e99]:
+    - list [ref=e101]:
+      - listitem [ref=e102]:
+        - link "Home" [ref=e103] [cursor=pointer]:
+          - /url: /
+      - listitem [ref=e104]:
+        - generic [ref=e105]: Search
+        - link "Search Colleges" [ref=e106] [cursor=pointer]:
+          - /url: /search/
+        - link "Search Fields of Study" [ref=e107] [cursor=pointer]:
+          - /url: /search/fos-landing/
+      - listitem [ref=e108]:
+        - generic [ref=e109]: Compare
+        - link "Compare Colleges" [ref=e110] [cursor=pointer]:
+          - /url: /compare/?toggle=institutions
+        - link "Compare Fields of Study" [ref=e111] [cursor=pointer]:
+          - /url: /compare/?toggle=fos
+      - listitem [ref=e112]:
+        - link "Resources" [ref=e113] [cursor=pointer]:
+          - /url: /resources/
+      - listitem [ref=e114]:
+        - generic [ref=e115]: About the Data
+        - link "Download the Data" [ref=e116] [cursor=pointer]:
+          - /url: /data/
+        - link "Data Documentation" [ref=e117] [cursor=pointer]:
+          - /url: /data/data-documentation/
+        - link "API Documentation" [ref=e118] [cursor=pointer]:
+          - /url: /data/api-documentation/
+        - link "Change Log" [ref=e119] [cursor=pointer]:
+          - /url: /data/changelog/
+        - link "Glossary" [ref=e120] [cursor=pointer]:
+          - /url: /data/glossary/
+    - generic [ref=e122]:
+      - paragraph [ref=e123]:
+        - generic [ref=e124]:
+          - text: Powered by
+          - link "College Scorecard Data" [ref=e125] [cursor=pointer]:
+            - /url: /data/
+      - paragraph [ref=e126]:
+        - generic [ref=e127]:
+          - link "3.5.4" [ref=e128] [cursor=pointer]:
+            - /url: https://github.com/RTICWDT/college-scorecard/releases
+            - text: 3.5.4
+            - generic [ref=e129]: 󰏌
+          - text: "|"
+          - link "Contact Us" [ref=e130] [cursor=pointer]:
+            - /url: mailto:scorecarddata@rti.org
+          - text: "|"
+          - link "Notices" [ref=e131] [cursor=pointer]:
+            - /url: https://www.ed.gov/about/ed-overview/required-notices
+            - text: Notices
+            - generic [ref=e132]: 󰏌
+          - text: "|"
+          - link "Glossary" [ref=e133] [cursor=pointer]:
+            - /url: /data/glossary/
+      - paragraph [ref=e134]:
+        - link "U.S. Department of Education" [ref=e136] [cursor=pointer]:
+          - /url: http://www.ed.gov/
+          - text: U.S. Department of Education
+          - generic [ref=e137]: 󰏌
+  - navigation [ref=e138]:
+    - generic [ref=e140]:
+      - generic [ref=e142]:
+        - paragraph [ref=e143]: Add up to 10 Colleges and 10 Fields of Study to compare.
+        - button "Close Compare Drawer" [ref=e144] [cursor=pointer]:
+          - generic [ref=e146]: 󰅖
+      - generic [ref=e147]:
+        - generic [ref=e148]:
+          - generic [ref=e149]:
+            - button "Compare Colleges Icon":
+              - generic:
+                - generic: 
+            - heading "Compare Colleges" [level=3] [ref=e150]
+          - paragraph [ref=e153]: No Colleges Selected
+          - link "Search Colleges" [ref=e155] [cursor=pointer]:
+            - /url: /search/
+            - button "Search Colleges" [ref=e156]:
+              - generic [ref=e157]: Search Colleges
+        - generic [ref=e158]:
+          - generic [ref=e159]:
+            - button "Compare Fields of Study Icon":
+              - generic:
+                - generic: 
+            - heading "Compare Fields of Study" [level=3] [ref=e160]
+          - paragraph [ref=e163]: No Fields of Study Selected
+          - link "Search Fields of Study" [ref=e165] [cursor=pointer]:
+            - /url: /search/fos-landing/
+            - button "Search Fields of Study" [ref=e166]:
+              - generic [ref=e167]: Search Fields of Study
+  - 'button "Ready to Compare: 0 Colleges 0 Fields of Study" [ref=e171] [cursor=pointer]':
+    - generic [ref=e175]:
+      - paragraph [ref=e177]: "Ready to Compare:"
+      - generic [ref=e178]:
+        - generic [ref=e180]: 
+        - paragraph [ref=e181]: 0 Colleges
+      - generic [ref=e182]:
+        - generic [ref=e184]: 
+        - paragraph [ref=e185]: 0 Fields of Study
+  - navigation [ref=e186]:
+    - generic [ref=e189]:
+      - generic [ref=e190]:
+        - button "Menu" [ref=e192] [cursor=pointer]:
+          - generic [ref=e194]: 󰅖
+        - generic [ref=e195]:
+          - generic [ref=e196]: Glossary
+          - generic [ref=e200]:
+            - generic [ref=e202]: 󰍉
+            - combobox "Search items" [ref=e203]
+            - generic [ref=e204]: Type to Search
+            - button "Toggle dropdown" [ref=e205] [cursor=pointer]:
+              - img [ref=e206]
+      - generic [ref=e209]:
+        - generic [ref=e210]:
+          - heading "A" [level=3] [ref=e211]
+          - separator [ref=e212]
+          - button "Acceptance Rate" [ref=e214] [cursor=pointer]
+          - button "Average Annual Cost" [ref=e216] [cursor=pointer]
+          - button "Average Annual Cost for Largest Program" [ref=e218] [cursor=pointer]
+        - generic [ref=e219]:
+          - heading "F" [level=3] [ref=e220]
+          - separator [ref=e221]
+          - button "Field of Study" [ref=e223] [cursor=pointer]
+          - button "Field of Study Median Earnings" [ref=e225] [cursor=pointer]
+          - button "Field of Study Median Total Debt After Graduation for All Federal Loans" [ref=e227] [cursor=pointer]
+          - button "Field of Study Monthly Earnings" [ref=e229] [cursor=pointer]
+          - button "Full-time Enrollment" [ref=e231] [cursor=pointer]
+        - generic [ref=e232]:
+          - heading "G" [level=3] [ref=e233]
+          - separator [ref=e234]
+          - button "Graduation Rate" [ref=e236] [cursor=pointer]
+        - generic [ref=e237]:
+          - heading "M" [level=3] [ref=e238]
+          - separator [ref=e239]
+          - button "Median Earnings" [ref=e241] [cursor=pointer]
+          - button "Median Total Debt After Graduation for Loans Taken Out at This College" [ref=e243] [cursor=pointer]
+          - button "Monthly Parent PLUS Loan Payment for All Colleges Attended" [ref=e245] [cursor=pointer]
+          - button "Monthly Student Loan Payment for Loans Taken Out at This College" [ref=e247] [cursor=pointer]
+        - generic [ref=e248]:
+          - heading "N" [level=3] [ref=e249]
+          - separator [ref=e250]
+          - button "Number of Graduates" [ref=e252] [cursor=pointer]
+        - generic [ref=e253]:
+          - heading "O" [level=3] [ref=e254]
+          - separator [ref=e255]
+          - button "Outcomes 8 Years After Attending" [ref=e257] [cursor=pointer]
+        - generic [ref=e258]:
+          - heading "P" [level=3] [ref=e259]
+          - separator [ref=e260]
+          - button "Pell Grant" [ref=e262] [cursor=pointer]
+          - button "Percent Earning More Than a High School Graduate" [ref=e264] [cursor=pointer]
+          - button "Predominant Award" [ref=e266] [cursor=pointer]
+        - generic [ref=e267]:
+          - heading "R" [level=3] [ref=e268]
+          - separator [ref=e269]
+          - button "Race/Ethnicity" [ref=e271] [cursor=pointer]
+          - button "Repayment Rate for Loans Taken Out at This College" [ref=e273] [cursor=pointer]
+          - button "Repayment Rate for Loans Taken Out at This College by Undergraduate Completers" [ref=e275] [cursor=pointer]
+          - button "Repayment Status" [ref=e277] [cursor=pointer]
+        - generic [ref=e278]:
+          - heading "S" [level=3] [ref=e279]
+          - separator [ref=e280]
+          - button "Socio-Economic Diversity" [ref=e282] [cursor=pointer]
+          - button "Student/Faculty Ratio" [ref=e284] [cursor=pointer]
+          - button "Students Receiving Federal Loans" [ref=e286] [cursor=pointer]
+          - button "Students Who Return After Their First Year" [ref=e288] [cursor=pointer]
+        - generic [ref=e289]:
+          - heading "T" [level=3] [ref=e290]
+          - separator [ref=e291]
+          - button "Test Scores" [ref=e293] [cursor=pointer]
+          - button "Total Undergraduate Students Enrolled" [ref=e295] [cursor=pointer]
+        - generic [ref=e296]:
+          - heading "U" [level=3] [ref=e297]
+          - separator [ref=e298]
+          - button "Under ED Monitoring" [ref=e300] [cursor=pointer]
+        - generic [ref=e301]:
+          - heading "W" [level=3] [ref=e302]
+          - separator [ref=e303]
+          - button "WIOA Programs" [ref=e305] [cursor=pointer]
+      - generic [ref=e307]: Download Glossary (CSV, 48KB)

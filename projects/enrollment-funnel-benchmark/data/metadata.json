@@ -1,0 +1,174 @@
+{
+  "data_dictionary": {
+    "student_id": {
+      "type": "string",
+      "description": "Unique student identifier",
+      "example": "ENR-00001"
+    },
+    "cycle_year": {
+      "type": "integer",
+      "description": "Admissions cycle year",
+      "example": 2025
+    },
+    "student_type": {
+      "type": "string",
+      "description": "Classification of student (First-Year, Transfer, Graduate)",
+      "values": ["First-Year", "Transfer", "Graduate"]
+    },
+    "residency": {
+      "type": "string",
+      "description": "Geographic residency status",
+      "values": ["Domestic", "International"]
+    },
+    "source_channel": {
+      "type": "string",
+      "description": "How student initially learned about institution",
+      "values": ["Website", "Search", "Campus Visit", "Event", "School Counselor", "Referral"]
+    },
+    "academic_program": {
+      "type": "string",
+      "description": "Intended major or program",
+      "values": ["Computer Science", "Engineering", "Business", "Liberal Arts"]
+    },
+    "market_geography": {
+      "type": "string",
+      "description": "Geographic recruitment territory",
+      "values": ["Local", "Regional", "National", "International"]
+    },
+    "first_gen_flag": {
+      "type": "binary",
+      "description": "First-generation college student indicator (1=yes, 0=no)"
+    },
+    "need_aid_flag": {
+      "type": "binary",
+      "description": "Demonstrated financial need indicator (1=yes, 0=no)"
+    },
+    "visit_flag": {
+      "type": "binary",
+      "description": "Campus visit completed indicator (1=yes, 0=no)"
+    },
+    "counselor_meeting_flag": {
+      "type": "binary",
+      "description": "Met with admissions counselor indicator (1=yes, 0=no)"
+    },
+    "academic_index": {
+      "type": "float",
+      "description": "Composite academic quality metric (0-100 scale)",
+      "range": [0, 100]
+    },
+    "affordability_index": {
+      "type": "float",
+      "description": "Financial attractiveness metric based on net cost (0-100 scale)",
+      "range": [0, 100]
+    },
+    "engagement_score": {
+      "type": "float",
+      "description": "Digital engagement metric based on website/email interaction (0-100 scale)",
+      "range": [0, 100]
+    },
+    "completeness_score": {
+      "type": "float",
+      "description": "Application completeness and quality indicator (0-100 scale)",
+      "range": [0, 100]
+    },
+    "offer_fit_score": {
+      "type": "float",
+      "description": "Institutional fit prediction for offer (0-100 scale)",
+      "range": [0, 100]
+    },
+    "inquiry_to_app_prob": {
+      "type": "float",
+      "description": "Simulated probability of applying given inquiry (0-1)",
+      "range": [0, 1]
+    },
+    "app_to_offer_prob": {
+      "type": "float",
+      "description": "Simulated probability of receiving offer given application (0-1)",
+      "range": [0, 1]
+    },
+    "offer_to_enroll_prob": {
+      "type": "float",
+      "description": "Simulated probability of enrolling given offer (0-1)",
+      "range": [0, 1]
+    },
+    "inquiry_flag": {
+      "type": "binary",
+      "description": "Student generated an inquiry (should be 1 for all records)"
+    },
+    "application_flag": {
+      "type": "binary",
+      "description": "Student submitted application (1=yes, 0=no)"
+    },
+    "offer_flag": {
+      "type": "binary",
+      "description": "Institution sent offer (1=yes, 0=no)"
+    },
+    "enrollment_flag": {
+      "type": "binary",
+      "description": "Student enrolled (1=yes, 0=no)"
+    },
+    "inquiry_date": {
+      "type": "date",
+      "description": "Date of initial inquiry (YYYY-MM-DD)",
+      "example": "2024-10-15"
+    },
+    "application_date": {
+      "type": "date",
+      "description": "Date application submitted (YYYY-MM-DD), null if not applied"
+    },
+    "offer_date": {
+      "type": "date",
+      "description": "Date offer sent (YYYY-MM-DD), null if no offer"
+    },
+    "enrollment_date": {
+      "type": "date",
+      "description": "Date student enrolled (YYYY-MM-DD), null if did not enroll"
+    },
+    "days_inquiry_to_app": {
+      "type": "float",
+      "description": "Days between inquiry and application submission",
+      "null_meaning": "Student did not apply"
+    },
+    "days_app_to_offer": {
+      "type": "float",
+      "description": "Days between application and offer",
+      "null_meaning": "Student did not receive offer"
+    },
+    "days_offer_to_enroll": {
+      "type": "float",
+      "description": "Days between offer and enrollment",
+      "null_meaning": "Student did not enroll"
+    },
+    "final_stage": {
+      "type": "string",
+      "description": "Furthest stage reached in funnel",
+      "values": ["Inquiry_Only", "Application_Submitted", "Offered", "Offered_Not_Enrolled", "Enrolled"]
+    },
+    "stop_reason": {
+      "type": "string",
+      "description": "Reason student stopped in funnel",
+      "values": ["No_Application", "Rejected", "Yield_Loss", "Converted"]
+    }
+  },
+  "data_quality_notes": {
+    "synthetic": true,
+    "generation_method": "Probabilistic simulation with realistic higher-ed funnel ranges",
+    "conversion_benchmarks": {
+      "inquiry_to_application": "20-40%",
+      "application_to_offer": "60-80%",
+      "offer_to_enrollment": "20-50%"
+    },
+    "missing_values": "Dates and day counts are null when a student did not progress to that stage",
+    "temporal_coverage": "2024-2025 admissions cycles",
+    "total_records": "Approximately 10,000 synthetic student records"
+  },
+  "key_insights": [
+    "Conversion rates vary significantly by source channel (Website, Search, Campus Visit, etc.)",
+    "Academic index and affordability index are strong drivers of enrollment",
+    "First-generation and financially-needy students show different progression patterns",
+    "Geographic origin impacts yield and conversion at each stage",
+    "Days-to-conversion metrics provide insights into engagement velocity"
+  ],
+  "last_updated": "2025-03-18",
+  "data_source": "Synthetic dataset calibrated to real industry benchmarks (NACAC, EAB research)"
+}
