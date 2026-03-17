@@ -1,10 +1,10 @@
-# 🎯 Student Retention & Early Alert Dashboard
+# Student Retention & Early Alert Dashboard
 
-**Real-Time Risk Identification & Intervention Planning** using Open University Learning Analytics Dataset. Helps institutional leaders identify at-risk students early and design targeted retention interventions.
+**Real-Time Risk Identification & Intervention Planning** using Open University Learning Analytics Dataset (OULAD). Helps institutional leaders identify at-risk students early and design targeted retention interventions.
 
 ---
 
-## 📊 Dashboard Overview
+## Dashboard Overview
 
 This interactive dashboard provides visibility into:
 - **At-risk student identification** - who is most likely to withdraw or fail
@@ -22,7 +22,7 @@ This interactive dashboard provides visibility into:
 
 ---
 
-## 📈 Dashboard Features
+## Dashboard Features
 
 ### 1. **Executive Summary** (Default Tab)
 Real-time KPI cards showing:
@@ -114,7 +114,7 @@ Identify where to focus support resources for maximum impact:
 
 ---
 
-## 📊 Data Structure
+## Data Structure
 
 ### Real Data Source
 **Open University Learning Analytics Dataset (OULAD)**
@@ -148,7 +148,7 @@ Identify where to focus support resources for maximum impact:
 
 ---
 
-## 🔬 Methodology & Interpretation Guide
+## Methodology & Interpretation Guide
 
 ### What Is "At-Risk"?
 
@@ -187,7 +187,7 @@ Identify where to focus support resources for maximum impact:
 
 ---
 
-## 📥 Data Dictionary
+## Data Dictionary
 
 See **`data/metadata.json`** for complete field definitions, including:
 - Detailed descriptions of each metric
@@ -197,7 +197,7 @@ See **`data/metadata.json`** for complete field definitions, including:
 
 ---
 
-## 🚀 How to Use This Dashboard
+## How to Use This Dashboard
 
 ### Week 1: Assess Your At-Risk Population
 1. **Executive Summary tab** - Get baseline numbers
@@ -232,7 +232,7 @@ See **`data/metadata.json`** for complete field definitions, including:
 
 ---
 
-## 💡 Key Insights from OULAD Data
+## Key Insights from OULAD Data
 
 ### What Predicts Withdrawal?
 1. **Engagement collapse** (engagement_index <30) = 70% likelihood of withdrawal
@@ -253,7 +253,7 @@ See **`data/metadata.json`** for complete field definitions, including:
 
 ---
 
-## 📈 Quick Start Workflow
+## Quick Start Workflow
 
 ### Monday: Identify At-Risk Students
 ```
@@ -277,7 +277,7 @@ Track response rates → Update risk scores weekly → Adjust support intensity 
 
 ---
 
-## 🎓 What This Dashboard Teaches
+## What This Dashboard Teaches
 
 ### Strategic Direction
 1. **Operational insight**: Where are your biggest retention challenges? (By course, by cohort, by risk factor)
@@ -292,7 +292,7 @@ Track response rates → Update risk scores weekly → Adjust support intensity 
 
 ---
 
-## ⚠️ Important Considerations
+## Important Considerations
 
 ### Limitations of Predictive Models
 - Risk scores are **correlations**, not causation
@@ -300,10 +300,10 @@ Track response rates → Update risk scores weekly → Adjust support intensity 
 - Model trained on **distance learning cohort** (Open University); may not perfectly apply to residential campuses
 
 ### Ethical Use
-- ✅ **Do**: Use for early intervention and support
-- ✅ **Do**: Combine with human judgment; advisors should verify concerns
-- ❌ **Don't**: Use to discourage enrollment or apply punitive measures
-- ❌ **Don't**: Assume demographic group risk (use data for targeting support, not gatekeeping)
+- **Do**: Use for early intervention and support
+- **Do**: Combine with human judgment; advisors should verify concerns
+- **Don't**: Use to discourage enrollment or apply punitive measures
+- **Don't**: Assume demographic group risk (use data for targeting support, not gatekeeping)
 
 ### Data Privacy
 - Dataset is fully anonymized; no personally identifiable information
@@ -311,7 +311,7 @@ Track response rates → Update risk scores weekly → Adjust support intensity 
 
 ---
 
-## 📞 Questions & Extended Use Cases
+## Questions & Extended Use Cases
 
 **Can I predict which students will withdraw by week 2?**  
 Yes—use early_alert_risk_score + clicks_first_30_days + at_risk_flag. Implement day-14 check-in for anyone with risk >70.
@@ -327,7 +327,7 @@ Weekly during course. As new engagement/assessment data arrives, risk scores bec
 
 ---
 
-## 📚 Data Source & Citation
+## Data Source & Citation
 
 **Dataset:** Open University Learning Analytics Dataset (OULAD)  
 **Creators:** Kuzilek, Hlosta, & Zdrahal (Open University Research)  
@@ -336,7 +336,7 @@ Weekly during course. As new engagement/assessment data arrives, risk scores bec
 
 ---
 
-## 🔄 Next Steps
+## Next Steps
 
 - **Real Data Integration**: Replace this real OULAD sample with your institutional data (same CSV schema)
 - **Baseline Benchmarking**: Compare your at-risk % and withdrawal rate to OULAD (35-40% withdrawal is typical)

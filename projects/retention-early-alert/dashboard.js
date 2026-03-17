@@ -869,22 +869,22 @@ function generateInterventionRecommendations() {
     let html = '';
     
     if (highRiskLowEngagement > 0) {
-        html += `<p><strong>🚨 Priority 1 - Check-in Campaign (${highRiskLowEngagement} students):</strong> Target students with high risk scores (>70) and low engagement (<40). These are at-risk but still recoverable. Reach out via email, SMS, or direct advisor contact within 1 week.</p>`;
+        html += `<p><strong>Priority 1 - Check-in Campaign (${highRiskLowEngagement} students):</strong> Target students with high risk scores (>70) and low engagement (<40). These are at-risk but still recoverable. Reach out via email, SMS, or direct advisor contact within 1 week.</p>`;
     }
 
     if (inactiveFirst30 > 0) {
-        html += `<p><strong>⚠️ Priority 2 - Early Alert (${inactiveFirst30} students):</strong> Students with <50 platform clicks in first 30 days are 4x more likely to withdraw. Implement onboarding check-in by day 14 of course enrollment.</p>`;
+        html += `<p><strong>Priority 2 - Early Alert (${inactiveFirst30} students):</strong> Students with <50 platform clicks in first 30 days are 4x more likely to withdraw. Implement onboarding check-in by day 14 of course enrollment.</p>`;
     }
 
     if (lateSubmitters > 0) {
-        html += `<p><strong>📋 Priority 3 - Assessment Support (${lateSubmitters} students):</strong> Late submission rate >50% correlates with withdrawal. Offer extension mechanisms, peer tutoring, or assignment clarification workshops.</p>`;
+        html += `<p><strong> Priority 3 - Assessment Support (${lateSubmitters} students):</strong> Late submission rate >50% correlates with withdrawal. Offer extension mechanisms, peer tutoring, or assignment clarification workshops.</p>`;
     }
 
     if (atRisk > 0) {
-        html += `<p><strong>📊 Overall Intervention Capacity:</strong> ${atRisk} students are flagged at-risk (${((atRisk/total)*100).toFixed(0)}% of cohort). Recommend triage: direct advising for high-risk + low-engagement; group workshops for engagement issues; peer mentoring for assessment struggles.</p>`;
+        html += `<p><strong>Overall Intervention Capacity:</strong> ${atRisk} students are flagged at-risk (${((atRisk/total)*100).toFixed(0)}% of cohort). Recommend triage: direct advising for high-risk + low-engagement; group workshops for engagement issues; peer mentoring for assessment struggles.</p>`;
     }
 
-    html += `<p><strong>✅ Success Metric:</strong> Track withdrawal rate in intervention vs. control groups. Target: reduce withdrawal from current rate by 2-5 percentage points within one cycle.</p>`;
+    html += `<p><strong>Success Metric:</strong> Track withdrawal rate in intervention vs. control groups. Target: reduce withdrawal from current rate by 2-5 percentage points within one cycle.</p>`;
 
     document.getElementById('intervention-recs').innerHTML = html;
 }

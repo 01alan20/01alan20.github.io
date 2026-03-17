@@ -1,10 +1,10 @@
-# 📊 Enrollment Funnel Model
+# Enrollment Funnel Model
 
 **Board-Ready Benchmark Dashboard** for inquiry-to-enrollment pipeline analysis. Synthetic data calibrated to realistic higher-ed conversion benchmarks.
 
 ---
 
-## 🎯 Dashboard Overview
+## Dashboard Overview
 
 This interactive dashboard provides institutional leaders with visibility into:
 - **Conversion performance** across the student recruitment pipeline
@@ -20,7 +20,7 @@ This interactive dashboard provides institutional leaders with visibility into:
 
 ---
 
-## 📈 Dashboard Features
+## Dashboard Features
 
 ### 1. **Executive Summary** (Default Tab)
 Real-time KPI cards showing:
@@ -97,7 +97,7 @@ Visualizations:
 
 ---
 
-## 📊 Data Structure
+## Data Structure
 
 ### Local Data Files
 - **`data/enrollment_funnel_synthetic.csv`** (Main dataset)
@@ -127,7 +127,7 @@ Visualizations:
 
 ---
 
-## 🔬 Methodology & Benchmarks
+## Methodology & Benchmarks
 
 ### Synthetic Data Approach
 - **Why synthetic?** Public higher-ed funnel datasets are rare/incomplete
@@ -151,7 +151,7 @@ These ranges reflect realistic higher-education admissions:
 
 ---
 
-## 💡 How to Interpret the Dashboard
+## How to Interpret the Dashboard
 
 ### Quick Health Check Questions
 
@@ -173,7 +173,7 @@ These ranges reflect realistic higher-education admissions:
 
 ---
 
-## 🎓 What This Dashboard Teaches You
+## What This Dashboard Teaches You
 
 ### Strategic Insights Available
 
@@ -200,7 +200,7 @@ These ranges reflect realistic higher-education admissions:
 
 ---
 
-## 📥 Data Dictionary
+## Data Dictionary
 
 See **`data/metadata.json`** for complete field definitions including:
 - Data types and ranges
@@ -210,7 +210,7 @@ See **`data/metadata.json`** for complete field definitions including:
 
 ---
 
-## 🚀 Next Steps
+## Next Steps
 
 ### To Make This Your Own
 1. **Replace synthetic data** with real institutional data (CSV format, same schema)
@@ -226,23 +226,23 @@ See **`data/metadata.json`** for complete field definitions including:
 
 ---
 
-## 📝 Data Source & Caveats
+## Data Source & Caveats
 
 **Source:** Synthetic student-level data calibrated to higher-education industry benchmarks (NACAC, EAB, institutional case studies)
 
 **Synthetic ≠ Unrealistic:** This data mirrors real funnel dynamics while protecting institutional privacy. Appropriate for:
-- ✅ Dashboard prototyping & design testing
-- ✅ Analytics capability demonstration
-- ✅ Teaching decision frameworks
+- Dashboard prototyping & design testing
+- Analytics capability demonstration
+- Teaching decision frameworks
 
 **Not appropriate for:**
-- ❌ Institutional planning (use real data)
-- ❌ Policy decisions affecting students
-- ❌ Compliance / regulatory reporting
+- Institutional planning (use real data)
+- Policy decisions affecting students
+- Compliance / regulatory reporting
 
 ---
 
-## 📞 Questions?
+## Questions?
 
 **Key Metrics Reference:**
 - **Conversion Rate** = (Students at next stage / Students at current stage) × 100

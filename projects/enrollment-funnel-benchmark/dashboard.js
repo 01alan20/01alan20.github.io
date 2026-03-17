@@ -170,19 +170,28 @@ function renderWaterfallChart() {
     const offers = filteredData.filter(d => d.offer_flag === '1').length;
     const enrollments = filteredData.filter(d => d.enrollment_flag === '1').length;
     
-    const decline1 = totalInquiries - applications;
-    const decline2 = applications - offers;
-    const decline3 = offers - enrollments;
+    const lossAppStage = totalInquiries - applications;
+    const lossOfferStage = applications - offers;
+    const lossEnrollStage = offers - enrollments;
     
     const trace = {
-        x: ['Inquiries', 'Lost', 'Applications', 'Lost', 'Offers', 'Lost', 'Enrollments'],
-        y: [totalInquiries, -decline1, applications, -decline2, offers, -decline3, enrollments],
+        x: ['Inquiries', 'Lost (Inquiry→App)', 'Lost (App→Offer)', 'Lost (Offer→Enroll)', 'Final Enrollments'],
+        y: [totalInquiries, -lossAppStage, -lossOfferStage, -lossEnrollStage, enrollments],
+        measure: ['absolute', 'relative', 'relative', 'relative', 'total'],
         type: 'waterfall',
         orientation: 'v',
         connector: { line: { color: '#3498db' } },
         increasing: { marker: { color: '#27ae60' } },
         decreasing: { marker: { color: '#e74c3c' } },
-        totals: { marker: { color: '#3498db' } },
+        totals: { marker: { color: '#27ae60' } },
+        textposition: 'outside',
+        text: [
+            totalInquiries.toLocaleString(),
+            '-' + lossAppStage.toLocaleString(),
+            '-' + lossOfferStage.toLocaleString(),
+            '-' + lossEnrollStage.toLocaleString(),
+            enrollments.toLocaleString()
+        ],
         hovertemplate: '<b>%{x}</b><br>Count: %{y:,.0f}<extra></extra>'
     };
     
@@ -192,7 +201,7 @@ function renderWaterfallChart() {
         hovermode: 'closest',
         plot_bgcolor: 'rgba(0,0,0,0)',
         paper_bgcolor: 'transparent',
-        yaxis: { gridcolor: '#ecf0f1' }
+        yaxis: { gridcolor: '#ecf0f1', title: 'Student Count' }
     };
     
     Plotly.newPlot('waterfall-chart', [trace], layout, { responsive: true });
