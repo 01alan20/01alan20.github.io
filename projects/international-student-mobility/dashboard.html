@@ -14,29 +14,28 @@
     <header class="header">
       <h1>International Student Mobility Flows</h1>
       <p>Global higher education student flows, 2015-2023</p>
-      <p class="subtitle">Visualizing which countries students are coming from and where they are going</p>
+      <p class="subtitle">Explore where students are moving with directional flows and volume</p>
     </header>
 
     <!-- Controls -->
     <div class="controls-section">
       <div class="control-group">
-        <label for="countrySelect">Focus on Country (or click map/table):</label>
+        <label for="countrySelect">Select Country:</label>
         <select id="countrySelect">
-          <option value="ALL">All Countries (Global Overview)</option>
+          <option value="">-- Choose a country --</option>
         </select>
-        <small style="color: #999; margin-top: 4px; display: block;">Tip: Click any country name in the map or table to select it</small>
       </div>
 
       <div class="control-group">
-        <label for="flowDirection">Show Flows:</label>
+        <label for="flowDirection">Flow Direction:</label>
         <div class="radio-group">
           <label>
             <input type="radio" name="direction" value="inbound" checked />
-            Incoming to Selected Country
+            Inbound (students coming TO this country)
           </label>
           <label>
             <input type="radio" name="direction" value="outbound" />
-            Outgoing from Selected Country
+            Outbound (students leaving FROM this country)
           </label>
         </div>
       </div>
@@ -57,11 +56,11 @@
       </div>
     </div>
 
-    <!-- Active Filters Display -->
-    <div id="activeFilters" class="active-filters" style="display: none;">
-      <div class="filter-badge">
-        <span id="filterText"></span>
-        <button class="badge-close" onclick="clearFilters()">x</button>
+    <!-- Active Selection Display -->
+    <div id="activeSelection" class="active-selection" style="display: none;">
+      <div class="selection-badge">
+        <span id="selectionText"></span>
+        <button class="badge-close" onclick="clearSelection()">Clear</button>
       </div>
     </div>
 
@@ -69,174 +68,108 @@
     <div class="tab-navigation">
       <button class="tab-btn active" data-tab="analysis">World Map</button>
       <button class="tab-btn" data-tab="trends">Trends</button>
-      <button class="tab-btn" data-tab="compare-years">Compare Years</button>
+      <button class="tab-btn" data-tab="analysis-detail">Analysis</button>
     </div>
 
-    <!-- Analysis Tab -->
+    <!-- Analysis Tab: World Map -->
     <div class="tab-content" id="analysis-tab" class="active">
       <div class="visualization-section">
         <div id="mapContainer" class="map-container">
-          <h2>World Map - International Student Destinations</h2>
+          <h2>Student Flow Map</h2>
           <div id="worldMap" style="width: 100%; height: 600px;"></div>
         </div>
 
-        <!-- Flow Stats - HIDDEN FOR NOW -->
-        <div class="flow-stats" style="display: none;">
+        <!-- Flow Stats -->
+        <div class="flow-stats">
           <div class="stat-card">
-            <h3>Top Source Country</h3>
-            <p id="topSource" class="stat-value">Loading...</p>
-            <small id="topSourceCount">0 students</small>
-          </div>
-          <div class="stat-card">
-            <h3>Top Destination</h3>
-            <p id="topDest" class="stat-value">Loading...</p>
-            <small id="topDestCount">0 students</small>
-          </div>
-          <div class="stat-card">
-            <h3>Total Students (Selected Year)</h3>
+            <h3>Total Students</h3>
             <p id="totalStudents" class="stat-value">0</p>
-            <small>Global estimate</small>
           </div>
           <div class="stat-card">
-            <h3>Active Corridors</h3>
-            <p id="corridorCount" class="stat-value">0</p>
-            <small>Country pairs</small>
+            <h3>Countries Involved</h3>
+            <p id="countriesCount" class="stat-value">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Top Partner</h3>
+            <p id="topPartner" class="stat-value">—</p>
+          </div>
+          <div class="stat-card">
+            <h3>Top Volume</h3>
+            <p id="topVolume" class="stat-value">0</p>
           </div>
         </div>
-      </div>
 
-      <!-- Flows Data Table - Under Map -->
-      <div class="table-section">
-        <div class="table-header">
-          <h2 id="tableTitleDynamic">Student Mobility Corridors</h2>
-          <p class="table-subtitle" id="tableSubtitle">
-            Showing all flows. Click on any country name to filter.
-          </p>
+        <!-- Student Detail Table -->
+        <div class="table-section">
+          <div class="table-header">
+            <h2>Student Flows - Detailed View</h2>
+            <p class="table-subtitle" id="tableSubtitle">
+              All bilateral flows for selected criteria
+            </p>
+          </div>
+          <input
+            type="text"
+            id="tableSearch"
+            placeholder="Search by country name..."
+            class="search-input"
+          />
+          <table id="flowsTable" class="flows-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>From</th>
+                <th></th>
+                <th>To</th>
+                <th>Students</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
         </div>
-        <p class="info-text">Shows all bilateral flows for selected year and direction. Click any country name to filter flows.</p>
-        <input
-          type="text"
-          id="tableSearch"
-          placeholder="Filter by country name..."
-          class="search-input"
-        />
-        <table id="flowsTable" class="flows-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>From</th>
-              <th></th>
-              <th>To</th>
-              <th>Students</th>
-              <th>% of Total</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody"></tbody>
-        </table>
       </div>
     </div>
 
     <!-- Trends Tab -->
-    <div class="tab-content" id="trends-tab">
-      <!-- Charts Section -->
+    <div class="tab-content" id="trends-tab" style="display: none;">
       <div class="charts-section">
         <div class="chart-row">
           <div class="chart-container">
-            <h2>Top 15 Student Source Countries</h2>
+            <h2>Top 15 Source Countries (2023)</h2>
             <div id="topSourcesChart"></div>
           </div>
 
           <div class="chart-container">
-            <h2>Top 15 Student Destinations</h2>
+            <h2>Top 15 Destination Countries (2023)</h2>
             <div id="topDestsChart"></div>
           </div>
         </div>
 
         <div class="chart-row">
           <div class="chart-container full-width">
-            <h2>Global Student Flow Trends (2015-2023)</h2>
+            <h2>Global Flow Trends (2015-2023)</h2>
             <div id="trendsChart"></div>
           </div>
         </div>
 
         <div class="chart-row">
           <div class="chart-container">
-            <h2>Pre-COVID (2019) vs Post-COVID (2023)</h2>
-            <div id="covidComparisonChart"></div>
-          </div>
-
-          <div class="chart-container">
-            <h2>Year-over-Year Change (%)</h2>
-            <div id="yoyChangeChart"></div>
+            <h2>Pre-COVID vs Post-COVID (2019 vs 2023)</h2>
+            <div id="covidChart"></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Compare Years Tab -->
-    <div class="tab-content" id="compare-years-tab" style="display: none;">
-      <div class="comparison-section">
-        <div class="comparison-controls">
-          <div class="control-group">
-            <label for="compareYear1">First Year:</label>
-            <select id="compareYear1">
-              <option value="2019">2019</option>
-              <option value="2018">2018</option>
-              <option value="2017">2017</option>
-              <option value="2016">2016</option>
-              <option value="2015">2015</option>
-            </select>
+    <!-- Analysis Detail Tab -->
+    <div class="tab-content" id="analysis-detail-tab" style="display: none;">
+      <div class="analysis-section">
+        <div class="analysis-grid">
+          <div class="analysis-card">
+            <h3>Current Selection Summary</h3>
+            <p id="analysisText">Select a country to view detailed analysis</p>
           </div>
-          <div class="control-group">
-            <label for="compareYear2">Second Year:</label>
-            <select id="compareYear2">
-              <option value="2023" selected>2023</option>
-              <option value="2022">2022</option>
-              <option value="2021">2021</option>
-              <option value="2020">2020</option>
-              <option value="2019">2019</option>
-              <option value="2018">2018</option>
-              <option value="2017">2017</option>
-              <option value="2016">2016</option>
-              <option value="2015">2015</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="comparison-table-section">
-          <h2>Year Comparison - Top Mobility Corridors</h2>
-          <input
-            type="text"
-            id="comparisonTableSearch"
-            placeholder="Filter by country name..."
-            class="search-input"
-          />
-          <table id="comparisonTable" class="flows-table">
-            <thead>
-              <tr>
-                <th>From</th>
-                <th>To</th>
-                <th id="year1Header">2019 Students</th>
-                <th id="year2Header">2023 Students</th>
-                <th>Difference</th>
-                <th>Change %</th>
-              </tr>
-            </thead>
-            <tbody id="comparisonTableBody"></tbody>
-          </table>
         </div>
       </div>
-    </div>
-
-    <!-- Methodology Section -->
-    <div class="methodology-section">
-      <h2>Data & Methods</h2>
-      <p>
-        <strong>Data Source:</strong> UNESCO Institute for Statistics international student mobility dataset covering 2015-2023 flows from origin to destination countries.
-      </p>
-      <p>
-        <strong>Coverage:</strong> This dashboard shows bilateral student flows as reported by national education systems, aggregated from UNESCO's comprehensive international student statistics.
-      </p>
     </div>
   </div>
 

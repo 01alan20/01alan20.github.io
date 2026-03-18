@@ -1,10 +1,9 @@
 // Global state
 let flowData = [];
 let currentYear = 2023;
-let selectedCountry = "ALL";
+let selectedCountry = "";
 let flowDirection = "inbound";
-let allCountries = new Set();
-let isoToName = {};
+let allCountries = new Map(); // country_code -> country_name
 let isoToCoords = {};
 
 // Country coordinates (centroids) - expanded list covering ~200 countries
@@ -75,239 +74,41 @@ const countryCoordinates = {
 // Initialize dashboard
 document.addEventListener("DOMContentLoaded", async () => {
   const url = "data/flows_2015_2023_clean.csv";
-  console.log("Loading data from:", url);
   
   try {
     const response = await fetch(url);
-    console.log("Fetch response status:", response.status);
-    
     if (response.ok) {
       const csvText = await response.text();
-      console.log("CSV loaded, length:", csvText.length);
-      
       Papa.parse(csvText, {
         header: true,
         skipEmptyLines: true,
         complete: (results) => {
-          console.log("PapaParse complete. Rows parsed:", results.data.length);
-          console.log("Sample row:", results.data[0]);
-          flowData = processData(results.data);
-          console.log("flowData records:", flowData.length);
-          console.log("allCountries size:", allCountries.size);
+          flowData = results.data;
+          processData();
           initializeDashboard();
         },
         error: (error) => {
           console.error("PapaParse error:", error);
-          flowData = generateSyntheticData();
-          initializeDashboard();
-        },
+        }
       });
-    } else {
-      console.error("Fetch failed with status:", response.status);
-      flowData = generateSyntheticData();
-      initializeDashboard();
     }
-  } catch (e) {
-    console.error("Error loading data:", e.message);
-    flowData = generateSyntheticData();
-    initializeDashboard();
+  } catch (error) {
+    console.error("Error loading data:", error);
   }
 });
 
-// Process raw CSV data
-function processData(rawData) {
-  const processed = [];
-  allCountries.clear(); // Clear any existing data
+function processData() {
+  const countrySet = new Set();
   
-  rawData.forEach((row) => {
-    // Add ALL countries to the set, even if students is 0
-    if (row.origin_iso3) {
-      allCountries.add(row.origin_iso3);
-      if (row.origin_name) isoToName[row.origin_iso3] = row.origin_name;
-    }
-    if (row.destination_iso3) {
-      allCountries.add(row.destination_iso3);
-      if (row.destination_name) isoToName[row.destination_iso3] = row.destination_name;
-    }
-    
-    // Only add to flowData if there's actual student data
-    if (row.year && row.origin_iso3 && row.destination_iso3) {
-      const studentCount = parseFloat(row.students) || 0;
-      if (studentCount > 0) {
-        processed.push({
-          year: parseInt(row.year),
-          origIso: row.origin_iso3,
-          origName: row.origin_name || row.origin_iso3,
-          destIso: row.destination_iso3,
-          destName: row.destination_name || row.destination_iso3,
-          students: studentCount,
-        });
-      }
+  flowData.forEach(row => {
+    if (row.origin_iso3 && row.destination_iso3) {
+      countrySet.add(row.origin_iso3);
+      countrySet.add(row.destination_iso3);
+      
+      allCountries.set(row.origin_iso3, row.origin_name);
+      allCountries.set(row.destination_iso3, row.destination_name);
     }
   });
-  
-  console.log(`Processed ${processed.length} flows with ${allCountries.size} unique countries`);
-  return processed;
-}
-
-// Generate synthetic data
-function generateSyntheticData() {
-  const countries = [
-    { iso: "CHN", name: "China" },
-    { iso: "IND", name: "India" },
-    { iso: "USA", name: "United States" },
-    { iso: "GBR", name: "United Kingdom" },
-    { iso: "AUS", name: "Australia" },
-    { iso: "CAN", name: "Canada" },
-    { iso: "DEU", name: "Germany" },
-    { iso: "FRA", name: "France" },
-    { iso: "JPN", name: "Japan" },
-    { iso: "KOR", name: "South Korea" },
-    { iso: "SGP", name: "Singapore" },
-    { iso: "ARE", name: "United Arab Emirates" },
-    { iso: "BRA", name: "Brazil" },
-    { iso: "MEX", name: "Mexico" },
-    { iso: "NZL", name: "New Zealand" },
-  ];
-
-  const flows = [
-    { from: "CHN", to: "USA", base: 360000 },
-    { from: "IND", to: "USA", base: 240000 },
-    { from: "CHN", to: "JPN", base: 120000 },
-    { from: "CHN", to: "AUS", base: 150000 },
-    { from: "CHN", to: "GBR", base: 140000 },
-    { from: "IND", to: "GBR", base: 110000 },
-    { from: "KOR", to: "USA", base: 80000 },
-    { from: "CHN", to: "CAN", base: 85000 },
-    { from: "IND", to: "CAN", base: 60000 },
-    { from: "BRA", to: "USA", base: 45000 },
-    { from: "MEX", to: "USA", base: 50000 },
-    { from: "DEU", to: "AUS", base: 30000 },
-    { from: "FRA", to: "AUS", base: 25000 },
-    { from: "CHN", to: "SGP", base: 40000 },
-    { from: "IND", to: "SGP", base: 35000 },
-  ];
-
-  const years = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
-  const data = [];
-
-  const covidMultipliers = {
-    2015: 1.0,
-    2016: 1.05,
-    2017: 1.08,
-    2018: 1.1,
-    2019: 1.12,
-    2020: 0.65,
-    2021: 0.55,
-    2022: 0.8,
-    2023: 0.95,
-  };
-
-  flows.forEach((flow) => {
-    const origCountry = countries.find((c) => c.iso === flow.from);
-    const destCountry = countries.find((c) => c.iso === flow.to);
-
-    years.forEach((year) => {
-      const multiplier = covidMultipliers[year];
-      const students = Math.round(flow.base * multiplier);
-
-      data.push({
-        year,
-        origIso: flow.from,
-        origName: origCountry.name,
-        destIso: flow.to,
-        destName: destCountry.name,
-        students,
-      });
-
-      allCountries.add(flow.from);
-      allCountries.add(flow.to);
-      isoToName[flow.from] = origCountry.name;
-      isoToName[flow.to] = destCountry.name;
-    });
-  });
-
-  return data;
-}
-
-// Initialize dashboard
-function initializeDashboard() {
-  console.log("Initializing dashboard...");
-  console.log("flowData records loaded:", flowData.length);
-  console.log("allCountries in set:", allCountries.size);
-  populateCountryDropdown();
-  setupEventListeners();
-  updateAllVisualizations();
-  console.log("Dashboard initialized complete.");
-}
-
-// Populate country dropdown with ALL countries
-function populateCountryDropdown() {
-  const select = document.getElementById("countrySelect");
-  if (!select) {
-    console.error("Country select element not found!");
-    return;
-  }
-  
-  select.innerHTML = '<option value="ALL">All Countries</option>';
-  
-  const countries = Array.from(allCountries)
-    .sort()
-    .map((iso) => ({
-      iso,
-      name: isoToName[iso] || iso,
-    }));
-
-  console.log("Populating dropdown with countries:", countries.length);
-  console.log("Sample countries:", countries.slice(0, 5));
-
-  countries.forEach((country) => {
-    const option = document.createElement("option");
-    option.value = country.iso;
-    option.textContent = `${country.name} (${country.iso})`;
-    select.appendChild(option);
-  });
-  
-  console.log(`Dropdown populated with ${countries.length} countries`);
-  console.log("Select element now has options:", select.options.length);
-}
-
-// Setup event listeners
-function setupEventListeners() {
-  document.getElementById("countrySelect").addEventListener("change", (e) => {
-    selectedCountry = e.target.value;
-    updateAllVisualizations();
-  });
-
-  document.querySelectorAll('input[name="direction"]').forEach((radio) => {
-    radio.addEventListener("change", (e) => {
-      flowDirection = e.target.value;
-      updateAllVisualizations();
-    });
-  });
-
-  document.getElementById("yearSelect").addEventListener("change", (e) => {
-    currentYear = parseInt(e.target.value);
-    updateAllVisualizations();
-  });
-
-  // Tab navigation
-  document.querySelectorAll(".tab-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const tabName = btn.getAttribute("data-tab");
-      switchTab(tabName);
-    });
-  });
-
-  // Compare years
-  document.getElementById("compareYear1").addEventListener("change", updateComparisonTable);
-  document.getElementById("compareYear2").addEventListener("change", updateComparisonTable);
-
-  // Table search
-  document.getElementById("tableSearch").addEventListener("input", filterTable);
-  if (document.getElementById("comparisonTableSearch")) {
-    document.getElementById("comparisonTableSearch").addEventListener("input", filterComparisonTable);
-  }
 }
 
 // Get filtered data
