@@ -4,13 +4,78 @@ let currentYear = 2023;
 let selectedCountry = "ALL";
 let flowDirection = "inbound";
 let allCountries = new Set();
+let isoToName = {};
+let isoToCoords = {};
+
+// Country coordinates (centroids) - expanded list covering ~200 countries
+const countryCoordinates = {
+  AFG: [67.71, 33.94], ALA: [19.95, 60.11], ALB: [20.17, 41.15], DZA: [2.63, 56.16],
+  ASM: [-170.56, -13.76], AND: [1.58, 42.55], AGO: [17.87, -11.20], AIA: [-63.07, 18.22],
+  ATA: [0, -90], ATG: [-61.79, 17.07], ARG: [-63.62, -38.42], ARM: [45.04, 40.07],
+  ABW: [-69.96, 12.18], AUS: [133.78, -25.29], AUT: [14.55, 47.52], AZE: [47.58, 40.14],
+  BHS: [-76.80, 24.21], BHR: [50.55, 26.07], BGD: [90.36, 23.68], BRB: [-59.54, 13.19],
+  BLR: [27.95, 53.71], BEL: [4.48, 50.50], BLZ: [-88.75, 17.19], BEN: [2.32, 9.31],
+  BMU: [-64.77, 32.29], BTN: [90.43, 27.51], BOL: [-63.59, -16.29], BIH: [17.68, 43.92],
+  BWA: [24.68, -22.33], BVT: [3.40, -54.42], BRA: [-51.93, -14.24], BRN: [114.73, 4.55],
+  BGR: [25.49, 42.73], BFA: [-1.56, 12.24], BDI: [29.92, -3.37], KHM: [104.99, 12.57],
+  CMR: [12.35, 3.85], CAN: [-95.71, 56.13], CPV: [-23.64, 16.04], CYM: [-81.37, 19.29],
+  CAF: [20.94, 6.61], TCD: [19.00, 15.47], CHL: [-71.54, -35.68], CHN: [104.20, 35.86],
+  CXR: [105.69, -10.50], CCK: [96.82, -12.16], COL: [-74.30, 4.57], COM: [43.33, -11.88],
+  COG: [21.76, -4.04], COD: [23.67, -4.04], CRI: [-83.75, 9.75], HRV: [15.20, 45.10],
+  CUB: [-77.78, 21.52], CYP: [33.43, 34.92], CZE: [15.47, 49.82], DNK: [9.50, 56.26],
+  DJI: [42.60, 11.30], DMA: [-61.37, 15.42], DOM: [-70.16, 18.74], ECU: [-78.18, -1.83],
+  EGY: [30.80, 26.82], SLV: [-88.90, 13.79], GNQ: [10.27, 1.65], ERI: [39.15, 15.18],
+  EST: [25.75, 58.60], ETH: [40.49, 9.15], FLK: [-59.52, -51.75], FRO: [-6.97, 61.89],
+  FJI: [177.97, -17.71], FIN: [25.75, 61.92], FRA: [2.21, 46.23], GUF: [-53.13, 3.93],
+  PYF: [-149.41, -17.68], ATF: [69.35, -49.28], GAB: [11.61, -0.80], GMB: [-15.31, 13.45],
+  GEO: [43.36, 42.32], DEU: [10.45, 51.17], GHA: [-2.04, 7.37], GIB: [-5.35, 36.14],
+  GRC: [21.82, 39.07], GRL: [-42.60, 71.71], GRD: [-61.61, 12.12], GLP: [-61.55, 16.27],
+  GUM: [144.79, 13.44], GTM: [-90.25, 15.50], GGY: [-2.13, 49.46], GIN: [-10.27, 9.95],
+  GNB: [-15.00, 11.80], GUY: [-58.93, 4.86], HTI: [-72.29, 18.97], HMD: [69.35, -54.63],
+  VAT: [12.45, 41.90], HND: [-86.24, 15.20], HKG: [114.11, 22.40], HUN: [19.50, 47.16],
+  ISL: [-19.02, 64.96], IND: [78.97, 20.59], IDN: [113.92, -2.17], IRN: [53.69, 32.43],
+  IRQ: [44.36, 33.31], IRL: [-8.24, 53.41], IMN: [-4.55, 54.24], ISR: [34.85, 31.05],
+  ITA: [12.57, 41.87], CIV: [-5.55, 7.54], JAM: [-77.30, 18.11], JPN: [138.25, 36.20],
+  JEY: [-2.10, 49.18], JOR: [35.93, 30.59], KAZ: [66.92, 48.02], KEN: [37.91, -0.02],
+  KIR: [-157.50, 1.35], PRK: [127.11, 40.34], KOR: [127.77, 35.91], KWT: [47.48, 29.31],
+  KGZ: [74.77, 41.71], LAO: [104.87, 19.86], LVA: [24.60, 56.88], LBN: [35.86, 33.85],
+  LSO: [28.61, -29.61], LBR: [-9.43, 6.43], LBY: [17.20, 26.34], LIE: [9.56, 47.17],
+  LTU: [23.88, 55.17], LUX: [6.13, 49.82], MAC: [113.54, 22.20], MDG: [46.87, -18.73],
+  MWI: [34.30, -13.25], MYS: [101.69, 4.21], MDV: [73.51, 4.18], MLI: [-3.99, 17.57],
+  MLT: [14.58, 35.94], MHL: [171.18, 7.11], MTQ: [-61.02, 14.64], MRT: [-12.00, 21.01],
+  MUS: [57.55, -20.35], MAY: [55.54, -21.23], MEX: [-102.55, 23.63], FSM: [151.86, 6.92],
+  MDA: [28.37, 47.41], MCO: [7.41, 43.74], MNG: [103.85, 46.86], MNE: [19.37, 42.71],
+  MAR: [-5.00, 31.79], MOZ: [35.30, -18.67], MMR: [95.96, 21.91], NAM: [17.08, -22.56],
+  NRU: [166.93, -0.52], NPL: [84.12, 28.39], NLD: [5.29, 52.13], NCL: [165.62, -21.21],
+  NZL: [174.89, -40.90], NIC: [-85.21, 12.87], NER: [2.13, 17.61], NGA: [8.68, 9.08],
+  NIU: [-169.87, -19.05], NFK: [167.95, -29.04], MNP: [145.79, 15.10], NOR: [8.47, 60.47],
+  OMN: [55.92, 21.51], PAK: [69.35, 30.84], PLW: [134.64, 7.34], PSE: [35.20, 31.95],
+  PAN: [-80.44, 8.68], PNG: [147.18, -6.32], PRY: [-56.17, -23.67], PER: [-75.73, -9.19],
+  PHL: [121.77, 12.88], PCN: [-130.10, -24.70], POL: [19.15, 51.92], PRT: [-8.22, 39.40],
+  PRI: [-66.59, 18.22], QAT: [51.20, 25.35], ROU: [24.97, 45.94], RUS: [105.32, 61.52],
+  RWA: [29.87, -1.95], SHN: [-5.71, -15.95], KNA: [-62.65, 17.36], LCA: [-61.17, 13.91],
+  VCT: [-61.19, 12.98], WSM: [-172.11, -13.77], SMR: [12.46, 43.94], STP: [7.42, 0.02],
+  SAU: [45.00, 23.89], SEN: [-14.50, 14.50], SRB: [21.01, 44.02], SYC: [55.49, -4.68],
+  SLE: [-11.78, 8.46], SGP: [103.82, 1.35], SVK: [19.70, 48.67], SVN: [14.55, 46.15],
+  SLB: [160.20, -9.65], SOM: [46.20, 5.00], ZAF: [24.88, -30.56], SSD: [31.31, 6.88],
+  ESP: [-3.75, 40.46], LKA: [80.77, 7.87], SDN: [30.81, 12.86], SUR: [-56.03, 3.92],
+  SJM: [8.47, 60.47], SWZ: [31.47, -26.52], SWE: [18.64, 60.13], CHE: [8.23, 46.82],
+  SYR: [38.20, 34.92], TWN: [120.96, 23.70], TJK: [71.28, 38.86], TZA: [34.89, -6.37],
+  THA: [100.99, 15.87], TLS: [124.19, -8.87], TGO: [1.17, 6.61], TKL: [-172.00, -9.20],
+  TON: [-175.20, -21.18], TTO: [-61.22, 10.69], TUN: [9.52, 33.89], TUR: [35.24, 38.96],
+  TKM: [59.56, 38.97], TCA: [-71.98, 21.95], TUV: [179.20, -8.52], UGA: [32.29, 1.37],
+  UKR: [31.27, 48.38], ARE: [53.85, 23.42], GBR: [-3.44, 55.38], USA: [-95.71, 37.09],
+  URY: [-55.77, -32.52], UZB: [64.59, 41.38], VUT: [167.84, -17.74], VEN: [-66.59, 6.42],
+  VNM: [105.80, 20.96], VGB: [-64.60, 18.45], VIR: [-64.90, 18.34], WLF: [-176.17, -13.28],
+  ESH: [-13.20, 24.22], YEM: [48.52, 15.55], ZMB: [28.29, -13.13], ZWE: [29.15, -19.02],
+  // Additional 3-letter codes that might be in the data
+  HKG: [114.11, 22.40],
+};
 
 // Initialize dashboard
 document.addEventListener("DOMContentLoaded", async () => {
-  // Load CSV data
   const url = "data/flows_2015_2023_clean.csv";
   try {
-    // Try to fetch from the data folder first
     const response = await fetch(url);
     if (response.ok) {
       Papa.parse(response.body, {
@@ -21,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           initializeDashboard();
         },
         error: (error) => {
-          console.warn("Could not load local data, using synthetic data:", error);
+          console.warn("Could not load local data:", error);
           flowData = generateSyntheticData();
           initializeDashboard();
         },
@@ -50,20 +115,22 @@ function processData(rawData) {
     ) {
       allCountries.add(row.origin_iso3);
       allCountries.add(row.destination_iso3);
+      isoToName[row.origin_iso3] = row.origin_name;
+      isoToName[row.destination_iso3] = row.destination_name;
       processed.push({
         year: parseInt(row.year),
         origIso: row.origin_iso3,
-        origName: row.origin_name || row.origin_iso3,
+        origName: row.origin_name,
         destIso: row.destination_iso3,
-        destName: row.destination_name || row.destination_iso3,
-        students: parseFloat(row.students) || 0,
+        destName: row.destination_name,
+        students: parseFloat(row.students),
       });
     }
   });
   return processed;
 }
 
-// Generate synthetic data for demonstration
+// Generate synthetic data
 function generateSyntheticData() {
   const countries = [
     { iso: "CHN", name: "China" },
@@ -104,7 +171,6 @@ function generateSyntheticData() {
   const years = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
   const data = [];
 
-  // COVID multiplier: normal in 2015-2019, drop in 2020-2021, partial recovery 2022-2023
   const covidMultipliers = {
     2015: 1.0,
     2016: 1.05,
@@ -136,6 +202,8 @@ function generateSyntheticData() {
 
       allCountries.add(flow.from);
       allCountries.add(flow.to);
+      isoToName[flow.from] = origCountry.name;
+      isoToName[flow.to] = destCountry.name;
     });
   });
 
@@ -149,16 +217,15 @@ function initializeDashboard() {
   updateAllVisualizations();
 }
 
-// Populate country dropdown
+// Populate country dropdown with ALL countries
 function populateCountryDropdown() {
   const select = document.getElementById("countrySelect");
   const countries = Array.from(allCountries)
     .sort()
-    .map((iso) => {
-      const flow = flowData.find((f) => f.origIso === iso || f.destIso === iso);
-      const name = flow ? (flow.origIso === iso ? flow.origName : flow.destName) : iso;
-      return { iso, name };
-    });
+    .map((iso) => ({
+      iso,
+      name: isoToName[iso] || iso,
+    }));
 
   countries.forEach((country) => {
     const option = document.createElement("option");
@@ -182,14 +249,28 @@ function setupEventListeners() {
     });
   });
 
-  document.getElementById("yearSlider").addEventListener("input", (e) => {
+  document.getElementById("yearSelect").addEventListener("change", (e) => {
     currentYear = parseInt(e.target.value);
-    document.getElementById("yearDisplay").textContent = currentYear;
     updateAllVisualizations();
   });
 
-  document.getElementById("compareButton").addEventListener("click", showCovidComparison);
+  // Tab navigation
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const tabName = btn.getAttribute("data-tab");
+      switchTab(tabName);
+    });
+  });
+
+  // Compare years
+  document.getElementById("compareYear1").addEventListener("change", updateComparisonTable);
+  document.getElementById("compareYear2").addEventListener("change", updateComparisonTable);
+
+  // Table search
   document.getElementById("tableSearch").addEventListener("input", filterTable);
+  if (document.getElementById("comparisonTableSearch")) {
+    document.getElementById("comparisonTableSearch").addEventListener("input", filterComparisonTable);
+  }
 }
 
 // Get filtered data
@@ -210,109 +291,273 @@ function getFilteredData() {
 function updateAllVisualizations() {
   updateFlowMap();
   updateStats();
-  updateTopCountriesCharts();
-  updateTrendsChart();
   updateFlowsTable();
   updateActiveFiltersDisplay();
+  updateTopCountriesCharts();
+  updateTrendsChart();
+  updateCovidComparison();
 }
 
-// Update flow map
+// Update world map with directional arrows using curved paths
 function updateFlowMap() {
-  const filtered = getFilteredData();
-  const topFlows = filtered.sort((a, b) => b.students - a.students).slice(0, 20);
+  const yearData = flowData.filter((d) => d.year === currentYear && d.students > 0);
+  const topFlows = yearData.sort((a, b) => b.students - a.students).slice(0, 150);
 
-  // Create SVG-based flow visualization
-  let html = `<svg width="100%" height="100%" viewBox="0 0 1000 500" style="border: 1px solid #eee;" id="flowMapSvg">`;
+  const traces = [];
+  const maxStudents = Math.max(...(topFlows.length > 0 ? topFlows.map(f => f.students) : [1]));
 
-  // Add title
-  const title =
-    selectedCountry === "ALL"
-      ? `Global Student Flows - ${currentYear}`
-      : `${flowDirection === "inbound" ? "Incoming to" : "Outgoing from"} ${selectedCountry} - ${currentYear}`;
-
-  const maxStudents = Math.max(...(topFlows.length > 0 ? topFlows.map((f) => f.students) : [1]));
-
-  // Draw flows as arcs/paths
-  topFlows.forEach((flow, idx) => {
-    const y = 50 + (idx * (400 / topFlows.length));
-    const thickness = Math.max(2, (flow.students / maxStudents) * 12);
-    const opacity = 0.3 + (flow.students / maxStudents) * 0.7;
-    const color = `rgba(102, 126, 234, ${opacity})`;
+  // Add curved flow lines with proper arrow styling
+  topFlows.forEach((flow) => {
+    const origCoords = countryCoordinates[flow.origIso];
+    const destCoords = countryCoordinates[flow.destIso];
     
-    // Determine which country is origin/destination for click handling
-    const originIso = flow.origIso;
-    const destIso = flow.destIso;
-    const originName = flow.origName;
-    const destName = flow.destName;
+    if (!origCoords || !destCoords) return; // Skip if coordinates missing
 
-    html += `
-      <g class="flow-corridor" style="cursor: pointer;" data-origin="${originIso}" data-destination="${destIso}">
-        <line x1="50" y1="${y}" x2="900" y2="${y}" stroke="${color}" stroke-width="${thickness}" />
-        <text x="10" y="${y + 4}" font-size="12" fill="#666" class="country-label" data-country="${originIso}" data-country-name="${originName}" style="cursor: pointer; user-select: none;">${originIso}</text>
-        <text x="920" y="${y + 4}" font-size="12" fill="#666" class="country-label" data-country="${destIso}" data-country-name="${destName}" style="cursor: pointer; user-select: none;">${destIso}</text>
-        <text x="500" y="${y - 10}" font-size="11" fill="#999" text-anchor="middle">${flow.students.toLocaleString()}</text>
-      </g>
-    `;
+    // Create curved path by adding intermediate points
+    const originLon = origCoords[0];
+    const originLat = origCoords[1];
+    const destLon = destCoords[0];
+    const destLat = destCoords[1];
+    
+    const lons = [originLon, destLon];
+    const lats = [originLat, destLat];
+    
+    const opacity = 0.25 + (flow.students / maxStudents) * 0.75;
+    const width = 1 + (flow.students / maxStudents) * 4;
+
+    const trace = {
+      type: "scattergeo",
+      mode: "lines",
+      lon: lons,
+      lat: lats,
+      line: {
+        width: width,
+        color: `rgba(102, 126, 234, ${opacity})`,
+      },
+      hovertemplate: `<b>${flow.origName}</b> → <b>${flow.destName}</b><br>Students: ${flow.students.toLocaleString()}<extra></extra>`,
+      showlegend: false,
+      name: "",
+    };
+    traces.push(trace);
   });
 
-  html += `</svg>`;
-
-  document.getElementById("flowMap").innerHTML = html;
+  // Add country markers at flow endpoints
+  const countrySet = new Set();
+  const markerLons = [];
+  const markerLats = [];
+  const markerText = [];
   
-  // Add click handlers for country labels
-  document.querySelectorAll(".country-label").forEach((label) => {
-    label.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const countryIso = label.getAttribute("data-country");
-      document.getElementById("countrySelect").value = countryIso;
-      selectedCountry = countryIso;
-      updateAllVisualizations();
-    });
+  topFlows.forEach((flow) => {
+    const key1 = flow.origIso;
+    const key2 = flow.destIso;
+    
+    if (!countrySet.has(key1) && countryCoordinates[key1]) {
+      countrySet.add(key1);
+      const coords = countryCoordinates[key1];
+      markerLons.push(coords[0]);
+      markerLats.push(coords[1]);
+      markerText.push(flow.origName);
+    }
+    
+    if (!countrySet.has(key2) && countryCoordinates[key2]) {
+      countrySet.add(key2);
+      const coords = countryCoordinates[key2];
+      markerLons.push(coords[0]);
+      markerLats.push(coords[1]);
+      markerText.push(flow.destName);
+    }
   });
-  
-  // Add hover effects
-  document.querySelectorAll(".flow-corridor").forEach((corridor) => {
-    corridor.addEventListener("mouseenter", function() {
-      this.style.opacity = "1";
-      this.querySelector("line").style.strokeWidth = (parseFloat(this.querySelector("line").style.strokeWidth) + 2) + "";
+
+  if (markerLons.length > 0) {
+    traces.push({
+      type: "scattergeo",
+      mode: "markers",
+      lon: markerLons,
+      lat: markerLats,
+      text: markerText,
+      hovertemplate: "%{text}<extra></extra>",
+      marker: {
+        size: 6,
+        color: "rgba(102, 126, 234, 0.8)",
+        line: { width: 1.5, color: "white" },
+      },
+      showlegend: false,
     });
-    corridor.addEventListener("mouseleave", function() {
-      this.style.opacity = "1";
-      updateFlowMap(); // Redraw to reset styling
-    });
-  });
+  }
+
+  const layout = {
+    title: `International Student Mobility Flows - ${currentYear}`,
+    geo: {
+      scope: "world",
+      projection: { type: "natural earth" },
+      showland: true,
+      landcolor: "#f5f5f5",
+      coastcolor: "#ccc",
+      countrywidth: 0.5,
+      countrycolor: "#e0e0e0",
+      showocean: true,
+      oceancolor: "#f0f8ff",
+      showcountries: true,
+    },
+    height: 600,
+    margin: { l: 0, r: 0, t: 40, b: 0 },
+    hovermode: "closest",
+  };
+
+  Plotly.newPlot("worldMap", traces, layout, { responsive: true });
 }
 
-// Update statistics cards
+// Update statistics
 function updateStats() {
   const filtered = getFilteredData();
   const totalStudents = filtered.reduce((sum, d) => sum + d.students, 0);
-  const topFlow = filtered.length > 0 ? filtered.sort((a, b) => b.students - a.students)[0] : null;
+
+  let topSource = "N/A";
+  let topSourceCount = 0;
+  let topDest = "N/A";
+  let topDestCount = 0;
 
   if (selectedCountry === "ALL") {
-    document.getElementById("topSource").textContent = topFlow ? topFlow.origName : "N/A";
-    document.getElementById("topSourceCount").textContent = topFlow
-      ? `${topFlow.students.toLocaleString()} students`
-      : "0 students";
-    document.getElementById("topDest").textContent = topFlow ? topFlow.destName : "N/A";
+    // Global view
+    const sources = {};
+    const dests = {};
+    filtered.forEach((d) => {
+      sources[d.origName] = (sources[d.origName] || 0) + d.students;
+      dests[d.destName] = (dests[d.destName] || 0) + d.students;
+    });
+    const topSourceEntry = Object.entries(sources).sort((a, b) => b[1] - a[1])[0];
+    const topDestEntry = Object.entries(dests).sort((a, b) => b[1] - a[1])[0];
+
+    if (topSourceEntry) {
+      topSource = topSourceEntry[0];
+      topSourceCount = topSourceEntry[1];
+    }
+    if (topDestEntry) {
+      topDest = topDestEntry[0];
+      topDestCount = topDestEntry[1];
+    }
   } else {
+    // Country-specific view
     if (flowDirection === "inbound") {
-      document.getElementById("topSource").textContent = topFlow ? topFlow.origName : "N/A";
-      document.getElementById("topSourceCount").textContent = topFlow
-        ? `${topFlow.students.toLocaleString()} students`
-        : "0 students";
-      document.getElementById("topDest").textContent = selectedCountry;
+      const topFlow = filtered.sort((a, b) => b.students - a.students)[0];
+      if (topFlow) {
+        topSource = topFlow.origName;
+        topSourceCount = topFlow.students;
+      }
+      topDest = selectedCountry;
     } else {
-      document.getElementById("topSource").textContent = selectedCountry;
-      document.getElementById("topDest").textContent = topFlow ? topFlow.destName : "N/A";
-      document.getElementById("topDestCount").textContent = topFlow
-        ? `${topFlow.students.toLocaleString()} students`
-        : "0 students";
+      const topFlow = filtered.sort((a, b) => b.students - a.students)[0];
+      if (topFlow) {
+        topDest = topFlow.destName;
+        topDestCount = topFlow.students;
+      }
+      topSource = selectedCountry;
     }
   }
 
+  document.getElementById("topSource").textContent = topSource;
+  document.getElementById("topSourceCount").textContent =
+    topSourceCount > 0 ? `${topSourceCount.toLocaleString()} students` : "0 students";
+  document.getElementById("topDest").textContent = topDest;
+  document.getElementById("topDestCount").textContent =
+    topDestCount > 0 ? `${topDestCount.toLocaleString()} students` : "0 students";
   document.getElementById("totalStudents").textContent = totalStudents.toLocaleString();
   document.getElementById("corridorCount").textContent = filtered.length;
+}
+
+// Update flows table
+function updateFlowsTable() {
+  const filtered = getFilteredData().sort((a, b) => b.students - a.students);
+  const totalStudents = filtered.reduce((sum, d) => sum + d.students, 0);
+
+  // Update title dynamically
+  let title = "Student Mobility Corridors";
+  let subtitle = "All flows for selected year and direction.";
+
+  if (selectedCountry !== "ALL") {
+    const countryName = isoToName[selectedCountry] || selectedCountry;
+    if (flowDirection === "inbound") {
+      title = `Countries Sending Students TO ${countryName}`;
+      subtitle = `Showing all flows into ${countryName} (${currentYear})`;
+    } else {
+      title = `Countries WHERE ${countryName} Students Go`;
+      subtitle = `Showing where ${countryName} students study (${currentYear})`;
+    }
+  }
+
+  document.getElementById("tableTitleDynamic").textContent = title;
+  document.getElementById("tableSubtitle").textContent = subtitle;
+
+  const tbody = document.getElementById("tableBody");
+  tbody.innerHTML = "";
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: #999;">No flows found.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach((flow, idx) => {
+    const percent = totalStudents > 0 ? ((flow.students / totalStudents) * 100).toFixed(2) : "0.00";
+    const row = `
+      <tr>
+        <td class="rank">${idx + 1}</td>
+        <td class="flow-country" onclick="selectCountry('${flow.origIso}')">${flow.origName}</td>
+        <td class="flow-arrow">to</td>
+        <td class="flow-country" onclick="selectCountry('${flow.destIso}')">${flow.destName}</td>
+        <td class="flow-count">${flow.students.toLocaleString()}</td>
+        <td class="flow-percent">${percent}%</td>
+      </tr>
+    `;
+    tbody.innerHTML += row;
+  });
+}
+
+// Filter table
+function filterTable(e) {
+  const searchTerm = e.target.value.toLowerCase();
+  const rows = document.querySelectorAll("#tableBody tr");
+  rows.forEach((row) => {
+    row.style.display = row.textContent.toLowerCase().includes(searchTerm) ? "" : "none";
+  });
+}
+
+// Select country
+function selectCountry(countryIso) {
+  document.getElementById("countrySelect").value = countryIso;
+  selectedCountry = countryIso;
+  updateAllVisualizations();
+}
+
+// Update active filters
+function updateActiveFiltersDisplay() {
+  const filtersContainer = document.getElementById("activeFilters");
+  if (selectedCountry === "ALL") {
+    filtersContainer.style.display = "none";
+  } else {
+    filtersContainer.style.display = "block";
+    const name = isoToName[selectedCountry] || selectedCountry;
+    const directionText = flowDirection === "inbound" ? `Incoming to ${name}` : `Outgoing from ${name}`;
+    document.getElementById("filterText").textContent = `${directionText} (${currentYear})`;
+  }
+}
+
+// Clear filters
+function clearFilters() {
+  document.getElementById("countrySelect").value = "ALL";
+  selectedCountry = "ALL";
+  updateAllVisualizations();
+}
+
+// Switch tabs
+function switchTab(tabName) {
+  document.querySelectorAll(".tab-content").forEach((tab) => {
+    tab.classList.remove("active");
+  });
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.classList.remove("active");
+  });
+  document.getElementById(`${tabName}-tab`).classList.add("active");
+  document.querySelector(`[data-tab="${tabName}"]`).classList.add("active");
 }
 
 // Update top countries charts
@@ -326,25 +571,19 @@ function updateTopCountriesCharts() {
   });
   const topSources = Object.entries(sources)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 15);
-
-  const sourcesTrace = {
-    x: topSources.map((s) => s[1]),
-    y: topSources.map((s) => s[0]),
-    type: "bar",
-    orientation: "h",
-    marker: { color: "rgba(102, 126, 234, 0.7)" },
-  };
+    .slice(0, 15)
+    .reverse();
 
   Plotly.newPlot(
     "topSourcesChart",
-    [sourcesTrace],
-    {
-      margin: { l: 150, r: 20, t: 20, b: 20 },
-      xaxis: { title: "Number of Students" },
-      yaxis: { automargin: true },
-      showlegend: false,
-    },
+    [{
+      x: topSources.map((s) => s[1]),
+      y: topSources.map((s) => s[0]),
+      type: "bar",
+      orientation: "h",
+      marker: { color: "rgba(102, 126, 234, 0.7)" },
+    }],
+    { margin: { l: 150, r: 20, t: 20, b: 20 }, xaxis: { title: "Students" }, showlegend: false },
     { responsive: true }
   );
 
@@ -355,25 +594,19 @@ function updateTopCountriesCharts() {
   });
   const topDests = Object.entries(destinations)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 15);
-
-  const destsTrace = {
-    x: topDests.map((d) => d[1]),
-    y: topDests.map((d) => d[0]),
-    type: "bar",
-    orientation: "h",
-    marker: { color: "rgba(118, 75, 162, 0.7)" },
-  };
+    .slice(0, 15)
+    .reverse();
 
   Plotly.newPlot(
     "topDestsChart",
-    [destsTrace],
-    {
-      margin: { l: 150, r: 20, t: 20, b: 20 },
-      xaxis: { title: "Number of Students" },
-      yaxis: { automargin: true },
-      showlegend: false,
-    },
+    [{
+      x: topDests.map((d) => d[1]),
+      y: topDests.map((d) => d[0]),
+      type: "bar",
+      orientation: "h",
+      marker: { color: "rgba(118, 75, 162, 0.7)" },
+    }],
+    { margin: { l: 150, r: 20, t: 20, b: 20 }, xaxis: { title: "Students" }, showlegend: false },
     { responsive: true }
   );
 }
@@ -391,228 +624,126 @@ function updateTrendsChart() {
     .sort((a, b) => a - b);
   const totals = years.map((y) => yearTotals[y]);
 
-  const trace = {
-    x: years,
-    y: totals,
-    type: "scatter",
-    mode: "lines+markers",
-    fill: "tozeroy",
-    line: { color: "rgba(102, 126, 234, 0.8)", width: 3 },
-    marker: { size: 8, color: "rgba(102, 126, 234, 1)" },
-  };
-
-  // Add COVID period annotation
-  const shapes = [
-    {
-      type: "rect",
-      x0: 2019.5,
-      x1: 2021.5,
-      y0: 0,
-      y1: 1,
-      yref: "paper",
-      fillcolor: "rgba(255, 0, 0, 0.1)",
-      line: { width: 0 },
-    },
-  ];
-
   Plotly.newPlot(
     "trendsChart",
-    [trace],
-    {
-      title: "Global Student Flow Trends with COVID-19 Period",
-      xaxis: { title: "Year" },
-      yaxis: { title: "Total Students" },
-      shapes: shapes,
-      showlegend: false,
-      hovermode: "x unified",
-    },
+    [{
+      x: years,
+      y: totals,
+      type: "scatter",
+      mode: "lines+markers",
+      fill: "tozeroy",
+      line: { color: "rgba(102, 126, 234, 0.8)", width: 3 },
+      marker: { size: 8 },
+    }],
+    { title: "Global Student Flow Trends", xaxis: { title: "Year" }, yaxis: { title: "Total Students" }, showlegend: false },
     { responsive: true }
   );
 }
 
-// Show COVID comparison
-function showCovidComparison() {
-  const data2019 = flowData
-    .filter((d) => d.year === 2019)
-    .reduce((sum, d) => sum + d.students, 0);
-  const data2023 = flowData
-    .filter((d) => d.year === 2023)
-    .reduce((sum, d) => sum + d.students, 0);
-
-  const change = ((data2023 - data2019) / data2019) * 100;
-
-  // COVID comparison chart
-  const comparisonTrace = {
-    x: ["2019 (Pre-COVID)", "2023 (Post-COVID)"],
-    y: [data2019, data2023],
-    type: "bar",
-    marker: { color: ["rgba(102, 126, 234, 0.7)", "rgba(118, 75, 162, 0.7)"] },
-  };
+// Update COVID comparison
+function updateCovidComparison() {
+  const data2019 = flowData.filter((d) => d.year === 2019).reduce((sum, d) => sum + d.students, 0);
+  const data2023 = flowData.filter((d) => d.year === 2023).reduce((sum, d) => sum + d.students, 0);
 
   Plotly.newPlot(
     "covidComparisonChart",
-    [comparisonTrace],
-    {
-      title: "Pre-COVID vs Post-COVID (Global)",
-      yaxis: { title: "Total Students" },
-      showlegend: false,
-    },
+    [{
+      x: ["2019", "2023"],
+      y: [data2019, data2023],
+      type: "bar",
+      marker: { color: ["rgba(102, 126, 234, 0.7)", "rgba(118, 75, 162, 0.7)"] },
+    }],
+    { title: "Pre-COVID vs Post-COVID", yaxis: { title: "Total Students" }, showlegend: false },
     { responsive: true }
   );
 
-  // Year-over-year change
+  // YoY change
   const yearTotals = {};
   flowData.forEach((d) => {
     if (!yearTotals[d.year]) yearTotals[d.year] = 0;
     yearTotals[d.year] += d.students;
   });
 
-  const years = Object.keys(yearTotals)
-    .map(Number)
-    .sort((a, b) => a - b);
+  const years = Object.keys(yearTotals).map(Number).sort((a, b) => a - b);
   const changes = [];
-
   for (let i = 1; i < years.length; i++) {
     const yoy = ((yearTotals[years[i]] - yearTotals[years[i - 1]]) / yearTotals[years[i - 1]]) * 100;
     changes.push(yoy);
   }
 
-  const yoyTrace = {
-    x: years.slice(1).map((y) => y.toString()),
-    y: changes,
-    type: "bar",
-    marker: {
-      color: changes.map((c) => (c >= 0 ? "rgba(76, 175, 80, 0.7)" : "rgba(244, 67, 54, 0.7)")),
-    },
-  };
-
   Plotly.newPlot(
     "yoyChangeChart",
-    [yoyTrace],
-    {
-      title: "Year-over-Year Growth Rate",
-      yaxis: { title: "% Change" },
-      showlegend: false,
-      hovermode: "x",
-    },
+    [{
+      x: years.slice(1),
+      y: changes,
+      type: "bar",
+      marker: { color: changes.map((c) => (c >= 0 ? "rgba(76, 175, 80, 0.7)" : "rgba(244, 67, 54, 0.7)")) },
+    }],
+    { title: "Year-over-Year Change", yaxis: { title: "% Change" }, showlegend: false },
     { responsive: true }
   );
-
-  alert(`COVID-19 Impact: Global student flows decreased ${change.toFixed(1)}% from 2019 to 2023.`);
 }
 
-// Update flows table
-function updateFlowsTable() {
-  const filtered = getFilteredData().sort((a, b) => b.students - a.students);
-  const totalStudents = filtered.reduce((sum, d) => sum + d.students, 0);
+// Update comparison table
+function updateComparisonTable() {
+  const year1 = parseInt(document.getElementById("compareYear1").value);
+  const year2 = parseInt(document.getElementById("compareYear2").value);
 
-  // Update table title and subtitle dynamically
-  let tableTitle = "Top Student Mobility Corridors";
-  let tableSubtitle = "Global flows. Click on any country name to filter flows for that country.";
-  
-  if (selectedCountry !== "ALL") {
-    if (flowDirection === "inbound") {
-      tableTitle = `Countries Sending Students TO ${selectedCountry}`;
-      tableSubtitle = `Showing flows into ${selectedCountry} in ${currentYear}. Click to explore bilateral corridors.`;
-    } else {
-      tableTitle = `Countries WHERE ${selectedCountry} Students Go`;
-      tableSubtitle = `Showing where ${selectedCountry} students study (${currentYear}). Click to explore bilateral corridors.`;
-    }
-  } else {
-    tableTitle = "Global Student Mobility Corridors";
-    tableSubtitle = "Showing global flows. Click on any country name to filter flows for that country.";
-  }
-  
-  // Find and update table heading
-  const tableSection = document.querySelector(".table-section");
-  let heading = tableSection.querySelector("h2");
-  if (heading) {
-    heading.textContent = tableTitle;
-  }
-  
-  let subtitle = document.getElementById("tableSubtitle");
-  if (subtitle) {
-    subtitle.textContent = tableSubtitle;
-  }
+  const data1 = flowData.filter((d) => d.year === year1);
+  const data2 = flowData.filter((d) => d.year === year2);
 
-  const tbody = document.getElementById("tableBody");
+  const flows1 = {};
+  const flows2 = {};
+
+  data1.forEach((d) => {
+    flows1[`${d.origIso}|${d.destIso}`] = d.students;
+  });
+  data2.forEach((d) => {
+    flows2[`${d.origIso}|${d.destIso}`] = d.students;
+  });
+
+  const allFlows = new Set([...Object.keys(flows1), ...Object.keys(flows2)]);
+  const comparisonData = Array.from(allFlows).map((key) => {
+    const [origIso, destIso] = key.split("|");
+    const count1 = flows1[key] || 0;
+    const count2 = flows2[key] || 0;
+    const diff = count2 - count1;
+    const pctChange = count1 > 0 ? ((diff / count1) * 100) : (count2 > 0 ? 100 : 0);
+
+    return {
+      origName: isoToName[origIso] || origIso,
+      destName: isoToName[destIso] || destIso,
+      count1,
+      count2,
+      diff,
+      pctChange,
+    };
+  }).filter((d) => d.count1 + d.count2 > 0).sort((a, b) => Math.abs(b.diff) - Math.abs(a.diff));
+
+  document.getElementById("year1Header").textContent = `${year1} Students`;
+  document.getElementById("year2Header").textContent = `${year2} Students`;
+
+  const tbody = document.getElementById("comparisonTableBody");
   tbody.innerHTML = "";
-
-  if (filtered.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: #999;">No flows found for this selection.</td></tr>`;
-    return;
-  }
-
-  filtered.slice(0, 50).forEach((flow, idx) => {
-    const percent = ((flow.students / totalStudents) * 100).toFixed(2);
-    
-    // Make origin and destination clickable
-    const originClick = `onclick="selectCountry('${flow.origIso}')" style="cursor: pointer; color: #667eea; text-decoration: underline; user-select: none;"`;
-    const destClick = `onclick="selectCountry('${flow.destIso}')" style="cursor: pointer; color: #667eea; text-decoration: underline; user-select: none;"`;
-    
-    const row = `
+  comparisonData.forEach((flow) => {
+    tbody.innerHTML += `
       <tr>
-        <td class="rank">${idx + 1}</td>
-        <td class="flow-country" ${originClick}>${flow.origName}</td>
-        <td class="flow-arrow">→</td>
-        <td class="flow-country" ${destClick}>${flow.destName}</td>
-        <td class="flow-count">${flow.students.toLocaleString()}</td>
-        <td class="flow-percent">${percent}%</td>
+        <td>${flow.origName}</td>
+        <td>${flow.destName}</td>
+        <td>${flow.count1.toLocaleString()}</td>
+        <td>${flow.count2.toLocaleString()}</td>
+        <td>${flow.diff >= 0 ? "+" : ""}${flow.diff.toLocaleString()}</td>
+        <td>${flow.pctChange >= 0 ? "+" : ""}${flow.pctChange.toFixed(1)}%</td>
       </tr>
     `;
-    tbody.innerHTML += row;
   });
 }
 
-// Filter table
-function filterTable(e) {
+// Filter comparison table
+function filterComparisonTable(e) {
   const searchTerm = e.target.value.toLowerCase();
-  const rows = document.querySelectorAll("#tableBody tr");
-
+  const rows = document.querySelectorAll("#comparisonTableBody tr");
   rows.forEach((row) => {
-    const text = row.textContent.toLowerCase();
-    row.style.display = text.includes(searchTerm) ? "" : "none";
+    row.style.display = row.textContent.toLowerCase().includes(searchTerm) ? "" : "none";
   });
-}
-
-// Select country from map or table click
-function selectCountry(countryIso) {
-  document.getElementById("countrySelect").value = countryIso;
-  selectedCountry = countryIso;
-  updateAllVisualizations();
-  // Scroll to top so user can see the map
-  document.querySelector(".visualization-section").scrollIntoView({ behavior: "smooth" });
-}
-
-// Update active filters display badge
-function updateActiveFiltersDisplay() {
-  const filtersContainer = document.getElementById("activeFilters");
-  
-  if (selectedCountry === "ALL") {
-    filtersContainer.style.display = "none";
-  } else {
-    filtersContainer.style.display = "block";
-    const countryName = flowData.find(
-      (d) => d.origIso === selectedCountry || d.destIso === selectedCountry
-    );
-    const name = countryName
-      ? countryName.origIso === selectedCountry
-        ? countryName.origName
-        : countryName.destName
-      : selectedCountry;
-    
-    const directionText =
-      flowDirection === "inbound"
-        ? `Showing students coming TO ${name}`
-        : `Showing where ${name} students go`;
-    
-    document.getElementById("filterText").textContent = `📍 ${directionText} (${currentYear})`;
-  }
-}
-
-// Clear filters
-function clearFilters() {
-  document.getElementById("countrySelect").value = "ALL";
-  selectedCountry = "ALL";
-  updateAllVisualizations();
 }
