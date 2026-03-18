@@ -392,8 +392,7 @@
 
   function renderDrilldown() {
     const rows = state.filteredRows.length ? state.filteredRows : state.allRows;
-    const showFullList = document.getElementById("show-all-institutions")?.checked || false;
-    const limit = showFullList ? rows.length : 15;
+    const limit = 20;
 
     const topInst = rows
       .filter((r) => num(r.roi_value_score) !== null)
@@ -447,14 +446,6 @@
       state.currentControl = e.target.value;
       applyFilters();
     });
-    
-    // Add checkbox listener for "Show Full List"
-    const showAllCheckbox = document.getElementById("show-all-institutions");
-    if (showAllCheckbox) {
-      showAllCheckbox.addEventListener("change", () => {
-        renderDrilldown();
-      });
-    }
   }
 
   function wireTabs() {
