@@ -918,17 +918,19 @@ def prepare_scholarship_data(roi_df: pd.DataFrame) -> None:
         + 0.12 * (eligible["control_label"] == "Public").astype(int)
         - 0.08 * eligible["admission_rate"].fillna(0.70)
     ).clip(0.35, 1.20)
+    
+    # Calculate baseline metrics for comparison
+    implied_offers = baseline_incoming_class / baseline_yield
+    baseline_net_revenue = baseline_incoming_class * sticker_tuition
 
     scenario_frames = []
-    for discount_pct in range(0, 101, 10):
+    for discount_pct in range(0, 101, 1):  # More granular: 1% increments
         discount_rate = discount_pct / 100.0
         projected_yield = (
             baseline_yield + np.sqrt(discount_rate) * price_sensitivity * 0.18
         ).clip(lower=baseline_yield, upper=0.90)
-        implied_offers = baseline_incoming_class / baseline_yield
         projected_enrollment = implied_offers * projected_yield
         projected_net_tuition = sticker_tuition * (1 - discount_rate)
-        base_revenue = baseline_incoming_class * sticker_tuition
         projected_net_revenue = projected_enrollment * projected_net_tuition
 
         scenario_frames.append(
@@ -947,6 +949,7 @@ def prepare_scholarship_data(roi_df: pd.DataFrame) -> None:
                     "sticker_tuition_proxy": sticker_tuition.round(0),
                     "baseline_incoming_class": baseline_incoming_class.round(0),
                     "baseline_yield": baseline_yield.round(4),
+                    "baseline_net_revenue": baseline_net_revenue.round(0),
                     "price_sensitivity": price_sensitivity.round(4),
                     "scholarship_discount_pct": discount_pct,
                     "projected_yield": projected_yield.round(4),
@@ -954,24 +957,51 @@ def prepare_scholarship_data(roi_df: pd.DataFrame) -> None:
                     "projected_net_tuition": projected_net_tuition.round(0),
                     "projected_net_revenue": projected_net_revenue.round(0),
                     "incremental_enrollment": (projected_enrollment - baseline_incoming_class).round(0),
-                    "revenue_change_pct": ((projected_net_revenue / base_revenue) - 1.0).round(4),
+                    "revenue_change_pct": ((projected_net_revenue / baseline_net_revenue) - 1.0).round(4),
+                    "revenue_change_dollars": (projected_net_revenue - baseline_net_revenue).round(0),
                 }
             )
         )
 
     scenarios = pd.concat(scenario_frames, ignore_index=True)
-    best_idx = scenarios.groupby("unit_id")["projected_net_revenue"].idxmax()
-    optimal = scenarios.loc[best_idx].copy()
-    optimal = optimal.rename(
+    
+    # Calculate BOTH revenue-optimal and enrollment-optimal discounts
+    revenue_best_idx = scenarios.groupby("unit_id")["projected_net_revenue"].idxmax()
+    enrollment_best_idx = scenarios.groupby("unit_id")["projected_enrollment"].idxmax()
+    
+    optimal_revenue = scenarios.loc[revenue_best_idx].copy()
+    optimal_revenue = optimal_revenue.rename(
         columns={
-            "scholarship_discount_pct": "optimal_discount_pct",
-            "projected_yield": "optimal_projected_yield",
-            "projected_enrollment": "optimal_projected_enrollment",
-            "projected_net_tuition": "optimal_net_tuition",
+            "scholarship_discount_pct": "optimal_discount_pct_revenue",
+            "projected_yield": "optimal_projected_yield_revenue",
+            "projected_enrollment": "optimal_projected_enrollment_revenue",
+            "projected_net_tuition": "optimal_net_tuition_revenue",
             "projected_net_revenue": "optimal_net_revenue",
-            "incremental_enrollment": "optimal_incremental_enrollment",
+            "incremental_enrollment": "optimal_incremental_enrollment_revenue",
             "revenue_change_pct": "optimal_revenue_change_pct",
+            "revenue_change_dollars": "optimal_revenue_change_dollars",
         }
+    )
+    
+    optimal_enrollment = scenarios.loc[enrollment_best_idx][["unit_id", "scholarship_discount_pct", "projected_enrollment", "incremental_enrollment"]].copy()
+    optimal_enrollment = optimal_enrollment.rename(
+        columns={
+            "scholarship_discount_pct": "optimal_discount_pct_enrollment",
+            "projected_enrollment": "optimal_projected_enrollment",
+            "incremental_enrollment": "optimal_incremental_enrollment",
+        }
+    )
+    
+    # Merge both optimizations
+    optimal = optimal_revenue.merge(optimal_enrollment, on="unit_id", how="left")
+    
+    # Add analysis flags
+    optimal["revenue_positive"] = optimal["optimal_revenue_change_pct"] > 0
+    optimal["enrollment_gains_from_discount"] = optimal["optimal_discount_pct_enrollment"] > 0
+    optimal["discount_strategy"] = pd.cut(
+        optimal["optimal_discount_pct_revenue"],
+        bins=[-1, 0, 10, 20, 30, 101],
+        labels=["No Discount", "Light (1-10%)", "Moderate (11-20%)", "Aggressive (21-30%)", "Deep (30%+)"]
     )
 
     project_dir = PROJECTS_DIR / "scholarship-optimization" / "data"

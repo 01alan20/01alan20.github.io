@@ -55,99 +55,162 @@ function plot(divId, data, layout) {
 
 function updateKPIs() {
   const rows = state.allRows;
+  const positiveRevenue = rows.filter(r => num(r.optimal_revenue_change_pct) > 0);
   
   document.getElementById('kpi-institutions').textContent = fmt(rows.length, 0);
-  document.getElementById('kpi-avg-discount').textContent = pct(mean(values(rows, 'optimal_discount_pct')) / 100, 0);
+  document.getElementById('kpi-avg-discount').textContent = pct(mean(values(rows, 'optimal_discount_pct_revenue')) / 100, 0);
   document.getElementById('kpi-avg-revenue').textContent = pct(mean(values(rows, 'optimal_revenue_change_pct')), 1);
-  document.getElementById('kpi-avg-enrollment').textContent = fmt(mean(values(rows, 'optimal_incremental_enrollment')), 0);
+  document.getElementById('kpi-avg-enrollment').textContent = fmt(mean(values(rows, 'optimal_incremental_enrollment_revenue')), 0);
 }
 
 function renderSummary() {
   const rows = state.allRows;
   
-  // Distribution of optimal discounts
-  const discounts = values(rows, 'optimal_discount_pct');
+  // Left: Distribution of REVENUE-optimal discounts
+  const discountsRevenue = values(rows, 'optimal_discount_pct_revenue');
   plot('chart-optimal-discount', [
     {
-      x: discounts,
+      x: discountsRevenue,
       type: 'histogram',
-      nbinsx: 12,
-      marker: { color: '#16a34a', opacity: 0.8 },
-      name: 'Institutions'
+      nbinsx: 20,
+      marker: { color: '#3b82f6', opacity: 0.8 },
+      name: 'Revenue Optimal'
     }
   ], {
-    title: { text: 'Distribution of Optimal Scholarship Discounts', font: { size: 14, color: '#1f2937' } },
+    title: { text: 'Revenue-Optimal Scholarship Discount Distribution', font: { size: 14, color: '#1f2937' } },
     xaxis: { title: 'Discount %' },
-    yaxis: { title: 'Count of Institutions' }
+    yaxis: { title: 'Number of Institutions' }
   });
   
-  // Revenue lift vs enrollment gain scatter
-  const validRows = rows.filter((r) => num(r.optimal_revenue_change_pct) !== null && num(r.optimal_incremental_enrollment) !== null);
+  // Right: Revenue Gain/Loss breakdown
+  const positiveRevenue = rows.filter(r => num(r.optimal_revenue_change_pct) > 0);
+  const negativeRevenue = rows.filter(r => num(r.optimal_revenue_change_pct) < 0);
+  const breakeven = rows.filter(r => Math.abs(num(r.optimal_revenue_change_pct)) <= 0.001);
+  
   plot('chart-revenue-lift', [
     {
-      x: validRows.map((r) => num(r.optimal_revenue_change_pct) * 100),
-      y: validRows.map((r) => num(r.optimal_incremental_enrollment)),
-      mode: 'markers',
-      marker: { size: 8, color: '#16a34a', opacity: 0.6 },
-      text: validRows.map((r) => r.institution_name),
-      hovertemplate: '<b>%{text}</b><br>Revenue Change: %{x:.1f}%<br>Enrollment Gain: %{y:.0f}<extra></extra>',
-      name: 'Institution'
+      labels: ['Revenue Gains\n(Scholarships Help)', 'Revenue Losses\n(Scholarships Hurt)', 'Breakeven'],
+      values: [positiveRevenue.length, negativeRevenue.length, breakeven.length],
+      type: 'pie',
+      marker: { colors: ['#10b981', '#ef4444', '#f59e0b'] },
+      hovertemplate: '<b>%{label}</b><br>Count: %{value} institutions<br>%{percent}<extra></extra>'
     }
   ], {
-    title: { text: 'Revenue Lift vs Enrollment Gain', font: { size: 14, color: '#1f2937' } },
-    xaxis: { title: 'Revenue Change %' },
-    yaxis: { title: 'Additional Enrollments' }
+    title: { text: 'Institutions by Revenue Impact of Optimal Scholarship Strategy', font: { size: 14, color: '#1f2937' } },
+    height: 450
   });
 }
 
+
 function renderRevenueCurves() {
-  const rows = state.allRows;
-  const top6 = rows.sort((a, b) => num(b.optimal_net_revenue) - num(a.optimal_net_revenue)).slice(0, 6);
-  
-  const traces = top6.map((row) => ({
-    y: [num(row.optimal_net_revenue)],
-    name: row.institution_name.substring(0, 20),
-    type: 'bar'
-  }));
-  
-  plot('chart-revenue-curves', traces, {
-    title: { text: 'Optimized Net Revenue by Institution (Top 6)', font: { size: 14, color: '#1f2937' } },
-    yaxis: { title: 'Net Revenue ($)' },
-    barmode: 'group'
+  // Load full revenue curve data to show complete curves
+  Papa.parse('data/scholarship_revenue_curve.csv', {
+    header: true,
+    skipEmptyLines: true,
+    download: true,
+    complete: (results) => {
+      const curves = results.data;
+      const top6Institutions = state.allRows
+        .sort((a, b) => num(b.optimal_net_revenue) - num(a.optimal_net_revenue))
+        .slice(0, 6)
+        .map(r => r.unit_id);
+      
+      const institutionTraces = top6Institutions.map(unitId => {
+        const institutionData = curves.filter(r => num(r.unit_id) === unitId);
+        const instName = institutionData.length > 0 ? institutionData[0].institution_name : '';
+        
+        return {
+          x: institutionData.map(r => num(r.scholarship_discount_pct)),
+          y: institutionData.map(r => num(r.projected_net_revenue)),
+          mode: 'lines+markers',
+          name: instName.substring(0, 20),
+          hovertemplate: '<b>' + instName + '</b><br>Discount: %{x:.0f}%<br>Net Revenue: $%{y:,.0f}<extra></extra>'
+        };
+      });
+      
+      plot('chart-revenue-curves', institutionTraces, {
+        title: { text: 'Revenue Curves Across Scholarship Discount Levels (Top 6 Institutions)', font: { size: 14, color: '#1f2937' } },
+        xaxis: { title: 'Scholarship Discount %' },
+        yaxis: { title: 'Projected Net Revenue ($)' },
+        height: 500
+      });
+    }
   });
 }
 
 function renderYieldResponse() {
   const rows = state.allRows;
   
-  // Discount vs Yield
-  const validYield = rows.filter((r) => num(r.optimal_discount_pct) !== null && num(r.optimal_projected_yield) !== null);
-  plot('chart-discount-vs-yield', [
-    {
-      x: validYield.map((r) => num(r.optimal_discount_pct)),
-      y: validYield.map((r) => num(r.optimal_projected_yield) * 100),
-      mode: 'markers',
-      marker: { size: 7, color: '#16a34a', opacity: 0.5 },
-      text: validYield.map((r) => r.institution_name),
-      hovertemplate: '<b>%{text}</b><br>Discount: %{x:.0f}%<br>Projected Yield: %{y:.1f}%<extra></extra>',
-      name: 'Institution'
-    }
-  ], {
-    title: { text: 'Optimal Discount vs Projected Yield', font: { size: 14, color: '#1f2937' } },
-    xaxis: { title: 'Scholarship Discount %' },
-    yaxis: { title: 'Projected Yield %' }
+  // Left: Revenue-Optimal vs Enrollment-Optimal discount comparison
+  const validRows = rows.filter((r) => num(r.optimal_discount_pct_revenue) !== null && num(r.optimal_discount_pct_enrollment) !== null);
+  
+  const colors = validRows.map(r => {
+    const revDisc = num(r.optimal_discount_pct_revenue);
+    const enrollDisc = num(r.optimal_discount_pct_enrollment);
+    if (revDisc === enrollDisc) return '#9ca3af'; // Same = gray
+    return revDisc < enrollDisc ? '#3b82f6' : '#10b981'; // Blue if enroll higher, green if revenue higher
   });
   
-  // Discount vs Enrollment
-  const validEnroll = rows.filter((r) => num(r.optimal_discount_pct) !== null && num(r.optimal_projected_enrollment) !== null);
+  plot('chart-discount-vs-yield', [
+    {
+      x: validRows.map((r) => num(r.optimal_discount_pct_revenue)),
+      y: validRows.map((r) => num(r.optimal_discount_pct_enrollment)),
+      mode: 'markers',
+      marker: { size: 8, color: colors, opacity: 0.6, line: { width: 1, color: '#4b5563' } },
+      text: validRows.map((r) => `<b>${r.institution_name}</b><br>Revenue-Opt: ${num(r.optimal_discount_pct_revenue).toFixed(0)}%<br>Enrollment-Opt: ${num(r.optimal_discount_pct_enrollment).toFixed(0)}%`),
+      hovertemplate: '%{text}<extra></extra>',
+      name: 'Institution'
+    },
+    {
+      x: [0, 100],
+      y: [0, 100],
+      mode: 'lines',
+      line: { color: '#d1d5db', dash: 'dash', width: 2 },
+      hoverinfo: 'none',
+      showlegend: false
+    }
+  ], {
+    title: { text: 'Revenue vs Enrollment Optimization: Finding Your Strategy', font: { size: 14, color: '#1f2937' } },
+    xaxis: { title: 'Revenue-Optimal Discount %', range: [-5, 105] },
+    yaxis: { title: 'Enrollment-Optimal Discount %', range: [-5, 105] },
+    annotations: [
+      {
+        x: 50, y: 50, xref: 'x domain', yref: 'y domain',
+        text: 'Equal',
+        showarrow: false,
+        opacity: 0.3,
+        font: { size: 12, color: '#9ca3af' }
+      }
+    ]
+  });
+  
+  // Right: Discount strategy categorization
+  const strategies = {};
+  validRows.forEach(r => {
+    const strat = r.discount_strategy || 'Unknown';
+    if (!strategies[strat]) strategies[strat] = 0;
+    strategies[strat]++;
+  });
+  
   plot('chart-discount-vs-enrollment', [
     {
-      x: validEnroll.map((r) => num(r.optimal_discount_pct)),
-      y: validEnroll.map((r) => num(r.optimal_projected_enrollment)),
-      mode: 'markers',
-      marker: { size: 7, color: '#10b981', opacity: 0.5 },
-      text: validEnroll.map((r) => r.institution_name),
-      hovertemplate: '<b>%{text}</b><br>Discount: %{x:.0f}%<br>Projected Enrollment: %{y:.0f}<extra></extra>',
+      x: Object.keys(strategies),
+      y: Object.values(strategies),
+      type: 'bar',
+      marker: { 
+        color: ['#6366f1', '#3b82f6', '#06b6d4', '#10b981', '#f59e0b'],
+        opacity: 0.8
+      },
+      text: Object.values(strategies),
+      textposition: 'auto',
+      hovertemplate: '<b>%{x}</b><br>Institutions: %{y}<extra></extra>'
+    }
+  ], {
+    title: { text: 'Distribution by Scholarship Strategy', font: { size: 14, color: '#1f2937' } },
+    yaxis: { title: 'Number of Institutions' },
+    xaxis: { tickangle: -45 }
+  });
+}
       name: 'Institution'
     }
   ], {
@@ -160,51 +223,68 @@ function renderYieldResponse() {
 function renderBands() {
   const rows = state.allRows;
   
-  // Count by discount band
+  // Count by discount band (using revenue-optimal)
   const bands = [
-    { range: '0%', min: 0, max: 0, count: 0 },
-    { range: '1-5%', min: 1, max: 5, count: 0 },
-    { range: '6-10%', min: 6, max: 10, count: 0 },
-    { range: '11-20%', min: 11, max: 20, count: 0 },
-    { range: '21%+', min: 21, max: 100, count: 0 }
+    { range: 'No Discount (0%)', min: 0, max: 0, count: 0 },
+    { range: 'Light (1-10%)', min: 1, max: 10, count: 0 },
+    { range: 'Moderate (11-20%)', min: 11, max: 20, count: 0 },
+    { range: 'Aggressive (21-30%)', min: 21, max: 30, count: 0 },
+    { range: 'Deep (31%+)', min: 31, max: 100, count: 0 }
   ];
   
   rows.forEach((r) => {
-    const disc = num(r.optimal_discount_pct) || 0;
+    const disc = num(r.optimal_discount_pct_revenue) || 0;
     bands.forEach((b) => {
       if (disc >= b.min && disc <= b.max) b.count++;
     });
   });
   
+  // Left chart: Distribution by discount strategy band
   plot('chart-discount-distribution', [
     {
       x: bands.map((b) => b.range),
       y: bands.map((b) => b.count),
       type: 'bar',
-      marker: { color: '#16a34a' },
-      name: 'Institutions'
+      marker: { color: ['#6366f1', '#3b82f6', '#06b6d4', '#10b981', '#f59e0b'], opacity: 0.8 },
+      text: bands.map((b) => b.count),
+      textposition: 'auto',
+      hovertemplate: '<b>%{x}</b><br>Institutions: %{y}<extra></extra>'
     }
   ], {
-    title: { text: 'Distribution by Discount Band', font: { size: 14, color: '#1f2937' } },
-    yaxis: { title: 'Number of Institutions' }
+    title: { text: 'Institutions by Revenue-Optimal Discount Strategy', font: { size: 14, color: '#1f2937' } },
+    yaxis: { title: 'Number of Institutions' },
+    height: 450
   });
   
-  // Outcomes by band
-  const bandOutcomes = bands.map((b) => {
-    const bandRows = rows.filter((r) => {
-      const disc = num(r.optimal_discount_pct) || 0;
-      return disc >= b.min && disc <= b.max;
-    });
-    return {
-      band: b.range,
-      revenue: mean(values(bandRows, 'optimal_revenue_change_pct')) * 100,
-      enrollment: mean(values(bandRows, 'optimal_incremental_enrollment'))
-    };
+  // Right chart: Outcomes by control type
+  const controlTypes = {};
+  rows.forEach(r => {
+    const control = r.control_label || 'Unknown';
+    if (!controlTypes[control]) {
+      controlTypes[control] = { revenue: [], enrollment: [], count: 0 };
+    }
+    controlTypes[control].revenue.push(num(r.optimal_revenue_change_pct) * 100);
+    controlTypes[control].enrollment.push(num(r.optimal_incremental_enrollment));
+    controlTypes[control].count++;
   });
   
-  plot('chart-band-outcomes', [
+  const controlData = [
     {
-      x: bandOutcomes.map((b) => b.band),
+      x: Object.keys(controlTypes),
+      y: Object.keys(controlTypes).map(k => mean(controlTypes[k].revenue)),
+      name: 'Avg Revenue Gain %',
+      type: 'bar',
+      marker: { color: '#3b82f6', opacity: 0.8 }
+    }
+  ];
+  
+  plot('chart-band-outcomes', controlData, {
+    title: { text: 'Average Scholarship Revenue Impact by Institution Type', font: { size: 14, color: '#1f2937' } },
+    yaxis: { title: 'Average Revenue Change %' },
+    height: 450,
+    hovermode: 'x unified'
+  });
+}
       y: bandOutcomes.map((b) => b.revenue),
       type: 'bar',
       marker: { color: '#16a34a' },
