@@ -75,29 +75,40 @@ const countryCoordinates = {
 // Initialize dashboard
 document.addEventListener("DOMContentLoaded", async () => {
   const url = "data/flows_2015_2023_clean.csv";
+  console.log("Loading data from:", url);
+  
   try {
     const response = await fetch(url);
+    console.log("Fetch response status:", response.status);
+    
     if (response.ok) {
-      Papa.parse(response.body, {
+      const csvText = await response.text();
+      console.log("CSV loaded, length:", csvText.length);
+      
+      Papa.parse(csvText, {
         header: true,
         skipEmptyLines: true,
         complete: (results) => {
+          console.log("PapaParse complete. Rows parsed:", results.data.length);
+          console.log("Sample row:", results.data[0]);
           flowData = processData(results.data);
+          console.log("flowData records:", flowData.length);
+          console.log("allCountries size:", allCountries.size);
           initializeDashboard();
         },
         error: (error) => {
-          console.warn("Could not load local data:", error);
+          console.error("PapaParse error:", error);
           flowData = generateSyntheticData();
           initializeDashboard();
         },
       });
     } else {
-      console.log("Data file not found, using synthetic data");
+      console.error("Fetch failed with status:", response.status);
       flowData = generateSyntheticData();
       initializeDashboard();
     }
   } catch (e) {
-    console.log("Using synthetic data:", e.message);
+    console.error("Error loading data:", e.message);
     flowData = generateSyntheticData();
     initializeDashboard();
   }
@@ -106,27 +117,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Process raw CSV data
 function processData(rawData) {
   const processed = [];
+  allCountries.clear(); // Clear any existing data
+  
   rawData.forEach((row) => {
-    if (
-      row.year &&
-      row.origin_iso3 &&
-      row.destination_iso3 &&
-      parseFloat(row.students) > 0
-    ) {
+    // Add ALL countries to the set, even if students is 0
+    if (row.origin_iso3) {
       allCountries.add(row.origin_iso3);
+      if (row.origin_name) isoToName[row.origin_iso3] = row.origin_name;
+    }
+    if (row.destination_iso3) {
       allCountries.add(row.destination_iso3);
-      isoToName[row.origin_iso3] = row.origin_name;
-      isoToName[row.destination_iso3] = row.destination_name;
-      processed.push({
-        year: parseInt(row.year),
-        origIso: row.origin_iso3,
-        origName: row.origin_name,
-        destIso: row.destination_iso3,
-        destName: row.destination_name,
-        students: parseFloat(row.students),
-      });
+      if (row.destination_name) isoToName[row.destination_iso3] = row.destination_name;
+    }
+    
+    // Only add to flowData if there's actual student data
+    if (row.year && row.origin_iso3 && row.destination_iso3) {
+      const studentCount = parseFloat(row.students) || 0;
+      if (studentCount > 0) {
+        processed.push({
+          year: parseInt(row.year),
+          origIso: row.origin_iso3,
+          origName: row.origin_name || row.origin_iso3,
+          destIso: row.destination_iso3,
+          destName: row.destination_name || row.destination_iso3,
+          students: studentCount,
+        });
+      }
     }
   });
+  
+  console.log(`Processed ${processed.length} flows with ${allCountries.size} unique countries`);
   return processed;
 }
 
@@ -317,8 +337,40 @@ function updateAllVisualizations() {
 
 // Update world map with directional arrows using curved paths
 function updateFlowMap() {
-  const yearData = flowData.filter((d) => d.year === currentYear && d.students > 0);
-  const topFlows = yearData.sort((a, b) => b.students - a.students).slice(0, 150);
+  // Filter flows based on selected country
+  let filteredFlows;
+  let mapTitle;
+  let centerCoords = null;
+  let zoomLevel = 1;
+  
+  if (selectedCountry !== "ALL") {
+    const countryName = isoToName[selectedCountry] || selectedCountry;
+    centerCoords = countryCoordinates[selectedCountry];
+    
+    if (flowDirection === "inbound") {
+      // Show flows coming INTO selected country
+      filteredFlows = flowData.filter(d => 
+        d.year === currentYear && d.students > 0 && d.destIso === selectedCountry
+      );
+      mapTitle = `Students Coming to ${countryName} (${currentYear})`;
+      zoomLevel = 2; // Zoom in more
+    } else {
+      // Show flows going OUT OF selected country
+      filteredFlows = flowData.filter(d => 
+        d.year === currentYear && d.students > 0 && d.origIso === selectedCountry
+      );
+      mapTitle = `Students Leaving ${countryName} (${currentYear})`;
+      zoomLevel = 2;
+    }
+  } else {
+    // Show all flows
+    filteredFlows = flowData.filter(d => d.year === currentYear && d.students > 0);
+    mapTitle = `International Student Mobility Flows - ${currentYear}`;
+    zoomLevel = 1;
+  }
+  
+  // Sort and limit flows
+  const topFlows = filteredFlows.sort((a, b) => b.students - a.students).slice(0, 150);
 
   const traces = [];
   const maxStudents = Math.max(...(topFlows.length > 0 ? topFlows.map(f => f.students) : [1]));
@@ -328,14 +380,14 @@ function updateFlowMap() {
     const origCoords = countryCoordinates[flow.origIso];
     const destCoords = countryCoordinates[flow.destIso];
     
-    if (!origCoords || !destCoords) return; // Skip if coordinates missing
+    if (!origCoords || !destCoords) return;
 
     const originLon = origCoords[0];
     const originLat = origCoords[1];
     const destLon = destCoords[0];
     const destLat = destCoords[1];
     
-    // Create curved path with intermediate point
+    // Create curved path
     const midLon = (originLon + destLon) / 2;
     const midLat = (originLat + destLat) / 2;
     const curveFactor = 0.3;
@@ -345,7 +397,6 @@ function updateFlowMap() {
     const opacity = 0.25 + (flow.students / maxStudents) * 0.75;
     const width = 1 + (flow.students / maxStudents) * 4;
 
-    // Main flow line with arrow
     const trace = {
       type: "scattergeo",
       mode: "lines+markers",
@@ -356,42 +407,58 @@ function updateFlowMap() {
         color: `rgba(102, 126, 234, ${opacity})`,
       },
       marker: {
-        size: [0, 0, width * 2.5],  // Arrow at destination
+        size: [0, 0, width * 2.5],
         color: `rgba(102, 126, 234, ${opacity})`,
         symbol: "triangle-up",
         angleref: "previous",
       },
       hovertemplate: `<b>${flow.origName}</b> → <b>${flow.destName}</b><br>Students: ${flow.students.toLocaleString()}<extra></extra>`,
       showlegend: false,
-      name: "",
     };
     traces.push(trace);
   });
 
-  // Add country markers at flow endpoints
+  // Add country markers
   const countrySet = new Set();
   const markerLons = [];
   const markerLats = [];
   const markerText = [];
+  const markerColors = [];
+  const markerSizes = [];
   
   topFlows.forEach((flow) => {
-    const key1 = flow.origIso;
-    const key2 = flow.destIso;
-    
-    if (!countrySet.has(key1) && countryCoordinates[key1]) {
-      countrySet.add(key1);
-      const coords = countryCoordinates[key1];
+    // Origin marker
+    if (!countrySet.has(flow.origIso) && countryCoordinates[flow.origIso]) {
+      countrySet.add(flow.origIso);
+      const coords = countryCoordinates[flow.origIso];
       markerLons.push(coords[0]);
       markerLats.push(coords[1]);
       markerText.push(flow.origName);
+      // Highlight selected country
+      if (flow.origIso === selectedCountry) {
+        markerColors.push("rgba(220, 38, 38, 0.9)"); // Red for selected
+        markerSizes.push(12);
+      } else {
+        markerColors.push("rgba(102, 126, 234, 0.8)");
+        markerSizes.push(6);
+      }
     }
     
-    if (!countrySet.has(key2) && countryCoordinates[key2]) {
-      countrySet.add(key2);
-      const coords = countryCoordinates[key2];
+    // Destination marker
+    if (!countrySet.has(flow.destIso) && countryCoordinates[flow.destIso]) {
+      countrySet.add(flow.destIso);
+      const coords = countryCoordinates[flow.destIso];
       markerLons.push(coords[0]);
       markerLats.push(coords[1]);
       markerText.push(flow.destName);
+      // Highlight selected country
+      if (flow.destIso === selectedCountry) {
+        markerColors.push("rgba(220, 38, 38, 0.9)"); // Red for selected
+        markerSizes.push(12);
+      } else {
+        markerColors.push("rgba(102, 126, 234, 0.8)");
+        markerSizes.push(6);
+      }
     }
   });
 
@@ -404,28 +471,37 @@ function updateFlowMap() {
       text: markerText,
       hovertemplate: "%{text}<extra></extra>",
       marker: {
-        size: 6,
-        color: "rgba(102, 126, 234, 0.8)",
+        size: markerSizes,
+        color: markerColors,
         line: { width: 1.5, color: "white" },
       },
       showlegend: false,
     });
   }
 
+  // Build geo layout with optional center/zoom
+  const geoConfig = {
+    scope: "world",
+    projection: { type: "natural earth" },
+    showland: true,
+    landcolor: "#f5f5f5",
+    coastcolor: "#ccc",
+    countrywidth: 0.5,
+    countrycolor: "#e0e0e0",
+    showocean: true,
+    oceancolor: "#f0f8ff",
+    showcountries: true,
+  };
+  
+  // If a specific country is selected, center and zoom
+  if (centerCoords) {
+    geoConfig.center = { lon: centerCoords[0], lat: centerCoords[1] };
+    geoConfig.projection = { type: "natural earth", scale: zoomLevel * 150 };
+  }
+
   const layout = {
-    title: `International Student Mobility Flows - ${currentYear}`,
-    geo: {
-      scope: "world",
-      projection: { type: "natural earth" },
-      showland: true,
-      landcolor: "#f5f5f5",
-      coastcolor: "#ccc",
-      countrywidth: 0.5,
-      countrycolor: "#e0e0e0",
-      showocean: true,
-      oceancolor: "#f0f8ff",
-      showcountries: true,
-    },
+    title: mapTitle,
+    geo: geoConfig,
     height: 600,
     margin: { l: 0, r: 0, t: 40, b: 0 },
     hovermode: "closest",
