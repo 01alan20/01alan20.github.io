@@ -220,6 +220,8 @@ function initializeDashboard() {
 // Populate country dropdown with ALL countries
 function populateCountryDropdown() {
   const select = document.getElementById("countrySelect");
+  select.innerHTML = '<option value="ALL">All Countries</option>';
+  
   const countries = Array.from(allCountries)
     .sort()
     .map((iso) => ({
@@ -233,6 +235,8 @@ function populateCountryDropdown() {
     option.textContent = `${country.name} (${country.iso})`;
     select.appendChild(option);
   });
+  
+  console.log(`Dropdown populated with ${countries.length} countries`);
 }
 
 // Setup event listeners
