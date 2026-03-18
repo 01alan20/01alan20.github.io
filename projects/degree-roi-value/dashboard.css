@@ -136,9 +136,14 @@ html, body {
 
 .chart-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.chart-row .chart-card {
+  grid-column: 1;
 }
 
 .chart-row .chart-card.full {
@@ -192,6 +197,97 @@ html, body {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.drilldown-controls label:last-of-type {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 400;
+  margin-left: auto;
+}
+
+.drilldown-controls input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+.institutions-table-container {
+  overflow-x: auto;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.institutions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.institutions-table thead {
+  background: var(--accent-light);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.institutions-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 2px solid var(--border);
+}
+
+.institutions-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+
+.institutions-table tbody tr:hover {
+  background: var(--accent-light);
+}
+
+.institutions-table td {
+  padding: 0.75rem 1rem;
+}
+
+.institutions-table .rank {
+  font-weight: 600;
+  color: var(--muted);
+  width: 50px;
+}
+
+.institutions-table .institution-name {
+  font-weight: 500;
+}
+
+.institutions-table .roi-score {
+  font-weight: 600;
+  text-align: right;
+  width: 100px;
+}
+
+.roi-score-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.roi-score-bar {
+  width: 80px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 900px) {

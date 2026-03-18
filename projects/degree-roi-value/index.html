@@ -128,11 +128,16 @@
           <select id="region-filter"></select>
           <label for="control-filter">Filter by Type:</label>
           <select id="control-filter"></select>
+          <div style="flex: 1;"></div>
+          <label>
+            <input type="checkbox" id="show-all-institutions" />
+            Show Full List
+          </label>
         </div>
         <div class="chart-row">
           <div class="chart-card full">
             <h3>Top Institutions by ROI Value Score</h3>
-            <div id="chart-top-institutions" class="chart"></div>
+            <div id="institutions-table-container" class="institutions-table-container"></div>
           </div>
         </div>
       </div>
