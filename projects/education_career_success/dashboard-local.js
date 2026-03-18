@@ -397,17 +397,6 @@
 
   init();
 })();
-  const OUTCOMES = ["Job_Offers", "Career_Satisfaction", "Starting_Salary"];
-  const FACTORS = [
-    "Age",
-    "High_School_GPA",
-    "SAT_Score",
-    "University_GPA",
-    "Internships_Completed",
-    "Projects_Completed",
-    "Certifications",
-    "Soft_Skills_Score",
-    "Networking_Score",
     "Work_Life_Balance",
   ];
   const READINESS = [

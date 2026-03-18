@@ -1,0 +1,159 @@
+{
+  "source": "College Scorecard (U.S. Department of Education)",
+  "description": "Institution-level cost, earnings, debt, and outcomes data for degree programs across U.S. higher education institutions",
+  "fields": {
+    "unit_id": {
+      "type": "identifier",
+      "description": "Unique institution identifier in College Scorecard database"
+    },
+    "institution_name": {
+      "type": "string",
+      "description": "Name of the institution"
+    },
+    "city": {
+      "type": "string",
+      "description": "City where institution is located"
+    },
+    "state": {
+      "type": "string",
+      "description": "Two-letter state abbreviation"
+    },
+    "control_label": {
+      "type": "categorical",
+      "description": "Institution type: Public, Private, For-Profit",
+      "values": ["Public", "Private nonprofit", "For-profit"]
+    },
+    "degree_level": {
+      "type": "categorical",
+      "description": "Highest degree level offered",
+      "values": ["Bachelors", "Masters", "Associates", "Certificate"]
+    },
+    "region_label": {
+      "type": "string",
+      "description": "U.S. geographic region"
+    },
+    "admission_rate": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Share of applicants admitted to the institution"
+    },
+    "average_sat": {
+      "type": "numeric",
+      "range": [400, 1600],
+      "description": "Average SAT score of enrolled students"
+    },
+    "undergrad_size": {
+      "type": "numeric",
+      "description": "Total undergraduate enrollment"
+    },
+    "cost_of_attendance": {
+      "type": "currency",
+      "description": "Average annual cost in dollars including tuition, fees, room, board, books, and supplies"
+    },
+    "tuition_in_state": {
+      "type": "currency",
+      "description": "Annual in-state tuition and fees"
+    },
+    "tuition_out_of_state": {
+      "type": "currency",
+      "description": "Annual out-of-state tuition and fees"
+    },
+    "pell_share": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Share of students receiving Pell Grants"
+    },
+    "completion_rate": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Share of students who graduate or transfer within 150% of normal time"
+    },
+    "retention_rate": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Share of first-time, full-time students who return for a second year"
+    },
+    "repayment_rate_3yr": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Share of borrowers who have repaid at least $1 within 3 years of entering repayment"
+    },
+    "median_debt": {
+      "type": "currency",
+      "description": "Median cumulative debt of borrowers who left the institution"
+    },
+    "median_earnings_10yr": {
+      "type": "currency",
+      "description": "Median earnings of students 10 years after entry to the institution"
+    },
+    "median_earnings_monthly": {
+      "type": "currency",
+      "description": "Median monthly earnings 10 years after entry"
+    },
+    "share_earning_above_25k": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Share of students earning above $25,000 ten years after entry"
+    },
+    "earnings_to_cost_ratio": {
+      "type": "numeric",
+      "range": [0, 20],
+      "description": "Ratio of median 10-year earnings to cost of attendance (>1 means earnings exceed cost)"
+    },
+    "debt_to_earnings_ratio": {
+      "type": "numeric",
+      "range": [0, 2],
+      "description": "Ratio of median debt to median 10-year earnings (<0.5 is favorable)"
+    },
+    "roi_value_score": {
+      "type": "numeric",
+      "range": [0, 100],
+      "description": "Composite score reflecting overall value (cost-adjusted earnings, debt burden, completion, repayment)"
+    }
+  },
+  "key_metrics": {
+    "roi_value_score": {
+      "interpretation": "Higher scores indicate better value. Score = (earnings_to_cost_ratio × 30) + (completion_rate × 30) + ((1 - debt_to_earnings_ratio) × 25) + (repayment_rate × 15)",
+      "threshold_high": 60,
+      "threshold_medium": 40,
+      "threshold_low": 0
+    },
+    "earnings_to_cost_ratio": {
+      "interpretation": "Ratio of 1+ means 10-year earnings exceed cost of attendance. Higher is better.",
+      "favorable": ">1.5",
+      "moderate": "1.0 - 1.5",
+      "unfavorable": "<1.0"
+    },
+    "debt_to_earnings_ratio": {
+      "interpretation": "Lower is better. <0.5 means debt is manageable relative to earnings.",
+      "favorable": "<0.4",
+      "moderate": "0.4 - 0.7",
+      "unfavorable": ">0.7"
+    },
+    "completion_rate": {
+      "interpretation": "Percentage of students who graduate or transfer within 150% of normal time",
+      "threshold_high": "70%",
+      "threshold_medium": "50%",
+      "threshold_low": "<50%"
+    }
+  },
+  "data_quality_notes": [
+    "Some institutions may have missing values in specialized fields (SAT, debt to earnings ratio)",
+    "Data represents most recent cohort available in College Scorecard",
+    "Earnings data is sample-based and may not represent all graduates",
+    "Cost of attendance includes living expenses and may vary by program within an institution"
+  ],
+  "dashboard_tabs": {
+    "Executive Summary": "Overview of ROI score distribution and relationship between cost and earnings across all institutions",
+    "Value Map": "Breakdown of average ROI value scores by degree level and institution type (public/private/for-profit)",
+    "Cost vs Earnings": "Scatter plot and distributions showing relationship between cost of attendance and 10-year median earnings by region",
+    "Debt & Completion": "Analysis of student debt, completion rates, and 3-year loan repayment rates by degree and institution type",
+    "Institution Drilldown": "Filter and compare top-performing institutions by ROI value score within selected region or institution type"
+  },
+  "intended_use": [
+    "Prospective students comparing colleges by financial value and outcomes",
+    "Financial aid officers understanding institutional cost-effectiveness",
+    "Institutional researchers benchmarking ROI performance",
+    "Policy makers evaluating higher education value and affordability"
+  ]
+}

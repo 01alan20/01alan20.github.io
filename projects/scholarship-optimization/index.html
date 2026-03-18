@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scholarship Optimization Model</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="container">
+      <h1>Scholarship Optimization Model</h1>
+      <p class="subtitle">Discount Strategy Optimization for Net Tuition Revenue (College Scorecard + Modeled Scenarios)</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- KPI Section -->
+    <section class="kpi-section">
+      <article class="kpi-card">
+        <div class="kpi-label">Institutions Analyzed</div>
+        <div class="kpi-value" id="kpi-institutions">—</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-label">Avg Optimal Discount</div>
+        <div class="kpi-value" id="kpi-avg-discount">—</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-label">Avg Revenue Lift</div>
+        <div class="kpi-value" id="kpi-avg-revenue">—</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-label">Avg Enrollment Gain</div>
+        <div class="kpi-value" id="kpi-avg-enrollment">—</div>
+      </article>
+    </section>
+
+    <!-- Tab Navigation -->
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="summary">Executive Summary</button>
+      <button class="tab-btn" data-tab="revenue">Revenue Curves</button>
+      <button class="tab-btn" data-tab="yield">Yield Response</button>
+      <button class="tab-btn" data-tab="bands">Discount Bands</button>
+      <button class="tab-btn" data-tab="drilldown">Institution Drilldown</button>
+    </nav>
+
+    <!-- Tab Content -->
+    
+    <!-- Tab 1: Executive Summary -->
+    <section class="tab-pane active" data-tab="summary">
+      <h2>Executive Summary</h2>
+      <p class="section-description">Overview of scholarship optimization strategy effectiveness across all institutions.</p>
+      <div class="chart-row">
+        <div class="chart-container">
+          <div id="chart-optimal-discount" class="chart"></div>
+        </div>
+        <div class="chart-container">
+          <div id="chart-revenue-lift" class="chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Revenue Curves -->
+    <section class="tab-pane" data-tab="revenue">
+      <h2>Revenue Curves</h2>
+      <p class="section-description">How net tuition revenue changes across scholarship discount levels (0%-100%) for selected institutions.</p>
+      <div class="chart-row">
+        <div class="chart-container">
+          <div id="chart-revenue-curves" class="chart" style="min-height: 500px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Yield Response -->
+    <section class="tab-pane" data-tab="yield">
+      <h2>Yield Response Analysis</h2>
+      <p class="section-description">Relationship between scholarship discount and projected yield/enrollment across institutions.</p>
+      <div class="chart-row">
+        <div class="chart-container">
+          <div id="chart-discount-vs-yield" class="chart"></div>
+        </div>
+        <div class="chart-container">
+          <div id="chart-discount-vs-enrollment" class="chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 4: Discount Bands -->
+    <section class="tab-pane" data-tab="bands">
+      <h2>Discount Band Strategy</h2>
+      <p class="section-description">Distribution of institutions by optimal discount strategy and outcomes by band.</p>
+      <div class="chart-row">
+        <div class="chart-container">
+          <div id="chart-discount-distribution" class="chart"></div>
+        </div>
+        <div class="chart-container">
+          <div id="chart-band-outcomes" class="chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 5: Institution Drilldown -->
+    <section class="tab-pane" data-tab="drilldown">
+      <h2>Institution Drilldown</h2>
+      <p class="section-description">Compare specific institutions and their scholarship optimization recommendations.</p>
+      
+      <div class="filter-group">
+        <label for="state-select">Filter by State:</label>
+        <select id="state-select">
+          <option value="">All States</option>
+        </select>
+        
+        <label for="control-select">Filter by Type:</label>
+        <select id="control-select">
+          <option value="">All Types</option>
+          <option value="Public">Public</option>
+          <option value="Private nonprofit">Private</option>
+          <option value="For-profit">For-Profit</option>
+        </select>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-container">
+          <div id="chart-top-institutions" class="chart" style="min-height: 600px;"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

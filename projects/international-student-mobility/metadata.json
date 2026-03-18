@@ -1,0 +1,158 @@
+{
+  "id": "international-student-mobility",
+  "title": "International Student Mobility Dashboard",
+  "subtitle": "Global Higher Education Flows & COVID-19 Impact, 2015-2023",
+  "category": "Analytics & Data Visualization",
+  "description": "Interactive visualization of global student flows across higher education institutions. Enables exploration of which countries students come from, where they go, and how the COVID-19 pandemic disrupted and reshaped academic mobility. Features directional flow mapping, year-over-year trends, and deep-dive analysis of major mobility corridors.",
+  "keyInsight": "Global student mobility dropped 30-40% in 2020-2021 during pandemic restrictions, with partial recovery by 2023. USA, UK, and Australia remain dominant destinations, with China and India as primary sources, but emerging diversification to alternate destinations like Canada and Singapore.",
+  "status": "Complete & Interactive",
+  "featured": true,
+  "dateCompleted": "2026-03-18",
+  "technologies": [
+    "Data Visualization",
+    "Interactive Mapping",
+    "Plotly.js",
+    "PapaParse",
+    "Responsive Web Design",
+    "Higher Education Analytics"
+  ],
+  "dataSource": {
+    "name": "Resilient but Uneven: International Student Mobility Reconfiguration Through COVID-19",
+    "description": "Research dataset tracking bilateral international student flows from origin to destination countries, 2015-2023, with focus on pandemic impact and recovery",
+    "recordCount": 7043,
+    "yearRange": "2015-2023",
+    "granularity": "Bilateral (country-pair) flows, annual"
+  },
+  "analyticalApproach": [
+    "Directional flow analysis (incoming vs. outgoing)",
+    "Temporal trend analysis (pre-COVID baseline vs. pandemic vs. recovery)",
+    "Year-over-year growth rate calculations",
+    "Regional pattern identification",
+    "Top-corridor ranking and analysis",
+    "Comparative impact assessment (2019 pre-COVID vs. 2023 post-COVID)"
+  ],
+  "dashboardFeatures": [
+    {
+      "name": "Interactive Flow Map",
+      "description": "Visualization of student flows between countries with arrow sizing proportional to flow volume"
+    },
+    {
+      "name": "Directional Toggle",
+      "description": "Switch between 'Incoming' (which countries send students to destination) and 'Outgoing' (where students from origin go)"
+    },
+    {
+      "name": "Country Selector",
+      "description": "Focus on specific country or view global aggregate flows"
+    },
+    {
+      "name": "Year Slider",
+      "description": "Explore flows across 2015-2023 to track COVID-19 impact and recovery"
+    },
+    {
+      "name": "Top Sources Chart",
+      "description": "Horizontal bar chart showing which countries send most international students"
+    },
+    {
+      "name": "Top Destinations Chart",
+      "description": "Horizontal bar chart showing which countries receive most international students"
+    },
+    {
+      "name": "Global Trends Line Chart",
+      "description": "Time series showing total international student flows 2015-2023, with COVID period highlighted"
+    },
+    {
+      "name": "Pre/Post COVID Comparison",
+      "description": "Side-by-side comparison of 2019 vs. 2023 with recovery percentage"
+    },
+    {
+      "name": "Year-over-Year Growth Chart",
+      "description": "Percentage change in flows year-to-year, color-coded for growth/decline"
+    },
+    {
+      "name": "Detailed Flow Table",
+      "description": "Searchable table of top 50 bilateral corridors with flow counts and percentages"
+    },
+    {
+      "name": "Statistical Summary Cards",
+      "description": "Quick metrics: top source country, top destination, total students, active corridors"
+    }
+  ],
+  "keyFindings": [
+    "COVID-19 caused 30-40% decline in international student mobility in 2020-2021",
+    "Partial recovery by 2023 suggests in-person international education remains valued",
+    "USA, UK, Australia receive 50-70% of global international students",
+    "China and India are dominant source countries (300k-400k students annually pre-COVID)",
+    "Emerging diversification to non-traditional destinations (Canada, Singapore) post-COVID",
+    "Major bilateral corridors heavily concentrated: top 10 flows represent 40-50% of total",
+    "Regional mobility patterns vary significantly (strong South-North flows, weak intra-regional)"
+  ],
+  "practicalApplications": [
+    "Policy makers: Understand export/import of talent; inform education strategy and visa policy",
+    "University leaders: Benchmark against peer institutions; identify new recruitment markets",
+    "Education researchers: Analyze pandemic disruption and recovery patterns",
+    "Student advisors: Understand destination preferences and emerging opportunity markets",
+    "International educators: Track sector recovery; inform recruitment and retention strategies",
+    "Data analysts: Explore global education market dynamics"
+  ],
+  "additionalVisualizations": [
+    "Interactive flow arrow sizing for visual emphasis on major corridors",
+    "Color-coded year-over-year change (green for growth, red for decline)",
+    "COVID-19 impact shading on timeline charts",
+    "Regional clustering patterns in bilateral flows",
+    "Concentration metrics (top 10 flows as % of total)"
+  ],
+  "interactiveElements": [
+    "Real-time chart updates on slider drag",
+    "Hover tooltips on bar charts with exact values",
+    "Searchable flow table with live filtering",
+    "Modal comparison view (2019 vs 2023)",
+    "Responsive design for desktop, tablet, mobile"
+  ],
+  "targetAudience": [
+    "Higher Education Leaders & Strategists",
+    "International Educators & Enrollment Leaders",
+    "Ministry of Education Officials",
+    "University Rankings & Analytics Professionals",
+    "Student Mobility Researchers",
+    "Data-Driven Education Policy Makers",
+    "Academic Recruitment Professionals"
+  ],
+  "dataQualityNotes": [
+    "Bilateral data may have collection gaps—some zero flows reflect data limitations, not true absence",
+    "Flow definition varies by country (tertiary enrollment, credit-granting programs, etc.)",
+    "Some countries report with 1-2 year lag; 2023 data may be projected",
+    "Mode of study not distinguished (residential, online, hybrid)",
+    "Use for trends/patterns more confidently than precision accounting"
+  ],
+  "files": {
+    "dashboard": "dashboard.html",
+    "styles": "dashboard.css",
+    "logic": "dashboard.js",
+    "readme": "README.md",
+    "metadata": "metadata.json",
+    "dataFile": "data/flows_2015_2023_clean.csv"
+  },
+  "chartCount": 10,
+  "tableRows": 50,
+  "interactiviteLevel": "High",
+  "mobileOptimized": true,
+  "offlineCapable": true,
+  "projectNotes": "This dashboard demonstrates application of international comparative education analysis to global student mobility patterns. The COVID-19 focus reveals both disruption and underlying resilience in international higher education. Arrow-scaled flow visualization makes major mobility corridors immediately apparent while supporting drill-down analysis of bilateral relationships. Responsive design enables use on desktop for research/policy work and mobile for accessible exploration.",
+  "relatedProjects": [
+    "enrollment-funnel-benchmark",
+    "student-retention-early-alert",
+    "degree-roi-value"
+  ],
+  "futureEnhancements": [
+    "Regional aggregation views (flows by continent/region)",
+    "Bilateral pathway explorer with qualitative insights",
+    "Career outcomes tracking (post-graduation destinations)",
+    "Financial layer (tuition costs, scholarship availability, ROI)",
+    "Gender composition analysis by corridor",
+    "Field of study patterns (STEM, business, humanities flows)",
+    "GIS mapping integration with Leaflet.js",
+    "Forecasting models for 2024-2025 recovery",
+    "Peer country benchmarking",
+    "Separation of remote/online flows from residential"
+  ]
+}

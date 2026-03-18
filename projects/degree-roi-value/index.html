@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Degree ROI & Value Model</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="container">
+      <h1>Degree ROI & Value Model</h1>
+      <p class="subtitle">Cost vs. Earnings Analysis Across U.S. Institutions (College Scorecard Data)</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- KPI Section -->
+    <section class="kpi-section">
+      <article class="kpi-card">
+        <div class="kpi-label">Institutions Analyzed</div>
+        <div class="kpi-value" id="kpi-institutions">—</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-label">Highest ROI Score</div>
+        <div class="kpi-value" id="kpi-max-roi">—</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-label">Average 10-Year Earnings</div>
+        <div class="kpi-value" id="kpi-avg-earnings">—</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-label">Median Completion Rate</div>
+        <div class="kpi-value" id="kpi-completion">—</div>
+      </article>
+    </section>
+
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="summary">Executive Summary</button>
+      <button class="tab-btn" data-tab="value-map">Value Map</button>
+      <button class="tab-btn" data-tab="cost-earnings">Cost vs Earnings</button>
+      <button class="tab-btn" data-tab="debt-completion">Debt & Completion</button>
+      <button class="tab-btn" data-tab="drilldown">Institution Drilldown</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+      <!-- Tab 1: Executive Summary -->
+      <div class="tab-pane active" id="summary" data-tab-id="summary">
+        <h2>Executive Summary</h2>
+        <div class="chart-row">
+          <div class="chart-card">
+            <h3>ROI Value Score Distribution</h3>
+            <div id="chart-roi-hist" class="chart"></div>
+          </div>
+          <div class="chart-card">
+            <h3>Earnings vs Cost of Attendance</h3>
+            <div id="chart-earnings-cost" class="chart"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Value Map -->
+      <div class="tab-pane" id="value-map" data-tab-id="value-map">
+        <h2>Value Map by Degree Level & Control Type</h2>
+        <div class="chart-row">
+          <div class="chart-card">
+            <h3>ROI by Degree Level</h3>
+            <div id="chart-roi-degree" class="chart"></div>
+          </div>
+          <div class="chart-card">
+            <h3>ROI by Institution Type</h3>
+            <div id="chart-roi-control" class="chart"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Cost vs Earnings -->
+      <div class="tab-pane" id="cost-earnings" data-tab-id="cost-earnings">
+        <h2>Cost vs Earnings Relationship</h2>
+        <div class="chart-row">
+          <div class="chart-card full">
+            <h3>Cost of Attendance vs Median 10-Year Earnings (Color: Completion Rate)</h3>
+            <div id="chart-cost-earnings-scatter" class="chart"></div>
+          </div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-card">
+            <h3>Earnings Distribution by Control Type</h3>
+            <div id="chart-earnings-box" class="chart"></div>
+          </div>
+          <div class="chart-card">
+            <h3>Cost of Attendance by Region</h3>
+            <div id="chart-cost-region" class="chart"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Debt & Completion -->
+      <div class="tab-pane" id="debt-completion" data-tab-id="debt-completion">
+        <h2>Debt & Completion Analysis</h2>
+        <div class="chart-row">
+          <div class="chart-card">
+            <h3>Debt-to-Earnings Ratio vs Completion Rate</h3>
+            <div id="chart-debt-completion" class="chart"></div>
+          </div>
+          <div class="chart-card">
+            <h3>Median Student Debt by Degree Level</h3>
+            <div id="chart-debt-degree" class="chart"></div>
+          </div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-card">
+            <h3>Repayment Rate by Institution Type</h3>
+            <div id="chart-repayment" class="chart"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: Institution Drilldown -->
+      <div class="tab-pane" id="drilldown" data-tab-id="drilldown">
+        <h2>Institution Drilldown</h2>
+        <div class="drilldown-controls">
+          <label for="region-filter">Filter by Region:</label>
+          <select id="region-filter"></select>
+          <label for="control-filter">Filter by Type:</label>
+          <select id="control-filter"></select>
+        </div>
+        <div class="chart-row">
+          <div class="chart-card full">
+            <h3>Top Institutions by ROI Value Score</h3>
+            <div id="chart-top-institutions" class="chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

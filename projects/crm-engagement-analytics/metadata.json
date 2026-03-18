@@ -1,0 +1,122 @@
+{
+  "id": "crm-engagement-analytics",
+  "title": "Student CRM & Engagement Analytics",
+  "subtitle": "Predicting Retention Risk Through Service Usage Patterns",
+  "category": "Analytics & Data Science",
+  "description": "Interactive analytics dashboard applying customer relationship management (CRM) techniques to student retention and engagement prediction. Analyzes service adoption patterns, commitment levels, and communication channels as predictors of student persistence.",
+  "keyInsight": "Service adoption strongly predicts student persistence—students using 4+ support services show <5% dropout rates, while those using 0-1 services show 40%+ dropout rates.",
+  "status": "Complete",
+  "featured": true,
+  "dateCompleted": "2025-01-15",
+  "technologies": [
+    "Data Analytics",
+    "Predictive Modeling",
+    "Business Intelligence",
+    "Interactive Visualizations",
+    "CRM Analytics",
+    "Retention Prediction"
+  ],
+  "dataSource": {
+    "name": "IBM Telco Customer Churn Dataset",
+    "description": "Publicly available telecommunications customer churn data, translated and adapted to student engagement and retention context",
+    "recordCount": 7043,
+    "featureCount": 21,
+    "target": "Dropout/Attrition (binary)"
+  },
+  "analyticalApproach": [
+    "Exploratory Data Analysis (EDA)",
+    "Feature Engineering (engagement index composite)",
+    "Logistic Regression for risk scoring",
+    "Cohort Comparison Analysis",
+    "Predictive Model Calibration"
+  ],
+  "dashboardTabs": [
+    {
+      "name": "Executive Summary",
+      "description": "Engagement distribution, risk band validation, and lifecycle vs. engagement patterns",
+      "charts": 3
+    },
+    {
+      "name": "Attrition Risk",
+      "description": "Risk score distribution, calibration, and service usage by risk band",
+      "charts": 3
+    },
+    {
+      "name": "Service Usage",
+      "description": "Service adoption rates, engagement correlation with dropout, and usage patterns",
+      "charts": 3
+    },
+    {
+      "name": "Billing & Commitment",
+      "description": "Dropout by commitment type and payment method; cost vs. engagement analysis",
+      "charts": 3
+    },
+    {
+      "name": "Profile Drilldown",
+      "description": "Targeted segment analysis with filtering; high-risk and low-risk profile comparison",
+      "charts": 2,
+      "features": ["Risk band filter", "Dropout status filter", "Profile comparison cards", "Intervention opportunities"]
+    }
+  ],
+  "keyFindings": [
+    "Service adoption is the strongest predictor of student persistence—engagement dominates demographic factors",
+    "Students with annual commitment contracts show 25-30% lower dropout than open enrollment students",
+    "Communication channel diversity correlates with engagement—multi-channel users show lower risk",
+    "New students (first 3-6 months) show highest dropout risk; early engagement interventions likely high-leverage",
+    "Open enrollment students represent disproportionate dropout volume despite good early-stage characteristics",
+    "Services show intercorrelation in adoption—students who adopt one support service tend to adopt others"
+  ],
+  "practicalApplications": [
+    "Early warning system for at-risk student identification",
+    "Triage for proactive student outreach and intervention targeting",
+    "Service awareness and utilization optimization planning",
+    "Retention benchmarking and performance tracking",
+    "Program-level retention analysis and improvement evaluation",
+    "Intervention ROI modeling for institutional leadership"
+  ],
+  "limitations": [
+    "Data source is telecommunications churn, not actual student data—represents one plausible engagement framing",
+    "Supports correlation analysis but not causal inference—cannot determine if services cause persistence or persistence causes service adoption",
+    "Risk scoring based on historical customer behavior; current student engagement patterns may differ significantly",
+    "Does not account for external macro factors (economic conditions, family emergencies, pandemic impacts)",
+    "Masks institutional and program-level variation in retention patterns"
+  ],
+  "ethicalConsiderations": [
+    "Risk predictions are probabilistic tendency, not deterministic—many high-risk students persist",
+    "Avoid self-fulfilling prophecy: use risk score to increase support, not justify withdrawal",
+    "Model incorporates demographics; disaggregate analysis to identify and mitigate demographic disparities",
+    "Intervention effectiveness not proven from this data; use model to identify candidates for experimental evaluation"
+  ],
+  "files": {
+    "readme": "README.md",
+    "dashboard": "dashboard-local.html",
+    "styles": "dashboard-local.css",
+    "logic": "dashboard-local.js",
+    "dataFiles": [
+      "data/student_crm_engagement_translated.csv",
+      "data/telco_customer_churn_raw.csv"
+    ]
+  },
+  "chartCount": 14,
+  "interactiveElements": [
+    "5-tab navigation interface",
+    "Responsive scatter plots with hover tooltips",
+    "Risk band filtering in profile drilldown",
+    "Dropout status segmentation toggles",
+    "Dynamic profile comparison cards"
+  ],
+  "targetAudience": [
+    "Student Services Leadership (VP of Student Success, Dean of Students)",
+    "Institutional Research Professionals",
+    "Academic Support Services Directors",
+    "Retention Program Managers",
+    "Chief Analytics Officers / Strategic Planning Leadership",
+    "Data-Driven Educational Practitioners"
+  ],
+  "relatedProjects": [
+    "higher-ed-analytics-roadmap",
+    "retention-early-alert",
+    "education-career-success"
+  ],
+  "projectNotes": "This project demonstrates the application of CRM analytics frameworks to educational contexts. While based on adapted commercial data rather than actual student records, it illustrates how retention analytics, service-engagement modeling, and predictive segmentation can transform institutional understanding of persistence drivers and enable data-driven retention strategy. The model shows engagement as the central variable linking student characteristics, institutional services, and persistence outcomes."
+}

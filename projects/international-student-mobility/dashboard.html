@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>International Student Mobility Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>International Student Mobility Flows</h1>
+      <p>Global higher education student flows, 2015-2023</p>
+      <p class="subtitle">Visualizing which countries students are coming FROM and year-over-year changes during COVID-19</p>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls-section">
+      <div class="control-group">
+        <label for="countrySelect">Focus on Country (or click map/table):</label>
+        <select id="countrySelect">
+          <option value="ALL">All Countries (Global Overview)</option>
+        </select>
+        <small style="color: #999; margin-top: 4px; display: block;">💡 Tip: Click any country name in the map or table to select it</small>
+      </div>
+
+      <div class="control-group">
+        <label for="flowDirection">Show Flows:</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="direction" value="inbound" checked />
+            Incoming to Selected Country
+          </label>
+          <label>
+            <input type="radio" name="direction" value="outbound" />
+            Outgoing from Selected Country
+          </label>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label for="yearSlider">Year: <span id="yearDisplay">2023</span></label>
+        <input type="range" id="yearSlider" min="2015" max="2023" value="2023" />
+      </div>
+
+      <div class="control-group">
+        <button id="compareButton" class="btn-compare">Compare 2019 vs 2023 (COVID Impact)</button>
+      </div>
+    </div>
+
+    <!-- Active Filters Display -->
+    <div id="activeFilters" class="active-filters" style="display: none;">
+      <div class="filter-badge">
+        <span id="filterText"></span>
+        <button class="badge-close" onclick="clearFilters()">✕</button>
+      </div>
+    </div>
+
+    <!-- Map and Flow Visualization -->
+    <div class="visualization-section">
+      <div id="mapContainer" class="map-container">
+        <h2>Student Flow Map</h2>
+        <p class="info-text">Hover over arrows to see flow details. Arrow size represents number of students.</p>
+        <div id="flowMap" class="flow-map"></div>
+      </div>
+
+      <!-- Flow Stats -->
+      <div class="flow-stats">
+        <div class="stat-card">
+          <h3>Top Source Country</h3>
+          <p id="topSource" class="stat-value">Loading...</p>
+          <small id="topSourceCount">0 students</small>
+        </div>
+        <div class="stat-card">
+          <h3>Top Destination</h3>
+          <p id="topDest" class="stat-value">Loading...</p>
+          <small id="topDestCount">0 students</small>
+        </div>
+        <div class="stat-card">
+          <h3>Total Students (Selected Year)</h3>
+          <p id="totalStudents" class="stat-value">0</p>
+          <small>Global estimate</small>
+        </div>
+        <div class="stat-card">
+          <h3>Active Corridors</h3>
+          <p id="corridorCount" class="stat-value">0</p>
+          <small>Country pairs</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+      <div class="chart-row">
+        <div class="chart-container">
+          <h2>Top 15 Student Source Countries</h2>
+          <div id="topSourcesChart"></div>
+        </div>
+
+        <div class="chart-container">
+          <h2>Top 15 Student Destinations</h2>
+          <div id="topDestsChart"></div>
+        </div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-container full-width">
+          <h2>Global Student Flow Trends (2015-2023)</h2>
+          <div id="trendsChart"></div>
+          <div class="chart-note">
+            <strong>COVID-19 Impact:</strong> Notice the dip in 2020-2021 during pandemic restrictions, with partial recovery in 2022-2023.
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-container">
+          <h2>Pre-COVID (2019) vs Post-COVID (2023)</h2>
+          <div id="covidComparisonChart"></div>
+        </div>
+
+        <div class="chart-container">
+          <h2>Year-over-Year Change (%)</h2>
+          <div id="yoyChangeChart"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detailed Data Table -->
+    <div class="table-section">
+      <div class="table-header">
+        <h2>Top Student Mobility Corridors</h2>
+        <p class="table-subtitle" id="tableSubtitle">
+          Showing global flows. Click on any country name to filter flows for that country.
+        </p>
+      </div>
+      <p class="info-text">Double-click to expand. Shows top bilateral flows for selected year and direction. <strong>Click any country name in the table or map</strong> to explore flows for that country.</p>
+      <input
+        type="text"
+        id="tableSearch"
+        placeholder="Filter by country name..."
+        class="search-input"
+      />
+      <table id="flowsTable" class="flows-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>From →</th>
+            <th></th>
+            <th>To →</th>
+            <th>Students</th>
+            <th>% of Total</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Insights Section -->
+    <div class="insights-section">
+      <h2>Key Insights</h2>
+      <div id="insightsContainer" class="insights-grid">
+        <div class="insight-card">
+          <h3>🌏 Major Mobility Hubs</h3>
+          <p>
+            The United States, United Kingdom, and Australia attract the largest numbers of international students, with China, India, and other Asian countries as
+            primary sources.
+          </p>
+        </div>
+        <div class="insight-card">
+          <h3>📉 COVID-19 Disruption</h3>
+          <p>Student flows dropped significantly in 2020-2021 due to travel restrictions and campus closures. Partial recovery visible by 2023, but not yet at
+            pre-pandemic levels globally.</p>
+        </div>
+        <div class="insight-card">
+          <h3>🌐 Regional Patterns</h3>
+          <p>Asian students (especially from China and India) comprise majority of international students in Western universities. Intra-regional mobility in
+            Africa and Latin America remains lower.</p>
+        </div>
+        <div class="insight-card">
+          <h3>💡 Emerging Trends</h3>
+          <p>Growing flows from Southeast Asia and Middle East. Some evidence of "alternative pathway" destinations (Canada, Singapore, Australia) gaining share
+            as competition intensifies.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology Section -->
+    <div class="methodology-section">
+      <h2>Data & Methods</h2>
+      <p>
+        <strong>Data Source:</strong> "Resilient but Uneven: International Student Mobility Reconfiguration Through COVID-19" research dataset covering 2015-2023
+        flows from origin to destination countries.
+      </p>
+      <p>
+        <strong>Arrow Sizing:</strong> Flow arrow thickness represents the volume of students flowing from one country to another. Larger arrows = more students.
+      </p>
+      <p>
+        <strong>Note:</strong> This dashboard shows flows as reported. Some flows may be zero due to data collection limitations or countries not actively
+        tracking international student origin at fine levels of detail.
+      </p>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

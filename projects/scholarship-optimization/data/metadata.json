@@ -1,0 +1,146 @@
+{
+  "source": "College Scorecard (U.S. Department of Education) + Modeled Scholarship Scenarios",
+  "description": "Institution-level scholarship optimization analysis showing optimal discount levels for revenue maximization and projected enrollment/revenue impacts across discount scenarios.",
+  "fields": {
+    "unit_id": {
+      "type": "identifier",
+      "description": "Unique institution identifier from College Scorecard"
+    },
+    "institution_name": {
+      "type": "string",
+      "description": "Name of the institution"
+    },
+    "state": {
+      "type": "string",
+      "description": "Two-letter state abbreviation"
+    },
+    "control_label": {
+      "type": "categorical",
+      "description": "Institution control type",
+      "values": ["Public", "Private nonprofit", "For-profit"]
+    },
+    "degree_level": {
+      "type": "categorical",
+      "description": "Highest degree level offered",
+      "values": ["Bachelors", "Masters", "Associates", "Certificate"]
+    },
+    "undergrad_size": {
+      "type": "numeric",
+      "description": "Total undergraduate enrollment"
+    },
+    "pell_share": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Share of undergraduates receiving Pell Grants (federal aid for low-income students)"
+    },
+    "admission_rate": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Share of applicants admitted"
+    },
+    "retention_rate": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Share of first-time, full-time students returning for second year"
+    },
+    "cost_of_attendance": {
+      "type": "currency",
+      "description": "Average annual total cost (tuition, fees, room, board, books, supplies)"
+    },
+    "sticker_tuition_proxy": {
+      "type": "currency",
+      "description": "Proxy for sticker tuition (list price before aid); used as basis for revenue calculations"
+    },
+    "baseline_incoming_class": {
+      "type": "numeric",
+      "description": "Baseline entering cohort size (students expected to enroll without scholarship intervention)"
+    },
+    "baseline_yield": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Baseline yield rate (percentage of admitted students who enroll)"
+    },
+    "price_sensitivity": {
+      "type": "numeric",
+      "range": [0.5, 2.0],
+      "description": "Elasticity of yield to price (scholarship discount). Higher values indicate greater sensitivity to price reductions. Estimated from institutional characteristics and historical patterns.",
+      "interpretation": {
+        "low": "<0.75: Price-insensitive (selective, high demand)",
+        "moderate": "0.75-1.25: Moderate price sensitivity (typical public/private)",
+        "high": ">1.25: High price sensitivity (less selective, price-dependent recruitment)"
+      }
+    },
+    "optimal_discount_pct": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Scholarship discount level (as percentage of sticker tuition) that maximizes net tuition revenue for this institution"
+    },
+    "optimal_projected_yield": {
+      "type": "percentage",
+      "range": [0, 1],
+      "description": "Projected yield rate when optimal discount is applied"
+    },
+    "optimal_projected_enrollment": {
+      "type": "numeric",
+      "description": "Projected entering class size when optimal discount is applied"
+    },
+    "optimal_net_tuition": {
+      "type": "currency",
+      "description": "Net tuition per student after optimal discount (sticker_tuition_proxy × (1 - optimal_discount_pct))"
+    },
+    "optimal_net_revenue": {
+      "type": "currency",
+      "description": "Total net tuition revenue with optimal discount (optimal_projected_enrollment × optimal_net_tuition)"
+    },
+    "optimal_incremental_enrollment": {
+      "type": "numeric",
+      "description": "Additional students attracted by optimal discount (optimal_projected_enrollment - baseline_incoming_class)"
+    },
+    "optimal_revenue_change_pct": {
+      "type": "percentage",
+      "range": [-1, 1],
+      "description": "Percentage change in net revenue from applying optimal discount vs. baseline (no discount). Positive values indicate revenue improvement; negative indicate revenue decline.",
+      "interpretation": {
+        "positive": "Scholarship strategy increases revenue (enrollment gain exceeds revenue loss)",
+        "near_zero": "Scholarship strategy has minimal revenue impact",
+        "negative": "Scholarship strategy decreases revenue (enrollment gain insufficient to offset per-student loss)"
+      }
+    }
+  },
+  "calculated_metrics": {
+    "optimal_discount_pct": {
+      "calculation": "Discount level (0%-100%) that maximizes: optimal_projected_enrollment × optimal_net_tuition",
+      "methodology": "Revenue optimization model iterates through discount scenarios and selects level producing highest net revenue"
+    },
+    "optimal_projected_yield": {
+      "calculation": "min(baseline_yield + (optimal_discount_pct × price_sensitivity), 1.0)",
+      "interpretation": "Yield cannot exceed 100% (biological maximum); larger discounts produce proportionally larger yield improvements for price-sensitive institutions"
+    },
+    "optimal_revenue_change_pct": {
+      "calculation": "(optimal_net_revenue - baseline_net_revenue) / baseline_net_revenue",
+      "note": "Positive: Discounts increase revenue (counter-intuitive for revenue-conscious institutions). Negative: Discounts reduce revenue (common for selective institutions). Zero: Discounts have minimal net impact."
+    }
+  },
+  "data_quality_notes": [
+    "Price sensitivity coefficients are modeled estimates based on institutional characteristics and market patterns; actual price sensitivity may vary",
+    "Revenue projections assume linear enrollment response to discounts; actual response may be non-linear",
+    "Model focuses on net tuition revenue and doesn't account for room & board, fees, retention impacts, or cost of instruction",
+    "Institutional-level aggregates mask variation by degree program; optimal discount for engineering may differ from optimal for liberal arts",
+    "Model assumes independent institutional decisions; actual competitive dynamics may make calculated optimal discounts sub-optimal in equilibrium"
+  ],
+  "strategic_use_cases": [
+    "Revenue optimization: Determine scholarship discount level that maximizes net tuition revenue for institution type and market position",
+    "Competitive benchmarking: Compare your institution's current strategy to optimal strategy and to peer institutions' optimal strategies",
+    "Enrollment planning: Model enrollment and revenue impacts of alternative scholarship discount levels",
+    "Demographic strategy: Evaluate how scholarships can attract targeted populations (e.g., first-generation, specific geographic regions)",
+    "Financial forecasting: Scenario modeling of revenue impacts under different price/enrollment strategies"
+  ],
+  "limitations": [
+    "This model prioritizes revenue maximization; other institutional goals (access, equity, mission) may warrant different strategies",
+    "Assumes no competitive response; if all institutions increase discounts simultaneously, projected enrollment gains may not materialize",
+    "Long-term impacts not captured: student completion, retention, alumni outcomes, reputation effects",
+    "Doesn't distinguish merit-based scholarships (talent recruitment) from need-based scholarships (access) or other types",
+    "Regional and degree-program variation masked in institution-level aggregates",
+    "Model recency: Based on College Scorecard recent cohorts; market conditions may have changed"
+  ]
+}
