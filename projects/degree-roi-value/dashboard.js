@@ -392,11 +392,16 @@
 
   function renderDrilldown() {
     const rows = state.filteredRows.length ? state.filteredRows : state.allRows;
+    const showFullList = document.getElementById("show-all-institutions")?.checked || false;
+    const limit = showFullList ? rows.length : 15;
 
     const topInst = rows
       .filter((r) => num(r.roi_value_score) !== null)
       .sort((a, b) => num(b.roi_value_score) - num(a.roi_value_score))
-      .slice(0, 15);
+      .slice(0, limit);
+
+    // Reverse so highest score is at top (for horizontal bar chart)
+    const chartData = [...topInst].reverse();
 
     plot(
       "chart-top-institutions",
@@ -404,15 +409,17 @@
         {
           type: "bar",
           orientation: "h",
-          y: topInst.map((d) => d.institution_name),
-          x: topInst.map((d) => num(d.roi_value_score)),
+          y: chartData.map((d) => d.institution_name),
+          x: chartData.map((d) => num(d.roi_value_score)),
           marker: { color: "#2563eb" },
+          text: chartData.map((d) => num(d.roi_value_score).toFixed(1)),
+          textposition: "outside",
         },
       ],
       {
-        xaxis: { title: "ROI Value Score" },
-        yaxis: { tickfont: { size: 11 } },
-        margin: { l: 280, r: 20, t: 20, b: 40 },
+        xaxis: { title: "ROI Value Score", range: [0, Math.max(...topInst.map(d => num(d.roi_value_score))) * 1.1] },
+        yaxis: { tickfont: { size: 11 }, autorange: true },
+        margin: { l: 280, r: 60, t: 20, b: 40 },
       }
     );
   }
@@ -440,6 +447,14 @@
       state.currentControl = e.target.value;
       applyFilters();
     });
+    
+    // Add checkbox listener for "Show Full List"
+    const showAllCheckbox = document.getElementById("show-all-institutions");
+    if (showAllCheckbox) {
+      showAllCheckbox.addEventListener("change", () => {
+        renderDrilldown();
+      });
+    }
   }
 
   function wireTabs() {
