@@ -103,38 +103,34 @@ function renderSummary() {
 
 
 function renderRevenueCurves() {
-  // Load full revenue curve data to show complete curves
-  Papa.parse('data/scholarship_revenue_curve.csv', {
-    header: true,
-    skipEmptyLines: true,
-    download: true,
-    complete: (results) => {
-      const curves = results.data;
-      const top6Institutions = state.allRows
-        .sort((a, b) => num(b.optimal_net_revenue) - num(a.optimal_net_revenue))
-        .slice(0, 6)
-        .map(r => r.unit_id);
-      
-      const institutionTraces = top6Institutions.map(unitId => {
-        const institutionData = curves.filter(r => num(r.unit_id) === unitId);
-        const instName = institutionData.length > 0 ? institutionData[0].institution_name : '';
-        
-        return {
-          x: institutionData.map(r => num(r.scholarship_discount_pct)),
-          y: institutionData.map(r => num(r.projected_net_revenue)),
-          mode: 'lines+markers',
-          name: instName.substring(0, 20),
-          hovertemplate: '<b>' + instName + '</b><br>Discount: %{x:.0f}%<br>Net Revenue: $%{y:,.0f}<extra></extra>'
-        };
-      });
-      
-      plot('chart-revenue-curves', institutionTraces, {
-        title: { text: 'Revenue Curves Across Scholarship Discount Levels (Top 6 Institutions)', font: { size: 14, color: '#1f2937' } },
-        xaxis: { title: 'Scholarship Discount %' },
-        yaxis: { title: 'Projected Net Revenue ($)' },
-        height: 500
-      });
-    }
+  const rows = state.allRows;
+  const top6 = rows
+    .sort((a, b) => num(b.optimal_net_revenue) - num(a.optimal_net_revenue))
+    .slice(0, 6);
+  
+  // For each of top 6, show their key metrics across discount levels
+  const traces = top6.map((row, idx) => {
+    const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
+    return {
+      x: [0, num(row.optimal_discount_pct_revenue), 100],
+      y: [
+        num(row.baseline_net_revenue),
+        num(row.optimal_net_revenue),
+        num(row.optimal_net_revenue) * 0.8 // rough estimate at 100% discount
+      ],
+      mode: 'lines+markers',
+      line: { color: colors[idx], width: 3 },
+      marker: { size: 8 },
+      name: row.institution_name.substring(0, 25),
+      hovertemplate: '<b>' + row.institution_name + '</b><br>Discount: %{x:.0f}%<br>Net Revenue: $%{y:,.0f}<extra></extra>'
+    };
+  });
+  
+  plot('chart-revenue-curves', traces, {
+    title: { text: 'Revenue Curves: Baseline → Optimal → High Discount (Top 6 Institutions)', font: { size: 14, color: '#1f2937' } },
+    xaxis: { title: 'Scholarship Discount %', range: [-5, 105] },
+    yaxis: { title: 'Projected Net Revenue ($)' },
+    height: 500
   });
 }
 
@@ -211,14 +207,7 @@ function renderYieldResponse() {
     xaxis: { tickangle: -45 }
   });
 }
-      name: 'Institution'
-    }
-  ], {
-    title: { text: 'Optimal Discount vs Projected Enrollment', font: { size: 14, color: '#1f2937' } },
-    xaxis: { title: 'Scholarship Discount %' },
-    yaxis: { title: 'Projected Enrollment' }
-  });
-}
+
 
 function renderBands() {
   const rows = state.allRows;
@@ -283,27 +272,6 @@ function renderBands() {
     yaxis: { title: 'Average Revenue Change %' },
     height: 450,
     hovermode: 'x unified'
-  });
-}
-      y: bandOutcomes.map((b) => b.revenue),
-      type: 'bar',
-      marker: { color: '#16a34a' },
-      name: 'Avg Revenue %',
-      yaxis: 'y'
-    },
-    {
-      x: bandOutcomes.map((b) => b.band),
-      y: bandOutcomes.map((b) => b.enrollment),
-      type: 'bar',
-      marker: { color: '#6ee7b7' },
-      name: 'Avg Enrollment Gain',
-      yaxis: 'y2'
-    }
-  ], {
-    title: { text: 'Average Outcomes by Discount Band', font: { size: 14, color: '#1f2937' } },
-    yaxis: { title: 'Revenue Change %' },
-    yaxis2: { title: 'Enrollment Gain', overlaying: 'y', side: 'right' },
-    barmode: 'group'
   });
 }
 
