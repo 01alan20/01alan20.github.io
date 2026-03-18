@@ -212,14 +212,23 @@ function generateSyntheticData() {
 
 // Initialize dashboard
 function initializeDashboard() {
+  console.log("Initializing dashboard...");
+  console.log("flowData records loaded:", flowData.length);
+  console.log("allCountries in set:", allCountries.size);
   populateCountryDropdown();
   setupEventListeners();
   updateAllVisualizations();
+  console.log("Dashboard initialized complete.");
 }
 
 // Populate country dropdown with ALL countries
 function populateCountryDropdown() {
   const select = document.getElementById("countrySelect");
+  if (!select) {
+    console.error("Country select element not found!");
+    return;
+  }
+  
   select.innerHTML = '<option value="ALL">All Countries</option>';
   
   const countries = Array.from(allCountries)
@@ -229,6 +238,9 @@ function populateCountryDropdown() {
       name: isoToName[iso] || iso,
     }));
 
+  console.log("Populating dropdown with countries:", countries.length);
+  console.log("Sample countries:", countries.slice(0, 5));
+
   countries.forEach((country) => {
     const option = document.createElement("option");
     option.value = country.iso;
@@ -237,6 +249,7 @@ function populateCountryDropdown() {
   });
   
   console.log(`Dropdown populated with ${countries.length} countries`);
+  console.log("Select element now has options:", select.options.length);
 }
 
 // Setup event listeners
@@ -310,33 +323,43 @@ function updateFlowMap() {
   const traces = [];
   const maxStudents = Math.max(...(topFlows.length > 0 ? topFlows.map(f => f.students) : [1]));
 
-  // Add curved flow lines with proper arrow styling
+  // Add curved flow arrows with directional indicators
   topFlows.forEach((flow) => {
     const origCoords = countryCoordinates[flow.origIso];
     const destCoords = countryCoordinates[flow.destIso];
     
     if (!origCoords || !destCoords) return; // Skip if coordinates missing
 
-    // Create curved path by adding intermediate points
     const originLon = origCoords[0];
     const originLat = origCoords[1];
     const destLon = destCoords[0];
     const destLat = destCoords[1];
     
-    const lons = [originLon, destLon];
-    const lats = [originLat, destLat];
+    // Create curved path with intermediate point
+    const midLon = (originLon + destLon) / 2;
+    const midLat = (originLat + destLat) / 2;
+    const curveFactor = 0.3;
+    const curvedMidLon = midLon + (originLat - destLat) * curveFactor;
+    const curvedMidLat = midLat + (destLon - originLon) * curveFactor;
     
     const opacity = 0.25 + (flow.students / maxStudents) * 0.75;
     const width = 1 + (flow.students / maxStudents) * 4;
 
+    // Main flow line with arrow
     const trace = {
       type: "scattergeo",
-      mode: "lines",
-      lon: lons,
-      lat: lats,
+      mode: "lines+markers",
+      lon: [originLon, curvedMidLon, destLon],
+      lat: [originLat, curvedMidLat, destLat],
       line: {
         width: width,
         color: `rgba(102, 126, 234, ${opacity})`,
+      },
+      marker: {
+        size: [0, 0, width * 2.5],  // Arrow at destination
+        color: `rgba(102, 126, 234, ${opacity})`,
+        symbol: "triangle-up",
+        angleref: "previous",
       },
       hovertemplate: `<b>${flow.origName}</b> → <b>${flow.destName}</b><br>Students: ${flow.students.toLocaleString()}<extra></extra>`,
       showlegend: false,
@@ -562,6 +585,11 @@ function switchTab(tabName) {
   });
   document.getElementById(`${tabName}-tab`).classList.add("active");
   document.querySelector(`[data-tab="${tabName}"]`).classList.add("active");
+  
+  // Load comparison table data when Compare Years tab is opened
+  if (tabName === "compare-years") {
+    updateComparisonTable();
+  }
 }
 
 // Update top countries charts

@@ -7,7 +7,7 @@ const state = {
 
 const num = (v) => {
   const n = Number(v);
-  return Number.isFinite(n) ? n : null;
+  return Number.isFinite(n) ? Math.min(Math.max(n, 0), 100) : null; // Clamp to 0-100
 };
 
 const fmt = (v, d = 2) =>
@@ -148,20 +148,22 @@ function renderRisk() {
     {
       x: riskScores,
       type: 'histogram',
-      nbinsx: 16,
+      nbinsx: 10,
       marker: { color: '#a78bfa', opacity: 0.8 },
       name: 'Students'
     }
   ], {
     title: { text: 'Distribution of Attrition Risk Score', font: { size: 14, color: '#1f2937' } },
-    xaxis: { title: 'Risk Score (0-100)' },
+    xaxis: { title: 'Risk Score (0-100)', range: [0, 100] },
     yaxis: { title: 'Count of Students' }
   });
   
   // Risk vs actual dropout
   const riskBands = {};
   rows.forEach((r) => {
-    const risk = Math.floor(num(r.attrition_risk_score) / 10) * 10;
+    let risk = num(r.attrition_risk_score);
+    if (risk >= 100) risk = 90; // Bucket 100 into 90-100 range
+    risk = Math.floor(risk / 10) * 10;
     const band = `${risk}-${risk + 10}`;
     if (!riskBands[band]) riskBands[band] = { actual: 0, total: 0 };
     riskBands[band].total++;
@@ -188,7 +190,9 @@ function renderRisk() {
   // Risk by service count
   const serviceByRisk = {};
   rows.forEach((r) => {
-    const risk = Math.floor(num(r.attrition_risk_score) / 20) * 20;
+    let risk = num(r.attrition_risk_score);
+    if (risk >= 100) risk = 80; // Bucket 100 into 80-100 range
+    risk = Math.floor(risk / 20) * 20;
     const band = `${risk}-${risk + 20}`;
     if (!serviceByRisk[band]) serviceByRisk[band] = [];
     serviceByRisk[band].push(num(r.engagement_services_count));

@@ -83,6 +83,8 @@ html, body {
   font-size: 28px;
   font-weight: 700;
   color: var(--accent);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Tabs */
@@ -169,6 +171,7 @@ html, body {
 .chart {
   width: 100%;
   min-height: 400px;
+  overflow: hidden;
 }
 
 /* Filter Group */
