@@ -1,0 +1,403 @@
+major_4digit,major_name,count_2013,count_2023,gross_change,pct_change,low_base_flag
+2401,"Liberal Arts and Sciences, General Studies and Humanities",430494.0,511953.0,81459.0,18.922214943762285,False
+5202,"Business Administration, Management and Operations",370368.0,395227.0,24859.0,6.711972956626923,False
+5138,"Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing",239380.0,308114.0,68734.0,28.71334280223912,False
+5108,Allied Health and Medical Assisting Services,149072.0,79189.0,-69883.0,-46.878689492325854,False
+4301,Criminal Justice and Corrections,130519.0,103302.0,-27217.0,-20.85290264252714,False
+4201,"Psychology, General",128094.0,144496.0,16402.0,12.804659078489234,False
+1204,Cosmetology and Related Personal Grooming Services,125618.0,132103.0,6485.0,5.1624767151204445,False
+1312,"Teacher Education and Professional Development, Specific Levels and Methods",117672.0,106652.0,-11020.0,-9.365014616901217,False
+5139,"Practical Nursing, Vocational Nursing and Nursing Assistants",112908.0,88809.0,-24099.0,-21.343926028270804,False
+5203,Accounting and Related Services,110838.0,84760.0,-26078.0,-23.52803190241614,False
+5107,Health and Medical Administrative Services,107076.0,85302.0,-21774.0,-20.335089095595652,False
+5109,"Allied Health Diagnostic, Intervention, and Treatment Professions",83235.0,85413.0,2178.0,2.6166876914759416,False
+2601,"Biology, General",82418.0,103883.0,21465.0,26.04406804338858,False
+4706,Vehicle Maintenance and Repair Technologies/Technicians,74251.0,68347.0,-5904.0,-7.951408061844285,False
+0901,Communication and Media Studies,59135.0,56620.0,-2515.0,-4.252980468419717,False
+5201,"Business/Commerce, General",59051.0,57204.0,-1847.0,-3.127804778919917,False
+1313,"Teacher Education and Professional Development, Specific Subject Areas",56009.0,40101.0,-15908.0,-28.402578157081898,False
+2301,"English Language and Literature, General",54030.0,35472.0,-18558.0,-34.34758467518046,False
+3105,"Sports, Kinesiology, and Physical Education/Fitness",49693.0,65385.0,15692.0,31.577888233755257,False
+2201,Law,47582.0,35647.0,-11935.0,-25.083014585347403,False
+1205,Culinary Arts and Related Services,47318.0,22680.0,-24638.0,-52.068980092142525,False
+4510,Political Science and Government,47201.0,46438.0,-763.0,-1.6164911760344058,False
+4407,Social Work,46008.0,59381.0,13373.0,29.06668405494697,False
+5007,Fine and Studio Arts,45145.0,36332.0,-8813.0,-19.521541698969987,False
+5208,Finance and Financial Management Services,45079.0,58013.0,12934.0,28.691852081900667,False
+5004,Design and Applied Arts,44237.0,36019.0,-8218.0,-18.57720912358433,False
+5401,History,44004.0,31255.0,-12749.0,-28.972366148531954,False
+1101,"Computer and Information Sciences, General",43527.0,105098.0,61571.0,141.45472924851242,False
+5214,Marketing,40533.0,52820.0,12287.0,30.313571657661658,False
+1304,Educational Administration and Supervision,39980.0,43921.0,3941.0,9.857428714357178,False
+1907,"Human Development, Family Studies, and Related Services",38585.0,40263.0,1678.0,4.34884022288454,False
+4511,Sociology,38231.0,33194.0,-5037.0,-13.175171980853234,False
+4506,Economics,38149.0,46225.0,8076.0,21.16962436761121,False
+3099,"Multi/Interdisciplinary Studies, Other",35648.0,29596.0,-6052.0,-16.97710951526032,False
+4805,Precision Metal Working,34381.0,59352.0,24971.0,72.63023181408336,False
+1301,"Education, General",33933.0,27845.0,-6088.0,-17.941237143783336,False
+5106,Dental Support Services and Allied Professions,33627.0,25040.0,-8587.0,-25.536027596871563,False
+1310,Special Education and Teaching,32962.0,34843.0,1881.0,5.706571203203689,False
+1419,Mechanical Engineering,29952.0,43522.0,13570.0,45.30582264957265,False
+5204,Business Operations Support and Assistant Services,29350.0,16604.0,-12746.0,-43.427597955706986,False
+4228,"Clinical, Counseling and Applied Psychology",27629.0,39326.0,11697.0,42.33595135545984,False
+5210,Human Resources Management and Services,27190.0,25350.0,-1840.0,-6.767193821257815,False
+5009,Music,26774.0,26167.0,-607.0,-2.267124822589079,False
+2701,Mathematics,25869.0,27179.0,1310.0,5.063976187715025,False
+1410,"Electrical, Electronics, and Communications Engineering",25438.0,27809.0,2371.0,9.320701312996304,False
+5135,Somatic Bodywork and Related Therapeutic Services,24928.0,10516.0,-14412.0,-57.814505776636715,False
+1110,Computer/Information Technology Administration and Management,24057.0,46791.0,22734.0,94.50056116722784,False
+5112,Medicine,23172.0,29206.0,6034.0,26.04004833419644,False
+5123,Rehabilitation and Therapeutic Professions,22997.0,29934.0,6937.0,30.164804104883245,False
+4501,"Social Sciences, General",21938.0,17458.0,-4480.0,-20.4211869814933,False
+5115,Mental and Social Health Services and Allied Professions,21765.0,31550.0,9785.0,44.95750057431656,False
+5122,Public Health,21455.0,42551.0,21096.0,98.32673036588207,False
+1303,Curriculum and Instruction,20738.0,20472.0,-266.0,-1.28266949561192,False
+4005,Chemistry,20620.0,19976.0,-644.0,-3.1231813773035886,False
+3001,Biological and Physical Sciences,20602.0,28469.0,7867.0,38.18561304727696,False
+1107,Computer Science,20416.0,72693.0,52277.0,256.05897335423197,False
+5209,Hospitality Administration/Management,19994.0,14076.0,-5918.0,-29.59887966389917,False
+1408,Civil Engineering,19963.0,20728.0,765.0,3.8320893653258525,False
+1609,"Romance Languages, Literatures, and Linguistics",19937.0,13043.0,-6894.0,-34.57892360936952,False
+2203,Legal Support Services,19590.0,10507.0,-9083.0,-46.36549259826442,False
+4902,Ground Transportation,19248.0,24115.0,4867.0,25.285743973399832,False
+5102,Communication Disorders Sciences and Services,19222.0,23288.0,4066.0,21.152845697638124,False
+4702,"Heating, Air Conditioning, Ventilation and Refrigeration Maintenance Technology/Technician (HAC, HACR, HVAC, HVACR)",19046.0,21415.0,2369.0,12.438307256116769,False
+1109,Computer Systems Networking and Telecommunications,18557.0,13734.0,-4823.0,-25.99019238023387,False
+5110,Clinical/Medical Laboratory Science/Research and Allied Professions,17920.0,19017.0,1097.0,6.121651785714286,False
+4404,Public Administration,17898.0,15867.0,-2031.0,-11.347636607442173,False
+5120,"Pharmacy, Pharmaceutical Sciences, and Administration",17604.0,18729.0,1125.0,6.3905930470347645,False
+0301,Natural Resources Conservation and Research,17407.0,23672.0,6265.0,35.99126788073763,False
+0904,Journalism,17277.0,12280.0,-4997.0,-28.922845401400703,False
+5006,Film/Video and Photographic Arts,17074.0,18531.0,1457.0,8.533442661356448,False
+4603,Electrical and Power Transmission Installers,16843.0,29904.0,13061.0,77.54556789170576,False
+4509,International Relations and National Security Studies,16688.0,14086.0,-2602.0,-15.592042186001917,False
+5005,Drama/Theatre Arts and Stagecraft,16188.0,16853.0,665.0,4.107981220657277,False
+4400,PUBLIC ADMINISTRATION AND SOCIAL SERVICE PROFESSIONS,15877.0,11596.0,-4281.0,-26.963532153429487,False
+3906,Theological and Ministerial Studies,15629.0,14928.0,-701.0,-4.485251775545461,False
+5212,Management Information Systems and Services,15458.0,11695.0,-3763.0,-24.343382067537846,False
+0909,"Public Relations, Advertising, and Applied Communication",15379.0,20666.0,5287.0,34.378047987515444,False
+1503,Electrical/Electronic Engineering Technologies/Technicians,15265.0,8331.0,-6934.0,-45.42417294464462,False
+2313,Rhetoric and Composition/Writing Studies,15171.0,13176.0,-1995.0,-13.150088985564565,False
+1311,Student Counseling and Personnel Services,14999.0,14512.0,-487.0,-3.2468831255417023,False
+4502,Anthropology,14488.0,10899.0,-3589.0,-24.772225289895086,False
+4302,Fire Protection,13805.0,13533.0,-272.0,-1.9703006157189424,False
+5100,HEALTH PROFESSIONS AND RELATED PROGRAMS,12608.0,35887.0,23279.0,184.6367385786802,False
+1513,Drafting/Design Engineering Technologies/Technicians,12598.0,9134.0,-3464.0,-27.49642800444515,False
+1104,Information Science/Studies,12302.0,20202.0,7900.0,64.21720045521053,False
+0907,"Radio, Television, and Digital Communication",11621.0,18257.0,6636.0,57.103519490577405,False
+2602,"Biochemistry, Biophysics and Molecular Biology",11449.0,14354.0,2905.0,25.3733950563368,False
+1108,Computer Software and Media Applications,11284.0,14684.0,3400.0,30.131159163417227,False
+3801,Philosophy,11012.0,9331.0,-1681.0,-15.265165274246275,False
+4008,Physics,10946.0,13306.0,2360.0,21.56038735611182,False
+0402,Architecture,10790.0,4794.0,-5996.0,-55.569972196478226,False
+5211,International Business,10598.0,7505.0,-3093.0,-29.18475183996981,False
+1407,Chemical Engineering,10056.0,11830.0,1774.0,17.6412092283214,False
+3802,Religion/Religious Studies,9957.0,9587.0,-370.0,-3.715978708446319,False
+1506,Industrial Production Technologies/Technicians,9859.0,11351.0,1492.0,15.133380667410487,False
+4701,Electrical/Electronics Maintenance and Repair Technologies/Technicians,9521.0,7979.0,-1542.0,-16.19577775443756,False
+4901,Air Transportation,9314.0,10445.0,1131.0,12.143010521795148,False
+3017,Behavioral Sciences,9296.0,4777.0,-4519.0,-48.612306368330465,False
+1409,Computer Engineering,9101.0,18973.0,9872.0,108.47159652785408,False
+1505,Environmental Control Technologies/Technicians,9091.0,8781.0,-310.0,-3.4099659003409966,False
+1002,Audiovisual Communications Technologies/Technicians,8873.0,6764.0,-2109.0,-23.768736616702355,False
+0501,Area Studies,8731.0,6170.0,-2561.0,-29.332264345435803,False
+4507,Geography and Cartography,8623.0,7541.0,-1082.0,-12.547837179635856,False
+4006,Geological and Earth Sciences/Geosciences,8475.0,7691.0,-784.0,-9.250737463126843,False
+4504,Criminology,8336.0,10609.0,2273.0,27.267274472168907,False
+1601,"Linguistic, Comparative, and Related Language Studies and Services",8258.0,7681.0,-577.0,-6.987163962218455,False
+0183,Veterinary/Animal Health Technologies/Technicians,8253.0,8257.0,4.0,0.04846722403974312,False
+1102,Computer Programming,8136.0,12983.0,4847.0,59.574729596853494,False
+5219,"Specialized Sales, Merchandising and  Marketing Operations",8086.0,4322.0,-3764.0,-46.549591887212465,False
+1405,Biomedical/Medical Engineering,7889.0,14006.0,6117.0,77.53834453035873,False
+5111,Health/Medical Preparatory Programs,7860.0,9413.0,1553.0,19.758269720101783,False
+1401,"Engineering, General",7774.0,12241.0,4467.0,57.460766658091075,False
+3020,International/Globalization Studies,7635.0,6458.0,-1177.0,-15.4158480681074,False
+5199,"Health Professions and Related Clinical Sciences, Other",7585.0,7387.0,-198.0,-2.6104152933421227,False
+2501,Library Science and Administration,7298.0,6224.0,-1074.0,-14.716360646752536,False
+0101,Agricultural Business and Management,7233.0,8085.0,852.0,11.779344670261302,False
+5213,Management Sciences and Quantitative Methods,7218.0,56747.0,49529.0,686.1873095040178,False
+5207,Entrepreneurial and Small Business Operations,7072.0,12707.0,5635.0,79.68042986425338,False
+1003,Graphic Communications,6782.0,7730.0,948.0,13.97817752875258,False
+5299,"Business, Management, Marketing, and Related Support Services, Other",6777.0,4903.0,-1874.0,-27.652353548767895,False
+1399,"Education, Other",6591.0,4693.0,-1898.0,-28.79684418145957,False
+1504,Electromechanical Technologies/Technicians,6553.0,10996.0,4443.0,67.8010071722875,False
+0502,"Ethnic, Cultural Minority, Gender, and Group Studies",6538.0,9022.0,2484.0,37.99327011318446,False
+0109,Animal Sciences,6342.0,8396.0,2054.0,32.387259539577414,False
+1905,"Foods, Nutrition, and Related Services",6315.0,4014.0,-2301.0,-36.43705463182898,False
+1435,Industrial Engineering,6230.0,8722.0,2492.0,40.0,False
+2202,Legal Research and Advanced Professional Studies,6144.0,11141.0,4997.0,81.33138020833334,False
+5206,Business/Managerial Economics,6053.0,4885.0,-1168.0,-19.29621675202379,False
+1508,Mechanical Engineering Related Technologies/Technicians,5776.0,5841.0,65.0,1.1253462603878117,False
+4604,"Building/Construction Finishing, Management, and Inspection",5727.0,6049.0,322.0,5.622489959839357,False
+4227,Research and Experimental Psychology,5685.0,22179.0,16494.0,290.13192612137203,False
+2613,"Ecology, Evolution, Systematics, and Population Biology",5656.0,9123.0,3467.0,61.29773691654879,False
+4903,Marine Transportation,5527.0,1173.0,-4354.0,-78.77691333453953,False
+1314,Teaching English or French as a Second or Foreign Language,5524.0,5030.0,-494.0,-8.94279507603186,False
+3902,Bible/Biblical Studies,5419.0,3832.0,-1587.0,-29.285846097065882,False
+2615,Neurobiology and Neurosciences,5366.0,12903.0,7537.0,140.45844204248974,False
+5104,Dentistry,5306.0,6961.0,1655.0,31.191104410101772,False
+2609,"Physiology, Pathology and Related Sciences",5288.0,10453.0,5165.0,97.67397881996975,False
+1402,"Aerospace, Aeronautical, and Astronautical/Space Engineering",5267.0,9220.0,3953.0,75.05221188532371,False
+5131,Dietetics and Clinical Nutrition Services,5236.0,5644.0,408.0,7.792207792207792,False
+1305,Educational/Instructional Media Design,5019.0,8912.0,3893.0,77.56525204223948,False
+4405,Public Policy Analysis,4946.0,6740.0,1794.0,36.2717347351395,False
+4703,Heavy/Industrial Equipment Maintenance Technologies/Technicians,4946.0,8614.0,3668.0,74.1609381318237,False
+1512,Computer Engineering Technologies/Technicians,4865.0,3432.0,-1433.0,-29.455292908530318,False
+2604,Cell/Cellular Biology and Anatomical Sciences,4814.0,6274.0,1460.0,30.328209389281263,False
+1901,"Family and Consumer Sciences/Human Sciences, General",4715.0,2454.0,-2261.0,-47.953340402969246,False
+1515,Engineering-Related Fields,4676.0,7918.0,3242.0,69.3327630453379,False
+5218,"General Sales, Merchandising and Related Marketing Operations",4569.0,5965.0,1396.0,30.553731669949663,False
+2705,Statistics,4536.0,9944.0,5408.0,119.22398589065256,False
+0106,Applied Horticulture and Horticultural Business Services,4475.0,3932.0,-543.0,-12.134078212290502,False
+5126,Health Aides/Attendants/Orderlies,4415.0,2244.0,-2171.0,-49.17327293318233,False
+4304,Security Science and Technology,4338.0,8130.0,3792.0,87.41355463347165,False
+2703,Applied Mathematics,4207.0,11635.0,7428.0,176.5628714048015,False
+2605,Microbiological Sciences and Immunology,4062.0,4815.0,753.0,18.537666174298376,False
+5001,"Visual and Performing Arts, General",3988.0,6785.0,2797.0,70.13540621865597,False
+3103,"Parks, Recreation, and Leisure Facilities Management",3827.0,2492.0,-1335.0,-34.883720930232556,False
+1507,Quality Control and Safety Technologies/Technicians,3777.0,3540.0,-237.0,-6.274821286735505,False
+1427,Systems Engineering,3759.0,4148.0,389.0,10.34849694067571,False
+1500,ENGINEERING/ENGINEERING-RELATED TECHNOLOGIES/TECHNICIANS,3722.0,4002.0,280.0,7.522837184309511,False
+4402,Community Organization and Advocacy,3649.0,2557.0,-1092.0,-29.92600712523979,False
+5010,"Arts, Entertainment, and Media Management",3522.0,4722.0,1200.0,34.07155025553663,False
+4299,"Psychology, Other",3466.0,2887.0,-579.0,-16.705135603000578,False
+3101,"Parks, Recreation, and Leisure Studies",3454.0,2361.0,-1093.0,-31.644470179502026,False
+4602,Carpenters,3422.0,4214.0,792.0,23.14436002337814,False
+4303,Homeland Security,3411.0,6480.0,3069.0,89.9736147757256,False
+4001,"Physical Sciences, General",3361.0,2747.0,-614.0,-18.268372508182086,False
+0403,"City/Urban, Community, and Regional Planning",3294.0,2481.0,-813.0,-24.681238615664842,False
+4599,"Social Sciences, Other",3233.0,2069.0,-1164.0,-36.00371172285803,False
+5220,Construction Management,3218.0,4158.0,940.0,29.210689869484153,False
+2200,LEGAL PROFESSIONS AND STUDIES,3179.0,4745.0,1566.0,49.26077382824788,False
+5215,Real Estate,3155.0,7783.0,4628.0,146.6877971473851,False
+3000,MULTI/INTERDISCIPLINARY STUDIES,3134.0,9341.0,6207.0,198.0536056158264,False
+1315,Teaching Assistants/Aides,3118.0,2942.0,-176.0,-5.644644002565747,False
+3907,Pastoral Counseling and Specialized Ministries,3113.0,3433.0,320.0,10.279473176999678,False
+2612,Biotechnology,3063.0,3836.0,773.0,25.236696049624552,False
+5133,Alternative and Complementary Medicine and Medical Systems,3050.0,3431.0,381.0,12.491803278688526,False
+1909,Apparel and Textiles,3032.0,2961.0,-71.0,-2.341688654353562,False
+2607,Zoology/Animal Biology,3000.0,3246.0,246.0,8.200000000000001,False
+2699,"Biological and Biomedical Sciences, Other",2988.0,4637.0,1649.0,55.18741633199464,False
+1510,Construction Engineering Technology/Technician,2943.0,4771.0,1828.0,62.11348963642541,False
+1199,"Computer and Information Sciences and Support Services, Other",2915.0,2000.0,-915.0,-31.3893653516295,False
+0111,Plant Sciences,2878.0,3307.0,429.0,14.906184850590687,False
+1103,Data Processing,2830.0,1927.0,-903.0,-31.908127208480565,False
+5003,Dance,2807.0,3233.0,426.0,15.176344852155326,False
+0100,AGRICULTURAL/ANIMAL/PLANT/VETERINARY SCIENCE AND RELATED FIELDS,2755.0,3256.0,501.0,18.185117967332122,False
+3019,Nutrition Sciences,2747.0,5514.0,2767.0,100.72806698216237,False
+1418,Materials Engineering,2721.0,3397.0,676.0,24.84380742374127,False
+0180,Veterinary Medicine,2610.0,3555.0,945.0,36.206896551724135,False
+0302,Environmental/Natural Resources Management and Policy,2556.0,3147.0,591.0,23.122065727699532,False
+1517,Energy Systems Technologies/Technicians,2426.0,1230.0,-1196.0,-49.299258037922506,False
+1603,"East Asian Languages, Literatures, and Linguistics",2416.0,2056.0,-360.0,-14.90066225165563,False
+2399,"English Language and Literature/Letters, Other",2395.0,877.0,-1518.0,-63.382045929018794,False
+5132,"Health Professions Education, Ethics, and Humanities",2393.0,5056.0,2663.0,111.28290848307563,False
+4399,"Homeland Security, Law Enforcement, Firefighting and Related Protective Services, Other",2378.0,1416.0,-962.0,-40.45416316232128,False
+4605,Plumbing and Related Water Supply Services,2313.0,2745.0,432.0,18.67704280155642,False
+1414,Environmental/Environmental Health Engineering,2279.0,3012.0,733.0,32.16322948661694,False
+1616,American Sign Language,2252.0,2341.0,89.0,3.952042628774423,False
+0110,Food Science and Technology,2224.0,2181.0,-43.0,-1.9334532374100721,False
+5101,Chiropractic,2224.0,2698.0,474.0,21.31294964028777,False
+0305,Forestry,2186.0,2243.0,57.0,2.607502287282708,False
+1105,Computer Systems Analysis,2168.0,2864.0,696.0,32.10332103321033,False
+2299,"Legal Professions and Studies, Other",2149.0,2229.0,80.0,3.7226617031177294,False
+1499,"Engineering, Other",2109.0,3221.0,1112.0,52.726410621147465,False
+0999,"Communication, Journalism, and Related Programs, Other",2082.0,1238.0,-844.0,-40.53794428434198,False
+1612,"Classics and Classical Languages, Literatures, and Linguistics",2073.0,1484.0,-589.0,-28.41292812349252,False
+5216,Taxation,2056.0,1257.0,-799.0,-38.86186770428016,False
+1203,Funeral Service and Mortuary Science,2016.0,2451.0,435.0,21.577380952380953,False
+3018,Natural Sciences,1966.0,2275.0,309.0,15.717192268565617,False
+0306,Wildlife and Wildlands Science and Management,1918.0,2389.0,471.0,24.556830031282587,False
+0103,Agricultural Production Operations,1875.0,3522.0,1647.0,87.83999999999999,False
+1605,"Germanic Languages, Literatures, and Linguistics",1823.0,1098.0,-725.0,-39.76961053208996,False
+0406,Landscape Architecture,1800.0,926.0,-874.0,-48.55555555555556,False
+4512,Urban Studies/Affairs,1771.0,1301.0,-470.0,-26.538678712591757,False
+4103,Physical Science Technologies/Technicians,1745.0,2688.0,943.0,54.04011461318051,False
+1425,Petroleum Engineering,1623.0,941.0,-682.0,-42.020948860135555,False
+1502,Civil Engineering Technologies/Technicians,1586.0,1199.0,-387.0,-24.401008827238336,False
+4499,"Public Administration and Social Service Professions, Other",1574.0,553.0,-1021.0,-64.86658195679796,False
+1599,"Engineering/Engineering-Related Technologies/Technicians, Other",1572.0,2458.0,886.0,56.36132315521628,False
+3904,Religious Education,1568.0,1185.0,-383.0,-24.426020408163264,False
+5117,Optometry,1560.0,1789.0,229.0,14.67948717948718,False
+1904,Family and Consumer Economics and Related Studies,1490.0,1208.0,-282.0,-18.926174496644297,False
+1106,Data Entry/Microcomputer Applications,1484.0,542.0,-942.0,-63.47708894878706,False
+2611,"Biomathematics, Bioinformatics, and Computational Biology",1466.0,3505.0,2039.0,139.08594815825376,False
+3005,Peace Studies and Conflict Resolution,1445.0,1074.0,-371.0,-25.674740484429066,False
+5105,Advanced/Graduate Dentistry and Oral Sciences,1434.0,1845.0,411.0,28.661087866108787,False
+1501,Architectural Engineering Technologies/Technicians,1426.0,1261.0,-165.0,-11.570827489481065,False
+3999,"Theology and Religious Vocations, Other",1410.0,1237.0,-173.0,-12.26950354609929,False
+1403,Agricultural Engineering,1410.0,1328.0,-82.0,-5.815602836879433,False
+4600,CONSTRUCTION TRADES,1401.0,2597.0,1196.0,85.36759457530336,False
+3011,Gerontology,1380.0,951.0,-429.0,-31.08695652173913,False
+1302,"Bilingual, Multilingual, and Multicultural Education",1370.0,1654.0,284.0,20.72992700729927,False
+1437,Operations Research,1339.0,1907.0,568.0,42.41971620612397,False
+4199,"Science Technologies/Technicians, Other",1242.0,2436.0,1194.0,96.1352657004831,False
+5099,"Visual and Performing Arts, Other",1194.0,1026.0,-168.0,-14.07035175879397,False
+1423,Nuclear Engineering,1187.0,885.0,-302.0,-25.44229149115417,False
+4004,Atmospheric Sciences and Meteorology,1177.0,1288.0,111.0,9.430756159728123,False
+0102,Agricultural Mechanization,1170.0,1402.0,232.0,19.82905982905983,False
+5118,Ophthalmic and Optometric Support Services and Allied Professions,1169.0,760.0,-409.0,-34.98716852010265,False
+3903,Missions/Missionary Studies and Missiology,1120.0,1490.0,370.0,33.035714285714285,False
+5217,Insurance,1113.0,2334.0,1221.0,109.70350404312667,False
+2608,Genetics,1103.0,1703.0,600.0,54.39709882139619,False
+1906,Housing and Human Environments,1101.0,314.0,-787.0,-71.48047229791099,False
+1413,Engineering Science,1088.0,1338.0,250.0,22.977941176470587,False
+0105,Agricultural and Domestic Animal Services,1021.0,1217.0,196.0,19.19686581782566,False
+1611,"Middle/Near Eastern and Semitic Languages, Literatures, and Linguistics",1013.0,549.0,-464.0,-45.8045409674235,False
+2610,Pharmacology and Toxicology,1008.0,1179.0,171.0,16.964285714285715,False
+4704,Precision Systems Maintenance and Repair Technologies/Technicians,983.0,2301.0,1318.0,134.0793489318413,False
+0409,Architectural Sciences and Technology,969.0,9033.0,8064.0,832.1981424148607,False
+0404,Environmental Design,968.0,719.0,-249.0,-25.723140495867767,False
+2314,Literature,956.0,774.0,-182.0,-19.03765690376569,False
+1511,Engineering-Related Technologies/Technicians,954.0,1144.0,190.0,19.91614255765199,False
+1404,Architectural Engineering,934.0,1090.0,156.0,16.70235546038544,False
+5205,Business/Corporate Communications,921.0,837.0,-84.0,-9.120521172638437,False
+3025,Cognitive Science,871.0,2959.0,2088.0,239.72445464982778,False
+2902,"Intelligence, Command Control and Information Operations",865.0,3962.0,3097.0,358.0346820809249,False
+4101,Biology/Biotechnology Technologies/Technicians,860.0,1240.0,380.0,44.18604651162791,False
+1509,Mining and Petroleum Technologies/Technicians,842.0,433.0,-409.0,-48.574821852731596,False
+1604,"Slavic, Baltic and Albanian Languages, Literatures, and Linguistics",829.0,536.0,-293.0,-35.343787696019305,False
+3015,"Science, Technology and Society",826.0,805.0,-21.0,-2.5423728813559325,False
+5127,Medical Illustration and Informatics,821.0,2689.0,1868.0,227.5274056029233,False
+4002,Astronomy and Astrophysics,770.0,1573.0,803.0,104.28571428571429,False
+4799,"Mechanic and Repair Technologies/Technicians, Other",765.0,1175.0,410.0,53.59477124183007,False
+1412,Engineering Physics,710.0,1047.0,337.0,47.46478873239436,False
+4807,Woodworking,694.0,587.0,-107.0,-15.417867435158502,False
+0405,Interior Architecture,682.0,850.0,168.0,24.633431085043988,False
+3014,Museology/Museum Studies,659.0,892.0,233.0,35.35660091047041,False
+4099,"Physical Sciences, Other",651.0,404.0,-247.0,-37.94162826420891,False
+4699,"Construction Trades, Other",644.0,232.0,-412.0,-63.975155279503106,False
+1309,Social and Philosophical Foundations of Education,642.0,959.0,317.0,49.37694704049844,False
+1436,Manufacturing Engineering,636.0,942.0,306.0,48.113207547169814,False
+1001,Communications Technologies/Technicians,628.0,990.0,362.0,57.64331210191082,False
+0181,Veterinary Biomedical and Clinical Sciences,620.0,954.0,334.0,53.87096774193548,False
+2999,"Military Technologies and Applied Sciences, Other",611.0,148.0,-463.0,-75.77741407528642,False
+3033,Sustainability Studies,608.0,4382.0,3774.0,620.7236842105262,False
+1299,"Culinary, Entertainment, and Personal Services, Other",605.0,84.0,-521.0,-86.11570247933884,False
+2603,Botany/Plant Biology,601.0,743.0,142.0,23.62728785357737,False
+0108,Agricultural Public Services,582.0,866.0,284.0,48.797250859106526,False
+5114,Medical Clinical Sciences/Graduate Medical Studies,580.0,1090.0,510.0,87.93103448275862,False
+1306,"Educational Assessment, Evaluation, and Research",552.0,4249.0,3697.0,669.7463768115942,False
+1433,Construction Engineering,552.0,1284.0,732.0,132.6086956521739,False
+3027,Human Biology,547.0,2016.0,1469.0,268.55575868372944,False
+3899,"Philosophy and Religious Studies, Other",528.0,202.0,-326.0,-61.74242424242424,False
+3006,Systems Science and Theory,522.0,1080.0,558.0,106.89655172413792,False
+1699,"Foreign Languages, Literatures, and Linguistics, Other",506.0,520.0,14.0,2.766798418972332,False
+4010,Materials Sciences,504.0,679.0,175.0,34.72222222222222,False
+4102,Nuclear and Industrial Radiologic Technologies/Technicians,502.0,319.0,-183.0,-36.45418326693227,False
+1422,Naval Architecture and Marine Engineering,480.0,390.0,-90.0,-18.75,False
+3023,Intercultural/Multicultural and Diversity Studies,468.0,584.0,116.0,24.786324786324787,False
+4513,Sociology and Anthropology,462.0,552.0,90.0,19.480519480519483,False
+3012,Historic Preservation and Conservation,461.0,423.0,-38.0,-8.24295010845987,False
+3905,Religious Music and Worship,460.0,511.0,51.0,11.08695652173913,False
+4601,Mason/Masonry,452.0,370.0,-82.0,-18.141592920353983,False
+3028,Dispute Resolution,436.0,652.0,216.0,49.54128440366973,False
+2503,Library and Archives Assisting,434.0,485.0,51.0,11.751152073732719,False
+1902,Family and Consumer Sciences/Human Sciences Business Services,428.0,560.0,132.0,30.8411214953271,False
+1439,Geological/Geophysical Engineering,420.0,315.0,-105.0,-25.0,False
+0499,"Architecture and Related Services, Other",411.0,206.0,-205.0,-49.87834549878345,False
+0303,Fishing and Fisheries Sciences and Management,410.0,505.0,95.0,23.170731707317074,False
+0112,Soil Sciences,399.0,439.0,40.0,10.025062656641603,False
+3199,"Parks, Recreation, Leisure, Fitness, and Kinesiology, Other",395.0,232.0,-163.0,-41.265822784810126,False
+5136,Movement and Mind-Body Therapies and Education,374.0,468.0,94.0,25.13368983957219,False
+1099,"Communications Technologies/Technicians and Support Services, Other",368.0,188.0,-180.0,-48.91304347826087,False
+4503,Archeology,358.0,339.0,-19.0,-5.307262569832402,False
+1514,Nuclear Engineering Technology/Technician,356.0,261.0,-95.0,-26.685393258426966,False
+0113,Agriculture/Veterinary Preparatory Programs,355.0,486.0,131.0,36.901408450704224,False
+1421,Mining and Mineral Engineering,345.0,300.0,-45.0,-13.043478260869565,False
+0199,"Agricultural/Animal/Plant/Veterinary Science and Related Fields, Other",335.0,700.0,365.0,108.95522388059702,False
+1424,Ocean Engineering,313.0,290.0,-23.0,-7.348242811501597,False
+1428,Textile Sciences and Engineering,307.0,292.0,-15.0,-4.88599348534202,False
+1307,International and Comparative Education,300.0,317.0,17.0,5.666666666666666,False
+3022,Classical and Ancient Studies,295.0,290.0,-5.0,-1.694915254237288,False
+0399,"Natural Resources and Conservation, Other",289.0,150.0,-139.0,-48.09688581314879,False
+1411,Engineering Mechanics,270.0,209.0,-61.0,-22.59259259259259,False
+1432,Polymer/Plastics Engineering,269.0,290.0,21.0,7.806691449814126,False
+2799,"Mathematics and Statistics, Other",267.0,671.0,404.0,151.31086142322096,False
+3008,Mathematics and Computer Science,254.0,1489.0,1235.0,486.2204724409449,False
+0410,Real Estate Development,236.0,549.0,313.0,132.6271186440678,False
+4803,Leatherworking and Upholstery,234.0,31.0,-203.0,-86.75213675213675,False
+5002,"Crafts/Craft Design, Folk Art and Artisanry",219.0,102.0,-117.0,-53.42465753424658,False
+1445,Biological/Biosystems Engineering,209.0,411.0,202.0,96.65071770334929,False
+2599,"Library Science, Other",204.0,131.0,-73.0,-35.78431372549019,False
+1900,FAMILY AND CONSUMER SCIENCES/HUMAN SCIENCES,199.0,0.0,-199.0,-100.0,False
+0910,Publishing,185.0,371.0,186.0,100.54054054054053,False
+3031,Human Computer Interaction,172.0,2324.0,2152.0,1251.1627906976744,False
+3010,Biopsychology,171.0,208.0,37.0,21.637426900584796,False
+1420,Metallurgical Engineering,165.0,195.0,30.0,18.181818181818183,False
+3106,Outdoor Education,165.0,277.0,112.0,67.87878787878789,False
+3026,Cultural Studies/Critical Theory and Analysis,154.0,375.0,221.0,143.5064935064935,False
+0104,Agricultural and Food Products Processing,153.0,198.0,45.0,29.411764705882355,False
+4899,"Precision Production, Other",147.0,104.0,-43.0,-29.25170068027211,False
+1442,"Mechatronics, Robotics, and Automation Engineering",144.0,1759.0,1615.0,1121.5277777777778,False
+3013,Medieval and Renaissance Studies,143.0,105.0,-38.0,-26.573426573426573,False
+4700,MECHANIC AND REPAIR TECHNOLOGIES/TECHNICIANS,136.0,431.0,295.0,216.91176470588235,False
+1999,"Family and Consumer Sciences/Human Sciences, Other",133.0,142.0,9.0,6.7669172932330826,False
+0408,"Architectural History, Criticism, and Conservation",123.0,158.0,35.0,28.455284552845526,False
+2903,Military Applied Sciences,106.0,251.0,145.0,136.7924528301887,False
+1406,Ceramic Sciences and Engineering,104.0,60.0,-44.0,-42.30769230769231,False
+3032,Marine Sciences,103.0,436.0,333.0,323.3009708737864,False
+5134,Alternative and Complementary Medical Support Services,98.0,136.0,38.0,38.775510204081634,False
+2904,Military Systems and Maintenance Technology,97.0,188.0,91.0,93.81443298969072,False
+1438,Surveying Engineering,92.0,123.0,31.0,33.69565217391305,False
+0107,International Agriculture,86.0,215.0,129.0,150.0,False
+5137,Energy and Biologically Based Therapies,81.0,116.0,35.0,43.20987654320987,False
+3800,PHILOSOPHY AND RELIGIOUS STUDIES,80.0,181.0,101.0,126.25,False
+4999,"Transportation and Materials Moving, Other",72.0,18.0,-54.0,-75.0,False
+1516,Nanotechnology,67.0,105.0,38.0,56.71641791044776,False
+1441,Electromechanical Engineering,63.0,47.0,-16.0,-25.396825396825395,False
+4100,SCIENCE TECHNOLOGIES/TECHNICIANS,59.0,88.0,29.0,49.152542372881356,False
+1443,Biochemical Engineering,58.0,141.0,83.0,143.10344827586206,False
+4505,Demography,53.0,81.0,28.0,52.83018867924528,False
+3030,Computational Science,53.0,2167.0,2114.0,3988.6792452830186,False
+3016,Accounting and Computer Science,51.0,55.0,4.0,7.8431372549019605,False
+2614,Molecular Medicine,51.0,130.0,79.0,154.90196078431373,False
+4808,Boilermaking/Boilermaker,36.0,41.0,5.0,13.88888888888889,True
+1440,Paper Science and Engineering,30.0,48.0,18.0,60.0,True
+3021,Holocaust and Related Studies,27.0,67.0,40.0,148.14814814814815,True
+1434,Forest Engineering,27.0,57.0,30.0,111.11111111111111,True
+3029,Maritime Studies,21.0,68.0,47.0,223.80952380952382,True
+4800,PRECISION PRODUCTION,20.0,55.0,35.0,175.0,True
+1610,"American Indian/Native American Languages, Literatures, and Linguistics",19.0,48.0,29.0,152.63157894736844,True
+1602,"African Languages, Literatures, and Linguistics",16.0,8.0,-8.0,-50.0,True
+1608,"Iranian/Persian Languages, Literatures, and Linguistics",12.0,8.0,-4.0,-33.33333333333333,True
+5221,Telecommunications Management,10.0,58.0,48.0,480.0,True
+1607,"South Asian Languages, Literatures, and Linguistics",9.0,26.0,17.0,188.88888888888889,True
+1615,"Turkic, Uralic-Altaic, Caucasian, and Central Asian Languages, Literatures, and Linguistics",8.0,1.0,-7.0,-87.5,True
+1613,"Celtic Languages, Literatures, and Linguistics",7.0,3.0,-4.0,-57.14285714285714,True
+1606,Modern Greek Language and Literature,7.0,4.0,-3.0,-42.857142857142854,True
+1444,Engineering Chemistry,5.0,27.0,22.0,440.00000000000006,True
+1614,"Southeast Asian and Australasian/Pacific Languages, Literatures, and Linguistics",5.0,50.0,45.0,900.0,True
+3046,History and Political Science,0.0,68.0,68.0,,True
+3043,Geobiology,0.0,0.0,0.0,,True
+3042,Geoarcheaology,0.0,1.0,1.0,,True
+3041,Environmental Geosciences,0.0,102.0,102.0,,True
+3040,Economics and Foreign Language/Literature,0.0,12.0,12.0,,True
+3039,Economics and Computer Science,0.0,89.0,89.0,,True
+3038,Earth Systems Science,0.0,25.0,25.0,,True
+3036,Cultural Studies and Comparative Literature,0.0,40.0,40.0,,True
+3035,Climate Science,0.0,110.0,110.0,,True
+3034,Anthrozoology,0.0,47.0,47.0,,True
+3071,Data Analytics,0.0,7294.0,7294.0,,True
+3048,Linguistics and Computer Science,0.0,4.0,4.0,,True
+3049,Mathematical Economics,0.0,139.0,139.0,,True
+3051,"Philosophy, Politics, and Economics",0.0,153.0,153.0,,True
+3052,Digital Humanities and Textual Studies,0.0,54.0,54.0,,True
+3053,Thanatology,0.0,8.0,8.0,,True
+3070,Data Science,0.0,4416.0,4416.0,,True
+3045,History and Language/Literature,0.0,1.0,1.0,,True
+3908,Religious Institution Administration and Law,0.0,56.0,56.0,,True
+0182,Veterinary Administrative Services,0.0,113.0,113.0,,True
+4011,Physics and Astronomy,0.0,45.0,45.0,,True
+3047,Linguistics and Anthropology,0.0,1.0,1.0,,True
+4707,Energy Systems Maintenance and Repair Technologies/Technicians,0.0,146.0,146.0,,True
+2706,Applied Statistics,0.0,541.0,541.0,,True
+3044,Geography and Environmental Studies,0.0,809.0,809.0,,True
+5011,Community/Environmental/Socially-Engaged Art,0.0,6.0,6.0,,True
+1617,Second Language Learning,0.0,282.0,282.0,,True
+2906,Military Technology and Applied Sciences Management,0.0,19.0,19.0,,True
+1910,Work and Family Studies,0.0,10.0,10.0,,True
+1448,Energy Systems Engineering,0.0,187.0,187.0,,True
+1447,Electrical and Computer Engineering,0.0,1988.0,1988.0,,True
+1206,Casino Operations and Services,0.0,619.0,619.0,,True
+0599,"Area, Ethnic, Cultural, Gender, and Group Studies, Other",0.0,62.0,62.0,,True

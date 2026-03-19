@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IPEDS Major Trends (2013-2023)</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>IPEDS Major Trends (2013-2023)</h1>
+      <p>Major change analysis using 4-digit CIP groups (major names shown only).</p>
+      <p class="note">Note: "Following graduates" here means aggregate completion trends over time, not person-level longitudinal tracking.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="controls">
+      <label>
+        Major
+        <select id="major-select"></select>
+      </label>
+      <label>
+        Metric
+        <select id="metric-select">
+          <option value="gross_change">Gross Change</option>
+          <option value="pct_change">Percent Change</option>
+        </select>
+      </label>
+      <label>
+        Trend View
+        <select id="trend-select">
+          <option value="graduates">Count</option>
+          <option value="share_of_total">Share</option>
+        </select>
+      </label>
+      <label>
+        State Overlay
+        <select id="state-overlay-select">
+          <option value="all">National Only</option>
+        </select>
+      </label>
+      <label class="checkbox">
+        <input id="include-low-base" type="checkbox">
+        Include low-base rows (2013 count &lt; 50)
+      </label>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="main">Main Infographic</button>
+      <button class="tab-btn" data-tab="rankings">National Rankings</button>
+      <button class="tab-btn" data-tab="map">US Map by Major</button>
+      <button class="tab-btn" data-tab="trend">Trend Over Time</button>
+      <button class="tab-btn" data-tab="states">State Drilldown</button>
+    </nav>
+
+    <section class="tab-pane active" data-tab="main">
+      <h2>Top 20 Majors: 2013 vs 2023</h2>
+      <p class="sub">Left side is top 20 majors by 2013 volume. Right side shows the same majors in 2023, with slope lines encoding movement.</p>
+      <div id="chart-slopegraph" class="chart tall"></div>
+    </section>
+
+    <section class="tab-pane" data-tab="rankings">
+      <h2>National Change Rankings</h2>
+      <div class="split">
+        <div id="chart-ranking" class="chart"></div>
+        <div id="chart-distribution" class="chart"></div>
+      </div>
+    </section>
+
+    <section class="tab-pane" data-tab="map">
+      <h2>State-Level Percent Change (2013 to 2023)</h2>
+      <p class="sub">Map always uses percent change for the selected major: (2023 - 2013) / 2013.</p>
+      <div id="chart-us-map" class="chart"></div>
+    </section>
+
+    <section class="tab-pane" data-tab="trend">
+      <h2>Trend Over Time</h2>
+      <div id="chart-trend" class="chart"></div>
+    </section>
+
+    <section class="tab-pane" data-tab="states">
+      <h2>State Drilldown</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>2013</th>
+              <th>2023</th>
+              <th>Gross Change</th>
+              <th>Percent Change</th>
+              <th>Low Base</th>
+            </tr>
+          </thead>
+          <tbody id="state-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
