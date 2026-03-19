@@ -92,15 +92,16 @@ function renderTradeoff() {
 function renderROI() {
   if (!state.data) return;
   
-  // Cost per additional enrollment
+  // Calculate cost per additional enrollment
+  // Note: Budget is FIXED at $3M (3% of revenue), so this shows efficiency
   const costPerEnroll = state.data.map((r, i) => {
     if (i === 0) return null; // No aid = undefined
-    const aidBudget = r.total_scholarships_spent;
-    const gain = r.enrollment_change;
+    const aidBudget = r.total_scholarships_spent; // Always ~$3M
+    const gain = r.enrollment_change; // Always ~15 students
     return gain > 0 ? aidBudget / gain : null;
   });
   
-  // Left chart: Cost per enrollment
+  // Left chart: Cost per enrollment (shows it's roughly constant ~$200k)
   plot('chart-cost-per-enroll', [
     {
       x: state.data.map(r => r.scholarship_amount),
@@ -109,15 +110,62 @@ function renderROI() {
       mode: 'lines+markers',
       line: { color: '#10b981', width: 3 },
       marker: { size: 8 },
-      fill: 'tozeroy',
-      fillcolor: 'rgba(16, 185, 129, 0.1)',
-      hovertemplate: 'Award Size: $%{x:,.0f}<br>Cost per Student: $%{y:,.0f}<extra></extra>'
+      hovertemplate: 'Award: $%{x:,.0f}<br>Cost per Additional Student: $%{y:,.0f}<extra></extra>'
     }
   ], {
-    title: { text: 'How Much You Spend to Attract One Student', font: { size: 14, color: '#1f2937' } },
+    title: { text: 'Cost Efficiency: $ Spent per Additional Student Enrolled', font: { size: 14, color: '#1f2937' } },
     xaxis: { title: 'Scholarship per Recipient ($)', tickformat: '$,.0f' },
-    yaxis: { title: 'Cost per Additional Enrollment ($)', tickformat: '$,.0f' },
-    height: 400
+    yaxis: { title: 'Cost per Additional Enrollment ($)', tickformat: '$,.0f', range: [150000, 250000] },
+    height: 400,
+    annotations: [{
+      x: 5000, y: 195000,
+      text: 'Fixed $3M budget gets ~15 students\nregardless of award size',
+      showarrow: true, arrowhead: 2, arrowcolor: '#6b7280',
+      ax: 0, ay: -60,
+      font: { size: 11, color: '#4b5563' },
+      bgcolor: 'rgba(255,255,255,0.9)', bordercolor: '#d1d5db', borderwidth: 1
+    }]
+  });
+  
+  // Right chart: Aid penetration vs enrollment gain
+  // Shows the REAL trade-off: market coverage vs impact per student
+  plot('chart-aid-penetration', [
+    {
+      x: state.data.map(r => (r.students_receiving_aid / 5000) * 100),
+      y: state.data.map(r => r.enrollment_change),
+      mode: 'markers+text',
+      type: 'scatter',
+      marker: { 
+        size: state.data.map(r => r.scholarship_amount / 200), // Size = award amount
+        color: '#8b5cf6', 
+        opacity: 0.7,
+        line: { width: 1, color: '#4c1d95' }
+      },
+      text: state.data.map(r => `$${Math.round(r.scholarship_amount/1000)}k`),
+      textposition: 'top center',
+      textfont: { size: 10 },
+      hovertemplate: 'Market Reach: %{x:.1f}% of cohort<br>Enrollment Gain: %{y:.1f} students<br>Award Size: $' + state.data.map(r => r.scholarship_amount.toLocaleString()) + '<extra></extra>'
+    }
+  ], {
+    title: { text: 'The Real Trade-off: Market Coverage vs Enrollment Impact', font: { size: 14, color: '#1f2937' } },
+    xaxis: { title: '% of 5,000-Student Cohort Receiving Aid', range: [0, 70] },
+    yaxis: { title: 'Additional Enrollments Gained', range: [10, 20] },
+    height: 400,
+    annotations: [{
+      x: 60, y: 12,
+      text: 'Small awards: High coverage,\nsmall per-student impact',
+      showarrow: true, arrowhead: 2, arrowcolor: '#6b7280',
+      ax: -50, ay: -30,
+      font: { size: 10, color: '#4b5563' }
+    }, {
+      x: 10, y: 16,
+      text: 'Large awards: Low coverage,\nmeaningful per-student impact',
+      showarrow: true, arrowhead: 2, arrowcolor: '#6b7280',
+      ax: 50, ay: -30,
+      font: { size: 10, color: '#4b5563' }
+    }]
+  });
+}
   });
   
   // Right chart: Aid penetration
