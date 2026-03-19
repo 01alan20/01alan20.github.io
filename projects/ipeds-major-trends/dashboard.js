@@ -146,14 +146,16 @@
     const container = document.getElementById("chart-slopegraph");
     if (!container) return;
 
-    const top20 = state.nationalChange
+    const ranked2013 = state.nationalChange
       .slice()
-      .sort((a, b) => score(b.count_2013) - score(a.count_2013))
-      .slice(0, 20);
+      .sort((a, b) => score(b.count_2013) - score(a.count_2013));
+    const ranked2023 = state.nationalChange
+      .slice()
+      .sort((a, b) => score(b.count_2023) - score(a.count_2023));
+    const top20 = ranked2023.slice(0, 20);
 
-    const rank2013 = Object.fromEntries(top20.map((r, i) => [r.major_name, i + 1]));
-    const top20By2023 = [...top20].sort((a, b) => score(b.count_2023) - score(a.count_2023));
-    const rank2023 = Object.fromEntries(top20By2023.map((r, i) => [r.major_name, i + 1]));
+    const rank2013 = Object.fromEntries(ranked2013.map((r, i) => [r.major_name, i + 1]));
+    const rank2023 = Object.fromEntries(ranked2023.map((r, i) => [r.major_name, i + 1]));
 
     container.classList.add("infographic-shell");
     container.innerHTML = "";
@@ -163,7 +165,7 @@
 
     const head = document.createElement("div");
     head.className = "rank-dumbbell-head";
-    ["2013 Rank", "Major", "Shift", "2023 Rank"].forEach((label) => {
+    ["2023 Rank", "Major", "Shift", "2013 Rank"].forEach((label) => {
       const span = document.createElement("span");
       span.textContent = label;
       head.appendChild(span);
@@ -171,19 +173,19 @@
     board.appendChild(head);
 
     top20.forEach((row, index) => {
-      const rankStart = rank2013[row.major_name];
-      const rankEnd = rank2023[row.major_name];
-      const delta = rankStart - rankEnd;
+      const rankCurrent = rank2023[row.major_name];
+      const rankOrigin = rank2013[row.major_name];
+      const delta = rankOrigin - rankCurrent;
       const moveClass = movementClass(delta);
 
       const rowEl = document.createElement("div");
       rowEl.className = "rank-dumbbell-row";
       rowEl.dataset.majorKey = majorKey(row, index);
-      rowEl.title = `${row.major_name}: 2013 rank ${rankStart}, 2023 rank ${rankEnd}`;
+      rowEl.title = `${row.major_name}: 2023 rank ${rankCurrent}, 2013 rank ${rankOrigin}`;
 
       const leftPill = document.createElement("div");
       leftPill.className = "rank-pill rank-pill-left";
-      leftPill.innerHTML = `<span class="rank-label">2013</span><span class="rank-value">${rankStart}</span>`;
+      leftPill.innerHTML = `<span class="rank-label">2023</span><span class="rank-value">${rankCurrent}</span>`;
 
       const nameEl = document.createElement("div");
       nameEl.className = "rank-major-name";
@@ -207,7 +209,7 @@
 
       const rightPill = document.createElement("div");
       rightPill.className = "rank-pill rank-pill-right";
-      rightPill.innerHTML = `<span class="rank-label">2023</span><span class="rank-value">${rankEnd}</span>`;
+      rightPill.innerHTML = `<span class="rank-label">2013</span><span class="rank-value">${rankOrigin}</span>`;
 
       trackWrap.appendChild(track);
       trackWrap.appendChild(rightPill);
