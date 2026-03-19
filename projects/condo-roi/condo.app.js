@@ -65,6 +65,14 @@ function fmtPercent(value, digits = 2) {
   })}%`;
 }
 
+function fmtYears(value, digits = 1) {
+  if (!Number.isFinite(value)) return "-";
+  return `${value.toLocaleString(undefined, {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits
+  })} yrs`;
+}
+
 function fmtDelta(value, digits = 1) {
   if (!Number.isFinite(value)) return "-";
   const sign = value > 0 ? "+" : value < 0 ? "-" : "";
@@ -74,11 +82,10 @@ function fmtDelta(value, digits = 1) {
   })}`;
 }
 
-function roiClass(roi) {
-  if (!Number.isFinite(roi)) return "roi-low";
-  if (roi < 0) return "roi-negative";
-  if (roi >= 25) return "roi-high";
-  if (roi >= 12) return "roi-mid";
+function roiClass(paybackYears) {
+  if (!Number.isFinite(paybackYears)) return "roi-low";
+  if (paybackYears <= 20) return "roi-high";
+  if (paybackYears <= 30) return "roi-mid";
   return "roi-low";
 }
 
@@ -257,12 +264,12 @@ function buildProjectSummary(rows) {
   });
 
   return Array.from(grouped.entries()).map(([project, items]) => {
-    const annual = { buy: {}, rent: {}, yield: {} };
+    const annual = { buy: {}, rent: {}, payback: {} };
     YEARS.forEach((year) => {
       annual.buy[year] = mean(items.map((item) => item.annualBuy[year]));
       annual.rent[year] = mean(items.map((item) => item.annualRent[year]));
-      annual.yield[year] = Number.isFinite(annual.buy[year]) && Number.isFinite(annual.rent[year])
-        ? (annual.rent[year] * 12 / annual.buy[year]) * 100
+      annual.payback[year] = Number.isFinite(annual.buy[year]) && Number.isFinite(annual.rent[year])
+        ? annual.buy[year] / (annual.rent[year] * 12)
         : NaN;
     });
 
@@ -328,7 +335,7 @@ function tenureSummary(projectSummary) {
 function topProjects(projectSummary, limit = 10) {
   return projectSummary
     .filter((item) => Number.isFinite(item.avgRoi))
-    .sort((a, b) => b.avgRoi - a.avgRoi)
+    .sort((a, b) => a.avgRoi - b.avgRoi)
     .slice(0, limit);
 }
 
@@ -346,7 +353,7 @@ function initState(rows) {
 
   const rankedDistricts = aggregateProjectLevel(state.projectSummary, "district")
     .filter((item) => item.label !== "Unknown")
-    .sort((a, b) => b.avgRoi - a.avgRoi);
+    .sort((a, b) => a.avgRoi - b.avgRoi);
   state.compareDistrictA = rankedDistricts[0]?.label || state.districtOptions[0] || "";
   state.compareDistrictB = rankedDistricts.find((item) => item.label !== state.compareDistrictA)?.label || state.districtOptions[1] || state.compareDistrictA;
   state.compareArea = areaSummary(state.rows).sort((a, b) => b.count - a.count)[0]?.label || state.areaOptions[0] || "";
@@ -396,7 +403,7 @@ function renderOverview() {
   const avgRent = mean(state.projectSummary.map((item) => item.avgRent));
 
   $("#projectCount").textContent = marketProjects.toLocaleString();
-  $("#avgRoi").textContent = fmtPercent(avgRoi);
+  $("#avgRoi").textContent = fmtYears(avgRoi);
   $("#avgBuy").textContent = fmtMoney(avgBuy);
   $("#avgRent").textContent = fmtMoney(avgRent);
 }
@@ -413,10 +420,10 @@ function renderTabs() {
 function renderRoiTab() {
   const projects = topProjects(state.projectSummary, 10);
   if (!projects.length) {
-    renderEmptyPlot("roi-top-projects", "No project-level ROI data available.");
-    renderEmptyPlot("roi-districts", "No district ROI data available.");
-    renderEmptyPlot("roi-areas", "No area ROI data available.");
-    renderEmptyPlot("roi-price-scatter", "No price-to-ROI data available.");
+    renderEmptyPlot("roi-top-projects", "No project-level payback data available.");
+    renderEmptyPlot("roi-districts", "No district payback data available.");
+    renderEmptyPlot("roi-areas", "No area payback data available.");
+    renderEmptyPlot("roi-price-scatter", "No price-to-payback data available.");
     return;
   }
 
@@ -427,46 +434,46 @@ function renderRoiTab() {
     y: projects.map((item) => wrapLabel(item.project, 18)).reverse(),
     customdata: projects.map((item) => [item.project, item.district]).reverse(),
     marker: { color: "#1f5a45" },
-    hovertemplate: "<b>%{customdata[0]}</b><br>%{customdata[1]}<br>Average ROI: %{x:.2f}%<extra></extra>"
+    hovertemplate: "<b>%{customdata[0]}</b><br>%{customdata[1]}<br>Average payback: %{x:.1f} years<extra></extra>"
   }], plotLayout({
     margin: { l: 160, r: 12, t: 10, b: 40 },
-    xaxis: { title: "Average ROI (%)" },
+    xaxis: { title: "Average Payback (Years)" },
     yaxis: { automargin: true }
   }), { responsive: true, displayModeBar: false });
 
   const districts = aggregateProjectLevel(state.projectSummary, "district")
     .filter((item) => item.label !== "Unknown")
-    .sort((a, b) => b.avgRoi - a.avgRoi);
+    .sort((a, b) => a.avgRoi - b.avgRoi);
   Plotly.newPlot("roi-districts", [{
     type: "bar",
     orientation: "h",
     x: districts.map((item) => item.avgRoi).reverse(),
     y: districts.map((item) => item.label).reverse(),
     marker: { color: "#2f7d5d" },
-    hovertemplate: "<b>%{y}</b><br>Average ROI: %{x:.2f}%<extra></extra>"
+    hovertemplate: "<b>%{y}</b><br>Average payback: %{x:.1f} years<extra></extra>"
   }], plotLayout({
     margin: { l: 110, r: 12, t: 10, b: 40 },
-    xaxis: { title: "Average ROI (%)" },
+    xaxis: { title: "Average Payback (Years)" },
     yaxis: { automargin: true }
   }), { responsive: true, displayModeBar: false });
 
   const areas = areaSummary(state.rows)
     .filter((item) => Number.isFinite(item.avgRoi))
-    .sort((a, b) => b.avgRoi - a.avgRoi);
+    .sort((a, b) => a.avgRoi - b.avgRoi);
   Plotly.newPlot("roi-areas", [{
     type: "bar",
     orientation: "h",
     x: areas.map((item) => item.avgRoi).reverse(),
     y: areas.map((item) => item.label).reverse(),
     marker: { color: "#b57734" },
-    hovertemplate: "<b>%{y}</b><br>Average ROI: %{x:.2f}%<extra></extra>"
+    hovertemplate: "<b>%{y}</b><br>Average payback: %{x:.1f} years<extra></extra>"
   }], plotLayout({
     margin: { l: 100, r: 12, t: 10, b: 40 },
-    xaxis: { title: "Average ROI (%)" },
+    xaxis: { title: "Average Payback (Years)" },
     yaxis: { automargin: true }
   }), { responsive: true, displayModeBar: false });
 
-  const tenure = tenureSummary(state.projectSummary).sort((a, b) => b.avgRoi - a.avgRoi);
+  const tenure = tenureSummary(state.projectSummary).sort((a, b) => a.avgRoi - b.avgRoi);
   const tenureBox = $("#roi-tenure");
   const leasehold = tenure.find((item) => item.label === "Leasehold");
   const freehold = tenure.find((item) => item.label === "Freehold");
@@ -474,14 +481,14 @@ function renderRoiTab() {
   tenureBox.innerHTML = [freehold, leasehold].filter(Boolean).map((item) => `
     <article class="mini-card">
       <span class="mini-label">${escapeHtml(item.label)}</span>
-      <div class="mini-value">${fmtPercent(item.avgRoi)}</div>
+      <div class="mini-value">${fmtYears(item.avgRoi)}</div>
       <p class="mini-sub">Average recent buy ${fmtMoney(item.avgBuy)} across ${item.count.toLocaleString()} projects.</p>
     </article>
   `).join("") + `
     <article class="mini-card" style="grid-column: 1 / -1;">
-      <span class="mini-label">Difference</span>
-      <div class="mini-value">${Number.isFinite(diff) ? fmtDelta(diff, 2) + "%" : "-"}</div>
-      <p class="mini-sub">Positive means freehold projects average higher ROI in this dataset.</p>
+      <span class="mini-label">Payback Gap</span>
+      <div class="mini-value">${Number.isFinite(diff) ? fmtDelta(diff, 1) + " yrs" : "-"}</div>
+      <p class="mini-sub">Positive means freehold projects take longer on average to recover the purchase price from rent.</p>
     </article>
   `;
 
@@ -490,7 +497,7 @@ function renderRoiTab() {
     .map((item) => ({ x: item.avgBuy, y: item.avgRoi, project: item.project, district: item.district }));
 
   if (!scatterPoints.length) {
-    renderEmptyPlot("roi-price-scatter", "No price-to-ROI data available.");
+    renderEmptyPlot("roi-price-scatter", "No price-to-payback data available.");
     return;
   }
 
@@ -520,31 +527,31 @@ function renderRoiTab() {
         color: "#1f5a45",
         opacity: 0.72
       },
-      hovertemplate: "<b>%{customdata[0]}</b><br>%{customdata[1]}<br>Average Buy: S$%{x:,.0f}<br>Average ROI: %{y:.2f}%<extra></extra>",
+      hovertemplate: "<b>%{customdata[0]}</b><br>%{customdata[1]}<br>Average Buy: S$%{x:,.0f}<br>Average payback: %{y:.1f} years<extra></extra>",
       showlegend: false
     },
     lineTrace
   ], plotLayout({
     margin: { l: 70, r: 20, t: 10, b: 55 },
     xaxis: { title: "Average Recent Buy (S$)", tickformat: ",.0f" },
-    yaxis: { title: "Average ROI (%)" }
+    yaxis: { title: "Average Payback (Years)" }
   }), { responsive: true, displayModeBar: false });
 
   const insight = $("#roi-price-insight");
   const corr = lineFit.correlation;
   if (Math.abs(corr) < 0.12) {
-    insight.textContent = "ROI and buy price look weakly related in this dataset. Higher prices do not clearly imply better or worse ROI.";
+    insight.textContent = "Payback years and buy price look weakly related here. Higher prices do not clearly imply faster or slower recovery.";
   } else if (corr > 0) {
-    insight.textContent = `ROI generally rises as price rises here, but the relationship is modest (correlation ${corr.toFixed(2)}).`;
+    insight.textContent = `Payback generally gets longer as price rises here, though the relationship is modest (correlation ${corr.toFixed(2)}).`;
   } else {
-    insight.textContent = `ROI generally softens as price rises here, though the relationship is not perfectly linear (correlation ${corr.toFixed(2)}).`;
+    insight.textContent = `Payback generally gets shorter as price rises here, though the relationship is not perfectly linear (correlation ${corr.toFixed(2)}).`;
   }
 }
 
 function districtProjectSummary(district) {
   return state.projectSummary
     .filter((item) => item.district === district && Number.isFinite(item.avgRoi))
-    .sort((a, b) => b.avgRoi - a.avgRoi);
+    .sort((a, b) => a.avgRoi - b.avgRoi);
 }
 
 function renderCompareCards() {
@@ -563,10 +570,10 @@ function renderCompareCards() {
     return `
       <article class="summary-card">
         <span class="summary-label">${escapeHtml(target.label)}</span>
-        <strong class="summary-value">${fmtPercent(avgRoi)}</strong>
-        <div class="mini-sub">Average ROI across ${target.items.length.toLocaleString()} projects.</div>
+        <strong class="summary-value">${fmtYears(avgRoi)}</strong>
+        <div class="mini-sub">Average payback across ${target.items.length.toLocaleString()} projects.</div>
         <div class="mini-sub">Average buy ${fmtMoney(avgBuy)}.</div>
-        <div class="mini-sub">Top project: ${escapeHtml(top ? top.project : "None")}.</div>
+        <div class="mini-sub">Fastest project: ${escapeHtml(top ? top.project : "None")}.</div>
       </article>
     `;
   }).join("");
@@ -576,7 +583,7 @@ function renderRankList(containerId, items) {
   const container = $(`#${containerId}`);
   if (!container) return;
   if (!items.length) {
-    container.innerHTML = `<div class="empty-state">No project-level ROI data for this district.</div>`;
+    container.innerHTML = `<div class="empty-state">No project-level payback data for this district.</div>`;
     return;
   }
 
@@ -585,7 +592,7 @@ function renderRankList(containerId, items) {
       <div class="rank-index">${index + 1}</div>
       <div class="rank-copy">
         <div class="rank-title">${escapeHtml(item.project)}</div>
-        <div class="rank-meta">${escapeHtml(item.propertyType)} | ${escapeHtml(item.tenureGroup)} | ${fmtMoney(item.avgBuy)} buy | ${fmtMoney(item.avgRent)} rent | ${fmtPercent(item.avgRoi)}</div>
+        <div class="rank-meta">${escapeHtml(item.propertyType)} | ${escapeHtml(item.tenureGroup)} | ${fmtMoney(item.avgBuy)} buy | ${fmtMoney(item.avgRent)} rent | ${fmtYears(item.avgRoi)}</div>
       </div>
     </article>
   `).join("");
@@ -606,7 +613,7 @@ function renderCompareTable() {
     .filter((row) => (row.district === districtA || row.district === districtB))
     .filter((row) => !area || row.areaBucket === area)
     .filter((row) => Number.isFinite(row.roi) && Number.isFinite(row.mostRecentBuy) && Number.isFinite(row.mostRecentRent))
-    .sort((a, b) => a.mostRecentBuy - b.mostRecentBuy || b.roi - a.roi)
+    .sort((a, b) => a.mostRecentBuy - b.mostRecentBuy || a.roi - b.roi)
     .slice(0, 16);
 
   const tbody = $("#compare-area-body");
@@ -623,11 +630,11 @@ function renderCompareTable() {
       <td>${escapeHtml(row.areaBucket)}</td>
       <td class="num">${fmtMoney(row.mostRecentBuy)}</td>
       <td class="num">${fmtMoney(row.mostRecentRent)}</td>
-      <td class="num"><span class="roi-badge ${roiClass(row.roi)}">${fmtPercent(row.roi)}</span></td>
+      <td class="num"><span class="roi-badge ${roiClass(row.roi)}">${fmtYears(row.roi)}</span></td>
     </tr>
   `).join("");
 
-  $("#compare-area-summary").textContent = `Showing similarly sized rows in ${area} across ${districtA} and ${districtB}, sorted by recent buy price.`;
+  $("#compare-area-summary").textContent = `Showing similarly sized rows in ${area} across ${districtA} and ${districtB}, sorted first by recent buy price and then by faster payback.`;
 }
 
 function selectedTrendProjects() {
@@ -656,11 +663,11 @@ function trendMetricMeta() {
       source: (item, year) => item.annual.rent[year]
     };
   }
-  if (state.trendMetric === "yield") {
+  if (state.trendMetric === "payback") {
     return {
-      title: "Estimated Yield",
-      format: "percent",
-      source: (item, year) => item.annual.yield[year]
+      title: "Estimated Payback",
+      format: "years",
+      source: (item, year) => item.annual.payback[year]
     };
   }
   return {
@@ -671,7 +678,9 @@ function trendMetricMeta() {
 }
 
 function formatMetricValue(metric, value) {
-  return metric === "percent" ? fmtPercent(value) : fmtMoney(value);
+  if (metric === "percent") return fmtPercent(value);
+  if (metric === "years") return fmtYears(value);
+  return fmtMoney(value);
 }
 
 function renderTrendSummary(projects, meta) {
@@ -689,7 +698,13 @@ function renderTrendSummary(projects, meta) {
       <article class="summary-card">
         <span class="summary-label">${escapeHtml(item.project)}</span>
         <strong class="summary-value">${formatMetricValue(meta.format, end)}</strong>
-        <div class="mini-sub">2020 to 2025 change ${meta.format === "percent" ? fmtDelta(delta, 2) + "%" : fmtDelta(delta, 0)}</div>
+        <div class="mini-sub">2020 to 2025 change ${
+          meta.format === "years"
+            ? fmtDelta(delta, 1) + " yrs"
+            : meta.format === "percent"
+              ? fmtDelta(delta, 2) + "%"
+              : fmtDelta(delta, 0)
+        }</div>
       </article>
     `;
   }).join("");
@@ -720,9 +735,11 @@ function renderTrendsTab() {
   Plotly.newPlot("trend-chart", traces, plotLayout({
     margin: { l: 70, r: 20, t: 10, b: 50 },
     xaxis: { title: "Year", dtick: 1 },
-    yaxis: meta.format === "percent"
-      ? { title: "Estimated Yield (%)" }
-      : { title: meta.title, tickprefix: "S$", separatethousands: true },
+    yaxis: meta.format === "years"
+      ? { title: "Years to Payback" }
+      : meta.format === "percent"
+        ? { title: "Estimated Yield (%)" }
+        : { title: meta.title, tickprefix: "S$", separatethousands: true },
     legend: { orientation: "h", y: 1.15, x: 0 }
   }), { responsive: true, displayModeBar: false });
 }
@@ -739,14 +756,14 @@ function searchRows() {
     .filter((row) => !area || row.areaBucket === area)
     .filter((row) => !district || row.district === district)
     .filter((row) => !Number.isFinite(budget) || row.mostRecentBuy <= budget)
-    .sort((a, b) => b.roi - a.roi || a.mostRecentBuy - b.mostRecentBuy)
+    .sort((a, b) => a.roi - b.roi || a.mostRecentBuy - b.mostRecentBuy)
     .slice(0, 10);
 }
 
 function renderSearchTab() {
   const rows = searchRows();
   $("#search-summary").textContent = rows.length
-    ? `Top ${rows.length} matching rows ranked by ROI.`
+    ? `Top ${rows.length} matching rows ranked by shortest payback.`
     : "No results match the current search inputs.";
 
   const container = $("#search-results");
@@ -771,8 +788,8 @@ function renderSearchTab() {
         <span class="search-stat-value">${fmtMoney(row.mostRecentRent)}</span>
       </div>
       <div class="search-stat">
-        <span class="search-stat-label">ROI</span>
-        <span class="roi-badge ${roiClass(row.roi)}">${fmtPercent(row.roi)}</span>
+        <span class="search-stat-label">Payback</span>
+        <span class="roi-badge ${roiClass(row.roi)}">${fmtYears(row.roi)}</span>
       </div>
     </article>
   `).join("");
@@ -879,7 +896,7 @@ async function init() {
     renderActiveTab();
   } catch (error) {
     console.error(error);
-    alert("Failed to load the condo ROI dataset.");
+    alert("Failed to load the condo payback dataset.");
   }
 }
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Singapore Condo ROI Explorer</title>
+  <title>Singapore Condo Payback Explorer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -16,16 +16,16 @@
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <span class="eyebrow">Property Analytics Dashboard</span>
-        <h1>Singapore Condo ROI Explorer</h1>
+        <h1>Singapore Condo Payback Explorer</h1>
         <p class="hero-sub">
-          Explore condo performance by ROI, district, size, tenure, and time.
+          Explore condo performance by payback years, district, size, tenure, and time.
           Compare submarkets, inspect trend lines, and screen likely fits from the same underlying dataset.
         </p>
       </div>
       <aside class="hero-note">
         <span class="note-label">Data Source</span>
         <p>Dashboard view powered by <code>pmi_roi_agg.csv</code>.</p>
-        <p class="muted">Rows are project and size-band combinations. Bedrooms are estimated from size buckets in the Search tab because no bedroom field exists in the source file.</p>
+        <p class="muted">The source field labeled ROI is interpreted here as estimated payback years: purchase price divided by annualized rent. Lower is better. Bedrooms are estimated from size buckets because no bedroom field exists in the source file.</p>
       </aside>
     </div>
   </header>
@@ -37,7 +37,7 @@
         <strong id="projectCount" class="summary-value">0</strong>
       </article>
       <article class="summary-card">
-        <span class="summary-label">Average ROI</span>
+        <span class="summary-label">Average Payback</span>
         <strong id="avgRoi" class="summary-value">-</strong>
       </article>
       <article class="summary-card">
@@ -51,7 +51,7 @@
     </section>
 
     <nav class="tabbar" aria-label="Dashboard tabs">
-      <button class="tab-btn active" data-tab="roi" type="button">ROI</button>
+      <button class="tab-btn active" data-tab="roi" type="button">Payback</button>
       <button class="tab-btn" data-tab="compare" type="button">Compare</button>
       <button class="tab-btn" data-tab="trends" type="button">Trends</button>
       <button class="tab-btn" data-tab="search" type="button">Search</button>
@@ -60,9 +60,9 @@
     <section class="tab-panel active" data-tab="roi">
       <div class="panel tab-header">
         <div>
-          <span class="section-kicker">Returns</span>
-          <h2>ROI</h2>
-          <p class="panel-sub">Which projects, districts, area buckets, and tenure types are producing stronger ROI right now, and how does ROI move as price rises?</p>
+          <span class="section-kicker">Payback</span>
+          <h2>Payback</h2>
+          <p class="panel-sub">Which projects, districts, area buckets, and tenure types recover the purchase price fastest, and how do payback years move as price rises?</p>
         </div>
       </div>
 
@@ -71,7 +71,7 @@
           <div class="panel-top">
             <div>
               <span class="section-kicker">Right now</span>
-              <h3>Top Projects</h3>
+              <h3>Fastest Projects</h3>
             </div>
           </div>
           <div id="roi-top-projects" class="viz-chart"></div>
@@ -81,7 +81,7 @@
           <div class="panel-top">
             <div>
               <span class="section-kicker">Districts</span>
-              <h3>Average ROI</h3>
+              <h3>Average Payback</h3>
             </div>
           </div>
           <div id="roi-districts" class="viz-chart"></div>
@@ -91,7 +91,7 @@
           <div class="panel-top">
             <div>
               <span class="section-kicker">Area Buckets</span>
-              <h3>Best Sizes</h3>
+              <h3>Fastest Sizes</h3>
             </div>
           </div>
           <div id="roi-areas" class="viz-chart"></div>
@@ -111,7 +111,7 @@
           <div class="panel-top">
             <div>
               <span class="section-kicker">Price Relationship</span>
-              <h3>Buy Price vs ROI</h3>
+              <h3>Buy Price vs Payback</h3>
               <p id="roi-price-insight" class="panel-sub">Loading price relationship...</p>
             </div>
           </div>
@@ -125,7 +125,7 @@
         <div>
           <span class="section-kicker">District Matchup</span>
           <h2>Compare</h2>
-          <p class="panel-sub">Choose two districts, compare standout projects on ROI, and inspect similar size bands where price and rent diverge.</p>
+          <p class="panel-sub">Choose two districts, compare standout projects on payback years, and inspect similar size bands where price and rent diverge.</p>
         </div>
       </div>
 
@@ -153,7 +153,7 @@
           <div class="panel-top">
             <div>
               <span id="compare-title-a" class="section-kicker">District A</span>
-              <h3>Standout Projects</h3>
+              <h3>Fastest Projects</h3>
             </div>
           </div>
           <div id="compare-top-a" class="rank-list"></div>
@@ -163,7 +163,7 @@
           <div class="panel-top">
             <div>
               <span id="compare-title-b" class="section-kicker">District B</span>
-              <h3>Standout Projects</h3>
+              <h3>Fastest Projects</h3>
             </div>
           </div>
           <div id="compare-top-b" class="rank-list"></div>
@@ -187,7 +187,7 @@
                 <th>Area</th>
                 <th class="num">Recent Buy</th>
                 <th class="num">Recent Rent</th>
-                <th class="num">ROI</th>
+                <th class="num">Payback</th>
               </tr>
             </thead>
             <tbody id="compare-area-body"></tbody>
@@ -201,7 +201,7 @@
         <div>
           <span class="section-kicker">Time Series</span>
           <h2>Trends</h2>
-          <p class="panel-sub">Track how average buy prices, average rents, and estimated yield changed from 2020 to 2025 by project.</p>
+          <p class="panel-sub">Track how average buy prices, average rents, and estimated payback changed from 2020 to 2025 by project.</p>
         </div>
       </div>
 
@@ -214,7 +214,7 @@
           <div class="metric-switch" role="group" aria-label="Trend metric">
             <button class="metric-btn active" data-metric="buy" type="button">Buy</button>
             <button class="metric-btn" data-metric="rent" type="button">Rent</button>
-            <button class="metric-btn" data-metric="yield" type="button">Yield</button>
+            <button class="metric-btn" data-metric="payback" type="button">Payback</button>
           </div>
           <p class="microcopy">Select up to 4 projects.</p>
           <div id="trendProjectList" class="project-checklist"></div>
@@ -240,7 +240,7 @@
         <div>
           <span class="section-kicker">Opportunity Finder</span>
           <h2>Search</h2>
-          <p class="panel-sub">Filter by estimated bedrooms, size band, budget, and district, then rank the best-fitting options by ROI.</p>
+          <p class="panel-sub">Filter by estimated bedrooms, size band, budget, and district, then rank the best-fitting options by shortest payback.</p>
         </div>
       </div>
 
@@ -270,7 +270,7 @@
         <div class="panel-top">
           <div>
             <span class="section-kicker">Top Matches</span>
-            <h3>Ranked by ROI</h3>
+            <h3>Ranked by Payback</h3>
             <p id="search-summary" class="panel-sub">Loading search results...</p>
           </div>
         </div>
