@@ -48,6 +48,14 @@ html, body {
   font-weight: 500;
 }
 
+.source-note {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.95;
+  max-width: 900px;
+}
+
 /* KPI Section */
 .kpi-section {
   display: grid;

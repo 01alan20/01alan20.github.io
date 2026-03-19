@@ -45,44 +45,31 @@ html, body {
   opacity: 0.96;
 }
 
-.hero .note {
-  font-size: 13px;
-  opacity: 0.9;
-}
-
-.controls {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+.tab-controls {
+  display: flex;
   gap: 10px;
+  flex-wrap: wrap;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 14px;
-  margin-bottom: 18px;
+  margin: 8px 0 12px;
 }
 
-.controls label {
+.tab-controls label {
   display: flex;
   flex-direction: column;
   gap: 6px;
   font-size: 12px;
   color: var(--muted);
   font-weight: 600;
-}
-
-.controls select {
+.tab-controls select {
   border: 1px solid var(--line);
   border-radius: 6px;
   background: white;
   padding: 8px;
   color: var(--ink);
-}
-
-.controls .checkbox {
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  margin-top: 20px;
+  min-width: 220px;
 }
 
 .tabs {
@@ -138,10 +125,8 @@ h2 {
   min-height: 860px;
 }
 
-.split {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 14px;
+.single-row {
+  display: block;
 }
 
 .table-wrap {
@@ -168,7 +153,8 @@ th:first-child, td:first-child {
 }
 
 @media (max-width: 900px) {
-  .split {
+  .tab-controls {
+    display: grid;
     grid-template-columns: 1fr;
   }
   .chart.tall {

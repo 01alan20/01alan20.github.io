@@ -4,15 +4,13 @@
   const FILES = {
     nationalChange: "./data/major_change_national_2013_2023.csv",
     stateChange: "./data/major_change_state_2013_2023.csv",
-    nationalAnnual: "./data/major_trend_national_annual.csv",
-    stateAnnual: "./data/major_trend_state_annual.csv"
+    nationalAnnual: "./data/major_trend_national_annual.csv"
   };
 
   const state = {
     nationalChange: [],
     stateChange: [],
-    nationalAnnual: [],
-    stateAnnual: []
+    nationalAnnual: []
   };
 
   const num = (v) => {
@@ -20,33 +18,39 @@
     return Number.isFinite(n) ? n : null;
   };
 
-  const asBool = (v) => String(v).toLowerCase() === "true";
+  const score = (v) => (v === null || v === undefined ? Number.NEGATIVE_INFINITY : v);
   const moneyish = (v) => (v === null || v === undefined ? "-" : Math.round(v).toLocaleString());
   const pct = (v, d = 1) => (v === null || v === undefined ? "-" : `${v.toFixed(d)}%`);
-  const score = (v) => (v === null || v === undefined ? Number.NEGATIVE_INFINITY : v);
 
-  function baseLayout(extra = {}) {
-    return {
-      margin: { l: 40, r: 20, t: 30, b: 40 },
-      paper_bgcolor: "white",
-      plot_bgcolor: "white",
-      font: { family: "Segoe UI, sans-serif", size: 12, color: "#1f2937" },
-      ...extra
-    };
+  function toTitleCase(input) {
+    const lowerWords = new Set(["and", "or", "of", "the", "in", "to", "for", "on", "with", "by"]);
+    return String(input || "")
+      .toLowerCase()
+      .split(" ")
+      .map((word, idx) => {
+        if (idx > 0 && lowerWords.has(word)) return word;
+        if (!word) return word;
+        return word[0].toUpperCase() + word.slice(1);
+      })
+      .join(" ")
+      .replace(/\bUsa\b/g, "USA")
+      .replace(/\bIpeds\b/g, "IPEDS");
   }
 
   function parseRows(rows) {
-    return rows.filter((r) => r && Object.keys(r).length > 0).map((r) => ({
-      ...r,
-      count_2013: num(r.count_2013),
-      count_2023: num(r.count_2023),
-      gross_change: num(r.gross_change),
-      pct_change: num(r.pct_change),
-      graduates: num(r.graduates),
-      year: num(r.year),
-      share_of_total: num(r.share_of_total),
-      low_base_flag: asBool(r.low_base_flag)
-    }));
+    return rows
+      .filter((r) => r && Object.keys(r).length > 0)
+      .map((r) => ({
+        ...r,
+        major_name: toTitleCase(r.major_name),
+        count_2013: num(r.count_2013),
+        count_2023: num(r.count_2023),
+        gross_change: num(r.gross_change),
+        pct_change: num(r.pct_change),
+        year: num(r.year),
+        graduates: num(r.graduates),
+        share_of_total: num(r.share_of_total)
+      }));
   }
 
   async function loadCSV(path) {
@@ -57,146 +61,159 @@
     return parseRows(parsed.data);
   }
 
-  function filteredNational() {
-    const includeLowBase = document.getElementById("include-low-base").checked;
-    return state.nationalChange.filter((r) => includeLowBase || !r.low_base_flag);
+  function baseLayout(extra = {}) {
+    return {
+      margin: { l: 60, r: 20, t: 50, b: 40 },
+      paper_bgcolor: "white",
+      plot_bgcolor: "white",
+      font: { family: "Segoe UI, sans-serif", size: 12, color: "#1f2937" },
+      ...extra
+    };
   }
 
-  function filteredStateForMajor(majorName) {
-    const includeLowBase = document.getElementById("include-low-base").checked;
-    return state.stateChange.filter((r) => r.major_name === majorName && (includeLowBase || !r.low_base_flag));
+  function majorList() {
+    return [...new Set(state.nationalChange.map((r) => r.major_name))].sort((a, b) => a.localeCompare(b));
   }
 
-  function getMetric() {
-    return document.getElementById("metric-select").value;
+  function getMapMajor() {
+    return document.getElementById("map-major-select").value;
   }
 
-  function getMajor() {
-    return document.getElementById("major-select").value;
+  function getTrendMajors() {
+    const select = document.getElementById("trend-major-select");
+    const values = [...select.selectedOptions].map((o) => o.value);
+    if (values.includes("ALL")) return ["ALL"];
+    return values;
   }
 
-  function renderSlopegraph() {
-    const rows = filteredNational()
+  function getStateMajor() {
+    return document.getElementById("state-major-select").value;
+  }
+
+  function renderMainInfographic() {
+    const top20 = state.nationalChange
       .slice()
       .sort((a, b) => score(b.count_2013) - score(a.count_2013))
       .slice(0, 20);
 
-    const rightRank = [...rows].sort((a, b) => score(b.count_2023) - score(a.count_2023));
-    const rightIndex = Object.fromEntries(rightRank.map((r, i) => [r.major_name, i + 1]));
+    const rank2013 = Object.fromEntries(top20.map((r, i) => [r.major_name, i + 1]));
+    const top20By2023 = [...top20].sort((a, b) => score(b.count_2023) - score(a.count_2023));
+    const rank2023 = Object.fromEntries(top20By2023.map((r, i) => [r.major_name, i + 1]));
 
-    const traces = rows.map((r, i) => {
-      const leftY = i + 1;
-      const rightY = rightIndex[r.major_name] || leftY;
-      const color = (r.gross_change || 0) >= 0 ? "#059669" : "#dc2626";
+    const traces = top20.map((r) => {
+      const y0 = rank2013[r.major_name];
+      const y1 = rank2023[r.major_name];
+      const color = (r.gross_change ?? 0) >= 0 ? "#059669" : "#dc2626";
       return {
-        x: [0, 1],
-        y: [leftY, rightY],
-        mode: "lines+markers",
         type: "scatter",
-        line: { width: 2 + Math.min(Math.abs((r.gross_change || 0) / 100000), 5), color },
-        marker: { size: 7, color },
+        mode: "lines+markers",
+        x: [0, 1],
+        y: [y0, y1],
+        line: { color, width: 2 },
+        marker: { color, size: 7 },
         hovertemplate:
           `<b>${r.major_name}</b><br>` +
-          `2013: ${moneyish(r.count_2013)}<br>` +
-          `2023: ${moneyish(r.count_2023)}<br>` +
-          `Gross: ${moneyish(r.gross_change)}<br>` +
-          `Pct: ${pct(r.pct_change)}<extra></extra>`,
+          `2013 Rank: ${y0}<br>` +
+          `2023 Rank: ${y1}<br>` +
+          `Gross Change: ${moneyish(r.gross_change)}<br>` +
+          `Percent Change: ${pct(r.pct_change)}<extra></extra>`,
         showlegend: false
       };
     });
 
     const annotations = [];
-    rows.forEach((r, i) => {
-      const leftY = i + 1;
-      const rightY = rightIndex[r.major_name] || leftY;
+    top20.forEach((r) => {
       annotations.push({
         x: -0.03,
-        y: leftY,
-        text: `${i + 1}. ${r.major_name} (${moneyish(r.count_2013)})`,
+        y: rank2013[r.major_name],
         xref: "x",
         yref: "y",
+        text: `${rank2013[r.major_name]}. ${r.major_name}`,
         xanchor: "right",
         showarrow: false,
-        font: { size: 11, color: "#111827" }
+        font: { size: 11 }
       });
       annotations.push({
         x: 1.03,
-        y: rightY,
-        text: `${moneyish(r.count_2023)} | ${moneyish(r.gross_change)} | ${pct(r.pct_change)}`,
+        y: rank2023[r.major_name],
         xref: "x",
         yref: "y",
+        text: `${rank2023[r.major_name]}. ${r.major_name}`,
         xanchor: "left",
         showarrow: false,
-        font: { size: 11, color: "#111827" }
+        font: { size: 11 }
       });
     });
-    annotations.push({
-      x: 0,
-      y: 0,
-      text: "<b>2013 Rank</b>",
-      showarrow: false,
-      xanchor: "center"
-    });
-    annotations.push({
-      x: 1,
-      y: 0,
-      text: "<b>2023 Value | Gross | %</b>",
-      showarrow: false,
-      xanchor: "center"
-    });
+    annotations.push({ x: 0, y: 0, text: "<b>2013 Ranking</b>", showarrow: false });
+    annotations.push({ x: 1, y: 0, text: "<b>2023 Ranking</b>", showarrow: false });
 
     Plotly.newPlot("chart-slopegraph", traces, baseLayout({
-      title: { text: "Infographic Slopegraph: Top 20 Majors by 2013 Graduates" },
+      title: { text: "Major Ranking Shift: Top 20 (2013 to 2023)" },
       xaxis: { visible: false, range: [-0.35, 1.35] },
-      yaxis: { autorange: "reversed", showgrid: false, zeroline: false, ticks: "", showticklabels: false },
+      yaxis: { autorange: "reversed", showgrid: false, zeroline: false, showticklabels: false },
       annotations,
-      margin: { l: 260, r: 260, t: 40, b: 30 }
+      margin: { l: 280, r: 280, t: 50, b: 20 }
     }), { responsive: true, displayModeBar: false });
   }
 
-  function renderRankings() {
-    const metric = getMetric();
-    const rows = filteredNational().slice().sort((a, b) => score(b[metric]) - score(a[metric]));
-    const top = rows.slice(0, 25);
+  function renderNationalRankings() {
+    const metric = document.getElementById("ranking-metric-select").value;
+    const rows = state.nationalChange.slice().sort((a, b) => score(b[metric]) - score(a[metric]));
+
+    const x = rows.map((r) => r[metric]);
+    const y = rows.map((r) => r.major_name);
+    const colors = x.map((v) => (v >= 0 ? "#059669" : "#dc2626"));
+    const maxAbs = Math.max(10, ...x.filter((v) => v !== null).map((v) => Math.abs(v)));
 
     Plotly.newPlot("chart-ranking", [
       {
         type: "bar",
         orientation: "h",
-        y: top.map((r) => r.major_name).reverse(),
-        x: top.map((r) => r[metric]).reverse(),
-        marker: { color: top.map((r) => ((r[metric] ?? 0) >= 0 ? "#059669" : "#dc2626")).reverse() },
+        x,
+        y,
+        marker: { color: colors },
         hovertemplate:
           "<b>%{y}</b><br>" +
-          (metric === "gross_change" ? "Gross change: %{x:,.0f}" : "Percent change: %{x:.1f}%") +
+          (metric === "gross_change" ? "Gross Change: %{x:,.0f}" : "Percent Change: %{x:.1f}%") +
           "<extra></extra>"
       }
     ], baseLayout({
-      title: { text: `Top 25 Majors by ${metric === "gross_change" ? "Gross" : "Percent"} Change` },
-      xaxis: { title: metric === "gross_change" ? "Graduates" : "Percent" },
-      margin: { l: 250, r: 20, t: 40, b: 40 }
-    }), { responsive: true, displayModeBar: false });
-
-    const values = rows.map((r) => r[metric]).filter((v) => v !== null);
-    Plotly.newPlot("chart-distribution", [
-      {
-        type: "histogram",
-        x: values,
-        nbinsx: 30,
-        marker: { color: "#0ea5e9" },
-        hovertemplate: "Bin count: %{y}<br>Value: %{x}<extra></extra>"
-      }
-    ], baseLayout({
-      title: { text: `${metric === "gross_change" ? "Gross" : "Percent"} Change Distribution` },
-      xaxis: { title: metric === "gross_change" ? "Graduates" : "Percent" },
-      yaxis: { title: "Majors" }
+      title: { text: `All Majors by ${metric === "gross_change" ? "Gross Change" : "Percent Change"} (2013 to 2023)` },
+      xaxis: {
+        title: metric === "gross_change" ? "Graduates" : "Percent",
+        zeroline: true,
+        zerolinecolor: "#111827",
+        range: [-maxAbs * 1.05, maxAbs * 1.05]
+      },
+      yaxis: { automargin: true, categoryorder: "array", categoryarray: y },
+      margin: { l: 480, r: 30, t: 50, b: 40 },
+      height: Math.max(900, rows.length * 22)
     }), { responsive: true, displayModeBar: false });
   }
 
+  function mapRowsForMajor(major) {
+    if (major === "ALL") {
+      const grouped = {};
+      state.stateChange.forEach((r) => {
+        const key = r.state_abbr;
+        if (!key || key === "UNK") return;
+        if (!grouped[key]) grouped[key] = { state_abbr: key, count_2013: 0, count_2023: 0 };
+        grouped[key].count_2013 += r.count_2013 || 0;
+        grouped[key].count_2023 += r.count_2023 || 0;
+      });
+      return Object.values(grouped).map((r) => {
+        const gross = r.count_2023 - r.count_2013;
+        const pctChange = r.count_2013 > 0 ? (gross / r.count_2013) * 100 : null;
+        return { ...r, gross_change: gross, pct_change: pctChange };
+      });
+    }
+    return state.stateChange.filter((r) => r.major_name === major && r.state_abbr !== "UNK");
+  }
+
   function renderMap() {
-    const major = getMajor();
-    const rows = filteredStateForMajor(major).filter((r) => r.state_abbr && r.state_abbr !== "UNK" && r.pct_change !== null);
-    const maxAbs = Math.max(...rows.map((r) => Math.abs(r.pct_change)), 10);
+    const major = getMapMajor();
+    const rows = mapRowsForMajor(major).filter((r) => r.pct_change !== null);
+    const maxAbs = Math.max(10, ...rows.map((r) => Math.abs(r.pct_change)));
 
     Plotly.newPlot("chart-us-map", [
       {
@@ -208,24 +225,18 @@
         zmax: maxAbs,
         colorscale: "RdBu",
         reversescale: true,
-        marker: { line: { color: "white", width: 0.6 } },
+        marker: { line: { color: "white", width: 0.7 } },
         colorbar: { title: "% Change" },
-        customdata: rows.map((r) => [
-          r.count_2013,
-          r.count_2023,
-          r.gross_change,
-          r.low_base_flag ? "Yes" : "No"
-        ]),
+        customdata: rows.map((r) => [r.count_2013, r.count_2023, r.gross_change]),
         hovertemplate:
           "<b>%{location}</b><br>" +
           "2013: %{customdata[0]:,.0f}<br>" +
           "2023: %{customdata[1]:,.0f}<br>" +
           "Gross: %{customdata[2]:,.0f}<br>" +
-          "Percent: %{z:.1f}%<br>" +
-          "Low base: %{customdata[3]}<extra></extra>"
+          "Percent: %{z:.1f}%<extra></extra>"
       }
     ], baseLayout({
-      title: { text: `State Percent Change for ${major} (2013 to 2023)` },
+      title: { text: `State Percent Change: ${major === "ALL" ? "All Majors" : major}` },
       geo: {
         scope: "usa",
         projection: { type: "albers usa" },
@@ -237,55 +248,92 @@
   }
 
   function renderTrend() {
-    const major = getMajor();
+    const selections = getTrendMajors();
     const trendMetric = document.getElementById("trend-select").value;
-    const overlayState = document.getElementById("state-overlay-select").value;
+    const majors = selections.length === 0 ? ["ALL"] : selections;
 
-    const national = state.nationalAnnual
-      .filter((r) => r.major_name === major)
-      .sort((a, b) => a.year - b.year);
-
-    const traces = [
-      {
-        type: "scatter",
-        mode: "lines+markers",
-        x: national.map((r) => r.year),
-        y: national.map((r) => r[trendMetric]),
-        name: "National",
-        line: { color: "#0f766e", width: 3 },
-        marker: { size: 7 }
+    const traces = majors.map((major) => {
+      let rows;
+      if (major === "ALL") {
+        const grouped = {};
+        state.nationalAnnual.forEach((r) => {
+          if (!grouped[r.year]) grouped[r.year] = { year: r.year, graduates: 0 };
+          grouped[r.year].graduates += r.graduates || 0;
+        });
+        rows = Object.values(grouped).sort((a, b) => a.year - b.year);
+      } else {
+        rows = state.nationalAnnual
+          .filter((r) => r.major_name === major)
+          .sort((a, b) => a.year - b.year);
       }
-    ];
 
-    if (overlayState !== "all") {
-      const stateRows = state.stateAnnual
-        .filter((r) => r.major_name === major && r.state_abbr === overlayState)
-        .sort((a, b) => a.year - b.year);
-      traces.push({
+      return {
         type: "scatter",
         mode: "lines+markers",
-        x: stateRows.map((r) => r.year),
-        y: stateRows.map((r) => r[trendMetric]),
-        name: overlayState,
-        line: { color: "#0369a1", width: 2, dash: "dot" },
-        marker: { size: 6 }
-      });
-    }
+        x: rows.map((r) => r.year),
+        y: rows.map((r) => {
+          if (trendMetric === "graduates") return r.graduates;
+          if (major === "ALL") return null;
+          return r.share_of_total;
+        }),
+        name: major === "ALL" ? "All Majors" : major
+      };
+    }).filter((t) => t.y.some((v) => v !== null));
 
     Plotly.newPlot("chart-trend", traces, baseLayout({
-      title: { text: `${major}: ${trendMetric === "graduates" ? "Graduate Count" : "Share of Total"} Trend` },
+      title: { text: `Trend Over Time (${trendMetric === "graduates" ? "Count" : "Share"})` },
       xaxis: { title: "Year", dtick: 1 },
-      yaxis: { title: trendMetric === "graduates" ? "Graduates" : "Share", tickformat: trendMetric === "graduates" ? ",.0f" : ".2%" }
+      yaxis: {
+        title: trendMetric === "graduates" ? "Graduates" : "Share of Total",
+        tickformat: trendMetric === "graduates" ? ",.0f" : ".2%"
+      }
     }), { responsive: true, displayModeBar: false });
   }
 
-  function renderStateTable() {
-    const metric = getMetric();
-    const major = getMajor();
-    const rows = filteredStateForMajor(major).slice().sort((a, b) => score(b[metric]) - score(a[metric]));
+  function stateRowsForMajor(major) {
+    if (major === "ALL") {
+      const grouped = {};
+      state.stateChange.forEach((r) => {
+        if (!r.state_abbr || r.state_abbr === "UNK") return;
+        if (!grouped[r.state_abbr]) grouped[r.state_abbr] = { state_abbr: r.state_abbr, count_2013: 0, count_2023: 0 };
+        grouped[r.state_abbr].count_2013 += r.count_2013 || 0;
+        grouped[r.state_abbr].count_2023 += r.count_2023 || 0;
+      });
+      return Object.values(grouped).map((r) => {
+        const gross = r.count_2023 - r.count_2013;
+        const p = r.count_2013 > 0 ? (gross / r.count_2013) * 100 : null;
+        return { ...r, gross_change: gross, pct_change: p };
+      });
+    }
+    return state.stateChange.filter((r) => r.major_name === major && r.state_abbr !== "UNK");
+  }
+
+  function renderStateTrends() {
+    const major = getStateMajor();
+    const metric = document.getElementById("state-metric-select").value;
+    const rows = stateRowsForMajor(major).slice().sort((a, b) => score(b[metric]) - score(a[metric]));
+
+    Plotly.newPlot("chart-state-trends", [
+      {
+        type: "bar",
+        orientation: "h",
+        y: rows.map((r) => r.state_abbr),
+        x: rows.map((r) => r[metric]),
+        marker: { color: rows.map((r) => ((r[metric] ?? 0) >= 0 ? "#059669" : "#dc2626")) },
+        hovertemplate:
+          "<b>%{y}</b><br>" +
+          (metric === "gross_change" ? "Gross Change: %{x:,.0f}" : "Percent Change: %{x:.1f}%") +
+          "<extra></extra>"
+      }
+    ], baseLayout({
+      title: { text: `State ${metric === "gross_change" ? "Gross" : "Percent"} Change: ${major === "ALL" ? "All Majors" : major}` },
+      xaxis: { zeroline: true, zerolinecolor: "#111827" },
+      margin: { l: 90, r: 20, t: 50, b: 40 },
+      height: Math.max(600, rows.length * 12)
+    }), { responsive: true, displayModeBar: false });
+
     const tbody = document.getElementById("state-table-body");
     tbody.innerHTML = "";
-
     rows.forEach((r) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
@@ -294,18 +342,17 @@
         <td>${moneyish(r.count_2023)}</td>
         <td style="color:${(r.gross_change ?? 0) >= 0 ? "#059669" : "#dc2626"}">${moneyish(r.gross_change)}</td>
         <td style="color:${(r.pct_change ?? 0) >= 0 ? "#059669" : "#dc2626"}">${pct(r.pct_change)}</td>
-        <td>${r.low_base_flag ? "Yes" : "No"}</td>
       `;
       tbody.appendChild(tr);
     });
   }
 
   function renderAll() {
-    renderSlopegraph();
-    renderRankings();
+    renderMainInfographic();
+    renderNationalRankings();
     renderMap();
     renderTrend();
-    renderStateTable();
+    renderStateTrends();
   }
 
   function wireTabs() {
@@ -321,49 +368,62 @@
   }
 
   function wireControls() {
-    ["major-select", "metric-select", "trend-select", "state-overlay-select", "include-low-base"].forEach((id) => {
+    ["ranking-metric-select", "map-major-select", "trend-major-select", "trend-select", "state-major-select", "state-metric-select"].forEach((id) => {
       document.getElementById(id).addEventListener("change", renderAll);
     });
   }
 
-  function populateControls() {
-    const majorSelect = document.getElementById("major-select");
-    const majors = [...new Set(state.nationalChange.map((r) => r.major_name))].sort((a, b) => a.localeCompare(b));
-    majorSelect.innerHTML = "";
+  function fillSelectWithAll(selectId, majors) {
+    const select = document.getElementById(selectId);
+    select.innerHTML = "";
+    const allOpt = document.createElement("option");
+    allOpt.value = "ALL";
+    allOpt.textContent = "All";
+    select.appendChild(allOpt);
     majors.forEach((m) => {
-      const option = document.createElement("option");
-      option.value = m;
-      option.textContent = m;
-      majorSelect.appendChild(option);
+      const opt = document.createElement("option");
+      opt.value = m;
+      opt.textContent = m;
+      select.appendChild(opt);
     });
+  }
 
-    // Default major: top growing major nationally
-    const defaultMajorRow = state.nationalChange
-      .filter((r) => !r.low_base_flag)
-      .sort((a, b) => score(b.gross_change) - score(a.gross_change))[0];
-    if (defaultMajorRow) majorSelect.value = defaultMajorRow.major_name;
+  function fillMultiSelectWithAll(selectId, majors) {
+    const select = document.getElementById(selectId);
+    select.innerHTML = "";
+    const allOpt = document.createElement("option");
+    allOpt.value = "ALL";
+    allOpt.textContent = "All";
+    allOpt.selected = true;
+    select.appendChild(allOpt);
+    majors.forEach((m) => {
+      const opt = document.createElement("option");
+      opt.value = m;
+      opt.textContent = m;
+      select.appendChild(opt);
+    });
+  }
 
-    const stateSelect = document.getElementById("state-overlay-select");
-    const stateCodes = [...new Set(state.stateAnnual.map((r) => r.state_abbr))]
-      .filter((s) => s && s !== "UNK")
-      .sort();
-    stateSelect.innerHTML = `<option value="all">National Only</option>` + stateCodes.map((s) => `<option value="${s}">${s}</option>`).join("");
+  function initializeControls() {
+    const majors = majorList();
+    fillSelectWithAll("map-major-select", majors);
+    fillSelectWithAll("state-major-select", majors);
+    fillMultiSelectWithAll("trend-major-select", majors);
   }
 
   async function init() {
     try {
-      const [nationalChange, stateChange, nationalAnnual, stateAnnual] = await Promise.all([
+      const [nationalChange, stateChange, nationalAnnual] = await Promise.all([
         loadCSV(FILES.nationalChange),
         loadCSV(FILES.stateChange),
-        loadCSV(FILES.nationalAnnual),
-        loadCSV(FILES.stateAnnual)
+        loadCSV(FILES.nationalAnnual)
       ]);
+
       state.nationalChange = nationalChange;
       state.stateChange = stateChange;
       state.nationalAnnual = nationalAnnual;
-      state.stateAnnual = stateAnnual;
 
-      populateControls();
+      initializeControls();
       wireTabs();
       wireControls();
       renderAll();

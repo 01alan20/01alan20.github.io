@@ -10,9 +10,6 @@ Dashboard and data pipeline for major-level graduate change analysis using IPEDS
   - `pct_change = (count_2023 - count_2013) / count_2013 * 100` when baseline is positive.
 - US choropleth map by major, colored by state-level percent change.
 
-## Important Note
-"Following graduates" in this project is aggregate trend tracking of completions over time, not person-level longitudinal tracking.
-
 ## Data Pipeline
 Run:
 
@@ -31,7 +28,3 @@ Files written to `projects/ipeds-major-trends/data/`:
 - `major_change_state_2013_2023.csv`
 - `major_trend_national_annual.csv`
 - `major_trend_state_annual.csv`
-
-## Low-Base Rule
-Rows with `count_2013 < 50` are flagged as `low_base_flag = true`.
-The dashboard excludes these rows by default and allows opt-in with a warning toggle.
