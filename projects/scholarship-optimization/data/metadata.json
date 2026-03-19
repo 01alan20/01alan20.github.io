@@ -86,11 +86,11 @@
     },
     "optimal_net_tuition": {
       "type": "currency",
-      "description": "Net tuition per student after optimal discount (sticker_tuition_proxy × (1 - optimal_discount_pct))"
+      "description": "Net tuition per student after optimal discount (sticker_tuition_proxy x (1 - optimal_discount_pct))"
     },
     "optimal_net_revenue": {
       "type": "currency",
-      "description": "Total net tuition revenue with optimal discount (optimal_projected_enrollment × optimal_net_tuition)"
+      "description": "Total net tuition revenue with optimal discount (optimal_projected_enrollment x optimal_net_tuition)"
     },
     "optimal_incremental_enrollment": {
       "type": "numeric",
@@ -109,11 +109,11 @@
   },
   "calculated_metrics": {
     "optimal_discount_pct": {
-      "calculation": "Discount level (0%-100%) that maximizes: optimal_projected_enrollment × optimal_net_tuition",
+      "calculation": "Discount level (0%-100%) that maximizes: optimal_projected_enrollment x optimal_net_tuition",
       "methodology": "Revenue optimization model iterates through discount scenarios and selects level producing highest net revenue"
     },
     "optimal_projected_yield": {
-      "calculation": "min(baseline_yield + (optimal_discount_pct × price_sensitivity), 1.0)",
+      "calculation": "min(baseline_yield + (optimal_discount_pct x price_sensitivity), 1.0)",
       "interpretation": "Yield cannot exceed 100% (biological maximum); larger discounts produce proportionally larger yield improvements for price-sensitive institutions"
     },
     "optimal_revenue_change_pct": {

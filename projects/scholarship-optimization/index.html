@@ -20,37 +20,32 @@
   </div>
 
   <div class="container">
-    <!-- KPI Section -->
     <section class="kpi-section">
       <article class="kpi-card">
         <div class="kpi-label">Baseline Enrollments</div>
-        <div class="kpi-value" id="kpi-baseline-enroll">—</div>
+        <div class="kpi-value" id="kpi-baseline-enroll">-</div>
       </article>
       <article class="kpi-card">
         <div class="kpi-label">Baseline Revenue</div>
-        <div class="kpi-value" id="kpi-baseline-revenue">—</div>
+        <div class="kpi-value" id="kpi-baseline-revenue">-</div>
       </article>
       <article class="kpi-card">
         <div class="kpi-label">Optimal Aid Amount</div>
-        <div class="kpi-value" id="kpi-optimal-amount">—</div>
+        <div class="kpi-value" id="kpi-optimal-amount">-</div>
       </article>
       <article class="kpi-card">
         <div class="kpi-label">Students Reached</div>
-        <div class="kpi-value" id="kpi-students-reached">—</div>
+        <div class="kpi-value" id="kpi-students-reached">-</div>
       </article>
     </section>
 
-    <!-- Tab Navigation -->
     <nav class="tabs">
       <button class="tab-btn active" data-tab="tradeoff">Enrollment vs Revenue</button>
-      <button class="tab-btn" data-tab="roi">ROI Analysis</button>
+      <button class="tab-btn" data-tab="roi">Flexible Optimizer</button>
       <button class="tab-btn" data-tab="scenarios">Scenario Comparison</button>
       <button class="tab-btn" data-tab="insights">Key Insights</button>
     </nav>
 
-    <!-- Tab Content -->
-    
-    <!-- Tab 1: Enrollment vs Revenue Trade-off -->
     <section class="tab-pane active" data-tab="tradeoff">
       <h2>The Core Trade-off: Enrollment Growth vs Revenue Impact</h2>
       <p class="section-description">
@@ -64,40 +59,72 @@
       <div class="insights-box">
         <h3>What This Shows:</h3>
         <ul>
-          <li><strong>Blue line (Enrollments):</strong> Student enrollment gains from scholarships (small, ~1-2%)</li>
-          <li><strong>Red line (Revenue):</strong> Net revenue impact (negative, as expected)</li>
-          <li><strong>Key insight:</strong> Scholarships rarely "pay for themselves" through enrollment gains alone</li>
+          <li><strong>Blue line (Enrollments):</strong> Student enrollment gains from scholarships (small, about 1-2%).</li>
+          <li><strong>Red line (Revenue):</strong> Net revenue impact (negative, as expected).</li>
+          <li><strong>Key insight:</strong> Scholarships rarely pay for themselves through enrollment gains alone.</li>
           <li><strong>Strategic choice:</strong> Is your goal enrollment growth or revenue maximization?</li>
         </ul>
       </div>
     </section>
 
-    <!-- Tab 2: ROI Analysis -->
     <section class="tab-pane" data-tab="roi">
-      <h2>Return on Investment: Aid Spent vs Outcomes</h2>
+      <h2>Flexible Optimizer: Budget, Awards, and Conversion Rates</h2>
       <p class="section-description">
-        How much enrollment gain do you buy for each dollar spent on scholarships? Breaking down ROI metrics.
+        Set your own budget, award range, student counts, and conversion assumptions. The optimizer evaluates each award level and picks the best strategy for your objective.
       </p>
+
+      <div class="optimizer-controls">
+        <div class="control-grid">
+          <label>Budget ($)<input id="opt-budget" type="number" min="100000" step="100000" value="3000000"></label>
+          <label>Tuition ($)<input id="opt-tuition" type="number" min="5000" step="500" value="35000"></label>
+          <label>Eligible Students<input id="opt-eligible" type="number" min="300" step="100" value="30000"></label>
+          <label>Min Students Served<input id="opt-min-students" type="number" min="0" step="50" value="300"></label>
+          <label>Max Students Served<input id="opt-max-students" type="number" min="1" step="100" value="30000"></label>
+          <label>Baseline Conversion (%)<input id="opt-base-conv" type="number" min="0" max="99" step="0.1" value="30"></label>
+          <label>Min Award ($)<input id="opt-min-award" type="number" min="1000" step="500" value="1000"></label>
+          <label>Max Award ($)<input id="opt-max-award" type="number" min="1000" step="500" value="35000"></label>
+          <label>Award Step ($)<input id="opt-award-step" type="number" min="500" step="500" value="1000"></label>
+          <label>Lift At Min Award (pp)<input id="opt-lift-min" type="number" min="0" max="95" step="0.1" value="3"></label>
+          <label>Lift At Max Award (pp)<input id="opt-lift-max" type="number" min="0" max="95" step="0.1" value="20"></label>
+          <label>Curve Shape
+            <select id="opt-curve-shape">
+              <option value="0.6">Fast early lift</option>
+              <option value="1.0" selected>Linear</option>
+              <option value="1.4">Back-loaded lift</option>
+            </select>
+          </label>
+          <label>Objective
+            <select id="opt-objective">
+              <option value="incremental">Max Incremental Enrollments</option>
+              <option value="net_revenue">Max Net Tuition Impact</option>
+              <option value="balanced">Balanced</option>
+            </select>
+          </label>
+        </div>
+        <button id="opt-run" type="button" class="run-btn">Run Optimizer</button>
+      </div>
+
+      <div class="optimizer-summary" id="opt-summary"></div>
+
       <div class="chart-row">
         <div class="chart-container">
-          <div id="chart-cost-per-enroll" class="chart"></div>
+          <div id="chart-optimizer-frontier" class="chart"></div>
         </div>
         <div class="chart-container">
-          <div id="chart-aid-penetration" class="chart"></div>
+          <div id="chart-optimizer-efficiency" class="chart"></div>
         </div>
       </div>
       <div class="insights-box">
-        <h3>ROI Interpretation:</h3>
+        <h3>How To Read This:</h3>
         <ul>
-          <li><strong>Cost per additional student:</strong> ~$190,000-$200,000. This is because the $3M budget is fixed and enrollment gains are modest (~15 students).</li>
-          <li><strong>The real trade-off:</strong> With a fixed budget, you choose between serving MANY students with small awards vs. FEW students with large awards.</li>
-          <li><strong>Market coverage:</strong> $1k awards reach 60% of cohort; $15k awards reach only 4% of cohort.</li>
-          <li><strong>Key insight:</strong> Enrollment gains are similar (~15 students) regardless of award size. The choice is about depth vs. breadth of aid.</li>
+          <li><strong>Incremental enrollments:</strong> Expected extra students from aid above baseline conversion.</li>
+          <li><strong>Net tuition delta:</strong> Expected tuition change after discounts versus no-aid baseline for served students.</li>
+          <li><strong>Cost per incremental enrollment:</strong> Budget spent per additional expected enrollment.</li>
+          <li><strong>Important:</strong> This optimizer assumes one award tier at a time and user-defined conversion curves.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Tab 3: Scenario Comparison -->
     <section class="tab-pane" data-tab="scenarios">
       <h2>Scenario Analysis: Comparing Scholarship Strategies</h2>
       <p class="section-description">
@@ -116,64 +143,62 @@
               <th style="padding: 12px; text-align: right; border: 1px solid #e5e7eb;">Students Served</th>
             </tr>
           </thead>
-          <tbody id="scenarios-tbody">
-          </tbody>
+          <tbody id="scenarios-tbody"></tbody>
         </table>
       </div>
     </section>
 
-    <!-- Tab 4: Key Insights -->
     <section class="tab-pane" data-tab="insights">
-      <h2>Strategic Insights & Recommendations</h2>
+      <h2>Strategic Insights and Recommendations</h2>
       <div class="insights-box">
         <h3>Decision Framework</h3>
         <p>Choose your scholarship strategy based on institutional priorities:</p>
         <br>
-        
+
         <strong style="color: #059669;">Maximize Access (Social Mission):</strong>
         <p style="margin-left: 20px; margin-bottom: 15px;">
           Allocate $5,000-$7,500 per high-need student.<br>
-          • Serves ~400-600 highest-need students<br>
-          • Meaningful aid that reduces financial barriers<br>
-          • Revenue cost: ~1.3% institutional impact<br>
-          • Best for: Mission-driven, well-endowed institutions
+          - Serves around 400-600 highest-need students<br>
+          - Meaningful aid that reduces financial barriers<br>
+          - Revenue cost around 1.3% institutional impact<br>
+          - Best for mission-driven, well-endowed institutions
         </p>
 
         <strong style="color: #dc2626;">Minimize Financial Impact:</strong>
         <p style="margin-left: 20px; margin-bottom: 15px;">
           Small scholarships ($1,000-$2,000) or no scholarships.<br>
-          • Minimal revenue impact (<1%)<br>
-          • Limited enrollment gain (10-15 additional students)<br>
-          • Serves 1,500-3,000 students with small awards<br>
-          • Best for: Revenue-constrained institutions
+          - Minimal revenue impact (less than 1%)<br>
+          - Limited enrollment gain (10-15 additional students)<br>
+          - Serves 1,500-3,000 students with small awards<br>
+          - Best for revenue-constrained institutions
         </p>
 
         <strong style="color: #2563eb;">Strategic Middle Ground:</strong>
         <p style="margin-left: 20px; margin-bottom: 15px;">
           $3,000-$5,000 per high-need student.<br>
-          • Balances access and revenue goals<br>
-          • Serves 600-1,000 students meaningfully<br>
-          • ~1% revenue impact (manageable)<br>
-          • Best for: Most institutions
+          - Balances access and revenue goals<br>
+          - Serves 600-1,000 students meaningfully<br>
+          - Around 1% revenue impact (manageable)<br>
+          - Best for most institutions
         </p>
       </div>
 
       <div class="insights-box" style="margin-top: 20px;">
         <h3>What The Model Shows</h3>
         <ul>
-          <li><strong>Realistic elasticity:</strong> 0.15 enrollment elasticity (peer-reviewed research range)</li>
-          <li><strong>Modest gains:</strong> Scholarships add ~15-16 students per 1,000 cohort, not dramatically more</li>
-          <li><strong>Revenue cost:</strong> Scholarships reduce net institutional revenue 1-1.5% (expected)</li>
-          <li><strong>Market coverage:</strong> With $3M budget (3% of revenue), reach 200-3,000 students depending on award size</li>
-          <li><strong>Why scholarships exist:</strong> Not about revenue, but about mission, equity, and access</li>
+          <li><strong>Realistic elasticity:</strong> 0.15 enrollment elasticity (peer-reviewed research range).</li>
+          <li><strong>Modest gains:</strong> Scholarships add around 15-16 students per 1,000 cohort.</li>
+          <li><strong>Revenue cost:</strong> Scholarships reduce net institutional revenue 1-1.5%.</li>
+          <li><strong>Market coverage:</strong> With $3M budget (3% of revenue), reach 200-3,000 students depending on award size.</li>
+          <li><strong>Why scholarships exist:</strong> Mission, equity, and access goals, not only revenue.</li>
         </ul>
       </div>
 
       <div class="insights-box" style="margin-top: 20px; background: #fef3c7; border-left: 4px solid #f59e0b;">
-        <h3>Common Institutional Question: Don't we make money on retention?</h3>
+        <h3>Common Institutional Question: Do We Make Money On Retention?</h3>
         <p>
-          This model shows <strong>immediate revenue impact</strong> (less enrollment × lower net tuition). 
-          In reality, students who persist and complete generate additional revenue (full-time enrollment, graduate programs, alumni giving). 
+          This model shows <strong>immediate revenue impact</strong> (less enrollment x lower net tuition).
+          In reality, students who persist and complete generate additional revenue (full-time enrollment, graduate programs, alumni giving).
           A more complete model would track 4-6 year cohorts, but the immediate cost is real and must be budgeted.
         </p>
       </div>
