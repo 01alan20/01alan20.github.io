@@ -1,0 +1,348 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: Property Analytics Dashboard
+        - heading "Singapore Condo ROI Explorer" [level=1] [ref=e6]
+        - paragraph [ref=e7]: Explore condo performance by ROI, district, size, tenure, and time. Compare submarkets, inspect trend lines, and screen likely fits from the same underlying dataset.
+      - complementary [ref=e8]:
+        - generic [ref=e9]: Data Source
+        - paragraph [ref=e10]:
+          - text: Dashboard view powered by
+          - code [ref=e11]: pmi_roi_agg.csv
+          - text: .
+        - paragraph [ref=e12]: Rows are project and size-band combinations. Bedrooms are estimated from size buckets in the Search tab because no bedroom field exists in the source file.
+  - main [ref=e13]:
+    - region "Market summary" [ref=e14]:
+      - article [ref=e15]:
+        - generic [ref=e16]: Tracked Projects
+        - strong [ref=e17]: 3,409
+      - article [ref=e18]:
+        - generic [ref=e19]: Average ROI
+        - strong [ref=e20]: 34.73%
+      - article [ref=e21]:
+        - generic [ref=e22]: Average Buy
+        - strong [ref=e23]: S$2,887,332
+      - article [ref=e24]:
+        - generic [ref=e25]: Average Rent
+        - strong [ref=e26]: S$6,487
+    - navigation "Dashboard tabs" [ref=e27]:
+      - button "ROI" [ref=e28] [cursor=pointer]
+      - button "Compare" [active] [ref=e29] [cursor=pointer]
+      - button "Trends" [ref=e30] [cursor=pointer]
+      - button "Search" [ref=e31] [cursor=pointer]
+    - generic [ref=e136]:
+      - generic [ref=e138]:
+        - generic [ref=e139]: District Matchup
+        - heading "Compare" [level=2] [ref=e140]
+        - paragraph [ref=e141]: Choose two districts, compare standout projects on ROI, and inspect similar size bands where price and rent diverge.
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - generic [ref=e145]: District A
+          - combobox "District A" [ref=e146]:
+            - option "District 1"
+            - option "District 2"
+            - option "District 3"
+            - option "District 4"
+            - option "District 5"
+            - option "District 6"
+            - option "District 7"
+            - option "District 8"
+            - option "District 9"
+            - option "District 10"
+            - option "District 11"
+            - option "District 12"
+            - option "District 13"
+            - option "District 14"
+            - option "District 15"
+            - option "District 16"
+            - option "District 17"
+            - option "District 18"
+            - option "District 19"
+            - option "District 20"
+            - option "District 21"
+            - option "District 22"
+            - option "District 23"
+            - option "District 24"
+            - option "District 25"
+            - option "District 26" [selected]
+            - option "District 27"
+            - option "District 28"
+        - generic [ref=e147]:
+          - generic [ref=e148]: District B
+          - combobox "District B" [ref=e149]:
+            - option "District 1"
+            - option "District 2"
+            - option "District 3"
+            - option "District 4"
+            - option "District 5"
+            - option "District 6"
+            - option "District 7"
+            - option "District 8"
+            - option "District 9"
+            - option "District 10"
+            - option "District 11"
+            - option "District 12"
+            - option "District 13"
+            - option "District 14"
+            - option "District 15"
+            - option "District 16"
+            - option "District 17"
+            - option "District 18"
+            - option "District 19"
+            - option "District 20"
+            - option "District 21"
+            - option "District 22"
+            - option "District 23"
+            - option "District 24"
+            - option "District 25"
+            - option "District 26"
+            - option "District 27"
+            - option "District 28" [selected]
+        - generic [ref=e150]:
+          - generic [ref=e151]: Area Bucket
+          - combobox "Area Bucket" [ref=e152]:
+            - option "20-30"
+            - option "30-40"
+            - option "40-50"
+            - option "50-60"
+            - option "60-70"
+            - option "70-80"
+            - option "80-90"
+            - option "90-100" [selected]
+            - option "100-110"
+            - option "100-150"
+            - option "150-160"
+            - option "150-200"
+            - option "200-250"
+            - option "250-300"
+            - option "300-350"
+            - option "350-400"
+            - option "400-450"
+            - option "450-500"
+            - option "500-550"
+            - option "550-600"
+            - option "600-650"
+            - option "650-700"
+            - option "700-750"
+            - option "750-800"
+      - generic [ref=e153]:
+        - article [ref=e154]:
+          - generic [ref=e155]: District 26
+          - strong [ref=e156]: 49.22%
+          - generic [ref=e157]: Average ROI across 31 projects.
+          - generic [ref=e158]: Average buy S$3,295,018.
+          - generic [ref=e159]: "Top project: MUN WAH GARDEN."
+        - article [ref=e160]:
+          - generic [ref=e161]: District 28
+          - strong [ref=e162]: 48.32%
+          - generic [ref=e163]: Average ROI across 51 projects.
+          - generic [ref=e164]: Average buy S$3,357,722.
+          - generic [ref=e165]: "Top project: DEDAP GARDENS."
+      - generic [ref=e166]:
+        - article [ref=e167]:
+          - generic [ref=e169]:
+            - generic [ref=e170]: District 26
+            - heading "Standout Projects" [level=3] [ref=e171]
+          - generic [ref=e172]:
+            - article [ref=e173]:
+              - generic [ref=e174]: "1"
+              - generic [ref=e175]:
+                - generic [ref=e176]: MUN WAH GARDEN
+                - generic [ref=e177]: Semi-detached | Freehold | S$5,526,667 buy | S$6,700 rent | 100.29%
+            - article [ref=e178]:
+              - generic [ref=e179]: "2"
+              - generic [ref=e180]:
+                - generic [ref=e181]: HEETON PARK
+                - generic [ref=e182]: Terrace | Freehold | S$4,159,400 buy | S$3,850 rent | 94.40%
+            - article [ref=e183]:
+              - generic [ref=e184]: "3"
+              - generic [ref=e185]:
+                - generic [ref=e186]: MANDAI GARDEN
+                - generic [ref=e187]: Semi-detached | Leasehold | S$4,136,148 buy | S$4,547 rent | 74.48%
+            - article [ref=e188]:
+              - generic [ref=e189]: "4"
+              - generic [ref=e190]:
+                - generic [ref=e191]: THE SPRINGSIDE
+                - generic [ref=e192]: Terrace | Freehold | S$4,673,111 buy | S$6,114 rent | 72.12%
+            - article [ref=e193]:
+              - generic [ref=e194]: "5"
+              - generic [ref=e195]:
+                - generic [ref=e196]: LENTOR VIEW
+                - generic [ref=e197]: Terrace | Freehold | S$5,010,000 buy | S$7,663 rent | 70.69%
+            - article [ref=e198]:
+              - generic [ref=e199]: "6"
+              - generic [ref=e200]:
+                - generic [ref=e201]: SPRINGLEAF GARDEN
+                - generic [ref=e202]: Semi-detached | Freehold | S$5,257,481 buy | S$6,322 rent | 64.03%
+        - article [ref=e203]:
+          - generic [ref=e205]:
+            - generic [ref=e206]: District 28
+            - heading "Standout Projects" [level=3] [ref=e207]
+          - generic [ref=e208]:
+            - article [ref=e209]:
+              - generic [ref=e210]: "1"
+              - generic [ref=e211]:
+                - generic [ref=e212]: DEDAP GARDENS
+                - generic [ref=e213]: Terrace | Leasehold | S$4,653,630 buy | S$5,175 rent | 82.30%
+            - article [ref=e214]:
+              - generic [ref=e215]: "2"
+              - generic [ref=e216]:
+                - generic [ref=e217]: KELULUT HILL
+                - generic [ref=e218]: Terrace | Leasehold | S$3,535,755 buy | S$4,000 rent | 80.18%
+            - article [ref=e219]:
+              - generic [ref=e220]: "3"
+              - generic [ref=e221]:
+                - generic [ref=e222]: EATON PARK
+                - generic [ref=e223]: Semi-detached | Freehold | S$4,383,333 buy | S$4,800 rent | 79.86%
+            - article [ref=e224]:
+              - generic [ref=e225]: "4"
+              - generic [ref=e226]:
+                - generic [ref=e227]: STRATTON PARK
+                - generic [ref=e228]: Terrace | Freehold | S$4,639,500 buy | S$5,320 rent | 77.19%
+            - article [ref=e229]:
+              - generic [ref=e230]: "5"
+              - generic [ref=e231]:
+                - generic [ref=e232]: MIMOSA TERRACE
+                - generic [ref=e233]: Terrace | Freehold | S$4,017,778 buy | S$4,633 rent | 76.81%
+            - article [ref=e234]:
+              - generic [ref=e235]: "6"
+              - generic [ref=e236]:
+                - generic [ref=e237]: GERALD GARDENS
+                - generic [ref=e238]: Terrace | Leasehold | S$4,402,222 buy | S$5,700 rent | 75.18%
+      - article [ref=e239]:
+        - generic [ref=e241]:
+          - generic [ref=e242]: Same Size Band
+          - heading "Price and Rent Gaps" [level=3] [ref=e243]
+          - paragraph [ref=e244]: Showing similarly sized rows in 90-100 across District 26 and District 28, sorted by recent buy price.
+        - table [ref=e246]:
+          - rowgroup [ref=e247]:
+            - row "Project District Area Recent Buy Recent Rent ROI" [ref=e248]:
+              - columnheader "Project" [ref=e249]
+              - columnheader "District" [ref=e250]
+              - columnheader "Area" [ref=e251]
+              - columnheader "Recent Buy" [ref=e252]
+              - columnheader "Recent Rent" [ref=e253]
+              - columnheader "ROI" [ref=e254]
+          - rowgroup [ref=e255]:
+            - row "SUNRISE GARDENS District 28 90-100 S$998,000 S$3,600 23.10%" [ref=e256]:
+              - cell "SUNRISE GARDENS" [ref=e257]
+              - cell "District 28" [ref=e258]
+              - cell "90-100" [ref=e259]
+              - cell "S$998,000" [ref=e260]
+              - cell "S$3,600" [ref=e261]
+              - cell "23.10%" [ref=e262]:
+                - generic [ref=e263]: 23.10%
+            - row "SELETAR SPRINGS CONDOMINIUM District 28 90-100 S$1,033,000 S$3,100 27.77%" [ref=e264]:
+              - cell "SELETAR SPRINGS CONDOMINIUM" [ref=e265]
+              - cell "District 28" [ref=e266]
+              - cell "90-100" [ref=e267]
+              - cell "S$1,033,000" [ref=e268]
+              - cell "S$3,100" [ref=e269]
+              - cell "27.77%" [ref=e270]:
+                - generic [ref=e271]: 27.77%
+            - row "FOREST HILLS CONDOMINIUM District 26 90-100 S$1,148,000 S$3,750 25.51%" [ref=e272]:
+              - cell "FOREST HILLS CONDOMINIUM" [ref=e273]
+              - cell "District 26" [ref=e274]
+              - cell "90-100" [ref=e275]
+              - cell "S$1,148,000" [ref=e276]
+              - cell "S$3,750" [ref=e277]
+              - cell "25.51%" [ref=e278]:
+                - generic [ref=e279]: 25.51%
+            - row "SELETAR PARK RESIDENCE District 28 90-100 S$1,275,000 S$3,600 29.51%" [ref=e280]:
+              - cell "SELETAR PARK RESIDENCE" [ref=e281]
+              - cell "District 28" [ref=e282]
+              - cell "90-100" [ref=e283]
+              - cell "S$1,275,000" [ref=e284]
+              - cell "S$3,600" [ref=e285]
+              - cell "29.51%" [ref=e286]:
+                - generic [ref=e287]: 29.51%
+            - row "SEASONS PARK District 26 90-100 S$1,330,000 S$3,700 29.95%" [ref=e288]:
+              - cell "SEASONS PARK" [ref=e289]
+              - cell "District 26" [ref=e290]
+              - cell "90-100" [ref=e291]
+              - cell "S$1,330,000" [ref=e292]
+              - cell "S$3,700" [ref=e293]
+              - cell "29.95%" [ref=e294]:
+                - generic [ref=e295]: 29.95%
+            - row "THE BROOKS I District 26 90-100 S$1,338,000 S$4,700 23.72%" [ref=e296]:
+              - cell "THE BROOKS I" [ref=e297]
+              - cell "District 26" [ref=e298]
+              - cell "90-100" [ref=e299]
+              - cell "S$1,338,000" [ref=e300]
+              - cell "S$4,700" [ref=e301]
+              - cell "23.72%" [ref=e302]:
+                - generic [ref=e303]: 23.72%
+            - row "LUSH ACRES District 28 90-100 S$1,438,000 S$4,000 29.96%" [ref=e304]:
+              - cell "LUSH ACRES" [ref=e305]
+              - cell "District 28" [ref=e306]
+              - cell "90-100" [ref=e307]
+              - cell "S$1,438,000" [ref=e308]
+              - cell "S$4,000" [ref=e309]
+              - cell "29.96%" [ref=e310]:
+                - generic [ref=e311]: 29.96%
+            - row "THE ESSENCE District 26 90-100 S$1,452,800 S$3,600 33.63%" [ref=e312]:
+              - cell "THE ESSENCE" [ref=e313]
+              - cell "District 26" [ref=e314]
+              - cell "90-100" [ref=e315]
+              - cell "S$1,452,800" [ref=e316]
+              - cell "S$3,600" [ref=e317]
+              - cell "33.63%" [ref=e318]:
+                - generic [ref=e319]: 33.63%
+            - row "HIGH PARK RESIDENCES District 28 90-100 S$1,500,000 S$4,000 31.25%" [ref=e320]:
+              - cell "HIGH PARK RESIDENCES" [ref=e321]
+              - cell "District 28" [ref=e322]
+              - cell "90-100" [ref=e323]
+              - cell "S$1,500,000" [ref=e324]
+              - cell "S$4,000" [ref=e325]
+              - cell "31.25%" [ref=e326]:
+                - generic [ref=e327]: 31.25%
+            - row "RIVERBANK @ FERNVALE District 28 90-100 S$1,550,000 S$3,900 33.12%" [ref=e328]:
+              - cell "RIVERBANK @ FERNVALE" [ref=e329]
+              - cell "District 28" [ref=e330]
+              - cell "90-100" [ref=e331]
+              - cell "S$1,550,000" [ref=e332]
+              - cell "S$3,900" [ref=e333]
+              - cell "33.12%" [ref=e334]:
+                - generic [ref=e335]: 33.12%
+            - row "THE GREENWICH District 28 90-100 S$1,570,000 S$3,700 35.36%" [ref=e336]:
+              - cell "THE GREENWICH" [ref=e337]
+              - cell "District 28" [ref=e338]
+              - cell "90-100" [ref=e339]
+              - cell "S$1,570,000" [ref=e340]
+              - cell "S$3,700" [ref=e341]
+              - cell "35.36%" [ref=e342]:
+                - generic [ref=e343]: 35.36%
+            - row "THE TOPIARY District 28 90-100 S$1,610,000 S$4,500 29.81%" [ref=e344]:
+              - cell "THE TOPIARY" [ref=e345]
+              - cell "District 28" [ref=e346]
+              - cell "90-100" [ref=e347]
+              - cell "S$1,610,000" [ref=e348]
+              - cell "S$4,500" [ref=e349]
+              - cell "29.81%" [ref=e350]:
+                - generic [ref=e351]: 29.81%
+            - row "PARC BOTANNIA District 28 90-100 S$1,638,000 S$4,000 34.13%" [ref=e352]:
+              - cell "PARC BOTANNIA" [ref=e353]
+              - cell "District 28" [ref=e354]
+              - cell "90-100" [ref=e355]
+              - cell "S$1,638,000" [ref=e356]
+              - cell "S$4,000" [ref=e357]
+              - cell "34.13%" [ref=e358]:
+                - generic [ref=e359]: 34.13%
+            - row "H2O RESIDENCES District 28 90-100 S$1,680,888 S$4,500 31.13%" [ref=e360]:
+              - cell "H2O RESIDENCES" [ref=e361]
+              - cell "District 28" [ref=e362]
+              - cell "90-100" [ref=e363]
+              - cell "S$1,680,888" [ref=e364]
+              - cell "S$4,500" [ref=e365]
+              - cell "31.13%" [ref=e366]:
+                - generic [ref=e367]: 31.13%
+            - row "THE CALROSE District 26 90-100 S$1,948,000 S$4,380 37.06%" [ref=e368]:
+              - cell "THE CALROSE" [ref=e369]
+              - cell "District 26" [ref=e370]
+              - cell "90-100" [ref=e371]
+              - cell "S$1,948,000" [ref=e372]
+              - cell "S$4,380" [ref=e373]
+              - cell "37.06%" [ref=e374]:
+                - generic [ref=e375]: 37.06%
+  - img [ref=e134]

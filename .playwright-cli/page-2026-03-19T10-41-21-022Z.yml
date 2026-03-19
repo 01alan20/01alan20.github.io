@@ -1,0 +1,260 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: Property Analytics Dashboard
+        - heading "Singapore Condo ROI Explorer" [level=1] [ref=e6]
+        - paragraph [ref=e7]: Explore condo performance by ROI, district, size, tenure, and time. Compare submarkets, inspect trend lines, and screen likely fits from the same underlying dataset.
+      - complementary [ref=e8]:
+        - generic [ref=e9]: Data Source
+        - paragraph [ref=e10]:
+          - text: Dashboard view powered by
+          - code [ref=e11]: pmi_roi_agg.csv
+          - text: .
+        - paragraph [ref=e12]: Rows are project and size-band combinations. Bedrooms are estimated from size buckets in the Search tab because no bedroom field exists in the source file.
+  - main [ref=e13]:
+    - region "Market summary" [ref=e14]:
+      - article [ref=e15]:
+        - generic [ref=e16]: Tracked Projects
+        - strong [ref=e17]: 3,409
+      - article [ref=e18]:
+        - generic [ref=e19]: Average ROI
+        - strong [ref=e20]: 34.73%
+      - article [ref=e21]:
+        - generic [ref=e22]: Average Buy
+        - strong [ref=e23]: S$2,887,332
+      - article [ref=e24]:
+        - generic [ref=e25]: Average Rent
+        - strong [ref=e26]: S$6,487
+    - navigation "Dashboard tabs" [ref=e27]:
+      - button "ROI" [ref=e28] [cursor=pointer]
+      - button "Compare" [ref=e29] [cursor=pointer]
+      - button "Trends" [ref=e30] [cursor=pointer]
+      - button "Search" [active] [ref=e31] [cursor=pointer]
+    - generic [ref=e10234]:
+      - generic [ref=e10236]:
+        - generic [ref=e10237]: Opportunity Finder
+        - heading "Search" [level=2] [ref=e10238]
+        - paragraph [ref=e10239]: Filter by estimated bedrooms, size band, budget, and district, then rank the best-fitting options by ROI.
+      - generic [ref=e10240]:
+        - generic [ref=e10241]:
+          - generic [ref=e10242]:
+            - generic [ref=e10243]: Bedrooms
+            - combobox "Bedrooms" [ref=e10244]:
+              - option "Any Beds" [selected]
+              - option "1"
+              - option "2"
+              - option "3"
+              - option "4"
+              - option "5+"
+          - generic [ref=e10245]:
+            - generic [ref=e10246]: Size
+            - combobox "Size" [ref=e10247]:
+              - option "Any Size" [selected]
+              - option "20-30"
+              - option "30-40"
+              - option "40-50"
+              - option "50-60"
+              - option "60-70"
+              - option "70-80"
+              - option "80-90"
+              - option "90-100"
+              - option "100-110"
+              - option "100-150"
+              - option "150-160"
+              - option "150-200"
+              - option "200-250"
+              - option "250-300"
+              - option "300-350"
+              - option "350-400"
+              - option "400-450"
+              - option "450-500"
+              - option "500-550"
+              - option "550-600"
+              - option "600-650"
+              - option "650-700"
+              - option "700-750"
+              - option "750-800"
+          - generic [ref=e10248]:
+            - generic [ref=e10249]: Budget
+            - spinbutton "Budget" [ref=e10250]
+          - generic [ref=e10251]:
+            - generic [ref=e10252]: District
+            - combobox "District" [ref=e10253]:
+              - option "Any District" [selected]
+              - option "District 1"
+              - option "District 2"
+              - option "District 3"
+              - option "District 4"
+              - option "District 5"
+              - option "District 6"
+              - option "District 7"
+              - option "District 8"
+              - option "District 9"
+              - option "District 10"
+              - option "District 11"
+              - option "District 12"
+              - option "District 13"
+              - option "District 14"
+              - option "District 15"
+              - option "District 16"
+              - option "District 17"
+              - option "District 18"
+              - option "District 19"
+              - option "District 20"
+              - option "District 21"
+              - option "District 22"
+              - option "District 23"
+              - option "District 24"
+              - option "District 25"
+              - option "District 26"
+              - option "District 27"
+              - option "District 28"
+        - paragraph [ref=e10254]: Bedrooms are estimated from size bands because the source file does not include bedroom counts.
+      - generic [ref=e10255]:
+        - generic [ref=e10257]:
+          - generic [ref=e10258]: Top Matches
+          - heading "Ranked by ROI" [level=3] [ref=e10259]
+          - paragraph [ref=e10260]: Top 10 matching rows ranked by ROI.
+        - generic [ref=e10261]:
+          - article [ref=e10262]:
+            - generic [ref=e10263]: "1"
+            - generic [ref=e10264]:
+              - generic [ref=e10265]: CLEMENTI PARK
+              - generic [ref=e10266]: District 21 | 750-800 | 5+ bed estimate | Freehold
+            - generic [ref=e10267]:
+              - generic [ref=e10268]: Buy
+              - text: S$20,000,000
+            - generic [ref=e10269]:
+              - generic [ref=e10270]: Rent
+              - text: S$8,500
+            - generic [ref=e10271]:
+              - generic [ref=e10272]: ROI
+              - generic [ref=e10273]: 196.08%
+          - article [ref=e10274]:
+            - generic [ref=e10275]: "2"
+            - generic [ref=e10276]:
+              - generic [ref=e10277]: WESTLAKE GARDENS
+              - generic [ref=e10278]: District 20 | 350-400 | 5+ bed estimate | Freehold
+            - generic [ref=e10279]:
+              - generic [ref=e10280]: Buy
+              - text: S$9,880,000
+            - generic [ref=e10281]:
+              - generic [ref=e10282]: Rent
+              - text: S$4,300
+            - generic [ref=e10283]:
+              - generic [ref=e10284]: ROI
+              - generic [ref=e10285]: 191.47%
+          - article [ref=e10286]:
+            - generic [ref=e10287]: "3"
+            - generic [ref=e10288]:
+              - generic [ref=e10289]: RAFFLES PARK
+              - generic [ref=e10290]: District 11 | 750-800 | 5+ bed estimate | Freehold
+            - generic [ref=e10291]:
+              - generic [ref=e10292]: Buy
+              - text: S$23,500,000
+            - generic [ref=e10293]:
+              - generic [ref=e10294]: Rent
+              - text: S$10,250
+            - generic [ref=e10295]:
+              - generic [ref=e10296]: ROI
+              - generic [ref=e10297]: 191.06%
+          - article [ref=e10298]:
+            - generic [ref=e10299]: "4"
+            - generic [ref=e10300]:
+              - generic [ref=e10301]: MCMAHON PARK
+              - generic [ref=e10302]: District 10 | 350-400 | 5+ bed estimate | Leasehold
+            - generic [ref=e10303]:
+              - generic [ref=e10304]: Buy
+              - text: S$12,000,000
+            - generic [ref=e10305]:
+              - generic [ref=e10306]: Rent
+              - text: S$5,700
+            - generic [ref=e10307]:
+              - generic [ref=e10308]: ROI
+              - generic [ref=e10309]: 175.44%
+          - article [ref=e10310]:
+            - generic [ref=e10311]: "5"
+            - generic [ref=e10312]:
+              - generic [ref=e10313]: SOO CHOW GARDEN
+              - generic [ref=e10314]: District 20 | 200-250 | 5+ bed estimate | Freehold
+            - generic [ref=e10315]:
+              - generic [ref=e10316]: Buy
+              - text: S$6,250,000
+            - generic [ref=e10317]:
+              - generic [ref=e10318]: Rent
+              - text: S$3,300
+            - generic [ref=e10319]:
+              - generic [ref=e10320]: ROI
+              - generic [ref=e10321]: 157.83%
+          - article [ref=e10322]:
+            - generic [ref=e10323]: "6"
+            - generic [ref=e10324]:
+              - generic [ref=e10325]: GREENBANK PARK
+              - generic [ref=e10326]: District 21 | 350-400 | 5+ bed estimate | Freehold
+            - generic [ref=e10327]:
+              - generic [ref=e10328]: Buy
+              - text: S$10,180,000
+            - generic [ref=e10329]:
+              - generic [ref=e10330]: Rent
+              - text: S$5,400
+            - generic [ref=e10331]:
+              - generic [ref=e10332]: ROI
+              - generic [ref=e10333]: 157.10%
+          - article [ref=e10334]:
+            - generic [ref=e10335]: "7"
+            - generic [ref=e10336]:
+              - generic [ref=e10337]: CORONATION VILLE
+              - generic [ref=e10338]: District 10 | 450-500 | 5+ bed estimate | Leasehold
+            - generic [ref=e10339]:
+              - generic [ref=e10340]: Buy
+              - text: S$13,888,000
+            - generic [ref=e10341]:
+              - generic [ref=e10342]: Rent
+              - text: S$7,500
+            - generic [ref=e10343]:
+              - generic [ref=e10344]: ROI
+              - generic [ref=e10345]: 154.31%
+          - article [ref=e10346]:
+            - generic [ref=e10347]: "8"
+            - generic [ref=e10348]:
+              - generic [ref=e10349]: THOMSON GARDEN ESTATE
+              - generic [ref=e10350]: District 20 | 150-200 | 5+ bed estimate | Freehold
+            - generic [ref=e10351]:
+              - generic [ref=e10352]: Buy
+              - text: S$6,388,888
+            - generic [ref=e10353]:
+              - generic [ref=e10354]: Rent
+              - text: S$3,500
+            - generic [ref=e10355]:
+              - generic [ref=e10356]: ROI
+              - generic [ref=e10357]: 152.12%
+          - article [ref=e10358]:
+            - generic [ref=e10359]: "9"
+            - generic [ref=e10360]:
+              - generic [ref=e10361]: HOOVER PARK
+              - generic [ref=e10362]: District 21 | 300-350 | 5+ bed estimate | Freehold
+            - generic [ref=e10363]:
+              - generic [ref=e10364]: Buy
+              - text: S$6,500,000
+            - generic [ref=e10365]:
+              - generic [ref=e10366]: Rent
+              - text: S$3,600
+            - generic [ref=e10367]:
+              - generic [ref=e10368]: ROI
+              - generic [ref=e10369]: 150.46%
+          - article [ref=e10370]:
+            - generic [ref=e10371]: "10"
+            - generic [ref=e10372]:
+              - generic [ref=e10373]: HENRY PARK
+              - generic [ref=e10374]: District 10 | 500-550 | 5+ bed estimate | Leasehold
+            - generic [ref=e10375]:
+              - generic [ref=e10376]: Buy
+              - text: S$13,516,888
+            - generic [ref=e10377]:
+              - generic [ref=e10378]: Rent
+              - text: S$7,500
+            - generic [ref=e10379]:
+              - generic [ref=e10380]: ROI
+              - generic [ref=e10381]: 150.19%
+  - img [ref=e134]

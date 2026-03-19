@@ -1,0 +1,276 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: Property Analytics Dashboard
+        - heading "Singapore Condo ROI Explorer" [level=1] [ref=e6]
+        - paragraph [ref=e7]: Explore condo performance by ROI, district, size, tenure, and time. Compare submarkets, inspect trend lines, and screen likely fits from the same underlying dataset.
+      - complementary [ref=e8]:
+        - generic [ref=e9]: Data Source
+        - paragraph [ref=e10]:
+          - text: Dashboard view powered by
+          - code [ref=e11]: pmi_roi_agg.csv
+          - text: .
+        - paragraph [ref=e12]: Rows are project and size-band combinations. Bedrooms are estimated from size buckets in the Search tab because no bedroom field exists in the source file.
+  - main [ref=e13]:
+    - region "Market summary" [ref=e14]:
+      - article [ref=e15]:
+        - generic [ref=e16]: Tracked Projects
+        - strong [ref=e17]: 3,409
+      - article [ref=e18]:
+        - generic [ref=e19]: Average ROI
+        - strong [ref=e20]: 34.73%
+      - article [ref=e21]:
+        - generic [ref=e22]: Average Buy
+        - strong [ref=e23]: S$2,887,332
+      - article [ref=e24]:
+        - generic [ref=e25]: Average Rent
+        - strong [ref=e26]: S$6,487
+    - navigation "Dashboard tabs" [ref=e27]:
+      - button "ROI" [ref=e28] [cursor=pointer]
+      - button "Compare" [ref=e29] [cursor=pointer]
+      - button "Trends" [ref=e30] [cursor=pointer]
+      - button "Search" [ref=e31] [cursor=pointer]
+    - generic [ref=e32]:
+      - generic [ref=e34]:
+        - generic [ref=e35]: Returns
+        - heading "ROI" [level=2] [ref=e36]
+        - paragraph [ref=e37]: Which projects, districts, area buckets, and tenure types are producing stronger ROI right now, and how does ROI move as price rises?
+      - generic [ref=e38]:
+        - article [ref=e39]:
+          - generic [ref=e41]:
+            - generic [ref=e42]: Right now
+            - heading "Top Projects" [level=3] [ref=e43]
+          - generic [ref=e44]:
+            - generic:
+              - generic:
+                - img:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic: "0"
+                        - generic:
+                          - generic: "20"
+                        - generic:
+                          - generic: "40"
+                        - generic:
+                          - generic: "60"
+                        - generic:
+                          - generic: "80"
+                        - generic:
+                          - generic: "100"
+                        - generic:
+                          - generic: "120"
+                      - generic:
+                        - generic:
+                          - generic: AIRVIEW PARK
+                        - generic:
+                          - generic: CORONATION VILLE
+                        - generic:
+                          - generic: SIGLAP PARK
+                        - generic:
+                          - generic: PICARDY GARDENS
+                        - generic:
+                          - generic: DUKE'S GARDEN
+                        - generic:
+                          - generic: HOLLAND GROVE PARK
+                        - generic:
+                          - generic: PALM GROVE TERRACE
+                        - generic:
+                          - generic: EAST COURT
+                        - generic:
+                          - generic: SOO CHOW GARDEN
+                        - generic:
+                          - generic: RAFFLES PARK
+                - img:
+                  - generic:
+                    - generic:
+                      - generic: Average ROI (%)
+                - img
+        - article [ref=e58]:
+          - generic [ref=e60]:
+            - generic [ref=e61]: Districts
+            - heading "Average ROI" [level=3] [ref=e62]
+          - generic [ref=e63]:
+            - generic:
+              - generic:
+                - img:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic: "0"
+                        - generic:
+                          - generic: "10"
+                        - generic:
+                          - generic: "20"
+                        - generic:
+                          - generic: "30"
+                        - generic:
+                          - generic: "40"
+                        - generic:
+                          - generic: "50"
+                      - generic:
+                        - generic:
+                          - generic: District 6
+                        - generic:
+                          - generic: District 14
+                        - generic:
+                          - generic: District 18
+                        - generic:
+                          - generic: District 25
+                        - generic:
+                          - generic: District 12
+                        - generic:
+                          - generic: District 22
+                        - generic:
+                          - generic: District 9
+                        - generic:
+                          - generic: District 5
+                        - generic:
+                          - generic: District 27
+                        - generic:
+                          - generic: District 13
+                        - generic:
+                          - generic: District 11
+                        - generic:
+                          - generic: District 10
+                        - generic:
+                          - generic: District 20
+                        - generic:
+                          - generic: District 26
+                - img:
+                  - generic:
+                    - generic:
+                      - generic: Average ROI (%)
+                - img
+        - article [ref=e77]:
+          - generic [ref=e79]:
+            - generic [ref=e80]: Area Buckets
+            - heading "Best Sizes" [level=3] [ref=e81]
+          - generic [ref=e82]:
+            - generic:
+              - generic:
+                - img:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic: "0"
+                        - generic:
+                          - generic: "10"
+                        - generic:
+                          - generic: "20"
+                        - generic:
+                          - generic: "30"
+                        - generic:
+                          - generic: "40"
+                        - generic:
+                          - generic: "50"
+                        - generic:
+                          - generic: "60"
+                        - generic:
+                          - generic: "70"
+                        - generic:
+                          - generic: "80"
+                      - generic:
+                        - generic:
+                          - generic: 30-40
+                        - generic:
+                          - generic: 20-30
+                        - generic:
+                          - generic: 60-70
+                        - generic:
+                          - generic: 80-90
+                        - generic:
+                          - generic: 100-110
+                        - generic:
+                          - generic: 250-300
+                        - generic:
+                          - generic: 450-500
+                        - generic:
+                          - generic: 300-350
+                        - generic:
+                          - generic: 150-200
+                        - generic:
+                          - generic: 600-650
+                        - generic:
+                          - generic: 500-550
+                        - generic:
+                          - generic: 650-700
+                - img:
+                  - generic:
+                    - generic:
+                      - generic: Average ROI (%)
+                - img
+        - article [ref=e96]:
+          - generic [ref=e98]:
+            - generic [ref=e99]: Tenure
+            - heading "Freehold vs Leasehold" [level=3] [ref=e100]
+          - generic [ref=e101]:
+            - article [ref=e102]:
+              - generic [ref=e103]: Freehold
+              - generic [ref=e104]: 36.21%
+              - paragraph [ref=e105]: Average recent buy S$2,580,242 across 1,493 projects.
+            - article [ref=e106]:
+              - generic [ref=e107]: Leasehold
+              - generic [ref=e108]: 31.71%
+              - paragraph [ref=e109]: Average recent buy S$2,309,056 across 731 projects.
+            - article [ref=e110]:
+              - generic [ref=e111]: Difference
+              - generic [ref=e112]: +4.50%
+              - paragraph [ref=e113]: Positive means freehold projects average higher ROI in this dataset.
+        - article [ref=e114]:
+          - generic [ref=e116]:
+            - generic [ref=e117]: Price Relationship
+            - heading "Buy Price vs ROI" [level=3] [ref=e118]
+            - paragraph [ref=e119]: ROI generally rises as price rises here, but the relationship is modest (correlation 0.70).
+          - generic [ref=e120]:
+            - generic:
+              - generic:
+                - img:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic: "0"
+                        - generic:
+                          - generic: 2,000,000
+                        - generic:
+                          - generic: 4,000,000
+                        - generic:
+                          - generic: 6,000,000
+                        - generic:
+                          - generic: 8,000,000
+                        - generic:
+                          - generic: 10,000,000
+                        - generic:
+                          - generic: 12,000,000
+                        - generic:
+                          - generic: 14,000,000
+                        - generic:
+                          - generic: 16,000,000
+                      - generic:
+                        - generic:
+                          - generic: "0"
+                        - generic:
+                          - generic: "20"
+                        - generic:
+                          - generic: "40"
+                        - generic:
+                          - generic: "60"
+                        - generic:
+                          - generic: "80"
+                        - generic:
+                          - generic: "100"
+                        - generic:
+                          - generic: "120"
+                - img:
+                  - generic:
+                    - generic:
+                      - generic: Average Recent Buy (S$)
+                    - generic:
+                      - generic: Average ROI (%)
+                - img
+  - img [ref=e134]
