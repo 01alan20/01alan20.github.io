@@ -216,7 +216,7 @@
             <button class="metric-btn" data-metric="rent" type="button">Rent</button>
             <button class="metric-btn" data-metric="payback" type="button">Payback</button>
           </div>
-          <p class="microcopy">Select up to 4 projects.</p>
+          <p class="microcopy">Select up to 4 projects. Nothing is preselected.</p>
           <div id="trendProjectList" class="project-checklist"></div>
         </aside>
 
@@ -240,34 +240,37 @@
         <div>
           <span class="section-kicker">Opportunity Finder</span>
           <h2>Search</h2>
-          <p class="panel-sub">Filter by estimated bedrooms, size band, tenure, budget, and district, then rank the best-fitting options by shortest payback.</p>
+          <p class="panel-sub">Choose one or more bedroom groups, size bands, tenure types, and districts, then rank the best-fitting options by shortest payback inside your budget range.</p>
         </div>
       </div>
 
       <section class="panel">
-        <div class="controls-grid controls-five">
+        <div class="controls-grid controls-search">
           <label class="control-field">
             <span>Bedrooms</span>
-            <select id="searchBeds"></select>
+            <select id="searchBeds" multiple size="5"></select>
           </label>
           <label class="control-field">
             <span>Size</span>
-            <select id="searchArea"></select>
+            <select id="searchArea" multiple size="6"></select>
           </label>
           <label class="control-field">
             <span>Tenure</span>
-            <select id="searchTenure"></select>
+            <select id="searchTenure" multiple size="3"></select>
           </label>
           <label class="control-field">
-            <span>Budget</span>
-            <input id="searchBudget" type="number" min="0" step="1000" placeholder="Max recent buy price" />
+            <span>Budget Range</span>
+            <div class="budget-range">
+              <input id="searchBudgetMin" type="number" min="0" step="1000" placeholder="Min buy price" />
+              <input id="searchBudgetMax" type="number" min="0" step="1000" placeholder="Max buy price" />
+            </div>
           </label>
           <label class="control-field">
             <span>District</span>
-            <select id="searchDistrict"></select>
+            <select id="searchDistrict" multiple size="6"></select>
           </label>
         </div>
-        <p class="microcopy">Bedrooms are estimated from size bands because the source file does not include bedroom counts.</p>
+        <p class="microcopy">Leave any multi-select empty to include all values. Bedrooms are estimated from size bands because the source file does not include bedroom counts.</p>
       </section>
 
       <section class="panel">

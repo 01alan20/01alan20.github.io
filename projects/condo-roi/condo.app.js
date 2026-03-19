@@ -359,12 +359,7 @@ function initState(rows) {
   state.compareDistrictA = rankedDistricts[0]?.label || state.districtOptions[0] || "";
   state.compareDistrictB = rankedDistricts.find((item) => item.label !== state.compareDistrictA)?.label || state.districtOptions[1] || state.compareDistrictA;
   state.compareArea = areaSummary(state.rows).sort((a, b) => b.count - a.count)[0]?.label || state.areaOptions[0] || "";
-
-  const defaultTrend = topProjects(
-    state.projectSummary.filter((item) => item.trendCoverage >= 2),
-    3
-  );
-  state.trendSelection = new Set(defaultTrend.map((item) => item.project));
+  state.trendSelection = new Set();
 }
 
 function fillSelect(selectId, items, includeAll = false, allLabel = "All") {
@@ -385,18 +380,33 @@ function fillSelect(selectId, items, includeAll = false, allLabel = "All") {
   });
 }
 
+function clearSelectSelection(selectId) {
+  const select = $(`#${selectId}`);
+  if (!select) return;
+  Array.from(select.options).forEach((option) => {
+    option.selected = false;
+  });
+}
+
+function selectedValues(selectId) {
+  const select = $(`#${selectId}`);
+  if (!select) return [];
+  return Array.from(select.selectedOptions).map((option) => option.value).filter(Boolean);
+}
+
 function fillControls() {
   fillSelect("compareDistrictA", state.districtOptions);
   fillSelect("compareDistrictB", state.districtOptions);
   fillSelect("compareArea", state.areaOptions);
-  fillSelect("searchDistrict", state.districtOptions, true, "Any District");
-  fillSelect("searchArea", state.areaOptions, true, "Any Size");
-  fillSelect("searchBeds", ["1", "2", "3", "4", "5+"], true, "Any Beds");
-  fillSelect("searchTenure", state.tenureOptions, true, "Any Tenure");
+  fillSelect("searchDistrict", state.districtOptions);
+  fillSelect("searchArea", state.areaOptions);
+  fillSelect("searchBeds", ["1", "2", "3", "4", "5+"]);
+  fillSelect("searchTenure", state.tenureOptions);
 
   $("#compareDistrictA").value = state.compareDistrictA;
   $("#compareDistrictB").value = state.compareDistrictB;
   $("#compareArea").value = state.compareArea;
+  ["searchDistrict", "searchArea", "searchBeds", "searchTenure"].forEach(clearSelectSelection);
 }
 
 function renderOverview() {
@@ -420,6 +430,28 @@ function renderTabs() {
   });
 }
 
+function renderHorizontalBarChart(id, items, config) {
+  const labels = items.map(config.label);
+  Plotly.newPlot(id, [{
+    type: "bar",
+    orientation: "h",
+    x: items.map(config.value),
+    y: labels,
+    customdata: config.customdata ? items.map(config.customdata) : undefined,
+    marker: { color: config.color },
+    hovertemplate: config.hovertemplate
+  }], plotLayout({
+    margin: { l: config.marginLeft, r: 12, t: 10, b: 40 },
+    xaxis: { title: config.xaxisTitle },
+    yaxis: {
+      automargin: true,
+      autorange: "reversed",
+      categoryorder: "array",
+      categoryarray: labels
+    }
+  }), { responsive: true, displayModeBar: false });
+}
+
 function renderRoiTab() {
   const projects = topProjects(state.projectSummary, 10);
   if (!projects.length) {
@@ -430,51 +462,39 @@ function renderRoiTab() {
     return;
   }
 
-  Plotly.newPlot("roi-top-projects", [{
-    type: "bar",
-    orientation: "h",
-    x: projects.map((item) => item.avgRoi).reverse(),
-    y: projects.map((item) => wrapLabel(item.project, 18)).reverse(),
-    customdata: projects.map((item) => [item.project, item.district]).reverse(),
-    marker: { color: "#1f5a45" },
-    hovertemplate: "<b>%{customdata[0]}</b><br>%{customdata[1]}<br>Average payback: %{x:.1f} years<extra></extra>"
-  }], plotLayout({
-    margin: { l: 160, r: 12, t: 10, b: 40 },
-    xaxis: { title: "Average Payback (Years)" },
-    yaxis: { automargin: true }
-  }), { responsive: true, displayModeBar: false });
+  renderHorizontalBarChart("roi-top-projects", projects, {
+    label: (item) => wrapLabel(item.project, 18),
+    value: (item) => item.avgRoi,
+    customdata: (item) => [item.project, item.district],
+    color: "#1f5a45",
+    hovertemplate: "<b>%{customdata[0]}</b><br>%{customdata[1]}<br>Average payback: %{x:.1f} years<extra></extra>",
+    marginLeft: 160,
+    xaxisTitle: "Average Payback (Years)"
+  });
 
   const districts = aggregateProjectLevel(state.projectSummary, "district")
     .filter((item) => item.label !== "Unknown")
     .sort((a, b) => a.avgRoi - b.avgRoi);
-  Plotly.newPlot("roi-districts", [{
-    type: "bar",
-    orientation: "h",
-    x: districts.map((item) => item.avgRoi).reverse(),
-    y: districts.map((item) => item.label).reverse(),
-    marker: { color: "#2f7d5d" },
-    hovertemplate: "<b>%{y}</b><br>Average payback: %{x:.1f} years<extra></extra>"
-  }], plotLayout({
-    margin: { l: 110, r: 12, t: 10, b: 40 },
-    xaxis: { title: "Average Payback (Years)" },
-    yaxis: { automargin: true }
-  }), { responsive: true, displayModeBar: false });
+  renderHorizontalBarChart("roi-districts", districts, {
+    label: (item) => item.label,
+    value: (item) => item.avgRoi,
+    color: "#2f7d5d",
+    hovertemplate: "<b>%{y}</b><br>Average payback: %{x:.1f} years<extra></extra>",
+    marginLeft: 110,
+    xaxisTitle: "Average Payback (Years)"
+  });
 
   const areas = areaSummary(state.rows)
     .filter((item) => Number.isFinite(item.avgRoi))
     .sort((a, b) => a.avgRoi - b.avgRoi);
-  Plotly.newPlot("roi-areas", [{
-    type: "bar",
-    orientation: "h",
-    x: areas.map((item) => item.avgRoi).reverse(),
-    y: areas.map((item) => item.label).reverse(),
-    marker: { color: "#b57734" },
-    hovertemplate: "<b>%{y}</b><br>Average payback: %{x:.1f} years<extra></extra>"
-  }], plotLayout({
-    margin: { l: 100, r: 12, t: 10, b: 40 },
-    xaxis: { title: "Average Payback (Years)" },
-    yaxis: { automargin: true }
-  }), { responsive: true, displayModeBar: false });
+  renderHorizontalBarChart("roi-areas", areas, {
+    label: (item) => item.label,
+    value: (item) => item.avgRoi,
+    color: "#b57734",
+    hovertemplate: "<b>%{y}</b><br>Average payback: %{x:.1f} years<extra></extra>",
+    marginLeft: 100,
+    xaxisTitle: "Average Payback (Years)"
+  });
 
   const tenure = tenureSummary(state.projectSummary).sort((a, b) => a.avgRoi - b.avgRoi);
   const tenureBox = $("#roi-tenure");
@@ -748,19 +768,23 @@ function renderTrendsTab() {
 }
 
 function searchRows() {
-  const beds = $("#searchBeds").value;
-  const area = $("#searchArea").value;
-  const tenure = $("#searchTenure").value;
-  const district = $("#searchDistrict").value;
-  const budget = toNum($("#searchBudget").value);
+  const beds = selectedValues("searchBeds");
+  const area = selectedValues("searchArea");
+  const tenure = selectedValues("searchTenure");
+  const district = selectedValues("searchDistrict");
+  const budgetMin = toNum($("#searchBudgetMin").value);
+  const budgetMax = toNum($("#searchBudgetMax").value);
+  const lowerBudget = Number.isFinite(budgetMin) && Number.isFinite(budgetMax) ? Math.min(budgetMin, budgetMax) : budgetMin;
+  const upperBudget = Number.isFinite(budgetMin) && Number.isFinite(budgetMax) ? Math.max(budgetMin, budgetMax) : budgetMax;
 
   return state.rows
     .filter((row) => Number.isFinite(row.roi) && Number.isFinite(row.mostRecentBuy) && Number.isFinite(row.mostRecentRent))
-    .filter((row) => !beds || row.estimatedBedrooms === beds)
-    .filter((row) => !area || row.areaBucket === area)
-    .filter((row) => !tenure || row.tenureGroup === tenure)
-    .filter((row) => !district || row.district === district)
-    .filter((row) => !Number.isFinite(budget) || row.mostRecentBuy <= budget)
+    .filter((row) => !beds.length || beds.includes(row.estimatedBedrooms))
+    .filter((row) => !area.length || area.includes(row.areaBucket))
+    .filter((row) => !tenure.length || tenure.includes(row.tenureGroup))
+    .filter((row) => !district.length || district.includes(row.district))
+    .filter((row) => !Number.isFinite(lowerBudget) || row.mostRecentBuy >= lowerBudget)
+    .filter((row) => !Number.isFinite(upperBudget) || row.mostRecentBuy <= upperBudget)
     .sort((a, b) => a.roi - b.roi || a.mostRecentBuy - b.mostRecentBuy)
     .slice(0, 10);
 }
@@ -864,7 +888,9 @@ function wireSearchControls() {
   ["searchBeds", "searchArea", "searchTenure", "searchDistrict"].forEach((id) => {
     $(`#${id}`).addEventListener("change", renderSearchTab);
   });
-  $("#searchBudget").addEventListener("input", debounce(renderSearchTab, 150));
+  ["searchBudgetMin", "searchBudgetMax"].forEach((id) => {
+    $(`#${id}`).addEventListener("input", debounce(renderSearchTab, 150));
+  });
 }
 
 function debounce(fn, ms) {
