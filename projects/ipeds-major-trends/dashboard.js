@@ -7,6 +7,14 @@
     nationalAnnual: "./data/major_trend_national_annual.csv"
   };
 
+  const VALID_STATES = new Set([
+    "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+    "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+    "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+    "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+    "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "DC"
+  ]);
+
   const state = {
     nationalChange: [],
     stateChange: [],
@@ -43,6 +51,7 @@
       .map((r) => ({
         ...r,
         major_name: toTitleCase(r.major_name),
+        state_abbr: (r.state_abbr || "").toUpperCase(),
         count_2013: num(r.count_2013),
         count_2023: num(r.count_2023),
         gross_change: num(r.gross_change),
@@ -80,17 +89,20 @@
     return el ? el.value : "ALL";
   }
 
-  function getTrendMajors() {
-    const select = document.getElementById("trend-major-select");
-    if (!select) return ["ALL"];
-    const values = [...select.selectedOptions].map((o) => o.value);
-    if (values.includes("ALL")) return ["ALL"];
-    return values;
-  }
-
   function getStateMajor() {
     const el = document.getElementById("state-major-select");
     return el ? el.value : "ALL";
+  }
+
+  function getTrendMajors() {
+    const checks = document.querySelectorAll('.trend-major-check:checked');
+    const values = [...checks].map((el) => el.value);
+    if (values.includes("ALL") || values.length === 0) return ["ALL"];
+    return values;
+  }
+
+  function isValidYear(y) {
+    return Number.isInteger(y) && y >= 2013 && y <= 2023;
   }
 
   function renderMainInfographic() {
@@ -189,21 +201,20 @@
         zerolinecolor: "#111827",
         range: [-maxAbs * 1.05, maxAbs * 1.05]
       },
-      yaxis: { automargin: true, categoryorder: "array", categoryarray: y },
+      yaxis: { automargin: true, autorange: "reversed" },
       margin: { l: 480, r: 30, t: 50, b: 40 },
       height: Math.max(900, rows.length * 22)
     }), { responsive: true, displayModeBar: false });
   }
 
   function mapRowsForMajor(major) {
+    const baseRows = state.stateChange.filter((r) => VALID_STATES.has(r.state_abbr));
     if (major === "ALL") {
       const grouped = {};
-      state.stateChange.forEach((r) => {
-        const key = r.state_abbr;
-        if (!key || key === "UNK") return;
-        if (!grouped[key]) grouped[key] = { state_abbr: key, count_2013: 0, count_2023: 0 };
-        grouped[key].count_2013 += r.count_2013 || 0;
-        grouped[key].count_2023 += r.count_2023 || 0;
+      baseRows.forEach((r) => {
+        if (!grouped[r.state_abbr]) grouped[r.state_abbr] = { state_abbr: r.state_abbr, count_2013: 0, count_2023: 0 };
+        grouped[r.state_abbr].count_2013 += r.count_2013 || 0;
+        grouped[r.state_abbr].count_2023 += r.count_2023 || 0;
       });
       return Object.values(grouped).map((r) => {
         const gross = r.count_2023 - r.count_2013;
@@ -211,7 +222,7 @@
         return { ...r, gross_change: gross, pct_change: pctChange };
       });
     }
-    return state.stateChange.filter((r) => r.major_name === major && r.state_abbr !== "UNK");
+    return baseRows.filter((r) => r.major_name === major);
   }
 
   function renderMap() {
@@ -252,23 +263,23 @@
   }
 
   function renderTrend() {
-    const selections = getTrendMajors();
+    const majors = getTrendMajors();
     const trendEl = document.getElementById("trend-select");
     const trendMetric = trendEl ? trendEl.value : "graduates";
-    const majors = selections.length === 0 ? ["ALL"] : selections;
 
     const traces = majors.map((major) => {
       let rows;
       if (major === "ALL") {
         const grouped = {};
         state.nationalAnnual.forEach((r) => {
+          if (!isValidYear(r.year)) return;
           if (!grouped[r.year]) grouped[r.year] = { year: r.year, graduates: 0 };
           grouped[r.year].graduates += r.graduates || 0;
         });
         rows = Object.values(grouped).sort((a, b) => a.year - b.year);
       } else {
         rows = state.nationalAnnual
-          .filter((r) => r.major_name === major)
+          .filter((r) => r.major_name === major && isValidYear(r.year))
           .sort((a, b) => a.year - b.year);
       }
 
@@ -287,7 +298,7 @@
 
     Plotly.newPlot("chart-trend", traces, baseLayout({
       title: { text: `Trend Over Time (${trendMetric === "graduates" ? "Count" : "Share"})` },
-      xaxis: { title: "Year", dtick: 1 },
+      xaxis: { title: "Year", dtick: 1, tickmode: "linear", tick0: 2013, range: [2012.5, 2023.5] },
       yaxis: {
         title: trendMetric === "graduates" ? "Graduates" : "Share of Total",
         tickformat: trendMetric === "graduates" ? ",.0f" : ".2%"
@@ -296,10 +307,10 @@
   }
 
   function stateRowsForMajor(major) {
+    const baseRows = state.stateChange.filter((r) => VALID_STATES.has(r.state_abbr));
     if (major === "ALL") {
       const grouped = {};
-      state.stateChange.forEach((r) => {
-        if (!r.state_abbr || r.state_abbr === "UNK") return;
+      baseRows.forEach((r) => {
         if (!grouped[r.state_abbr]) grouped[r.state_abbr] = { state_abbr: r.state_abbr, count_2013: 0, count_2023: 0 };
         grouped[r.state_abbr].count_2013 += r.count_2013 || 0;
         grouped[r.state_abbr].count_2023 += r.count_2023 || 0;
@@ -310,7 +321,7 @@
         return { ...r, gross_change: gross, pct_change: p };
       });
     }
-    return state.stateChange.filter((r) => r.major_name === major && r.state_abbr !== "UNK");
+    return baseRows.filter((r) => r.major_name === major);
   }
 
   function renderStateTrends() {
@@ -334,6 +345,7 @@
     ], baseLayout({
       title: { text: `State ${metric === "gross_change" ? "Gross" : "Percent"} Change: ${major === "ALL" ? "All Majors" : major}` },
       xaxis: { zeroline: true, zerolinecolor: "#111827" },
+      yaxis: { autorange: "reversed" },
       margin: { l: 90, r: 20, t: 50, b: 40 },
       height: Math.max(600, rows.length * 12)
     }), { responsive: true, displayModeBar: false });
@@ -374,11 +386,35 @@
     });
   }
 
+  function wireTrendChecklistBehavior() {
+    const container = document.getElementById("trend-major-list");
+    if (!container) return;
+    container.addEventListener("change", (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLInputElement) || !target.classList.contains("trend-major-check")) return;
+      if (target.value === "ALL" && target.checked) {
+        container.querySelectorAll(".trend-major-check").forEach((cb) => {
+          if (cb !== target) cb.checked = false;
+        });
+      } else if (target.value !== "ALL" && target.checked) {
+        const allBox = container.querySelector('.trend-major-check[value="ALL"]');
+        if (allBox) allBox.checked = false;
+      }
+      const anyChecked = container.querySelectorAll(".trend-major-check:checked").length > 0;
+      if (!anyChecked) {
+        const allBox = container.querySelector('.trend-major-check[value="ALL"]');
+        if (allBox) allBox.checked = true;
+      }
+      renderAll();
+    });
+  }
+
   function wireControls() {
-    ["ranking-metric-select", "map-major-select", "trend-major-select", "trend-select", "state-major-select", "state-metric-select"].forEach((id) => {
+    ["ranking-metric-select", "map-major-select", "trend-select", "state-major-select", "state-metric-select"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.addEventListener("change", renderAll);
     });
+    wireTrendChecklistBehavior();
   }
 
   function fillSelectWithAll(selectId, majors) {
@@ -397,28 +433,35 @@
     });
   }
 
-  function fillMultiSelectWithAll(selectId, majors) {
-    const select = document.getElementById(selectId);
-    if (!select) return;
-    select.innerHTML = "";
-    const allOpt = document.createElement("option");
-    allOpt.value = "ALL";
-    allOpt.textContent = "All";
-    allOpt.selected = true;
-    select.appendChild(allOpt);
-    majors.forEach((m) => {
-      const opt = document.createElement("option");
-      opt.value = m;
-      opt.textContent = m;
-      select.appendChild(opt);
-    });
+  function buildTrendChecklist(majors) {
+    const container = document.getElementById("trend-major-list");
+    if (!container) return;
+    container.innerHTML = "";
+
+    const mkItem = (value, label, checked = false) => {
+      const wrap = document.createElement("label");
+      wrap.className = "major-check-item";
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.className = "trend-major-check";
+      input.value = value;
+      input.checked = checked;
+      const text = document.createElement("span");
+      text.textContent = label;
+      wrap.appendChild(input);
+      wrap.appendChild(text);
+      return wrap;
+    };
+
+    container.appendChild(mkItem("ALL", "All", true));
+    majors.forEach((m) => container.appendChild(mkItem(m, m, false)));
   }
 
   function initializeControls() {
     const majors = majorList();
     fillSelectWithAll("map-major-select", majors);
     fillSelectWithAll("state-major-select", majors);
-    fillMultiSelectWithAll("trend-major-select", majors);
+    buildTrendChecklist(majors);
   }
 
   async function init() {
@@ -430,8 +473,8 @@
       ]);
 
       state.nationalChange = nationalChange;
-      state.stateChange = stateChange;
-      state.nationalAnnual = nationalAnnual;
+      state.stateChange = stateChange.filter((r) => VALID_STATES.has(r.state_abbr));
+      state.nationalAnnual = nationalAnnual.filter((r) => isValidYear(r.year));
 
       initializeControls();
       wireTabs();

@@ -149,6 +149,31 @@ h2 {
   box-shadow: 0 0 0 3px var(--accent-light);
 }
 
+.major-checklist {
+  margin-top: 6px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  padding: 8px 10px;
+  width: 430px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.major-check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 5px 0;
+}
+
+.major-check-item input {
+  accent-color: var(--accent);
+}
+
 .chart {
   width: 100%;
   min-height: 400px;
@@ -157,6 +182,10 @@ h2 {
   border-radius: 8px;
   padding: 16px;
   box-shadow: var(--shadow);
+}
+
+.tab-pane[data-tab="map"] #chart-us-map {
+  min-height: 650px;
 }
 
 .chart.tall {
@@ -229,6 +258,10 @@ tbody tr:hover {
 
   .tab-controls {
     gap: 12px;
+  }
+
+  .major-checklist {
+    width: 100%;
   }
 
   .chart.tall {

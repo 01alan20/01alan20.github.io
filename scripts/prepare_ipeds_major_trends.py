@@ -18,6 +18,13 @@ CACHE_DIR = Path(tempfile.gettempdir()) / "ipeds_major_trends_cache"
 START_YEAR = 2013
 END_YEAR = 2023
 LOW_BASE_THRESHOLD = 50
+VALID_STATES = {
+    "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+    "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+    "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+    "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+    "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "DC"
+}
 
 COMPLETIONS_URL = "https://nces.ed.gov/ipeds/datacenter/data/C{year}_A.zip"
 HD_URL = "https://nces.ed.gov/ipeds/datacenter/data/HD{year}.zip"
@@ -181,6 +188,7 @@ def load_completions_year(year: int, state_lookup: pd.DataFrame, code_map: dict[
 
     df = df.merge(state_lookup, on="UNITID", how="left")
     df["state_abbr"] = df["STABBR"].fillna("UNK").astype(str).str.strip().str.upper()
+    df = df[df["state_abbr"].isin(VALID_STATES)]
     df["year"] = year
 
     agg = (
