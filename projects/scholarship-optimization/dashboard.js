@@ -1,50 +1,29 @@
 const state = {
-  allRows: [],
-  filteredRows: [],
-  currentState: '',
-  currentControl: '',
-  selectedInstitutions: []
+  data: null,
+  currentView: 'enrollment'
 };
 
-const num = (v) => {
-  const n = Number(v);
-  return Number.isFinite(n) ? n : null;
+const fmt = (v) => {
+  if (v === null || v === undefined) return '-';
+  if (v > 1_000_000) return `$${(v / 1_000_000).toFixed(1)}M`;
+  if (v > 1_000) return `$${(v / 1_000).toFixed(1)}K`;
+  return `$${Math.round(v).toLocaleString()}`;
 };
 
-const fmt = (v, d = 2) =>
-  v === null || v === undefined
-    ? '-'
-    : Number(v).toLocaleString(undefined, { maximumFractionDigits: d });
-
-const pct = (v, d = 1) =>
-  v === null || v === undefined ? '-' : `${(v * 100).toFixed(d)}%`;
-
-const money = (v) =>
-  v === null || v === undefined ? '-' : `$${Math.round(v).toLocaleString()}`;
-
-const mean = (arr) => {
-  const valid = arr.filter((v) => v !== null && Number.isFinite(v));
-  return valid.length ? valid.reduce((a, b) => a + b) / valid.length : null;
+const pct = (v) => {
+  if (v === null || v === undefined) return '-';
+  return `${(v).toFixed(1)}%`;
 };
-
-const median = (arr) => {
-  const valid = arr.filter((v) => v !== null && Number.isFinite(v)).sort((a, b) => a - b);
-  if (!valid.length) return null;
-  const mid = Math.floor(valid.length / 2);
-  return valid.length % 2 !== 0 ? valid[mid] : (valid[mid - 1] + valid[mid]) / 2;
-};
-
-const values = (rows, field) => rows.map((r) => num(r[field])).filter((v) => v !== null);
 
 function baseLayout() {
   return {
     font: { family: 'sans-serif', size: 12, color: '#4b5563' },
     plot_bgcolor: '#fafafa',
     paper_bgcolor: 'white',
-    margin: { l: 60, r: 20, t: 20, b: 50 },
-    hovermode: 'closest',
+    margin: { l: 70, r: 40, t: 30, b: 50 },
+    hovermode: 'x unified',
     showlegend: true,
-    legend: { x: 0.01, y: 0.99 }
+    legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(255, 255, 255, 0.8)', bordercolor: '#e5e7eb', borderwidth: 1 }
   };
 }
 
@@ -54,276 +33,130 @@ function plot(divId, data, layout) {
 }
 
 function updateKPIs() {
-  const rows = state.allRows;
-  const positiveRevenue = rows.filter(r => num(r.optimal_revenue_change_pct) > 0);
+  if (!state.data || state.data.length === 0) return;
   
-  document.getElementById('kpi-institutions').textContent = fmt(rows.length, 0);
-  document.getElementById('kpi-avg-discount').textContent = pct(mean(values(rows, 'optimal_discount_pct_revenue')) / 100, 0);
-  document.getElementById('kpi-avg-revenue').textContent = pct(mean(values(rows, 'optimal_revenue_change_pct')), 1);
-  document.getElementById('kpi-avg-enrollment').textContent = fmt(mean(values(rows, 'optimal_incremental_enrollment_revenue')), 0);
-}
-
-function renderSummary() {
-  const rows = state.allRows;
-  
-  // Left: Distribution of REVENUE-optimal discounts
-  const discountsRevenue = values(rows, 'optimal_discount_pct_revenue');
-  plot('chart-optimal-discount', [
-    {
-      x: discountsRevenue,
-      type: 'histogram',
-      nbinsx: 20,
-      marker: { color: '#3b82f6', opacity: 0.8 },
-      name: 'Revenue Optimal'
+  const baseline = state.data[0];
+  const optimal = state.data.reduce((best, row) => {
+    // Optimal = maximizes enrollment gain while keeping revenue impact < 1.5%
+    if (row.revenue_change_pct > -1.5 && row.enrollment_change > best.enrollment_change) {
+      return row;
     }
-  ], {
-    title: { text: 'Revenue-Optimal Scholarship Discount Distribution', font: { size: 14, color: '#1f2937' } },
-    xaxis: { title: 'Discount %' },
-    yaxis: { title: 'Number of Institutions' }
+    return best;
   });
   
-  // Right: Revenue Gain/Loss breakdown
-  const positiveRevenue = rows.filter(r => num(r.optimal_revenue_change_pct) > 0);
-  const negativeRevenue = rows.filter(r => num(r.optimal_revenue_change_pct) < 0);
-  const breakeven = rows.filter(r => Math.abs(num(r.optimal_revenue_change_pct)) <= 0.001);
-  
-  plot('chart-revenue-lift', [
-    {
-      labels: ['Revenue Gains\n(Scholarships Help)', 'Revenue Losses\n(Scholarships Hurt)', 'Breakeven'],
-      values: [positiveRevenue.length, negativeRevenue.length, breakeven.length],
-      type: 'pie',
-      marker: { colors: ['#10b981', '#ef4444', '#f59e0b'] },
-      hovertemplate: '<b>%{label}</b><br>Count: %{value} institutions<br>%{percent}<extra></extra>'
-    }
-  ], {
-    title: { text: 'Institutions by Revenue Impact of Optimal Scholarship Strategy', font: { size: 14, color: '#1f2937' } },
-    height: 450
-  });
+  document.getElementById('kpi-baseline-enroll').textContent = Math.round(baseline.total_enrollments).toLocaleString();
+  document.getElementById('kpi-baseline-revenue').textContent = fmt(baseline.total_revenue);
+  document.getElementById('kpi-optimal-amount').textContent = `$${Math.round(optimal.scholarship_amount).toLocaleString()}`;
+  document.getElementById('kpi-students-reached').textContent = Math.round(optimal.students_receiving_aid).toLocaleString();
 }
 
-
-function renderRevenueCurves() {
-  const rows = state.allRows;
-  const top6 = rows
-    .sort((a, b) => num(b.optimal_net_revenue) - num(a.optimal_net_revenue))
-    .slice(0, 6);
+function renderTradeoff() {
+  if (!state.data) return;
   
-  // For each of top 6, show their key metrics across discount levels
-  const traces = top6.map((row, idx) => {
-    const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
-    return {
-      x: [0, num(row.optimal_discount_pct_revenue), 100],
-      y: [
-        num(row.baseline_net_revenue),
-        num(row.optimal_net_revenue),
-        num(row.optimal_net_revenue) * 0.8 // rough estimate at 100% discount
-      ],
+  const data = [
+    // Enrollments (primary axis)
+    {
+      x: state.data.map(r => r.scholarship_amount),
+      y: state.data.map(r => r.enrollment_change),
+      name: 'Enrollment Gain',
+      type: 'scatter',
       mode: 'lines+markers',
-      line: { color: colors[idx], width: 3 },
+      line: { color: '#3b82f6', width: 3 },
       marker: { size: 8 },
-      name: row.institution_name.substring(0, 25),
-      hovertemplate: '<b>' + row.institution_name + '</b><br>Discount: %{x:.0f}%<br>Net Revenue: $%{y:,.0f}<extra></extra>'
-    };
-  });
+      yaxis: 'y1',
+      hovertemplate: 'Aid: $%{x:,.0f}<br>Enrollment Gain: %{y:.0f} students<extra></extra>'
+    },
+    // Revenue (secondary axis)
+    {
+      x: state.data.map(r => r.scholarship_amount),
+      y: state.data.map(r => r.revenue_change_pct),
+      name: 'Revenue Change %',
+      type: 'scatter',
+      mode: 'lines+markers',
+      line: { color: '#ef4444', width: 3 },
+      marker: { size: 8 },
+      yaxis: 'y2',
+      hovertemplate: 'Aid: $%{x:,.0f}<br>Revenue Impact: %{y:.2f}%<extra></extra>'
+    }
+  ];
   
-  plot('chart-revenue-curves', traces, {
-    title: { text: 'Revenue Curves: Baseline → Optimal → High Discount (Top 6 Institutions)', font: { size: 14, color: '#1f2937' } },
-    xaxis: { title: 'Scholarship Discount %', range: [-5, 105] },
-    yaxis: { title: 'Projected Net Revenue ($)' },
+  plot('chart-tradeoff', data, {
+    title: { text: 'Core Trade-off: How Much Enrollment Growth for Revenue Cost?', font: { size: 14, color: '#1f2937' } },
+    xaxis: { title: 'Scholarship per Recipient ($)', tickformat: '$,.0f' },
+    yaxis: { title: 'Additional Enrollments', titlefont: { color: '#3b82f6' }, tickfont: { color: '#3b82f6' } },
+    yaxis2: { title: 'Revenue Change (%)', titlefont: { color: '#ef4444' }, tickfont: { color: '#ef4444' }, overlaying: 'y', side: 'right' },
     height: 500
   });
 }
 
-function renderYieldResponse() {
-  const rows = state.allRows;
+function renderROI() {
+  if (!state.data) return;
   
-  // Left: Revenue-Optimal vs Enrollment-Optimal discount comparison
-  const validRows = rows.filter((r) => num(r.optimal_discount_pct_revenue) !== null && num(r.optimal_discount_pct_enrollment) !== null);
-  
-  const colors = validRows.map(r => {
-    const revDisc = num(r.optimal_discount_pct_revenue);
-    const enrollDisc = num(r.optimal_discount_pct_enrollment);
-    if (revDisc === enrollDisc) return '#9ca3af'; // Same = gray
-    return revDisc < enrollDisc ? '#3b82f6' : '#10b981'; // Blue if enroll higher, green if revenue higher
+  // Cost per additional enrollment
+  const costPerEnroll = state.data.map((r, i) => {
+    if (i === 0) return null; // No aid = undefined
+    const aidBudget = r.total_scholarships_spent;
+    const gain = r.enrollment_change;
+    return gain > 0 ? aidBudget / gain : null;
   });
   
-  plot('chart-discount-vs-yield', [
+  // Left chart: Cost per enrollment
+  plot('chart-cost-per-enroll', [
     {
-      x: validRows.map((r) => num(r.optimal_discount_pct_revenue)),
-      y: validRows.map((r) => num(r.optimal_discount_pct_enrollment)),
-      mode: 'markers',
-      marker: { size: 8, color: colors, opacity: 0.6, line: { width: 1, color: '#4b5563' } },
-      text: validRows.map((r) => `<b>${r.institution_name}</b><br>Revenue-Opt: ${num(r.optimal_discount_pct_revenue).toFixed(0)}%<br>Enrollment-Opt: ${num(r.optimal_discount_pct_enrollment).toFixed(0)}%`),
-      hovertemplate: '%{text}<extra></extra>',
-      name: 'Institution'
-    },
-    {
-      x: [0, 100],
-      y: [0, 100],
-      mode: 'lines',
-      line: { color: '#d1d5db', dash: 'dash', width: 2 },
-      hoverinfo: 'none',
-      showlegend: false
+      x: state.data.map(r => r.scholarship_amount),
+      y: costPerEnroll,
+      type: 'scatter',
+      mode: 'lines+markers',
+      line: { color: '#10b981', width: 3 },
+      marker: { size: 8 },
+      fill: 'tozeroy',
+      fillcolor: 'rgba(16, 185, 129, 0.1)',
+      hovertemplate: 'Award Size: $%{x:,.0f}<br>Cost per Student: $%{y:,.0f}<extra></extra>'
     }
   ], {
-    title: { text: 'Revenue vs Enrollment Optimization: Finding Your Strategy', font: { size: 14, color: '#1f2937' } },
-    xaxis: { title: 'Revenue-Optimal Discount %', range: [-5, 105] },
-    yaxis: { title: 'Enrollment-Optimal Discount %', range: [-5, 105] },
-    annotations: [
-      {
-        x: 50, y: 50, xref: 'x domain', yref: 'y domain',
-        text: 'Equal',
-        showarrow: false,
-        opacity: 0.3,
-        font: { size: 12, color: '#9ca3af' }
-      }
-    ]
+    title: { text: 'How Much You Spend to Attract One Student', font: { size: 14, color: '#1f2937' } },
+    xaxis: { title: 'Scholarship per Recipient ($)', tickformat: '$,.0f' },
+    yaxis: { title: 'Cost per Additional Enrollment ($)', tickformat: '$,.0f' },
+    height: 400
   });
   
-  // Right: Discount strategy categorization
-  const strategies = {};
-  validRows.forEach(r => {
-    const strat = r.discount_strategy || 'Unknown';
-    if (!strategies[strat]) strategies[strat] = 0;
-    strategies[strat]++;
-  });
-  
-  plot('chart-discount-vs-enrollment', [
+  // Right chart: Aid penetration
+  plot('chart-aid-penetration', [
     {
-      x: Object.keys(strategies),
-      y: Object.values(strategies),
+      x: state.data.map(r => r.scholarship_amount),
+      y: state.data.map(r => (r.students_receiving_aid / 5000) * 100),
       type: 'bar',
-      marker: { 
-        color: ['#6366f1', '#3b82f6', '#06b6d4', '#10b981', '#f59e0b'],
-        opacity: 0.8
-      },
-      text: Object.values(strategies),
+      marker: { color: '#8b5cf6', opacity: 0.8 },
+      text: state.data.map(r => `${Math.round(r.students_receiving_aid)} students`),
       textposition: 'auto',
-      hovertemplate: '<b>%{x}</b><br>Institutions: %{y}<extra></extra>'
+      hovertemplate: 'Award: $%{x:,.0f}<br>Market Penetration: %{y:.1f}%<extra></extra>'
     }
   ], {
-    title: { text: 'Distribution by Scholarship Strategy', font: { size: 14, color: '#1f2937' } },
-    yaxis: { title: 'Number of Institutions' },
-    xaxis: { tickangle: -45 }
+    title: { text: 'Aid Market Penetration (% of Cohort Served)', font: { size: 14, color: '#1f2937' } },
+    xaxis: { title: 'Scholarship per Recipient ($)', tickformat: '$,.0f' },
+    yaxis: { title: '% of 5,000-Student Cohort' },
+    height: 400
   });
 }
 
-
-function renderBands() {
-  const rows = state.allRows;
+function renderScenarios() {
+  const tbody = document.getElementById('scenarios-tbody');
+  tbody.innerHTML = '';
   
-  // Count by discount band (using revenue-optimal)
-  const bands = [
-    { range: 'No Discount (0%)', min: 0, max: 0, count: 0 },
-    { range: 'Light (1-10%)', min: 1, max: 10, count: 0 },
-    { range: 'Moderate (11-20%)', min: 11, max: 20, count: 0 },
-    { range: 'Aggressive (21-30%)', min: 21, max: 30, count: 0 },
-    { range: 'Deep (31%+)', min: 31, max: 100, count: 0 }
-  ];
-  
-  rows.forEach((r) => {
-    const disc = num(r.optimal_discount_pct_revenue) || 0;
-    bands.forEach((b) => {
-      if (disc >= b.min && disc <= b.max) b.count++;
-    });
+  state.data.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.style.borderBottom = '1px solid #e5e7eb';
+    tr.innerHTML = `
+      <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: 600;">$${Math.round(row.scholarship_amount).toLocaleString()}</td>
+      <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: right;">${Math.round(row.total_enrollments).toLocaleString()}</td>
+      <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: right; color: ${row.enrollment_change > 0 ? '#059669' : '#9ca3af'};">+${Math.round(row.enrollment_change)}</td>
+      <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: right; font-weight: 600;">${fmt(row.total_revenue)}</td>
+      <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: right; color: ${row.revenue_change_pct < -0.5 ? '#dc2626' : '#f59e0b'};">${pct(row.revenue_change_pct)}</td>
+      <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: right;">${fmt(row.total_scholarships_spent)}</td>
+      <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: right;">${Math.round(row.students_receiving_aid).toLocaleString()}</td>
+    `;
+    tbody.appendChild(tr);
   });
-  
-  // Left chart: Distribution by discount strategy band
-  plot('chart-discount-distribution', [
-    {
-      x: bands.map((b) => b.range),
-      y: bands.map((b) => b.count),
-      type: 'bar',
-      marker: { color: ['#6366f1', '#3b82f6', '#06b6d4', '#10b981', '#f59e0b'], opacity: 0.8 },
-      text: bands.map((b) => b.count),
-      textposition: 'auto',
-      hovertemplate: '<b>%{x}</b><br>Institutions: %{y}<extra></extra>'
-    }
-  ], {
-    title: { text: 'Institutions by Revenue-Optimal Discount Strategy', font: { size: 14, color: '#1f2937' } },
-    yaxis: { title: 'Number of Institutions' },
-    height: 450
-  });
-  
-  // Right chart: Outcomes by control type
-  const controlTypes = {};
-  rows.forEach(r => {
-    const control = r.control_label || 'Unknown';
-    if (!controlTypes[control]) {
-      controlTypes[control] = { revenue: [], enrollment: [], count: 0 };
-    }
-    controlTypes[control].revenue.push(num(r.optimal_revenue_change_pct) * 100);
-    controlTypes[control].enrollment.push(num(r.optimal_incremental_enrollment));
-    controlTypes[control].count++;
-  });
-  
-  const controlData = [
-    {
-      x: Object.keys(controlTypes),
-      y: Object.keys(controlTypes).map(k => mean(controlTypes[k].revenue)),
-      name: 'Avg Revenue Gain %',
-      type: 'bar',
-      marker: { color: '#3b82f6', opacity: 0.8 }
-    }
-  ];
-  
-  plot('chart-band-outcomes', controlData, {
-    title: { text: 'Average Scholarship Revenue Impact by Institution Type', font: { size: 14, color: '#1f2937' } },
-    yaxis: { title: 'Average Revenue Change %' },
-    height: 450,
-    hovermode: 'x unified'
-  });
-}
-
-function renderDrilldown() {
-  const rows = state.filteredRows.length > 0 ? state.filteredRows : state.allRows;
-  const sorted = rows.sort((a, b) => num(b.optimal_net_revenue) - num(a.optimal_net_revenue)).slice(0, 15);
-  
-  plot('chart-top-institutions', [
-    {
-      y: sorted.map((r) => r.institution_name),
-      x: sorted.map((r) => num(r.optimal_net_revenue)),
-      type: 'bar',
-      orientation: 'h',
-      marker: { color: '#16a34a' },
-      text: sorted.map((r) => `${fmt(num(r.optimal_discount_pct), 0)}% discount`),
-      textposition: 'inside',
-      textfont: { color: 'white', size: 11 },
-      hovertemplate: '<b>%{y}</b><br>Net Revenue: $%{x:,.0f}<br>Optimal Discount: %{text}<extra></extra>'
-    }
-  ], {
-    title: { text: 'Top 15 Institutions by Optimized Net Revenue', font: { size: 14, color: '#1f2937' } },
-    xaxis: { title: 'Net Revenue ($)' },
-    margin: { l: 280 }
-  });
-}
-
-function applyFilters() {
-  const state_val = document.getElementById('state-select').value;
-  const control_val = document.getElementById('control-select').value;
-  
-  state.filteredRows = state.allRows.filter((r) => {
-    const matchState = !state_val || r.state === state_val;
-    const matchControl = !control_val || r.control_label === control_val;
-    return matchState && matchControl;
-  });
-  
-  renderDrilldown();
-}
-
-function populateFilters() {
-  const states = [...new Set(state.allRows.map((r) => r.state))].filter((s) => s).sort();
-  const stateSelect = document.getElementById('state-select');
-  
-  states.forEach((s) => {
-    const opt = document.createElement('option');
-    opt.value = s;
-    opt.textContent = s;
-    stateSelect.appendChild(opt);
-  });
-  
-  document.getElementById('state-select').addEventListener('change', applyFilters);
-  document.getElementById('control-select').addEventListener('change', applyFilters);
 }
 
 function wireTabs() {
@@ -342,30 +175,44 @@ function wireTabs() {
 
 async function init() {
   try {
-    if (!window.Plotly) throw new Error('Plotly did not load.');
-    if (!window.Papa) throw new Error('PapaParse did not load.');
+    if (!window.Plotly) throw new Error('Plotly not loaded.');
+    if (!window.Papa) throw new Error('Papa Parse not loaded.');
     
-    const res = await fetch('./data/scholarship_optimal_discount_summary.csv');
-    if (!res.ok) throw new Error('Could not fetch scholarship data.');
+    const res = await fetch('./data/scholarship_optimization_summary_v2.csv');
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
     
     const csv = await res.text();
-    const parsed = Papa.parse(csv, { header: true });
-    state.allRows = parsed.data.filter((r) => r.unit_id && !r.unit_id.startsWith('__'));
+    const parsed = Papa.parse(csv, { header: true, dynamicTyping: true });
     
-    if (!state.allRows.length) throw new Error('No data rows found.');
+    // Validate data
+    if (!parsed.data || parsed.data.length === 0) {
+      throw new Error('No data rows found in CSV.');
+    }
+    
+    // Filter valid rows
+    state.data = parsed.data.filter(row => 
+      row.scholarship_amount !== undefined && 
+      row.scholarship_amount !== null &&
+      Number.isFinite(row.total_enrollments)
+    );
+    
+    if (state.data.length === 0) {
+      throw new Error('All rows were filtered out. Check CSV format.');
+    }
+    
+    console.log(`Loaded ${state.data.length} scenarios`);
     
     updateKPIs();
-    renderSummary();
-    renderRevenueCurves();
-    renderYieldResponse();
-    renderBands();
-    renderDrilldown();
-    populateFilters();
+    renderTradeoff();
+    renderROI();
+    renderScenarios();
     wireTabs();
+    
   } catch (e) {
     console.error('Init error:', e);
     alert('Error loading dashboard: ' + e.message);
+    document.body.innerHTML += `<div style="padding: 40px; color: red;"><h2>Error</h2><p>${e.message}</p></div>`;
   }
 }
 
-init();
+document.addEventListener('DOMContentLoaded', init);

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scholarship Optimization Model</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="container">
+      <h1>Scholarship Optimization Model</h1>
+      <p class="subtitle">Student-Level Analysis: Enrollment vs Revenue Trade-off</p>
+      <p style="font-size: 0.85em; opacity: 0.9; margin: 10px 0 0 0;">
+        5,000-student cohort | Need-based aid allocation | Realistic enrollment elasticity (0.15)
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- KPI Section -->
+    <section class="kpi-section">
+      <article class="kpi-card">
+        <div class="kpi-label">Baseline Enrollments</div>
+        <div class="kpi-value" id="kpi-baseline-enroll">—</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-label">Baseline Revenue</div>
+        <div class="kpi-value" id="kpi-baseline-revenue">—</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-label">Optimal Aid Amount</div>
+        <div class="kpi-value" id="kpi-optimal-amount">—</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-label">Students Reached</div>
+        <div class="kpi-value" id="kpi-students-reached">—</div>
+      </article>
+    </section>
+
+    <!-- Tab Navigation -->
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="tradeoff">Enrollment vs Revenue</button>
+      <button class="tab-btn" data-tab="roi">ROI Analysis</button>
+      <button class="tab-btn" data-tab="scenarios">Scenario Comparison</button>
+      <button class="tab-btn" data-tab="insights">Key Insights</button>
+    </nav>
+
+    <!-- Tab Content -->
+    
+    <!-- Tab 1: Enrollment vs Revenue Trade-off -->
+    <section class="tab-pane active" data-tab="tradeoff">
+      <h2>The Core Trade-off: Enrollment Growth vs Revenue Impact</h2>
+      <p class="section-description">
+        Scholarships increase enrollment but reduce net revenue. Which scholarship level best matches your institution's strategy?
+      </p>
+      <div class="chart-row">
+        <div class="chart-container full-width">
+          <div id="chart-tradeoff" class="chart" style="min-height: 500px;"></div>
+        </div>
+      </div>
+      <div class="insights-box">
+        <h3>📊 What This Shows:</h3>
+        <ul>
+          <li><strong>Blue line (Enrollments):</strong> Student enrollment gains from scholarships (small, ~1-2%)</li>
+          <li><strong>Red line (Revenue):</strong> Net revenue impact (negative, as expected)</li>
+          <li>💡 <strong>Key insight:</strong> Scholarships rarely "pay for themselves" through enrollment gains alone</li>
+          <li>💡 <strong>Strategic choice:</strong> Is your goal enrollment growth or revenue maximization?</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Tab 2: ROI Analysis -->
+    <section class="tab-pane" data-tab="roi">
+      <h2>Return on Investment: Aid Spent vs Outcomes</h2>
+      <p class="section-description">
+        How much enrollment gain do you buy for each dollar spent on scholarships? Breaking down ROI metrics.
+      </p>
+      <div class="chart-row">
+        <div class="chart-container">
+          <div id="chart-cost-per-enroll" class="chart"></div>
+        </div>
+        <div class="chart-container">
+          <div id="chart-aid-penetration" class="chart"></div>
+        </div>
+      </div>
+      <div class="insights-box">
+        <h3>💰 ROI Interpretation:</h3>
+        <ul>
+          <li><strong>Cost per additional student:</strong> How much to spend to attract one more student</li>
+          <li><strong>Aid penetration:</strong> % of cohort receiving aid (market coverage)</li>
+          <li>Higher amounts serve fewer students but with more impact per recipient</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Tab 3: Scenario Comparison -->
+    <section class="tab-pane" data-tab="scenarios">
+      <h2>Scenario Analysis: Comparing Scholarship Strategies</h2>
+      <p class="section-description">
+        Side-by-side comparison of key metrics across different scholarship levels. Choose your institutional priorities.
+      </p>
+      <div id="scenarios-table" style="overflow-x: auto; margin: 20px 0;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+          <thead style="background: #f3f4f6; border-bottom: 2px solid #d1d5db;">
+            <tr>
+              <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Scholarship</th>
+              <th style="padding: 12px; text-align: right; border: 1px solid #e5e7eb;">Enrollments</th>
+              <th style="padding: 12px; text-align: right; border: 1px solid #e5e7eb;">Gain vs $0</th>
+              <th style="padding: 12px; text-align: right; border: 1px solid #e5e7eb;">Revenue</th>
+              <th style="padding: 12px; text-align: right; border: 1px solid #e5e7eb;">Impact</th>
+              <th style="padding: 12px; text-align: right; border: 1px solid #e5e7eb;">Aid Budget</th>
+              <th style="padding: 12px; text-align: right; border: 1px solid #e5e7eb;">Students Served</th>
+            </tr>
+          </thead>
+          <tbody id="scenarios-tbody">
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tab 4: Key Insights -->
+    <section class="tab-pane" data-tab="insights">
+      <h2>Strategic Insights & Recommendations</h2>
+      <div class="insights-box">
+        <h3>🎯 Decision Framework</h3>
+        <p>Choose your scholarship strategy based on institutional priorities:</p>
+        <br>
+        
+        <strong style="color: #059669;">✓ Maximize Access (Social Mission):</strong>
+        <p style="margin-left: 20px; margin-bottom: 15px;">
+          Allocate $5,000-$7,500 per high-need student.<br>
+          • Serves ~400-600 highest-need students<br>
+          • Meaningful aid that reduces financial barriers<br>
+          • Revenue cost: ~1.3% institutional impact<br>
+          • Best for: Mission-driven, well-endowed institutions
+        </p>
+
+        <strong style="color: #dc2626;">⚠ Minimize Financial Impact:</strong>
+        <p style="margin-left: 20px; margin-bottom: 15px;">
+          Small scholarships ($1,000-$2,000) or no scholarships.<br>
+          • Minimal revenue impact (<1%)<br>
+          • Limited enrollment gain (10-15 additional students)<br>
+          • Serves 1,500-3,000 students with small awards<br>
+          • Best for: Revenue-constrained institutions
+        </p>
+
+        <strong style="color: #2563eb;">→ Strategic Middle Ground:</strong>
+        <p style="margin-left: 20px; margin-bottom: 15px;">
+          $3,000-$5,000 per high-need student.<br>
+          • Balances access and revenue goals<br>
+          • Serves 600-1,000 students meaningfully<br>
+          • ~1% revenue impact (manageable)<br>
+          • Best for: Most institutions
+        </p>
+      </div>
+
+      <div class="insights-box" style="margin-top: 20px;">
+        <h3>📋 What The Model Shows</h3>
+        <ul>
+          <li><strong>Realistic elasticity:</strong> 0.15 enrollment elasticity (peer-reviewed research range)</li>
+          <li><strong>Modest gains:</strong> Scholarships add ~15-16 students per 1,000 cohort, not dramatically more</li>
+          <li><strong>Revenue cost:</strong> Scholarships reduce net institutional revenue 1-1.5% (expected)</li>
+          <li><strong>Market coverage:</strong> With $3M budget (3% of revenue), reach 200-3,000 students depending on award size</li>
+          <li><strong>Why scholarships exist:</strong> Not about revenue, but about mission, equity, and access</li>
+        </ul>
+      </div>
+
+      <div class="insights-box" style="margin-top: 20px; background: #fef3c7; border-left: 4px solid #f59e0b;">
+        <h3>⚡ Common Institutional Question: Don't we make money on retention?</h3>
+        <p>
+          This model shows <strong>immediate revenue impact</strong> (less enrollment × lower net tuition). 
+          In reality, students who persist and complete generate additional revenue (full-time enrollment, graduate programs, alumni giving). 
+          A more complete model would track 4-6 year cohorts, but the immediate cost is real and must be budgeted.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script src="dashboard_v2.js"></script>
+</body>
+</html>
