@@ -1,7 +1,7 @@
 /* CRM-style visual system with brown palette */
 :root {
-  --accent: #8b5e34;
-  --accent-dark: #6f4518;
+  --accent: #8a5a2d;
+  --accent-dark: #6e4219;
   --accent-light: #f4e7d8;
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
@@ -17,78 +17,68 @@
 }
 
 html, body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Manrope", "Segoe UI", sans-serif;
   color: var(--text-primary);
   background: #f9fafb;
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1680px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 32px;
 }
 
 .hero {
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
   color: white;
-  padding: 40px 0;
+  padding: 42px 0;
   box-shadow: var(--shadow);
 }
 
 .hero h1 {
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
 .hero p {
-  font-size: 14px;
+  font-size: 18px;
   opacity: 0.95;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .tabs {
   display: flex;
-  gap: 0;
+  gap: 12px;
   margin: 36px 0 28px;
   border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
+  padding-bottom: 12px;
 }
 
 .tab-btn {
-  background: none;
-  border: none;
-  padding: 12px 20px;
-  font-size: 15px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-secondary);
   cursor: pointer;
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.tab-btn::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--accent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 .tab-btn:hover {
   color: var(--text-primary);
+  border-color: #d2d6dc;
+  box-shadow: var(--shadow);
 }
 
 .tab-btn.active {
-  color: var(--accent);
-}
-
-.tab-btn.active::after {
-  opacity: 1;
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
 }
 
 .tab-pane {
@@ -107,14 +97,15 @@ html, body {
 
 h2 {
   margin: 0 0 8px 0;
-  font-size: 32px;
+  font-size: 46px;
   line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .sub {
-  font-size: 14px;
+  font-size: 18px;
   color: var(--text-secondary);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .tab-controls {
@@ -126,7 +117,7 @@ h2 {
 }
 
 .tab-controls label {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-secondary);
   display: block;
@@ -134,13 +125,13 @@ h2 {
 
 .tab-controls select {
   margin-top: 6px;
-  padding: 8px 12px;
+  padding: 10px 12px;
   border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 8px;
+  font-size: 15px;
   background: white;
   cursor: pointer;
-  min-width: 180px;
+  min-width: 220px;
 }
 
 .tab-controls select:focus {
@@ -152,22 +143,22 @@ h2 {
 .major-checklist {
   margin-top: 6px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   background: white;
-  padding: 8px 10px;
+  padding: 10px 12px;
   width: 100%;
-  max-height: 380px;
+  max-height: 700px;
   overflow-y: auto;
 }
 
 .major-check-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 10px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-primary);
-  margin: 5px 0;
+  margin: 7px 0;
 }
 
 .major-check-item input {
@@ -176,47 +167,49 @@ h2 {
 
 .chart {
   width: 100%;
-  min-height: 400px;
+  min-height: 520px;
   background: white;
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: 12px;
+  padding: 18px;
   box-shadow: var(--shadow);
 }
 
 .tab-pane[data-tab="map"] #chart-us-map {
-  min-height: 780px;
+  min-height: 920px;
 }
 
 .trend-layout {
   display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
-  gap: 16px;
+  grid-template-columns: 380px minmax(0, 1fr);
+  gap: 20px;
   align-items: start;
 }
 
 .trend-sidebar {
   background: white;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: var(--shadow);
-  padding: 12px;
+  padding: 14px;
+  position: sticky;
+  top: 12px;
 }
 
 .trend-sidebar label {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-secondary);
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .trend-sidebar input[type="search"] {
   margin-top: 6px;
   width: 100%;
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 8px 10px;
+  border-radius: 8px;
+  padding: 10px 12px;
   font-size: 14px;
 }
 
@@ -227,7 +220,7 @@ h2 {
 }
 
 .chart.tall {
-  min-height: 900px;
+  min-height: 1080px;
 }
 
 .single-row {
@@ -247,7 +240,7 @@ h2 {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 thead {
@@ -259,7 +252,7 @@ thead {
 }
 
 th, td {
-  padding: 12px;
+  padding: 13px;
   border-bottom: 1px solid var(--border);
   text-align: right;
 }
@@ -278,11 +271,11 @@ tbody tr:hover {
   }
 
   .hero h1 {
-    font-size: 24px;
+    font-size: 30px;
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 32px;
   }
 
   .tabs {
@@ -290,8 +283,8 @@ tbody tr:hover {
   }
 
   .tab-btn {
-    padding: 10px 16px;
-    font-size: 13px;
+    padding: 8px 14px;
+    font-size: 14px;
   }
 
   .tab-controls {
@@ -307,6 +300,6 @@ tbody tr:hover {
   }
 
   .chart.tall {
-    min-height: 620px;
+    min-height: 740px;
   }
 }

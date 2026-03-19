@@ -48,7 +48,7 @@
 
   function shortName(name, max = 56) {
     if (!name) return "";
-    return name.length <= max ? name : `${name.slice(0, max - 1)}…`;
+    return name.length <= max ? name : `${name.slice(0, max - 3)}...`;
   }
 
   function isValidYear(y) {
@@ -85,7 +85,7 @@
       margin: { l: 60, r: 20, t: 50, b: 40 },
       paper_bgcolor: "white",
       plot_bgcolor: "white",
-      font: { family: "Segoe UI, sans-serif", size: 13, color: "#1f2937" },
+      font: { family: "Manrope, Segoe UI, sans-serif", size: 14, color: "#1f2937" },
       ...extra
     };
   }
@@ -127,10 +127,10 @@
       return {
         type: "scatter",
         mode: "lines+markers",
-        x: [0.22, 0.78],
+        x: [0.18, 0.82],
         y: [y0, y1],
-        line: { color, width: 2.5 },
-        marker: { color, size: 7 },
+        line: { color, width: 3 },
+        marker: { color, size: 8 },
         hovertemplate:
           `<b>${r.major_name}</b><br>` +
           `2013 Rank: ${y0}<br>` +
@@ -151,7 +151,7 @@
         text: shortName(r.major_name),
         xanchor: "left",
         showarrow: false,
-        font: { size: 12 }
+        font: { size: 13 }
       });
       annotations.push({
         x: 0.98,
@@ -161,7 +161,7 @@
         text: shortName(r.major_name),
         xanchor: "right",
         showarrow: false,
-        font: { size: 12 }
+        font: { size: 13 }
       });
     });
     annotations.push({ x: 0.02, xref: "paper", y: 0, text: "<b>2013 Ranking</b>", showarrow: false, xanchor: "left" });
@@ -172,8 +172,8 @@
       xaxis: { visible: false, range: [0, 1] },
       yaxis: { autorange: "reversed", showgrid: false, zeroline: false, showticklabels: false },
       annotations,
-      margin: { l: 70, r: 70, t: 50, b: 20 },
-      height: 1020
+      margin: { l: 50, r: 50, t: 56, b: 24 },
+      height: 1120
     }), { responsive: true, displayModeBar: false });
   }
 
@@ -183,9 +183,13 @@
     const rows = state.nationalChange.slice().sort((a, b) => score(b[metric]) - score(a[metric]));
 
     const x = rows.map((r) => r[metric]);
-    const y = rows.map((r) => r.major_name);
+    const y = rows.map((r) => shortName(r.major_name, 52));
     const colors = x.map((v) => (v >= 0 ? "#059669" : "#dc2626"));
-    const maxAbs = Math.max(10, ...x.filter((v) => v !== null).map((v) => Math.abs(v)));
+    const vals = x.filter((v) => v !== null);
+    const minVal = Math.min(...vals, 0);
+    const maxVal = Math.max(...vals, 0);
+    const span = Math.max(10, maxVal - minVal);
+    const pad = span * 0.06;
 
     Plotly.newPlot("chart-ranking", [
       {
@@ -193,9 +197,10 @@
         orientation: "h",
         x,
         y,
-        marker: { color: colors },
+        customdata: rows.map((r) => [r.major_name]),
+        marker: { color: colors, line: { width: 0 } },
         hovertemplate:
-          "<b>%{y}</b><br>" +
+          "<b>%{customdata[0]}</b><br>" +
           (metric === "gross_change" ? "Gross Change: %{x:,.0f}" : "Percent Change: %{x:.1f}%") +
           "<extra></extra>"
       }
@@ -205,11 +210,12 @@
         title: metric === "gross_change" ? "Graduates" : "Percent",
         zeroline: true,
         zerolinecolor: "#111827",
-        range: [-maxAbs * 1.05, maxAbs * 1.05]
+        range: [minVal - pad, maxVal + pad]
       },
-      yaxis: { automargin: true, autorange: "reversed" },
-      margin: { l: 500, r: 30, t: 50, b: 40 },
-      height: Math.max(900, rows.length * 22)
+      yaxis: { automargin: true, autorange: "reversed", tickfont: { size: 13 } },
+      bargap: 0.2,
+      margin: { l: 360, r: 24, t: 56, b: 52 },
+      height: Math.max(1040, rows.length * 24)
     }), { responsive: true, displayModeBar: false });
   }
 
@@ -236,6 +242,24 @@
     const rows = mapRowsForMajor(major).filter((r) => r.pct_change !== null);
     const maxAbs = Math.max(10, ...rows.map((r) => Math.abs(r.pct_change)));
 
+    if (rows.length === 0) {
+      Plotly.newPlot("chart-us-map", [], baseLayout({
+        title: { text: `State Percent Change: ${major === "ALL" ? "All Majors" : major}` },
+        annotations: [{
+          text: "No map data available for this selection.",
+          x: 0.5,
+          y: 0.5,
+          xref: "paper",
+          yref: "paper",
+          showarrow: false,
+          font: { size: 18, color: "#6b7280" }
+        }],
+        margin: { l: 6, r: 6, t: 52, b: 8 },
+        height: 900
+      }), { responsive: true, displayModeBar: false });
+      return;
+    }
+
     Plotly.newPlot("chart-us-map", [
       {
         type: "choropleth",
@@ -260,14 +284,14 @@
       title: { text: `State Percent Change: ${major === "ALL" ? "All Majors" : major}` },
       geo: {
         scope: "usa",
-        projection: { type: "albers usa" },
+        projection: { type: "albers usa", scale: 1.4 },
         showlakes: false,
         bgcolor: "rgba(0,0,0,0)",
         fitbounds: "locations",
-        domain: { x: [0, 1], y: [0, 1] }
+        domain: { x: [0.01, 0.99], y: [0, 1] }
       },
       margin: { l: 6, r: 6, t: 50, b: 8 },
-      height: 760
+      height: 900
     }), { responsive: true, displayModeBar: false });
   }
 
@@ -312,7 +336,9 @@
         title: trendMetric === "graduates" ? "Graduates" : "Share of Total",
         tickformat: trendMetric === "graduates" ? ",.0f" : ".2%"
       },
-      height: 560
+      legend: { orientation: "h", y: 1.1, x: 0 },
+      hovermode: "x unified",
+      height: 690
     }), { responsive: true, displayModeBar: false });
   }
 
@@ -376,12 +402,26 @@
     });
   }
 
-  function renderAll() {
-    renderMainInfographic();
-    renderNationalRankings();
-    renderMap();
-    renderTrend();
-    renderStateTrends();
+  function renderTab(tab) {
+    if (tab === "main") {
+      renderMainInfographic();
+      return;
+    }
+    if (tab === "rankings") {
+      renderNationalRankings();
+      return;
+    }
+    if (tab === "map") {
+      renderMap();
+      return;
+    }
+    if (tab === "trend") {
+      renderTrend();
+      return;
+    }
+    if (tab === "states") {
+      renderStateTrends();
+    }
   }
 
   function wireTabs() {
@@ -392,6 +432,7 @@
         document.querySelectorAll(".tab-pane").forEach((p) => p.classList.remove("active"));
         btn.classList.add("active");
         document.querySelector(`.tab-pane[data-tab="${tab}"]`).classList.add("active");
+        requestAnimationFrame(() => renderTab(tab));
       });
     });
   }
@@ -430,7 +471,7 @@
           });
         }
       }
-      renderAll();
+      renderTrend();
     });
   }
 
@@ -443,10 +484,21 @@
   }
 
   function wireControls() {
-    ["ranking-metric-select", "map-major-select", "trend-select", "state-major-select", "state-metric-select"].forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener("change", renderAll);
-    });
+    const rankingMetric = document.getElementById("ranking-metric-select");
+    if (rankingMetric) rankingMetric.addEventListener("change", renderNationalRankings);
+
+    const mapMajor = document.getElementById("map-major-select");
+    if (mapMajor) mapMajor.addEventListener("change", renderMap);
+
+    const trendMetric = document.getElementById("trend-select");
+    if (trendMetric) trendMetric.addEventListener("change", renderTrend);
+
+    const stateMajor = document.getElementById("state-major-select");
+    if (stateMajor) stateMajor.addEventListener("change", renderStateTrends);
+
+    const stateMetric = document.getElementById("state-metric-select");
+    if (stateMetric) stateMetric.addEventListener("change", renderStateTrends);
+
     wireTrendChecklistBehavior();
     wireTrendSearch();
   }
@@ -517,7 +569,7 @@
       initializeControls();
       wireTabs();
       wireControls();
-      renderAll();
+      renderMainInfographic();
     } catch (err) {
       console.error(err);
       alert(`Dashboard failed to initialize: ${err.message}`);
