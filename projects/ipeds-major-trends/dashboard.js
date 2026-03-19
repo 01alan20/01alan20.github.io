@@ -46,9 +46,41 @@
       .replace(/\bIpeds\b/g, "IPEDS");
   }
 
-  function shortName(name, max = 56) {
-    if (!name) return "";
-    return name.length <= max ? name : `${name.slice(0, max - 3)}...`;
+  function majorKey(row, index = 0) {
+    return `${row.major_4digit || "major"}-${index}`;
+  }
+
+  function signedNumber(value, digits = 0) {
+    if (value === null || value === undefined) return "-";
+    const sign = value > 0 ? "+" : value < 0 ? "-" : "";
+    const abs = Math.abs(value);
+    return `${sign}${abs.toLocaleString(undefined, {
+      minimumFractionDigits: digits,
+      maximumFractionDigits: digits
+    })}`;
+  }
+
+  function metricLabel(metric, value) {
+    if (metric === "pct_change") {
+      return value === null || value === undefined ? "-" : `${signedNumber(value, 1)}%`;
+    }
+    return signedNumber(value, 0);
+  }
+
+  function movementClass(delta) {
+    if (delta > 0) return "positive";
+    if (delta < 0) return "negative";
+    return "neutral";
+  }
+
+  function movementText(delta) {
+    return delta > 0 ? `+${delta}` : `${delta}`;
+  }
+
+  function movementTitle(delta) {
+    if (delta > 0) return `Moved up ${delta} rank${delta === 1 ? "" : "s"}`;
+    if (delta < 0) return `Dropped ${Math.abs(delta)} rank${Math.abs(delta) === 1 ? "" : "s"}`;
+    return "No rank change";
   }
 
   function isValidYear(y) {
@@ -111,6 +143,9 @@
   }
 
   function renderMainInfographic() {
+    const container = document.getElementById("chart-slopegraph");
+    if (!container) return;
+
     const top20 = state.nationalChange
       .slice()
       .sort((a, b) => score(b.count_2013) - score(a.count_2013))
@@ -120,103 +155,148 @@
     const top20By2023 = [...top20].sort((a, b) => score(b.count_2023) - score(a.count_2023));
     const rank2023 = Object.fromEntries(top20By2023.map((r, i) => [r.major_name, i + 1]));
 
-    const traces = top20.map((r) => {
-      const y0 = rank2013[r.major_name];
-      const y1 = rank2023[r.major_name];
-      const color = (r.gross_change ?? 0) >= 0 ? "#059669" : "#dc2626";
-      return {
-        type: "scatter",
-        mode: "lines+markers",
-        x: [0.18, 0.82],
-        y: [y0, y1],
-        line: { color, width: 3 },
-        marker: { color, size: 8 },
-        hovertemplate:
-          `<b>${r.major_name}</b><br>` +
-          `2013 Rank: ${y0}<br>` +
-          `2023 Rank: ${y1}<br>` +
-          `Gross Change: ${moneyish(r.gross_change)}<br>` +
-          `Percent Change: ${pct(r.pct_change)}<extra></extra>`,
-        showlegend: false
-      };
+    container.classList.add("infographic-shell");
+    container.innerHTML = "";
+
+    const board = document.createElement("div");
+    board.className = "rank-dumbbell";
+
+    const head = document.createElement("div");
+    head.className = "rank-dumbbell-head";
+    ["2013 Rank", "Major", "Shift", "2023 Rank"].forEach((label) => {
+      const span = document.createElement("span");
+      span.textContent = label;
+      head.appendChild(span);
+    });
+    board.appendChild(head);
+
+    top20.forEach((row, index) => {
+      const rankStart = rank2013[row.major_name];
+      const rankEnd = rank2023[row.major_name];
+      const delta = rankStart - rankEnd;
+      const moveClass = movementClass(delta);
+
+      const rowEl = document.createElement("div");
+      rowEl.className = "rank-dumbbell-row";
+      rowEl.dataset.majorKey = majorKey(row, index);
+      rowEl.title = `${row.major_name}: 2013 rank ${rankStart}, 2023 rank ${rankEnd}`;
+
+      const leftPill = document.createElement("div");
+      leftPill.className = "rank-pill rank-pill-left";
+      leftPill.innerHTML = `<span class="rank-label">2013</span><span class="rank-value">${rankStart}</span>`;
+
+      const nameEl = document.createElement("div");
+      nameEl.className = "rank-major-name";
+      nameEl.textContent = row.major_name;
+
+      const movementWrap = document.createElement("div");
+      movementWrap.className = "rank-movement";
+      const movementChip = document.createElement("span");
+      movementChip.className = `movement-chip ${moveClass}`;
+      movementChip.textContent = movementText(delta);
+      movementChip.title = movementTitle(delta);
+      movementWrap.appendChild(movementChip);
+
+      const trackWrap = document.createElement("div");
+      trackWrap.className = "rank-track-wrap";
+      const track = document.createElement("div");
+      track.className = "rank-track";
+      const fill = document.createElement("div");
+      fill.className = `rank-track-fill ${moveClass}`;
+      track.appendChild(fill);
+
+      const rightPill = document.createElement("div");
+      rightPill.className = "rank-pill rank-pill-right";
+      rightPill.innerHTML = `<span class="rank-label">2023</span><span class="rank-value">${rankEnd}</span>`;
+
+      trackWrap.appendChild(track);
+      trackWrap.appendChild(rightPill);
+
+      rowEl.appendChild(leftPill);
+      rowEl.appendChild(nameEl);
+      rowEl.appendChild(movementWrap);
+      rowEl.appendChild(trackWrap);
+      board.appendChild(rowEl);
     });
 
-    const annotations = [];
-    top20.forEach((r) => {
-      annotations.push({
-        x: 0.02,
-        xref: "paper",
-        y: rank2013[r.major_name],
-        yref: "y",
-        text: shortName(r.major_name),
-        xanchor: "left",
-        showarrow: false,
-        font: { size: 13 }
-      });
-      annotations.push({
-        x: 0.98,
-        xref: "paper",
-        y: rank2023[r.major_name],
-        yref: "y",
-        text: shortName(r.major_name),
-        xanchor: "right",
-        showarrow: false,
-        font: { size: 13 }
-      });
-    });
-    annotations.push({ x: 0.02, xref: "paper", y: 0, text: "<b>2013 Ranking</b>", showarrow: false, xanchor: "left" });
-    annotations.push({ x: 0.98, xref: "paper", y: 0, text: "<b>2023 Ranking</b>", showarrow: false, xanchor: "right" });
-
-    Plotly.newPlot("chart-slopegraph", traces, baseLayout({
-      title: { text: "Major Ranking Shift: Top 20 (2013 to 2023)" },
-      xaxis: { visible: false, range: [0, 1] },
-      yaxis: { autorange: "reversed", showgrid: false, zeroline: false, showticklabels: false },
-      annotations,
-      margin: { l: 50, r: 50, t: 56, b: 24 },
-      height: 1120
-    }), { responsive: true, displayModeBar: false });
+    container.appendChild(board);
   }
 
   function renderNationalRankings() {
+    const container = document.getElementById("chart-ranking");
+    if (!container) return;
+
     const metricEl = document.getElementById("ranking-metric-select");
     const metric = metricEl ? metricEl.value : "gross_change";
     const rows = state.nationalChange.slice().sort((a, b) => score(b[metric]) - score(a[metric]));
 
-    const x = rows.map((r) => r[metric]);
-    const y = rows.map((r) => shortName(r.major_name, 52));
-    const colors = x.map((v) => (v >= 0 ? "#059669" : "#dc2626"));
-    const vals = x.filter((v) => v !== null);
-    const minVal = Math.min(...vals, 0);
-    const maxVal = Math.max(...vals, 0);
-    const span = Math.max(10, maxVal - minVal);
-    const pad = span * 0.06;
+    container.classList.add("ranking-shell");
+    container.innerHTML = "";
 
-    Plotly.newPlot("chart-ranking", [
-      {
-        type: "bar",
-        orientation: "h",
-        x,
-        y,
-        customdata: rows.map((r) => [r.major_name]),
-        marker: { color: colors, line: { width: 0 } },
-        hovertemplate:
-          "<b>%{customdata[0]}</b><br>" +
-          (metric === "gross_change" ? "Gross Change: %{x:,.0f}" : "Percent Change: %{x:.1f}%") +
-          "<extra></extra>"
+    const values = rows.map((r) => r[metric]).filter((v) => v !== null && v !== undefined);
+    const maxAbs = Math.max(1, ...values.map((v) => Math.abs(v)));
+
+    const board = document.createElement("div");
+    board.className = "ranking-board";
+
+    const axis = document.createElement("div");
+    axis.className = "ranking-axis";
+
+    const labelHead = document.createElement("div");
+    labelHead.className = "ranking-axis-label";
+    labelHead.textContent = "Major";
+
+    const scale = document.createElement("div");
+    scale.className = "ranking-axis-scale";
+    const scaleMeta = document.createElement("div");
+    scaleMeta.className = "ranking-axis-meta";
+    scaleMeta.innerHTML = "<span>Negative change</span><span>0</span><span>Positive change</span>";
+    scale.appendChild(scaleMeta);
+
+    const valueHead = document.createElement("div");
+    valueHead.className = "ranking-axis-label ranking-value-head";
+    valueHead.textContent = metric === "gross_change" ? "Gross Change" : "Percent Change";
+
+    axis.appendChild(labelHead);
+    axis.appendChild(scale);
+    axis.appendChild(valueHead);
+    board.appendChild(axis);
+
+    rows.forEach((row, index) => {
+      const value = row[metric] ?? 0;
+      const magnitude = Math.abs(value);
+      const widthPct = magnitude === 0 ? 0 : Math.max(1.25, (magnitude / maxAbs) * 50);
+      const signClass = movementClass(value);
+
+      const rowEl = document.createElement("div");
+      rowEl.className = "ranking-row";
+      rowEl.dataset.majorKey = majorKey(row, index);
+      rowEl.title = `${row.major_name}: ${metricLabel(metric, value)}`;
+
+      const label = document.createElement("div");
+      label.className = "ranking-label";
+      label.textContent = row.major_name;
+
+      const barArea = document.createElement("div");
+      barArea.className = "ranking-bar-area";
+      const bar = document.createElement("div");
+      bar.className = `ranking-bar ${value === 0 ? "neutral" : signClass}`;
+      if (value !== 0) {
+        bar.style.setProperty("--bar-width", widthPct.toFixed(2));
       }
-    ], baseLayout({
-      title: { text: `All Majors by ${metric === "gross_change" ? "Gross Change" : "Percent Change"} (2013 to 2023)` },
-      xaxis: {
-        title: metric === "gross_change" ? "Graduates" : "Percent",
-        zeroline: true,
-        zerolinecolor: "#111827",
-        range: [minVal - pad, maxVal + pad]
-      },
-      yaxis: { automargin: true, autorange: "reversed", tickfont: { size: 13 } },
-      bargap: 0.2,
-      margin: { l: 360, r: 24, t: 56, b: 52 },
-      height: Math.max(1040, rows.length * 24)
-    }), { responsive: true, displayModeBar: false });
+      barArea.appendChild(bar);
+
+      const valueEl = document.createElement("div");
+      valueEl.className = `ranking-value ${value === 0 ? "neutral" : signClass}`;
+      valueEl.textContent = metricLabel(metric, value);
+
+      rowEl.appendChild(label);
+      rowEl.appendChild(barArea);
+      rowEl.appendChild(valueEl);
+      board.appendChild(rowEl);
+    });
+
+    container.appendChild(board);
   }
 
   function mapRowsForMajor(major) {
