@@ -333,6 +333,10 @@ body {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.controls-five {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .control-field span {
   display: block;
   margin-bottom: 8px;
@@ -650,7 +654,8 @@ body {
   .compare-grid,
   .trend-layout,
   .controls-three,
-  .controls-four {
+  .controls-four,
+  .controls-five {
     grid-template-columns: 1fr;
   }
 

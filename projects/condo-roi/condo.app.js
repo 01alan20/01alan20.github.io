@@ -16,6 +16,7 @@ const state = {
   projectSummary: [],
   districtOptions: [],
   areaOptions: [],
+  tenureOptions: [],
   activeTab: "roi",
   trendMetric: "buy",
   trendSelection: new Set(),
@@ -350,6 +351,7 @@ function initState(rows) {
   state.projectSummary = buildProjectSummary(state.rows);
   state.districtOptions = sortDistricts(unique(state.projectSummary.map((item) => item.district).filter((value) => value !== "Unknown")));
   state.areaOptions = areaSummary(state.rows).map((item) => item.label);
+  state.tenureOptions = ["Freehold", "Leasehold"].filter((value) => state.rows.some((row) => row.tenureGroup === value));
 
   const rankedDistricts = aggregateProjectLevel(state.projectSummary, "district")
     .filter((item) => item.label !== "Unknown")
@@ -390,6 +392,7 @@ function fillControls() {
   fillSelect("searchDistrict", state.districtOptions, true, "Any District");
   fillSelect("searchArea", state.areaOptions, true, "Any Size");
   fillSelect("searchBeds", ["1", "2", "3", "4", "5+"], true, "Any Beds");
+  fillSelect("searchTenure", state.tenureOptions, true, "Any Tenure");
 
   $("#compareDistrictA").value = state.compareDistrictA;
   $("#compareDistrictB").value = state.compareDistrictB;
@@ -747,6 +750,7 @@ function renderTrendsTab() {
 function searchRows() {
   const beds = $("#searchBeds").value;
   const area = $("#searchArea").value;
+  const tenure = $("#searchTenure").value;
   const district = $("#searchDistrict").value;
   const budget = toNum($("#searchBudget").value);
 
@@ -754,6 +758,7 @@ function searchRows() {
     .filter((row) => Number.isFinite(row.roi) && Number.isFinite(row.mostRecentBuy) && Number.isFinite(row.mostRecentRent))
     .filter((row) => !beds || row.estimatedBedrooms === beds)
     .filter((row) => !area || row.areaBucket === area)
+    .filter((row) => !tenure || row.tenureGroup === tenure)
     .filter((row) => !district || row.district === district)
     .filter((row) => !Number.isFinite(budget) || row.mostRecentBuy <= budget)
     .sort((a, b) => a.roi - b.roi || a.mostRecentBuy - b.mostRecentBuy)
@@ -856,7 +861,7 @@ function wireTrendControls() {
 }
 
 function wireSearchControls() {
-  ["searchBeds", "searchArea", "searchDistrict"].forEach((id) => {
+  ["searchBeds", "searchArea", "searchTenure", "searchDistrict"].forEach((id) => {
     $(`#${id}`).addEventListener("change", renderSearchTab);
   });
   $("#searchBudget").addEventListener("input", debounce(renderSearchTab, 150));
