@@ -61,20 +61,30 @@
 
     <section class="tab-pane" data-tab="trend">
       <h2>Trend Over Time</h2>
-      <section class="tab-controls">
-        <label>
-          Major selections
-          <div id="trend-major-list" class="major-checklist"></div>
-        </label>
-        <label>
-          Trend View
-          <select id="trend-select">
-            <option value="graduates">Count</option>
-            <option value="share_of_total">Share</option>
-          </select>
-        </label>
-      </section>
-      <div id="chart-trend" class="chart"></div>
+      <div class="trend-layout">
+        <aside class="trend-sidebar">
+          <label>
+            Search Major
+            <input id="trend-major-search" type="search" placeholder="Type to filter majors">
+          </label>
+          <label>
+            Major selections
+            <div id="trend-major-list" class="major-checklist"></div>
+          </label>
+        </aside>
+        <div class="trend-main">
+          <section class="tab-controls">
+            <label>
+              Trend View
+              <select id="trend-select">
+                <option value="graduates">Count</option>
+                <option value="share_of_total">Share</option>
+              </select>
+            </label>
+          </section>
+          <div id="chart-trend" class="chart"></div>
+        </div>
+      </div>
     </section>
 
     <section class="tab-pane" data-tab="states">
@@ -110,6 +120,6 @@
     </section>
   </main>
 
-  <script src="dashboard.js?v=20260319c"></script>
+  <script src="dashboard.js?v=20260319d"></script>
 </body>
 </html>

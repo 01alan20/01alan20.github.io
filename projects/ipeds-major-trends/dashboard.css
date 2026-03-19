@@ -59,7 +59,7 @@ html, body {
   background: none;
   border: none;
   padding: 12px 20px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-secondary);
   cursor: pointer;
@@ -155,8 +155,8 @@ h2 {
   border-radius: 8px;
   background: white;
   padding: 8px 10px;
-  width: 430px;
-  max-height: 300px;
+  width: 100%;
+  max-height: 380px;
   overflow-y: auto;
 }
 
@@ -185,7 +185,45 @@ h2 {
 }
 
 .tab-pane[data-tab="map"] #chart-us-map {
-  min-height: 650px;
+  min-height: 780px;
+}
+
+.trend-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.trend-sidebar {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 12px;
+}
+
+.trend-sidebar label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.trend-sidebar input[type="search"] {
+  margin-top: 6px;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.trend-sidebar input[type="search"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
 }
 
 .chart.tall {
@@ -258,6 +296,10 @@ tbody tr:hover {
 
   .tab-controls {
     gap: 12px;
+  }
+
+  .trend-layout {
+    grid-template-columns: 1fr;
   }
 
   .major-checklist {

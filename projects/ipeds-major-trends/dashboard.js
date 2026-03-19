@@ -18,7 +18,8 @@
   const state = {
     nationalChange: [],
     stateChange: [],
-    nationalAnnual: []
+    nationalAnnual: [],
+    trendSelection: new Set(["ALL"])
   };
 
   const num = (v) => {
@@ -43,6 +44,15 @@
       .join(" ")
       .replace(/\bUsa\b/g, "USA")
       .replace(/\bIpeds\b/g, "IPEDS");
+  }
+
+  function shortName(name, max = 56) {
+    if (!name) return "";
+    return name.length <= max ? name : `${name.slice(0, max - 1)}…`;
+  }
+
+  function isValidYear(y) {
+    return Number.isInteger(y) && y >= 2013 && y <= 2023;
   }
 
   function parseRows(rows) {
@@ -75,7 +85,7 @@
       margin: { l: 60, r: 20, t: 50, b: 40 },
       paper_bgcolor: "white",
       plot_bgcolor: "white",
-      font: { family: "Segoe UI, sans-serif", size: 12, color: "#1f2937" },
+      font: { family: "Segoe UI, sans-serif", size: 13, color: "#1f2937" },
       ...extra
     };
   }
@@ -95,14 +105,9 @@
   }
 
   function getTrendMajors() {
-    const checks = document.querySelectorAll('.trend-major-check:checked');
-    const values = [...checks].map((el) => el.value);
-    if (values.includes("ALL") || values.length === 0) return ["ALL"];
-    return values;
-  }
-
-  function isValidYear(y) {
-    return Number.isInteger(y) && y >= 2013 && y <= 2023;
+    const selected = [...state.trendSelection];
+    if (selected.length === 0 || selected.includes("ALL")) return ["ALL"];
+    return selected;
   }
 
   function renderMainInfographic() {
@@ -122,9 +127,9 @@
       return {
         type: "scatter",
         mode: "lines+markers",
-        x: [0, 1],
+        x: [0.22, 0.78],
         y: [y0, y1],
-        line: { color, width: 2 },
+        line: { color, width: 2.5 },
         marker: { color, size: 7 },
         hovertemplate:
           `<b>${r.major_name}</b><br>` +
@@ -139,35 +144,36 @@
     const annotations = [];
     top20.forEach((r) => {
       annotations.push({
-        x: -0.03,
+        x: 0.02,
+        xref: "paper",
         y: rank2013[r.major_name],
-        xref: "x",
         yref: "y",
-        text: `${rank2013[r.major_name]}. ${r.major_name}`,
-        xanchor: "right",
-        showarrow: false,
-        font: { size: 11 }
-      });
-      annotations.push({
-        x: 1.03,
-        y: rank2023[r.major_name],
-        xref: "x",
-        yref: "y",
-        text: `${rank2023[r.major_name]}. ${r.major_name}`,
+        text: shortName(r.major_name),
         xanchor: "left",
         showarrow: false,
-        font: { size: 11 }
+        font: { size: 12 }
+      });
+      annotations.push({
+        x: 0.98,
+        xref: "paper",
+        y: rank2023[r.major_name],
+        yref: "y",
+        text: shortName(r.major_name),
+        xanchor: "right",
+        showarrow: false,
+        font: { size: 12 }
       });
     });
-    annotations.push({ x: 0, y: 0, text: "<b>2013 Ranking</b>", showarrow: false });
-    annotations.push({ x: 1, y: 0, text: "<b>2023 Ranking</b>", showarrow: false });
+    annotations.push({ x: 0.02, xref: "paper", y: 0, text: "<b>2013 Ranking</b>", showarrow: false, xanchor: "left" });
+    annotations.push({ x: 0.98, xref: "paper", y: 0, text: "<b>2023 Ranking</b>", showarrow: false, xanchor: "right" });
 
     Plotly.newPlot("chart-slopegraph", traces, baseLayout({
       title: { text: "Major Ranking Shift: Top 20 (2013 to 2023)" },
-      xaxis: { visible: false, range: [-0.35, 1.35] },
+      xaxis: { visible: false, range: [0, 1] },
       yaxis: { autorange: "reversed", showgrid: false, zeroline: false, showticklabels: false },
       annotations,
-      margin: { l: 280, r: 280, t: 50, b: 20 }
+      margin: { l: 70, r: 70, t: 50, b: 20 },
+      height: 1020
     }), { responsive: true, displayModeBar: false });
   }
 
@@ -202,7 +208,7 @@
         range: [-maxAbs * 1.05, maxAbs * 1.05]
       },
       yaxis: { automargin: true, autorange: "reversed" },
-      margin: { l: 480, r: 30, t: 50, b: 40 },
+      margin: { l: 500, r: 30, t: 50, b: 40 },
       height: Math.max(900, rows.length * 22)
     }), { responsive: true, displayModeBar: false });
   }
@@ -241,7 +247,7 @@
         colorscale: "RdBu",
         reversescale: true,
         marker: { line: { color: "white", width: 0.7 } },
-        colorbar: { title: "% Change" },
+        colorbar: { title: "% Change", len: 0.86, thickness: 20 },
         customdata: rows.map((r) => [r.count_2013, r.count_2023, r.gross_change]),
         hovertemplate:
           "<b>%{location}</b><br>" +
@@ -256,9 +262,12 @@
         scope: "usa",
         projection: { type: "albers usa" },
         showlakes: false,
-        bgcolor: "rgba(0,0,0,0)"
+        bgcolor: "rgba(0,0,0,0)",
+        fitbounds: "locations",
+        domain: { x: [0, 1], y: [0, 1] }
       },
-      margin: { l: 20, r: 20, t: 50, b: 10 }
+      margin: { l: 6, r: 6, t: 50, b: 8 },
+      height: 760
     }), { responsive: true, displayModeBar: false });
   }
 
@@ -289,12 +298,12 @@
         x: rows.map((r) => r.year),
         y: rows.map((r) => {
           if (trendMetric === "graduates") return r.graduates;
-          if (major === "ALL") return null;
+          if (major === "ALL") return 1;
           return r.share_of_total;
         }),
         name: major === "ALL" ? "All Majors" : major
       };
-    }).filter((t) => t.y.some((v) => v !== null));
+    }).filter((t) => t.y.some((v) => v !== null && v !== undefined));
 
     Plotly.newPlot("chart-trend", traces, baseLayout({
       title: { text: `Trend Over Time (${trendMetric === "graduates" ? "Count" : "Share"})` },
@@ -302,7 +311,8 @@
       yaxis: {
         title: trendMetric === "graduates" ? "Graduates" : "Share of Total",
         tickformat: trendMetric === "graduates" ? ",.0f" : ".2%"
-      }
+      },
+      height: 560
     }), { responsive: true, displayModeBar: false });
   }
 
@@ -392,20 +402,43 @@
     container.addEventListener("change", (event) => {
       const target = event.target;
       if (!(target instanceof HTMLInputElement) || !target.classList.contains("trend-major-check")) return;
-      if (target.value === "ALL" && target.checked) {
-        container.querySelectorAll(".trend-major-check").forEach((cb) => {
-          if (cb !== target) cb.checked = false;
-        });
-      } else if (target.value !== "ALL" && target.checked) {
-        const allBox = container.querySelector('.trend-major-check[value="ALL"]');
-        if (allBox) allBox.checked = false;
-      }
-      const anyChecked = container.querySelectorAll(".trend-major-check:checked").length > 0;
-      if (!anyChecked) {
-        const allBox = container.querySelector('.trend-major-check[value="ALL"]');
-        if (allBox) allBox.checked = true;
+
+      if (target.value === "ALL") {
+        if (target.checked) {
+          state.trendSelection = new Set(["ALL"]);
+          container.querySelectorAll(".trend-major-check").forEach((cb) => {
+            if (cb.value !== "ALL") cb.checked = false;
+          });
+        } else {
+          target.checked = true;
+        }
+      } else {
+        if (target.checked) {
+          state.trendSelection.delete("ALL");
+          state.trendSelection.add(target.value);
+          const allBox = container.querySelector('.trend-major-check[value="ALL"]');
+          if (allBox) allBox.checked = false;
+        } else {
+          state.trendSelection.delete(target.value);
+        }
+        if (state.trendSelection.size === 0) {
+          state.trendSelection = new Set(["ALL"]);
+          const allBox = container.querySelector('.trend-major-check[value="ALL"]');
+          if (allBox) allBox.checked = true;
+          container.querySelectorAll(".trend-major-check").forEach((cb) => {
+            if (cb.value !== "ALL") cb.checked = false;
+          });
+        }
       }
       renderAll();
+    });
+  }
+
+  function wireTrendSearch() {
+    const input = document.getElementById("trend-major-search");
+    if (!input) return;
+    input.addEventListener("input", () => {
+      buildTrendChecklist(majorList(), input.value.trim());
     });
   }
 
@@ -415,6 +448,7 @@
       if (el) el.addEventListener("change", renderAll);
     });
     wireTrendChecklistBehavior();
+    wireTrendSearch();
   }
 
   function fillSelectWithAll(selectId, majors) {
@@ -433,7 +467,7 @@
     });
   }
 
-  function buildTrendChecklist(majors) {
+  function buildTrendChecklist(majors, search = "") {
     const container = document.getElementById("trend-major-list");
     if (!container) return;
     container.innerHTML = "";
@@ -453,15 +487,19 @@
       return wrap;
     };
 
-    container.appendChild(mkItem("ALL", "All", true));
-    majors.forEach((m) => container.appendChild(mkItem(m, m, false)));
+    const q = search.toLowerCase();
+    const filtered = majors.filter((m) => m.toLowerCase().includes(q));
+    if (state.trendSelection.size === 0) state.trendSelection = new Set(["ALL"]);
+
+    container.appendChild(mkItem("ALL", "All", state.trendSelection.has("ALL")));
+    filtered.forEach((m) => container.appendChild(mkItem(m, m, state.trendSelection.has(m))));
   }
 
   function initializeControls() {
     const majors = majorList();
     fillSelectWithAll("map-major-select", majors);
     fillSelectWithAll("state-major-select", majors);
-    buildTrendChecklist(majors);
+    buildTrendChecklist(majors, "");
   }
 
   async function init() {
