@@ -76,18 +76,21 @@
   }
 
   function getMapMajor() {
-    return document.getElementById("map-major-select").value;
+    const el = document.getElementById("map-major-select");
+    return el ? el.value : "ALL";
   }
 
   function getTrendMajors() {
     const select = document.getElementById("trend-major-select");
+    if (!select) return ["ALL"];
     const values = [...select.selectedOptions].map((o) => o.value);
     if (values.includes("ALL")) return ["ALL"];
     return values;
   }
 
   function getStateMajor() {
-    return document.getElementById("state-major-select").value;
+    const el = document.getElementById("state-major-select");
+    return el ? el.value : "ALL";
   }
 
   function renderMainInfographic() {
@@ -157,7 +160,8 @@
   }
 
   function renderNationalRankings() {
-    const metric = document.getElementById("ranking-metric-select").value;
+    const metricEl = document.getElementById("ranking-metric-select");
+    const metric = metricEl ? metricEl.value : "gross_change";
     const rows = state.nationalChange.slice().sort((a, b) => score(b[metric]) - score(a[metric]));
 
     const x = rows.map((r) => r[metric]);
@@ -249,7 +253,8 @@
 
   function renderTrend() {
     const selections = getTrendMajors();
-    const trendMetric = document.getElementById("trend-select").value;
+    const trendEl = document.getElementById("trend-select");
+    const trendMetric = trendEl ? trendEl.value : "graduates";
     const majors = selections.length === 0 ? ["ALL"] : selections;
 
     const traces = majors.map((major) => {
@@ -310,7 +315,8 @@
 
   function renderStateTrends() {
     const major = getStateMajor();
-    const metric = document.getElementById("state-metric-select").value;
+    const metricEl = document.getElementById("state-metric-select");
+    const metric = metricEl ? metricEl.value : "gross_change";
     const rows = stateRowsForMajor(major).slice().sort((a, b) => score(b[metric]) - score(a[metric]));
 
     Plotly.newPlot("chart-state-trends", [
@@ -333,6 +339,7 @@
     }), { responsive: true, displayModeBar: false });
 
     const tbody = document.getElementById("state-table-body");
+    if (!tbody) return;
     tbody.innerHTML = "";
     rows.forEach((r) => {
       const tr = document.createElement("tr");
@@ -369,12 +376,14 @@
 
   function wireControls() {
     ["ranking-metric-select", "map-major-select", "trend-major-select", "trend-select", "state-major-select", "state-metric-select"].forEach((id) => {
-      document.getElementById(id).addEventListener("change", renderAll);
+      const el = document.getElementById(id);
+      if (el) el.addEventListener("change", renderAll);
     });
   }
 
   function fillSelectWithAll(selectId, majors) {
     const select = document.getElementById(selectId);
+    if (!select) return;
     select.innerHTML = "";
     const allOpt = document.createElement("option");
     allOpt.value = "ALL";
@@ -390,6 +399,7 @@
 
   function fillMultiSelectWithAll(selectId, majors) {
     const select = document.getElementById(selectId);
+    if (!select) return;
     select.innerHTML = "";
     const allOpt = document.createElement("option");
     allOpt.value = "ALL";
