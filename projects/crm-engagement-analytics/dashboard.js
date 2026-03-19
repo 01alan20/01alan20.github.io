@@ -31,6 +31,7 @@ const median = (arr) => {
 };
 
 const values = (rows, field) => rows.map((r) => num(r[field])).filter((v) => v !== null);
+const div0 = (numValue, denValue) => (denValue ? numValue / denValue : 0);
 
 function baseLayout() {
   return {
@@ -137,6 +138,86 @@ function renderSummary() {
     xaxis: { title: 'Months as Student' },
     yaxis: { title: 'Engagement Index' }
   });
+
+  renderSummaryInsights(rows);
+}
+
+function renderSummaryInsights(rows) {
+  const total = rows.length;
+  const dropoutCount = rows.filter((r) => num(r.actual_dropout_flag) === 1).length;
+  const dropoutRate = div0(dropoutCount, total);
+
+  const criticalRows = rows.filter((r) => (num(r.attrition_risk_score) || 0) >= 75);
+  const criticalDropoutRate = div0(
+    criticalRows.filter((r) => num(r.actual_dropout_flag) === 1).length,
+    criticalRows.length
+  );
+
+  const lowRiskRows = rows.filter((r) => (num(r.attrition_risk_score) || 0) < 25);
+  const lowRiskDropoutRate = div0(
+    lowRiskRows.filter((r) => num(r.actual_dropout_flag) === 1).length,
+    lowRiskRows.length
+  );
+
+  const commitmentStats = [...new Set(rows.map((r) => r.enrollment_commitment_type).filter(Boolean))]
+    .map((label) => {
+      const subset = rows.filter((r) => r.enrollment_commitment_type === label);
+      return {
+        label,
+        count: subset.length,
+        dropoutRate: div0(subset.filter((r) => num(r.actual_dropout_flag) === 1).length, subset.length)
+      };
+    })
+    .sort((a, b) => b.dropoutRate - a.dropoutRate);
+
+  const paymentStats = [...new Set(rows.map((r) => r.payment_plan_type).filter(Boolean))]
+    .map((label) => {
+      const subset = rows.filter((r) => r.payment_plan_type === label);
+      return {
+        label,
+        count: subset.length,
+        dropoutRate: div0(subset.filter((r) => num(r.actual_dropout_flag) === 1).length, subset.length)
+      };
+    })
+    .sort((a, b) => b.dropoutRate - a.dropoutRate);
+
+  const atRiskActive = rows.filter((r) => (num(r.attrition_risk_score) || 0) >= 50 && num(r.actual_dropout_flag) === 0);
+  const avgEngagement = mean(values(rows, 'engagement_index')) || 0;
+  const belowAvgEngagement = rows.filter((r) => (num(r.engagement_index) || 0) < avgEngagement);
+
+  const strongestCommitment = commitmentStats[commitmentStats.length - 1];
+  const weakestCommitment = commitmentStats[0];
+  const strongestPayment = paymentStats[paymentStats.length - 1];
+  const weakestPayment = paymentStats[0];
+
+  const keyInsights = [
+    `Dropout is ${pct(dropoutRate, 1)} overall (${fmt(dropoutCount, 0)} of ${fmt(total, 0)} students).`,
+    `Risk stratification is strong: critical-risk dropout is ${pct(criticalDropoutRate, 1)} vs low-risk at ${pct(lowRiskDropoutRate, 1)}.`,
+    weakestCommitment && strongestCommitment
+      ? `Commitment matters: ${weakestCommitment.label} has the highest dropout at ${pct(weakestCommitment.dropoutRate, 1)}, while ${strongestCommitment.label} is lowest at ${pct(strongestCommitment.dropoutRate, 1)}.`
+      : 'Commitment segmentation is unavailable in the current data.',
+    weakestPayment && strongestPayment
+      ? `Payment pattern spread is material: ${weakestPayment.label} dropout is ${pct(weakestPayment.dropoutRate, 1)} vs ${strongestPayment.label} at ${pct(strongestPayment.dropoutRate, 1)}.`
+      : 'Payment method segmentation is unavailable in the current data.'
+  ];
+
+  const nextSteps = [
+    `Launch a priority intervention list for ${fmt(atRiskActive.length, 0)} at-risk active students (${pct(div0(atRiskActive.length, total), 1)} of population).`,
+    `Run an engagement campaign for students below average engagement (${fmt(belowAvgEngagement.length, 0)} students).`,
+    weakestCommitment
+      ? `Design a conversion path from ${weakestCommitment.label} into longer commitments to lower retention risk.`
+      : 'Promote longer-term commitment options to improve retention stability.',
+    weakestPayment
+      ? `Target ${weakestPayment.label} users with payment support and auto-pay migration prompts.`
+      : 'Reduce billing friction at renewal and payment touchpoints.'
+  ];
+
+  const keyContainer = document.getElementById('summary-key-insights');
+  const nextContainer = document.getElementById('summary-next-steps');
+  if (!keyContainer || !nextContainer) return;
+
+  keyContainer.innerHTML = `<ul>${keyInsights.map((item) => `<li>${item}</li>`).join('')}</ul>`;
+  nextContainer.innerHTML = `<ul>${nextSteps.map((item) => `<li>${item}</li>`).join('')}</ul>`;
 }
 
 function renderRisk() {

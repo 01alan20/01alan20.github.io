@@ -152,6 +152,7 @@ function updateAllCharts() {
     renderWaterfallChart();
     renderVelocityChart();
     renderBenchmarkChart();
+    renderExecutiveInsights();
     renderFunnelBarChart();
     renderExitRateChart();
     renderFunnelDetailChart();
@@ -161,6 +162,94 @@ function updateAllCharts() {
     renderSegmentTypeChart();
     renderAcademicIndexChart();
     renderProgramChart();
+}
+
+function safeRate(numerator, denominator) {
+    return denominator > 0 ? numerator / denominator : 0;
+}
+
+function formatPct(value) {
+    return (value * 100).toFixed(1) + '%';
+}
+
+function renderExecutiveInsights() {
+    const totalInquiries = filteredData.length;
+    const insightsContainer = document.getElementById('summary-key-insights');
+    const nextStepsContainer = document.getElementById('summary-next-steps');
+    if (!insightsContainer || !nextStepsContainer) return;
+    if (totalInquiries === 0) {
+        insightsContainer.innerHTML = '<li>No data available for the current filter combination.</li>';
+        nextStepsContainer.innerHTML = '<li>Clear one or more filters to restore actionable guidance.</li>';
+        return;
+    }
+
+    const applications = filteredData.filter(d => d.application_flag === '1').length;
+    const offers = filteredData.filter(d => d.offer_flag === '1').length;
+    const enrollments = filteredData.filter(d => d.enrollment_flag === '1').length;
+
+    const appLoss = totalInquiries - applications;
+    const offerLoss = applications - offers;
+    const enrollLoss = offers - enrollments;
+    const stageLosses = [
+        { stage: 'Inquiry to Application', count: appLoss, rate: safeRate(appLoss, totalInquiries) },
+        { stage: 'Application to Offer', count: offerLoss, rate: safeRate(offerLoss, applications) },
+        { stage: 'Offer to Enrollment', count: enrollLoss, rate: safeRate(enrollLoss, offers) }
+    ].sort((a, b) => b.count - a.count);
+    const largestLeak = stageLosses[0];
+
+    const channels = [...new Set(filteredData.map(d => d.source_channel).filter(Boolean))]
+        .map(channel => {
+            const rows = filteredData.filter(d => d.source_channel === channel);
+            const channelEnrollments = rows.filter(d => d.enrollment_flag === '1').length;
+            return {
+                channel,
+                count: rows.length,
+                rate: safeRate(channelEnrollments, rows.length)
+            };
+        })
+        .filter(item => item.count > 0)
+        .sort((a, b) => b.rate - a.rate);
+
+    const topChannel = channels[0];
+    const lowChannel = channels[channels.length - 1];
+
+    const cyclePerformance = [...new Set(filteredData.map(d => d.cycle_year).filter(Boolean))]
+        .map(cycle => {
+            const rows = filteredData.filter(d => d.cycle_year === cycle);
+            const cycleEnrollments = rows.filter(d => d.enrollment_flag === '1').length;
+            return { cycle, rate: safeRate(cycleEnrollments, rows.length), count: rows.length };
+        })
+        .sort((a, b) => b.rate - a.rate);
+
+    const bestCycle = cyclePerformance[0];
+
+    const overallRate = safeRate(enrollments, totalInquiries);
+    const inquiryToApp = safeRate(applications, totalInquiries);
+    const appToOffer = safeRate(offers, applications);
+    const offerToEnroll = safeRate(enrollments, offers);
+
+    const insights = [
+        `Overall inquiry-to-enrollment conversion is ${formatPct(overallRate)} (${enrollments.toLocaleString()} of ${totalInquiries.toLocaleString()}).`,
+        `Largest leakage happens at ${largestLeak.stage} with ${largestLeak.count.toLocaleString()} students lost (${formatPct(largestLeak.rate)} stage loss).`,
+        topChannel && lowChannel
+            ? `Source spread is material: ${topChannel.channel} converts at ${formatPct(topChannel.rate)} vs ${lowChannel.channel} at ${formatPct(lowChannel.rate)}.`
+            : 'Source-level conversion differences are unavailable for the current filter.',
+        bestCycle
+            ? `Best cycle is ${bestCycle.cycle} at ${formatPct(bestCycle.rate)} inquiry-to-enrollment conversion.`
+            : 'Cycle comparison is unavailable for the current filter.'
+    ];
+
+    const nextSteps = [
+        `Prioritize funnel fixes at ${largestLeak.stage}; a 1-2 percentage-point lift there will create the largest enrollment gain.`,
+        topChannel && lowChannel
+            ? `Shift recruitment investment toward channels with >= ${formatPct(topChannel.rate)} conversion and redesign nurture flows for lower-performing channels.`
+            : 'Re-balance source mix based on conversion and volume once channel-level sample sizes are sufficient.',
+        `Set cycle targets using the current stage baselines: Inq->App ${formatPct(inquiryToApp)}, App->Offer ${formatPct(appToOffer)}, Offer->Enroll ${formatPct(offerToEnroll)}.`,
+        'Use Scenario Modeling to test stage-lift combinations and commit to one near-term conversion objective for the next recruitment cycle.'
+    ];
+
+    insightsContainer.innerHTML = insights.map(text => `<li>${text}</li>`).join('');
+    nextStepsContainer.innerHTML = nextSteps.map(text => `<li>${text}</li>`).join('');
 }
 
 // Waterfall Chart
