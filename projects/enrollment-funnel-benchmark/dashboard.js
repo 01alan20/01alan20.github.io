@@ -7,12 +7,13 @@ let currentScenario = {
     enroll_rate: 0.35,
     start_inquiries: 1000
 };
+const PRIORITY_CHANNELS = ['School Counselor', 'Referral', 'Campus Visit'];
 
 // Load data on page load
 document.addEventListener('DOMContentLoaded', async function() {
     await loadData();
     populateFilters();
-    updateAllCharts();
+    applyGlobalFilters();
     setupEventListeners();
 });
 
@@ -36,18 +37,29 @@ function setupEventListeners() {
     document.getElementById('scenario-update-btn').addEventListener('click', updateScenarioCharts);
     document.getElementById('scenario-reset-btn').addEventListener('click', resetScenario);
     
-    // Filter changes
-    document.getElementById('segment-filter').addEventListener('change', applyFilters);
-    document.getElementById('program-filter').addEventListener('change', applyFilters);
+    // Global filter changes
+    document.getElementById('source-filter').addEventListener('change', applyGlobalFilters);
+    document.getElementById('geography-filter').addEventListener('change', applyGlobalFilters);
+    document.getElementById('major-filter').addEventListener('change', applyGlobalFilters);
+
+    // Segment drilldown filter changes (composes with global filters)
+    document.getElementById('segment-filter').addEventListener('change', renderSegmentCharts);
+    document.getElementById('program-filter').addEventListener('change', renderSegmentCharts);
 }
 
 // Populate filter dropdowns
 function populateFilters() {
     const studentTypes = [...new Set(rawData.map(d => d.student_type).filter(Boolean))];
     const programs = [...new Set(rawData.map(d => d.academic_program).filter(Boolean))];
+    const sources = [...new Set(rawData.map(d => d.source_channel).filter(Boolean))].sort();
+    const geographies = [...new Set(rawData.map(d => d.market_geography).filter(Boolean))].sort();
+    const majors = [...new Set(rawData.map(d => d.academic_program).filter(Boolean))].sort();
     
     const segmentFilter = document.getElementById('segment-filter');
     const programFilter = document.getElementById('program-filter');
+    const sourceFilter = document.getElementById('source-filter');
+    const geographyFilter = document.getElementById('geography-filter');
+    const majorFilter = document.getElementById('major-filter');
     
     studentTypes.forEach(type => {
         const option = document.createElement('option');
@@ -62,21 +74,62 @@ function populateFilters() {
         option.textContent = prog;
         programFilter.appendChild(option);
     });
+
+    sources.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item;
+        option.textContent = item;
+        sourceFilter.appendChild(option);
+    });
+
+    geographies.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item;
+        option.textContent = item;
+        geographyFilter.appendChild(option);
+    });
+
+    majors.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item;
+        option.textContent = item;
+        majorFilter.appendChild(option);
+    });
 }
 
-// Apply filters
-function applyFilters() {
+function selectedMultiValues(id) {
+    const element = document.getElementById(id);
+    if (!element) return [];
+    return Array.from(element.selectedOptions || []).map(opt => opt.value).filter(Boolean);
+}
+
+function applyGlobalFilters() {
+    const selectedSources = selectedMultiValues('source-filter');
+    const selectedGeographies = selectedMultiValues('geography-filter');
+    const selectedMajors = selectedMultiValues('major-filter');
+
+    filteredData = rawData.filter(row => {
+        if (selectedSources.length && !selectedSources.includes(row.source_channel)) return false;
+        if (selectedGeographies.length && !selectedGeographies.includes(row.market_geography)) return false;
+        if (selectedMajors.length && !selectedMajors.includes(row.academic_program)) return false;
+        return true;
+    });
+
+    updateKPIs();
+    updateAllCharts();
+    updateScenarioDisplay();
+    updateScenarioCharts();
+}
+
+function getSegmentFilteredData() {
     const studentType = document.getElementById('segment-filter').value;
     const program = document.getElementById('program-filter').value;
-    
-    filteredData = rawData.filter(row => {
+
+    return filteredData.filter(row => {
         if (studentType !== 'all' && row.student_type !== studentType) return false;
         if (program !== 'all' && row.academic_program !== program) return false;
         return true;
     });
-    
-    updateKPIs();
-    updateAllCharts();
 }
 
 // Update KPI cards
@@ -159,9 +212,7 @@ function updateAllCharts() {
     renderSourceChart();
     renderGeographyChart();
     renderSourcePerformanceChart();
-    renderSegmentTypeChart();
-    renderAcademicIndexChart();
-    renderProgramChart();
+    renderSegmentCharts();
 }
 
 function safeRate(numerator, denominator) {
@@ -180,6 +231,10 @@ function renderExecutiveInsights() {
     if (totalInquiries === 0) {
         insightsContainer.innerHTML = '<li>No data available for the current filter combination.</li>';
         nextStepsContainer.innerHTML = '<li>Clear one or more filters to restore actionable guidance.</li>';
+        const actionsContainer = document.getElementById('summary-recommended-actions');
+        if (actionsContainer) {
+            actionsContainer.innerHTML = '<li>Expand Source, Geography, or Major filters to get actionable recommendations.</li>';
+        }
         return;
     }
 
@@ -212,6 +267,7 @@ function renderExecutiveInsights() {
 
     const topChannel = channels[0];
     const lowChannel = channels[channels.length - 1];
+    const priorityStats = PRIORITY_CHANNELS.map(channel => channels.find(item => item.channel === channel)).filter(Boolean);
 
     const cyclePerformance = [...new Set(filteredData.map(d => d.cycle_year).filter(Boolean))]
         .map(cycle => {
@@ -240,16 +296,29 @@ function renderExecutiveInsights() {
     ];
 
     const nextSteps = [
-        `Prioritize funnel fixes at ${largestLeak.stage}; a 1-2 percentage-point lift there will create the largest enrollment gain.`,
-        topChannel && lowChannel
-            ? `Shift recruitment investment toward channels with >= ${formatPct(topChannel.rate)} conversion and redesign nurture flows for lower-performing channels.`
+        `Prioritize the two biggest leaks first: Inquiry -> Application (${formatPct(safeRate(appLoss, totalInquiries))} loss) and Offer -> Enrollment (${formatPct(safeRate(enrollLoss, offers))} loss).`,
+        priorityStats.length
+            ? `Prioritize reach and conversion investment in ${priorityStats.map(item => `${item.channel} (${formatPct(item.rate)})`).join(', ')}.`
             : 'Re-balance source mix based on conversion and volume once channel-level sample sizes are sufficient.',
         `Set cycle targets using the current stage baselines: Inq->App ${formatPct(inquiryToApp)}, App->Offer ${formatPct(appToOffer)}, Offer->Enroll ${formatPct(offerToEnroll)}.`,
-        'Use Scenario Modeling to test stage-lift combinations and commit to one near-term conversion objective for the next recruitment cycle.'
+        'Run a why-school campaign with current juniors/seniors in good standing, then feed top themes into counselor, referral, and campus-visit marketing creative.'
     ];
 
     insightsContainer.innerHTML = insights.map(text => `<li>${text}</li>`).join('');
     nextStepsContainer.innerHTML = nextSteps.map(text => `<li>${text}</li>`).join('');
+
+    const actionsContainer = document.getElementById('summary-recommended-actions');
+    if (actionsContainer) {
+        const actions = [
+            `Leak focus: recover at least 5% of lost volume in Inquiry -> Application (${appLoss.toLocaleString()} currently lost).`,
+            `Yield focus: improve Offer -> Enrollment from ${formatPct(offerToEnroll)} to ${(Math.min(offerToEnroll + 0.03, 1) * 100).toFixed(1)}% in the next cycle.`,
+            priorityStats.length
+                ? `Channel growth plan: increase qualified inquiry volume from ${priorityStats.map(item => item.channel).join(', ')} by 10-15%.`
+                : 'Channel growth plan: prioritize top-converting sources once sufficient volume is available.',
+            'Message test plan: interview juniors/seniors on decision drivers, convert top reasons into campaign messaging tests, and track conversion lift by source.'
+        ];
+        actionsContainer.innerHTML = actions.map(text => `<li>${text}</li>`).join('');
+    }
 }
 
 // Waterfall Chart
@@ -595,10 +664,16 @@ function renderSourcePerformanceChart() {
 
 // Segment Type Chart
 function renderSegmentTypeChart() {
-    const types = [...new Set(filteredData.map(d => d.student_type).filter(Boolean))];
+    const segmentRows = getSegmentFilteredData();
+    if (!segmentRows.length) {
+        renderNoDataChart('segment-type-chart', 'No segment data for current filters.');
+        return;
+    }
+
+    const types = [...new Set(segmentRows.map(d => d.student_type).filter(Boolean))];
     
     const typeData = types.map(type => {
-        const typeRecords = filteredData.filter(d => d.student_type === type);
+        const typeRecords = segmentRows.filter(d => d.student_type === type);
         const appRate = typeRecords.length > 0 ? (typeRecords.filter(d => d.application_flag === '1').length / typeRecords.length) * 100 : 0;
         const offerRate = typeRecords.length > 0 ? (typeRecords.filter(d => d.offer_flag === '1').length / typeRecords.length) * 100 : 0;
         const enrollRate = typeRecords.length > 0 ? (typeRecords.filter(d => d.enrollment_flag === '1').length / typeRecords.length) * 100 : 0;
@@ -644,10 +719,20 @@ function renderSegmentTypeChart() {
 
 // Academic Index Impact Chart
 function renderAcademicIndexChart() {
-    const trainingData = filteredData.map(d => ({
+    const segmentRows = getSegmentFilteredData();
+    if (!segmentRows.length) {
+        renderNoDataChart('academic-index-chart', 'No academic-index data for current filters.');
+        return;
+    }
+
+    const trainingData = segmentRows.map(d => ({
         index: parseFloat(d.academic_index),
         enrolled: d.enrollment_flag === '1' ? 1 : 0
     })).filter(d => !isNaN(d.index));
+    if (!trainingData.length) {
+        renderNoDataChart('academic-index-chart', 'No academic-index data for current filters.');
+        return;
+    }
     
     // Bin data
     const bins = {};
@@ -692,10 +777,16 @@ function renderAcademicIndexChart() {
 
 // Program Comparison Chart
 function renderProgramChart() {
-    const programs = [...new Set(filteredData.map(d => d.academic_program).filter(Boolean))];
+    const segmentRows = getSegmentFilteredData();
+    if (!segmentRows.length) {
+        renderNoDataChart('program-chart', 'No program data for current filters.');
+        return;
+    }
+
+    const programs = [...new Set(segmentRows.map(d => d.academic_program).filter(Boolean))];
     
     const programData = programs.map(prog => {
-        const progRecords = filteredData.filter(d => d.academic_program === prog);
+        const progRecords = segmentRows.filter(d => d.academic_program === prog);
         const count = progRecords.length;
         const enrolled = progRecords.filter(d => d.enrollment_flag === '1').length;
         const rate = count > 0 ? (enrolled / count) * 100 : 0;
@@ -723,6 +814,31 @@ function renderProgramChart() {
     };
     
     Plotly.newPlot('program-chart', [trace], layout, { responsive: true });
+}
+
+function renderSegmentCharts() {
+    renderSegmentTypeChart();
+    renderAcademicIndexChart();
+    renderProgramChart();
+}
+
+function renderNoDataChart(chartId, message) {
+    Plotly.newPlot(chartId, [], {
+        annotations: [{
+            text: message,
+            xref: 'paper',
+            yref: 'paper',
+            x: 0.5,
+            y: 0.5,
+            showarrow: false,
+            font: { size: 14, color: '#6b7280' }
+        }],
+        xaxis: { visible: false },
+        yaxis: { visible: false },
+        margin: { l: 20, r: 20, t: 30, b: 20 },
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        paper_bgcolor: 'transparent'
+    }, { responsive: true });
 }
 
 // Scenario Comparison Chart

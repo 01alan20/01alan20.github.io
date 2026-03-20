@@ -115,31 +115,67 @@ function renderSummary() {
     yaxis: { title: 'Dropout Rate (%)' }
   });
   
-  // Lifecycle vs engagement scatter
-  const validRows = rows.filter((r) => num(r.student_lifecycle_months) !== null && num(r.engagement_index) !== null);
-  plot('chart-lifecycle-engagement', [
-    {
-      x: validRows.map((r) => num(r.student_lifecycle_months)),
-      y: validRows.map((r) => num(r.engagement_index)),
-      mode: 'markers',
-      marker: {
-        size: 5,
-        color: validRows.map((r) => num(r.attrition_risk_score)),
-        colorscale: 'Viridis',
-        showscale: true,
-        colorbar: { title: 'Risk Score' }
-      },
-      text: validRows.map((r) => `${r.student_id}`),
-      hovertemplate: 'Student: %{text}<br>Months: %{x:.0f}<br>Engagement: %{y:.1f}<extra></extra>',
-      name: 'Student'
-    }
-  ], {
-    title: { text: 'Student Lifecycle vs Engagement (colored by risk)', font: { size: 14, color: '#1f2937' } },
-    xaxis: { title: 'Months as Student' },
-    yaxis: { title: 'Engagement Index' }
-  });
+  renderRiskDrivers(rows);
 
   renderSummaryInsights(rows);
+}
+
+function renderRiskDrivers(rows) {
+  const overallDropoutRate = div0(
+    rows.filter((r) => num(r.actual_dropout_flag) === 1).length,
+    rows.length
+  );
+
+  const drivers = [];
+  const addDriver = (groupName, label, subset) => {
+    if (!subset.length) return;
+    const rate = div0(subset.filter((r) => num(r.actual_dropout_flag) === 1).length, subset.length);
+    const delta = (rate - overallDropoutRate) * 100;
+    drivers.push({
+      label: `${groupName}: ${label} (n=${fmt(subset.length, 0)})`,
+      delta
+    });
+  };
+
+  [...new Set(rows.map((r) => r.enrollment_commitment_type).filter(Boolean))]
+    .forEach((value) => addDriver('Commitment', value, rows.filter((r) => r.enrollment_commitment_type === value)));
+  [...new Set(rows.map((r) => r.payment_plan_type).filter(Boolean))]
+    .forEach((value) => addDriver('Payment', value, rows.filter((r) => r.payment_plan_type === value)));
+  [...new Set(rows.map((r) => r.digital_access_type).filter(Boolean))]
+    .forEach((value) => addDriver('Digital Access', value, rows.filter((r) => r.digital_access_type === value)));
+
+  addDriver('Service Depth', '0-2 Services', rows.filter((r) => (num(r.engagement_services_count) || 0) <= 2));
+  addDriver('Service Depth', '3-5 Services', rows.filter((r) => {
+    const count = num(r.engagement_services_count) || 0;
+    return count >= 3 && count <= 5;
+  }));
+  addDriver('Service Depth', '6-8 Services', rows.filter((r) => (num(r.engagement_services_count) || 0) >= 6));
+
+  addDriver('Engagement Band', 'Low (<30)', rows.filter((r) => (num(r.engagement_index) || 0) < 30));
+  addDriver('Engagement Band', 'Medium (30-59)', rows.filter((r) => {
+    const value = num(r.engagement_index) || 0;
+    return value >= 30 && value < 60;
+  }));
+  addDriver('Engagement Band', 'High (>=60)', rows.filter((r) => (num(r.engagement_index) || 0) >= 60));
+
+  const ordered = drivers.sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta)).slice(0, 12);
+  const colors = ordered.map((item) => (item.delta >= 0 ? '#dc2626' : '#16a34a'));
+  plot('chart-risk-drivers', [
+    {
+      type: 'bar',
+      orientation: 'h',
+      x: ordered.map((item) => item.delta).reverse(),
+      y: ordered.map((item) => item.label).reverse(),
+      marker: { color: colors.reverse() },
+      text: ordered.map((item) => `${item.delta >= 0 ? '+' : ''}${item.delta.toFixed(1)} pp`).reverse(),
+      textposition: 'outside',
+      hovertemplate: '<b>%{y}</b><br>Dropout delta vs overall: %{x:.1f} pp<extra></extra>'
+    }
+  ], {
+    title: { text: 'Risk Driver Impact (Dropout Rate Delta vs Overall)', font: { size: 14, color: '#1f2937' } },
+    xaxis: { title: 'Delta vs Overall Dropout Rate (percentage points)', zeroline: true, zerolinewidth: 2, zerolinecolor: '#9ca3af' },
+    yaxis: { automargin: true }
+  });
 }
 
 function renderSummaryInsights(rows) {
@@ -218,6 +254,124 @@ function renderSummaryInsights(rows) {
 
   keyContainer.innerHTML = `<ul>${keyInsights.map((item) => `<li>${item}</li>`).join('')}</ul>`;
   nextContainer.innerHTML = `<ul>${nextSteps.map((item) => `<li>${item}</li>`).join('')}</ul>`;
+}
+
+function assignRiskTheme(row, avgEngagement) {
+  const services = num(row.engagement_services_count) || 0;
+  const engagement = num(row.engagement_index) || 0;
+  const isLowService = services <= 3;
+  const hasEngagementGap = engagement < avgEngagement;
+  const isPaymentFriction = row.payment_plan_type === 'Electronic check';
+  const isOpenEnrollment = row.enrollment_commitment_type === 'Open enrollment';
+
+  if (isLowService && hasEngagementGap) return 'Low Service Engagement';
+  if (isPaymentFriction) return 'Payment Friction Profile';
+  if (isOpenEnrollment) return 'Open Enrollment Exposure';
+  if (hasEngagementGap) return 'Engagement Gap Profile';
+  return 'Other Risk Pattern';
+}
+
+function themeRecommendation(theme) {
+  if (theme === 'Low Service Engagement') return 'Assign advisor outreach + academic support nudges in week 1.';
+  if (theme === 'Payment Friction Profile') return 'Offer billing counseling and auto-pay migration support.';
+  if (theme === 'Open Enrollment Exposure') return 'Promote annual or multi-year commitment conversion path.';
+  if (theme === 'Engagement Gap Profile') return 'Launch targeted engagement campaign and monitor weekly activity lift.';
+  return 'Review case-by-case with student success team.';
+}
+
+function renderNoDataCard(id, message) {
+  const element = document.getElementById(id);
+  if (!element) return;
+  element.innerHTML = `<ul><li>${message}</li></ul>`;
+}
+
+function renderUnderstandingRisk() {
+  const rows = state.allRows;
+  const avgEngagement = mean(values(rows, 'engagement_index')) || 0;
+  const atRiskActive = rows.filter((r) => (num(r.attrition_risk_score) || 0) >= 50 && num(r.actual_dropout_flag) === 0);
+
+  if (!atRiskActive.length) {
+    plot('chart-risk-themes', [], {
+      annotations: [{ text: 'No at-risk active students for the current data.', x: 0.5, y: 0.5, xref: 'paper', yref: 'paper', showarrow: false }],
+      xaxis: { visible: false },
+      yaxis: { visible: false }
+    });
+    const tbody = document.getElementById('risk-theme-table-body');
+    if (tbody) tbody.innerHTML = `<tr><td colspan="6">No at-risk active students found.</td></tr>`;
+    renderNoDataCard('campaign-aim', 'No campaign target identified for below-average engagement.');
+    return;
+  }
+
+  const activeThemeRows = atRiskActive.map((row) => ({
+    row,
+    theme: assignRiskTheme(row, avgEngagement)
+  }));
+
+  const fullThemeRows = rows.map((row) => ({
+    row,
+    theme: assignRiskTheme(row, avgEngagement)
+  }));
+
+  const themes = [...new Set(activeThemeRows.map((item) => item.theme))];
+  const summary = themes.map((theme) => {
+    const activeSubset = activeThemeRows.filter((item) => item.theme === theme).map((item) => item.row);
+    const benchmarkSubset = fullThemeRows.filter((item) => item.theme === theme).map((item) => item.row);
+    const benchmarkDropout = div0(
+      benchmarkSubset.filter((r) => num(r.actual_dropout_flag) === 1).length,
+      benchmarkSubset.length
+    );
+
+    return {
+      theme,
+      count: activeSubset.length,
+      pct: div0(activeSubset.length, atRiskActive.length),
+      avgRisk: mean(activeSubset.map((r) => num(r.attrition_risk_score)).filter((v) => v !== null)),
+      benchmarkDropout,
+      recommendation: themeRecommendation(theme)
+    };
+  }).sort((a, b) => b.count - a.count);
+
+  plot('chart-risk-themes', [
+    {
+      type: 'bar',
+      x: summary.map((item) => item.theme),
+      y: summary.map((item) => item.count),
+      marker: { color: '#7c3aed' },
+      text: summary.map((item) => `${fmt(item.count, 0)} (${pct(item.pct, 1)})`),
+      textposition: 'outside',
+      hovertemplate: '<b>%{x}</b><br>At-risk active students: %{y}<extra></extra>'
+    }
+  ], {
+    title: { text: 'At-Risk Active Students by Main Risk Theme', font: { size: 14, color: '#1f2937' } },
+    yaxis: { title: 'Students' },
+    xaxis: { tickangle: -15 }
+  });
+
+  const tbody = document.getElementById('risk-theme-table-body');
+  if (tbody) {
+    tbody.innerHTML = summary.map((item) => `
+      <tr>
+        <td>${item.theme}</td>
+        <td>${fmt(item.count, 0)}</td>
+        <td>${pct(item.pct, 1)}</td>
+        <td>${fmt(item.avgRisk, 1)}</td>
+        <td>${pct(item.benchmarkDropout, 1)}</td>
+        <td>${item.recommendation}</td>
+      </tr>
+    `).join('');
+  }
+
+  const belowAvgEngagement = rows.filter((r) => (num(r.engagement_index) || 0) < avgEngagement);
+  const belowAvgRisk50 = belowAvgEngagement.filter((r) => (num(r.attrition_risk_score) || 0) >= 50).length;
+  const campaignAim = document.getElementById('campaign-aim');
+  if (campaignAim) {
+    campaignAim.innerHTML = `<ul>
+      <li><strong>Objective:</strong> Move below-average engagement students into higher engagement bands and lower risk bands.</li>
+      <li><strong>Target cohort:</strong> ${fmt(belowAvgEngagement.length, 0)} students below average engagement, including ${fmt(belowAvgRisk50, 0)} with risk score 50+.</li>
+      <li><strong>Channel plan:</strong> advisor touchpoints, academic-support nudges, and billing support routing for high-friction payment profiles.</li>
+      <li><strong>Success metrics:</strong> +5 point engagement lift, 10% migration from 50+ risk into under-50 risk, and measurable retention improvement next term.</li>
+    </ul>`;
+  }
 }
 
 function renderRisk() {
@@ -565,6 +719,7 @@ async function init() {
     updateKPIs();
     renderSummary();
     renderRisk();
+    renderUnderstandingRisk();
     renderServices();
     renderBilling();
     renderDrilldown();

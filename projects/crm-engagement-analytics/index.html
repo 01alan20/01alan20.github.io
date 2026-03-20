@@ -42,6 +42,7 @@
     <nav class="tabs">
       <button class="tab-btn active" data-tab="summary">Executive Summary</button>
       <button class="tab-btn" data-tab="risk">Attrition Risk</button>
+      <button class="tab-btn" data-tab="understanding">Understanding Risk</button>
       <button class="tab-btn" data-tab="services">Service Usage</button>
       <button class="tab-btn" data-tab="billing">Billing & Commitment</button>
       <button class="tab-btn" data-tab="drilldown">Profile Drilldown</button>
@@ -63,7 +64,7 @@
       </div>
       <div class="chart-row">
         <div class="chart-container">
-          <div id="chart-lifecycle-engagement" class="chart"></div>
+          <div id="chart-risk-drivers" class="chart"></div>
         </div>
       </div>
       <div class="insights-grid">
@@ -97,7 +98,44 @@
       </div>
     </section>
 
-    <!-- Tab 3: Service Usage -->
+    <!-- Tab 3: Understanding Risk -->
+    <section class="tab-pane" data-tab="understanding">
+      <h2>Understanding Risk</h2>
+      <p class="section-description">Theme-based cohorts for at-risk active students, with benchmark risk context and intervention plays.</p>
+      <div class="chart-row">
+        <div class="chart-container">
+          <div id="chart-risk-themes" class="chart"></div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-container">
+          <h3 class="subhead">Theme Cohorts</h3>
+          <div class="table-wrap">
+            <table class="risk-table">
+              <thead>
+                <tr>
+                  <th>Theme</th>
+                  <th>At-Risk Active</th>
+                  <th>% of At-Risk Active</th>
+                  <th>Avg Risk Score</th>
+                  <th>Benchmark Dropout Rate</th>
+                  <th>Recommended Intervention</th>
+                </tr>
+              </thead>
+              <tbody id="risk-theme-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="insights-grid">
+        <article class="insight-card">
+          <h3>Campaign Aim</h3>
+          <div id="campaign-aim"></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Tab 4: Service Usage -->
     <section class="tab-pane" data-tab="services">
       <h2>Service Engagement Patterns</h2>
       <p class="section-description">How student engagement with support services correlates with retention and outcomes.</p>
@@ -116,7 +154,7 @@
       </div>
     </section>
 
-    <!-- Tab 4: Billing & Commitment -->
+    <!-- Tab 5: Billing & Commitment -->
     <section class="tab-pane" data-tab="billing">
       <h2>Billing and Commitment Patterns</h2>
       <p class="section-description">Relationship between payment plans, enrollment commitments, and student retention.</p>
@@ -135,7 +173,7 @@
       </div>
     </section>
 
-    <!-- Tab 5: Profile Drilldown -->
+    <!-- Tab 6: Profile Drilldown -->
     <section class="tab-pane" data-tab="drilldown">
       <h2>Student Risk Profile Segments</h2>
       <p class="section-description">Identify and drill into student segments by risk level and engagement characteristics.</p>

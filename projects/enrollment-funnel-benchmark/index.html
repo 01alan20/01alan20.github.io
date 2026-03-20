@@ -52,6 +52,29 @@
             </div>
         </section>
 
+        <section class="global-filter-section">
+            <div class="filter-card">
+                <h5 class="filter-title">Global Filters</h5>
+                <div class="row g-3">
+                    <div class="col-lg-4 col-md-6">
+                        <label class="form-label"><strong>Source Channel</strong></label>
+                        <select id="source-filter" class="form-select" multiple size="6" aria-label="Filter by source channel"></select>
+                        <small class="text-muted">Leave unselected to include all sources.</small>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <label class="form-label"><strong>Geography</strong></label>
+                        <select id="geography-filter" class="form-select" multiple size="6" aria-label="Filter by geography"></select>
+                        <small class="text-muted">Leave unselected to include all geographies.</small>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <label class="form-label"><strong>Major (Program)</strong></label>
+                        <select id="major-filter" class="form-select" multiple size="6" aria-label="Filter by major"></select>
+                        <small class="text-muted">Leave unselected to include all majors.</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Tab Navigation -->
         <ul class="nav nav-tabs custom-tabs" role="tablist">
             <li class="nav-item" role="presentation">
@@ -108,6 +131,14 @@
                         <div class="chart-container insight-container">
                             <h5>Possible Next Steps</h5>
                             <ul id="summary-next-steps" class="insight-list"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2 mb-4">
+                    <div class="col-lg-12">
+                        <div class="chart-container insight-container compact-insight">
+                            <h5>Recommended Actions</h5>
+                            <ul id="summary-recommended-actions" class="insight-list"></ul>
                         </div>
                     </div>
                 </div>
