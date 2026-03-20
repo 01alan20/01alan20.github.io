@@ -38,16 +38,16 @@ function setupEventListeners() {
     document.getElementById('scenario-reset-btn').addEventListener('click', resetScenario);
     
     // Global filter changes
-    document.getElementById('source-filter').addEventListener('change', applyGlobalFilters);
-    document.getElementById('geography-filter').addEventListener('change', applyGlobalFilters);
-    document.getElementById('major-filter').addEventListener('change', applyGlobalFilters);
+    document.getElementById('source-filter').addEventListener('change', handleCheckboxFilterChange);
+    document.getElementById('geography-filter').addEventListener('change', handleCheckboxFilterChange);
+    document.getElementById('major-filter').addEventListener('change', handleCheckboxFilterChange);
 
     // Segment drilldown filter changes (composes with global filters)
     document.getElementById('segment-filter').addEventListener('change', renderSegmentCharts);
     document.getElementById('program-filter').addEventListener('change', renderSegmentCharts);
 }
 
-// Populate filter dropdowns
+// Populate filters
 function populateFilters() {
     const studentTypes = [...new Set(rawData.map(d => d.student_type).filter(Boolean))];
     const programs = [...new Set(rawData.map(d => d.academic_program).filter(Boolean))];
@@ -57,9 +57,6 @@ function populateFilters() {
     
     const segmentFilter = document.getElementById('segment-filter');
     const programFilter = document.getElementById('program-filter');
-    const sourceFilter = document.getElementById('source-filter');
-    const geographyFilter = document.getElementById('geography-filter');
-    const majorFilter = document.getElementById('major-filter');
     
     studentTypes.forEach(type => {
         const option = document.createElement('option');
@@ -75,38 +72,69 @@ function populateFilters() {
         programFilter.appendChild(option);
     });
 
-    sources.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item;
-        option.textContent = item;
-        sourceFilter.appendChild(option);
-    });
-
-    geographies.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item;
-        option.textContent = item;
-        geographyFilter.appendChild(option);
-    });
-
-    majors.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item;
-        option.textContent = item;
-        majorFilter.appendChild(option);
-    });
+    populateCheckboxGroup('source-filter', 'source', sources);
+    populateCheckboxGroup('geography-filter', 'geography', geographies);
+    populateCheckboxGroup('major-filter', 'major', majors);
 }
 
-function selectedMultiValues(id) {
-    const element = document.getElementById(id);
-    if (!element) return [];
-    return Array.from(element.selectedOptions || []).map(opt => opt.value).filter(Boolean);
+function populateCheckboxGroup(containerId, groupName, values) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const allId = `${groupName}-all`;
+    container.innerHTML = `
+        <label class="filter-check">
+            <input type="checkbox" data-group="${groupName}" data-role="all" id="${allId}" checked>
+            <span>All</span>
+        </label>
+        ${values.map((value, index) => `
+            <label class="filter-check">
+                <input type="checkbox" data-group="${groupName}" data-role="item" value="${value}" id="${groupName}-item-${index}">
+                <span>${value}</span>
+            </label>
+        `).join('')}
+    `;
+}
+
+function selectedCheckboxValues(groupName) {
+    return Array.from(document.querySelectorAll(`input[data-group="${groupName}"][data-role="item"]:checked`))
+        .map(input => input.value);
+}
+
+function handleCheckboxFilterChange(event) {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement) || target.type !== 'checkbox') return;
+    const group = target.dataset.group;
+    const role = target.dataset.role;
+    if (!group || !role) return;
+
+    const allCheckbox = document.querySelector(`input[data-group="${group}"][data-role="all"]`);
+    const itemCheckboxes = Array.from(document.querySelectorAll(`input[data-group="${group}"][data-role="item"]`));
+
+    if (role === 'all' && target.checked) {
+        itemCheckboxes.forEach(input => {
+            input.checked = false;
+        });
+    }
+
+    if (role === 'item' && target.checked && allCheckbox) {
+        allCheckbox.checked = false;
+    }
+
+    if (role === 'item' && allCheckbox && !itemCheckboxes.some(input => input.checked)) {
+        allCheckbox.checked = true;
+    }
+
+    if (role === 'all' && !target.checked && !itemCheckboxes.some(input => input.checked)) {
+        target.checked = true;
+    }
+
+    applyGlobalFilters();
 }
 
 function applyGlobalFilters() {
-    const selectedSources = selectedMultiValues('source-filter');
-    const selectedGeographies = selectedMultiValues('geography-filter');
-    const selectedMajors = selectedMultiValues('major-filter');
+    const selectedSources = selectedCheckboxValues('source');
+    const selectedGeographies = selectedCheckboxValues('geography');
+    const selectedMajors = selectedCheckboxValues('major');
 
     filteredData = rawData.filter(row => {
         if (selectedSources.length && !selectedSources.includes(row.source_channel)) return false;
@@ -231,10 +259,6 @@ function renderExecutiveInsights() {
     if (totalInquiries === 0) {
         insightsContainer.innerHTML = '<li>No data available for the current filter combination.</li>';
         nextStepsContainer.innerHTML = '<li>Clear one or more filters to restore actionable guidance.</li>';
-        const actionsContainer = document.getElementById('summary-recommended-actions');
-        if (actionsContainer) {
-            actionsContainer.innerHTML = '<li>Expand Source, Geography, or Major filters to get actionable recommendations.</li>';
-        }
         return;
     }
 
@@ -301,24 +325,12 @@ function renderExecutiveInsights() {
             ? `Prioritize reach and conversion investment in ${priorityStats.map(item => `${item.channel} (${formatPct(item.rate)})`).join(', ')}.`
             : 'Re-balance source mix based on conversion and volume once channel-level sample sizes are sufficient.',
         `Set cycle targets using the current stage baselines: Inq->App ${formatPct(inquiryToApp)}, App->Offer ${formatPct(appToOffer)}, Offer->Enroll ${formatPct(offerToEnroll)}.`,
-        'Run a why-school campaign with current juniors/seniors in good standing, then feed top themes into counselor, referral, and campus-visit marketing creative.'
+        'Channel growth plan: increase qualified inquiry volume from School Counselor, Referral, Campus Visit by 10-15%.',
+        'Message test plan: interview juniors/seniors on decision drivers, convert top reasons into campaign messaging tests, and track conversion lift by source.'
     ];
 
     insightsContainer.innerHTML = insights.map(text => `<li>${text}</li>`).join('');
     nextStepsContainer.innerHTML = nextSteps.map(text => `<li>${text}</li>`).join('');
-
-    const actionsContainer = document.getElementById('summary-recommended-actions');
-    if (actionsContainer) {
-        const actions = [
-            `Leak focus: recover at least 5% of lost volume in Inquiry -> Application (${appLoss.toLocaleString()} currently lost).`,
-            `Yield focus: improve Offer -> Enrollment from ${formatPct(offerToEnroll)} to ${(Math.min(offerToEnroll + 0.03, 1) * 100).toFixed(1)}% in the next cycle.`,
-            priorityStats.length
-                ? `Channel growth plan: increase qualified inquiry volume from ${priorityStats.map(item => item.channel).join(', ')} by 10-15%.`
-                : 'Channel growth plan: prioritize top-converting sources once sufficient volume is available.',
-            'Message test plan: interview juniors/seniors on decision drivers, convert top reasons into campaign messaging tests, and track conversion lift by source.'
-        ];
-        actionsContainer.innerHTML = actions.map(text => `<li>${text}</li>`).join('');
-    }
 }
 
 // Waterfall Chart

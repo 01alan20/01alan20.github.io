@@ -58,18 +58,18 @@
                 <div class="row g-3">
                     <div class="col-lg-4 col-md-6">
                         <label class="form-label"><strong>Source Channel</strong></label>
-                        <select id="source-filter" class="form-select" multiple size="6" aria-label="Filter by source channel"></select>
-                        <small class="text-muted">Leave unselected to include all sources.</small>
+                        <div id="source-filter" class="checkbox-filter-group" aria-label="Filter by source channel"></div>
+                        <small class="text-muted">Default is All.</small>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <label class="form-label"><strong>Geography</strong></label>
-                        <select id="geography-filter" class="form-select" multiple size="6" aria-label="Filter by geography"></select>
-                        <small class="text-muted">Leave unselected to include all geographies.</small>
+                        <div id="geography-filter" class="checkbox-filter-group" aria-label="Filter by geography"></div>
+                        <small class="text-muted">Default is All.</small>
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <label class="form-label"><strong>Major (Program)</strong></label>
-                        <select id="major-filter" class="form-select" multiple size="6" aria-label="Filter by major"></select>
-                        <small class="text-muted">Leave unselected to include all majors.</small>
+                        <div id="major-filter" class="checkbox-filter-group" aria-label="Filter by major"></div>
+                        <small class="text-muted">Default is All.</small>
                     </div>
                 </div>
             </div>
@@ -131,14 +131,6 @@
                         <div class="chart-container insight-container">
                             <h5>Possible Next Steps</h5>
                             <ul id="summary-next-steps" class="insight-list"></ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-2 mb-4">
-                    <div class="col-lg-12">
-                        <div class="chart-container insight-container compact-insight">
-                            <h5>Recommended Actions</h5>
-                            <ul id="summary-recommended-actions" class="insight-list"></ul>
                         </div>
                     </div>
                 </div>

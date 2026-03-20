@@ -132,7 +132,7 @@ function renderRiskDrivers(rows) {
     const rate = div0(subset.filter((r) => num(r.actual_dropout_flag) === 1).length, subset.length);
     const delta = (rate - overallDropoutRate) * 100;
     drivers.push({
-      label: `${groupName}: ${label} (n=${fmt(subset.length, 0)})`,
+      label: `${groupName}: ${label}`,
       delta
     });
   };
@@ -172,8 +172,8 @@ function renderRiskDrivers(rows) {
       hovertemplate: '<b>%{y}</b><br>Dropout delta vs overall: %{x:.1f} pp<extra></extra>'
     }
   ], {
-    title: { text: 'Risk Driver Impact (Dropout Rate Delta vs Overall)', font: { size: 14, color: '#1f2937' } },
-    xaxis: { title: 'Delta vs Overall Dropout Rate (percentage points)', zeroline: true, zerolinewidth: 2, zerolinecolor: '#9ca3af' },
+    title: { text: 'Risk Driver Impact', font: { size: 14, color: '#1f2937' } },
+    xaxis: { title: 'Impact on Dropout Rate', zeroline: true, zerolinewidth: 2, zerolinecolor: '#9ca3af' },
     yaxis: { automargin: true }
   });
 }
