@@ -20,12 +20,19 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "projects" / "crm-engagement-analytics" / "data"
+STANDALONE_DATA_DIR = ROOT / "projects" / "day1-first-year-dropout-risk" / "data"
 INPUT_CSV = DATA_DIR / "student_crm_engagement_translated.csv"
 
 OUTPUT_PREDICTIONS = DATA_DIR / "day1_risk_predictions.csv"
 OUTPUT_SUMMARY = DATA_DIR / "day1_risk_model_summary.json"
 OUTPUT_MODEL = DATA_DIR / "day1_risk_model.pkl"
 OUTPUT_FEATURES = DATA_DIR / "day1_risk_feature_set.csv"
+OUTPUT_SCORECARD = DATA_DIR / "day1_risk_scorecard.json"
+STANDALONE_PREDICTIONS = STANDALONE_DATA_DIR / "day1_risk_predictions.csv"
+STANDALONE_MODEL = STANDALONE_DATA_DIR / "day1_risk_model.pkl"
+STANDALONE_FEATURES = STANDALONE_DATA_DIR / "day1_risk_feature_set.csv"
+STANDALONE_SCORECARD = STANDALONE_DATA_DIR / "day1_risk_scorecard.json"
+STANDALONE_SUMMARY = STANDALONE_DATA_DIR / "day1_risk_model_summary.json"
 
 RISK_CUTOFFS = {
     "safe_max_exclusive": 40,
@@ -158,6 +165,69 @@ def choose_model(evals: List[ModelEval]) -> ModelEval:
     )[0]
 
 
+def export_logistic_scorecard(x: pd.DataFrame, y: pd.Series) -> Dict[str, object]:
+    preprocessor, categorical_cols, numeric_cols = build_preprocessor(x)
+    logistic = Pipeline(
+        steps=[
+            ("prep", preprocessor),
+            (
+                "model",
+                LogisticRegression(
+                    max_iter=3000,
+                    class_weight="balanced",
+                    solver="lbfgs",
+                ),
+            ),
+        ]
+    )
+    logistic.fit(x, y)
+
+    fitted_pre = logistic.named_steps["prep"]
+    fitted_model = logistic.named_steps["model"]
+    cat_encoder = fitted_pre.named_transformers_["cat"].named_steps["onehot"]
+    scaler = fitted_pre.named_transformers_["num"].named_steps["scale"]
+
+    categorical = {}
+    coef_index = 0
+    for feature_name, categories in zip(categorical_cols, cat_encoder.categories_):
+        weights = []
+        for category in categories:
+            weights.append(
+                {
+                    "category": str(category),
+                    "weight": float(fitted_model.coef_[0][coef_index]),
+                }
+            )
+            coef_index += 1
+        categorical[feature_name] = weights
+
+    numeric = []
+    for feature_name, mean_value, scale_value in zip(numeric_cols, scaler.mean_, scaler.scale_):
+        numeric.append(
+            {
+                "feature": feature_name,
+                "mean": float(mean_value),
+                "scale": float(scale_value) if float(scale_value) != 0 else 1.0,
+                "weight": float(fitted_model.coef_[0][coef_index]),
+            }
+        )
+        coef_index += 1
+
+    scorecard = {
+        "model_name": "logistic_regression",
+        "intercept": float(fitted_model.intercept_[0]),
+        "numeric_features": numeric,
+        "categorical_features": categorical,
+        "cutoffs": {
+            "safe_max_exclusive": RISK_CUTOFFS["safe_max_exclusive"],
+            "moderate_max_exclusive": RISK_CUTOFFS["moderate_max_exclusive"],
+        },
+        "target_description": "First-year dropout proxy based on historical dropout flag",
+        "feature_set": DAY1_FEATURES,
+    }
+    return scorecard
+
+
 def build_reason_codes(row: pd.Series, high_bill_threshold: float) -> list[str]:
     reasons: List[str] = []
     if row.get("enrollment_commitment_type") == "Open enrollment":
@@ -236,6 +306,8 @@ def main() -> None:
     # Refit best model on the full Day-1 dataset for deployment scoring.
     best_model.fit(x, y)
     joblib.dump(best_model, OUTPUT_MODEL, compress=3)
+    STANDALONE_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    joblib.dump(best_model, STANDALONE_MODEL, compress=3)
 
     probs_all = best_model.predict_proba(x)[:, 1]
     scores_all = probs_all * 100.0
@@ -264,9 +336,15 @@ def main() -> None:
         "reason_code_3",
     ]
     scored[output_cols].to_csv(OUTPUT_PREDICTIONS, index=False)
+    scored[output_cols].to_csv(STANDALONE_PREDICTIONS, index=False)
 
     feature_export = df[[ID_COLUMN] + DAY1_FEATURES + [TARGET_COLUMN]].copy()
     feature_export.to_csv(OUTPUT_FEATURES, index=False)
+    feature_export.to_csv(STANDALONE_FEATURES, index=False)
+
+    scorecard = export_logistic_scorecard(x, y)
+    OUTPUT_SCORECARD.write_text(json.dumps(scorecard, indent=2), encoding="utf-8")
+    STANDALONE_SCORECARD.write_text(json.dumps(scorecard, indent=2), encoding="utf-8")
 
     tier_counts = (
         scored["risk_tier_day1"]
@@ -296,10 +374,20 @@ def main() -> None:
             "model": str(OUTPUT_MODEL.relative_to(ROOT)),
             "summary": str(OUTPUT_SUMMARY.relative_to(ROOT)),
             "feature_set": str(OUTPUT_FEATURES.relative_to(ROOT)),
+            "scorecard": str(OUTPUT_SCORECARD.relative_to(ROOT)),
         },
     }
 
     OUTPUT_SUMMARY.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    standalone_summary = dict(summary)
+    standalone_summary["output_files"] = {
+        "predictions": str(STANDALONE_PREDICTIONS.relative_to(ROOT)),
+        "model": str(STANDALONE_MODEL.relative_to(ROOT)),
+        "summary": str(STANDALONE_SUMMARY.relative_to(ROOT)),
+        "feature_set": str(STANDALONE_FEATURES.relative_to(ROOT)),
+        "scorecard": str(STANDALONE_SCORECARD.relative_to(ROOT)),
+    }
+    STANDALONE_SUMMARY.write_text(json.dumps(standalone_summary, indent=2), encoding="utf-8")
     print(f"Built Day-1 risk predictor. Selected model: {winner.name}")
     print(f"Wrote: {OUTPUT_PREDICTIONS.name}, {OUTPUT_MODEL.name}, {OUTPUT_SUMMARY.name}, {OUTPUT_FEATURES.name}")
 

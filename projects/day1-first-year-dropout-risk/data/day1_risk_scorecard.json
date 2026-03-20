@@ -1,0 +1,124 @@
+{
+  "model_name": "logistic_regression",
+  "intercept": -0.5202178695699016,
+  "numeric_features": [
+    {
+      "feature": "adult_learner_flag",
+      "mean": 0.1621468124378816,
+      "scale": 0.36858543603093713,
+      "weight": 0.060196952048576294
+    },
+    {
+      "feature": "family_support_flag",
+      "mean": 0.4830327985233565,
+      "scale": 0.49971203114799134,
+      "weight": -0.12588895441392842
+    },
+    {
+      "feature": "dependents_flag",
+      "mean": 0.2995882436461735,
+      "scale": 0.4580776439809899,
+      "weight": -0.06480904680883039
+    },
+    {
+      "feature": "mobile_contactable_flag",
+      "mean": 0.9031662643759761,
+      "scale": 0.29573123485543507,
+      "weight": -0.06868982751216986
+    },
+    {
+      "feature": "multi_channel_contact_flag",
+      "mean": 0.42183728524776376,
+      "scale": 0.49385280197905185,
+      "weight": 0.012169610867438478
+    },
+    {
+      "feature": "digital_self_service_flag",
+      "mean": 0.5922192247621753,
+      "scale": 0.4914220330675696,
+      "weight": 0.16089528578044743
+    },
+    {
+      "feature": "monthly_student_bill",
+      "mean": 64.76169246059918,
+      "scale": 30.087910854936975,
+      "weight": -0.20579093059610262
+    }
+  ],
+  "categorical_features": {
+    "gender": [
+      {
+        "category": "Female",
+        "weight": -0.23564301767938434
+      },
+      {
+        "category": "Male",
+        "weight": -0.2562562263497999
+      }
+    ],
+    "digital_access_type": [
+      {
+        "category": "High bandwidth",
+        "weight": 0.8623434600443755
+      },
+      {
+        "category": "Limited access",
+        "weight": -1.0891459919432576
+      },
+      {
+        "category": "Standard bandwidth",
+        "weight": -0.2650967121302976
+      }
+    ],
+    "enrollment_commitment_type": [
+      {
+        "category": "Annual commitment",
+        "weight": -0.23590412260541527
+      },
+      {
+        "category": "Multi-year commitment",
+        "weight": -1.3753161252911603
+      },
+      {
+        "category": "Open enrollment",
+        "weight": 1.119321003867397
+      }
+    ],
+    "payment_plan_type": [
+      {
+        "category": "Bank transfer (automatic)",
+        "weight": -0.30171614864849206
+      },
+      {
+        "category": "Credit card (automatic)",
+        "weight": -0.3779689069494511
+      },
+      {
+        "category": "Electronic check",
+        "weight": 0.25673835683863977
+      },
+      {
+        "category": "Mailed check",
+        "weight": -0.06895254526987774
+      }
+    ]
+  },
+  "cutoffs": {
+    "safe_max_exclusive": 40,
+    "moderate_max_exclusive": 70
+  },
+  "target_description": "First-year dropout proxy based on historical dropout flag",
+  "feature_set": [
+    "gender",
+    "adult_learner_flag",
+    "family_support_flag",
+    "dependents_flag",
+    "mobile_contactable_flag",
+    "multi_channel_contact_flag",
+    "digital_access_type",
+    "enrollment_commitment_type",
+    "digital_self_service_flag",
+    "payment_plan_type",
+    "monthly_student_bill"
+  ]
+}

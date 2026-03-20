@@ -66,6 +66,7 @@
     "predictions": "projects\\crm-engagement-analytics\\data\\day1_risk_predictions.csv",
     "model": "projects\\crm-engagement-analytics\\data\\day1_risk_model.pkl",
     "summary": "projects\\crm-engagement-analytics\\data\\day1_risk_model_summary.json",
-    "feature_set": "projects\\crm-engagement-analytics\\data\\day1_risk_feature_set.csv"
+    "feature_set": "projects\\crm-engagement-analytics\\data\\day1_risk_feature_set.csv",
+    "scorecard": "projects\\crm-engagement-analytics\\data\\day1_risk_scorecard.json"
   }
 }

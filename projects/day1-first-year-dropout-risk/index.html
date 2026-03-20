@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day-1 First-Year Dropout Risk Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Precision-First Risk Scoring</span>
+        <h1>Day-1 First-Year Dropout Risk Predictor</h1>
+        <p class="hero-sub">
+          Score a student on Day 1 using only enrollment-time information. The model returns a 0-100 risk score, three tiers, and prescriptive next steps for online nudges or in-person outreach.
+        </p>
+        <div class="tier-pills">
+          <span class="tier-pill safe">Safe &lt; 40</span>
+          <span class="tier-pill moderate">Moderate Risk 40-69</span>
+          <span class="tier-pill high">High Risk 70+</span>
+        </div>
+      </div>
+      <aside class="hero-note">
+        <span class="note-label">Built From Day-1 Features</span>
+        <p>This scorecard uses enrollment-time fields only. It excludes post-start engagement, billing, and service behavior.</p>
+        <p class="muted">The browser scorer is generated from the fitted Day-1 logistic scorecard and is designed for prescriptive use: enter a profile, get a score, and see the intervention path.</p>
+      </aside>
+    </div>
+  </header>
+
+  <main class="wrap page-shell">
+    <section class="summary-grid" aria-label="Model summary">
+      <article class="summary-card">
+        <span class="summary-label">Test AUC</span>
+        <strong id="metric-auc" class="summary-value">-</strong>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label">High-Risk Precision</span>
+        <strong id="metric-precision" class="summary-value">-</strong>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label">Target Dropout Rate</span>
+        <strong id="metric-base-rate" class="summary-value">-</strong>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label">High-Risk Share</span>
+        <strong id="metric-high-share" class="summary-value">-</strong>
+      </article>
+    </section>
+
+    <section class="panel-grid">
+      <article class="panel panel-form">
+        <div class="panel-top">
+          <div>
+            <span class="section-kicker">Input Form</span>
+            <h2>Score a Student</h2>
+            <p class="panel-sub">Enter the information available on Day 1. The score updates instantly.</p>
+          </div>
+          <button id="load-example" class="ghost-btn" type="button">Load Example</button>
+        </div>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>Gender</span>
+            <select id="gender">
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Digital Access</span>
+            <select id="digital_access_type">
+              <option>High bandwidth</option>
+              <option>Standard bandwidth</option>
+              <option>Limited access</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Commitment Type</span>
+            <select id="enrollment_commitment_type">
+              <option>Open enrollment</option>
+              <option>Annual commitment</option>
+              <option>Multi-year commitment</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Payment Plan</span>
+            <select id="payment_plan_type">
+              <option>Electronic check</option>
+              <option>Mailed check</option>
+              <option>Bank transfer (automatic)</option>
+              <option>Credit card (automatic)</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Monthly Student Bill</span>
+            <input id="monthly_student_bill" type="number" min="0" step="0.01" value="55">
+          </label>
+        </div>
+
+        <div class="toggle-grid">
+          <label class="toggle"><input id="adult_learner_flag" type="checkbox"><span>Adult learner</span></label>
+          <label class="toggle"><input id="family_support_flag" type="checkbox"><span>Family support</span></label>
+          <label class="toggle"><input id="dependents_flag" type="checkbox"><span>Dependents</span></label>
+          <label class="toggle"><input id="mobile_contactable_flag" type="checkbox" checked><span>Mobile contactable</span></label>
+          <label class="toggle"><input id="multi_channel_contact_flag" type="checkbox"><span>Multi-channel contact</span></label>
+          <label class="toggle"><input id="digital_self_service_flag" type="checkbox" checked><span>Digital self-service</span></label>
+        </div>
+      </article>
+
+      <article class="panel panel-result">
+        <div class="panel-top">
+          <div>
+            <span class="section-kicker">Score</span>
+            <h2>Day-1 Risk</h2>
+            <p class="panel-sub">Higher score means higher first-year dropout risk.</p>
+          </div>
+        </div>
+
+        <div class="score-ring">
+          <div class="score-value" id="risk-score">0.0</div>
+          <div class="score-tier" id="risk-tier">safe</div>
+        </div>
+        <div class="score-meta">
+          <span id="risk-probability">0.0% predicted dropout probability</span>
+        </div>
+
+        <div class="gauge">
+          <div class="gauge-fill" id="gauge-fill"></div>
+        </div>
+        <div class="gauge-labels">
+          <span>0</span>
+          <span>40</span>
+          <span>70</span>
+          <span>100</span>
+        </div>
+
+        <div class="prescriptive-card">
+          <h3>Recommended Action</h3>
+          <p id="action-text">Load or adjust inputs to generate a recommended action.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="insights-grid">
+      <article class="insight-card">
+        <h3>Top Risk Drivers</h3>
+        <ol id="risk-drivers" class="insight-list"></ol>
+      </article>
+      <article class="insight-card">
+        <h3>Protective Factors</h3>
+        <ol id="protective-factors" class="insight-list"></ol>
+      </article>
+      <article class="insight-card">
+        <h3>How To Use It</h3>
+        <ul class="insight-list">
+          <li>Use `high risk` for direct outreach and in-person intervention.</li>
+          <li>Use `moderate risk` for online nudges and advisor monitoring.</li>
+          <li>Use `safe` for light-touch follow-up and automated reminders.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <script src="dashboard.js" defer></script>
+</body>
+</html>
