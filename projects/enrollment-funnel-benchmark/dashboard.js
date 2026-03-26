@@ -729,40 +729,57 @@ function renderSegmentTypeChart() {
     Plotly.newPlot('segment-type-chart', [trace1, trace2, trace3], layout, { responsive: true });
 }
 
-// Academic Index Impact Chart
-function renderAcademicIndexChart() {
+function academicIndexToGpa(academicIndex) {
+    if (isNaN(academicIndex)) return NaN;
+    return Math.min(4.0, Math.max(0.0, academicIndex / 25));
+}
+
+function formatGpaBand(start) {
+    return `${start.toFixed(1)}-${(start + 0.5).toFixed(1)}`;
+}
+
+// GPA Band Chart
+function renderGpaChart() {
     const segmentRows = getSegmentFilteredData();
     if (!segmentRows.length) {
-        renderNoDataChart('academic-index-chart', 'No academic-index data for current filters.');
+        renderNoDataChart('gpa-chart', 'No GPA data for current filters.');
         return;
     }
 
+    // The synthetic dataset stores academic strength on a 0-100 scale, so normalize it
+    // to a 0.0-4.0 GPA display scale for this chart.
     const trainingData = segmentRows.map(d => ({
-        index: parseFloat(d.academic_index),
+        gpa: academicIndexToGpa(parseFloat(d.academic_index)),
         enrolled: d.enrollment_flag === '1' ? 1 : 0
-    })).filter(d => !isNaN(d.index));
+    })).filter(d => !isNaN(d.gpa));
     if (!trainingData.length) {
-        renderNoDataChart('academic-index-chart', 'No academic-index data for current filters.');
+        renderNoDataChart('gpa-chart', 'No GPA data for current filters.');
         return;
     }
     
-    // Bin data
-    const bins = {};
+    const bandStarts = Array.from({ length: 8 }, (_, index) => index * 0.5);
+    const bins = Object.fromEntries(
+        bandStarts.map(start => [start.toFixed(1), { total: 0, enrolled: 0 }])
+    );
+
     trainingData.forEach(d => {
-        const bin = Math.floor(d.index / 10) * 10;
-        if (!bins[bin]) bins[bin] = { total: 0, enrolled: 0 };
-        bins[bin].total++;
-        bins[bin].enrolled += d.enrolled;
+        const clampedGpa = Math.min(4.0, Math.max(0.0, d.gpa));
+        const bandStart = clampedGpa >= 4.0 ? 3.5 : Math.floor(clampedGpa / 0.5) * 0.5;
+        const bandKey = bandStart.toFixed(1);
+        bins[bandKey].total++;
+        bins[bandKey].enrolled += d.enrolled;
     });
     
-    const binLabels = Object.keys(bins).sort((a, b) => a - b);
-    const enrollmentRates = binLabels.map(bin => {
-        const rate = (bins[bin].enrolled / bins[bin].total) * 100;
+    const bandLabels = bandStarts.map(formatGpaBand);
+    const enrollmentRates = bandStarts.map(start => {
+        const band = bins[start.toFixed(1)];
+        if (!band.total) return null;
+        const rate = (band.enrolled / band.total) * 100;
         return parseFloat(rate.toFixed(1));
     });
     
     const trace = {
-        x: binLabels.map(bin => bin + '-' + (parseInt(bin) + 10)),
+        x: bandLabels,
         y: enrollmentRates,
         type: 'scatter',
         mode: 'lines+markers',
@@ -771,12 +788,13 @@ function renderAcademicIndexChart() {
         marker: { size: 8 },
         fill: 'tozeroy',
         fillcolor: 'rgba(231, 76, 60, 0.2)',
-        hovertemplate: '<b>Academic Index: %{x}</b><br>Enrollment Rate: %{y:.1f}%<extra></extra>'
+        connectgaps: false,
+        hovertemplate: '<b>GPA Band: %{x}</b><br>Enrollment Rate: %{y:.1f}%<extra></extra>'
     };
     
     const layout = {
         font: { family: 'Segoe UI, sans-serif', size: 12 },
-        xaxis: { title: 'Academic Index Band' },
+        xaxis: { title: 'GPA Band' },
         yaxis: { title: 'Enrollment Rate (%)', gridcolor: '#ecf0f1' },
         margin: { l: 70, r: 50, t: 30, b: 70 },
         plot_bgcolor: 'rgba(0,0,0,0)',
@@ -784,7 +802,7 @@ function renderAcademicIndexChart() {
         hovermode: 'closest'
     };
     
-    Plotly.newPlot('academic-index-chart', [trace], layout, { responsive: true });
+    Plotly.newPlot('gpa-chart', [trace], layout, { responsive: true });
 }
 
 // Program Comparison Chart
@@ -830,7 +848,7 @@ function renderProgramChart() {
 
 function renderSegmentCharts() {
     renderSegmentTypeChart();
-    renderAcademicIndexChart();
+    renderGpaChart();
     renderProgramChart();
 }
 
