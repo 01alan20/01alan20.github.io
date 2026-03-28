@@ -1,0 +1,111 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Alan Cromlish" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - list [ref=e5]:
+        - listitem [ref=e6]:
+          - link "About" [ref=e7] [cursor=pointer]:
+            - /url: /about
+        - listitem [ref=e8]:
+          - link "Projects" [ref=e9] [cursor=pointer]:
+            - /url: /projects
+        - listitem [ref=e10]:
+          - link "Writings" [ref=e11] [cursor=pointer]:
+            - /url: /writings
+        - listitem [ref=e12]:
+          - link "Contact" [ref=e13] [cursor=pointer]:
+            - /url: /contact
+  - main [ref=e14]:
+    - generic [ref=e16]:
+      - heading "Projects" [level=1] [ref=e17]
+      - paragraph [ref=e18]: A few highlights. Many posts link out to live dashboards and code.
+      - generic [ref=e19]:
+        - 'link "See Through Admissions Admissions-intelligence platform for applicants. How it works: choose a target program, enter profile signals, and compare those inputs to historical admit/deny patterns to see likely ranges and decision-support insights. Admissions Analytics Data Product Decision Support" [ref=e20] [cursor=pointer]':
+          - /url: https://seethroughadmissions.me
+          - heading "See Through Admissions" [level=3] [ref=e21]
+          - paragraph [ref=e22]: "Admissions-intelligence platform for applicants. How it works: choose a target program, enter profile signals, and compare those inputs to historical admit/deny patterns to see likely ranges and decision-support insights."
+          - generic [ref=e23]:
+            - generic [ref=e24]: Admissions Analytics
+            - generic [ref=e25]: Data Product
+            - generic [ref=e26]: Decision Support
+        - link "Enrollment Funnel Benchmark Dashboard Board-ready interactive dashboard for analyzing the inquiry-to-enrollment pipeline. Tracks conversion rates across funnel stages with synthetic data calibrated to industry benchmarks. Includes segment analysis, source effectiveness, and what-if scenario modeling for enrollment strategy. Enrollment Analytics Plotly JavaScript Scenario Modeling" [ref=e27] [cursor=pointer]:
+          - /url: projects/enrollment-funnel-benchmark/
+          - heading "Enrollment Funnel Benchmark Dashboard" [level=3] [ref=e28]
+          - paragraph [ref=e29]: Board-ready interactive dashboard for analyzing the inquiry-to-enrollment pipeline. Tracks conversion rates across funnel stages with synthetic data calibrated to industry benchmarks. Includes segment analysis, source effectiveness, and what-if scenario modeling for enrollment strategy.
+          - generic [ref=e30]:
+            - generic [ref=e31]: Enrollment Analytics
+            - generic [ref=e32]: Plotly
+            - generic [ref=e33]: JavaScript
+            - generic [ref=e34]: Scenario Modeling
+        - link "Student Retention & Early Alert Dashboard Real-time at-risk student identification dashboard using Open University learning analytics data. Identifies withdrawal predictors, segments at-risk populations by demographics, and provides actionable intervention opportunities. Includes engagement tracking, course-level analysis, and evidence-based recommendations for student support. Retention Analytics Risk Prediction OULAD Data Intervention Planning" [ref=e35] [cursor=pointer]:
+          - /url: projects/retention-early-alert/
+          - heading "Student Retention & Early Alert Dashboard" [level=3] [ref=e36]
+          - paragraph [ref=e37]: Real-time at-risk student identification dashboard using Open University learning analytics data. Identifies withdrawal predictors, segments at-risk populations by demographics, and provides actionable intervention opportunities. Includes engagement tracking, course-level analysis, and evidence-based recommendations for student support.
+          - generic [ref=e38]:
+            - generic [ref=e39]: Retention Analytics
+            - generic [ref=e40]: Risk Prediction
+            - generic [ref=e41]: OULAD Data
+            - generic [ref=e42]: Intervention Planning
+        - link "Education to Career Success Dashboard Student-guidance dashboard with staged insights on job offers, salary, satisfaction, and readiness pathways. Plotly JavaScript CSV" [ref=e43] [cursor=pointer]:
+          - /url: projects/education_career_success/dashboard-local.html
+          - heading "Education to Career Success Dashboard" [level=3] [ref=e44]
+          - paragraph [ref=e45]: Student-guidance dashboard with staged insights on job offers, salary, satisfaction, and readiness pathways.
+          - generic [ref=e46]:
+            - generic [ref=e47]: Plotly
+            - generic [ref=e48]: JavaScript
+            - generic [ref=e49]: CSV
+        - link "Student CRM & Engagement Analytics Interactive analytics dashboard analyzing service adoption, commitment patterns, and communication channels as predictors of student persistence. Reveals that engagement drives retention—students using 4+ services show <5% dropout rates vs. 40%+ for minimal engagement. Retention Analytics Predictive Modeling CRM Analytics Plotly" [ref=e50] [cursor=pointer]:
+          - /url: projects/crm-engagement-analytics/
+          - heading "Student CRM & Engagement Analytics" [level=3] [ref=e51]
+          - paragraph [ref=e52]: Interactive analytics dashboard analyzing service adoption, commitment patterns, and communication channels as predictors of student persistence. Reveals that engagement drives retention—students using 4+ services show <5% dropout rates vs. 40%+ for minimal engagement.
+          - generic [ref=e53]:
+            - generic [ref=e54]: Retention Analytics
+            - generic [ref=e55]: Predictive Modeling
+            - generic [ref=e56]: CRM Analytics
+            - generic [ref=e57]: Plotly
+        - link "Day-1 First-Year Dropout Risk Predictor Standalone Day-1 risk scorer for first-year dropout, using enrollment-time features only. Enter a student profile, get a risk score and tier, and see prescriptive intervention guidance for online nudges or in-person outreach. Early Risk Scoring First-Year Retention Tiered Intervention Python" [ref=e58] [cursor=pointer]:
+          - /url: projects/day1-first-year-dropout-risk/
+          - heading "Day-1 First-Year Dropout Risk Predictor" [level=3] [ref=e59]
+          - paragraph [ref=e60]: Standalone Day-1 risk scorer for first-year dropout, using enrollment-time features only. Enter a student profile, get a risk score and tier, and see prescriptive intervention guidance for online nudges or in-person outreach.
+          - generic [ref=e61]:
+            - generic [ref=e62]: Early Risk Scoring
+            - generic [ref=e63]: First-Year Retention
+            - generic [ref=e64]: Tiered Intervention
+            - generic [ref=e65]: Python
+        - link "Degree ROI & Value Model Institutional cost-to-earnings analysis dashboard comparing financial value across U.S. higher education institutions. ROI Value Score composite metric synthesizing earnings potential, completion rates, and debt burden. Region and institution-type filtering with detailed benchmarking across public, private, and for-profit universities. College Scorecard ROI Analysis Cost & Earnings Higher Ed" [ref=e66] [cursor=pointer]:
+          - /url: projects/degree-roi-value/
+          - heading "Degree ROI & Value Model" [level=3] [ref=e67]
+          - paragraph [ref=e68]: Institutional cost-to-earnings analysis dashboard comparing financial value across U.S. higher education institutions. ROI Value Score composite metric synthesizing earnings potential, completion rates, and debt burden. Region and institution-type filtering with detailed benchmarking across public, private, and for-profit universities.
+          - generic [ref=e69]:
+            - generic [ref=e70]: College Scorecard
+            - generic [ref=e71]: ROI Analysis
+            - generic [ref=e72]: Cost & Earnings
+            - generic [ref=e73]: Higher Ed
+        - link "Singapore Condo Payback Explorer Interactive property analytics dashboard for screening condo projects by recent buy price, rent, district, area bucket, tenure, and rental payback period. Includes comparison views, trend analysis, and ranked search results for identifying projects that recover purchase price faster through rent. Real Estate Analytics Payback Analysis Singapore Market JavaScript" [ref=e74] [cursor=pointer]:
+          - /url: projects/condo-roi/
+          - heading "Singapore Condo Payback Explorer" [level=3] [ref=e75]
+          - paragraph [ref=e76]: Interactive property analytics dashboard for screening condo projects by recent buy price, rent, district, area bucket, tenure, and rental payback period. Includes comparison views, trend analysis, and ranked search results for identifying projects that recover purchase price faster through rent.
+          - generic [ref=e77]:
+            - generic [ref=e78]: Real Estate Analytics
+            - generic [ref=e79]: Payback Analysis
+            - generic [ref=e80]: Singapore Market
+            - generic [ref=e81]: JavaScript
+        - link "Scholarship Optimization Model Revenue-maximizing scholarship discount strategy analysis. Models optimal discount level for each institution balancing enrollment gains against per-student revenue loss. Reveals which institutions benefit from scholarships (counterintuitive revenue gains) vs. those harmed by discounts (high baseline demand). Includes yield elasticity analysis and peer benchmarking. Scholarship Strategy Revenue Analysis Enrollment Economics Price Sensitivity" [ref=e82] [cursor=pointer]:
+          - /url: projects/scholarship-optimization/
+          - heading "Scholarship Optimization Model" [level=3] [ref=e83]
+          - paragraph [ref=e84]: Revenue-maximizing scholarship discount strategy analysis. Models optimal discount level for each institution balancing enrollment gains against per-student revenue loss. Reveals which institutions benefit from scholarships (counterintuitive revenue gains) vs. those harmed by discounts (high baseline demand). Includes yield elasticity analysis and peer benchmarking.
+          - generic [ref=e85]:
+            - generic [ref=e86]: Scholarship Strategy
+            - generic [ref=e87]: Revenue Analysis
+            - generic [ref=e88]: Enrollment Economics
+            - generic [ref=e89]: Price Sensitivity
+        - link "IPEDS Major Trends (2013-2023) Interactive major-change dashboard using IPEDS completions data. Tracks gross and percentage change in graduates by 4-digit CIP major groups, compares top majors between 2013 and 2023 via infographic slopegraph, and maps state-level percent change for any selected major. IPEDS Major Trends US Map Slopegraph" [ref=e90] [cursor=pointer]:
+          - /url: projects/ipeds-major-trends/
+          - heading "IPEDS Major Trends (2013-2023)" [level=3] [ref=e91]
+          - paragraph [ref=e92]: Interactive major-change dashboard using IPEDS completions data. Tracks gross and percentage change in graduates by 4-digit CIP major groups, compares top majors between 2013 and 2023 via infographic slopegraph, and maps state-level percent change for any selected major.
+          - generic [ref=e93]:
+            - generic [ref=e94]: IPEDS
+            - generic [ref=e95]: Major Trends
+            - generic [ref=e96]: US Map
+            - generic [ref=e97]: Slopegraph

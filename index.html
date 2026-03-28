@@ -54,12 +54,12 @@
           </article>
         </div>
 
-        <h2 class="section-subhead">Selected Outcomes</h2>
-        <ul class="outcomes-strip">
-          <li>I am just a guy who believes that education should increase its value.  We should enjoy learning, </li>
-          <li>but there is the connected purpose after we finish that is likely missing.  The opportunity to use the skills and experience we acquired is not available.</li>
-          <li>I am to use my skills and experience to make a positive impact in the field of education to help people take meaningful next steps whether that's their career, start a company, connect with others, perform research, or whatever else it is they want.</li>
-        </ul>
+        <h2 class="section-subhead">Who I Am</h2>
+        <p class="about-story">
+          I'm just a guy who thinks education should actually help people move forward.<br />
+          Learning should be enjoyable, but it should also connect to real opportunities after the classroom.<br />
+          That's what I'm trying to do with my work: help people turn skills and experience into careers, ideas, research, companies, and whatever meaningful next step comes next.
+        </p>
       </div>
     </section>
 
@@ -213,7 +213,18 @@
       var params = new URLSearchParams(window.location.search);
       var p = params.get("p");
       if (p && p.charAt(0) === "/") {
-        window.history.replaceState(null, "", p);
+        var hashIndex = p.indexOf("#");
+        var hash = hashIndex >= 0 ? p.slice(hashIndex) : "";
+        var withoutHash = hashIndex >= 0 ? p.slice(0, hashIndex) : p;
+        var queryIndex = withoutHash.indexOf("?");
+        var query = queryIndex >= 0 ? withoutHash.slice(queryIndex) : "";
+        var path = queryIndex >= 0 ? withoutHash.slice(0, queryIndex) : withoutHash;
+
+        if (path.length > 1 && path.endsWith("/")) {
+          path = path.slice(0, -1);
+        }
+
+        window.history.replaceState(null, "", path + query + hash);
       }
     })();
   </script>
