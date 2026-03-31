@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enrollment Strategy Dashboard</title>
+  <meta name="description" content="Flagship enrollment strategy dashboard for class target forecasting, stage conversion, scholarship strategy, melt prevention, and scenario planning.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="hero-links">
+          <a class="hero-link" href="../enrollment-benchmark-calibration/">Methodology &amp; Sources</a>
+        </div>
+        <div class="eyebrow">Flagship Higher-Ed Analytics Project</div>
+        <h1>Enrollment Strategy Dashboard</h1>
+        <p class="hero-lead">
+          Executive decision system for class target attainment, stage conversion, scholarship allocation,
+          counselor prioritization, and melt prevention.
+        </p>
+        <div class="hero-tags">
+          <span class="hero-tag" id="hero-institution">North Coast University</span>
+          <span class="hero-tag">Enrollment-Only Scope</span>
+          <span class="hero-tag">Synthetic Student Microdata Calibrated to Public Benchmarks</span>
+        </div>
+        <p class="hero-subnote" id="hero-benchmark-note">Loading benchmark guardrails...</p>
+      </div>
+      <aside class="hero-brief">
+        <div class="brief-label">Current Readout</div>
+        <h2 id="brief-headline">Loading current cycle forecast...</h2>
+        <p id="brief-copy">The dashboard is loading the active cycle, segment performance, and class target forecast.</p>
+        <div class="brief-metrics">
+          <div>
+            <span class="brief-metric-label">Class Target</span>
+            <strong id="brief-target">-</strong>
+          </div>
+          <div>
+            <span class="brief-metric-label">Projected Class</span>
+            <strong id="brief-projected">-</strong>
+          </div>
+          <div>
+            <span class="brief-metric-label">Gap</span>
+            <strong id="brief-gap">-</strong>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <nav class="section-nav" aria-label="Dashboard sections">
+      <a href="#overview">Overview</a>
+      <a href="#leakage">Conversion</a>
+      <a href="#programs">Programs & Segments</a>
+      <a href="#aid">Scholarship Strategy</a>
+      <a href="#melt">Melt Risk</a>
+      <a href="#scenario">Scenario Planner</a>
+    </nav>
+
+    <section class="control-bar panel">
+      <div class="control-title-block">
+        <div class="section-label">Filters</div>
+        <h2>Focus the active cycle</h2>
+        <p>Slice the 2025 class forecast by student type, geography, program, and channel without losing the executive context.</p>
+      </div>
+      <div class="control-grid">
+        <label>
+          <span>Student Type</span>
+          <select id="student-type-filter"></select>
+        </label>
+        <label>
+          <span>Geography</span>
+          <select id="geography-filter"></select>
+        </label>
+        <label>
+          <span>Program</span>
+          <select id="program-filter"></select>
+        </label>
+        <label>
+          <span>Source Channel</span>
+          <select id="source-filter"></select>
+        </label>
+      </div>
+      <div class="control-actions">
+        <button id="reset-filters-btn" type="button" class="ghost-button">Reset Filters</button>
+        <div class="provenance-note" id="provenance-note">Source mix: IPEDS, College Scorecard, CDS, Census/NCES context, and synthetic CRM-style funnel logic.</div>
+      </div>
+    </section>
+
+    <section class="kpi-grid" aria-label="Executive key performance indicators">
+      <article class="kpi-card accent-blue">
+        <div class="kpi-label">Projected Matriculants</div>
+        <div class="kpi-value" id="kpi-matriculants">-</div>
+        <div class="kpi-foot" id="kpi-target-gap">-</div>
+      </article>
+      <article class="kpi-card accent-orange">
+        <div class="kpi-label">Deposits in Hand</div>
+        <div class="kpi-value" id="kpi-deposits">-</div>
+        <div class="kpi-foot" id="kpi-melt-exposure">-</div>
+      </article>
+      <article class="kpi-card accent-green">
+        <div class="kpi-label">Net Tuition Revenue</div>
+        <div class="kpi-value" id="kpi-net-revenue">-</div>
+        <div class="kpi-foot" id="kpi-discount-rate">-</div>
+      </article>
+      <article class="kpi-card accent-slate">
+        <div class="kpi-label">Counselor Priority Admits</div>
+        <div class="kpi-value" id="kpi-counselor">-</div>
+        <div class="kpi-foot" id="kpi-recoverable">-</div>
+      </article>
+    </section>
+
+    <section class="decision-strip">
+      <article class="decision-card">
+        <div class="decision-label">Biggest Conversion Drop</div>
+        <h3 id="decision-leak-title">-</h3>
+        <p id="decision-leak-copy">-</p>
+      </article>
+      <article class="decision-card">
+        <div class="decision-label">Top Opportunity</div>
+        <h3 id="decision-opportunity-title">-</h3>
+        <p id="decision-opportunity-copy">-</p>
+      </article>
+      <article class="decision-card">
+        <div class="decision-label">Immediate Action</div>
+        <h3 id="decision-action-title">-</h3>
+        <p id="decision-action-copy">-</p>
+      </article>
+    </section>
+
+    <section id="overview" class="panel section-panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Overview</div>
+          <h2>Are we on track to hit class target?</h2>
+        </div>
+        <p>Start with target attainment, cycle trend, and a short executive readout on where the class stands now.</p>
+      </div>
+      <p class="section-note" id="note-overview">Loading benchmark note...</p>
+      <div class="chart-grid two-up">
+        <div class="chart-card">
+          <h3>Class Target vs Forecast</h3>
+          <div class="chart" id="chart-attainment"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Cycle Trend: Inquiries to Matriculants</h3>
+          <div class="chart" id="chart-cycle-trend"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="leakage" class="panel section-panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Conversion</div>
+          <h2>Where are prospects not converting?</h2>
+        </div>
+        <p>Compare stage conversion, drop-off count, and source efficiency to see whether the shortfall is operational or upstream.</p>
+      </div>
+      <p class="section-note" id="note-conversion">Loading benchmark note...</p>
+      <div class="chart-grid two-up">
+        <div class="chart-card">
+          <h3>Stage Conversion vs Historical Benchmark</h3>
+          <div class="chart" id="chart-stage-conversion"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Drop-Off by Stage Count</h3>
+          <div class="chart" id="chart-leakage-count"></div>
+        </div>
+      </div>
+      <div class="chart-grid two-up">
+        <div class="chart-card">
+          <h3>Source Channels Producing Inquiries but Not Enrollments</h3>
+          <div class="chart" id="chart-source-efficiency"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Recoverable Incomplete Applicants by Program</h3>
+          <div class="chart" id="chart-recoverable-programs"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs" class="panel section-panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Programs & Segments</div>
+          <h2>Which programs and segments need intervention now?</h2>
+        </div>
+        <p>Use program target gaps, segment conversion, and counselor queue rankings to decide where more completed applications or deposits are needed.</p>
+      </div>
+      <p class="section-note" id="note-programs">Loading benchmark note...</p>
+      <div class="chart-grid two-up">
+        <div class="chart-card">
+          <h3>Program Gap vs Calibrated Mix</h3>
+          <div class="chart" id="chart-program-gap"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Segments With the Largest Growth Opportunity</h3>
+          <div class="chart" id="chart-segment-opportunity"></div>
+        </div>
+      </div>
+      <div class="table-grid two-up">
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Admits Needing Counselor Attention</h3>
+            <span id="counselor-count-badge" class="table-badge">-</span>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Program</th>
+                  <th>Geography</th>
+                  <th>Priority</th>
+                  <th>Net Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="table-counselor-priority"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Recoverable Incomplete Applicants</h3>
+            <span id="recoverable-count-badge" class="table-badge">-</span>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Program</th>
+                  <th>Source</th>
+                  <th>Recoverability</th>
+                  <th>Completeness</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="table-recoverable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="aid" class="panel section-panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Scholarship Strategy</div>
+          <h2>Which segments justify more scholarship dollars?</h2>
+        </div>
+        <p>Balance class growth against net tuition. The point is not to spend more aid everywhere, but to spend it where it moves the class.</p>
+      </div>
+      <p class="section-note" id="note-aid">Loading benchmark note...</p>
+      <div class="chart-grid two-up">
+        <div class="chart-card">
+          <h3>Award Strategy Tradeoff</h3>
+          <div class="chart" id="chart-aid-tradeoff"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Segments With the Most Aid-Responsive Admits</h3>
+          <div class="chart" id="chart-aid-segments"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="melt" class="panel section-panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Melt Risk</div>
+          <h2>Which deposited students are most likely to melt?</h2>
+        </div>
+        <p>Prioritize summer protection around late deposits, missing orientation, missing housing, and price-sensitive segments.</p>
+      </div>
+      <p class="section-note" id="note-melt">Loading benchmark note...</p>
+      <div class="chart-grid two-up">
+        <div class="chart-card">
+          <h3>Deposits by Melt Risk Band</h3>
+          <div class="chart" id="chart-melt-risk"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Primary Melt Drivers in the Current Slice</h3>
+          <div class="chart" id="chart-melt-drivers"></div>
+        </div>
+      </div>
+      <div class="table-card">
+        <div class="table-header">
+          <h3>High-Risk Deposit Watchlist</h3>
+          <span id="melt-count-badge" class="table-badge">-</span>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Program</th>
+                <th>Risk</th>
+                <th>Drivers</th>
+                <th>Deposit Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="table-melt-watchlist"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="scenario" class="panel section-panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Scenario Planner</div>
+          <h2>What combination of inquiries, admit rate, and discounting gets us to target?</h2>
+        </div>
+        <p>Adjust the operational levers first, then judge how much target gap still requires more inquiry volume from the market.</p>
+      </div>
+      <p class="section-note" id="note-scenario">Loading benchmark note...</p>
+      <div class="scenario-layout">
+        <div class="scenario-controls">
+          <label>
+            <span>Inquiry Volume</span>
+            <input id="scenario-inquiry-multiplier" type="range" min="85" max="125" step="1" value="100">
+            <strong id="scenario-inquiry-display">100%</strong>
+          </label>
+          <label>
+            <span>Completion Lift</span>
+            <input id="scenario-completion-lift" type="range" min="-5" max="12" step="1" value="0">
+            <strong id="scenario-completion-display">0 pp</strong>
+          </label>
+          <label>
+            <span>Admit Rate Lift</span>
+            <input id="scenario-admit-lift" type="range" min="-5" max="10" step="1" value="0">
+            <strong id="scenario-admit-display">0 pp</strong>
+          </label>
+          <label>
+            <span>Average Award Change from Current</span>
+            <input id="scenario-award-delta" type="range" min="-2000" max="5000" step="250" value="0">
+            <strong id="scenario-award-display">Current average award</strong>
+          </label>
+          <label>
+            <span>Deposit-to-Matric Improvement</span>
+            <input id="scenario-melt-improvement" type="range" min="0" max="8" step="1" value="0">
+            <strong id="scenario-melt-display">0 pp</strong>
+          </label>
+          <label>
+            <span>Yield Lift from Outreach</span>
+            <input id="scenario-yield-lift" type="range" min="0" max="8" step="1" value="0">
+            <strong id="scenario-yield-display">0 pp</strong>
+          </label>
+          <div class="scenario-buttons">
+            <button id="scenario-reset-btn" type="button" class="ghost-button">Reset Scenario</button>
+          </div>
+        </div>
+        <div class="scenario-results">
+          <div class="scenario-kpis">
+            <article>
+              <span>Scenario Matriculants</span>
+              <strong id="scenario-matric">-</strong>
+            </article>
+            <article>
+              <span>Scenario Net Tuition</span>
+              <strong id="scenario-net">-</strong>
+            </article>
+            <article>
+              <span>Scenario Discount Rate</span>
+              <strong id="scenario-discount">-</strong>
+            </article>
+            <article>
+              <span>Gap to Target</span>
+              <strong id="scenario-gap">-</strong>
+            </article>
+          </div>
+          <div class="chart-grid two-up compact-top">
+            <div class="chart-card">
+              <h3>Baseline vs Scenario Funnel</h3>
+              <div class="chart" id="chart-scenario-funnel"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Operational vs Market-Driven Gap</h3>
+              <div class="chart" id="chart-gap-decomposition"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Built from public benchmark sources and calibrated synthetic student-level records. Real public student-level CRM data does not exist for this use case, so the operational funnel, counselor, deposit, and melt layers are simulated by design.
+      </p>
+      <p>
+        Methodology and sources:
+        <a href="../enrollment-benchmark-calibration/">How the dashboard is grounded</a>
+      </p>
+    </footer>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

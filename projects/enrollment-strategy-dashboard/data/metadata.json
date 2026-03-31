@@ -1,0 +1,25 @@
+{
+  "project_name": "Enrollment Strategy Dashboard",
+  "verified_public_sources": [
+    "IPEDS Use The Data",
+    "IPEDS Data Center",
+    "College Scorecard data",
+    "College Scorecard API",
+    "Common Data Set",
+    "Census Bureau data",
+    "NCES Projections of Education Statistics"
+  ],
+  "proxy_or_synthetic_layers": [
+    "student-level CRM style engagement",
+    "application start behavior",
+    "deposit timing",
+    "melt risk indicators",
+    "scholarship response scenarios",
+    "counselor attention queues"
+  ],
+  "benchmark_method": "Matched national 4-year admissions-reporting composite",
+  "benchmark_rule": "Official 4-year institutions with at least 5,000 applications, then matched to the synthetic operating profile on admit-rate and yield-rate proximity.",
+  "active_cycle": 2025,
+  "class_target": 1350,
+  "institution_name": "North Coast University"
+}

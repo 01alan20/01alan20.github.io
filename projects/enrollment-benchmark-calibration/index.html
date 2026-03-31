@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enrollment Strategy Dashboard Methodology</title>
+  <meta name="description" content="Methodology and source guide for the Enrollment Strategy Dashboard, showing where the benchmark inputs come from and how they are used.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <div class="eyebrow">Methodology &amp; Sources</div>
+      <h1>How the Enrollment Strategy Dashboard Is Grounded</h1>
+      <p class="hero-lead">
+        This page shows where the public benchmark information comes from and what it is used for inside the
+        Enrollment Strategy Dashboard. It is intentionally about source logic and methodology, not about publishing raw data.
+      </p>
+      <div class="hero-actions">
+        <a class="primary-link" href="../enrollment-strategy-dashboard/">Open Enrollment Strategy Dashboard</a>
+        <a class="secondary-link" href="../enrollment-strategy-dashboard/SOURCES.md">Open Source Notes</a>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Why This Exists</div>
+          <h2>Show the source logic behind the dashboard</h2>
+        </div>
+        <p>
+          The point is to make the data story legible: which sources are official, which parts are synthetic,
+          and how those pieces are turned into enrollment decisions.
+        </p>
+      </div>
+      <div class="card-grid three-up">
+        <article class="mini-card">
+          <h3>Public Benchmark Anchors</h3>
+          <p>IPEDS and College Scorecard define volume, selectivity, yield, tuition, and net price context.</p>
+        </article>
+        <article class="mini-card">
+          <h3>Admissions Profile Guardrails</h3>
+          <p>Common Data Set examples tighten academic profile bands, test ranges, and selectivity assumptions.</p>
+        </article>
+        <article class="mini-card">
+          <h3>Operational Decision Layer</h3>
+          <p>Student-level funnel records are simulated from those benchmark layers so the dashboard can support real executive decisions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Source Hierarchy</div>
+          <h2>What is real, what is constrained, and what is simulated</h2>
+        </div>
+        <p>The calibration layer separates official institutional benchmarks from the synthetic operational fields the flagship dashboard requires.</p>
+      </div>
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Primary Sources</th>
+              <th>What It Calibrates</th>
+              <th>Why It Matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Institution Benchmarks</td>
+              <td>IPEDS, College Scorecard</td>
+              <td>Class size, admit rate, yield, tuition, net price</td>
+              <td>Keeps the flagship dashboard tied to plausible institutional behavior.</td>
+            </tr>
+            <tr>
+              <td>Admissions Profile</td>
+              <td>Common Data Set</td>
+              <td>Academic profile bands, test-score realism, selectivity assumptions</td>
+              <td>Prevents the applicant pool from looking arbitrary.</td>
+            </tr>
+            <tr>
+              <td>Market Context</td>
+              <td>Census, NCES projections</td>
+              <td>Geography mix, income mix, demand-side market pressure</td>
+              <td>Supports the difference between operational underperformance and market limits.</td>
+            </tr>
+            <tr>
+              <td>Operational Simulation</td>
+              <td>Synthetic logic informed by the benchmark layers</td>
+              <td>Inquiries, completions, counselor activity, deposits, melt risk</td>
+              <td>Creates the student-level decision system required by the flagship dashboard.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Pipeline</div>
+          <h2>How the source hierarchy feeds the dashboard</h2>
+        </div>
+        <p>The goal is a clean chain from public benchmarks to executive decisions.</p>
+      </div>
+      <div class="pipeline-grid">
+        <article class="pipeline-step">
+          <span>01</span>
+          <h3>Pull benchmark inputs</h3>
+          <p>Use IPEDS and College Scorecard to define the class-size, yield, tuition, and net-price envelope.</p>
+        </article>
+        <article class="pipeline-step">
+          <span>02</span>
+          <h3>Apply admissions guardrails</h3>
+          <p>Use Common Data Set ranges to shape academic profile assumptions and selectivity logic.</p>
+        </article>
+        <article class="pipeline-step">
+          <span>03</span>
+          <h3>Set benchmark guardrails</h3>
+          <p>Use those source ranges as guardrails for class size, selectivity, pricing, and academic profile assumptions.</p>
+        </article>
+        <article class="pipeline-step">
+          <span>04</span>
+          <h3>Generate synthetic students</h3>
+          <p>Create student-level funnel, aid, deposit, and melt records within those constraints.</p>
+        </article>
+        <article class="pipeline-step">
+          <span>05</span>
+          <h3>Validate outcomes</h3>
+          <p>Check that rates, volumes, pricing, and mix stay inside the intended benchmark envelope.</p>
+        </article>
+        <article class="pipeline-step">
+          <span>06</span>
+          <h3>Drive executive decisions</h3>
+          <p>Use the constrained synthetic layer to answer class-target, conversion, aid, and melt questions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Source Map</div>
+          <h2>Where the information comes from and what it is used for</h2>
+        </div>
+        <p>This is the public-facing logic layer: source, use case, and why each source matters.</p>
+      </div>
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>What We Take From It</th>
+              <th>What We Do With It</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>IPEDS Admissions and Fall Enrollment</td>
+              <td>Applications, admits, enrolled counts, yield, first-year volume, broad institutional mix</td>
+              <td>Anchor class target assumptions, admit-rate guardrails, yield guardrails, and volume realism.</td>
+            </tr>
+            <tr>
+              <td>College Scorecard</td>
+              <td>Tuition, cost of attendance, net price, Pell share, retention context, debt and earnings context</td>
+              <td>Anchor sticker price, net-price realism, aid pressure, and affordability assumptions.</td>
+            </tr>
+            <tr>
+              <td>Common Data Set</td>
+              <td>SAT and ACT ranges, GPA ranges, application and enrollment context, admissions-policy detail</td>
+              <td>Tighten academic-profile assumptions so the applicant pool and selectivity logic do not look arbitrary.</td>
+            </tr>
+            <tr>
+              <td>Census and NCES projections</td>
+              <td>Geographic and demographic context, high-school pipeline pressure, market conditions</td>
+              <td>Separate market pressure from operational underperformance and keep geography assumptions defensible.</td>
+            </tr>
+            <tr>
+              <td>Synthetic operational layer</td>
+              <td>Inquiries, counselor touches, application recovery, deposit timing, melt indicators</td>
+              <td>Create the student-level decision system that public source data alone cannot provide.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">What This Proves</div>
+          <h2>This is the portfolio evidence behind the flagship product</h2>
+        </div>
+        <p>It shows the work behind the dashboard, not just the dashboard itself.</p>
+      </div>
+      <div class="proof-list">
+        <div class="proof-item">You can structure a higher-ed source hierarchy and separate official benchmarks from simulated operational layers.</div>
+        <div class="proof-item">You can explain exactly what each public source contributes to an executive enrollment product.</div>
+        <div class="proof-item">You can translate institution-level public information into a student-level decision system without pretending public CRM data exists.</div>
+        <div class="proof-item">You can connect methodology, data engineering, and executive-facing product design in one coherent portfolio story.</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
