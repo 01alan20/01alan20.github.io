@@ -1,0 +1,15 @@
+{
+  "project_name": "Marketing Attribution Dashboard",
+  "official_source_basis": [
+    "Google Analytics developer documentation: BigQuery sample dataset for Google Analytics ecommerce web implementation",
+    "Google blog: Introducing the Google Analytics Sample Dataset for BigQuery"
+  ],
+  "source_dataset_reference": "bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*",
+  "source_window": "2020-11-01 to 2021-01-31",
+  "local_modeled_layer": [
+    "cart-intent event assignment",
+    "multi-touch attribution credits",
+    "generic cohort labels for filtering"
+  ],
+  "caveat": "The in-repo CSVs are a reproducible modeled extract aligned to the public Google Merchandise Store sample dataset concepts rather than a live BigQuery export."
+}

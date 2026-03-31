@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Analytics Sample Dataset Marketing Exercise</title>
+  <meta name="description" content="Marketing analysis exercise built around the Google Merchandise Store BigQuery sample dataset concept, with a data-examination tab, a question-driven tab, and an upload-ready Jupyter notebook.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="hero-links">
+          <a class="hero-link" href="https://developers.google.com/analytics/bigquery/web-ecommerce-demo-dataset" target="_blank" rel="noopener">Official Dataset Docs</a>
+          <a class="hero-link" href="https://blog.google/products/marketingplatform/analytics/introducing-google-analytics-sample/" target="_blank" rel="noopener">Google Announcement</a>
+          <a class="hero-link" href="google-analytics-marketing-exploration.ipynb" download>Download Notebook</a>
+        </div>
+        <div class="eyebrow">Google Analytics Sample Dataset Marketing Exercise</div>
+        <h1>Channel, Conversion, and Journey Analysis</h1>
+        <p class="hero-lead">
+          This project is structured like a real marketing analysis exercise. First we inspect the dataset,
+          its scope, and the shape of the event stream. Then we move to the business questions that the data
+          can actually answer about channel mix, transactions, attribution, and multi-touch behavior.
+        </p>
+        <div class="hero-tags">
+          <span class="hero-tag">Dataset Understanding</span>
+          <span class="hero-tag">Jupyter Notebook</span>
+          <span class="hero-tag">Attribution Analysis</span>
+          <span class="hero-tag">Marketing Questions</span>
+        </div>
+        <p class="hero-subnote" id="hero-source-note">Loading source note...</p>
+      </div>
+
+      <aside class="hero-brief">
+        <div class="brief-label">Current Readout</div>
+        <h2 id="brief-headline">Loading dataset summary...</h2>
+        <p id="brief-copy">The exercise is loading session mix, transaction behavior, and attribution patterns.</p>
+        <div class="brief-metrics">
+          <div>
+            <span class="brief-metric-label">Transaction Rate</span>
+            <strong id="brief-transaction-rate">-</strong>
+          </div>
+          <div>
+            <span class="brief-metric-label">Best Closer</span>
+            <strong id="brief-closer">-</strong>
+          </div>
+          <div>
+            <span class="brief-metric-label">Avg Order Value</span>
+            <strong id="brief-revenue">-</strong>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <nav class="tabs" aria-label="Dashboard tabs">
+      <button class="tab-btn active" data-tab="data-exam" type="button">Data Examination</button>
+      <button class="tab-btn" data-tab="questions" type="button">Questions From Data</button>
+    </nav>
+
+    <section class="tab-pane active" data-tab="data-exam">
+      <section class="control-bar panel">
+        <div class="control-title-block">
+          <div class="section-label">Filters</div>
+          <h2>Inspect the dataset before you jump to conclusions</h2>
+          <p>Filter the same extract by entry channel, primary device, and touch depth so the notebook story and the dashboard story stay aligned.</p>
+        </div>
+        <div class="control-grid">
+          <label>
+            <span>Entry Channel</span>
+            <select id="entry-channel-filter"></select>
+          </label>
+          <label>
+            <span>Primary Device</span>
+            <select id="device-filter"></select>
+          </label>
+          <label>
+            <span>Touch Pattern</span>
+            <select id="touch-filter"></select>
+          </label>
+        </div>
+        <div class="control-actions">
+          <button id="reset-filters-btn" type="button" class="ghost-button">Reset Filters</button>
+          <div class="provenance-note" id="provenance-note">Loading provenance note...</div>
+        </div>
+      </section>
+
+      <section class="kpi-grid" aria-label="Dataset key performance indicators">
+        <article class="kpi-card accent-blue">
+          <div class="kpi-label">Sessions</div>
+          <div class="kpi-value" id="kpi-sessions">-</div>
+          <div class="kpi-foot" id="kpi-engaged">-</div>
+        </article>
+        <article class="kpi-card accent-orange">
+          <div class="kpi-label">Cart-Intent Journeys</div>
+          <div class="kpi-value" id="kpi-cart-intents">-</div>
+          <div class="kpi-foot" id="kpi-cart-rate">-</div>
+        </article>
+        <article class="kpi-card accent-green">
+          <div class="kpi-label">Transactions</div>
+          <div class="kpi-value" id="kpi-transactions">-</div>
+          <div class="kpi-foot" id="kpi-transaction-rate">-</div>
+        </article>
+        <article class="kpi-card accent-slate">
+          <div class="kpi-label">Revenue</div>
+          <div class="kpi-value" id="kpi-revenue">-</div>
+          <div class="kpi-foot" id="kpi-aov">-</div>
+        </article>
+      </section>
+
+      <section class="panel section-panel">
+        <div class="section-header">
+          <div>
+            <div class="section-label">Data Examination</div>
+            <h2>What is actually in the extract?</h2>
+          </div>
+          <p>Start with scale and shape: session trend, channel-level quality, and the notebook workflow you would use to document understanding before writing conclusions.</p>
+        </div>
+        <div class="chart-grid two-up">
+          <div class="chart-card">
+            <h3>Weekly Sessions, Cart Intent, and Transactions</h3>
+            <div class="chart" id="chart-weekly-performance"></div>
+          </div>
+          <div class="chart-card">
+            <h3>Channel Efficiency: Sessions vs Transactions</h3>
+            <div class="chart" id="chart-channel-efficiency"></div>
+          </div>
+        </div>
+        <div class="insight-grid two-up">
+          <article class="insight-card">
+            <h3>Notebook Workflow</h3>
+            <div id="insight-summary"></div>
+          </article>
+          <article class="insight-card secondary">
+            <h3>Downloadable Analysis File</h3>
+            <div id="insight-framing"></div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <section class="tab-pane" data-tab="questions">
+      <section class="decision-strip">
+        <article class="decision-card">
+          <div class="decision-label">Question 1</div>
+          <h3 id="decision-efficiency-title">-</h3>
+          <p id="decision-efficiency-copy">-</p>
+        </article>
+        <article class="decision-card">
+          <div class="decision-label">Question 2</div>
+          <h3 id="decision-volume-title">-</h3>
+          <p id="decision-volume-copy">-</p>
+        </article>
+        <article class="decision-card">
+          <div class="decision-label">Question 3</div>
+          <h3 id="decision-journey-title">-</h3>
+          <p id="decision-journey-copy">-</p>
+        </article>
+      </section>
+
+      <section class="panel section-panel">
+        <div class="section-header">
+          <div>
+            <div class="section-label">Attribution Questions</div>
+            <h2>Which channels create demand, and which channels close the sale?</h2>
+          </div>
+          <p>These views answer two direct questions: which channel most often opens a converting journey, which one most often closes it, and how much do rankings shift once you move from traffic to attributed transactions?</p>
+        </div>
+        <div class="chart-grid two-up">
+          <div class="chart-card">
+            <h3>First-Touch vs Last-Touch Attributed Transactions</h3>
+            <div class="chart" id="chart-attribution-models"></div>
+          </div>
+          <div class="chart-card">
+            <h3>Traffic Rank vs Attributed Transaction Rank</h3>
+            <div class="chart" id="chart-rank-shift"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel section-panel">
+        <div class="section-header">
+          <div>
+            <div class="section-label">Journey Questions</div>
+            <h2>How many touches do converters need, and what paths are common?</h2>
+          </div>
+          <p>Use these charts to move from channel-only reporting to actual journey logic: assist channels, closer channels, and path depth.</p>
+        </div>
+        <div class="chart-grid two-up">
+          <div class="chart-card">
+            <h3>Converting Journeys: Entry Channel to Closing Channel</h3>
+            <div class="chart" id="chart-journey-flow"></div>
+          </div>
+          <div class="chart-card">
+            <h3>Touch Depth vs Transaction Rate</h3>
+            <div class="chart" id="chart-touch-depth"></div>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Top Journey Paths</h3>
+            <span id="path-count-badge" class="table-badge">-</span>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>Journey Path</th>
+                  <th>Journeys</th>
+                  <th>Cart Intent</th>
+                  <th>Transactions</th>
+                  <th>Transaction Rate</th>
+                  <th>Median Days to Transaction</th>
+                </tr>
+              </thead>
+              <tbody id="table-paths"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel section-panel">
+        <div class="section-header">
+          <div>
+            <div class="section-label">Actionable Answers</div>
+            <h2>Which channels deserve more attention after looking at the data?</h2>
+          </div>
+          <p>This is the short answer table you would use after the notebook: which channels look efficient, which ones look expensive in opportunity cost, and what follow-up question each one suggests.</p>
+        </div>
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Channel Watchlist</h3>
+            <span id="channel-count-badge" class="table-badge">-</span>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>Channel</th>
+                  <th>Sessions</th>
+                  <th>Cart Intents</th>
+                  <th>Transactions</th>
+                  <th>Transactions / 100 Sessions</th>
+                  <th>Cart to Transaction</th>
+                  <th>Follow-Up Question</th>
+                </tr>
+              </thead>
+              <tbody id="table-channels"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Official source basis: the public Google Merchandise Store BigQuery sample dataset documentation and Google’s sample-dataset announcement.
+        The local CSVs in this project are a reproducible modeled extract aligned to that source concept, not a live BigQuery export.
+      </p>
+      <p>
+        The notebook and dashboard are intentionally organized in sequence: understand the data first, then ask the business questions that the data can support.
+      </p>
+    </footer>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

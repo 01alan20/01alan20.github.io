@@ -123,7 +123,9 @@ function updateAllCharts() {
     renderCoursePerformanceChart();
     renderCourseRiskChart();
     renderCourseComparisonChart();
+    renderCourseFailureChart();
     renderCourseDemographicsChart();
+    generateCourseIssueInsights();
     
     renderInterventionOpportunitiesChart();
     renderRiskFactorsChart();
@@ -583,24 +585,97 @@ function renderLateSubmissionChart() {
 
 // COURSE DRILLDOWN CHARTS
 
+function getCourseStats(data) {
+    const courseMap = new Map();
+
+    (data || []).forEach(row => {
+        const course = row.module_code;
+        if (!course) return;
+
+        if (!courseMap.has(course)) {
+            courseMap.set(course, {
+                course,
+                count: 0,
+                passed: 0,
+                failed: 0,
+                withdrawn: 0,
+                atRisk: 0,
+                female: 0,
+                male: 0,
+                riskTotal: 0,
+                riskCount: 0
+            });
+        }
+
+        const stats = courseMap.get(course);
+        stats.count += 1;
+
+        if (row.final_result === 'Pass') stats.passed += 1;
+        if (row.final_result === 'Fail') stats.failed += 1;
+        if (row.final_result === 'Withdrawn') stats.withdrawn += 1;
+        if (row.at_risk_flag === '1') stats.atRisk += 1;
+        if (row.gender === 'F') stats.female += 1;
+        if (row.gender === 'M') stats.male += 1;
+
+        const riskScore = parseFloat(row.early_alert_risk_score);
+        if (!isNaN(riskScore)) {
+            stats.riskTotal += riskScore;
+            stats.riskCount += 1;
+        }
+    });
+
+    return Array.from(courseMap.values()).map(stats => ({
+        course: stats.course,
+        count: stats.count,
+        passed: stats.passed,
+        failed: stats.failed,
+        withdrawn: stats.withdrawn,
+        atRisk: stats.atRisk,
+        passRate: stats.count > 0 ? (stats.passed / stats.count) * 100 : 0,
+        failureRate: stats.count > 0 ? (stats.failed / stats.count) * 100 : 0,
+        withdrawalRate: stats.count > 0 ? (stats.withdrawn / stats.count) * 100 : 0,
+        atRiskRate: stats.count > 0 ? (stats.atRisk / stats.count) * 100 : 0,
+        avgRisk: stats.riskCount > 0 ? stats.riskTotal / stats.riskCount : 0,
+        femalePct: stats.count > 0 ? (stats.female / stats.count) * 100 : 0,
+        malePct: stats.count > 0 ? (stats.male / stats.count) * 100 : 0
+    }));
+}
+
+function getPeerFilteredData() {
+    const riskBand = document.getElementById('risk-band-filter').value;
+    const ageBand = document.getElementById('age-filter').value;
+    const educationLevel = document.getElementById('education-filter').value;
+
+    return rawData.filter(row => {
+        const riskScore = parseFloat(row.early_alert_risk_score);
+
+        if (riskBand === 'high' && riskScore < 70) return false;
+        if (riskBand === 'medium' && (riskScore < 40 || riskScore >= 70)) return false;
+        if (riskBand === 'low' && riskScore >= 40) return false;
+
+        if (ageBand !== 'all' && row.age_band !== ageBand) return false;
+        if (educationLevel !== 'all' && row.highest_education !== educationLevel) return false;
+
+        return true;
+    });
+}
+
+function formatPercent(value) {
+    return `${value.toFixed(1)}%`;
+}
+
 function renderCoursePerformanceChart() {
-    const courses = [...new Set(filteredData.map(d => d.module_code))];
-    
-    const courseStats = courses.map(course => {
-        const courseData = filteredData.filter(d => d.module_code === course);
-        const passed = courseData.filter(d => d.final_result === 'Pass').length;
-        const rate = (passed / courseData.length * 100).toFixed(1);
-        return { course, rate: parseFloat(rate), count: courseData.length };
-    }).sort((a, b) => b.rate - a.rate);
+    const courseStats = getCourseStats(filteredData).sort((a, b) => b.passRate - a.passRate);
 
     const trace = {
         x: courseStats.map(d => d.course),
-        y: courseStats.map(d => d.rate),
+        y: courseStats.map(d => d.passRate),
+        customdata: courseStats.map(d => [d.failureRate, d.withdrawalRate, d.count]),
         type: 'bar',
-        marker: { color: courseStats.map(d => d.rate), colorscale: 'Greens' },
-        text: courseStats.map(d => `${d.rate.toFixed(1)}%`),
+        marker: { color: courseStats.map(d => d.passRate), colorscale: 'Greens' },
+        text: courseStats.map(d => `${d.passRate.toFixed(1)}%`),
         textposition: 'outside',
-        hovertemplate: '<b>%{x}</b><br>Pass Rate: %{y:.1f}%<extra></extra>'
+        hovertemplate: '<b>%{x}</b><br>Pass Rate: %{y:.1f}%<br>Fail Rate: %{customdata[0]:.1f}%<br>Withdrawal Rate: %{customdata[1]:.1f}%<br>Students: %{customdata[2]}<extra></extra>'
     };
 
     const layout = {
@@ -617,23 +692,17 @@ function renderCoursePerformanceChart() {
 }
 
 function renderCourseRiskChart() {
-    const courses = [...new Set(filteredData.map(d => d.module_code))];
-    
-    const courseRisk = courses.map(course => {
-        const courseData = filteredData.filter(d => d.module_code === course);
-        const atRiskCount = courseData.filter(d => d.at_risk_flag === '1').length;
-        const rate = (atRiskCount / courseData.length * 100).toFixed(1);
-        return { course, rate: parseFloat(rate) };
-    }).sort((a, b) => b.rate - a.rate);
+    const courseRisk = getCourseStats(filteredData).sort((a, b) => b.atRiskRate - a.atRiskRate);
 
     const trace = {
         x: courseRisk.map(d => d.course),
-        y: courseRisk.map(d => d.rate),
+        y: courseRisk.map(d => d.atRiskRate),
+        customdata: courseRisk.map(d => [d.failureRate, d.withdrawalRate, d.count]),
         type: 'bar',
         marker: { color: '#e74c3c' },
-        text: courseRisk.map(d => d.rate.toFixed(1) + '%'),
+        text: courseRisk.map(d => d.atRiskRate.toFixed(1) + '%'),
         textposition: 'outside',
-        hovertemplate: '<b>%{x}</b><br>At-Risk: %{y:.1f}%<extra></extra>'
+        hovertemplate: '<b>%{x}</b><br>At-Risk: %{y:.1f}%<br>Fail Rate: %{customdata[0]:.1f}%<br>Withdrawal Rate: %{customdata[1]:.1f}%<br>Students: %{customdata[2]}<extra></extra>'
     };
 
     const layout = {
@@ -650,30 +719,24 @@ function renderCourseRiskChart() {
 }
 
 function renderCourseComparisonChart() {
-    const courses = [...new Set(filteredData.map(d => d.module_code))];
-    
-    const comparison = courses.map(course => {
-        const courseData = filteredData.filter(d => d.module_code === course);
-        const avgRisk = courseData.reduce((sum, d) => sum + parseFloat(d.early_alert_risk_score), 0) / courseData.length;
-        const passRate = (courseData.filter(d => d.final_result === 'Pass').length / courseData.length * 100);
-        return { course, risk: avgRisk, passRate, count: courseData.length };
-    });
+    const comparison = getCourseStats(filteredData);
 
     const trace = {
-        x: comparison.map(d => d.risk),
+        x: comparison.map(d => d.avgRisk),
         y: comparison.map(d => d.passRate),
         mode: 'markers+text',
         type: 'scatter',
         text: comparison.map(d => d.course),
         textposition: 'top center',
+        customdata: comparison.map(d => [d.failureRate, d.withdrawalRate, d.count, d.atRiskRate]),
         marker: {
             size: comparison.map(d => Math.sqrt(d.count / 5) + 8),
-            color: comparison.map(d => d.risk),
+            color: comparison.map(d => d.avgRisk),
             colorscale: 'Reds',
             showscale: true,
             colorbar: { title: 'Avg Risk' }
         },
-        hovertemplate: '<b>%{text}</b><br>Risk: %{x:.1f}<br>Pass Rate: %{y:.1f}%<extra></extra>'
+        hovertemplate: '<b>%{text}</b><br>Avg Risk: %{x:.1f}<br>Pass Rate: %{y:.1f}%<br>Fail Rate: %{customdata[0]:.1f}%<br>Withdrawal Rate: %{customdata[1]:.1f}%<br>At-Risk Rate: %{customdata[3]:.1f}%<br>Students: %{customdata[2]}<extra></extra>'
     };
 
     const layout = {
@@ -689,24 +752,72 @@ function renderCourseComparisonChart() {
     Plotly.newPlot('course-comparison-chart', [trace], layout, { responsive: true });
 }
 
+function renderCourseFailureChart() {
+    const courseStats = getCourseStats(filteredData).sort((a, b) => b.failureRate - a.failureRate);
+    const overallFailureRate = filteredData.length > 0
+        ? (filteredData.filter(d => d.final_result === 'Fail').length / filteredData.length) * 100
+        : 0;
+
+    const trace = {
+        x: courseStats.map(d => d.course),
+        y: courseStats.map(d => d.failureRate),
+        customdata: courseStats.map(d => [d.failed, d.withdrawn, d.atRiskRate, d.count]),
+        type: 'bar',
+        marker: {
+            color: courseStats.map(d => d.failureRate),
+            colorscale: [
+                [0, '#f8c471'],
+                [1, '#c0392b']
+            ]
+        },
+        text: courseStats.map(d => formatPercent(d.failureRate)),
+        textposition: 'outside',
+        hovertemplate: '<b>%{x}</b><br>Fail Rate: %{y:.1f}%<br>Failing Students: %{customdata[0]}<br>Withdrawn Students: %{customdata[1]}<br>At-Risk Rate: %{customdata[2]:.1f}%<br>Students: %{customdata[3]}<extra></extra>'
+    };
+
+    const layout = {
+        font: { family: 'Segoe UI, sans-serif', size: 12 },
+        yaxis: { title: 'Failure Rate (%)', gridcolor: '#ecf0f1' },
+        xaxis: { tickangle: -45 },
+        margin: { l: 70, r: 50, t: 30, b: 100 },
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        paper_bgcolor: 'transparent',
+        hovermode: 'closest',
+        shapes: courseStats.length > 0 ? [{
+            type: 'line',
+            x0: -0.5,
+            x1: courseStats.length - 0.5,
+            y0: overallFailureRate,
+            y1: overallFailureRate,
+            line: {
+                color: '#7f8c8d',
+                width: 2,
+                dash: 'dash'
+            }
+        }] : [],
+        annotations: courseStats.length > 0 ? [{
+            x: courseStats.length - 1,
+            y: overallFailureRate,
+            xanchor: 'right',
+            yanchor: 'bottom',
+            text: `Avg ${formatPercent(overallFailureRate)}`,
+            showarrow: false,
+            font: { size: 11, color: '#7f8c8d' },
+            bgcolor: 'rgba(255,255,255,0.85)'
+        }] : []
+    };
+
+    Plotly.newPlot('course-failure-chart', [trace], layout, { responsive: true });
+}
+
 function renderCourseDemographicsChart() {
-    const courses = [...new Set(filteredData.map(d => d.module_code))].slice(0, 6); // Top 6 courses
-    
-    const demographics = courses.map(course => {
-        const courseData = filteredData.filter(d => d.module_code === course);
-        const femaleCount = courseData.filter(d => d.gender === 'F').length;
-        const maleCount = courseData.filter(d => d.gender === 'M').length;
-        const total = courseData.length;
-        return {
-            course,
-            female: (femaleCount / total * 100).toFixed(1),
-            male: (maleCount / total * 100).toFixed(1)
-        };
-    });
+    const demographics = getCourseStats(filteredData)
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 6);
 
     const trace1 = {
         x: demographics.map(d => d.course),
-        y: demographics.map(d => parseFloat(d.female)),
+        y: demographics.map(d => d.femalePct),
         name: 'Female',
         type: 'bar',
         marker: { color: '#e74c3c' }
@@ -714,7 +825,7 @@ function renderCourseDemographicsChart() {
 
     const trace2 = {
         x: demographics.map(d => d.course),
-        y: demographics.map(d => parseFloat(d.male)),
+        y: demographics.map(d => d.malePct),
         name: 'Male',
         type: 'bar',
         marker: { color: '#3498db' }
@@ -732,6 +843,63 @@ function renderCourseDemographicsChart() {
     };
 
     Plotly.newPlot('course-demographics-chart', [trace1, trace2], layout, { responsive: true });
+}
+
+function generateCourseIssueInsights() {
+    const issueContainer = document.getElementById('course-issue-insights');
+    const courseStats = getCourseStats(filteredData);
+
+    if (!issueContainer) return;
+
+    if (courseStats.length === 0) {
+        issueContainer.innerHTML = '<p class="text-muted">No courses match the current filters.</p>';
+        return;
+    }
+
+    const selectedCourse = document.getElementById('course-filter').value;
+    const peerCourseStats = getCourseStats(getPeerFilteredData());
+
+    if (selectedCourse !== 'all' && courseStats.length === 1) {
+        const current = courseStats[0];
+        const failRank = [...peerCourseStats]
+            .sort((a, b) => b.failureRate - a.failureRate)
+            .findIndex(d => d.course === current.course) + 1;
+        const withdrawalRank = [...peerCourseStats]
+            .sort((a, b) => b.withdrawalRate - a.withdrawalRate)
+            .findIndex(d => d.course === current.course) + 1;
+        const peerFailureAverage = peerCourseStats.length > 0
+            ? peerCourseStats.reduce((sum, d) => sum + d.failureRate, 0) / peerCourseStats.length
+            : current.failureRate;
+        const issueShape = current.failureRate > current.withdrawalRate
+            ? 'More students are staying enrolled but not passing, so tutoring, assessment scaffolding, and course design review should lead the response.'
+            : 'Withdrawal exceeds failure, so onboarding friction, weak early engagement, and advisor outreach are likely more urgent than academic remediation alone.';
+
+        issueContainer.innerHTML = `
+            <p><strong>${current.course} profile:</strong> ${formatPercent(current.failureRate)} failure, ${formatPercent(current.withdrawalRate)} withdrawal, ${formatPercent(current.atRiskRate)} at-risk, and ${current.avgRisk.toFixed(1)} average risk across ${current.count.toLocaleString()} students.</p>
+            <p><strong>Benchmark within current filters:</strong> ${current.course} ranks #${failRank} of ${peerCourseStats.length} on failure rate and #${withdrawalRank} on withdrawal rate. Its failure rate is ${current.failureRate >= peerFailureAverage ? 'above' : 'below'} the peer-course average of ${formatPercent(peerFailureAverage)}.</p>
+            <p><strong>Issue shaping:</strong> ${issueShape}</p>
+        `;
+        return;
+    }
+
+    const failureHotspots = [...courseStats]
+        .sort((a, b) => b.failureRate - a.failureRate)
+        .slice(0, 3);
+    const withdrawalHotspot = [...courseStats]
+        .sort((a, b) => b.withdrawalRate - a.withdrawalRate)[0];
+    const failureVolumeHotspot = [...courseStats]
+        .sort((a, b) => b.failed - a.failed || b.failureRate - a.failureRate)[0];
+
+    const issueShape = failureHotspots[0].course === withdrawalHotspot.course
+        ? `${failureHotspots[0].course} is carrying both the highest failure and withdrawal pressure, so it needs a combined academic-support and persistence-intervention plan.`
+        : `${failureHotspots[0].course} is the main failure-heavy course, while ${withdrawalHotspot.course} is the main withdrawal-heavy course. Treat academic difficulty and persistence risk as separate issues instead of one generic retention problem.`;
+
+    issueContainer.innerHTML = `
+        <p><strong>Failure hotspots:</strong> ${failureHotspots.map(d => `${d.course} (${formatPercent(d.failureRate)} fail, ${formatPercent(d.passRate)} pass)`).join('; ')}.</p>
+        <p><strong>Persistence hotspot:</strong> ${withdrawalHotspot.course} has the highest withdrawal rate at ${formatPercent(withdrawalHotspot.withdrawalRate)} with ${formatPercent(withdrawalHotspot.failureRate)} failure, which points to stop-out and engagement pressure more than pure assessment difficulty.</p>
+        <p><strong>Scale hotspot:</strong> ${failureVolumeHotspot.course} has the largest number of failing students in the current view (${failureVolumeHotspot.failed.toLocaleString()} students, ${formatPercent(failureVolumeHotspot.failureRate)} fail rate), so it is the biggest operational recovery opportunity.</p>
+        <p><strong>Issue shaping:</strong> ${issueShape}</p>
+    `;
 }
 
 // INTERVENTION OPPORTUNITY CHARTS
