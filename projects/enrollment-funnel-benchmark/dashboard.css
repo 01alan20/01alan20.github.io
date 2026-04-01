@@ -191,6 +191,71 @@ body {
     border-bottom: 2px solid var(--light-color);
 }
 
+.executive-summary-panel {
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+}
+
+.executive-summary-header {
+    margin-bottom: 1rem;
+}
+
+.executive-headline {
+    font-size: 1.55rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.executive-summary-text {
+    margin-bottom: 1.5rem;
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.stage-action-grid {
+    margin-bottom: 1.5rem;
+}
+
+.stage-action-card {
+    height: 100%;
+    border: 1px solid #dbe8f4;
+    border-radius: 10px;
+    background: #fff;
+    padding: 1.1rem;
+}
+
+.stage-action-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: #5f6b7a;
+    margin-bottom: 0.55rem;
+}
+
+.stage-action-metric {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.65rem;
+}
+
+.stage-action-copy {
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.65;
+    font-size: 0.94rem;
+}
+
+.executive-next-steps h6 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
 .insight-container {
     min-height: 320px;
 }

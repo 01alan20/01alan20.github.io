@@ -251,30 +251,70 @@ function formatPct(value) {
     return (value * 100).toFixed(1) + '%';
 }
 
+function getFunnelMetrics(rows = filteredData) {
+    const inquiries = rows.length;
+    const applications = rows.filter(d => d.application_flag === '1').length;
+    const offers = rows.filter(d => d.offer_flag === '1').length;
+    const enrollments = rows.filter(d => d.enrollment_flag === '1').length;
+
+    return {
+        inquiries,
+        applications,
+        offers,
+        enrollments,
+        inquiryToApp: safeRate(applications, inquiries),
+        appToOffer: safeRate(offers, applications),
+        offerToEnroll: safeRate(enrollments, offers),
+        inquiryToEnroll: safeRate(enrollments, inquiries)
+    };
+}
+
+function stageGapCopy(label, rate, minBenchmark, maxBenchmark, emphasis) {
+    if (rate < minBenchmark) {
+        return `${label} is below the benchmark range of ${formatPct(minBenchmark)} to ${formatPct(maxBenchmark)}. ${emphasis}`;
+    }
+    if (rate > maxBenchmark) {
+        return `${label} is above the benchmark range of ${formatPct(minBenchmark)} to ${formatPct(maxBenchmark)}. Protect performance while scaling volume.`;
+    }
+    return `${label} sits within the benchmark range of ${formatPct(minBenchmark)} to ${formatPct(maxBenchmark)}. Tighten execution and test for incremental lift.`;
+}
+
 function renderExecutiveInsights() {
-    const totalInquiries = filteredData.length;
-    const insightsContainer = document.getElementById('summary-key-insights');
+    const headline = document.getElementById('executive-headline');
+    const summaryText = document.getElementById('executive-summary-text');
+    const stageOverallRate = document.getElementById('summary-stage-overall-rate');
+    const stageOverallCopy = document.getElementById('summary-stage-overall-copy');
+    const stageAppRate = document.getElementById('summary-stage-app-rate');
+    const stageOfferRate = document.getElementById('summary-stage-offer-rate');
+    const stageEnrollRate = document.getElementById('summary-stage-enroll-rate');
+    const stageAppCopy = document.getElementById('summary-stage-app-copy');
+    const stageOfferCopy = document.getElementById('summary-stage-offer-copy');
+    const stageEnrollCopy = document.getElementById('summary-stage-enroll-copy');
     const nextStepsContainer = document.getElementById('summary-next-steps');
-    if (!insightsContainer || !nextStepsContainer) return;
+    if (!headline || !summaryText || !stageOverallRate || !stageOverallCopy || !stageAppRate || !stageOfferRate || !stageEnrollRate || !stageAppCopy || !stageOfferCopy || !stageEnrollCopy || !nextStepsContainer) return;
+
+    const metrics = getFunnelMetrics(filteredData);
+    const totalInquiries = metrics.inquiries;
     if (totalInquiries === 0) {
-        insightsContainer.innerHTML = '<li>No data available for the current filter combination.</li>';
+        headline.textContent = 'No data available for the current filter combination.';
+        summaryText.textContent = '';
+        stageOverallRate.textContent = '--';
+        stageOverallCopy.textContent = 'Clear one or more filters to evaluate overall inquiry-to-enrollment conversion.';
+        stageAppRate.textContent = '--';
+        stageOfferRate.textContent = '--';
+        stageEnrollRate.textContent = '--';
+        stageAppCopy.textContent = 'Clear one or more filters to evaluate inquiry-to-application performance.';
+        stageOfferCopy.textContent = 'Clear one or more filters to evaluate application-to-offer performance.';
+        stageEnrollCopy.textContent = 'Clear one or more filters to evaluate offer-to-enrollment performance.';
         nextStepsContainer.innerHTML = '<li>Clear one or more filters to restore actionable guidance.</li>';
         return;
     }
 
-    const applications = filteredData.filter(d => d.application_flag === '1').length;
-    const offers = filteredData.filter(d => d.offer_flag === '1').length;
-    const enrollments = filteredData.filter(d => d.enrollment_flag === '1').length;
-
+    const applications = metrics.applications;
+    const offers = metrics.offers;
+    const enrollments = metrics.enrollments;
     const appLoss = totalInquiries - applications;
-    const offerLoss = applications - offers;
     const enrollLoss = offers - enrollments;
-    const stageLosses = [
-        { stage: 'Inquiry to Application', count: appLoss, rate: safeRate(appLoss, totalInquiries) },
-        { stage: 'Application to Offer', count: offerLoss, rate: safeRate(offerLoss, applications) },
-        { stage: 'Offer to Enrollment', count: enrollLoss, rate: safeRate(enrollLoss, offers) }
-    ].sort((a, b) => b.count - a.count);
-    const largestLeak = stageLosses[0];
 
     const channels = [...new Set(filteredData.map(d => d.source_channel).filter(Boolean))]
         .map(channel => {
@@ -302,34 +342,50 @@ function renderExecutiveInsights() {
         .sort((a, b) => b.rate - a.rate);
 
     const bestCycle = cyclePerformance[0];
+    const overallRate = metrics.inquiryToEnroll;
+    const inquiryToApp = metrics.inquiryToApp;
+    const appToOffer = metrics.appToOffer;
+    const offerToEnroll = metrics.offerToEnroll;
 
-    const overallRate = safeRate(enrollments, totalInquiries);
-    const inquiryToApp = safeRate(applications, totalInquiries);
-    const appToOffer = safeRate(offers, applications);
-    const offerToEnroll = safeRate(enrollments, offers);
+    headline.textContent = `${formatPct(overallRate)} of inquiries become enrollments in the current slice.`;
+    summaryText.textContent = `${enrollments.toLocaleString()} enrollments came from ${totalInquiries.toLocaleString()} inquiries. The biggest loss happens before application submission, with ${appLoss.toLocaleString()} students stopping between inquiry and application. ${topChannel && lowChannel ? `${topChannel.channel} is the strongest current source at ${formatPct(topChannel.rate)}, while ${lowChannel.channel} trails at ${formatPct(lowChannel.rate)}.` : ''} ${bestCycle ? `The best cycle in view is ${bestCycle.cycle} at ${formatPct(bestCycle.rate)} inquiry-to-enrollment conversion.` : ''}`.trim();
 
-    const insights = [
-        `Overall inquiry-to-enrollment conversion is ${formatPct(overallRate)} (${enrollments.toLocaleString()} of ${totalInquiries.toLocaleString()}).`,
-        `Largest leakage happens at ${largestLeak.stage} with ${largestLeak.count.toLocaleString()} students lost (${formatPct(largestLeak.rate)} stage loss).`,
-        topChannel && lowChannel
-            ? `Source spread is material: ${topChannel.channel} converts at ${formatPct(topChannel.rate)} vs ${lowChannel.channel} at ${formatPct(lowChannel.rate)}.`
-            : 'Source-level conversion differences are unavailable for the current filter.',
-        bestCycle
-            ? `Best cycle is ${bestCycle.cycle} at ${formatPct(bestCycle.rate)} inquiry-to-enrollment conversion.`
-            : 'Cycle comparison is unavailable for the current filter.'
-    ];
+    stageOverallRate.textContent = formatPct(overallRate);
+    stageOverallCopy.textContent = `${enrollments.toLocaleString()} enrollments from ${totalInquiries.toLocaleString()} inquiries. This is the headline conversion outcome for the current slice.`;
+    stageAppRate.textContent = formatPct(inquiryToApp);
+    stageOfferRate.textContent = formatPct(appToOffer);
+    stageEnrollRate.textContent = formatPct(offerToEnroll);
+
+    stageAppCopy.textContent = stageGapCopy(
+        'Inquiry-to-application',
+        inquiryToApp,
+        0.20,
+        0.40,
+        'Focus here first: sharpen messaging, simplify next-step asks, and increase qualified lead volume from higher-intent sources.'
+    );
+    stageOfferCopy.textContent = stageGapCopy(
+        'Application-to-offer',
+        appToOffer,
+        0.60,
+        0.80,
+        'Improve application quality and review speed, and prioritize counselor outreach to incomplete or marginal files.'
+    );
+    stageEnrollCopy.textContent = stageGapCopy(
+        'Offer-to-enrollment',
+        offerToEnroll,
+        0.20,
+        0.50,
+        'Test yield messaging, financial aid framing, and counselor follow-up to convert more offers into deposits and enrollments.'
+    );
 
     const nextSteps = [
-        `Prioritize the two biggest leaks first: Inquiry -> Application (${formatPct(safeRate(appLoss, totalInquiries))} loss) and Offer -> Enrollment (${formatPct(safeRate(enrollLoss, offers))} loss).`,
-        priorityStats.length
-            ? `Prioritize reach and conversion investment in ${priorityStats.map(item => `${item.channel} (${formatPct(item.rate)})`).join(', ')}.`
-            : 'Re-balance source mix based on conversion and volume once channel-level sample sizes are sufficient.',
-        `Set cycle targets using the current stage baselines: Inq->App ${formatPct(inquiryToApp)}, App->Offer ${formatPct(appToOffer)}, Offer->Enroll ${formatPct(offerToEnroll)}.`,
-        'Channel growth plan: increase qualified inquiry volume from School Counselor, Referral, Campus Visit by 10-15%.',
-        'Message test plan: interview juniors/seniors on decision drivers, convert top reasons into campaign messaging tests, and track conversion lift by source.'
+        `Close the inquiry-to-application gap first: ${appLoss.toLocaleString()} students are dropping before application, so test message variants, shorten the first conversion step, and push more prospects into visits or counselor touchpoints.`,
+        `Increase qualified leads from high-converting channels such as ${priorityStats.length ? priorityStats.map(item => item.channel).join(', ') : 'the strongest source segments'} instead of only adding more top-of-funnel volume.`,
+        'Use application-to-offer review as a quality control stage: identify incomplete or weak files early, intervene faster, and monitor whether qualification standards are helping or suppressing the class target.',
+        `Run offer-to-enrollment yield tests around value proposition, aid clarity, and counselor follow-up to recover the ${enrollLoss.toLocaleString()} students lost after the offer stage.`,
+        'Prioritize reach and conversion investment where both volume and conversion support the class goal, then reduce spend in weaker channels until the message or process improves.'
     ];
 
-    insightsContainer.innerHTML = insights.map(text => `<li>${text}</li>`).join('');
     nextStepsContainer.innerHTML = nextSteps.map(text => `<li>${text}</li>`).join('');
 }
 
@@ -374,6 +430,56 @@ function renderWaterfallChart() {
         yaxis: { gridcolor: '#ecf0f1', title: 'Student Count' }
     };
     
+    Plotly.newPlot('waterfall-chart', [trace], layout, { responsive: true });
+}
+
+function renderWaterfallChart() {
+    const metrics = getFunnelMetrics(filteredData);
+    const totalInquiries = metrics.inquiries;
+    const applications = metrics.applications;
+    const offers = metrics.offers;
+    const enrollments = metrics.enrollments;
+    const overallConversion = metrics.inquiryToEnroll;
+
+    const lossAppStage = totalInquiries - applications;
+    const lossOfferStage = applications - offers;
+    const lossEnrollStage = offers - enrollments;
+
+    const trace = {
+        x: ['Inquiries', 'Lost (Inquiry to App)', 'Lost (App to Offer)', 'Lost (Offer to Enroll)', 'Final Enrollments'],
+        y: [totalInquiries, -lossAppStage, -lossOfferStage, -lossEnrollStage, enrollments],
+        measure: ['absolute', 'relative', 'relative', 'relative', 'total'],
+        type: 'waterfall',
+        orientation: 'v',
+        connector: { line: { color: '#3498db' } },
+        increasing: { marker: { color: '#27ae60' } },
+        decreasing: { marker: { color: '#e74c3c' } },
+        totals: { marker: { color: '#27ae60' } },
+        textposition: 'outside',
+        text: [
+            totalInquiries.toLocaleString(),
+            '-' + lossAppStage.toLocaleString(),
+            '-' + lossOfferStage.toLocaleString(),
+            '-' + lossEnrollStage.toLocaleString(),
+            enrollments.toLocaleString()
+        ],
+        hovertemplate: '<b>%{x}</b><br>Count: %{y:,.0f}<extra></extra>'
+    };
+
+    const layout = {
+        font: { family: 'Segoe UI, sans-serif', size: 12 },
+        margin: { l: 50, r: 50, t: 30, b: 50 },
+        hovermode: 'closest',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        paper_bgcolor: 'transparent',
+        yaxis: { gridcolor: '#ecf0f1', title: 'Student Count' }
+    };
+
+    const waterfallTitle = document.getElementById('waterfall-title');
+    if (waterfallTitle) {
+        waterfallTitle.textContent = `Funnel Waterfall - ${formatPct(overallConversion)} conversion from inquiry to enrollment`;
+    }
+
     Plotly.newPlot('waterfall-chart', [trace], layout, { responsive: true });
 }
 

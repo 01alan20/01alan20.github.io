@@ -99,9 +99,56 @@
             <!-- Executive Summary Tab -->
             <div class="tab-pane fade show active" id="summary-pane" role="tabpanel">
                 <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="chart-container executive-summary-panel">
+                            <div class="executive-summary-header">
+                                <div>
+                                    <h5>Executive Summary</h5>
+                                    <p id="executive-headline" class="executive-headline">Loading funnel summary...</p>
+                                </div>
+                            </div>
+                            <p id="executive-summary-text" class="executive-summary-text"></p>
+                            <div class="row g-3 stage-action-grid justify-content-center">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="stage-action-card">
+                                        <div class="stage-action-label">Inquiry to Enrollment</div>
+                                        <div class="stage-action-metric" id="summary-stage-overall-rate">--</div>
+                                        <p id="summary-stage-overall-copy" class="stage-action-copy"></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="stage-action-card">
+                                        <div class="stage-action-label">Inquiry to Application</div>
+                                        <div class="stage-action-metric" id="summary-stage-app-rate">--</div>
+                                        <p id="summary-stage-app-copy" class="stage-action-copy"></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="stage-action-card">
+                                        <div class="stage-action-label">Application to Offer</div>
+                                        <div class="stage-action-metric" id="summary-stage-offer-rate">--</div>
+                                        <p id="summary-stage-offer-copy" class="stage-action-copy"></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="stage-action-card">
+                                        <div class="stage-action-label">Offer to Enrollment</div>
+                                        <div class="stage-action-metric" id="summary-stage-enroll-rate">--</div>
+                                        <p id="summary-stage-enroll-copy" class="stage-action-copy"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="executive-next-steps">
+                                <h6>Actionable Next Steps</h6>
+                                <ul id="summary-next-steps" class="insight-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
                     <div class="col-lg-6">
                         <div class="chart-container">
-                            <h5>Funnel Waterfall (Inquiry → Enrollment)</h5>
+                            <h5 id="waterfall-title">Funnel Waterfall (Inquiry to Enrollment)</h5>
                             <div id="waterfall-chart"></div>
                         </div>
                     </div>
@@ -117,20 +164,6 @@
                         <div class="chart-container">
                             <h5>Conversion Rates vs. Benchmarks</h5>
                             <div id="benchmark-chart"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-2 mb-4">
-                    <div class="col-lg-6">
-                        <div class="chart-container insight-container">
-                            <h5>Key Insights</h5>
-                            <ul id="summary-key-insights" class="insight-list"></ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="chart-container insight-container">
-                            <h5>Possible Next Steps</h5>
-                            <ul id="summary-next-steps" class="insight-list"></ul>
                         </div>
                     </div>
                 </div>
