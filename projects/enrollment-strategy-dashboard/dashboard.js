@@ -752,29 +752,35 @@ function renderAidTradeoffChart() {
       type: "scatter",
       mode: "lines+markers",
       name: "Expected Matriculants",
-      x: curve.map((row) => row.award_delta),
+      x: curve.map((row) => row.avg_award),
       y: curve.map((row) => row.expected_matriculants),
-      customdata: curve.map((row) => formatAwardChange(row.award_delta)),
+      customdata: curve.map((row) => [formatAwardChange(row.award_delta), row.award_delta]),
       line: { color: "#2563eb", width: 3 },
       marker: { size: 8 },
       yaxis: "y1",
-      hovertemplate: "%{customdata}<br>Expected matriculants: %{y:,.1f}<extra></extra>",
+      hovertemplate:
+        "Average award: %{x:$,.0f}" +
+        "<br>%{customdata[0]}" +
+        "<br>Expected matriculants: %{y:,.1f}<extra></extra>",
     },
     {
       type: "scatter",
       mode: "lines+markers",
       name: "Expected Net Tuition",
-      x: curve.map((row) => row.award_delta),
+      x: curve.map((row) => row.avg_award),
       y: curve.map((row) => row.expected_net_tuition),
-      customdata: curve.map((row) => formatAwardChange(row.award_delta)),
+      customdata: curve.map((row) => [formatAwardChange(row.award_delta), row.award_delta]),
       line: { color: "#f97316", width: 3 },
       marker: { size: 8 },
       yaxis: "y2",
-      hovertemplate: "%{customdata}<br>Expected NTR: %{y:$,.0f}<extra></extra>",
+      hovertemplate:
+        "Average award: %{x:$,.0f}" +
+        "<br>%{customdata[0]}" +
+        "<br>Expected NTR: %{y:$,.0f}<extra></extra>",
     },
   ], {
     height: 360,
-    xaxis: { title: "Average award change from current", tickprefix: "$" },
+    xaxis: { title: "Average award", tickprefix: "$" },
     yaxis: { title: "Expected matriculants", titlefont: { color: "#2563eb" }, tickfont: { color: "#2563eb" } },
     yaxis2: {
       title: "Expected net tuition",
