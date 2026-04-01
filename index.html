@@ -67,115 +67,142 @@
     <section id="projects" class="page">
       <div class="container">
         <h1>Projects</h1>
-        <p class="muted">A few highlights. Many posts link out to live dashboards and code.</p>
+        <p class="muted">Grouped by area so visitors can scan the work quickly. Every section stays open and the card copy uses plain language.</p>
 
-        <div class="projects-grid">
-          <a class="project-card" id="project-seethrough" href="https://seethroughadmissions.me" target="_blank" rel="noopener">
-            <h3>See Through Admissions</h3>
-            <p>Admissions-intelligence platform for applicants. How it works: choose a target program, enter profile signals, and compare those inputs to historical admit/deny patterns to see likely ranges and decision-support insights.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Admissions Analytics</span><span class="tech-tag">Data Product</span><span class="tech-tag">Decision Support</span>
+        <div class="project-groups">
+          <section class="project-group" aria-labelledby="projects-higher-education">
+            <div class="project-group-head">
+              <h2 id="projects-higher-education">Higher Education</h2>
+              <p class="muted">Dashboards and tools for enrollment, student success, scholarships, and degree value.</p>
             </div>
-          </a>
 
-          <a class="project-card" href="projects/enrollment-strategy-dashboard/" target="_blank" rel="noopener">
-            <h3>Enrollment Strategy Dashboard</h3>
-            <p>Flagship executive dashboard for class target attainment, funnel leakage, program and segment intervention, scholarship strategy, counselor prioritization, melt prevention, and scenario planning. Built as a VP Enrollment decision system using public benchmark anchors plus synthetic student-level funnel records.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Enrollment Strategy</span><span class="tech-tag">Executive Dashboard</span><span class="tech-tag">Scenario Planning</span><span class="tech-tag">Plotly</span>
-            </div>
-          </a>
+            <div class="projects-grid">
+              <a class="project-card" id="project-seethrough" href="https://seethroughadmissions.me" target="_blank" rel="noopener">
+                <h3>See Through Admissions</h3>
+                <p>A tool for applicants to compare their profile with past admissions patterns and get a clearer sense of where they may be competitive.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Admissions</span><span class="tech-tag">Decision Support</span><span class="tech-tag">Data Product</span>
+                </div>
+              </a>
 
-          <a class="project-card" href="projects/marketing-attribution-dashboard/" target="_blank" rel="noopener">
-            <h3>Google Analytics Marketing Exercise</h3>
-            <p>Structured marketing analysis built around the Google Merchandise Store sample-dataset concept. Starts with a data-examination view and an upload-ready Jupyter notebook, then moves into question-driven analysis on channel quality, attribution, transactions, and multi-touch paths.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Google Analytics</span><span class="tech-tag">Notebook Workflow</span><span class="tech-tag">Attribution</span><span class="tech-tag">Plotly</span>
-            </div>
-          </a>
+              <a class="project-card" href="projects/enrollment-strategy-dashboard/" target="_blank" rel="noopener">
+                <h3>Enrollment Strategy Dashboard</h3>
+                <p>A leadership dashboard for tracking class goals, weak points in the funnel, scholarship tradeoffs, and planning scenarios in one place.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Enrollment</span><span class="tech-tag">Planning</span><span class="tech-tag">Dashboard</span><span class="tech-tag">Scenarios</span>
+                </div>
+              </a>
 
-          <a class="project-card" href="projects/enrollment-funnel-benchmark/" target="_blank" rel="noopener">
-            <h3>Enrollment Funnel Benchmark Dashboard</h3>
-            <p>Board-ready interactive dashboard for analyzing the inquiry-to-enrollment pipeline. Tracks conversion rates across funnel stages with synthetic data calibrated to industry benchmarks. Includes segment analysis, source effectiveness, and what-if scenario modeling for enrollment strategy.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Enrollment Analytics</span><span class="tech-tag">Plotly</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Scenario Modeling</span>
-            </div>
-          </a>
+              <a class="project-card" href="projects/enrollment-funnel-benchmark/" target="_blank" rel="noopener">
+                <h3>Enrollment Funnel Benchmark Dashboard</h3>
+                <p>A board-ready view of the path from inquiry to enrollment, with conversion rates, segment comparisons, and what-if planning.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Enrollment Funnel</span><span class="tech-tag">Benchmarks</span><span class="tech-tag">Planning</span><span class="tech-tag">Dashboard</span>
+                </div>
+              </a>
 
-          <a class="project-card" href="projects/retention-early-alert/" target="_blank" rel="noopener">
-            <h3>Student Retention & Early Alert Dashboard</h3>
-            <p>Real-time at-risk student identification dashboard using Open University learning analytics data. Identifies withdrawal predictors, segments at-risk populations by demographics, and provides actionable intervention opportunities. Includes engagement tracking, course-level analysis, and evidence-based recommendations for student support.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Retention Analytics</span><span class="tech-tag">Risk Prediction</span><span class="tech-tag">OULAD Data</span><span class="tech-tag">Intervention Planning</span>
-            </div>
-          </a>
+              <a class="project-card" href="projects/retention-early-alert/" target="_blank" rel="noopener">
+                <h3>Student Retention and Early Alert Dashboard</h3>
+                <p>A dashboard that helps teams spot students who may be at risk of leaving and shows where support could make the biggest difference.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Retention</span><span class="tech-tag">Early Alerts</span><span class="tech-tag">Student Support</span><span class="tech-tag">Dashboard</span>
+                </div>
+              </a>
 
-          <a class="project-card" href="projects/education_career_success/dashboard-local.html" target="_blank" rel="noopener">
-            <h3>Education to Career Success Dashboard</h3>
-            <p>Student-guidance dashboard with staged insights on job offers, salary, satisfaction, and readiness pathways.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Plotly</span><span class="tech-tag">JavaScript</span><span class="tech-tag">CSV</span>
-            </div>
-          </a>
+              <a class="project-card" href="projects/education_career_success/dashboard-local.html" target="_blank" rel="noopener">
+                <h3>Education to Career Success Dashboard</h3>
+                <p>A student outcomes dashboard linking school experiences to job offers, salary, and career readiness after graduation.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Student Outcomes</span><span class="tech-tag">Careers</span><span class="tech-tag">Dashboard</span>
+                </div>
+              </a>
 
-          <a class="project-card" href="projects/crm-engagement-analytics/" target="_blank" rel="noopener">
-            <h3>Student CRM & Engagement Analytics</h3>
-            <p>Interactive analytics dashboard analyzing service adoption, commitment patterns, and communication channels as predictors of student persistence. Reveals that engagement drives retention—students using 4+ services show &lt;5% dropout rates vs. 40%+ for minimal engagement.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Retention Analytics</span><span class="tech-tag">Predictive Modeling</span><span class="tech-tag">CRM Analytics</span><span class="tech-tag">Plotly</span>
-            </div>
-          </a>
+              <a class="project-card" href="projects/crm-engagement-analytics/" target="_blank" rel="noopener">
+                <h3>Student CRM and Engagement Analytics</h3>
+                <p>A dashboard showing how advising, services, and communication activity connect to student persistence and dropout risk.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Student Engagement</span><span class="tech-tag">CRM</span><span class="tech-tag">Retention</span><span class="tech-tag">Analytics</span>
+                </div>
+              </a>
 
-          <a class="project-card" href="projects/day1-first-year-dropout-risk/" target="_blank" rel="noopener">
-            <h3>Day-1 First-Year Dropout Risk Predictor</h3>
-            <p>Standalone Day-1 risk scorer for first-year dropout, using enrollment-time features only. Enter a student profile, get a risk score and tier, and see prescriptive intervention guidance for online nudges or in-person outreach.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Early Risk Scoring</span><span class="tech-tag">First-Year Retention</span><span class="tech-tag">Tiered Intervention</span><span class="tech-tag">Python</span>
-            </div>
-          </a>
+              <a class="project-card" href="projects/day1-first-year-dropout-risk/" target="_blank" rel="noopener">
+                <h3>First-Year Dropout Risk Predictor</h3>
+                <p>A day-one risk tool that scores a new student profile and suggests the level of outreach or support they may need.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Risk Scoring</span><span class="tech-tag">First-Year Students</span><span class="tech-tag">Interventions</span><span class="tech-tag">Predictive Model</span>
+                </div>
+              </a>
 
-          <!-- TEMPORARILY DISABLED: International Student Mobility Dashboard
-          Due to data loading issues - revisiting implementation approach.
-          <a class="project-card" href="projects/international-student-mobility/dashboard.html" target="_blank" rel="noopener">
-            <h3>International Student Mobility Dashboard</h3>
-            <p>Interactive visualization of global higher education student flows. Select any country and choose inbound or outbound flows to explore where students are moving. World map with directional arrows sized by volume, detailed student roster, trend analysis, and year-over-year comparisons.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Student Mobility</span><span class="tech-tag">Flow Mapping</span><span class="tech-tag">World Map</span><span class="tech-tag">Plotly</span><span class="tech-tag">Global Education</span>
-            </div>
-          </a>
-          -->
+              <!-- TEMPORARILY DISABLED: International Student Mobility Dashboard
+              Due to data loading issues - revisiting implementation approach.
+              <a class="project-card" href="projects/international-student-mobility/dashboard.html" target="_blank" rel="noopener">
+                <h3>International Student Mobility Dashboard</h3>
+                <p>Interactive visualization of global higher education student flows. Select any country and choose inbound or outbound flows to explore where students are moving. World map with directional arrows sized by volume, detailed student roster, trend analysis, and year-over-year comparisons.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Student Mobility</span><span class="tech-tag">Flow Mapping</span><span class="tech-tag">World Map</span><span class="tech-tag">Plotly</span><span class="tech-tag">Global Education</span>
+                </div>
+              </a>
+              -->
 
-          <a class="project-card" href="projects/degree-roi-value/" target="_blank" rel="noopener">
-            <h3>Degree ROI & Value Model</h3>
-            <p>Institutional cost-to-earnings analysis dashboard comparing financial value across U.S. higher education institutions. ROI Value Score composite metric synthesizing earnings potential, completion rates, and debt burden. Region and institution-type filtering with detailed benchmarking across public, private, and for-profit universities.</p>
-            <div class="project-tech">
-              <span class="tech-tag">College Scorecard</span><span class="tech-tag">ROI Analysis</span><span class="tech-tag">Cost & Earnings</span><span class="tech-tag">Higher Ed</span>
-            </div>
-          </a>
+              <a class="project-card" href="projects/degree-roi-value/" target="_blank" rel="noopener">
+                <h3>Degree Value and Earnings Dashboard</h3>
+                <p>A dashboard comparing college cost, debt, completion, and earnings to help explain which institutions deliver stronger financial value.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">College Value</span><span class="tech-tag">Cost and Earnings</span><span class="tech-tag">Dashboard</span><span class="tech-tag">Higher Ed</span>
+                </div>
+              </a>
 
-          <a class="project-card" href="projects/condo-roi/" target="_blank" rel="noopener">
-            <h3>Singapore Condo Payback Explorer</h3>
-            <p>Interactive property analytics dashboard for screening condo projects by recent buy price, rent, district, area bucket, tenure, and rental payback period. Includes comparison views, trend analysis, and ranked search results for identifying projects that recover purchase price faster through rent.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Real Estate Analytics</span><span class="tech-tag">Payback Analysis</span><span class="tech-tag">Singapore Market</span><span class="tech-tag">JavaScript</span>
-            </div>
-          </a>
+              <a class="project-card" href="projects/scholarship-optimization/" target="_blank" rel="noopener">
+                <h3>Scholarship Optimization Model</h3>
+                <p>A planning model that shows when scholarship discounts may help enrollment and when they may reduce net revenue too much.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Scholarships</span><span class="tech-tag">Revenue</span><span class="tech-tag">Enrollment</span><span class="tech-tag">Pricing</span>
+                </div>
+              </a>
 
-          <a class="project-card" href="projects/scholarship-optimization/" target="_blank" rel="noopener">
-            <h3>Scholarship Optimization Model</h3>
-            <p>Revenue-maximizing scholarship discount strategy analysis. Models optimal discount level for each institution balancing enrollment gains against per-student revenue loss. Reveals which institutions benefit from scholarships (counterintuitive revenue gains) vs. those harmed by discounts (high baseline demand). Includes yield elasticity analysis and peer benchmarking.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Scholarship Strategy</span><span class="tech-tag">Revenue Analysis</span><span class="tech-tag">Enrollment Economics</span><span class="tech-tag">Price Sensitivity</span>
+              <a class="project-card" href="projects/ipeds-major-trends/" target="_blank" rel="noopener">
+                <h3>IPEDS Major Trends</h3>
+                <p>A trends dashboard showing which majors grew or shrank over time, with national comparisons and state-by-state views.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Majors</span><span class="tech-tag">Trends</span><span class="tech-tag">IPEDS</span><span class="tech-tag">Dashboard</span>
+                </div>
+              </a>
             </div>
-          </a>
+          </section>
 
-          <a class="project-card" href="projects/ipeds-major-trends/" target="_blank" rel="noopener">
-            <h3>IPEDS Major Trends (2013-2023)</h3>
-            <p>Interactive major-change dashboard using IPEDS completions data. Tracks gross and percentage change in graduates by 4-digit CIP major groups, compares top majors between 2013 and 2023 via infographic slopegraph, and maps state-level percent change for any selected major.</p>
-            <div class="project-tech">
-              <span class="tech-tag">IPEDS</span><span class="tech-tag">Major Trends</span><span class="tech-tag">US Map</span><span class="tech-tag">Slopegraph</span>
+          <section class="project-group" aria-labelledby="projects-real-estate">
+            <div class="project-group-head">
+              <h2 id="projects-real-estate">Real Estate</h2>
+              <p class="muted">Property analysis tools written for faster screening and comparison.</p>
             </div>
-          </a>
+
+            <div class="projects-grid">
+              <a class="project-card" href="projects/condo-roi/" target="_blank" rel="noopener">
+                <h3>Singapore Condo Investments</h3>
+                <p>A dashboard for comparing condo projects by price, rent, district, size, tenure, and estimated payback period.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Condo Search</span><span class="tech-tag">Property Comparison</span><span class="tech-tag">Payback Period</span><span class="tech-tag">Singapore</span>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="project-group" aria-labelledby="projects-marketing">
+            <div class="project-group-head">
+              <h2 id="projects-marketing">Marketing</h2>
+              <p class="muted">Marketing analysis focused on channel performance, attribution, and path-to-conversion questions.</p>
+            </div>
+
+            <div class="projects-grid">
+              <a class="project-card" href="projects/marketing-attribution-dashboard/" target="_blank" rel="noopener">
+                <h3>Marketing Attribution Dashboard</h3>
+                <p>A marketing analysis project that looks at channel quality, assisted conversions, transactions, and multi-touch customer paths.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Marketing</span><span class="tech-tag">Attribution</span><span class="tech-tag">Google Analytics</span><span class="tech-tag">Dashboard</span>
+                </div>
+              </a>
+            </div>
+          </section>
         </div>
       </div>
     </section>
