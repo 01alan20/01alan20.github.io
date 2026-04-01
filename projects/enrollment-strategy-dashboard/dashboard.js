@@ -526,18 +526,19 @@ function renderStageConversionChart(counts) {
 }
 
 function renderLeakageCountChart(counts) {
+  // Use business-facing drop-off buckets instead of raw transition labels.
   const values = [
-    counts.inquiries - counts.started,
-    counts.started - counts.completed,
+    counts.inquiries - counts.completed,
     counts.completed - counts.admit,
     counts.admit - counts.deposit,
-    counts.deposit - counts.matric,
+    Math.max(counts.deposit - counts.matric - counts.melt, 0),
+    counts.melt,
   ];
   plot("chart-leakage-count", [
     {
       type: "waterfall",
       measure: ["relative", "relative", "relative", "relative", "relative"],
-      x: ["No Start", "No Completion", "No Admit", "No Deposit", "Melt / No Show"],
+      x: ["No Application", "No Admit", "No Deposit", "No Start", "Melt / No Show"],
       y: values.map((value) => -value),
       text: values.map((value) => formatNumber(value)),
       textposition: "outside",
