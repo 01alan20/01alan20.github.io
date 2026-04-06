@@ -1,0 +1,57 @@
+{
+  "project_name": "University Registrar Intelligence Dashboard",
+  "public_framing": "Generic public-university registrar operations dashboard",
+  "current_term": "2026 Winter",
+  "programs_modeled": [
+    "Business Administration",
+    "Business Analytics",
+    "Elementary Education",
+    "Secondary Education"
+  ],
+  "official_source_basis": [
+    {
+      "label": "OSU Academic Regulations",
+      "url": "https://catalog.oregonstate.edu/regulations/"
+    },
+    {
+      "label": "OSU Business Administration Program",
+      "url": "https://catalog.oregonstate.edu/college-departments/business/business-administration-ba-bs-hba-hbs/"
+    },
+    {
+      "label": "OSU Business Analytics Program",
+      "url": "https://catalog.oregonstate.edu/college-departments/business/business-analytics-bs-hbs/"
+    },
+    {
+      "label": "OSU Elementary Education Program",
+      "url": "https://catalog.oregonstate.edu/college-departments/education/educational-practice-research/elementary-education-ba-bs-hba-hbs/"
+    },
+    {
+      "label": "OSU Secondary Education Program",
+      "url": "https://catalog.oregonstate.edu/college-departments/education/educational-practice-research/secondary-education-ba-bs-hba-hbs/"
+    }
+  ],
+  "policy_rules_modeled": [
+    "180 earned quarter credits",
+    "60 upper-division credits",
+    "36 credits in each major including 24 upper-division credits",
+    "2.00 institutional GPA floor, with 3.0 modeled floor for education majors",
+    "residence, core curriculum, and world language completion",
+    "education-program professional progression readiness"
+  ],
+  "local_modeled_layer": [
+    "synthetic student current-term status records",
+    "rule-based registration blocker logic",
+    "required-course seat pressure and waitlist modeling",
+    "anonymized action queues for registrar triage"
+  ],
+  "caveat": "The data files in this project are synthetic operational records generated from policy-aware rules. They are modeled from official Oregon State catalog and regulations sources but do not represent live institutional data.",
+  "headline_summary": "1,139 students are blocked from registration, 3,240 are off track, and 39 seniors appear graduation-ready without an application.",
+  "quick_stats": {
+    "students": 10400,
+    "sections": 75,
+    "blocked_students": 1139,
+    "not_registered_students": 867,
+    "off_track_students": 3240,
+    "eligible_not_applied": 39
+  }
+}

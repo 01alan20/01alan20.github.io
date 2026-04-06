@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Registrar Intelligence Dashboard</title>
+  <meta
+    name="description"
+    content="A current-term registrar operations dashboard for registration blockers, seat pressure, degree-audit risk, and graduation follow-up."
+  >
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@300;400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="hero-links">
+          <a class="hero-link" href="https://catalog.oregonstate.edu/regulations/" target="_blank" rel="noopener">Policy Source</a>
+          <a class="hero-link" href="https://catalog.oregonstate.edu/college-departments/business/" target="_blank" rel="noopener">Program Structure Basis</a>
+          <a class="hero-link" href="https://catalog.oregonstate.edu/college-departments/education/" target="_blank" rel="noopener">Education Program Basis</a>
+        </div>
+        <div class="eyebrow">Registrar Operations Command Center</div>
+        <h1>University Registrar Intelligence Dashboard</h1>
+        <p class="hero-lead">
+          A current-term operational view of blocked registration, required-course seat pressure, degree-audit risk,
+          and graduation follow-up. The page stays generic in public framing, while the underlying policy logic is
+          modeled from official Oregon State undergraduate rules and program structure.
+        </p>
+        <div class="hero-tags">
+          <span class="hero-tag">Current Term</span>
+          <span class="hero-tag">Registrar Triage</span>
+          <span class="hero-tag">Degree Audit</span>
+          <span class="hero-tag">Action Queues</span>
+        </div>
+        <p class="hero-subnote" id="hero-source-note">Loading methodology note...</p>
+      </div>
+
+      <aside class="hero-brief">
+        <div class="brief-label" id="brief-term">Loading term...</div>
+        <h2 id="brief-headline">Loading current-term readout...</h2>
+        <p id="brief-copy">The dashboard is loading student status, section pressure, and graduation workflow signals.</p>
+        <div class="brief-metrics">
+          <div>
+            <span class="brief-metric-label">Students</span>
+            <strong id="brief-students">-</strong>
+          </div>
+          <div>
+            <span class="brief-metric-label">Blocked</span>
+            <strong id="brief-blocked">-</strong>
+          </div>
+          <div>
+            <span class="brief-metric-label">Off Track</span>
+            <strong id="brief-offtrack">-</strong>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <nav class="section-nav" aria-label="Dashboard sections">
+      <a href="#snapshot">Snapshot</a>
+      <a href="#registration">Registration</a>
+      <a href="#seat-pressure">Seat Pressure</a>
+      <a href="#audit">Degree Audit</a>
+      <a href="#actions">Action Queues</a>
+      <a href="#methodology">Methodology</a>
+    </nav>
+
+    <section class="panel control-bar">
+      <div class="control-title-block">
+        <div class="section-label">Filters</div>
+        <h2>Filter the term by program, class, hold status, and audit status</h2>
+      </div>
+      <div class="control-grid">
+        <label>
+          <span>Program</span>
+          <select id="program-filter"></select>
+        </label>
+        <label>
+          <span>Class Level</span>
+          <select id="class-level-filter"></select>
+        </label>
+        <label>
+          <span>Hold Status</span>
+          <select id="hold-filter"></select>
+        </label>
+        <label>
+          <span>Audit Status</span>
+          <select id="audit-filter"></select>
+        </label>
+      </div>
+      <div class="control-actions">
+        <button id="reset-filters-btn" type="button" class="ghost-button">Reset Filters</button>
+        <button id="clear-focus-btn" type="button" class="ghost-button ghost-alt">Clear Queue Focus</button>
+        <div class="provenance-note" id="provenance-note">Loading current-term provenance...</div>
+      </div>
+    </section>
+
+    <section id="snapshot" class="kpi-grid" aria-label="Executive snapshot">
+      <button class="kpi-card accent-navy" type="button" data-focus-queue="registration">
+        <div class="kpi-label">Registration Completion</div>
+        <div class="kpi-value" id="kpi-registration-rate">-</div>
+        <div class="kpi-foot" id="kpi-registration-foot">-</div>
+      </button>
+      <button class="kpi-card accent-brick" type="button" data-focus-queue="hold">
+        <div class="kpi-label">Blocked By Hold</div>
+        <div class="kpi-value" id="kpi-blocked">-</div>
+        <div class="kpi-foot" id="kpi-blocked-foot">-</div>
+      </button>
+      <button class="kpi-card accent-amber" type="button" data-focus-queue="hold">
+        <div class="kpi-label">Unresolved Hold Rate</div>
+        <div class="kpi-value" id="kpi-hold-rate">-</div>
+        <div class="kpi-foot" id="kpi-hold-foot">-</div>
+      </button>
+      <button class="kpi-card accent-green" type="button" data-focus-queue="course">
+        <div class="kpi-label">Waitlist Pressure Index</div>
+        <div class="kpi-value" id="kpi-waitlist-pressure">-</div>
+        <div class="kpi-foot" id="kpi-waitlist-foot">-</div>
+      </button>
+      <button class="kpi-card accent-plum" type="button" data-focus-queue="audit" data-focus-value="off_track">
+        <div class="kpi-label">Off-Track Students</div>
+        <div class="kpi-value" id="kpi-off-track">-</div>
+        <div class="kpi-foot" id="kpi-off-track-foot">-</div>
+      </button>
+      <button class="kpi-card accent-slate" type="button" data-focus-queue="graduation" data-focus-value="eligible_not_applied">
+        <div class="kpi-label">Eligible, Not Applied</div>
+        <div class="kpi-value" id="kpi-eligible-not-applied">-</div>
+        <div class="kpi-foot" id="kpi-eligible-foot">-</div>
+      </button>
+    </section>
+
+    <section id="registration" class="panel section-panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Registration And Holds</div>
+          <h2>Who is blocked, and where do support teams need to intervene first?</h2>
+        </div>
+        <p id="registration-explainer">Loading registration readout...</p>
+      </div>
+      <div class="chart-grid two-up">
+        <div class="chart-card">
+          <h3>Blocked Registration by Hold Type</h3>
+          <div class="chart" id="chart-hold-blockers"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Registration Status by Program</h3>
+          <div class="chart" id="chart-registration-status"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="seat-pressure" class="panel section-panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Course Demand And Seat Pressure</div>
+          <h2>Which required sections are constraining student progress this term?</h2>
+        </div>
+        <p id="course-explainer">Loading course-demand readout...</p>
+      </div>
+      <div class="chart-grid two-up">
+        <div class="chart-card">
+          <h3>Required-Course Waitlist Pressure</h3>
+          <div class="chart" id="chart-waitlist-pressure"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Course Fill and Capacity Pressure</h3>
+          <div class="chart" id="chart-seat-risk"></div>
+        </div>
+      </div>
+      <div class="risk-definitions" aria-label="Section risk label definitions">
+        <article class="risk-item risk-under">
+          <div class="risk-head">
+            <span class="risk-dot"></span>
+            <h3>Under Viability</h3>
+          </div>
+          <p>Section demand is too low to be operationally healthy. These sections may need consolidation or targeted enrollment support.</p>
+        </article>
+        <article class="risk-item risk-stable">
+          <div class="risk-head">
+            <span class="risk-dot"></span>
+            <h3>Stable</h3>
+          </div>
+          <p>Seat fill and waitlist conditions are within expected operating range. No immediate intervention is required.</p>
+        </article>
+        <article class="risk-item risk-bottleneck">
+          <div class="risk-head">
+            <span class="risk-dot"></span>
+            <h3>Bottleneck</h3>
+          </div>
+          <p>Demand exceeds practical seat supply, usually shown by persistent waitlist pressure. These sections are candidates for additional capacity.</p>
+        </article>
+      </div>
+      <div class="table-card">
+        <div class="table-header">
+          <h3>Highest-Pressure Required Sections</h3>
+          <span id="courses-count-badge" class="table-badge">-</span>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Program</th>
+                <th>Capacity</th>
+                <th>Enrolled</th>
+                <th>Waitlist</th>
+                <th>Pressure</th>
+                <th>Risk</th>
+              </tr>
+            </thead>
+            <tbody id="table-courses"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="audit" class="panel section-panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Degree Audit And Graduation Risk</div>
+          <h2>Who is off track, and is the problem pace, policy, or administrative completion?</h2>
+        </div>
+        <p id="audit-explainer">Loading audit readout...</p>
+      </div>
+      <div class="chart-grid two-up">
+        <div class="chart-card">
+          <h3>Audit Status by Program</h3>
+          <div class="chart" id="chart-audit-program"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Audit Status by Class Level</h3>
+          <div class="chart" id="chart-audit-class"></div>
+        </div>
+      </div>
+      <div class="chart-grid single-up">
+        <div class="chart-card">
+          <h3>Graduation Funnel for Final-Year Students</h3>
+          <div class="chart" id="chart-graduation-funnel"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="actions" class="panel section-panel">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Action Queues</div>
+          <h2>What should registrar teams work next?</h2>
+        </div>
+        <p id="action-focus-note">Queues are sorted by urgency and current filters. Click a relevant KPI or chart to focus one queue.</p>
+      </div>
+      <div class="action-grid">
+        <div class="table-card queue-card" id="queue-card-hold">
+          <div class="table-header">
+            <h3>Hold Resolution Queue</h3>
+            <span id="holds-count-badge" class="table-badge">-</span>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Program</th>
+                  <th>Class</th>
+                  <th>Hold</th>
+                  <th>Issue</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="table-holds"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-card queue-card" id="queue-card-audit">
+          <div class="table-header">
+            <h3>Degree Audit Intervention Queue</h3>
+            <span id="audit-count-badge" class="table-badge">-</span>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Program</th>
+                  <th>Class</th>
+                  <th>Status</th>
+                  <th>Reason</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="table-audit"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-card queue-card" id="queue-card-graduation">
+          <div class="table-header">
+            <h3>Graduation Follow-Up Queue</h3>
+            <span id="graduation-count-badge" class="table-badge">-</span>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Program</th>
+                  <th>Class</th>
+                  <th>Credits</th>
+                  <th>GPA</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="table-graduation"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <details id="methodology" class="panel methodology">
+      <summary>
+        <span>Methodology And Source Basis</span>
+        <span class="summary-hint">Modeled rules, source links, and caveats</span>
+      </summary>
+      <div class="methodology-grid">
+        <article class="insight-card">
+          <h3>Source Basis</h3>
+          <ul id="source-list" class="method-list"></ul>
+        </article>
+        <article class="insight-card">
+          <h3>Policy Rules Modeled</h3>
+          <ul id="rule-list" class="method-list"></ul>
+        </article>
+        <article class="insight-card">
+          <h3>Local Modeled Layer</h3>
+          <ul id="model-list" class="method-list"></ul>
+        </article>
+      </div>
+      <p class="method-caveat" id="method-caveat">Loading caveat...</p>
+    </details>
+
+    <footer class="page-footer">
+      <p>
+        This project is intentionally framed as a generic public-university operations dashboard. The policy logic and
+        program structure underneath it are modeled from official Oregon State undergraduate catalog and regulations sources.
+      </p>
+      <p>
+        The data shown here are synthetic, reproducible, and policy-aware. They are designed to demonstrate registrar support,
+        degree audit, and seat-management thinking rather than represent live institutional records.
+      </p>
+    </footer>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

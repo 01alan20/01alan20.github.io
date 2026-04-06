@@ -1,0 +1,76 @@
+section_id,term_name,program_name,school,course_code,course_title,requirement_type,course_level_group,capacity,enrolled,waitlist_count,fill_rate,waitlist_pressure,section_risk,modality,time_slot
+BUAD-BA101-01,2026 Winter,Business Administration,Business,BA 101,Introduction to Business,Required,Senior,50,49,0,0.98,0.0,Stable,In Person,Morning
+BUAD-BA101-02,2026 Winter,Business Administration,Business,BA 101,Introduction to Business,Required,Sophomore,31,31,1,1.0,0.032,Stable,Online,Afternoon
+BUAD-ACTG211-01,2026 Winter,Business Administration,Business,ACTG 211,Financial Accounting,Required,Sophomore,30,30,1,1.0,0.033,Bottleneck,In Person,Morning
+BUAD-ACTG211-02,2026 Winter,Business Administration,Business,ACTG 211,Financial Accounting,Required,Senior,45,45,3,1.0,0.067,Bottleneck,Hybrid,Afternoon
+BUAD-ACTG213-01,2026 Winter,Business Administration,Business,ACTG 213,Managerial Accounting,Required,Senior,33,32,0,0.97,0.0,Stable,In Person,Midday
+BUAD-ECON201-01,2026 Winter,Business Administration,Business,ECON 201,Introduction to Microeconomics,Required,Junior,42,38,0,0.905,0.0,Stable,In Person,Midday
+BUAD-ECON202-01,2026 Winter,Business Administration,Business,ECON 202,Introduction to Macroeconomics,Required,Senior,40,39,0,0.975,0.0,Stable,In Person,Afternoon
+BUAD-BA260-01,2026 Winter,Business Administration,Business,BA 260,Principles of Marketing,Required,Senior,30,27,0,0.9,0.0,Stable,In Person,Midday
+BUAD-BA302-01,2026 Winter,Business Administration,Business,BA 302,Managing Organizations,Required,Sophomore,29,28,0,0.966,0.0,Stable,Hybrid,Midday
+BUAD-FIN350-01,2026 Winter,Business Administration,Business,FIN 350,Business Finance,Required,Senior,33,33,1,1.0,0.03,Stable,Online,Midday
+BUAD-BIS315-01,2026 Winter,Business Administration,Business,BIS 315,Business Information Systems,Required,Junior,32,32,0,1.0,0.0,Stable,Online,Midday
+BUAD-BA390-01,2026 Winter,Business Administration,Business,BA 390,Business Career Success,Required,Sophomore,50,50,2,1.0,0.04,Bottleneck,Hybrid,Midday
+BUAD-BA497-01,2026 Winter,Business Administration,Business,BA 497,Business Strategy Capstone,Required,Sophomore,34,34,2,1.0,0.059,Bottleneck,In Person,Midday
+BUAD-BA497-02,2026 Winter,Business Administration,Business,BA 497,Business Strategy Capstone,Required,Sophomore,48,48,6,1.0,0.125,Bottleneck,In Person,Evening
+BUAD-BA361-01,2026 Winter,Business Administration,Business,BA 361,Retail Management,Elective,Junior,27,18,0,0.667,0.0,Stable,Hybrid,Morning
+BUAD-BA364-01,2026 Winter,Business Administration,Business,BA 364,Supply Chain Analytics,Elective,Sophomore,29,23,0,0.793,0.0,Stable,In Person,Afternoon
+BUAD-BA469-01,2026 Winter,Business Administration,Business,BA 469,Brand Management,Elective,Junior,45,25,0,0.556,0.0,Under Viability,In Person,Morning
+BUAD-BA474-01,2026 Winter,Business Administration,Business,BA 474,Global Business,Elective,Junior,40,31,0,0.775,0.0,Stable,In Person,Afternoon
+BANA-BA230-01,2026 Winter,Business Analytics,Business,BA 230,Business Analytics Foundations,Required,Senior,41,40,0,0.976,0.0,Stable,In Person,Midday
+BANA-BA230-02,2026 Winter,Business Analytics,Business,BA 230,Business Analytics Foundations,Required,Sophomore,32,31,0,0.969,0.0,Stable,Hybrid,Afternoon
+BANA-MTH241-01,2026 Winter,Business Analytics,Business,MTH 241,Calculus for Management and Social Science,Required,Sophomore,34,34,3,1.0,0.088,Bottleneck,Hybrid,Morning
+BANA-MTH241-02,2026 Winter,Business Analytics,Business,MTH 241,Calculus for Management and Social Science,Required,Junior,38,38,8,1.0,0.211,Bottleneck,In Person,Afternoon
+BANA-ST351-01,2026 Winter,Business Analytics,Business,ST 351,Introduction to Statistical Methods,Required,Sophomore,44,38,0,0.864,0.0,Stable,In Person,Afternoon
+BANA-BIS315-01,2026 Winter,Business Analytics,Business,BIS 315,Business Information Systems,Required,Junior,43,37,0,0.86,0.0,Stable,Hybrid,Afternoon
+BANA-BANA350-01,2026 Winter,Business Analytics,Business,BANA 350,Data Visualization for Business,Required,Senior,42,36,0,0.857,0.0,Stable,In Person,Midday
+BANA-BANA360-01,2026 Winter,Business Analytics,Business,BANA 360,Predictive Modeling,Required,Junior,51,51,2,1.0,0.039,Stable,In Person,Afternoon
+BANA-BANA410-01,2026 Winter,Business Analytics,Business,BANA 410,Decision Analytics,Required,Junior,28,24,0,0.857,0.0,Stable,In Person,Evening
+BANA-BANA420-01,2026 Winter,Business Analytics,Business,BANA 420,Machine Learning for Business,Required,Junior,34,34,0,1.0,0.0,Stable,In Person,Midday
+BANA-BA390-01,2026 Winter,Business Analytics,Business,BA 390,Business Career Success,Required,Senior,41,41,10,1.0,0.244,Bottleneck,In Person,Morning
+BANA-BA497-01,2026 Winter,Business Analytics,Business,BA 497,Analytics Strategy Capstone,Required,Senior,30,30,7,1.0,0.233,Bottleneck,In Person,Morning
+BANA-BA497-02,2026 Winter,Business Analytics,Business,BA 497,Analytics Strategy Capstone,Required,Junior,42,42,6,1.0,0.143,Bottleneck,In Person,Midday
+BANA-BANA365-01,2026 Winter,Business Analytics,Business,BANA 365,Operations Forecasting,Elective,Junior,30,30,0,1.0,0.0,Stable,Online,Midday
+BANA-BANA430-01,2026 Winter,Business Analytics,Business,BANA 430,Optimization for Managers,Elective,Senior,32,19,0,0.594,0.0,Stable,In Person,Afternoon
+BANA-BANA440-01,2026 Winter,Business Analytics,Business,BANA 440,Customer Analytics,Elective,Senior,39,24,0,0.615,0.0,Stable,In Person,Evening
+BANA-BANA450-01,2026 Winter,Business Analytics,Business,BANA 450,Applied Data Storytelling,Elective,Senior,39,39,1,1.0,0.026,Stable,In Person,Afternoon
+ELED-ED219-01,2026 Winter,Elementary Education,Education,ED 219,Foundations of Teaching,Required,Junior,28,25,0,0.893,0.0,Stable,In Person,Afternoon
+ELED-ED219-02,2026 Winter,Elementary Education,Education,ED 219,Foundations of Teaching,Required,Junior,28,25,0,0.893,0.0,Stable,In Person,Morning
+ELED-ED253-01,2026 Winter,Elementary Education,Education,ED 253,Human Development and Learning,Required,Sophomore,44,44,9,1.0,0.205,Bottleneck,Hybrid,Midday
+ELED-ED253-02,2026 Winter,Elementary Education,Education,ED 253,Human Development and Learning,Required,Junior,40,40,5,1.0,0.125,Bottleneck,In Person,Evening
+ELED-ED309-01,2026 Winter,Elementary Education,Education,ED 309,Inclusive Teaching Practice,Required,Junior,39,39,0,1.0,0.0,Stable,Hybrid,Afternoon
+ELED-ED311-01,2026 Winter,Elementary Education,Education,ED 311,Teaching Reading and Language Arts,Required,Senior,44,37,0,0.841,0.0,Stable,In Person,Morning
+ELED-ED320-01,2026 Winter,Elementary Education,Education,ED 320,Mathematics Methods,Required,Senior,48,44,0,0.917,0.0,Stable,Online,Midday
+ELED-ED360-01,2026 Winter,Elementary Education,Education,ED 360,Classroom Assessment,Required,Junior,36,31,0,0.861,0.0,Stable,In Person,Afternoon
+ELED-ED416-01,2026 Winter,Elementary Education,Education,ED 416,Professional Level Practicum,Required,Sophomore,51,51,1,1.0,0.02,Stable,In Person,Midday
+ELED-ED416-02,2026 Winter,Elementary Education,Education,ED 416,Professional Level Practicum,Required,Senior,40,40,0,1.0,0.0,Stable,In Person,Morning
+ELED-ED446-01,2026 Winter,Elementary Education,Education,ED 446,Elementary Literacy Practicum,Required,Sophomore,48,41,0,0.854,0.0,Stable,In Person,Midday
+ELED-ED446-02,2026 Winter,Elementary Education,Education,ED 446,Elementary Literacy Practicum,Required,Junior,51,44,0,0.863,0.0,Stable,In Person,Afternoon
+ELED-ED450-01,2026 Winter,Elementary Education,Education,ED 450,Student Teaching Seminar,Required,Junior,50,50,12,1.0,0.24,Bottleneck,Online,Midday
+ELED-ED450-02,2026 Winter,Elementary Education,Education,ED 450,Student Teaching Seminar,Required,Senior,31,31,3,1.0,0.097,Bottleneck,Hybrid,Evening
+ELED-ED483-01,2026 Winter,Elementary Education,Education,ED 483,Student Teaching,Required,Senior,44,44,9,1.0,0.205,Bottleneck,In Person,Midday
+ELED-ED483-02,2026 Winter,Elementary Education,Education,ED 483,Student Teaching,Required,Senior,33,33,7,1.0,0.212,Bottleneck,Hybrid,Morning
+ELED-ED332-01,2026 Winter,Elementary Education,Education,ED 332,Arts Integration,Elective,Junior,31,18,0,0.581,0.0,Stable,Hybrid,Evening
+ELED-ED342-01,2026 Winter,Elementary Education,Education,ED 342,Community Based Learning,Elective,Sophomore,44,20,0,0.455,0.0,Under Viability,Online,Midday
+ELED-ED372-01,2026 Winter,Elementary Education,Education,ED 372,Science Methods,Elective,Junior,24,16,0,0.667,0.0,Stable,Online,Morning
+ELED-ED382-01,2026 Winter,Elementary Education,Education,ED 382,Social Studies Methods,Elective,Junior,39,19,0,0.487,0.0,Under Viability,In Person,Afternoon
+SEED-ED219-01,2026 Winter,Secondary Education,Education,ED 219,Foundations of Teaching,Required,Junior,32,32,0,1.0,0.0,Stable,In Person,Afternoon
+SEED-ED219-02,2026 Winter,Secondary Education,Education,ED 219,Foundations of Teaching,Required,Sophomore,37,35,0,0.946,0.0,Stable,In Person,Afternoon
+SEED-ED309-01,2026 Winter,Secondary Education,Education,ED 309,Inclusive Teaching Practice,Required,Junior,36,36,4,1.0,0.111,Bottleneck,In Person,Morning
+SEED-ED309-02,2026 Winter,Secondary Education,Education,ED 309,Inclusive Teaching Practice,Required,Sophomore,51,51,9,1.0,0.176,Bottleneck,Hybrid,Midday
+SEED-ED331-01,2026 Winter,Secondary Education,Education,ED 331,Secondary Curriculum Design,Required,Sophomore,28,25,0,0.893,0.0,Stable,In Person,Evening
+SEED-ED352-01,2026 Winter,Secondary Education,Education,ED 352,Classroom Management,Required,Junior,44,42,0,0.955,0.0,Stable,Hybrid,Evening
+SEED-ED410-01,2026 Winter,Secondary Education,Education,ED 410,Professional Methods Seminar,Required,Senior,32,32,1,1.0,0.031,Stable,In Person,Afternoon
+SEED-ED410-02,2026 Winter,Secondary Education,Education,ED 410,Professional Methods Seminar,Required,Sophomore,46,42,0,0.913,0.0,Stable,In Person,Midday
+SEED-ED412-01,2026 Winter,Secondary Education,Education,ED 412,Assessment in Secondary Classrooms,Required,Senior,51,46,0,0.902,0.0,Stable,In Person,Evening
+SEED-ED412-02,2026 Winter,Secondary Education,Education,ED 412,Assessment in Secondary Classrooms,Required,Junior,48,41,0,0.854,0.0,Stable,In Person,Morning
+SEED-ED416-01,2026 Winter,Secondary Education,Education,ED 416,Professional Level Practicum,Required,Sophomore,49,49,0,1.0,0.0,Stable,Online,Midday
+SEED-ED416-02,2026 Winter,Secondary Education,Education,ED 416,Professional Level Practicum,Required,Junior,32,27,0,0.844,0.0,Stable,Hybrid,Afternoon
+SEED-ED451-01,2026 Winter,Secondary Education,Education,ED 451,Secondary Student Teaching Seminar,Required,Sophomore,51,51,4,1.0,0.078,Bottleneck,Hybrid,Midday
+SEED-ED451-02,2026 Winter,Secondary Education,Education,ED 451,Secondary Student Teaching Seminar,Required,Sophomore,46,46,8,1.0,0.174,Bottleneck,In Person,Morning
+SEED-ED483-01,2026 Winter,Secondary Education,Education,ED 483,Student Teaching,Required,Sophomore,38,38,5,1.0,0.132,Bottleneck,Hybrid,Morning
+SEED-ED483-02,2026 Winter,Secondary Education,Education,ED 483,Student Teaching,Required,Sophomore,32,32,2,1.0,0.062,Bottleneck,In Person,Evening
+SEED-ED334-01,2026 Winter,Secondary Education,Education,ED 334,Adolescent Literacy,Elective,Junior,40,39,0,0.975,0.0,Stable,In Person,Afternoon
+SEED-ED344-01,2026 Winter,Secondary Education,Education,ED 344,Educational Technology,Elective,Junior,39,38,0,0.974,0.0,Stable,In Person,Midday
+SEED-ED364-01,2026 Winter,Secondary Education,Education,ED 364,Equity and Schooling,Elective,Sophomore,27,19,0,0.704,0.0,Stable,In Person,Midday
+SEED-ED374-01,2026 Winter,Secondary Education,Education,ED 374,Family and Community Engagement,Elective,Sophomore,35,22,0,0.629,0.0,Stable,Hybrid,Afternoon
