@@ -45,13 +45,13 @@
     "anonymized action queues for registrar triage"
   ],
   "caveat": "The data files in this project are synthetic operational records generated from policy-aware rules. They are modeled from official Oregon State catalog and regulations sources but do not represent live institutional data.",
-  "headline_summary": "1,139 students are blocked from registration, 3,240 are off track, and 39 seniors appear graduation-ready without an application.",
+  "headline_summary": "1,139 students are blocked from registration, 3,240 are off track, and 1,066 seniors appear graduation-ready without an application.",
   "quick_stats": {
     "students": 10400,
     "sections": 75,
     "blocked_students": 1139,
     "not_registered_students": 867,
     "off_track_students": 3240,
-    "eligible_not_applied": 39
+    "eligible_not_applied": 1066
   }
 }

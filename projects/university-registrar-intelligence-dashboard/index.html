@@ -165,42 +165,54 @@
         </div>
         <p id="course-explainer">Loading course-demand readout...</p>
       </div>
-      <div class="chart-grid two-up">
-        <div class="chart-card">
-          <h3>Required-Course Waitlist Pressure</h3>
-          <div class="chart" id="chart-waitlist-pressure"></div>
-        </div>
-        <div class="chart-card">
-          <h3>Course Fill and Capacity Pressure</h3>
-          <div class="chart" id="chart-seat-risk"></div>
-        </div>
-      </div>
       <div class="risk-definitions" aria-label="Section risk label definitions">
-        <article class="risk-item risk-under">
+        <article class="risk-item risk-under" id="risk-card-under-viability">
           <div class="risk-head">
             <span class="risk-dot"></span>
             <h3>Under Viability</h3>
           </div>
           <p>Section demand is too low to be operationally healthy. These sections may need consolidation or targeted enrollment support.</p>
+          <div class="risk-count" id="course-count-under-viability">-</div>
         </article>
-        <article class="risk-item risk-stable">
+        <article class="risk-item risk-stable" id="risk-card-stable">
           <div class="risk-head">
             <span class="risk-dot"></span>
             <h3>Stable</h3>
           </div>
           <p>Seat fill and waitlist conditions are within expected operating range. No immediate intervention is required.</p>
+          <div class="risk-count" id="course-count-stable">-</div>
         </article>
-        <article class="risk-item risk-bottleneck">
+        <article class="risk-item risk-bottleneck" id="risk-card-bottleneck">
           <div class="risk-head">
             <span class="risk-dot"></span>
             <h3>Bottleneck</h3>
           </div>
           <p>Demand exceeds practical seat supply, usually shown by persistent waitlist pressure. These sections are candidates for additional capacity.</p>
+          <div class="risk-count" id="course-count-bottleneck">-</div>
         </article>
+      </div>
+      <div class="section-filter-row" aria-label="Course demand filters">
+        <label>
+          <span>Major</span>
+          <select id="course-major-filter"></select>
+        </label>
+        <label>
+          <span>Classification</span>
+          <select id="course-classification-filter"></select>
+        </label>
+      </div>
+      <div class="chart-grid single-up">
+        <div class="chart-card">
+          <h3>Course Fill and Capacity Pressure</h3>
+          <div class="chart" id="chart-seat-risk"></div>
+          <p class="chart-note" id="course-rollup-note">
+            Courses are rolled up across sections and meeting times in this view so demand differences are easier to compare. Section and schedule splits can be added later.
+          </p>
+        </div>
       </div>
       <div class="table-card">
         <div class="table-header">
-          <h3>Highest-Pressure Required Sections</h3>
+          <h3>Highest-Pressure Required Courses</h3>
           <span id="courses-count-badge" class="table-badge">-</span>
         </div>
         <div class="table-shell">
@@ -213,7 +225,6 @@
                 <th>Enrolled</th>
                 <th>Waitlist</th>
                 <th>Pressure</th>
-                <th>Risk</th>
               </tr>
             </thead>
             <tbody id="table-courses"></tbody>
@@ -256,71 +267,26 @@
         </div>
         <p id="action-focus-note">Queues are sorted by urgency and current filters. Click a relevant KPI or chart to focus one queue.</p>
       </div>
-      <div class="action-grid">
-        <div class="table-card queue-card" id="queue-card-hold">
-          <div class="table-header">
-            <h3>Hold Resolution Queue</h3>
-            <span id="holds-count-badge" class="table-badge">-</span>
-          </div>
-          <div class="table-shell">
-            <table>
-              <thead>
-                <tr>
-                  <th>Student</th>
-                  <th>Program</th>
-                  <th>Class</th>
-                  <th>Hold</th>
-                  <th>Issue</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="table-holds"></tbody>
-            </table>
-          </div>
+      <div class="table-card">
+        <div class="table-header">
+          <h3>Top Action Queue Rows</h3>
+          <span id="actions-count-badge" class="table-badge">-</span>
         </div>
-
-        <div class="table-card queue-card" id="queue-card-audit">
-          <div class="table-header">
-            <h3>Degree Audit Intervention Queue</h3>
-            <span id="audit-count-badge" class="table-badge">-</span>
-          </div>
-          <div class="table-shell">
-            <table>
-              <thead>
-                <tr>
-                  <th>Student</th>
-                  <th>Program</th>
-                  <th>Class</th>
-                  <th>Status</th>
-                  <th>Reason</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="table-audit"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="table-card queue-card" id="queue-card-graduation">
-          <div class="table-header">
-            <h3>Graduation Follow-Up Queue</h3>
-            <span id="graduation-count-badge" class="table-badge">-</span>
-          </div>
-          <div class="table-shell">
-            <table>
-              <thead>
-                <tr>
-                  <th>Student</th>
-                  <th>Program</th>
-                  <th>Class</th>
-                  <th>Credits</th>
-                  <th>GPA</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="table-graduation"></tbody>
-            </table>
-          </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Queue</th>
+                <th>Program</th>
+                <th>Class</th>
+                <th>Type of Hold</th>
+                <th>Issue</th>
+                <th>Recommended Action</th>
+              </tr>
+            </thead>
+            <tbody id="table-actions"></tbody>
+          </table>
         </div>
       </div>
     </section>

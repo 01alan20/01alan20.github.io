@@ -8,6 +8,10 @@ const state = {
     holdStatus: "",
     auditStatus: "",
   },
+  courseFilters: {
+    major: "",
+    classification: "",
+  },
   focus: {
     queue: "",
     label: "",
@@ -28,6 +32,7 @@ const CLASS_LEVEL_ORDER = ["Freshman", "Sophomore", "Junior", "Senior"];
 const REGISTRATION_STATUS_ORDER = ["registered", "blocked", "not_registered"];
 const AUDIT_STATUS_ORDER = ["on_track", "near_risk", "off_track"];
 const GRADUATION_STAGE_ORDER = ["not_eligible", "eligible_not_applied", "applied_pending", "ready_to_award"];
+const SECTION_RISK_ORDER = ["Bottleneck", "Stable", "Under Viability"];
 
 const COLORS = {
   navy: "#17324d",
@@ -198,6 +203,25 @@ function setClassLevelFilter(value) {
   syncFiltersFromControls();
 }
 
+function syncCourseFiltersFromControls() {
+  state.courseFilters.major = document.getElementById("course-major-filter")?.value || "";
+  state.courseFilters.classification = document.getElementById("course-classification-filter")?.value || "";
+}
+
+function setCourseMajorFilter(value) {
+  const select = document.getElementById("course-major-filter");
+  if (!select) return;
+  select.value = value;
+  syncCourseFiltersFromControls();
+}
+
+function setCourseClassificationFilter(value) {
+  const select = document.getElementById("course-classification-filter");
+  if (!select) return;
+  select.value = value;
+  syncCourseFiltersFromControls();
+}
+
 function clearFocus() {
   state.focus = {
     queue: "",
@@ -231,6 +255,67 @@ function getFilteredSections() {
   });
 }
 
+function getCourseBaseSections(sections) {
+  return sections.filter(
+    (row) => row.requirement_type === "Required" && (!state.courseFilters.major || row.program_name === state.courseFilters.major)
+  );
+}
+
+function classifyCourseDemand(fillPct, pressurePct) {
+  if (pressurePct > 0 || fillPct > 100) {
+    return "Bottleneck";
+  }
+  if (fillPct < 62) {
+    return "Under Viability";
+  }
+  return "Stable";
+}
+
+function buildCourseDemandRows(sections) {
+  const courseMap = new Map();
+  sections.forEach((row) => {
+    const key = `${row.program_name}|||${row.course_code}`;
+    if (!courseMap.has(key)) {
+      courseMap.set(key, {
+        label: `${row.course_code} · ${row.program_name}`,
+        program: row.program_name,
+        courseCode: row.course_code,
+        courseTitle: row.course_title,
+        capacity: 0,
+        enrolled: 0,
+        waitlist: 0,
+      });
+    }
+    const item = courseMap.get(key);
+    if (!item.courseTitle && row.course_title) {
+      item.courseTitle = row.course_title;
+    }
+    item.capacity += num(row.capacity);
+    item.enrolled += num(row.enrolled);
+    item.waitlist += num(row.waitlist_count);
+  });
+
+  return [...courseMap.values()].map((row) => {
+    const capacity = Math.max(row.capacity, 1);
+    const fillPct = (row.enrolled / capacity) * 100;
+    const overflowCount = Math.max(row.enrolled + row.waitlist - row.capacity, 0);
+    const pressurePct = (overflowCount / capacity) * 100;
+    return {
+      ...row,
+      fillPct,
+      pressurePct,
+      totalDemandPct: fillPct + pressurePct,
+      classification: classifyCourseDemand(fillPct, pressurePct),
+    };
+  });
+}
+
+function getCourseFilteredRows(sections) {
+  return buildCourseDemandRows(getCourseBaseSections(sections)).filter(
+    (row) => !state.courseFilters.classification || row.classification === state.courseFilters.classification
+  );
+}
+
 function sum(rows, key) {
   return rows.reduce((total, row) => total + num(row[key]), 0);
 }
@@ -247,16 +332,38 @@ function groupCount(rows, key, order) {
   return [...map.entries()].map(([label, count]) => ({ label, count }));
 }
 
-function getTopRequiredSections(sections, limit = 10) {
-  return sections
-    .filter((row) => row.requirement_type === "Required")
+function getTopCourseRows(rows, limit = 10) {
+  return rows
     .sort((a, b) => {
-      if (num(b.waitlist_pressure) !== num(a.waitlist_pressure)) {
-        return num(b.waitlist_pressure) - num(a.waitlist_pressure);
+      if (state.courseFilters.classification === "Under Viability") {
+        if (num(a.fillPct) !== num(b.fillPct)) {
+          return num(a.fillPct) - num(b.fillPct);
+        }
+        return num(a.enrolled) - num(b.enrolled);
       }
-      return num(b.waitlist_count) - num(a.waitlist_count);
+      if (state.courseFilters.classification === "Stable") {
+        if (num(b.fillPct) !== num(a.fillPct)) {
+          return num(b.fillPct) - num(a.fillPct);
+        }
+        return num(b.capacity) - num(a.capacity);
+      }
+      if (num(b.pressurePct) !== num(a.pressurePct)) {
+        return num(b.pressurePct) - num(a.pressurePct);
+      }
+      if (num(b.waitlist) !== num(a.waitlist)) {
+        return num(b.waitlist) - num(a.waitlist);
+      }
+      return num(b.fillPct) - num(a.fillPct);
     })
     .slice(0, limit);
+}
+
+function riskClassName(value) {
+  return {
+    "Under Viability": "risk-under",
+    Stable: "risk-stable",
+    Bottleneck: "risk-bottleneck",
+  }[value] || "";
 }
 
 function urgencyRank(value) {
@@ -413,83 +520,48 @@ function renderRegistrationSection(students) {
 }
 
 function renderCourseDemandSection(sections) {
-  const requiredSections = getTopRequiredSections(sections, 10);
-  if (!requiredSections.length) {
-    renderEmptyPlot("chart-waitlist-pressure", "No required sections match the current filters.");
-    renderEmptyPlot("chart-seat-risk", "No sections match the current filters.");
-    setHTML("table-courses", `<tr><td colspan="7" class="muted-copy">No required sections match the current filters.</td></tr>`);
-    setText("courses-count-badge", "0 rows");
-    setText("course-explainer", "No sections match the current filters.");
+  const baseCourseRows = buildCourseDemandRows(getCourseBaseSections(sections));
+  const filteredCourseRows = getCourseFilteredRows(sections);
+  const riskCounts = {
+    "Under Viability": baseCourseRows.filter((row) => row.classification === "Under Viability").length,
+    Stable: baseCourseRows.filter((row) => row.classification === "Stable").length,
+    Bottleneck: baseCourseRows.filter((row) => row.classification === "Bottleneck").length,
+  };
+
+  [
+    ["Under Viability", "course-count-under-viability", "risk-card-under-viability"],
+    ["Stable", "course-count-stable", "risk-card-stable"],
+    ["Bottleneck", "course-count-bottleneck", "risk-card-bottleneck"],
+  ].forEach(([risk, countId, cardId]) => {
+    setText(countId, fmt(riskCounts[risk]));
+    document.getElementById(cardId)?.classList.toggle("is-active", state.courseFilters.classification === risk);
+  });
+
+  if (!baseCourseRows.length) {
+    renderEmptyPlot("chart-seat-risk", "No required courses match the current filters.");
+    setHTML("table-courses", `<tr><td colspan="6" class="muted-copy">No required courses match the current filters.</td></tr>`);
+    setText("courses-count-badge", "0 courses");
+    setText("course-explainer", "No required courses match the current filters.");
     return;
   }
 
-  plot(
-    "chart-waitlist-pressure",
-    [
-      {
-        type: "bar",
-        orientation: "h",
-        y: [...requiredSections].reverse().map((row) => `${row.course_code} · ${row.program_name}`),
-        x: [...requiredSections].reverse().map((row) => num(row.waitlist_pressure) * 100),
-        marker: {
-          color: [...requiredSections].reverse().map((row) => SECTION_RISK_COLORS[row.section_risk] || COLORS.slate),
-        },
-        hovertemplate:
-          "%{y}<br>Waitlist pressure: %{x:.1f}%<br>Waitlist count: %{customdata}<extra></extra>",
-        customdata: [...requiredSections].reverse().map((row) => num(row.waitlist_count)),
-      },
-    ],
-    {
-      margin: { l: 170, r: 20, t: 28, b: 44 },
-      xaxis: { title: "Waitlist pressure", ticksuffix: "%", gridcolor: "rgba(19,34,53,0.08)" },
-      yaxis: { automargin: true },
-    }
-  );
+  if (!filteredCourseRows.length) {
+    renderEmptyPlot("chart-seat-risk", "No required courses match the current major and classification filters.");
+    setHTML(
+      "table-courses",
+      `<tr><td colspan="6" class="muted-copy">No required courses match the current major and classification filters.</td></tr>`
+    );
+    setText("courses-count-badge", "0 courses");
+    setText(
+      "course-explainer",
+      `No required courses match the ${state.courseFilters.classification.toLowerCase()} classification in the current major view.`
+    );
+    return;
+  }
 
-  wirePlotClick("chart-waitlist-pressure", (event) => {
-    const label = String(event.points?.[0]?.y || "");
-    const program = label.split("·").slice(1).join("·").trim();
-    if (!program) return;
-    setProgramFilter(program);
-    clearFocus();
-    renderAll();
-  });
-
-  const courseMap = new Map();
-  sections.forEach((row) => {
-    const key = `${row.program_name}|||${row.course_code}|||${row.course_title}`;
-    if (!courseMap.has(key)) {
-      courseMap.set(key, {
-        label: `${row.course_code} · ${row.program_name}`,
-        program: row.program_name,
-        courseTitle: row.course_title,
-        capacity: 0,
-        enrolled: 0,
-        waitlist: 0,
-      });
-    }
-    const item = courseMap.get(key);
-    item.capacity += num(row.capacity);
-    item.enrolled += num(row.enrolled);
-    item.waitlist += num(row.waitlist_count);
-  });
-
-  const courseRows = [...courseMap.values()]
-    .map((row) => {
-      const capacity = Math.max(row.capacity, 1);
-      const fillPct = (row.enrolled / capacity) * 100;
-      const pressurePct = (row.waitlist / capacity) * 100;
-      return {
-        ...row,
-        fillPct,
-        pressurePct,
-        totalDemandPct: fillPct + pressurePct,
-      };
-    })
-    .sort((a, b) => b.totalDemandPct - a.totalDemandPct);
-
+  const courseRows = getTopCourseRows(filteredCourseRows, filteredCourseRows.length);
   const maxDemandPct = Math.max(...courseRows.map((row) => row.totalDemandPct), 110);
-  const chartHeight = Math.max(360, 26 * courseRows.length + 120);
+  const chartHeight = Math.max(380, 30 * courseRows.length + 120);
 
   plot(
     "chart-seat-risk",
@@ -502,8 +574,7 @@ function renderCourseDemandSection(sections) {
         x: [...courseRows].reverse().map((row) => row.fillPct),
         customdata: [...courseRows].reverse().map((row) => row.program),
         marker: { color: COLORS.navySoft },
-        hovertemplate:
-          "%{y}<br>Filled capacity: %{x:.1f}%<extra></extra>",
+        hovertemplate: "%{y}<br>Filled capacity: %{x:.1f}%<extra></extra>",
       },
       {
         type: "bar",
@@ -511,17 +582,16 @@ function renderCourseDemandSection(sections) {
         name: "Pressure Above Capacity",
         y: [...courseRows].reverse().map((row) => row.label),
         x: [...courseRows].reverse().map((row) => row.pressurePct),
-        base: [...courseRows].reverse().map(() => 100),
+        base: [...courseRows].reverse().map((row) => row.fillPct),
         customdata: [...courseRows].reverse().map((row) => row.program),
         marker: { color: COLORS.brick },
-        hovertemplate:
-          "%{y}<br>Pressure above 100%: %{x:.1f}%<extra></extra>",
+        hovertemplate: "%{y}<br>Pressure above 100%: %{x:.1f}%<extra></extra>",
       },
     ],
     {
       barmode: "overlay",
       height: chartHeight,
-      margin: { l: 190, r: 24, t: 30, b: 52 },
+      margin: { l: 220, r: 28, t: 30, b: 52 },
       xaxis: {
         title: "Course demand as % of capacity",
         ticksuffix: "%",
@@ -558,39 +628,43 @@ function renderCourseDemandSection(sections) {
   wirePlotClick("chart-seat-risk", (event) => {
     const program = event.points?.[0]?.customdata;
     if (!program) return;
-    setProgramFilter(program);
+    setCourseMajorFilter(program);
     clearFocus();
     renderAll();
   });
 
-  setText("courses-count-badge", `${fmt(requiredSections.length)} rows`);
+  const topCourses = getTopCourseRows([...filteredCourseRows], 10);
+  setText("courses-count-badge", `${fmt(filteredCourseRows.length)} courses`);
   setHTML(
     "table-courses",
-    requiredSections
+    topCourses
       .map(
         (row) => `
           <tr>
             <td>
-              <div class="mono">${htmlEscape(row.course_code)}</div>
-              <div class="muted-copy">${htmlEscape(row.course_title)}</div>
+              <div class="course-label">
+                <span class="risk-dot course-status-dot ${riskClassName(row.classification)}"></span>
+                <div class="course-title-block">
+                  <div class="mono">${htmlEscape(row.courseCode)}</div>
+                  <div class="muted-copy">${htmlEscape(row.courseTitle)}</div>
+                </div>
+              </div>
             </td>
-            <td>${htmlEscape(row.program_name)}</td>
+            <td>${htmlEscape(row.program)}</td>
             <td>${fmt(num(row.capacity))}</td>
             <td>${fmt(num(row.enrolled))}</td>
-            <td>${fmt(num(row.waitlist_count))}</td>
-            <td>${pct(num(row.waitlist_pressure))}</td>
-            <td>${htmlEscape(row.section_risk)}</td>
+            <td>${fmt(num(row.waitlist))}</td>
+            <td>${fmt(num(row.pressurePct), 1)}%</td>
           </tr>
         `
       )
       .join("")
   );
 
-  const bottleneckCount = sections.filter((row) => row.section_risk === "Bottleneck").length;
-  const topSection = requiredSections[0];
+  const topCourse = topCourses[0];
   setText(
     "course-explainer",
-    `${fmt(bottleneckCount)} sections are currently flagged as bottlenecks. ${topSection.course_code} in ${topSection.program_name} has the highest required-course waitlist pressure in the current view.`
+    `${fmt(riskCounts.Bottleneck)} bottleneck, ${fmt(riskCounts.Stable)} stable, and ${fmt(riskCounts["Under Viability"])} under-viability required courses are in the current major view. ${topCourse.courseCode} in ${topCourse.program} carries the strongest rolled-up seat-pressure signal in the current slice.`
   );
 }
 
@@ -671,10 +745,12 @@ function renderAuditSection(students) {
   if (!seniorStudents.length) {
     renderEmptyPlot("chart-graduation-funnel", "No senior students match the current filters.");
   } else {
+    const totalSeniorCohort = seniorStudents.length;
     const stageCounts = GRADUATION_STAGE_ORDER.map((stage) => ({
       stage,
       count: seniorStudents.filter((row) => row.graduation_stage === stage).length,
     })).filter((row) => row.count > 0);
+    const stagePercentages = stageCounts.map((row) => `${((row.count / totalSeniorCohort) * 100).toFixed(1)}% of senior class`);
 
     plot(
       "chart-graduation-funnel",
@@ -684,11 +760,17 @@ function renderAuditSection(students) {
           y: stageCounts.map((row) => titleCaseStatus(row.stage)),
           x: stageCounts.map((row) => row.count),
           textposition: "inside",
-          textinfo: "value+percent initial",
+          texttemplate: "%{value} students<br>%{customdata}",
+          customdata: stagePercentages,
           marker: {
-            color: [COLORS.slate, COLORS.brick, COLORS.amber, COLORS.green],
+            color: stageCounts.map((row) => {
+              if (row.stage === "not_eligible") return COLORS.slate;
+              if (row.stage === "eligible_not_applied") return COLORS.brick;
+              if (row.stage === "applied_pending") return COLORS.amber;
+              return COLORS.green;
+            }),
           },
-          hovertemplate: "%{label}<br>%{value} students<extra></extra>",
+          hovertemplate: "%{label}<br>%{value} students<br>%{customdata}<extra></extra>",
         },
       ],
       {
@@ -722,19 +804,14 @@ function renderAuditSection(students) {
     .sort((a, b) => b.count - a.count)
     .find((row) => row.label !== "Pace and policy checks satisfied");
   const eligibleNotApplied = seniorStudents.filter((row) => row.graduation_stage === "eligible_not_applied").length;
+  const seniorsOutsideWindow = seniorStudents.filter((row) => row.graduation_stage === "not_in_window").length;
   setText(
     "audit-explainer",
-    `${fmt(students.filter((row) => row.audit_status === "off_track").length)} students are off track. The most common risk driver in the current view is ${topReason ? topReason.label.toLowerCase() : "audit policy review"}, and ${fmt(eligibleNotApplied)} seniors still need graduation application follow-up.`
+    `${fmt(students.filter((row) => row.audit_status === "off_track").length)} students are off track. The most common risk driver in the current view is ${topReason ? topReason.label.toLowerCase() : "audit policy review"}, ${fmt(eligibleNotApplied)} seniors still need graduation application follow-up, and ${fmt(seniorsOutsideWindow)} seniors sit outside the current graduation-window cohort.`
   );
 }
 
 function renderQueueCardFocus() {
-  ["hold", "audit", "graduation"].forEach((queue) => {
-    const node = document.getElementById(`queue-card-${queue}`);
-    if (!node) return;
-    node.classList.toggle("focused", state.focus.queue === queue);
-  });
-
   if (!state.focus.queue) {
     setText(
       "action-focus-note",
@@ -785,68 +862,37 @@ function renderActionQueues(students) {
     return num(a.credits_completed) - num(b.credits_completed);
   });
 
-  setText("holds-count-badge", `${fmt(holdRows.length)} students`);
-  setText("audit-count-badge", `${fmt(auditRows.length)} students`);
-  setText("graduation-count-badge", `${fmt(graduationRows.length)} students`);
+  const combinedRows = [
+    ...holdRows.map((row) => ({ ...row, queueLabel: "Hold Resolution" })),
+    ...auditRows.map((row) => ({ ...row, queueLabel: row.queue_name })),
+    ...graduationRows.map((row) => ({ ...row, queueLabel: "Graduation Follow-Up" })),
+  ].sort((a, b) => {
+    if (urgencyRank(a.urgency) !== urgencyRank(b.urgency)) return urgencyRank(a.urgency) - urgencyRank(b.urgency);
+    if (classRank(a.class_level) !== classRank(b.class_level)) return classRank(a.class_level) - classRank(b.class_level);
+    return String(a.student_id).localeCompare(String(b.student_id));
+  });
 
+  const topRows = combinedRows.slice(0, 5);
+  setText("actions-count-badge", `${fmt(topRows.length)} of ${fmt(combinedRows.length)} shown`);
   renderTableRows(
-    "table-holds",
-    holdRows.slice(0, 12),
-    "No blocked students match the current filter and focus state.",
+    "table-actions",
+    topRows,
+    "No action-queue students match the current filter and focus state.",
     (row) => `
       <tr>
         <td>
           <div class="mono">${htmlEscape(row.student_id)}</div>
           <span class="pill ${String(row.urgency).toLowerCase()}">${htmlEscape(row.urgency)}</span>
         </td>
+        <td>${htmlEscape(row.queueLabel)}</td>
         <td>${htmlEscape(row.program_name)}</td>
         <td>${htmlEscape(row.class_level)}</td>
-        <td>${htmlEscape(row.hold_type)}</td>
+        <td>${htmlEscape(row.hold_type && row.hold_type !== "None" ? row.hold_type : "-")}</td>
         <td>${htmlEscape(row.issue_summary)}</td>
         <td>${htmlEscape(row.recommended_action)}</td>
       </tr>
     `,
-    6
-  );
-
-  renderTableRows(
-    "table-audit",
-    auditRows.slice(0, 12),
-    "No audit-intervention students match the current filter and focus state.",
-    (row) => `
-      <tr>
-        <td>
-          <div class="mono">${htmlEscape(row.student_id)}</div>
-          <span class="pill ${String(row.urgency).toLowerCase()}">${htmlEscape(row.urgency)}</span>
-        </td>
-        <td>${htmlEscape(row.program_name)}</td>
-        <td>${htmlEscape(row.class_level)}</td>
-        <td>${titleCaseStatus(row.audit_status)}</td>
-        <td>${htmlEscape(row.audit_reason)}</td>
-        <td>${htmlEscape(row.recommended_action)}</td>
-      </tr>
-    `,
-    6
-  );
-
-  renderTableRows(
-    "table-graduation",
-    graduationRows.slice(0, 12),
-    "No graduation follow-up students match the current filter and focus state.",
-    (row) => `
-      <tr>
-        <td>
-          <div class="mono">${htmlEscape(row.student_id)}</div>
-          <span class="pill high">High</span>
-        </td>
-        <td>${htmlEscape(row.program_name)}</td>
-        <td>${htmlEscape(row.class_level)}</td>
-        <td>${fmt(num(row.credits_completed))}</td>
-        <td>${num(row.osu_gpa).toFixed(2)}</td>
-        <td>${htmlEscape(row.recommended_action)}</td>
-      </tr>
-    `,
-    6
+    7
   );
 }
 
@@ -891,12 +937,30 @@ function wireControls() {
     });
   });
 
+  ["course-major-filter", "course-classification-filter"].forEach((id) => {
+    const node = document.getElementById(id);
+    if (!node) return;
+    node.addEventListener("change", () => {
+      syncCourseFiltersFromControls();
+      clearFocus();
+      renderAll();
+    });
+  });
+
   document.getElementById("reset-filters-btn")?.addEventListener("click", () => {
-    ["program-filter", "class-level-filter", "hold-filter", "audit-filter"].forEach((id) => {
+    [
+      "program-filter",
+      "class-level-filter",
+      "hold-filter",
+      "audit-filter",
+      "course-major-filter",
+      "course-classification-filter",
+    ].forEach((id) => {
       const node = document.getElementById(id);
       if (node) node.value = "";
     });
     syncFiltersFromControls();
+    syncCourseFiltersFromControls();
     clearFocus();
     renderAll();
   });
@@ -950,6 +1014,8 @@ async function init() {
     populateSelect("class-level-filter", CLASS_LEVEL_ORDER, "All class levels");
     populateSelect("hold-filter", ["Active Hold", "No Hold"], "All hold states");
     populateSelect("audit-filter", AUDIT_STATUS_ORDER, "All audit states");
+    populateSelect("course-major-filter", PROGRAM_ORDER, "All majors");
+    populateSelect("course-classification-filter", SECTION_RISK_ORDER, "All classifications");
 
     const auditSelect = document.getElementById("audit-filter");
     if (auditSelect) {
@@ -961,6 +1027,7 @@ async function init() {
 
     wireControls();
     syncFiltersFromControls();
+    syncCourseFiltersFromControls();
     renderAll();
   } catch (error) {
     console.error(error);

@@ -166,6 +166,12 @@ HOLD_WEIGHTS = HOLD_WEIGHTS / HOLD_WEIGHTS.sum()
 
 MODALITIES = ["In Person", "Hybrid", "Online"]
 TIME_SLOTS = ["Morning", "Midday", "Afternoon", "Evening"]
+GRADUATION_STAGE_TARGETS = {
+    "not_eligible": 0.048,
+    "eligible_not_applied": 0.407,
+    "applied_pending": 0.383,
+    "ready_to_award": 0.151,
+}
 
 
 def clip(value: float, low: float, high: float) -> float:
@@ -325,6 +331,148 @@ def recommended_action(student: dict[str, object]) -> str:
         return "Monitor progress and confirm the next registration plan before census."
 
     return "No immediate intervention required."
+
+
+def senior_readiness_score(student: dict[str, object]) -> float:
+    program = PROGRAM_LOOKUP[str(student["program_name"])]
+    gpa_floor = float(program["gpa_floor"])
+    credits_progress = clip(float(student["credits_completed"]) / 180.0, 0.0, 1.08)
+    upper_division_progress = clip(float(student["upper_division_completed"]) / 60.0, 0.0, 1.12)
+    completion_ratio = clip(float(student["required_completion_ratio"]), 0.0, 1.0)
+    gpa_margin = clip((float(student["osu_gpa"]) - gpa_floor + 0.45) / 2.45, 0.0, 1.0)
+    completion_flags = np.mean(
+        [
+            int(student["residence_met_flag"]),
+            int(student["core_met_flag"]),
+            int(student["world_language_met_flag"]),
+            int(student["professional_progression_met_flag"]),
+        ]
+    )
+    audit_alignment = {
+        "off_track": 0.18,
+        "near_risk": 0.62,
+        "on_track": 1.0,
+    }.get(str(student["audit_status"]), 0.50)
+    blocked_penalty = 0.04 if str(student["registration_status"]) == "blocked" else 0.0
+
+    return (
+        credits_progress * 0.23
+        + upper_division_progress * 0.21
+        + completion_ratio * 0.22
+        + gpa_margin * 0.14
+        + float(completion_flags) * 0.12
+        + audit_alignment * 0.12
+        - blocked_penalty
+    )
+
+
+def graduation_stage_targets(total_seniors: int) -> dict[str, int]:
+    return {
+        stage: int(round(total_seniors * target_share))
+        for stage, target_share in GRADUATION_STAGE_TARGETS.items()
+    }
+
+
+def rebalance_senior_graduation_stages(students: pd.DataFrame) -> pd.DataFrame:
+    students = students.copy()
+    senior_mask = students["class_level"] == "Senior"
+    if not senior_mask.any():
+        return students
+
+    seniors = students.loc[senior_mask].copy()
+    seniors["readiness_score"] = seniors.apply(lambda row: senior_readiness_score(row.to_dict()), axis=1)
+    seniors = seniors.sort_values(
+        [
+            "readiness_score",
+            "required_completion_ratio",
+            "credits_completed",
+            "upper_division_completed",
+            "osu_gpa",
+            "student_id",
+        ],
+        ascending=[False, False, False, False, False, True],
+    )
+
+    ordered_indices = seniors.index.tolist()
+    targets = graduation_stage_targets(len(ordered_indices))
+    low_start = len(ordered_indices) - targets["not_eligible"]
+    assignments: dict[int, str] = {}
+    cursor = 0
+
+    for stage in ("ready_to_award", "applied_pending", "eligible_not_applied"):
+        count = targets[stage]
+        for index in ordered_indices[cursor : cursor + count]:
+            assignments[index] = stage
+        cursor += count
+
+    for index in ordered_indices[cursor:low_start]:
+        assignments[index] = "not_in_window"
+    for index in ordered_indices[low_start:]:
+        assignments[index] = "not_eligible"
+
+    for index, stage in assignments.items():
+        students.at[index, "graduation_stage"] = stage
+
+    students["eligible_flag"] = students["graduation_stage"].isin(
+        {"eligible_not_applied", "applied_pending", "ready_to_award"}
+    ).astype(int)
+    students["applied_flag"] = students["graduation_stage"].isin({"applied_pending", "ready_to_award"}).astype(int)
+    students["award_ready_flag"] = (students["graduation_stage"] == "ready_to_award").astype(int)
+
+    return students
+
+
+def derive_operational_fields(student: dict[str, object]) -> dict[str, object]:
+    registration_status = str(student["registration_status"])
+    graduation_stage = str(student["graduation_stage"])
+    audit_status = str(student["audit_status"])
+    hold_type = str(student["hold_type"])
+    audit_reason = str(student["audit_reason"])
+
+    queue_name = "Monitor"
+    queue_priority = 4
+    if registration_status == "blocked":
+        queue_name = "Hold Resolution"
+        queue_priority = 1
+    elif graduation_stage == "eligible_not_applied":
+        queue_name = "Graduation Follow-Up"
+        queue_priority = 1
+    elif audit_status == "off_track":
+        queue_name = "Degree Audit Intervention"
+        queue_priority = 2
+    elif audit_status == "near_risk":
+        queue_name = "Watchlist"
+        queue_priority = 3
+
+    if queue_name == "Monitor":
+        urgency = "Low"
+    elif queue_priority == 1:
+        urgency = "High"
+    else:
+        urgency = "Medium"
+
+    issue_summary = (
+        f"{hold_type} hold blocking registration"
+        if registration_status == "blocked"
+        else ("Eligible to graduate but application incomplete" if graduation_stage == "eligible_not_applied" else audit_reason)
+    )
+
+    return {
+        "queue_name": queue_name,
+        "queue_priority": queue_priority,
+        "urgency": urgency,
+        "issue_summary": issue_summary,
+        "recommended_action": recommended_action(student),
+    }
+
+
+def refresh_student_operational_fields(students: pd.DataFrame) -> pd.DataFrame:
+    students = students.copy()
+    for index, row in students.iterrows():
+        operational_fields = derive_operational_fields(row.to_dict())
+        for key, value in operational_fields.items():
+            students.at[index, key] = value
+    return students
 
 
 def build_student_status(rng: np.random.Generator) -> pd.DataFrame:
@@ -516,7 +664,10 @@ def build_student_status(rng: np.random.Generator) -> pd.DataFrame:
             }
         )
 
-    return pd.DataFrame(rows)
+    students = pd.DataFrame(rows)
+    students = rebalance_senior_graduation_stages(students)
+    students = refresh_student_operational_fields(students)
+    return students
 
 
 def build_section_status(rng: np.random.Generator, students: pd.DataFrame) -> pd.DataFrame:
