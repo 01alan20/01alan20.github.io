@@ -1,0 +1,140 @@
+﻿:root {
+  --bg: #f8fafc;
+  --text: #1e293b;
+  --muted: #475569;
+  --panel: #ffffff;
+  --line: #dbe3ee;
+  --primary: #2563eb;
+  --secondary: #3b82f6;
+  --accent: #f97316;
+  --ok: #16a34a;
+  --warn: #d97706;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Fira Sans", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at 15% 10%, #eef4ff 0%, transparent 35%), radial-gradient(circle at 85% 85%, #fff1e9 0%, transparent 35%), var(--bg);
+}
+
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(36px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+.orb-1 { width: 280px; height: 280px; background: #bfd8ff; top: -80px; right: -80px; }
+.orb-2 { width: 320px; height: 320px; background: #ffd8bf; bottom: -120px; left: -100px; }
+
+.page-shell { max-width: 1200px; margin: 0 auto; padding: 28px 16px 44px; }
+.panel {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 18px;
+  padding: 22px;
+}
+.eyebrow { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--primary); font-weight: 700; }
+h1 { margin: 8px 0 6px; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.1; }
+.hero-lead { margin: 0 0 10px; color: var(--muted); }
+.hero-note { margin: 0; font-size: .9rem; color: #334155; }
+.hero-links { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-link {
+  text-decoration: none;
+  color: var(--primary);
+  border: 1px solid #c7d8fb;
+  background: #eef4ff;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 600;
+}
+.hero-link:hover { background: #e0ecff; transition: background .2s ease; }
+.hero-brief { background: #0f172a; color: #e2e8f0; border-radius: 14px; padding: 16px; }
+.hero-brief h2 { color: #fff; margin: 8px 0; }
+.brief-label { font-family: "Fira Code", monospace; font-size: .78rem; color: #93c5fd; }
+
+.kpi-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0,1fr));
+  gap: 10px;
+}
+.kpi-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+}
+.kpi-card span { font-size: .78rem; color: var(--muted); display: block; }
+.kpi-card strong { display: block; font-size: 1.36rem; margin: 4px 0; }
+.kpi-card em { font-style: normal; font-size: .78rem; color: #64748b; }
+
+.tabs { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+.tab-btn {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #334155;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tab-btn:hover { background: #f8fafc; }
+.tab-btn.active { background: #eaf1ff; border-color: #9dbcf5; color: #1d4ed8; }
+.tab-pane { display: none; margin-top: 12px; }
+.tab-pane.active { display: block; animation: fadeIn .2s ease; }
+
+.chart-grid { display: grid; gap: 12px; }
+.chart-grid.two-up { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.chart-grid.three-up { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.chart-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+}
+.chart-card h3 { margin: 4px 4px 8px; font-size: 1rem; }
+.chart { min-height: 290px; }
+
+.insight-card {
+  margin-top: 12px;
+  background: linear-gradient(130deg, #fff7ed 0%, #fff 58%);
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  padding: 14px;
+}
+.insight-card h3 { margin: 0 0 6px; }
+.insight-card p { margin: 0; color: #7c2d12; }
+
+.footer-note { margin-top: 14px; padding: 14px; font-size: .92rem; color: #334155; }
+.footer-note p { margin: 4px 0; }
+
+@keyframes fadeIn {
+  from { opacity: .35; transform: translateY(2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1024px) {
+  .kpi-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .chart-grid.three-up { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .chart-grid.two-up, .chart-grid.three-up { grid-template-columns: 1fr; }
+  .chart { min-height: 250px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab-pane.active { animation: none; }
+}

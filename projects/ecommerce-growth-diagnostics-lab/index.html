@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>E-commerce Growth Diagnostics Lab</title>
+  <meta name="description" content="Interactive GA4 e-commerce diagnostics dashboard for funnel, channel, product, device, geography, checkout leakage, and revenue concentration analysis." />
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+
+  <main class="page-shell">
+    <header class="hero panel">
+      <div class="hero-copy">
+        <div class="eyebrow">GA4 Public Dataset Project</div>
+        <h1>E-commerce Growth Diagnostics Lab</h1>
+        <p class="hero-lead">Public Web Analytics for Funnel, Product, and Revenue Optimization.</p>
+        <p class="hero-note">Source: <code>bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*</code> | Coverage: November 1, 2020 to January 31, 2021</p>
+        <div class="hero-links">
+          <a class="hero-link" href="https://developers.google.com/analytics/bigquery/web-ecommerce-demo-dataset" target="_blank" rel="noopener">Official Dataset Docs</a>
+          <a class="hero-link" href="README.md">Project README</a>
+        </div>
+      </div>
+      <aside class="hero-brief">
+        <div class="brief-label">Executive Readout</div>
+        <h2 id="brief-title">Loading...</h2>
+        <p id="brief-copy">Preparing funnel, channel, and revenue diagnostics.</p>
+      </aside>
+    </header>
+
+    <section class="kpi-grid" aria-label="KPI overview">
+      <article class="kpi-card"><span>Sessions</span><strong id="kpi-sessions">-</strong><em id="kpi-sessions-foot">-</em></article>
+      <article class="kpi-card"><span>Product Views</span><strong id="kpi-views">-</strong><em id="kpi-views-foot">-</em></article>
+      <article class="kpi-card"><span>Add to Cart</span><strong id="kpi-cart">-</strong><em id="kpi-cart-foot">-</em></article>
+      <article class="kpi-card"><span>Purchases</span><strong id="kpi-purchase">-</strong><em id="kpi-purchase-foot">-</em></article>
+      <article class="kpi-card"><span>Revenue</span><strong id="kpi-revenue">-</strong><em id="kpi-revenue-foot">-</em></article>
+      <article class="kpi-card"><span>Avg Order Value</span><strong id="kpi-aov">-</strong><em id="kpi-aov-foot">-</em></article>
+    </section>
+
+    <nav class="tabs" aria-label="Dashboard tabs">
+      <button class="tab-btn active" type="button" data-tab="funnel">Funnel & Leakage</button>
+      <button class="tab-btn" type="button" data-tab="channel">Channel & Acquisition</button>
+      <button class="tab-btn" type="button" data-tab="product">Product & Revenue</button>
+      <button class="tab-btn" type="button" data-tab="segment">Device, Geo & Loyalty</button>
+    </nav>
+
+    <section class="tab-pane active" data-tab="funnel">
+      <div class="chart-grid two-up">
+        <article class="chart-card"><h3>Core Funnel Conversion</h3><div id="chart-funnel" class="chart"></div></article>
+        <article class="chart-card"><h3>Checkout Leakage by Step</h3><div id="chart-leakage" class="chart"></div></article>
+      </div>
+      <article class="insight-card"><h3>Funnel Recommendation</h3><p id="insight-funnel">-</p></article>
+    </section>
+
+    <section class="tab-pane" data-tab="channel">
+      <div class="chart-grid two-up">
+        <article class="chart-card"><h3>Channel Session to Purchase Rate</h3><div id="chart-channel-conv" class="chart"></div></article>
+        <article class="chart-card"><h3>Channel Revenue Contribution</h3><div id="chart-channel-revenue" class="chart"></div></article>
+      </div>
+      <article class="insight-card"><h3>Channel Budget Direction</h3><p id="insight-channel">-</p></article>
+    </section>
+
+    <section class="tab-pane" data-tab="product">
+      <div class="chart-grid two-up">
+        <article class="chart-card"><h3>Top Product Categories by Revenue</h3><div id="chart-category" class="chart"></div></article>
+        <article class="chart-card"><h3>Revenue Concentration (Pareto)</h3><div id="chart-pareto" class="chart"></div></article>
+      </div>
+      <article class="insight-card"><h3>Merchandising Direction</h3><p id="insight-product">-</p></article>
+    </section>
+
+    <section class="tab-pane" data-tab="segment">
+      <div class="chart-grid three-up">
+        <article class="chart-card"><h3>Device Conversion</h3><div id="chart-device" class="chart"></div></article>
+        <article class="chart-card"><h3>Top Countries by Revenue</h3><div id="chart-geo" class="chart"></div></article>
+        <article class="chart-card"><h3>User Loyalty Segments</h3><div id="chart-loyalty" class="chart"></div></article>
+      </div>
+      <article class="insight-card"><h3>Segment Strategy</h3><p id="insight-segment">-</p></article>
+    </section>
+
+    <footer class="panel footer-note">
+      <p>This dashboard currently uses modeled example outputs aligned to the GA4 public sample dataset structure. Replace demo arrays in <code>dashboard.js</code> with your exported BigQuery results for production-grade findings.</p>
+      <p>SQL starter pack is available in <a href="sql/">/sql</a>.</p>
+    </footer>
+  </main>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
