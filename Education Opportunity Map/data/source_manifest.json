@@ -1,0 +1,25 @@
+{
+  "dataset_title": "The Geography of Opportunity \u2014 official metro inputs",
+  "reference_year": 2024,
+  "comparison_year": 2023,
+  "geography": "Metropolitan statistical areas represented by five-digit CBSA codes",
+  "retrieved": "2026-07-11",
+  "publisher": "U.S. Census Bureau, American Community Survey 1-year estimates",
+  "source_family": "ACS table-based summary files",
+  "tables": {
+    "B01003": "Total population",
+    "B20002": "Median earnings in the past 12 months for the population 16 years and over with earnings",
+    "B25064": "Median gross rent",
+    "B15003": "Educational attainment for the population 25 years and over",
+    "B28002": "Presence and types of internet subscriptions in household",
+    "B23025": "Employment status for the population 16 years and over"
+  },
+  "notes": [
+    "Population and resident employment growth compare ACS 2023 and ACS 2024 one-year estimates.",
+    "The employment-to-population ratio is employed civilians divided by the population age 16 and over.",
+    "Broadband subscription is households with broadband of any type divided by total households.",
+    "Coordinates are approximate display points and do not affect scores."
+  ],
+  "metro_count": 48,
+  "generated_file": "data/metro_source.csv"
+}

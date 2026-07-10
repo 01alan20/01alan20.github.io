@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070a12">
+  <meta name="description" content="An interactive data story using 2023 and 2024 American Community Survey estimates to compare opportunity across 48 U.S. metropolitan areas.">
+  <title>The Geography of Opportunity | Alan Cromlish</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="Back to Alan Cromlish portfolio">
+      <span class="brand-mark" aria-hidden="true">AC</span>
+      <span>Alan Cromlish</span>
+    </a>
+    <div class="header-actions">
+      <span class="prototype-badge"><span></span> Official ACS 2024 data</span>
+      <a class="header-link" href="#methodology">Method</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-orbit orbit-one" aria-hidden="true"></div>
+      <div class="hero-orbit orbit-two" aria-hidden="true"></div>
+      <svg id="hero-map" class="hero-map" role="img" aria-label="Animated map of U.S. metropolitan opportunity"></svg>
+      <div class="hero-vignette" aria-hidden="true"></div>
+
+      <div class="hero-copy">
+        <p class="eyebrow reveal">A responsive data story</p>
+        <h1 id="hero-title" class="display-title reveal">
+          Opportunity is<br>
+          <span>not evenly distributed.</span>
+        </h1>
+        <p class="hero-deck reveal">
+          Explore how careers, earnings, housing, education, and population change combine to shape where people can still move forward.
+        </p>
+        <div class="hero-actions reveal">
+          <a class="button button-primary" href="#story">Enter the map <span aria-hidden="true">↓</span></a>
+          <button class="button button-ghost" id="open-raleigh" type="button">Open the leading metro</button>
+        </div>
+      </div>
+
+      <div class="hero-stat" aria-live="polite">
+        <span class="hero-stat-label">Current leader</span>
+        <strong id="hero-leader">Raleigh</strong>
+        <span><b id="hero-leader-score">89</b> / 100 opportunity score</span>
+      </div>
+
+      <div class="scroll-cue" aria-hidden="true">
+        <span>Scroll to explore</span>
+        <i></i>
+      </div>
+    </section>
+
+    <section id="story" class="story-section" aria-labelledby="story-title">
+      <div class="section-intro content-width">
+        <p class="eyebrow">One country. Different realities.</p>
+        <h2 id="story-title">The same map tells five different stories.</h2>
+        <p>Scroll through the measures. The metros remain fixed while their relative strengths and constraints come into focus.</p>
+      </div>
+
+      <div class="story-layout">
+        <div class="story-visual-wrap">
+          <div class="story-visual">
+            <div class="visual-header">
+              <div>
+                <p class="visual-kicker" id="map-kicker">Composite index</p>
+                <h3 id="map-title">Opportunity score</h3>
+              </div>
+              <div class="legend" aria-label="Map legend">
+                <span>Lower</span>
+                <i></i>
+                <span>Higher</span>
+              </div>
+            </div>
+            <div class="map-stage">
+              <svg id="story-map" class="data-map" role="img" aria-label="Interactive U.S. metro opportunity map"></svg>
+              <div id="map-empty" class="map-empty" hidden>Map unavailable</div>
+            </div>
+            <div class="map-bottom-row">
+              <p id="map-caption">A weighted view of career growth, affordability, education, momentum, and connectivity.</p>
+              <button id="reset-map" class="text-button" type="button">Reset selection</button>
+            </div>
+            <aside id="metro-preview" class="metro-preview" aria-live="polite">
+              <span class="preview-rank">#1</span>
+              <div>
+                <p>Raleigh, NC</p>
+                <strong>89.2</strong>
+              </div>
+              <span class="preview-note">Career growth and population momentum lead.</span>
+            </aside>
+          </div>
+        </div>
+
+        <div class="story-steps" aria-label="Opportunity story steps">
+          <article class="story-step is-active" data-metric="opportunity_score" tabindex="0">
+            <span class="step-number">01</span>
+            <p class="step-label">Start with the whole picture</p>
+            <h3>Opportunity is a combination, not an earnings number.</h3>
+            <p>High pay can be cancelled out by housing pressure. Fast growth can mean little without education depth or connectivity.</p>
+            <div class="step-callout"><b>Composite score</b><span>Five dimensions weighted into one signal.</span></div>
+          </article>
+
+          <article class="story-step" data-metric="career_score" tabindex="0">
+            <span class="step-number">02</span>
+            <p class="step-label">Follow the jobs</p>
+            <h3>Career momentum is clustering in a smaller group of metros.</h3>
+            <p>Resident employment growth shows where the employed population expanded, while the employment-to-population ratio captures the current depth of work participation.</p>
+            <div class="step-callout"><b>Career score</b><span>Resident employment growth + employment-to-population ratio.</span></div>
+          </article>
+
+          <article class="story-step" data-metric="affordability_score" tabindex="0">
+            <span class="step-number">03</span>
+            <p class="step-label">Then subtract the rent</p>
+            <h3>Nominal earnings are not the same as usable income.</h3>
+            <p>Several high-earnings metros fall sharply once gross-rent pressure and earnings after twelve months of median rent are considered.</p>
+            <div class="step-callout"><b>Affordability score</b><span>Rent-to-earnings pressure + earnings remaining after rent.</span></div>
+          </article>
+
+          <article class="story-step" data-metric="education_score" tabindex="0">
+            <span class="step-number">04</span>
+            <p class="step-label">Look at the talent ecosystem</p>
+            <h3>Education depth changes what a labor market can become.</h3>
+            <p>A larger concentration of degree holders can support innovation, knowledge work, and employer demand—but may also intensify competition.</p>
+            <div class="step-callout"><b>Education score</b><span>Relative concentration of bachelor’s attainment.</span></div>
+          </article>
+
+          <article class="story-step" data-metric="momentum_score" tabindex="0">
+            <span class="step-number">05</span>
+            <p class="step-label">Watch where people are moving</p>
+            <h3>Population momentum reveals confidence—and pressure.</h3>
+            <p>Growth can expand opportunity, but it can also increase housing costs faster than wages. The best places manage both.</p>
+            <div class="step-callout"><b>Momentum score</b><span>Relative population growth across metros.</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="constellation" class="constellation-section" aria-labelledby="constellation-title">
+      <div class="content-width section-grid">
+        <div>
+          <p class="eyebrow">The opportunity constellation</p>
+          <h2 id="constellation-title">Growth and affordability rarely move together.</h2>
+          <p class="section-deck">Every metro becomes a point. Move between views to expose expensive growth, overlooked value, and balanced opportunity.</p>
+        </div>
+        <div class="mode-switch" role="group" aria-label="Constellation view">
+          <button class="mode-button is-active" data-mode="balanced" type="button">Balanced</button>
+          <button class="mode-button" data-mode="winners" type="button">Winners</button>
+          <button class="mode-button" data-mode="overlooked" type="button">Overlooked</button>
+          <button class="mode-button" data-mode="expensive" type="button">Expensive growth</button>
+        </div>
+      </div>
+
+      <div class="constellation-frame content-width">
+        <div class="axis-label axis-y">Career momentum →</div>
+        <svg id="constellation-chart" class="constellation-chart" role="img" aria-label="Scatterplot comparing metro career growth and affordability"></svg>
+        <div class="axis-label axis-x">Affordability →</div>
+        <div class="quadrant-label q-top-left">Fast but costly</div>
+        <div class="quadrant-label q-top-right">Opportunity leaders</div>
+        <div class="quadrant-label q-bottom-left">Under pressure</div>
+        <div class="quadrant-label q-bottom-right">Overlooked value</div>
+      </div>
+    </section>
+
+    <section id="compare" class="compare-section" aria-labelledby="compare-title">
+      <div class="content-width compare-heading">
+        <div>
+          <p class="eyebrow">Two metros. One decision.</p>
+          <h2 id="compare-title">Compare what the headline numbers hide.</h2>
+        </div>
+        <p>Select two places. The comparison updates instantly across opportunity, career momentum, affordability, education, and population change.</p>
+      </div>
+
+      <div class="comparison-shell content-width">
+        <div class="compare-controls">
+          <label>
+            <span>Metro A</span>
+            <select id="metro-a"></select>
+          </label>
+          <button id="swap-metros" class="swap-button" type="button" aria-label="Swap comparison metros">⇄</button>
+          <label>
+            <span>Metro B</span>
+            <select id="metro-b"></select>
+          </label>
+        </div>
+
+        <div class="comparison-scoreboard">
+          <article class="city-score city-a">
+            <p id="city-a-name">Atlanta, GA</p>
+            <strong id="city-a-score">73</strong>
+            <span>Opportunity score</span>
+          </article>
+          <div class="comparison-radar-wrap">
+            <svg id="comparison-radar" class="comparison-radar" role="img" aria-label="Radar comparison of selected metros"></svg>
+          </div>
+          <article class="city-score city-b">
+            <p id="city-b-name">Chicago, IL</p>
+            <strong id="city-b-score">55</strong>
+            <span>Opportunity score</span>
+          </article>
+        </div>
+
+        <div id="comparison-metrics" class="comparison-metrics"></div>
+        <div id="comparison-verdict" class="comparison-verdict" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="finder" class="finder-section" aria-labelledby="finder-title">
+      <div class="content-width finder-heading">
+        <div>
+          <p class="eyebrow">Build your own definition</p>
+          <h2 id="finder-title">What does opportunity mean to you?</h2>
+        </div>
+        <p>Change the weights. The ranking recalculates immediately and surfaces metros aligned to your priorities.</p>
+      </div>
+
+      <div class="finder-shell content-width">
+        <div class="finder-controls">
+          <div class="preset-row" role="group" aria-label="Opportunity presets">
+            <button class="preset-button is-active" data-preset="balanced" type="button">Balanced</button>
+            <button class="preset-button" data-preset="career" type="button">Career first</button>
+            <button class="preset-button" data-preset="value" type="button">Affordable growth</button>
+            <button class="preset-button" data-preset="education" type="button">Education hub</button>
+          </div>
+          <div id="weight-controls" class="weight-controls"></div>
+          <div class="weight-total"><span>Weight allocated</span><strong id="weight-total">100%</strong></div>
+        </div>
+
+        <div class="finder-results">
+          <div class="finder-results-head">
+            <div>
+              <span>Your top matches</span>
+              <strong id="match-summary">Balanced opportunity</strong>
+            </div>
+            <button id="randomize-weights" class="text-button" type="button">Surprise me</button>
+          </div>
+          <ol id="recommendation-list" class="recommendation-list"></ol>
+        </div>
+
+        <div class="finder-map-wrap">
+          <svg id="finder-map" class="finder-map" role="img" aria-label="Map highlighting recommended metros"></svg>
+          <p>Top five metros are highlighted. Click any point for its profile.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="methodology" class="method-section" aria-labelledby="method-title">
+      <div class="content-width method-grid">
+        <div>
+          <p class="eyebrow">Method and sources</p>
+          <h2 id="method-title">Official data, transparent calculations, and clear limits.</h2>
+        </div>
+        <div class="method-copy">
+          <p>The analysis uses U.S. Census Bureau American Community Survey one-year estimates for 2023 and 2024. Scores are percentile rankings among the 48 included metropolitan areas—not forecasts, causal estimates, or a definitive ranking of every place in the United States.</p>
+          <p class="source-note">Source tables: ACS B01003, B15003, B20002, B23025, B25064, and B28002. Full definitions and limitations are documented in <a href="DATA_DICTIONARY.md">the data dictionary</a>.</p>
+          <div class="method-cards">
+            <article><span>01</span><h3>Official inputs</h3><p>Population, earnings, gross rent, education, broadband, and employment status come from ACS detailed tables.</p></article>
+            <article><span>02</span><h3>Reproducible build</h3><p>Run <code>python scripts/fetch_official_data.py --refresh</code>, then <code>python scripts/build_dataset.py</code>.</p></article>
+            <article><span>03</span><h3>Interpret carefully</h3><p>Annual ACS estimates carry sampling error; the composite weights are editorial choices and can be changed in the finder.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>The Geography of Opportunity</strong>
+      <span>Interactive analysis by Alan Cromlish · ACS 2023–2024</span>
+    </div>
+    <a href="../">Back to portfolio ↑</a>
+  </footer>
+
+  <div id="tooltip" class="tooltip" role="status" aria-live="polite"></div>
+
+  <dialog id="metro-dialog" class="metro-dialog">
+    <button id="close-dialog" class="dialog-close" type="button" aria-label="Close metro profile">×</button>
+    <div id="dialog-content"></div>
+  </dialog>
+
+  <script src="data/us-outline.js"></script>
+  <script src="data/metro-data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!-- Adapt the classes to your existing portfolio card system. -->
+<a class="project-card opportunity-project" href="./Education%20Opportunity%20Map/">
+  <div class="project-card__visual" aria-hidden="true">
+    <span class="project-card__glow"></span>
+    <span class="project-card__map">● ● ● ● ●</span>
+  </div>
+  <div class="project-card__content">
+    <p class="project-card__eyebrow">Interactive data story</p>
+    <h3>The Geography of Opportunity</h3>
+    <p>Explore how employment, earnings, rent, education, broadband, and population change reshape opportunity across 48 U.S. metros.</p>
+    <span>Official ACS data · Scrollytelling · Decision model</span>
+  </div>
+</a>
+
+<style>
+  .opportunity-project {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(180px, .7fr) minmax(0, 1.3fr);
+    gap: 1.4rem;
+    min-height: 270px;
+    padding: 1.4rem;
+    overflow: hidden;
+    color: #f5f7fb;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 24px;
+    background: #080d18;
+    text-decoration: none;
+  }
+  .project-card__visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 210px;
+    border-radius: 18px;
+    background: radial-gradient(circle, rgba(86,240,208,.16), transparent 62%), #0d1526;
+  }
+  .project-card__glow {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border: 1px solid rgba(86,240,208,.35);
+    border-radius: 50%;
+    box-shadow: 0 0 55px rgba(86,240,208,.18);
+  }
+  .project-card__map { color: #56f0d0; letter-spacing: .65rem; transform: rotate(-8deg); }
+  .project-card__content { align-self: center; }
+  .project-card__eyebrow { color: #56f0d0; font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .opportunity-project h3 { margin: .35rem 0 .7rem; font-size: clamp(1.8rem, 3vw, 3rem); line-height: 1; }
+  .opportunity-project p:not(.project-card__eyebrow) { color: #9aa6ba; line-height: 1.65; }
+  .opportunity-project__content > span, .project-card__content > span { color: #738097; font-size: .76rem; }
+  @media (max-width: 680px) { .opportunity-project { grid-template-columns: 1fr; } }
+</style>
