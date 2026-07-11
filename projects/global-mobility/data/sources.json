@@ -1,0 +1,19 @@
+{
+  "global_period": "2013–2023",
+  "europe_period": "2014–2024 cumulative",
+  "global_definition": "Internationally mobile tertiary students; country of origin is ideally prior education, then residence, with citizenship used only where necessary.",
+  "global_corridor_scope": "Selected major corridors published in annual Wissenschaft weltoffen figures from 2016 onward. Source figures use an approximately 15,000-student display threshold; this layer is not a complete bilateral matrix.",
+  "europe_definition": "Cumulative Erasmus+ Key Action 1 learning-mobility participant flows between sending and receiving countries since 2014, through the 2024 data release.",
+  "break_note": "The European Erasmus+ section is not a continuation of the global degree-mobility series. It measures a different form of learning mobility.",
+  "source_urls": [
+    "https://www.wissenschaft-weltoffen.de/content/uploads/2026/05/wiwe_kompakt_2026_bf_EN.pdf",
+    "https://databrowser.uis.unesco.org/",
+    "https://uis.unesco.org/sites/default/files/medias/fichiers/2025/07/International_mobile_students_final.pdf",
+    "https://erasmus-plus.ec.europa.eu/resources-and-tools/statistics-and-factsheets/statistics/for-researchers",
+    "https://erasmus-plus.ec.europa.eu/resources-and-tools/factsheets-statistics-evaluations/statistics/data/learning-mobility-projects",
+    "https://raw.githubusercontent.com/bavla/wNets/main/Data/ErasmusFlows.net",
+    "https://www.wissenschaft-weltoffen.de/content/uploads/2021/09/wiwe_kompakt_2019_englisch.pdf",
+    "https://www.naturalearthdata.com/"
+  ],
+  "map_projection": "Projection-matched equirectangular basemaps generated locally from Natural Earth low-resolution boundaries."
+}

@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive academic atlas of global student mobility from 2013 to 2023, followed by Erasmus+ learning mobility across Europe through 2024.">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Global Student Highways — 2013–2023">
+  <meta property="og:description" content="An interactive academic atlas of global student mobility and Europe’s Erasmus+ learning-mobility network.">
+  <meta property="og:image" content="https://01alan20.github.io/projects/global-mobility/assets/img/preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Global Student Highways — 2013–2023</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to analysis</a>
+
+  <header class="site-header" id="siteHeader">
+    <a class="wordmark" href="../../" aria-label="Back to portfolio">
+      <span class="wordmark-mark" aria-hidden="true">AC</span>
+      <span class="wordmark-copy">Data studies</span>
+    </a>
+    <nav class="chapter-nav" aria-label="Project chapters">
+      <a class="chapter-link is-active" href="#global-atlas">Global · 2013–2023</a>
+      <a class="chapter-link" href="#europe-atlas">Europe · through 2024</a>
+    </nav>
+    <button class="text-button" type="button" data-open-methodology>Methodology</button>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="heroTitle">
+      <div class="hero-grid">
+        <div class="hero-kicker reveal">An interactive academic atlas</div>
+        <h1 class="hero-title reveal" id="heroTitle">
+          Global Student<br><em>Highways</em>
+        </h1>
+        <p class="hero-deck reveal">
+          A decade of international higher-education mobility, followed by a closer view of Europe when the globally comparable series ends.
+        </p>
+        <div class="hero-stat reveal" aria-label="Global internationally mobile students grew from 4.35 million in 2013 to 7.3 million in 2023">
+          <span class="hero-stat-value">4.35m<sup>*</sup></span>
+          <span class="hero-stat-rule" aria-hidden="true"></span>
+          <span class="hero-stat-value">7.3m</span>
+          <span class="hero-stat-label">internationally mobile students</span>
+        </div>
+        <div class="hero-actions reveal">
+          <a class="primary-action" href="#global-atlas">Explore the decade <span aria-hidden="true">↓</span></a>
+          <button class="secondary-action" type="button" id="heroPlay">Play 2013–2023</button>
+        </div>
+        <p class="hero-footnote reveal"><sup>*</sup>2013 is interpolated from revised 2012 and 2014 totals; the route-level map archive used here begins in 2016.</p>
+      </div>
+
+      <div class="hero-map" aria-hidden="true">
+        <img src="assets/img/world-map.svg" alt="">
+        <svg id="heroFlowLayer" viewBox="0 0 1200 483" preserveAspectRatio="none"></svg>
+        <div class="hero-year" id="heroYear">2023</div>
+      </div>
+    </section>
+
+    <section class="section-intro" aria-labelledby="questionTitle">
+      <div class="section-index">01 / The global decade</div>
+      <h2 id="questionTitle">Not simply more students.<br>A changing geography of choice.</h2>
+      <p>Move through the decade to see selected major corridors strengthen, weaken and redirect. The map shows published headline routes, while the total captures the wider global system.</p>
+    </section>
+
+    <section class="atlas-section" id="global-atlas" aria-labelledby="globalAtlasTitle">
+      <div class="atlas-toolbar">
+        <div>
+          <p class="eyebrow">Global degree mobility</p>
+          <h2 id="globalAtlasTitle">The network, year by year</h2>
+        </div>
+        <div class="toolbar-actions">
+          <button class="icon-button" id="globalPlay" type="button" aria-label="Play global timeline">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5 18 12 8 18.5Z"/></svg>
+          </button>
+          <label class="field compact-field">
+            <span>Focus country</span>
+            <select id="globalCountrySelect"><option value="all">All countries</option></select>
+          </label>
+        </div>
+      </div>
+
+      <div class="atlas-shell global-shell">
+        <div class="map-stage" id="globalMapStage">
+          <img class="map-base" src="assets/img/world-map.svg" alt="">
+          <svg class="flow-layer" id="globalFlowLayer" viewBox="0 0 1200 483" preserveAspectRatio="none" role="img" aria-label="Selected major international student mobility routes"></svg>
+          <div class="map-annotation" id="globalMapAnnotation">
+            <span class="annotation-year" id="globalYearLabel">2013</span>
+            <span class="annotation-copy" id="globalAnnotationCopy">Global total only · route-level archive begins in 2016</span>
+          </div>
+          <div class="coverage-notice" id="globalCoverageNotice">
+            <span>Route coverage</span>
+            <strong>Global total available.<br>Bilateral route maps begin in 2016.</strong>
+          </div>
+          <div class="map-legend" aria-label="Route colors by origin region">
+            <span><i class="legend-line asia"></i> Asia</span>
+            <span><i class="legend-line europe"></i> Europe</span>
+            <span><i class="legend-line middle-east"></i> Middle East</span>
+            <span><i class="legend-line north-america"></i> North America</span>
+            <span><i class="legend-line latin-america"></i> Latin America</span>
+            <span><i class="legend-line africa"></i> Africa</span>
+          </div>
+          <div class="tooltip" id="globalTooltip" role="status" aria-live="polite"></div>
+        </div>
+
+        <aside class="atlas-panel" aria-label="Global timeline details">
+          <div class="panel-stat">
+            <span class="panel-stat-label">Internationally mobile students</span>
+            <strong class="panel-stat-value" id="globalTotal">4.35m</strong>
+            <span class="status-badge is-estimated" id="globalStatus">Estimated</span>
+          </div>
+
+          <div class="panel-metric-row">
+            <div><span>Change since 2013</span><strong id="globalChange">—</strong></div>
+            <div><span>Published corridors shown</span><strong id="globalRouteCount">0</strong></div>
+          </div>
+
+          <div class="route-list-block">
+            <div class="subhead-row">
+              <h3>Largest visible corridors</h3>
+              <span id="globalListScope">Selected routes</span>
+            </div>
+            <ol class="route-list" id="globalRouteList"></ol>
+          </div>
+
+          <div class="data-note" id="globalDataNote">
+            The 2013 total is an interpolation. No route values are inferred for that year.
+          </div>
+        </aside>
+      </div>
+
+      <div class="timeline-control" aria-label="Global mobility year control">
+        <div class="timeline-years" aria-hidden="true"><span>2013</span><span>2018</span><span>2023</span></div>
+        <input id="globalYearSlider" type="range" min="2013" max="2023" step="1" value="2013" aria-label="Select year from 2013 to 2023">
+        <div class="timeline-ticks" id="globalTicks" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="growth-section" aria-labelledby="growthTitle">
+      <div class="growth-copy">
+        <p class="eyebrow">Scale of change</p>
+        <h2 id="growthTitle">The mobile student population grew by <span>2.95 million</span> in one decade.</h2>
+        <p>The increase equals <strong>67.8%</strong>, or a compound annual growth rate of approximately <strong>5.3%</strong>. Even the pandemic years did not reverse the global aggregate.</p>
+        <div class="growth-metrics">
+          <div><strong>+2.95m</strong><span>additional students</span></div>
+          <div><strong>+67.8%</strong><span>decade growth</span></div>
+          <div><strong>5.3%</strong><span>annualised growth</span></div>
+        </div>
+      </div>
+      <div class="chart-frame">
+        <div class="chart-heading">
+          <span>Global internationally mobile students</span>
+          <span>Millions</span>
+        </div>
+        <svg id="globalTrendChart" viewBox="0 0 760 430" role="img" aria-label="Internationally mobile students rose from an estimated 4.35 million in 2013 to 7.3 million in 2023"></svg>
+        <p class="chart-note">Open marker = estimated value. All other points use published historical totals.</p>
+      </div>
+    </section>
+
+    <section class="rankings-section" aria-labelledby="rankingsTitle">
+      <div class="rankings-header">
+        <div>
+          <p class="eyebrow">2023 system profile</p>
+          <h2 id="rankingsTitle">The countries moving students<br>and the systems receiving them</h2>
+        </div>
+        <div class="segmented" role="group" aria-label="Choose ranking type">
+          <button class="is-active" type="button" data-ranking="origin">Origins</button>
+          <button type="button" data-ranking="host">Hosts</button>
+        </div>
+      </div>
+      <div class="rankings-layout">
+        <ol class="ranking-list" id="countryRanking"></ol>
+        <aside class="ranking-insight" id="rankingInsight">
+          <span class="insight-number">1.86m</span>
+          <h3>China and India accounted for more than one quarter of the global mobile-student population.</h3>
+          <p>Scale is concentrated at the top, but the next tier is far more geographically dispersed.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="method-break" aria-labelledby="breakTitle">
+      <div class="method-break-grid">
+        <p class="break-index">A necessary break in the series</p>
+        <h2 id="breakTitle">2023 is where the globally comparable map stops.</h2>
+        <p class="break-deck">To look further forward, the lens must narrow—and the measure must change.</p>
+        <div class="break-comparison">
+          <article>
+            <span>Global · through 2023</span>
+            <h3>Degree mobility</h3>
+            <p>Students crossing an international border for tertiary education, compiled through UNESCO/OECD reporting.</p>
+          </article>
+          <div class="break-arrow" aria-hidden="true">→</div>
+          <article>
+            <span>Europe · through 2024</span>
+            <h3>Erasmus+ learning mobility</h3>
+            <p>Cumulative Key Action 1 participant flows between sending and receiving countries since 2014.</p>
+          </article>
+        </div>
+        <p class="break-warning"><strong>These datasets are not directly comparable.</strong> The transition is a change of scope, not another point on the same line.</p>
+      </div>
+    </section>
+
+    <section class="section-intro europe-intro" aria-labelledby="europeIntroTitle">
+      <div class="section-index">02 / The European network</div>
+      <h2 id="europeIntroTitle">A denser view of learning mobility.</h2>
+      <p>The Erasmus+ network reveals 8.27 million cumulative cross-border participant movements through 2024, with 1,120 directed country-to-country links represented in the source network.</p>
+    </section>
+
+    <section class="atlas-section europe-section" id="europe-atlas" aria-labelledby="europeAtlasTitle">
+      <div class="atlas-toolbar">
+        <div>
+          <p class="eyebrow">Erasmus+ · cumulative since 2014</p>
+          <h2 id="europeAtlasTitle">Europe’s learning-mobility network</h2>
+        </div>
+        <div class="toolbar-actions">
+          <label class="field compact-field">
+            <span>Country</span>
+            <select id="europeCountrySelect"><option value="all">All countries</option></select>
+          </label>
+          <div class="segmented small" role="group" aria-label="Choose European metric">
+            <button class="is-active" type="button" data-europe-view="inbound">Arrivals</button>
+            <button type="button" data-europe-view="outbound">Departures</button>
+            <button type="button" data-europe-view="balance">Balance</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="atlas-shell europe-shell">
+        <div class="map-stage europe-map-stage" id="europeMapStage">
+          <img class="map-base" src="assets/img/europe-map.svg" alt="">
+          <svg class="flow-layer" id="europeFlowLayer" viewBox="0 0 900 585" preserveAspectRatio="none" role="img" aria-label="Major cumulative Erasmus+ country-to-country learning mobility routes"></svg>
+          <div class="map-annotation europe-annotation">
+            <span class="annotation-year">2014–2024</span>
+            <span class="annotation-copy">Cumulative cross-border participant flows</span>
+          </div>
+          <div class="route-count-control">
+            <label for="europeRouteCount">Routes shown <strong id="europeRouteCountLabel">40</strong></label>
+            <input id="europeRouteCount" type="range" min="15" max="100" value="40" step="5">
+          </div>
+          <div class="tooltip" id="europeTooltip" role="status" aria-live="polite"></div>
+        </div>
+
+        <aside class="atlas-panel europe-panel" aria-label="European network details">
+          <div class="panel-stat">
+            <span class="panel-stat-label" id="europePanelLabel">Cross-border participants represented</span>
+            <strong class="panel-stat-value" id="europeMainValue">8.27m</strong>
+            <span class="status-badge">Cumulative</span>
+          </div>
+
+          <div class="panel-metric-row triple" id="europeMetricRow">
+            <div><span>Countries</span><strong>34</strong></div>
+            <div><span>Directed routes</span><strong>1,120</strong></div>
+            <div><span>Largest route</span><strong>217k</strong></div>
+          </div>
+
+          <div class="route-list-block">
+            <div class="subhead-row">
+              <h3 id="europeListTitle">Largest corridors</h3>
+              <span>Cross-border only</span>
+            </div>
+            <ol class="route-list" id="europeRouteList"></ol>
+          </div>
+
+          <div class="data-note" id="europeDataNote">Small same-country records and “Rest of the world” are excluded from the mapped cross-border analysis.</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="network-section" aria-labelledby="networkTitle">
+      <div class="network-header">
+        <p class="eyebrow">Network position</p>
+        <h2 id="networkTitle">Attractor, sender—or both?</h2>
+        <p>Inbound and outbound scale reveal different roles in the European mobility system. Select a country to inspect its balance, concentration and strongest partners.</p>
+      </div>
+      <div class="network-grid">
+        <div class="balance-chart-wrap">
+          <div class="chart-heading"><span>Largest net balances</span><span>Inbound minus outbound</span></div>
+          <div class="balance-chart" id="balanceChart"></div>
+        </div>
+        <article class="country-profile" id="countryProfile">
+          <div class="profile-header">
+            <span class="profile-kicker">Country profile</span>
+            <h3 id="profileCountry">Spain</h3>
+          </div>
+          <div class="profile-number"><strong id="profileBalance">+360,859</strong><span>net participant balance</span></div>
+          <dl class="profile-grid">
+            <div><dt>Inbound</dt><dd id="profileInbound">1.22m</dd></div>
+            <div><dt>Outbound</dt><dd id="profileOutbound">858,851</dd></div>
+            <div><dt>Top-three inbound share</dt><dd id="profileConcentration">45.0%</dd></div>
+            <div><dt>Inbound diversity</dt><dd id="profileDiversity">33.1 / 100</dd></div>
+          </dl>
+          <div class="profile-partners">
+            <h4>Strongest links</h4>
+            <div id="profilePartners"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="methods-section" id="methods" aria-labelledby="methodsTitle">
+      <div class="methods-heading">
+        <p class="eyebrow">Read the evidence carefully</p>
+        <h2 id="methodsTitle">Method, limits and reproducibility</h2>
+      </div>
+      <div class="methods-grid">
+        <article>
+          <span>01</span>
+          <h3>Global totals</h3>
+          <p>Published historical UNESCO/DAAD totals are used from 2014 onward. The 2013 value is a transparent interpolation between revised 2012 and 2014 totals. The bilateral headline-route archive used in this project begins in 2016.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Global corridors</h3>
+          <p>The route layer contains selected major flows transcribed from annual Wissenschaft weltoffen maps from 2016 onward. The source figures generally show corridors of approximately 15,000 students or more; this is not a complete bilateral matrix.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Definitions vary</h3>
+          <p>Origin is ideally based on prior education, then usual residence; citizenship may be used where better measures are unavailable. Country notes and series breaks matter.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>European network</h3>
+          <p>The Erasmus+ section uses cumulative Key Action 1 learning-mobility country flows since 2014, through the 2024 release. It is a different measure from global degree mobility.</p>
+        </article>
+      </div>
+      <div class="source-strip">
+        <span>Primary sources</span>
+        <a href="https://databrowser.uis.unesco.org/" target="_blank" rel="noreferrer">UNESCO UIS</a>
+        <a href="https://www.wissenschaft-weltoffen.de/" target="_blank" rel="noreferrer">Wissenschaft weltoffen</a>
+        <a href="https://erasmus-plus.ec.europa.eu/resources-and-tools/statistics-and-factsheets/statistics/for-researchers" target="_blank" rel="noreferrer">European Commission Erasmus+</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><strong>Global Student Highways</strong><span>Interactive data study</span></div>
+    <p>Designed and developed for static deployment on GitHub Pages.</p>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <dialog class="method-dialog" id="methodDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-header">
+      <div>
+        <p class="eyebrow">Methodology note</p>
+        <h2 id="dialogTitle">Two maps. Two measures.</h2>
+      </div>
+      <button class="dialog-close" type="button" data-close-methodology aria-label="Close methodology">×</button>
+    </div>
+    <div class="dialog-body">
+      <section>
+        <h3>Global, 2013–2023</h3>
+        <p>Internationally mobile tertiary students are people who physically crossed a national border to study. The preferred origin measure is prior education, followed by residence; citizenship is a fallback. The route layer is a curated set of published major corridors, not a full matrix.</p>
+      </section>
+      <section>
+        <h3>Europe, 2014–2024 cumulative</h3>
+        <p>The European section uses Erasmus+ Key Action 1 learning-mobility flows. It counts cumulative participant movements between sending and receiving countries. It must not be read as a continuation of the global degree-mobility series.</p>
+      </section>
+      <section>
+        <h3>Calculated measures</h3>
+        <p>Growth rates, balances, concentration and diversity measures are calculated within this project. They are analytical outputs—not official rankings from UNESCO, DAAD or the European Commission.</p>
+      </section>
+      <section>
+        <h3>Files</h3>
+        <p>All processed CSV files, source notes and Python build scripts are included in the repository folder for inspection and reuse.</p>
+      </section>
+    </div>
+  </dialog>
+
+  <noscript><p class="noscript-note">This interactive project requires JavaScript to render its maps and charts.</p></noscript>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

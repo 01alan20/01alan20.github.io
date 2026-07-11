@@ -1,0 +1,21 @@
+type,country,students,rank
+origin,China,1029550,1
+origin,India,834361,2
+origin,Nigeria,146305,3
+origin,Germany,129070,4
+origin,Vietnam,128240,5
+origin,Uzbekistan,120564,6
+origin,United States,118321,7
+origin,France,115166,8
+origin,Pakistan,114915,9
+origin,Nepal,108282,10
+host,United States,956923,1
+host,United Kingdom,748461,2
+host,Australia,467074,3
+host,Germany,423197,4
+host,Canada,389181,5
+host,Russia,336453,6
+host,Türkiye,301634,7
+host,France,276217,8
+host,United Arab Emirates,237034,9
+host,China,208380,10

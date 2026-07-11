@@ -1,0 +1,132 @@
+year,origin,destination,students,origin_region,status
+2016,China,United States,318414,Asia,published
+2016,India,United States,135733,Asia,published
+2016,China,Australia,122298,Asia,published
+2016,China,United Kingdom,106547,Asia,published
+2016,China,Japan,76537,Asia,published
+2016,Kazakhstan,Russia,69895,Asia,published
+2016,South Korea,United States,63129,Asia,published
+2016,Saudi Arabia,United States,60454,Middle East,published
+2016,China,Canada,58385,Asia,published
+2016,India,Australia,46316,Asia,published
+2016,China,South Korea,38813,Asia,published
+2016,Bangladesh,Malaysia,34155,Asia,published
+2016,Uzbekistan,Russia,32366,Asia,published
+2016,Ukraine,Poland,29253,Europe,published
+2016,Canada,United States,28255,North America,published
+2016,Morocco,France,28012,Middle East,published
+2016,Germany,Austria,27828,Europe,published
+2016,Malaysia,United Kingdom,23378,Asia,published
+2016,Slovakia,Czechia,22514,Europe,published
+2016,Belarus,Russia,22400,Europe,published
+2016,Vietnam,United States,22172,Asia,published
+2016,Germany,Netherlands,21956,Europe,published
+2016,South Korea,Japan,19152,Asia,published
+2016,Mexico,United States,17032,Latin America,published
+2016,Nigeria,United Kingdom,17008,Africa,published
+2016,France,Belgium,16856,Europe,published
+2016,Ukraine,Russia,16655,Europe,published
+2016,China,New Zealand,16626,Asia,published
+2016,Turkmenistan,Russia,16521,Asia,published
+2016,Algeria,France,16072,Middle East,published
+2016,India,United Kingdom,15437,Asia,published
+2016,Vietnam,Australia,15319,Asia,published
+2016,Tajikistan,Russia,15126,Asia,published
+2017,China,United States,329724,Asia,published
+2017,India,United States,142618,Asia,published
+2017,China,Australia,138313,Asia,published
+2017,China,United Kingdom,113718,Asia,published
+2017,China,Japan,79375,Asia,published
+2017,South Korea,United States,68339,Asia,published
+2017,India,Australia,51976,Asia,published
+2017,Ukraine,Poland,34692,Europe,published
+2017,Germany,Austria,28473,Europe,published
+2017,Germany,Netherlands,22656,Europe,published
+2017,Slovakia,Czechia,22478,Europe,published
+2018,China,United States,341419,Asia,published
+2018,China,Australia,153661,Asia,published
+2018,India,United States,135940,Asia,published
+2018,China,United Kingdom,124802,Asia,published
+2018,China,Japan,84101,Asia,published
+2018,India,Australia,73316,Asia,published
+2018,Germany,Austria,28932,Europe,published
+2018,Ukraine,Poland,26864,Europe,published
+2018,Germany,Netherlands,22598,Europe,published
+2018,Slovakia,Czechia,21955,Europe,published
+2018,Syria,Türkiye,20701,Middle East,published
+2018,China,Italy,15182,Asia,published
+2019,China,United States,347485,Asia,published
+2019,China,Australia,166055,Asia,published
+2019,China,United Kingdom,139166,Asia,published
+2019,India,United States,133321,Asia,published
+2019,India,Australia,93324,Asia,published
+2019,China,Japan,91528,Asia,published
+2019,Germany,Austria,29322,Europe,published
+2019,Syria,Türkiye,27034,Middle East,published
+2019,Germany,Netherlands,21314,Europe,published
+2019,Azerbaijan,Türkiye,19383,Middle East,published
+2019,France,Belgium,15441,Europe,published
+2020,China,United States,350795,Asia,published
+2020,China,United Kingdom,160964,Asia,published
+2020,China,Australia,137684,Asia,published
+2020,India,United States,128578,Asia,published
+2020,China,Japan,91528,Asia,published
+2020,India,Australia,84484,Asia,published
+2020,China,Canada,83058,Asia,published
+2020,South Korea,Japan,40633,Asia,published
+2020,Syria,Türkiye,37236,Middle East,published
+2020,Germany,Austria,30503,Europe,published
+2020,Slovakia,Czechia,21633,Europe,published
+2020,Germany,Netherlands,21314,Europe,published
+2020,Azerbaijan,Türkiye,21069,Middle East,published
+2020,France,Belgium,18089,Europe,published
+2020,Syria,Germany,15769,Middle East,published
+2021,China,United States,301642,Asia,published
+2021,China,United Kingdom,163006,Asia,published
+2021,India,United States,109329,Asia,published
+2021,China,Australia,102228,Asia,published
+2021,China,Canada,81957,Asia,published
+2021,India,Australia,68725,Asia,published
+2021,China,Japan,59780,Asia,published
+2021,Syria,Türkiye,47483,Middle East,published
+2021,South Korea,Japan,43275,Asia,published
+2021,Germany,Austria,34127,Europe,published
+2021,Germany,Netherlands,24442,Europe,published
+2021,Azerbaijan,Türkiye,23772,Middle East,published
+2021,Slovakia,Czechia,21907,Europe,published
+2021,France,Belgium,19063,Europe,published
+2021,Austria,Germany,16231,Europe,published
+2021,Cyprus,Greece,15066,Europe,published
+2022,China,United States,284858,Asia,published
+2022,China,United Kingdom,172555,Asia,published
+2022,India,United States,150001,Asia,published
+2022,China,Australia,97507,Asia,published
+2022,China,Canada,76044,Asia,published
+2022,India,Australia,69235,Asia,published
+2022,China,Japan,60551,Asia,published
+2022,Syria,Türkiye,52367,Middle East,published
+2022,South Korea,Japan,38514,Asia,published
+2022,Germany,Austria,36430,Europe,published
+2022,Azerbaijan,Türkiye,28616,Middle East,published
+2022,Germany,Netherlands,22637,Europe,published
+2022,Slovakia,Czechia,21466,Europe,published
+2022,France,Belgium,19768,Europe,published
+2022,Austria,Germany,17651,Europe,published
+2023,China,United States,272541,Asia,published
+2023,India,United States,223117,Asia,published
+2023,China,United Kingdom,174724,Asia,published
+2023,China,Australia,110220,Asia,published
+2023,India,Australia,91595,Asia,published
+2023,China,Japan,90448,Asia,published
+2023,China,Canada,70440,Asia,published
+2023,Syria,Türkiye,58210,Middle East,published
+2023,Germany,Austria,38178,Europe,published
+2023,Azerbaijan,Türkiye,34247,Middle East,published
+2023,South Korea,Japan,28814,Asia,published
+2023,Germany,Netherlands,23420,Europe,published
+2023,Iran,Türkiye,22632,Middle East,published
+2023,Slovakia,Czechia,21501,Europe,published
+2023,France,Belgium,19104,Europe,published
+2023,Austria,Germany,18027,Europe,published
+2023,Iraq,Türkiye,16172,Middle East,published
+2023,Cyprus,Greece,15143,Europe,published
