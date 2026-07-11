@@ -2,8 +2,9 @@
   'use strict';
 
   const DATA = window.MOBILITY_DATA;
-  if (!DATA) {
-    document.body.innerHTML = '<main style="padding:40px;font-family:sans-serif">The mobility dataset could not be loaded.</main>';
+  const MAPS = window.MOBILITY_MAP_DATA;
+  if (!DATA || !MAPS) {
+    document.body.innerHTML = '<main style="padding:40px;font-family:sans-serif">The mobility dataset or map geometry could not be loaded.</main>';
     return;
   }
 
@@ -31,7 +32,7 @@
   };
 
   const state = {
-    globalYear: 2013,
+    globalYear: 2016,
     globalCountry: 'all',
     globalPlaying: false,
     globalTimer: null,
@@ -53,6 +54,22 @@
     });
     if (text) node.textContent = text;
     return node;
+  }
+
+
+  function renderBasemap(group, paths) {
+    if (!group) return;
+    const fragment = document.createDocumentFragment();
+    paths.forEach(pathData => {
+      fragment.append(svgEl('path', { class: 'basemap-country', d: pathData }));
+    });
+    group.replaceChildren(fragment);
+  }
+
+  function initBasemaps() {
+    renderBasemap($('#heroBaseLayer'), MAPS.world.paths);
+    renderBasemap($('#globalBaseLayer'), MAPS.world.paths);
+    renderBasemap($('#europeBaseLayer'), MAPS.europe.paths);
   }
 
   function clamp(value, min, max) {
@@ -244,7 +261,7 @@
     const playButton = $('#globalPlay');
     const heroPlay = $('#heroPlay');
 
-    DATA.globalTotals.forEach(item => {
+    DATA.globalTotals.filter(item => item.year >= 2016).forEach(item => {
       const tick = document.createElement('i');
       tick.title = `${item.year}: ${formatCompact(item.students)} students`;
       ticks?.append(tick);
@@ -259,7 +276,7 @@
     heroPlay?.addEventListener('click', () => {
       $('#global-atlas')?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
       setTimeout(() => {
-        if (state.globalYear >= 2023) setGlobalYear(2013);
+        if (state.globalYear >= 2023) setGlobalYear(2016);
         startGlobalPlayback();
       }, prefersReducedMotion ? 0 : 600);
     });
@@ -299,13 +316,13 @@
     if (state.globalPlaying) {
       stopGlobalPlayback();
     } else {
-      if (state.globalYear >= 2023) setGlobalYear(2013);
+      if (state.globalYear >= 2023) setGlobalYear(2016);
       startGlobalPlayback();
     }
   }
 
   function setGlobalYear(year) {
-    state.globalYear = clamp(year, 2013, 2023);
+    state.globalYear = clamp(year, 2016, 2023);
     const slider = $('#globalYearSlider');
     if (slider) slider.value = String(state.globalYear);
     renderGlobalMap();
@@ -374,7 +391,7 @@
     });
 
     const yearRecord = DATA.globalTotals.find(item => item.year === state.globalYear);
-    const routeArchiveAvailable = state.globalYear >= 2016;
+    const routeArchiveAvailable = true;
     $('#globalYearLabel').textContent = String(state.globalYear);
     $('#globalAnnotationCopy').textContent = !routeArchiveAvailable
       ? 'Global total only · route-level archive begins in 2016'
@@ -569,16 +586,21 @@
           'text-anchor': index === 0 ? 'start' : 'end',
         }, formatCompact(item.students)));
       }
-      group.addEventListener('click', () => {
-        setGlobalYear(item.year);
-        $('#global-atlas')?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
-      });
-      group.addEventListener('keydown', event => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          group.dispatchEvent(new Event('click'));
-        }
-      });
+      if (item.year >= 2016) {
+        group.addEventListener('click', () => {
+          setGlobalYear(item.year);
+          $('#global-atlas')?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+        });
+        group.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            group.dispatchEvent(new Event('click'));
+          }
+        });
+      } else {
+        group.removeAttribute('tabindex');
+        group.removeAttribute('role');
+      }
       svg.append(group);
     });
   }
@@ -873,6 +895,7 @@
 
   function init() {
     addDynamicStyles();
+    initBasemaps();
     initHeader();
     initMethodology();
     initSelects();

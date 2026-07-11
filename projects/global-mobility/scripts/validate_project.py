@@ -27,10 +27,9 @@ def validate() -> None:
     required = [
         "index.html",
         "assets/css/styles.css",
+        "assets/js/map-data.js",
         "assets/js/data.js",
         "assets/js/app.js",
-        "assets/img/world-map.svg",
-        "assets/img/europe-map.svg",
         "scripts/generate_maps.py",
         "data/global_totals.csv",
         "data/global_major_corridors.csv",
@@ -97,13 +96,32 @@ def validate() -> None:
     if missing_coordinates:
         fail(f"Missing map coordinates: {', '.join(missing_coordinates)}")
 
+    # These anchor checks catch accidental reversion to broad geographic centroids.
+    expected_anchors = {
+        "United Kingdom": (-0.127647, 51.507322),
+        "Canada": (-75.697193, 45.421106),
+        "China": (116.391276, 39.906217),
+        "Russia": (37.617494, 55.750446),
+    }
+    for country, (expected_lon, expected_lat) in expected_anchors.items():
+        lon, lat = coordinates[country]
+        if abs(lon - expected_lon) > 1 or abs(lat - expected_lat) > 1:
+            fail(f"{country} is not using its capital-city map anchor: {(lon, lat)}")
+
+    map_text = (ROOT / "assets/js/map-data.js").read_text(encoding="utf-8").strip()
+    prefix = "window.MOBILITY_MAP_DATA = "
+    if not map_text.startswith(prefix) or not map_text.endswith(";"):
+        fail("assets/js/map-data.js has an unexpected wrapper")
+    map_payload = json.loads(map_text[len(prefix) : -1])
+    if len(map_payload["world"]["paths"]) < 250 or len(map_payload["europe"]["paths"]) < 60:
+        fail("Inline basemap geometry is unexpectedly incomplete")
+
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     for asset in [
         "assets/css/styles.css",
+        "assets/js/map-data.js",
         "assets/js/data.js",
         "assets/js/app.js",
-        "assets/img/world-map.svg",
-        "assets/img/europe-map.svg",
     ]:
         if asset not in html:
             fail(f"index.html does not reference {asset}")

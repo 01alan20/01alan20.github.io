@@ -1,66 +1,66 @@
 country,longitude,latitude
-Algeria,2,28
-Australia,134,-25
-Austria,14.5,47.5
-Azerbaijan,47.5,40.4
-Bangladesh,90,24
-Belarus,28,53
-Belgium,4.7,50.8
-Bulgaria,25,43
-Canada,-106,56
-China,104,35
-Croatia,16,45.2
-Cyprus,33,35
-Czechia,15.5,49.8
-Denmark,10,56
-Estonia,25.5,58.5
-Finland,26,64
-France,2.2,46.3
-Germany,10.5,51
-Greece,22,39
-Hungary,19,47
-Iceland,-19,65
-India,79,22
-Iran,53,32
-Iraq,44,33
-Ireland,-8,53
-Italy,12.5,42.7
-Japan,138,36
-Kazakhstan,67,48
-Latvia,24.6,57
-Liechtenstein,9.55,47.15
-Lithuania,24,55.2
-Luxembourg,6.1,49.8
-Malaysia,102,4
-Malta,14.4,35.9
-Mexico,-102,23
-Morocco,-7,31.5
-Nepal,84,28
-Netherlands,5.5,52.2
-New Zealand,174,-41
-Nigeria,8,9
-North Macedonia,21.7,41.6
-Norway,9,61
-Pakistan,69,30
-Poland,19,52
-Portugal,-8,39.5
-Rest of the world,0,0
-Romania,25,46
-Russia,60,57
-Saudi Arabia,45,24
-Serbia,21,44
-Slovakia,19.5,48.7
-Slovenia,14.8,46.1
-South Korea,128,36
-Spain,-3.5,40.2
-Sweden,16,62
-Syria,38,35
-Tajikistan,71,39
-Turkmenistan,59,39
-Türkiye,35,39
-Ukraine,31,49
-United Arab Emirates,54,24
-United Kingdom,-3,55
-United States,-100,39
-Uzbekistan,64,41
-Vietnam,108,16
+Algeria,3.060188,36.775361
+Australia,149.101268,-35.297591
+Austria,16.372504,48.208354
+Azerbaijan,49.832675,40.375443
+Bangladesh,90.378814,23.759357
+Belarus,27.561879,53.902334
+Belgium,4.351697,50.846557
+Bulgaria,48.256216,-15.25384
+Canada,-75.690308,45.421106
+China,116.391276,39.906217
+Croatia,15.977048,45.813177
+Cyprus,33.364726,35.17393
+Czechia,14.421254,50.087465
+Denmark,12.570072,55.686724
+Estonia,24.745369,59.437216
+Finland,24.942577,60.16741
+France,2.351462,48.856697
+Germany,13.38886,52.517036
+Greece,23.728305,37.983941
+Hungary,19.040471,47.498382
+Iceland,-21.942237,64.145981
+India,77.202266,28.614179
+Iran,51.401378,35.700618
+Iraq,44.378799,33.302431
+Ireland,-6.260273,53.349764
+Italy,12.482932,41.89332
+Japan,139.759455,35.682839
+Kazakhstan,71.430668,51.12822
+Latvia,24.105185,56.949398
+Liechtenstein,9.5215,47.141
+Lithuania,25.282911,54.687046
+Luxembourg,6.129675,49.815868
+Malaysia,101.694237,3.151696
+Malta,14.513676,35.898982
+Mexico,-99.133178,19.43263
+Morocco,-6.834543,34.022405
+Nepal,85.320582,27.708317
+Netherlands,4.893604,52.37276
+New Zealand,174.777211,-41.288795
+Nigeria,7.489297,9.06433
+North Macedonia,21.43165,41.996092
+Norway,10.73897,59.91333
+Pakistan,73.065151,33.693812
+Poland,21.071411,52.233717
+Portugal,-9.136592,38.707751
+Rest of the world,0.0,0.0
+Romania,26.10272,44.436141
+Russia,37.617494,55.750446
+Saudi Arabia,46.715065,24.631969
+Serbia,20.456897,44.817813
+Slovakia,17.109306,48.151699
+Slovenia,14.50686,46.04998
+South Korea,126.978291,37.566679
+Spain,-3.703582,40.416705
+Sweden,18.071094,59.325117
+Syria,36.309581,33.51307
+Tajikistan,68.815214,38.542584
+Turkmenistan,58.387426,37.939668
+Türkiye,32.854067,39.920777
+Ukraine,30.524136,50.450034
+United Arab Emirates,54.370576,24.474796
+United Kingdom,-0.127647,51.507322
+United States,-77.036571,38.894986
+Uzbekistan,69.278708,41.312336
+Vietnam,105.854444,21.02945

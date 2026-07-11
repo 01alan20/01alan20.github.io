@@ -11,7 +11,7 @@
   <meta property="og:image" content="https://01alan20.github.io/projects/global-mobility/assets/img/preview.png">
   <meta name="twitter:card" content="summary_large_image">
   <title>Global Student Highways — 2013–2023</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to analysis</a>
@@ -46,14 +46,16 @@
         </div>
         <div class="hero-actions reveal">
           <a class="primary-action" href="#global-atlas">Explore the decade <span aria-hidden="true">↓</span></a>
-          <button class="secondary-action" type="button" id="heroPlay">Play 2013–2023</button>
+          <button class="secondary-action" type="button" id="heroPlay">Play corridor map · 2016–2023</button>
         </div>
         <p class="hero-footnote reveal"><sup>*</sup>2013 is interpolated from revised 2012 and 2014 totals; the route-level map archive used here begins in 2016.</p>
       </div>
 
       <div class="hero-map" aria-hidden="true">
-        <img src="assets/img/world-map.svg" alt="">
-        <svg id="heroFlowLayer" viewBox="0 0 1200 483" preserveAspectRatio="none"></svg>
+        <svg class="hero-map-svg" viewBox="0 0 1200 483" preserveAspectRatio="none" aria-hidden="true">
+          <g id="heroBaseLayer" class="basemap-layer"></g>
+          <g id="heroFlowLayer"></g>
+        </svg>
         <div class="hero-year" id="heroYear">2023</div>
       </div>
     </section>
@@ -68,7 +70,7 @@
       <div class="atlas-toolbar">
         <div>
           <p class="eyebrow">Global degree mobility</p>
-          <h2 id="globalAtlasTitle">The network, year by year</h2>
+          <h2 id="globalAtlasTitle">Major corridors, year by year</h2>
         </div>
         <div class="toolbar-actions">
           <button class="icon-button" id="globalPlay" type="button" aria-label="Play global timeline">
@@ -83,15 +85,13 @@
 
       <div class="atlas-shell global-shell">
         <div class="map-stage" id="globalMapStage">
-          <img class="map-base" src="assets/img/world-map.svg" alt="">
-          <svg class="flow-layer" id="globalFlowLayer" viewBox="0 0 1200 483" preserveAspectRatio="none" role="img" aria-label="Selected major international student mobility routes"></svg>
+          <svg class="flow-layer" id="globalMapSvg" viewBox="0 0 1200 483" preserveAspectRatio="none" role="img" aria-label="Selected major international student mobility routes">
+            <g id="globalBaseLayer" class="basemap-layer"></g>
+            <g id="globalFlowLayer"></g>
+          </svg>
           <div class="map-annotation" id="globalMapAnnotation">
-            <span class="annotation-year" id="globalYearLabel">2013</span>
-            <span class="annotation-copy" id="globalAnnotationCopy">Global total only · route-level archive begins in 2016</span>
-          </div>
-          <div class="coverage-notice" id="globalCoverageNotice">
-            <span>Route coverage</span>
-            <strong>Global total available.<br>Bilateral route maps begin in 2016.</strong>
+            <span class="annotation-year" id="globalYearLabel">2016</span>
+            <span class="annotation-copy" id="globalAnnotationCopy">Selected published major corridors</span>
           </div>
           <div class="map-legend" aria-label="Route colors by origin region">
             <span><i class="legend-line asia"></i> Asia</span>
@@ -107,13 +107,13 @@
         <aside class="atlas-panel" aria-label="Global timeline details">
           <div class="panel-stat">
             <span class="panel-stat-label">Internationally mobile students</span>
-            <strong class="panel-stat-value" id="globalTotal">4.35m</strong>
-            <span class="status-badge is-estimated" id="globalStatus">Estimated</span>
+            <strong class="panel-stat-value" id="globalTotal">5.1m</strong>
+            <span class="status-badge" id="globalStatus">Published</span>
           </div>
 
           <div class="panel-metric-row">
             <div><span>Change since 2013</span><strong id="globalChange">—</strong></div>
-            <div><span>Published corridors shown</span><strong id="globalRouteCount">0</strong></div>
+            <div><span>Published corridors shown</span><strong id="globalRouteCount">33</strong></div>
           </div>
 
           <div class="route-list-block">
@@ -125,14 +125,14 @@
           </div>
 
           <div class="data-note" id="globalDataNote">
-            The 2013 total is an interpolation. No route values are inferred for that year.
+            The map begins in 2016, the first year in the audited published corridor archive. Earlier totals remain in the long-run trend chart below.
           </div>
         </aside>
       </div>
 
       <div class="timeline-control" aria-label="Global mobility year control">
-        <div class="timeline-years" aria-hidden="true"><span>2013</span><span>2018</span><span>2023</span></div>
-        <input id="globalYearSlider" type="range" min="2013" max="2023" step="1" value="2013" aria-label="Select year from 2013 to 2023">
+        <div class="timeline-years" aria-hidden="true"><span>2016</span><span>2020</span><span>2023</span></div>
+        <input id="globalYearSlider" type="range" min="2016" max="2023" step="1" value="2016" aria-label="Select corridor-map year from 2016 to 2023">
         <div class="timeline-ticks" id="globalTicks" aria-hidden="true"></div>
       </div>
     </section>
@@ -228,8 +228,10 @@
 
       <div class="atlas-shell europe-shell">
         <div class="map-stage europe-map-stage" id="europeMapStage">
-          <img class="map-base" src="assets/img/europe-map.svg" alt="">
-          <svg class="flow-layer" id="europeFlowLayer" viewBox="0 0 900 585" preserveAspectRatio="none" role="img" aria-label="Major cumulative Erasmus+ country-to-country learning mobility routes"></svg>
+          <svg class="flow-layer" id="europeMapSvg" viewBox="0 0 900 585" preserveAspectRatio="none" role="img" aria-label="Major cumulative Erasmus+ country-to-country learning mobility routes">
+            <g id="europeBaseLayer" class="basemap-layer"></g>
+            <g id="europeFlowLayer"></g>
+          </svg>
           <div class="map-annotation europe-annotation">
             <span class="annotation-year">2014–2024</span>
             <span class="annotation-copy">Cumulative cross-border participant flows</span>
@@ -369,7 +371,8 @@
   </dialog>
 
   <noscript><p class="noscript-note">This interactive project requires JavaScript to render its maps and charts.</p></noscript>
-  <script src="assets/js/data.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/map-data.js?v=3"></script>
+  <script src="assets/js/data.js?v=3"></script>
+  <script src="assets/js/app.js?v=3"></script>
 </body>
 </html>

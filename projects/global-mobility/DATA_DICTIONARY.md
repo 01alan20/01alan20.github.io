@@ -41,7 +41,7 @@ File: `data/global_major_corridors.csv`
 | `origin_region` | Region used for route colour |
 | `status` | Publication status |
 
-This is a selection of major headline routes from 2016 onward, not a complete origin-destination matrix. The source maps generally use an approximately 15,000-student display threshold. Counts should not be summed to estimate the global total. The 2013–2015 views therefore show annual totals without route lines.
+This is a selection of major headline routes from 2016 onward, not a complete origin-destination matrix. The source maps generally use an approximately 15,000-student display threshold. Counts should not be summed to estimate the global total. The interactive map starts in 2016; 2013–2015 appear only in the separate global-total trend.
 
 ## 2023 global rankings
 
@@ -123,4 +123,4 @@ A higher score represents a more evenly distributed network. The score is a proj
 
 File: `data/country_coordinates.csv`
 
-Coordinates are display points used to position routes on projection-matched equirectangular basemaps. They do not enter any calculation. `scripts/generate_maps.py` regenerates both basemaps using the same geographic bounds as the JavaScript projections. The local `data/naturalearth_lowres.geojson` geometry is derived from Natural Earth’s public-domain 1:110m country boundaries.
+Coordinates are capital-city display anchors used to position country-level routes. They do not enter any calculation and should not be interpreted as institution locations. The basemap, routes, and nodes are rendered inside the same SVG coordinate system. `scripts/generate_maps.py` regenerates `assets/js/map-data.js` directly from the included Natural Earth public-domain 1:110m country boundaries.

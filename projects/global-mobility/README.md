@@ -12,14 +12,15 @@ All page assets use relative paths. The portfolio link in the fixed header point
 
 ## What the project shows
 
-### Global section: 2013–2023
+### Global section
 
-- Annual worldwide totals for internationally mobile tertiary students
-- A selected archive of major published origin-to-destination corridors for 2016–2023
+- Annual worldwide totals for internationally mobile tertiary students, 2013–2023
+- An interactive corridor map covering 2016–2023 only
+- A selected archive of major published origin-to-destination corridors
 - 2023 origin and host-country rankings
 - Calculated decade growth, absolute growth, and compound annual growth
 
-The 2013 global total is explicitly marked as an estimate. It is an interpolation used to create a complete decade view. No 2013–2015 bilateral routes are inferred. Those years remain totals-only because the audited headline-route archive used here begins in 2016.
+The map does **not** include 2014 or 2015. Those years remain in the long-run total trend only because the audited headline-route archive used here begins in 2016. The 2013 total is explicitly marked as an interpolation.
 
 ### European section: 2014–2024 cumulative
 
@@ -73,24 +74,24 @@ index.html                         Page structure and written narrative
 assets/css/styles.css              Responsive editorial design
 assets/js/app.js                   Maps, timelines, filters, charts, and interactions
 assets/js/data.js                  Generated browser dataset
-assets/img/world-map.svg           Static world basemap
-assets/img/europe-map.svg          Static Europe basemap
+assets/js/map-data.js              Inline world and Europe SVG geometry
 data/global_totals.csv             Annual global totals
 data/global_major_corridors.csv    Selected published major corridors
 data/global_2023_countries.csv     2023 origin and destination rankings
 data/ErasmusFlows.net              Full Erasmus+ country network source
 data/naturalearth_lowres.geojson    Public-domain basemap boundaries
 scripts/build_data.py              Reproducible data build
-scripts/generate_maps.py           Projection-matched basemap generator
-
-The checked-in basemaps work without Python. Regenerating them requires `matplotlib`, `geopandas`, and `pyogrio`; the required Natural Earth geometry is included locally.
+scripts/generate_maps.py           Inline basemap-geometry generator
 scripts/validate_project.py        Project and calculation checks
+
+The checked-in `map-data.js` works without Python. Regenerating it requires `pyogrio` and `shapely`; the Natural Earth geometry is included locally.
 ```
 
 ## Data interpretation
 
 - “Internationally mobile students” follows the UIS concept of students who physically crossed a national border for tertiary education.
-- The global corridor layer is a curated set of headline routes published in annual *Wissenschaft weltoffen* figures from 2016 onward. The source maps generally display flows of approximately 15,000 students or more. It is not a complete bilateral matrix.
+- The global corridor layer is a curated set of headline routes published in annual *Wissenschaft weltoffen* figures from 2016 onward. The map timeline therefore begins in 2016. The source maps generally display flows of approximately 15,000 students or more. It is not a complete bilateral matrix.
+- Country nodes use capital-city anchor coordinates for consistent, recognisable placement. They are visual anchors, not claims about where every student studied within the country.
 - Erasmus+ values are cumulative participant movements. They should not be read as unique students or degree enrolments.
 - Project-created balance, concentration, diversity, and growth calculations are analytical outputs, not official rankings.
 
