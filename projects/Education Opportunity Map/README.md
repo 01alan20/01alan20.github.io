@@ -4,10 +4,10 @@ A standalone, responsive data story for GitHub Pages. It uses official U.S. Cens
 
 ## Where to put it
 
-Copy this entire folder into:
+This project now lives in:
 
 ```text
-C:\Alan\github\2025 website\01alan20.github.io\Education Opportunity Map
+C:\Alan\github\2025 website\01alan20.github.io\projects\Education Opportunity Map
 ```
 
 All asset paths are relative, so the folder name and spaces are supported.
@@ -15,7 +15,7 @@ All asset paths are relative, so the folder name and spaces are supported.
 Expected public URL:
 
 ```text
-https://01alan20.github.io/Education%20Opportunity%20Map/
+https://01alan20.github.io/projects/Education%20Opportunity%20Map/
 ```
 
 A lowercase hyphenated folder such as `education-opportunity-map` would create a cleaner URL, but renaming is optional.
@@ -27,7 +27,7 @@ Open `index.html` directly in a browser. The browser reads a generated JavaScrip
 For a local web server:
 
 ```powershell
-cd "C:\Alan\github\2025 website\01alan20.github.io\Education Opportunity Map"
+cd "C:\Alan\github\2025 website\01alan20.github.io\projects\Education Opportunity Map"
 python -m http.server 8000
 ```
 
@@ -134,7 +134,7 @@ The validator checks required files, duplicate HTML IDs, referenced assets, Java
 ## Add it to the portfolio homepage
 
 ```html
-<a href="./Education%20Opportunity%20Map/">
+<a href="./projects/Education%20Opportunity%20Map/">
   The Geography of Opportunity
 </a>
 ```
@@ -145,8 +145,8 @@ A fuller starter card is provided in `integration-card.html`.
 
 The public repository is based on Jigsaw. If deployment publishes only Jigsaw’s generated build folder, a new project placed at repository root may not be copied automatically. In that case, either:
 
-1. put the project folder inside `source/`, or
-2. add a build step that copies `Education Opportunity Map` into the generated production folder.
+1. put the project folder inside `source/projects/`, or
+2. add a build step that copies `projects/Education Opportunity Map` into the generated production folder.
 
 Do not maintain two independently edited copies.
 
