@@ -1,291 +1,310 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Singapore Condo Investments</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="condo.app.css" />
-  <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Singapore private condominium market trends, relative-value screening and investment underwriting using URA data.">
+  <title>Singapore Condo Investment Lab</title>
+  <link rel="stylesheet" href="condo.app.css?v=2.0">
 </head>
 <body>
-  <header class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <span class="eyebrow">Property Analytics Dashboard</span>
-        <h1>Singapore Condo Investments</h1>
-        <p class="hero-sub">
-          Compare condo projects by estimated payback period, district, size, tenure, and time.
-          Use it to screen options, compare submarkets, and spot projects with stronger rent-to-price balance.
-        </p>
-      </div>
-      <aside class="hero-note">
-        <span class="note-label">Data Source</span>
-        <p>Dashboard view powered by Singapore's Urban Redevelopment Authority.</p>
-        <p class="muted">The source field labeled ROI is shown here as estimated payback years: purchase price divided by yearly rent. Lower is better. Bedrooms are estimated from size buckets because the source file does not include a bedroom field.</p>
-      </aside>
-    </div>
+  <a class="skip-link" href="#main">Skip to analysis</a>
+
+  <header class="site-header">
+    <a class="back-link" href="../../" aria-label="Back to portfolio">← Portfolio</a>
+    <div class="site-mark">AC / DATA</div>
   </header>
 
-  <main class="wrap page-shell">
-    <section class="summary-grid" aria-label="Market summary">
-      <article class="summary-card">
-        <span class="summary-label">Tracked Projects</span>
-        <strong id="projectCount" class="summary-value">0</strong>
-      </article>
-      <article class="summary-card">
-        <span class="summary-label">Average Payback</span>
-        <strong id="avgRoi" class="summary-value">-</strong>
-      </article>
-      <article class="summary-card">
-        <span class="summary-label">Average Buy</span>
-        <strong id="avgBuy" class="summary-value">-</strong>
-      </article>
-      <article class="summary-card">
-        <span class="summary-label">Average Rent</span>
-        <strong id="avgRent" class="summary-value">-</strong>
-      </article>
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Property market intelligence · Singapore</p>
+        <h1 id="page-title">Condo Investment Lab</h1>
+        <p class="lede">Follow the relationship between prices and rents, find project-size combinations with stronger historical yield, and test whether an investment still works after stamp duty, vacancy, financing and exit costs.</p>
+        <div class="hero-status" aria-live="polite">
+          <span id="statusYears">2020–2025 history</span>
+          <span id="statusProjects">Loading projects…</span>
+          <span id="statusRecent">Historical aggregate</span>
+        </div>
+      </div>
+      <aside class="hero-note">
+        <span class="note-index">01</span>
+        <p><strong>Gross yield is a screen, not a return.</strong> The ranking uses recorded price and rent observations. The underwriter adds buyer-specific costs and assumptions.</p>
+      </aside>
     </section>
 
-    <nav class="tabbar" aria-label="Dashboard tabs">
-      <button class="tab-btn active" data-tab="roi" type="button">Payback</button>
-      <button class="tab-btn" data-tab="compare" type="button">Compare</button>
-      <button class="tab-btn" data-tab="trends" type="button">Trends</button>
-      <button class="tab-btn" data-tab="search" type="button">Search</button>
+    <nav class="section-nav" aria-label="Dashboard sections">
+      <button class="section-tab is-active" data-tab="market" type="button"><span>01</span> Market trends</button>
+      <button class="section-tab" data-tab="value" type="button"><span>02</span> Relative value</button>
+      <button class="section-tab" data-tab="underwriter" type="button"><span>03</span> Underwriter</button>
     </nav>
 
-    <section class="tab-panel active" data-tab="roi">
-      <div class="panel tab-header">
+    <section class="tab-panel is-active" data-panel="market" aria-labelledby="market-heading">
+      <header class="section-heading">
         <div>
-          <span class="section-kicker">Payback</span>
-          <h2>Payback</h2>
-          <p class="panel-sub">Which projects, districts, area buckets, and tenure types recover the purchase price fastest, and how do payback years move as price rises?</p>
+          <p class="eyebrow">Market trends</p>
+          <h2 id="market-heading">Are rents keeping pace with prices?</h2>
         </div>
+        <p>Filter the same project-size universe across time. Market lines are medians across available observations, not transaction-weighted indices.</p>
+      </header>
+
+      <div class="filter-strip" id="marketFilters">
+        <label>District<select id="marketDistrict"><option value="">All districts</option></select></label>
+        <label>Property type<select id="marketType"><option value="">All condo types</option></select></label>
+        <label>Tenure<select id="marketTenure"><option value="">All tenure</option></select></label>
+        <label>Unit size<select id="marketArea"><option value="">All sizes</option></select></label>
+        <button class="text-button" id="marketReset" type="button">Reset filters</button>
       </div>
 
-      <div class="viz-grid roi-grid">
-        <article class="panel">
-          <div class="panel-top">
-            <div>
-              <span class="section-kicker">Right now</span>
-              <h3>Fastest Projects</h3>
-            </div>
-          </div>
-          <div id="roi-top-projects" class="viz-chart"></div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-top">
-            <div>
-              <span class="section-kicker">Districts</span>
-              <h3>Average Payback</h3>
-            </div>
-          </div>
-          <div id="roi-districts" class="viz-chart"></div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-top">
-            <div>
-              <span class="section-kicker">Area Buckets</span>
-              <h3>Fastest Sizes</h3>
-            </div>
-          </div>
-          <div id="roi-areas" class="viz-chart"></div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-top">
-            <div>
-              <span class="section-kicker">Tenure</span>
-              <h3>Freehold vs Leasehold</h3>
-            </div>
-          </div>
-          <div id="roi-tenure" class="tenure-grid"></div>
-        </article>
-
-        <article class="panel panel-wide">
-          <div class="panel-top">
-            <div>
-              <span class="section-kicker">Price Relationship</span>
-              <h3>Buy Price vs Payback</h3>
-              <p id="roi-price-insight" class="panel-sub">Loading price relationship...</p>
-            </div>
-          </div>
-          <div id="roi-price-scatter" class="viz-chart viz-chart-tall"></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="tab-panel" data-tab="compare">
-      <div class="panel tab-header">
-        <div>
-          <span class="section-kicker">District Matchup</span>
-          <h2>Compare</h2>
-          <p class="panel-sub">Choose two districts, compare standout projects on payback years, and inspect similar size bands where price and rent diverge.</p>
-        </div>
+      <div class="metric-row" id="marketMetrics">
+        <article><span>Latest median buy</span><strong id="metricBuy">—</strong><small id="metricBuyDelta">—</small></article>
+        <article><span>Latest median rent</span><strong id="metricRent">—</strong><small id="metricRentDelta">—</small></article>
+        <article><span>Gross rental yield</span><strong id="metricYield">—</strong><small id="metricYieldDelta">—</small></article>
+        <article><span>Paired observations</span><strong id="metricCoverage">—</strong><small>Project × size records</small></article>
       </div>
 
-      <section class="panel">
-        <div class="controls-grid controls-three">
-          <label class="control-field">
-            <span>District A</span>
-            <select id="compareDistrictA"></select>
-          </label>
-          <label class="control-field">
-            <span>District B</span>
-            <select id="compareDistrictB"></select>
-          </label>
-          <label class="control-field">
-            <span>Area Bucket</span>
-            <select id="compareArea"></select>
-          </label>
-        </div>
-      </section>
-
-      <section id="compare-summary" class="summary-grid compare-summary"></section>
-
-      <div class="compare-grid">
-        <article class="panel">
-          <div class="panel-top">
-            <div>
-              <span id="compare-title-a" class="section-kicker">District A</span>
-              <h3>Fastest Projects</h3>
-            </div>
-          </div>
-          <div id="compare-top-a" class="rank-list"></div>
+      <div class="editorial-grid major-grid">
+        <article class="viz-block span-8">
+          <header class="viz-header">
+            <div><span class="figure-number">Figure 1</span><h3>Price and rent momentum</h3></div>
+            <p>Indexed to 100 at the first year with data in the selected universe.</p>
+          </header>
+          <div class="chart-legend"><span class="legend-buy">Sale price</span><span class="legend-rent">Monthly rent</span></div>
+          <svg id="momentumChart" class="chart" role="img" aria-label="Indexed sale price and rent trend"></svg>
         </article>
 
-        <article class="panel">
-          <div class="panel-top">
-            <div>
-              <span id="compare-title-b" class="section-kicker">District B</span>
-              <h3>Fastest Projects</h3>
-            </div>
-          </div>
-          <div id="compare-top-b" class="rank-list"></div>
-        </article>
-      </div>
-
-      <article class="panel">
-        <div class="panel-top">
-          <div>
-            <span class="section-kicker">Same Size Band</span>
-            <h3>Price and Rent Gaps</h3>
-            <p id="compare-area-summary" class="panel-sub">Comparing similarly sized units across the selected districts.</p>
-          </div>
-        </div>
-        <div class="table-shell">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Project</th>
-                <th>District</th>
-                <th>Area</th>
-                <th class="num">Recent Buy</th>
-                <th class="num">Recent Rent</th>
-                <th class="num">Payback</th>
-              </tr>
-            </thead>
-            <tbody id="compare-area-body"></tbody>
-          </table>
-        </div>
-      </article>
-    </section>
-
-    <section class="tab-panel" data-tab="trends">
-      <div class="panel tab-header">
-        <div>
-          <span class="section-kicker">Time Series</span>
-          <h2>Trends</h2>
-          <p class="panel-sub">Track how average buy prices, average rents, and estimated payback changed from 2020 to 2025 by project.</p>
-        </div>
-      </div>
-
-      <div class="trend-layout">
-        <aside class="panel trend-sidebar">
-          <label class="control-field">
-            <span>Search Projects</span>
-            <input id="trendProjectSearch" type="search" placeholder="Type to filter projects" />
-          </label>
-          <div class="metric-switch" role="group" aria-label="Trend metric">
-            <button class="metric-btn active" data-metric="buy" type="button">Buy</button>
-            <button class="metric-btn" data-metric="rent" type="button">Rent</button>
-            <button class="metric-btn" data-metric="payback" type="button">Payback</button>
-          </div>
-          <p class="microcopy">Select up to 4 projects. Nothing is preselected.</p>
-          <div id="trendProjectList" class="project-checklist"></div>
+        <aside class="analysis-note span-4">
+          <span class="note-index">Reading the chart</span>
+          <h3 id="momentumVerdict">Loading trend…</h3>
+          <p id="momentumNarrative">The gap between the two lines shows whether rent or purchase prices have grown faster.</p>
+          <div class="mini-stat"><span>Price change</span><strong id="pricePeriodChange">—</strong></div>
+          <div class="mini-stat"><span>Rent change</span><strong id="rentPeriodChange">—</strong></div>
         </aside>
 
-        <div class="trend-main">
-          <section id="trend-summary" class="summary-grid trend-summary"></section>
-          <article class="panel">
-            <div class="panel-top">
-              <div>
-                <span class="section-kicker">2020 to 2025</span>
-                <h3 id="trend-chart-title">Average Buy Price</h3>
-              </div>
+        <article class="viz-block span-5">
+          <header class="viz-header">
+            <div><span class="figure-number">Figure 2</span><h3>Gross yield through time</h3></div>
+            <p>Annual rent divided by annual purchase price.</p>
+          </header>
+          <svg id="yieldChart" class="chart chart-short" role="img" aria-label="Gross rental yield trend"></svg>
+        </article>
+
+        <article class="viz-block span-7">
+          <header class="viz-header">
+            <div><span class="figure-number">Figure 3</span><h3>District momentum</h3></div>
+            <p>Price growth versus rent growth over the available period.</p>
+          </header>
+          <div class="quadrant-key"><span>Rent leading</span><span>Price leading</span><span>Both weakening</span></div>
+          <svg id="districtQuadrant" class="chart chart-short" role="img" aria-label="District price growth versus rent growth"></svg>
+        </article>
+      </div>
+
+      <section class="ranked-section">
+        <div class="ranked-heading"><span class="figure-number">Signal table</span><h3>Where yields have changed most</h3></div>
+        <div id="marketSignals" class="signal-list" aria-live="polite"></div>
+      </section>
+    </section>
+
+    <section class="tab-panel" data-panel="value" aria-labelledby="value-heading" hidden>
+      <header class="section-heading">
+        <div>
+          <p class="eyebrow">Relative value</p>
+          <h2 id="value-heading">Which project-size combinations stand out?</h2>
+        </div>
+        <p>This is a historical yield screener, not a listings service. A project can screen well without being available for sale.</p>
+      </header>
+
+      <div class="screener-layout">
+        <aside class="screener-controls">
+          <h3>Investment screen</h3>
+          <label>Maximum purchase price
+            <div class="input-with-prefix"><span>S$</span><input id="maxPrice" type="number" min="300000" step="50000" value="2500000"></div>
+          </label>
+          <label>Minimum gross yield
+            <div class="input-with-suffix"><input id="minYield" type="number" min="0" max="15" step="0.1" value="3.5"><span>%</span></div>
+          </label>
+          <label>District<select id="valueDistrict"><option value="">All districts</option></select></label>
+          <label>Property type<select id="valueType"><option value="">All condo types</option></select></label>
+          <label>Tenure<select id="valueTenure"><option value="">All tenure</option></select></label>
+          <label>Bedrooms (estimated)<select id="valueBeds"><option value="">All sizes</option></select></label>
+          <label>Evidence<select id="valueEvidence"><option value="">All coverage</option></select></label>
+          <label>Rank by<select id="valueSort">
+            <option value="yield">Gross yield</option>
+            <option value="premium">Yield premium vs district</option>
+            <option value="discount">Price discount vs district</option>
+            <option value="rentGrowth">Historical rent growth</option>
+          </select></label>
+          <button class="primary-button" id="valueReset" type="button">Reset screen</button>
+          <p class="control-note">Default results require both a price and rent observation. Historical coverage is not transaction-count confidence until the recent URA updater is run.</p>
+        </aside>
+
+        <div class="screener-results">
+          <div class="metric-row compact" id="valueMetrics">
+            <article><span>Eligible combinations</span><strong id="valueCount">—</strong></article>
+            <article><span>Median yield</span><strong id="valueMedianYield">—</strong></article>
+            <article><span>Median price</span><strong id="valueMedianPrice">—</strong></article>
+            <article><span>Best screened yield</span><strong id="valueBestYield">—</strong></article>
+          </div>
+
+          <article class="viz-block scatter-block">
+            <header class="viz-header">
+              <div><span class="figure-number">Opportunity field</span><h3>Price versus gross yield</h3></div>
+              <p>Upper-left is cheaper with higher gross yield. Circle size reflects historical coverage or recent sample depth.</p>
+            </header>
+            <div class="canvas-wrap">
+              <canvas id="valueScatter" role="img" aria-label="Purchase price versus gross rental yield scatterplot"></canvas>
+              <div id="scatterTooltip" class="chart-tooltip" hidden></div>
             </div>
-            <div id="trend-chart" class="viz-chart viz-chart-tall"></div>
           </article>
+
+          <div class="results-header">
+            <div><span class="figure-number">Screened results</span><h3 id="resultsTitle">Ranked by gross yield</h3></div>
+            <span id="resultsCount">—</span>
+          </div>
+          <div class="table-wrap">
+            <table id="resultsTable">
+              <thead><tr>
+                <th>Project / size</th><th>District</th><th>Observed buy</th><th>Observed rent</th><th>Gross yield</th><th>Payback</th><th>Relative signal</th><th>Evidence</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <aside id="propertyDetail" class="detail-drawer" aria-live="polite">
+        <button class="drawer-close" type="button" aria-label="Close property details">×</button>
+        <p class="eyebrow">Project-size profile</p>
+        <h3 id="detailTitle">Select a result</h3>
+        <p id="detailMeta">Click a table row or scatter point to inspect its history.</p>
+        <div class="detail-metrics" id="detailMetrics"></div>
+        <svg id="detailChart" class="chart chart-short" role="img" aria-label="Selected property price and rent history"></svg>
+        <p id="detailCaveat" class="detail-caveat"></p>
+        <button id="sendToUnderwriter" class="primary-button" type="button">Underwrite this combination</button>
+      </aside>
+    </section>
+
+    <section class="tab-panel" data-panel="underwriter" aria-labelledby="underwriter-heading" hidden>
+      <header class="section-heading">
+        <div>
+          <p class="eyebrow">Investment underwriter</p>
+          <h2 id="underwriter-heading">Does the property still work after costs?</h2>
+        </div>
+        <p>Use recorded price and rent as a starting point, then overwrite every assumption. This is an indicative model, not tax, legal or financial advice.</p>
+      </header>
+
+      <div class="underwriter-layout">
+        <form id="underwriterForm" class="underwriter-inputs" onsubmit="return false;">
+          <div class="form-section property-picker">
+            <span class="form-index">A</span><h3>Property</h3>
+            <label>Search project or size<input id="uwPropertySearch" type="search" autocomplete="off" placeholder="e.g. THE SAIL 60-70"></label>
+            <div id="uwSuggestions" class="suggestions" hidden></div>
+            <p id="uwSelectedProperty" class="selected-property">No project selected</p>
+          </div>
+
+          <div class="form-section">
+            <span class="form-index">B</span><h3>Buyer and acquisition</h3>
+            <div class="form-grid">
+              <label>Buyer profile<select id="buyerProfile">
+                <option value="0">Singapore citizen · first property</option>
+                <option value="20">Singapore citizen · second property</option>
+                <option value="30">Singapore citizen · third+</option>
+                <option value="5">Permanent resident · first property</option>
+                <option value="30">Permanent resident · second property</option>
+                <option value="35">Permanent resident · third+</option>
+                <option value="60">Foreigner · any residential property</option>
+              </select></label>
+              <label>Purchase price (S$)<input id="uwPrice" type="number" min="100000" step="10000" value="1200000"></label>
+              <label>Monthly rent (S$)<input id="uwRent" type="number" min="500" step="50" value="4200"></label>
+              <label>Down payment<input id="downPayment" type="number" min="5" max="100" step="1" value="25"></label>
+              <label>Renovation / furnishing (S$)<input id="renovation" type="number" min="0" step="1000" value="30000"></label>
+              <label>Legal + valuation (S$)<input id="legalCosts" type="number" min="0" step="500" value="4000"></label>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <span class="form-index">C</span><h3>Operations and debt</h3>
+            <div class="form-grid">
+              <label>Interest rate<input id="interestRate" type="number" min="0" max="15" step="0.1" value="3.5"></label>
+              <label>Loan tenure (years)<input id="loanYears" type="number" min="1" max="35" step="1" value="25"></label>
+              <label>Vacancy (months/year)<input id="vacancyMonths" type="number" min="0" max="12" step="0.25" value="1"></label>
+              <label>Maintenance (S$/month)<input id="maintenance" type="number" min="0" step="50" value="400"></label>
+              <label>Property tax (S$/year)<input id="propertyTax" type="number" min="0" step="100" value="2400"></label>
+              <label>Insurance (S$/year)<input id="insurance" type="number" min="0" step="50" value="300"></label>
+              <label>Repairs reserve<input id="repairsPct" type="number" min="0" max="30" step="0.5" value="5"></label>
+              <label>Management fee<input id="managementPct" type="number" min="0" max="30" step="0.5" value="0"></label>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <span class="form-index">D</span><h3>Exit assumptions</h3>
+            <div class="form-grid">
+              <label>Holding period (years)<input id="holdingYears" type="number" min="1" max="20" step="1" value="5"></label>
+              <label>Annual price growth<input id="appreciation" type="number" min="-10" max="15" step="0.25" value="2"></label>
+              <label>Annual rent growth<input id="rentGrowthAssumption" type="number" min="-10" max="15" step="0.25" value="1"></label>
+              <label>Selling costs<input id="sellingCostPct" type="number" min="0" max="10" step="0.25" value="2"></label>
+            </div>
+          </div>
+        </form>
+
+        <div class="underwriter-results">
+          <div class="underwriter-hero">
+            <span>Estimated annual cash flow</span>
+            <strong id="uwCashFlow">—</strong>
+            <small id="uwCashFlowMonthly">—</small>
+          </div>
+
+          <div class="output-grid">
+            <article><span>Total cash required</span><strong id="outCashRequired">—</strong><small>Down payment + duties + setup</small></article>
+            <article><span>Gross rental yield</span><strong id="outGrossYield">—</strong><small>Before operating costs</small></article>
+            <article><span>Net operating yield</span><strong id="outNetYield">—</strong><small>Before financing</small></article>
+            <article><span>Cash-on-cash return</span><strong id="outCashOnCash">—</strong><small>After debt service</small></article>
+            <article><span>Monthly mortgage</span><strong id="outMortgage">—</strong><small id="outLoanAmount">—</small></article>
+            <article><span>Break-even rent</span><strong id="outBreakEvenRent">—</strong><small>To cover operations + debt</small></article>
+            <article><span>Projected IRR</span><strong id="outIrr">—</strong><small id="outHoldingLabel">Including modeled exit</small></article>
+            <article><span>Projected net profit</span><strong id="outNetProfit">—</strong><small id="outExitValue">—</small></article>
+          </div>
+
+          <article class="viz-block projection-block">
+            <header class="viz-header"><div><span class="figure-number">Cash-flow path</span><h3>Annual equity cash flows</h3></div><p>Year 0 includes the initial cash investment. Final year includes modeled sale proceeds.</p></header>
+            <svg id="cashflowChart" class="chart chart-short" role="img" aria-label="Annual property investment cash flows"></svg>
+          </article>
+
+          <section class="cost-ledger">
+            <div class="ranked-heading"><span class="figure-number">Acquisition ledger</span><h3>What the entry price really costs</h3></div>
+            <dl>
+              <div><dt>Buyer’s Stamp Duty</dt><dd id="ledgerBsd">—</dd></div>
+              <div><dt>Additional Buyer’s Stamp Duty</dt><dd id="ledgerAbsd">—</dd></div>
+              <div><dt>Renovation + professional costs</dt><dd id="ledgerSetup">—</dd></div>
+              <div><dt>Loan principal</dt><dd id="ledgerLoan">—</dd></div>
+              <div class="ledger-total"><dt>Total acquisition basis</dt><dd id="ledgerBasis">—</dd></div>
+            </dl>
+          </section>
+
+          <section class="stress-section">
+            <div class="ranked-heading"><span class="figure-number">Stress test</span><h3>How fragile is the cash flow?</h3></div>
+            <div id="stressCards" class="stress-grid"></div>
+          </section>
         </div>
       </div>
     </section>
 
-    <section class="tab-panel" data-tab="search">
-      <div class="panel tab-header">
-        <div>
-          <span class="section-kicker">Opportunity Finder</span>
-          <h2>Search</h2>
-          <p class="panel-sub">Choose one or more bedroom groups, size bands, tenure types, and districts, then rank the best-fitting options by shortest payback inside your budget range.</p>
-        </div>
+    <section class="methodology">
+      <div><p class="eyebrow">Methodology</p><h2>Transparent enough to challenge.</h2></div>
+      <div class="method-columns">
+        <p><strong>Trend universe.</strong> Apartments, condominiums and executive condominiums only. Annual summaries use medians across project-size observations in the source file. Without historical transaction counts, these are not transaction-weighted market indices.</p>
+        <p><strong>Yield screen.</strong> Gross yield equals monthly rent × 12 ÷ purchase price. Payback is its inverse. Neither includes vacancy, tax, maintenance, financing or sale costs.</p>
+        <p><strong>Underwriter.</strong> Stamp-duty schedules are embedded as editable model logic. Investor assumptions remain the user’s responsibility. Always verify current rules and property-specific costs before acting.</p>
       </div>
-
-      <section class="panel">
-        <div class="controls-grid controls-search">
-          <label class="control-field">
-            <span>Bedrooms</span>
-            <select id="searchBeds" multiple size="5"></select>
-          </label>
-          <label class="control-field">
-            <span>Size</span>
-            <select id="searchArea" multiple size="6"></select>
-          </label>
-          <label class="control-field">
-            <span>Tenure</span>
-            <select id="searchTenure" multiple size="3"></select>
-          </label>
-          <label class="control-field">
-            <span>Budget Range</span>
-            <div class="budget-range">
-              <input id="searchBudgetMin" type="number" min="0" step="1000" placeholder="Min buy price" />
-              <input id="searchBudgetMax" type="number" min="0" step="1000" placeholder="Max buy price" />
-            </div>
-          </label>
-          <label class="control-field">
-            <span>District</span>
-            <select id="searchDistrict" multiple size="6"></select>
-          </label>
-        </div>
-        <p class="microcopy">Leave any multi-select empty to include all values. Bedrooms are estimated from size bands because the source file does not include bedroom counts.</p>
-      </section>
-
-      <section class="panel">
-        <div class="panel-top">
-          <div>
-            <span class="section-kicker">Top Matches</span>
-            <h3>Ranked by Payback</h3>
-            <p id="search-summary" class="panel-sub">Loading search results...</p>
-          </div>
-        </div>
-        <div id="search-results" class="search-results"></div>
-      </section>
     </section>
   </main>
 
-  <script src="condo.app.js" defer></script>
+  <footer>
+    <p>Data: <a href="https://eservice.ura.gov.sg/maps/api/" rel="noopener">URA Data Service</a>. Stamp-duty reference: <a href="https://www.iras.gov.sg/quick-links/tax-rates/stamp-duty" rel="noopener">IRAS</a>.</p>
+    <p>For research and screening only. Historical transactions do not establish present availability or future return.</p>
+  </footer>
+
+  <script src="data/dashboard_data.js?v=2.0"></script>
+  <script src="condo.app.js?v=2.0"></script>
 </body>
 </html>
