@@ -1,0 +1,9 @@
+assumption,central,low,high,source_or_reason
+College-going rate,0.628,0.578,0.678,BLS October 2024 recent high-school graduate enrollment
+Four-year share,0.6666666666666666,0.6166666666666666,0.7166666666666667,BLS: about two in three enrolled recent graduates attended four-year colleges
+Undergraduate cohort divisor,4.25,4.0,4.5,Scenario proxy converting current undergraduate stock to annual scale
+Headcount-to-FTE factor,0.85,0.75,0.95,Editable scenario assumption
+Variable instructional expense share,0.3,0.2,0.4,Editable fixed/variable cost scenario
+National recruiter state weight,0.25,0.1,0.4,Heuristic recruitment-market proxy
+Statewide recruiter state weight,0.6,0.45,0.75,Heuristic recruitment-market proxy
+Regional recruiter state weight,0.85,0.75,0.95,Heuristic recruitment-market proxy

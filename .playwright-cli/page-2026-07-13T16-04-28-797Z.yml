@@ -1,0 +1,891 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "The Enrollment Squeeze" [ref=e3] [cursor=pointer]:
+      - /url: "#top"
+    - navigation "Primary" [ref=e4]:
+      - link "Trend" [ref=e5] [cursor=pointer]:
+        - /url: "#trend"
+      - link "States" [ref=e6] [cursor=pointer]:
+        - /url: "#states"
+      - link "State markets" [ref=e7] [cursor=pointer]:
+        - /url: "#state-support"
+      - link "Institutions" [ref=e8] [cursor=pointer]:
+        - /url: "#competition"
+      - link "International" [ref=e9] [cursor=pointer]:
+        - /url: "#international"
+      - link "Explorer" [ref=e10] [cursor=pointer]:
+        - /url: "#explorer"
+      - link "Stress test" [ref=e11] [cursor=pointer]:
+        - /url: "#stress"
+  - main [ref=e12]:
+    - generic [ref=e15]:
+      - paragraph [ref=e16]: U.S. higher education through 2041
+      - heading [level=1] [ref=e17]:
+        - text: The Enrollment
+        - emphasis [ref=e18]: Squeeze
+      - paragraph [ref=e19]: A smaller domestic pipeline. A weaker flow of new international students. And institutions with very different abilities to compete, adapt and absorb the financial pressure.
+      - generic [ref=e20]:
+        - article [ref=e21]:
+          - strong [ref=e22]: 3,857,783
+          - generic [ref=e23]: graduates at the projected national peak
+        - article [ref=e24]:
+          - strong [ref=e25]: "-12.5%"
+          - generic [ref=e26]: projected change from 2025 to 2041
+        - article [ref=e27]:
+          - strong [ref=e28]: −17%
+          - generic [ref=e29]: new international enrollment in the Fall 2025 snapshot
+      - link "Follow the story ↓" [ref=e30] [cursor=pointer]:
+        - /url: "#trend"
+    - generic [ref=e31]:
+      - paragraph [ref=e32]: The central question
+      - heading "What happens when the number of students falls, but the number of institutions competing for them does not?" [level=2] [ref=e33]
+      - paragraph [ref=e34]: The demographic change has been visible for years. The harder problem is how the losses will be distributed—and which institutions have enough demand, reach and financial flexibility to withstand them.
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - paragraph [ref=e37]: 01 · The national pipeline
+        - heading "The graduating class peaks, then contracts." [level=2] [ref=e38]
+        - paragraph [ref=e39]: "WICHE projects the national number of high-school graduates to peak in 2025 and decline through 2041. The line does not fall evenly, but the endpoint is clear: fewer traditional-age students enter the recruitment market."
+        - generic [ref=e40]:
+          - strong [ref=e41]: Observed versus projected.
+          - text: The chart marks WICHE’s reported data separately from its projection period.
+      - article [ref=e42]:
+        - generic [ref=e43]:
+          - generic [ref=e44]:
+            - paragraph [ref=e45]: High-school graduates
+            - heading "National classes, 2009–2041" [level=3] [ref=e46]
+          - generic [ref=e47]: WICHE
+        - generic "National high school graduate trend" [ref=e48]:
+          - img "National high school graduates 2009 to 2041" [ref=e49]:
+            - generic [ref=e50]: 3.25m
+            - generic [ref=e51]: 3.50m
+            - generic [ref=e52]: 3.75m
+            - generic [ref=e53]: 4.00m
+            - generic [ref=e54]: "2009"
+            - generic [ref=e55]: "2015"
+            - generic [ref=e56]: "2020"
+            - generic [ref=e57]: "2025"
+            - generic [ref=e58]: "2030"
+            - generic [ref=e59]: "2035"
+            - generic [ref=e60]: "2041"
+            - generic [ref=e64]: "2025: 3,857,783"
+            - generic [ref=e66]: "2041: 3,373,947"
+        - paragraph [ref=e67]:
+          - text: "Source: WICHE,"
+          - link "Knocking at the College Door, 11th Edition" [ref=e68] [cursor=pointer]:
+            - /url: https://www.wiche.edu/knocking/
+          - text: .
+        - generic [ref=e69]:
+          - generic [ref=e70]: Reported
+          - generic [ref=e72]: Projected
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - paragraph [ref=e77]: 02 · From graduates to entrants
+          - heading "A smaller class produces a smaller four-year market." [level=2] [ref=e78]
+        - paragraph [ref=e79]: Not every graduate enters college immediately, and not every college entrant attends a four-year institution. The central scenario holds the recent transition rates constant so users can see the scale of the market—not a guaranteed outcome.
+      - tablist [ref=e80]:
+        - button "2026" [ref=e81] [cursor=pointer]
+        - button "2030" [ref=e82] [cursor=pointer]
+        - button "2035" [ref=e83] [cursor=pointer]
+        - button "2041" [ref=e84] [cursor=pointer]
+      - generic [ref=e85]:
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - generic [ref=e88]:
+              - generic [ref=e89]: High-school graduates
+              - strong [ref=e91]: 3,633,730
+            - generic [ref=e92]:
+              - generic [ref=e93]: Likely college entrants
+              - strong [ref=e95]: 2,281,982
+            - generic [ref=e96]:
+              - generic [ref=e97]: Likely four-year entrants
+              - strong [ref=e99]: 1,521,322
+          - paragraph [ref=e100]: Central rates from the U.S. Bureau of Labor Statistics, October 2024.
+        - complementary [ref=e101]:
+          - paragraph [ref=e102]: Central illustration
+          - heading "1,521,322 likely four-year entrants" [level=3] [ref=e103]
+          - paragraph [ref=e104]: "The transition rates are held constant: 62.8% of recent graduates enter college and two-thirds of those entrants attend four-year institutions."
+          - generic [ref=e105]:
+            - term [ref=e106]: Change from 2026
+            - definition [ref=e107]: "-5.4%"
+            - term [ref=e108]: College-going rate
+            - definition [ref=e109]: 62.8%
+            - term [ref=e110]: Four-year share
+            - definition [ref=e111]: 66.7%
+    - generic [ref=e112]:
+      - generic [ref=e113]:
+        - generic [ref=e114]:
+          - paragraph [ref=e115]: 03 · Uneven geography
+          - heading "The national decline hides radically different state markets." [level=2] [ref=e116]
+        - paragraph [ref=e117]: Some states retain or expand their graduating classes. Others lose more than a quarter of the 2025 pool. Absolute scale and percentage change both matter.
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - text: Projection year
+          - combobox "Projection year" [ref=e120]:
+            - option "2030"
+            - option "2035" [selected]
+            - option "2041"
+        - generic [ref=e121]:
+          - text: Sort states
+          - combobox "Sort states" [ref=e122]:
+            - option "Largest decline" [selected]
+            - option "Largest projected class"
+            - option "Alphabetical"
+        - generic [ref=e123]:
+          - text: Find state
+          - combobox "Find state" [ref=e124]:
+            - option "All states" [selected]
+            - option "Alabama"
+            - option "Alaska"
+            - option "Arizona"
+            - option "Arkansas"
+            - option "California"
+            - option "Colorado"
+            - option "Connecticut"
+            - option "Delaware"
+            - option "District of Columbia"
+            - option "Florida"
+            - option "Georgia"
+            - option "Hawaii"
+            - option "Idaho"
+            - option "Illinois"
+            - option "Indiana"
+            - option "Iowa"
+            - option "Kansas"
+            - option "Kentucky"
+            - option "Louisiana"
+            - option "Maine"
+            - option "Maryland"
+            - option "Massachusetts"
+            - option "Michigan"
+            - option "Minnesota"
+            - option "Mississippi"
+            - option "Missouri"
+            - option "Montana"
+            - option "Nebraska"
+            - option "Nevada"
+            - option "New Hampshire"
+            - option "New Jersey"
+            - option "New Mexico"
+            - option "New York"
+            - option "North Carolina"
+            - option "North Dakota"
+            - option "Ohio"
+            - option "Oklahoma"
+            - option "Oregon"
+            - option "Pennsylvania"
+            - option "Rhode Island"
+            - option "South Carolina"
+            - option "South Dakota"
+            - option "Tennessee"
+            - option "Texas"
+            - option "Utah"
+            - option "Vermont"
+            - option "Virginia"
+            - option "Washington"
+            - option "West Virginia"
+            - option "Wisconsin"
+            - option "Wyoming"
+      - generic [ref=e125]:
+        - article [ref=e126]:
+          - generic [ref=e127]:
+            - generic [ref=e128]:
+              - paragraph [ref=e129]: State divergence
+              - heading "Change from the 2025 class" [level=3] [ref=e130]
+            - generic [ref=e131]: "2035"
+          - generic [ref=e132]:
+            - button "Hawaii -19.8%" [ref=e133] [cursor=pointer]:
+              - generic [ref=e134]: Hawaii
+              - strong [ref=e136]: "-19.8%"
+            - button "Illinois -17.7%" [ref=e137] [cursor=pointer]:
+              - generic [ref=e138]: Illinois
+              - strong [ref=e140]: "-17.7%"
+            - button "New York -16.9%" [ref=e141] [cursor=pointer]:
+              - generic [ref=e142]: New York
+              - strong [ref=e144]: "-16.9%"
+            - button "West Virginia -16.7%" [ref=e145] [cursor=pointer]:
+              - generic [ref=e146]: West Virginia
+              - strong [ref=e148]: "-16.7%"
+            - button "Wyoming -14.4%" [ref=e149] [cursor=pointer]:
+              - generic [ref=e150]: Wyoming
+              - strong [ref=e152]: "-14.4%"
+            - button "California -14.2%" [ref=e153] [cursor=pointer]:
+              - generic [ref=e154]: California
+              - strong [ref=e156]: "-14.2%"
+            - button "New Hampshire -13.6%" [ref=e157] [cursor=pointer]:
+              - generic [ref=e158]: New Hampshire
+              - strong [ref=e160]: "-13.6%"
+            - button "New Mexico -13.6%" [ref=e161] [cursor=pointer]:
+              - generic [ref=e162]: New Mexico
+              - strong [ref=e164]: "-13.6%"
+            - button "Mississippi -12.4%" [ref=e165] [cursor=pointer]:
+              - generic [ref=e166]: Mississippi
+              - strong [ref=e168]: "-12.4%"
+            - button "Rhode Island -10.5%" [ref=e169] [cursor=pointer]:
+              - generic [ref=e170]: Rhode Island
+              - strong [ref=e172]: "-10.5%"
+            - button "Oregon -10.3%" [ref=e173] [cursor=pointer]:
+              - generic [ref=e174]: Oregon
+              - strong [ref=e176]: "-10.3%"
+            - button "Colorado -9.4%" [ref=e177] [cursor=pointer]:
+              - generic [ref=e178]: Colorado
+              - strong [ref=e180]: "-9.4%"
+            - button "Wisconsin -9.4%" [ref=e181] [cursor=pointer]:
+              - generic [ref=e182]: Wisconsin
+              - strong [ref=e184]: "-9.4%"
+            - button "Kansas -8.8%" [ref=e185] [cursor=pointer]:
+              - generic [ref=e186]: Kansas
+              - strong [ref=e188]: "-8.8%"
+            - button "Michigan -7.8%" [ref=e189] [cursor=pointer]:
+              - generic [ref=e190]: Michigan
+              - strong [ref=e192]: "-7.8%"
+            - button "Pennsylvania -7.3%" [ref=e193] [cursor=pointer]:
+              - generic [ref=e194]: Pennsylvania
+              - strong [ref=e196]: "-7.3%"
+            - button "Indiana -7.1%" [ref=e197] [cursor=pointer]:
+              - generic [ref=e198]: Indiana
+              - strong [ref=e200]: "-7.1%"
+            - button "Maryland -6.8%" [ref=e201] [cursor=pointer]:
+              - generic [ref=e202]: Maryland
+              - strong [ref=e204]: "-6.8%"
+            - button "Missouri -6.4%" [ref=e205] [cursor=pointer]:
+              - generic [ref=e206]: Missouri
+              - strong [ref=e208]: "-6.4%"
+            - button "Ohio -5.9%" [ref=e209] [cursor=pointer]:
+              - generic [ref=e210]: Ohio
+              - strong [ref=e212]: "-5.9%"
+            - button "Kentucky -5.8%" [ref=e213] [cursor=pointer]:
+              - generic [ref=e214]: Kentucky
+              - strong [ref=e216]: "-5.8%"
+            - button "Connecticut -5.6%" [ref=e217] [cursor=pointer]:
+              - generic [ref=e218]: Connecticut
+              - strong [ref=e220]: "-5.6%"
+            - button "Vermont -5.2%" [ref=e221] [cursor=pointer]:
+              - generic [ref=e222]: Vermont
+              - strong [ref=e224]: "-5.2%"
+            - button "Arkansas -4.6%" [ref=e225] [cursor=pointer]:
+              - generic [ref=e226]: Arkansas
+              - strong [ref=e228]: "-4.6%"
+            - button "Massachusetts -4.6%" [ref=e229] [cursor=pointer]:
+              - generic [ref=e230]: Massachusetts
+              - strong [ref=e232]: "-4.6%"
+            - button "Alaska -4.4%" [ref=e233] [cursor=pointer]:
+              - generic [ref=e234]: Alaska
+              - strong [ref=e236]: "-4.4%"
+            - button "Maine -4.3%" [ref=e237] [cursor=pointer]:
+              - generic [ref=e238]: Maine
+              - strong [ref=e240]: "-4.3%"
+            - button "Oklahoma -3.7%" [ref=e241] [cursor=pointer]:
+              - generic [ref=e242]: Oklahoma
+              - strong [ref=e244]: "-3.7%"
+            - button "Utah -3.7%" [ref=e245] [cursor=pointer]:
+              - generic [ref=e246]: Utah
+              - strong [ref=e248]: "-3.7%"
+            - button "Minnesota -3.1%" [ref=e249] [cursor=pointer]:
+              - generic [ref=e250]: Minnesota
+              - strong [ref=e252]: "-3.1%"
+            - button "Nevada -2.8%" [ref=e253] [cursor=pointer]:
+              - generic [ref=e254]: Nevada
+              - strong [ref=e256]: "-2.8%"
+            - button "Washington -2.7%" [ref=e257] [cursor=pointer]:
+              - generic [ref=e258]: Washington
+              - strong [ref=e260]: "-2.7%"
+            - button "Iowa -2.5%" [ref=e261] [cursor=pointer]:
+              - generic [ref=e262]: Iowa
+              - strong [ref=e264]: "-2.5%"
+            - button "New Jersey -2.4%" [ref=e265] [cursor=pointer]:
+              - generic [ref=e266]: New Jersey
+              - strong [ref=e268]: "-2.4%"
+            - button "Georgia -2.0%" [ref=e269] [cursor=pointer]:
+              - generic [ref=e270]: Georgia
+              - strong [ref=e272]: "-2.0%"
+            - button "Louisiana -1.8%" [ref=e273] [cursor=pointer]:
+              - generic [ref=e274]: Louisiana
+              - strong [ref=e276]: "-1.8%"
+            - button "Virginia -1.7%" [ref=e277] [cursor=pointer]:
+              - generic [ref=e278]: Virginia
+              - strong [ref=e280]: "-1.7%"
+            - button "Arizona -0.4%" [ref=e281] [cursor=pointer]:
+              - generic [ref=e282]: Arizona
+              - strong [ref=e284]: "-0.4%"
+            - button "Alabama +0.4%" [ref=e285] [cursor=pointer]:
+              - generic [ref=e286]: Alabama
+              - strong [ref=e288]: +0.4%
+            - button "Texas +0.5%" [ref=e289] [cursor=pointer]:
+              - generic [ref=e290]: Texas
+              - strong [ref=e292]: +0.5%
+            - button "North Carolina +1.2%" [ref=e293] [cursor=pointer]:
+              - generic [ref=e294]: North Carolina
+              - strong [ref=e296]: +1.2%
+            - button "Nebraska +4.8%" [ref=e297] [cursor=pointer]:
+              - generic [ref=e298]: Nebraska
+              - strong [ref=e300]: +4.8%
+            - button "Tennessee +5.1%" [ref=e301] [cursor=pointer]:
+              - generic [ref=e302]: Tennessee
+              - strong [ref=e304]: +5.1%
+            - button "South Carolina +5.4%" [ref=e305] [cursor=pointer]:
+              - generic [ref=e306]: South Carolina
+              - strong [ref=e308]: +5.4%
+            - button "Delaware +5.5%" [ref=e309] [cursor=pointer]:
+              - generic [ref=e310]: Delaware
+              - strong [ref=e312]: +5.5%
+            - button "Florida +7.1%" [ref=e313] [cursor=pointer]:
+              - generic [ref=e314]: Florida
+              - strong [ref=e316]: +7.1%
+            - button "Idaho +8.0%" [ref=e317] [cursor=pointer]:
+              - generic [ref=e318]: Idaho
+              - strong [ref=e320]: +8.0%
+            - button "Montana +8.1%" [ref=e321] [cursor=pointer]:
+              - generic [ref=e322]: Montana
+              - strong [ref=e324]: +8.1%
+            - button "South Dakota +8.2%" [ref=e325] [cursor=pointer]:
+              - generic [ref=e326]: South Dakota
+              - strong [ref=e328]: +8.2%
+            - button "North Dakota +13.1%" [ref=e329] [cursor=pointer]:
+              - generic [ref=e330]: North Dakota
+              - strong [ref=e332]: +13.1%
+            - button "District of Columbia +36.4%" [ref=e333] [cursor=pointer]:
+              - generic [ref=e334]: District of Columbia
+              - strong [ref=e336]: +36.4%
+        - complementary [ref=e337]:
+          - paragraph [ref=e338]: State market
+          - heading "Hawaii" [level=3] [ref=e339]
+          - generic [ref=e340]: "-19.8%"
+          - paragraph [ref=e341]: Projected change in high-school graduates from 2025 to 2035.
+          - generic [ref=e342]:
+            - term [ref=e343]: Projected graduates
+            - definition [ref=e344]: 11,450
+            - term [ref=e345]: Likely four-year entrants
+            - definition [ref=e346]: 4,794
+            - term [ref=e347]: 2025 graduate class
+            - definition [ref=e348]: 14,276
+          - paragraph [ref=e349]: This is a state student-pool projection, not an institution enrollment forecast.
+    - generic [ref=e350]:
+      - generic [ref=e351]:
+        - generic [ref=e352]:
+          - paragraph [ref=e353]: 04 · Can the home pool support the system?
+          - heading "Each state has a graduating class. Its colleges have an entering-class requirement." [level=2] [ref=e354]
+        - paragraph [ref=e355]: The relevant comparison is annual first-time four-year intake—not total enrollment. The completed IPEDS layer separates students supplied by the state, imported from other states, and arriving from abroad.
+      - generic [ref=e356]:
+        - generic [ref=e357]:
+          - text: Projection year
+          - combobox "Projection year" [ref=e358]:
+            - option "2026"
+            - option "2030"
+            - option "2035" [selected]
+            - option "2041"
+        - generic [ref=e359]:
+          - text: State
+          - combobox "State" [ref=e360]:
+            - option "Select a state" [selected]
+        - generic [ref=e361]:
+          - text: Sort state markets
+          - combobox "Sort state markets" [ref=e362]:
+            - option "Lowest home-pool coverage" [selected]
+            - option "Highest import dependence"
+            - option "Largest projected decline"
+            - option "Alphabetical"
+      - generic [ref=e363]:
+        - article [ref=e364]:
+          - generic [ref=e365]:
+            - generic [ref=e366]:
+              - paragraph [ref=e367]: State competition map
+              - heading "Projected home pool versus current first-time demand" [level=3] [ref=e368]
+            - generic [ref=e369]: "2035"
+          - paragraph [ref=e370]: Home-pool coverage = projected likely four-year entrants ÷ current first-time four-year intake at institutions located in the state.
+        - complementary [ref=e371]
+      - generic [ref=e372]:
+        - article [ref=e373]:
+          - strong [ref=e374]: Home-pool coverage
+          - paragraph [ref=e375]: Whether the modeled state-resident four-year pool is numerically large enough to match the current first-time intake of institutions in that state.
+        - article [ref=e376]:
+          - strong [ref=e377]: Import dependence
+          - paragraph [ref=e378]: The observed share of first-time students arriving from other U.S. states. A state can have adequate home supply and still depend heavily on imports.
+        - article [ref=e379]:
+          - strong [ref=e380]: Resident retention
+          - paragraph [ref=e381]: The share of state residents beginning four-year study who remain in their home state.
+    - generic [ref=e382]:
+      - generic [ref=e383]:
+        - generic [ref=e384]:
+          - paragraph [ref=e385]: 05 · Competition distributes the losses
+          - heading "A state decline is not an institution forecast." [level=2] [ref=e386]
+        - paragraph [ref=e387]: Some colleges can reach beyond their local market or take share from competitors. Others are tied to a shrinking regional pool. The model therefore separates four dimensions rather than assigning every institution the same percentage loss.
+      - generic [ref=e388]:
+        - article [ref=e389]:
+          - text: "01"
+          - heading "Market strength" [level=3] [ref=e390]
+          - paragraph [ref=e391]: Applications, selectivity, yield, retention and recent enrollment momentum.
+        - article [ref=e392]:
+          - text: "02"
+          - heading "Recruitment reach" [level=3] [ref=e393]
+          - paragraph [ref=e394]: Local, statewide, national, online, graduate and international recruitment channels.
+        - article [ref=e395]:
+          - text: "03"
+          - heading "Demographic exposure" [level=3] [ref=e396]
+          - paragraph [ref=e397]: Dependence on first-time traditional undergraduates in shrinking markets.
+        - article [ref=e398]:
+          - text: "04"
+          - heading "Financial resilience" [level=3] [ref=e399]
+          - paragraph [ref=e400]: Tuition dependence, operating flexibility, reserves, debt and public funding.
+      - generic [ref=e401]:
+        - generic [ref=e402]: Student pool
+        - generic [ref=e403]: →
+        - generic [ref=e404]: Market competition
+        - generic [ref=e405]: →
+        - generic [ref=e406]: Institution enrollment
+        - generic [ref=e407]: →
+        - generic [ref=e408]: Financial pressure
+    - generic [ref=e409]:
+      - generic [ref=e410]:
+        - generic [ref=e411]:
+          - paragraph [ref=e412]: 07 · Test the competition assumption
+          - heading "Did institutions actually hold, gain or lose market share?" [level=2] [ref=e413]
+        - paragraph [ref=e414]: The backtest applies each institution’s prior share of its state’s first-time market to the next observed IPEDS residence cycle, then compares that baseline with actual intake.
+      - generic [ref=e415]:
+        - article [ref=e416]:
+          - generic [ref=e417]:
+            - generic [ref=e418]:
+              - paragraph [ref=e419]: Holdout performance
+              - heading "Constant-share baseline" [level=3] [ref=e420]
+            - generic [ref=e421]: Even-year residence cycles
+        - complementary [ref=e422]:
+          - paragraph [ref=e423]: Interpretation
+          - heading "The baseline should be difficult to beat honestly." [level=3] [ref=e424]
+          - paragraph [ref=e425]: A good institutional model must improve on “keep the same share of the next state market.” Pandemic windows are flagged rather than treated as normal behavior.
+          - generic [ref=e426]:
+            - term [ref=e427]: Primary error
+            - definition [ref=e428]: WAPE
+            - term [ref=e429]: Secondary error
+            - definition [ref=e430]: Median APE
+            - term [ref=e431]: Behavior test
+            - definition [ref=e432]: Share gain / loss
+    - generic [ref=e433]:
+      - generic [ref=e434]:
+        - generic [ref=e435]:
+          - paragraph [ref=e436]: 06 · A second squeeze
+          - heading "The headline total hides a weakening international intake pipeline." [level=2] [ref=e437]
+        - paragraph [ref=e438]: OPT is excluded here because participants are generally no longer enrolled. The relevant institutional signal is the flow of new students entering programs.
+      - generic [ref=e439]:
+        - article [ref=e440]:
+          - generic [ref=e441]:
+            - generic [ref=e442]:
+              - paragraph [ref=e443]: Fall 2025 snapshot
+              - heading "Change by enrollment group" [level=3] [ref=e444]
+            - generic [ref=e445]: Observed
+          - generic [ref=e446]:
+            - generic [ref=e447]:
+              - generic [ref=e448]: New international
+              - strong [ref=e452]: "-17.0%"
+            - generic [ref=e453]:
+              - generic [ref=e454]: Graduate
+              - strong [ref=e458]: "-12.0%"
+            - generic [ref=e459]:
+              - generic [ref=e460]: Non-degree
+              - strong [ref=e464]: "-17.0%"
+            - generic [ref=e465]:
+              - generic [ref=e466]: Undergraduate
+              - strong [ref=e470]: +2.0%
+          - paragraph [ref=e471]: "Source: IIE Fall 2025 Snapshot; 828 U.S. institutions responded."
+        - article [ref=e472]:
+          - paragraph [ref=e473]: Why the effect accumulates
+          - heading "Missing entrants remain missing from later cohorts." [level=3] [ref=e474]
+          - generic "Cohort accumulation illustration" [ref=e475]:
+            - strong [ref=e477]: "2026"
+            - strong [ref=e481]: "2027"
+            - strong [ref=e486]: "2028"
+            - strong [ref=e492]: "2029"
+          - paragraph [ref=e497]: Even if new recruitment later returns to normal, the total enrollment path recovers slowly because earlier missing classes never entered.
+    - generic [ref=e498]:
+      - generic [ref=e499]:
+        - generic [ref=e500]:
+          - paragraph [ref=e501]: 08 · Institution explorer
+          - heading "See how exposure and financial pressure differ." [level=2] [ref=e502]
+        - paragraph [ref=e503]: Market position and financial resilience are displayed separately. A college can be regionally exposed but financially resilient—or market-strong but financially fragile.
+      - generic [ref=e504]:
+        - strong [ref=e505]: Data status.
+        - text: The interface automatically uses the refreshed IPEDS panel when generated. Until then, the limited development sample remains visibly labeled and must not be published as a risk ranking.
+      - generic [ref=e506]:
+        - generic [ref=e507]:
+          - text: Year
+          - combobox "Year" [ref=e508]:
+            - option "2030"
+            - option "2035" [selected]
+            - option "2041"
+        - generic [ref=e509]:
+          - text: State
+          - combobox "State" [ref=e510]:
+            - option "All states" [selected]
+            - option "AK"
+            - option "AL"
+            - option "AR"
+            - option "CA"
+            - option "CO"
+            - option "GA"
+            - option "IN"
+        - generic [ref=e511]:
+          - text: Market profile
+          - combobox "Market profile" [ref=e512]:
+            - option "All profiles" [selected]
+            - option "Nationally protected"
+            - option "Adaptable"
+            - option "Regionally exposed"
+            - option "Structurally pressured"
+            - option "Development proxy"
+        - generic [ref=e513]:
+          - text: Financial resilience
+          - combobox "Financial resilience" [ref=e514]:
+            - option "All resilience levels" [selected]
+            - option "Financially resilient"
+            - option "Manageable pressure"
+            - option "High pressure"
+            - option "Structurally vulnerable"
+            - option "Insufficient data"
+            - option "Development proxy"
+        - generic [ref=e515]:
+          - text: Institution
+          - combobox "Institution" [ref=e516]:
+            - option "Select an institution"
+            - option "Auburn University (AL)"
+            - option "Auburn University at Montgomery (AL)"
+            - option "California State University-Dominguez Hills (CA)"
+            - option "California State University-East Bay (CA)"
+            - option "California State University-Fresno (CA)"
+            - option "California State University-Sacramento (CA)"
+            - option "California State University-San Bernardino (CA)"
+            - option "California State University-San Marcos (CA)"
+            - option "California State University-Stanislaus (CA)"
+            - option "Clayton State University (GA)"
+            - option "Colorado State University Global (CO)"
+            - option "Colorado State University Pueblo (CO)"
+            - option "Colorado State University-Fort Collins (CO)"
+            - option "Columbus State University (GA)"
+            - option "Covenant College (GA)"
+            - option "Georgia Southern University (GA)"
+            - option "Georgia Southwestern State University (GA)"
+            - option "Georgia State University (GA)"
+            - option "Indiana Institute of Technology (IN)"
+            - option "Indiana State University (IN)"
+            - option "Indiana University-Bloomington (IN)"
+            - option "Indiana University-East (IN)"
+            - option "Indiana University-Kokomo (IN)"
+            - option "Kennesaw State University (GA)"
+            - option "University of Alaska Anchorage (AK)"
+            - option "University of Alaska Fairbanks (AK)"
+            - option "University of Arkansas at Pine Bluff (AR)"
+            - option "University of Arkansas-Fort Smith (AR)"
+            - option "University of California-Irvine (CA)"
+            - option "University of California-Los Angeles (CA)"
+            - option "University of California-Merced (CA)"
+            - option "Westmont College (CA)" [selected]
+            - option "Whittier College (CA)"
+        - button "Reset" [ref=e517] [cursor=pointer]
+      - paragraph [ref=e518]: 33 institutions in this development sample
+      - generic [ref=e519]:
+        - article [ref=e520]:
+          - generic [ref=e521]:
+            - generic [ref=e522]:
+              - paragraph [ref=e523]: Filtered comparison
+              - heading "Modeled enrollment change" [level=3] [ref=e524]
+            - generic [ref=e525]: Click a bar
+          - generic [ref=e526]:
+            - button "Westmont College -13.0%" [ref=e527] [cursor=pointer]:
+              - generic "Westmont College" [ref=e528]
+              - strong [ref=e530]: "-13.0%"
+            - button "Whittier College -13.0%" [ref=e531] [cursor=pointer]:
+              - generic "Whittier College" [ref=e532]
+              - strong [ref=e534]: "-13.0%"
+            - button "California State University-San Bernardino -10.9%" [ref=e535] [cursor=pointer]:
+              - generic "California State University-San Bernardino" [ref=e536]
+              - strong [ref=e538]: "-10.9%"
+            - button "California State University-San Marcos -10.9%" [ref=e539] [cursor=pointer]:
+              - generic "California State University-San Marcos" [ref=e540]
+              - strong [ref=e542]: "-10.9%"
+            - button "California State University-Stanislaus -10.9%" [ref=e543] [cursor=pointer]:
+              - generic "California State University-Stanislaus" [ref=e544]
+              - strong [ref=e546]: "-10.9%"
+            - button "California State University-Dominguez Hills -10.9%" [ref=e547] [cursor=pointer]:
+              - generic "California State University-Dominguez Hills" [ref=e548]
+              - strong [ref=e550]: "-10.9%"
+            - button "California State University-East Bay -10.9%" [ref=e551] [cursor=pointer]:
+              - generic "California State University-East Bay" [ref=e552]
+              - strong [ref=e554]: "-10.9%"
+            - button "California State University-Fresno -10.9%" [ref=e555] [cursor=pointer]:
+              - generic "California State University-Fresno" [ref=e556]
+              - strong [ref=e558]: "-10.9%"
+            - button "University of California-Merced -10.9%" [ref=e559] [cursor=pointer]:
+              - generic "University of California-Merced" [ref=e560]
+              - strong [ref=e562]: "-10.9%"
+            - button "Colorado State University Pueblo -8.8%" [ref=e563] [cursor=pointer]:
+              - generic "Colorado State University Pueblo" [ref=e564]
+              - strong [ref=e566]: "-8.8%"
+            - button "Colorado State University-Fort Collins -7.9%" [ref=e567] [cursor=pointer]:
+              - generic "Colorado State University-Fort Collins" [ref=e568]
+              - strong [ref=e570]: "-7.9%"
+            - button "Colorado State University Global -7.9%" [ref=e571] [cursor=pointer]:
+              - generic "Colorado State University Global" [ref=e572]
+              - strong [ref=e574]: "-7.9%"
+            - button "California State University-Sacramento -7.9%" [ref=e575] [cursor=pointer]:
+              - generic "California State University-Sacramento" [ref=e576]
+              - strong [ref=e578]: "-7.9%"
+            - button "University of California-Irvine -7.9%" [ref=e579] [cursor=pointer]:
+              - generic "University of California-Irvine" [ref=e580]
+              - strong [ref=e582]: "-7.9%"
+            - button "University of California-Los Angeles -7.9%" [ref=e583] [cursor=pointer]:
+              - generic "University of California-Los Angeles" [ref=e584]
+              - strong [ref=e586]: "-7.9%"
+            - button "Indiana Institute of Technology -6.9%" [ref=e587] [cursor=pointer]:
+              - generic "Indiana Institute of Technology" [ref=e588]
+              - strong [ref=e590]: "-6.9%"
+            - button "Indiana University-East -6.9%" [ref=e591] [cursor=pointer]:
+              - generic "Indiana University-East" [ref=e592]
+              - strong [ref=e594]: "-6.9%"
+            - button "Indiana University-Kokomo -6.9%" [ref=e595] [cursor=pointer]:
+              - generic "Indiana University-Kokomo" [ref=e596]
+              - strong [ref=e598]: "-6.9%"
+            - button "Indiana State University -6.6%" [ref=e599] [cursor=pointer]:
+              - generic "Indiana State University" [ref=e600]
+              - strong [ref=e602]: "-6.6%"
+            - button "Indiana University-Bloomington -6.1%" [ref=e603] [cursor=pointer]:
+              - generic "Indiana University-Bloomington" [ref=e604]
+              - strong [ref=e606]: "-6.1%"
+            - button "University of Arkansas-Fort Smith -5.1%" [ref=e607] [cursor=pointer]:
+              - generic "University of Arkansas-Fort Smith" [ref=e608]
+              - strong [ref=e610]: "-5.1%"
+            - button "University of Alaska Anchorage -5.0%" [ref=e611] [cursor=pointer]:
+              - generic "University of Alaska Anchorage" [ref=e612]
+              - strong [ref=e614]: "-5.0%"
+            - button "University of Alaska Fairbanks -5.0%" [ref=e615] [cursor=pointer]:
+              - generic "University of Alaska Fairbanks" [ref=e616]
+              - strong [ref=e618]: "-5.0%"
+            - button "Kennesaw State University -4.8%" [ref=e619] [cursor=pointer]:
+              - generic "Kennesaw State University" [ref=e620]
+              - strong [ref=e622]: "-4.8%"
+            - button "University of Arkansas at Pine Bluff -4.8%" [ref=e623] [cursor=pointer]:
+              - generic "University of Arkansas at Pine Bluff" [ref=e624]
+              - strong [ref=e626]: "-4.8%"
+            - button "Clayton State University -3.5%" [ref=e627] [cursor=pointer]:
+              - generic "Clayton State University" [ref=e628]
+              - strong [ref=e630]: "-3.5%"
+            - button "Columbus State University -3.5%" [ref=e631] [cursor=pointer]:
+              - generic "Columbus State University" [ref=e632]
+              - strong [ref=e634]: "-3.5%"
+            - button "Georgia Southern University -3.5%" [ref=e635] [cursor=pointer]:
+              - generic "Georgia Southern University" [ref=e636]
+              - strong [ref=e638]: "-3.5%"
+            - button "Georgia State University -3.5%" [ref=e639] [cursor=pointer]:
+              - generic "Georgia State University" [ref=e640]
+              - strong [ref=e642]: "-3.5%"
+            - button "Covenant College -2.5%" [ref=e643] [cursor=pointer]:
+              - generic "Covenant College" [ref=e644]
+              - strong [ref=e646]: "-2.5%"
+            - button "Georgia Southwestern State University -2.5%" [ref=e647] [cursor=pointer]:
+              - generic "Georgia Southwestern State University" [ref=e648]
+              - strong [ref=e650]: "-2.5%"
+            - button "Auburn University -2.1%" [ref=e651] [cursor=pointer]:
+              - generic "Auburn University" [ref=e652]
+              - strong [ref=e654]: "-2.1%"
+            - button "Auburn University at Montgomery -0.5%" [ref=e655] [cursor=pointer]:
+              - generic "Auburn University at Montgomery" [ref=e656]
+              - strong [ref=e658]: "-0.5%"
+        - complementary [ref=e659]:
+          - paragraph [ref=e660]: Institution profile · 2035
+          - heading "Westmont College" [level=3] [ref=e661]
+          - paragraph [ref=e662]:
+            - generic [ref=e663]: Severe pressure
+          - generic [ref=e664]: "-13.0%"
+          - paragraph [ref=e665]: Modeled undergraduate change using a blend of state and national market contraction based on recruitment scope.
+          - generic [ref=e666]:
+            - generic [ref=e667]:
+              - generic [ref=e668]: Current UG
+              - strong [ref=e669]: 1,296
+            - generic [ref=e670]:
+              - generic [ref=e671]: Projected UG
+              - strong [ref=e672]: 1,128
+            - generic [ref=e673]:
+              - generic [ref=e674]: Modeled students lost
+              - strong [ref=e675]: "168"
+            - generic [ref=e676]:
+              - generic [ref=e677]: Recruitment scope
+              - strong [ref=e678]: Regional
+            - generic [ref=e679]:
+              - generic [ref=e680]: Tuition pressure
+              - strong [ref=e681]: $2,113,122
+            - generic [ref=e682]:
+              - generic [ref=e683]: Pressure / tuition
+              - strong [ref=e684]: +9.7%
+          - paragraph [ref=e685]: Finance values are older development proxies. This is not an audited deficit or closure forecast.
+    - generic [ref=e686]:
+      - generic [ref=e687]:
+        - generic [ref=e688]:
+          - paragraph [ref=e689]: 09 · From students to dollars
+          - heading "Enrollment losses become pressure only after costs adjust." [level=2] [ref=e690]
+        - paragraph [ref=e691]: The useful financial question is not gross tuition lost. It is how much net contribution disappears after the expenses that can realistically be reduced.
+      - generic [ref=e692]:
+        - generic [ref=e693]: Lost net tuition contribution
+        - generic [ref=e694]: −
+        - generic [ref=e695]: Avoidable expenses
+        - generic [ref=e696]: =
+        - generic [ref=e697]: Remaining funding pressure
+      - generic [ref=e698]:
+        - article [ref=e699]:
+          - strong [ref=e700]: "1"
+          - heading "Estimate lost students" [level=3] [ref=e701]
+          - paragraph [ref=e702]: Separate domestic, out-of-state and international recruitment changes.
+        - article [ref=e703]:
+          - strong [ref=e704]: "2"
+          - heading "Apply net revenue" [level=3] [ref=e705]
+          - paragraph [ref=e706]: Use realized tuition and fees, not the published sticker price.
+        - article [ref=e707]:
+          - strong [ref=e708]: "3"
+          - heading "Adjust expenses" [level=3] [ref=e709]
+          - paragraph [ref=e710]: Only a limited share of costs disappears when enrollment falls.
+        - article [ref=e711]:
+          - strong [ref=e712]: "4"
+          - heading "Scale the pressure" [level=3] [ref=e713]
+          - paragraph [ref=e714]: Compare the remaining gap with revenue, reserves and financial capacity.
+    - generic [ref=e715]:
+      - generic [ref=e716]:
+        - generic [ref=e717]:
+          - paragraph [ref=e718]: 10 · Recruitment stress test
+          - heading "Change the assumptions yourself." [level=2] [ref=e719]
+        - paragraph [ref=e720]: This is a scenario tool, not a forecast. It shows how independent recruitment shocks can accumulate into a multi-year headcount and tuition gap.
+      - generic [ref=e721]:
+        - generic [ref=e722]:
+          - generic [ref=e723]:
+            - text: Entering class size
+            - status "Entering class size 1000" [ref=e724]: 1,000
+            - slider [ref=e725]: "1000"
+          - generic [ref=e726]:
+            - text: In-state share
+            - status "In-state share 65" [ref=e727]: 65%
+            - slider [ref=e728]: "65"
+          - generic [ref=e729]:
+            - text: International share
+            - status "International share 8" [ref=e730]: 8%
+            - slider [ref=e731]: "8"
+          - generic [ref=e732]:
+            - text: In-state recruitment shock
+            - status "In-state recruitment shock -10" [ref=e733]: "-10%"
+            - slider [ref=e734]: "-10"
+          - generic [ref=e735]:
+            - text: Out-of-state recruitment shock
+            - status "Out-of-state recruitment shock -5" [ref=e736]: "-5%"
+            - slider [ref=e737]: "-5"
+          - generic [ref=e738]:
+            - text: International recruitment shock
+            - status "International recruitment shock -25" [ref=e739]: "-25%"
+            - slider [ref=e740]: "-25"
+          - generic [ref=e741]:
+            - text: Missing students replaced
+            - status "Missing students replaced 20" [ref=e742]: 20%
+            - slider [ref=e743]: "20"
+          - generic [ref=e744]:
+            - text: Revenue recovered per replacement
+            - status "Revenue recovered per replacement 80" [ref=e745]: 80%
+            - slider [ref=e746]: "80"
+          - generic [ref=e747]:
+            - text: Net tuition per student
+            - status "Net tuition per student 18000" [ref=e748]: $18,000
+            - slider [ref=e749]: "18000"
+          - generic [ref=e750]:
+            - text: Variable expense share
+            - status "Variable expense share 30" [ref=e751]: 30%
+            - slider [ref=e752]: "30"
+        - article [ref=e753]:
+          - generic [ref=e754]:
+            - article [ref=e755]:
+              - strong [ref=e756]: "79"
+              - generic [ref=e757]: Net entering-class loss
+            - article [ref=e758]:
+              - strong [ref=e759]: $1,489,320
+              - generic [ref=e760]: Tuition revenue lost
+            - article [ref=e761]:
+              - strong [ref=e762]: $446,796
+              - generic [ref=e763]: Expense reduction
+            - article [ref=e764]:
+              - strong [ref=e765]: $1,042,524
+              - generic [ref=e766]: Remaining pressure
+            - article [ref=e767]:
+              - strong [ref=e768]: "83"
+              - generic [ref=e769]: Students to close gap
+            - article [ref=e770]:
+              - strong [ref=e771]: 27%
+              - generic [ref=e772]: Out-of-state share
+          - generic [ref=e773]:
+            - generic [ref=e775]:
+              - paragraph [ref=e776]: Four-year accumulation
+              - heading "Enrollment below baseline" [level=3] [ref=e777]
+            - img [ref=e779]:
+              - generic [ref=e780]: "0"
+              - generic [ref=e781]: "79"
+              - generic [ref=e782]: "158"
+              - generic [ref=e783]: "236"
+              - generic [ref=e784]: "315"
+              - generic [ref=e786]: Year 1
+              - generic [ref=e787]: "79"
+              - generic [ref=e789]: Year 2
+              - generic [ref=e790]: "158"
+              - generic [ref=e792]: Year 3
+              - generic [ref=e793]: "236"
+              - generic [ref=e795]: Year 4
+              - generic [ref=e796]: "315"
+          - paragraph [ref=e797]: Assumes the same entering-class loss repeats for four years and students persist through a four-year program. It does not model transfers, graduate students or changes in retention.
+    - generic [ref=e798]:
+      - generic [ref=e800]:
+        - paragraph [ref=e801]: Method and next build
+        - heading "Observed facts, explicit assumptions and visible limitations." [level=2] [ref=e802]
+      - generic [ref=e803]:
+        - article [ref=e804]:
+          - text: Observed
+          - heading "Demographic trend" [level=3] [ref=e805]
+          - paragraph [ref=e806]: WICHE reported and projected high-school graduate counts, 2009–2041.
+        - article [ref=e807]:
+          - text: Assumed
+          - heading "Four-year transition" [level=3] [ref=e808]
+          - paragraph [ref=e809]: 62.8% college-going rate and two-thirds four-year share held constant for the central illustration.
+        - article [ref=e810]:
+          - text: Observed
+          - heading "International intake" [level=3] [ref=e811]
+          - paragraph [ref=e812]: Fall 2025 snapshot changes by enrollment group. OPT is excluded.
+        - article [ref=e813]:
+          - text: Provisional
+          - heading "Institution pressure" [level=3] [ref=e814]
+          - paragraph [ref=e815]: Limited sample with older finance proxies. Replace before public risk publication.
+      - generic [ref=e816]:
+        - heading "IPEDS build pipeline" [level=3] [ref=e817]
+        - generic [ref=e818]:
+          - article [ref=e819]:
+            - strong [ref=e820]: 01 · Enrollment panel
+            - text: HD, ADM, EF A, EF C and EF D for 2016–2024.
+          - article [ref=e821]:
+            - strong [ref=e822]: 02 · State competition
+            - text: First-time demand, resident supply, domestic imports, foreign residence and retention.
+          - article [ref=e823]:
+            - strong [ref=e824]: 03 · Separate profiles
+            - text: Market position remains distinct from FY2024 financial resilience.
+          - article [ref=e825]:
+            - strong [ref=e826]: 04 · Backtest
+            - text: Prior market share is tested against the next observed residence cycle.
+        - paragraph [ref=e827]:
+          - code [ref=e828]: python scripts/build_ipeds_panel.py --download --years 2016 2018 2020 2022 2024
+        - paragraph [ref=e829]:
+          - text: The site reads
+          - code [ref=e830]: data/generated/ipeds_story.js
+          - text: . When the official files are present, all state and institution views switch from development mode automatically.
+      - generic [ref=e831]:
+        - heading "Primary sources" [level=3] [ref=e832]
+        - paragraph [ref=e833]:
+          - link "WICHE — Knocking at the College Door" [ref=e834] [cursor=pointer]:
+            - /url: https://www.wiche.edu/knocking/
+        - paragraph [ref=e835]:
+          - link "BLS — College Enrollment and Work Activity of High School Graduates, 2024" [ref=e836] [cursor=pointer]:
+            - /url: https://www.bls.gov/news.release/hsgec.htm
+        - paragraph [ref=e837]:
+          - link "IIE — Fall 2025 Snapshot on International Student Enrollment" [ref=e838] [cursor=pointer]:
+            - /url: https://www.iie.org/publications/fall-2025-snapshot-on-international-student-enrollment/
+        - paragraph [ref=e839]:
+          - link "NCES — Integrated Postsecondary Education Data System" [ref=e840] [cursor=pointer]:
+            - /url: https://nces.ed.gov/ipeds/
+  - contentinfo [ref=e841]:
+    - strong [ref=e842]: The Enrollment Squeeze
+    - paragraph [ref=e843]: "A static visual story for GitHub Pages. Sources: WICHE, BLS, IIE Open Doors and NCES IPEDS."

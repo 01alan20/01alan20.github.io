@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The Enrollment Squeeze: an interactive analysis of demographic contraction, international recruitment friction, institutional exposure, and financial pressure in U.S. higher education." />
+  <title>The Enrollment Squeeze</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="assets/plotly.min.js"></script>
+</head>
+<body>
+  <header class="site-nav">
+    <a class="brand" href="#top">The Enrollment Squeeze</a>
+    <nav>
+      <a href="#story">Story</a>
+      <a href="#explorer">Explorer</a>
+      <a href="#method">Method</a>
+      <a class="nav-download" href="downloads/future_college_market_financial_model.xlsx">Model</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <p class="eyebrow">U.S. higher education through 2041</p>
+        <h1>The Enrollment<br><span>Squeeze</span></h1>
+        <p class="hero-deck">Fewer domestic students. A less predictable international pipeline. Thousands of colleges carrying costs built for a larger market.</p>
+        <div class="hero-stats">
+          <article><strong id="hero-grad">—</strong><span>projected high-school graduates in 2041</span></article>
+          <article><strong id="hero-change">—</strong><span>change from the class of 2026</span></article>
+          <article><strong>−17%</strong><span>new international enrollment in the Fall 2025 snapshot</span></article>
+        </div>
+        <a class="scroll-cue" href="#story">Follow the story ↓</a>
+      </div>
+    </section>
+
+    <section class="opening" id="story">
+      <div class="prose wide">
+        <p class="kicker">The central problem</p>
+        <h2>The cliff was visible. The cost structure remained.</h2>
+        <p class="lead">The demographic decline is not a surprise. Births, school cohorts and graduate projections have signaled it for years. The harder question is why so many institutions remain dependent on maintaining—or increasing—enrollment as the addressable market contracts.</p>
+      </div>
+    </section>
+
+    <section class="scrolly" id="national-story">
+      <div class="scrolly-copy">
+        <article class="step is-active" data-step="0">
+          <span class="chapter">01</span>
+          <h3>A smaller domestic pipeline</h3>
+          <p>The class of 2026 is the baseline. By 2041, the projected number of high-school graduates is materially smaller.</p>
+        </article>
+        <article class="step" data-step="1">
+          <span class="chapter">02</span>
+          <h3>Graduates are not the same as entrants</h3>
+          <p>Only a portion enrolls immediately in college, and roughly two-thirds of those entrants are assumed to choose four-year institutions in the central scenario.</p>
+        </article>
+        <article class="step" data-step="2">
+          <span class="chapter">03</span>
+          <h3>The squeeze compounds over time</h3>
+          <p>Even if college-going behavior holds steady, the four-year market contracts because the underlying cohort is smaller.</p>
+        </article>
+      </div>
+      <div class="scrolly-figure">
+        <div class="figure-card">
+          <div class="figure-head"><div><p class="kicker">National outlook</p><h3 id="national-title">Projected high-school graduates</h3></div><span class="model-tag">Central scenario</span></div>
+          <div id="national-chart" class="plot"></div>
+          <p class="figure-note">WICHE graduate projections; college-entry estimates apply explicit behavioral assumptions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="international">
+      <div class="prose wide">
+        <p class="kicker light">The second pressure</p>
+        <h2>The international cushion is less reliable.</h2>
+        <p class="lead light-text">International enrollment remains large, but the flow of new students has weakened and policy friction has increased. That does not prove policy caused every decline. It does mean colleges should not treat international recruitment as a guaranteed replacement for shrinking domestic cohorts.</p>
+      </div>
+      <div class="metric-grid" id="international-metrics"></div>
+      <div class="policy-panel">
+        <div>
+          <p class="kicker light">Policy context</p>
+          <h3>Recruitment now carries more uncertainty.</h3>
+        </div>
+        <div id="policy-timeline" class="timeline"></div>
+      </div>
+    </section>
+
+    <section class="map-section" id="state-markets">
+      <div class="section-head">
+        <div><p class="kicker">Geography matters</p><h2>The national decline hides different state markets.</h2></div>
+        <p>Some states retain or grow their local pipeline. Others become increasingly dependent on interstate, international, transfer, adult or online demand.</p>
+      </div>
+      <div class="control-bar">
+        <label>Year<select id="state-year"><option>2026</option><option>2030</option><option selected>2035</option><option>2041</option></select></label>
+        <label>Metric<select id="state-metric"><option value="change">Change from 2026</option><option value="coverage">Local pool coverage</option><option value="fourYearEntrants">Likely four-year entrants</option></select></label>
+      </div>
+      <div class="map-layout">
+        <div id="state-map" class="plot map-plot"></div>
+        <aside class="detail-panel" id="state-detail">
+          <p class="kicker">Select a state</p>
+          <h3>Click the map to inspect a market.</h3>
+          <p>The local pool coverage proxy compares likely four-year entrants with the state’s annualized undergraduate scale. It is a pressure indicator, not a count of empty seats.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="local-section" id="local-markets">
+      <div class="section-head">
+        <div><p class="kicker">Local markets</p><h2>The squeeze is experienced county by county.</h2></div>
+        <p>County estimates allocate state graduate projections using current age cohorts and recent geographic movement. They are useful for recruitment-market planning, not precise school-level forecasts.</p>
+      </div>
+      <div class="control-bar">
+        <label>State<select id="county-state"></select></label>
+        <label>Year<select id="county-year"><option>2026</option><option>2030</option><option selected>2035</option><option>2041</option></select></label>
+      </div>
+      <div class="split-card">
+        <div id="county-chart" class="plot"></div>
+        <div class="county-summary" id="county-summary"></div>
+      </div>
+    </section>
+
+    <section class="capacity-section" id="explorer">
+      <div class="section-head">
+        <div><p class="kicker">Institutional exposure</p><h2>More institutions are competing for a smaller market.</h2></div>
+        <p>Institutions with national brands can take share from weaker competitors. Smaller regional and tuition-dependent colleges are more exposed to local contraction.</p>
+      </div>
+      <div class="control-bar sticky-controls">
+        <label>Year<select id="inst-year"><option>2030</option><option selected>2035</option><option>2041</option></select></label>
+        <label>Control<select id="inst-control"><option value="All">All</option><option>Public</option><option>Private nonprofit</option></select></label>
+        <label>Scope<select id="inst-scope"><option value="All">All</option><option>Regional</option><option>Statewide</option><option>National</option></select></label>
+      </div>
+      <div class="map-layout">
+        <div id="institution-map" class="plot map-plot"></div>
+        <aside class="detail-panel" id="institution-detail">
+          <p class="kicker">Institution explorer</p>
+          <h3>Select an institution.</h3>
+          <p>Point size reflects current undergraduate enrollment. Color reflects modeled market change under a constant-share scenario.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="finance-section" id="finance">
+      <div class="section-head">
+        <div><p class="kicker">From students to dollars</p><h2>Enrollment loss becomes financial pressure.</h2></div>
+        <p>The model translates undergraduate FTE change into net-tuition exposure, then allows a limited portion of instructional cost to adjust. It is not a full institutional budget forecast.</p>
+      </div>
+      <div class="scenario-box">
+        <div><label>Market-share adjustment <output id="share-out">0.0%</output><input id="share-slider" type="range" min="-5" max="5" step="0.5" value="0"></label></div>
+        <div><label>Variable instructional cost <output id="variable-out">30%</output><input id="variable-slider" type="range" min="15" max="50" step="5" value="30"></label></div>
+      </div>
+      <div class="finance-layout">
+        <div id="finance-chart" class="plot"></div>
+        <div class="ranking-card">
+          <div class="ranking-head"><div><p class="kicker">Modeled exposure</p><h3>Highest-pressure institutions</h3></div><span class="model-tag warning">Not closure predictions</span></div>
+          <div class="table-wrap"><table><thead><tr><th>Institution</th><th>State</th><th>Gap</th><th>Exposure</th></tr></thead><tbody id="risk-table"></tbody></table></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ending">
+      <div class="prose wide">
+        <p class="kicker">The likely outcome</p>
+        <h2>The squeeze will not make every college smaller by the same percentage.</h2>
+        <p class="lead">It will redistribute students toward institutions with stronger brands, broader recruitment markets and deeper resources. Institutions already losing enrollment, heavily dependent on tuition and located in shrinking markets face elevated risk of downsizing, merger or closure.</p>
+        <div class="callout"><strong>Important:</strong> the current ranking measures modeled exposure, not a probability of closure. A defensible closure-risk model still requires current IPEDS balance-sheet, margin, debt, liquidity, endowment and multi-year enrollment data.</div>
+      </div>
+    </section>
+
+    <section class="method-section" id="method">
+      <div class="section-head">
+        <div><p class="kicker">Method and transparency</p><h2>What is observed, modeled and still missing.</h2></div>
+      </div>
+      <div class="method-grid" id="data-status"></div>
+      <div class="download-row">
+        <a class="button" href="downloads/future_college_market_financial_model.xlsx">Download the scenario model</a>
+        <a class="button secondary" href="downloads/methodology_model.md">Read methodology</a>
+        <a class="button secondary" href="downloads/data_dictionary.csv">Data dictionary</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>The Enrollment Squeeze</strong><p>A reproducible, static-data project designed for GitHub Pages.</p></div>
+    <div><p>Sources: WICHE, U.S. Census Bureau, U.S. Department of Education / College Scorecard, NCES IPEDS, IIE Open Doors, U.S. Department of State.</p></div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

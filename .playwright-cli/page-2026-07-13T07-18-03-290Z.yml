@@ -1,0 +1,203 @@
+- generic [active] [ref=f1e1]:
+  - navigation [ref=f1e2]:
+    - generic [ref=f1e3]:
+      - link "Alan Cromlish" [ref=f1e4] [cursor=pointer]:
+        - /url: /
+      - list [ref=f1e5]:
+        - listitem [ref=f1e6]:
+          - link "About" [ref=f1e7] [cursor=pointer]:
+            - /url: /about
+        - listitem [ref=f1e8]:
+          - link "Projects" [ref=f1e9] [cursor=pointer]:
+            - /url: /projects
+        - listitem [ref=f1e10]:
+          - link "Writings" [ref=f1e11] [cursor=pointer]:
+            - /url: /writings
+        - listitem [ref=f1e12]:
+          - link "Contact" [ref=f1e13] [cursor=pointer]:
+            - /url: /contact
+  - main [ref=f1e14]:
+    - generic [ref=f1e16]:
+      - heading "Projects" [level=1] [ref=f1e17]
+      - paragraph [ref=f1e18]: A selection of dashboards, decision tools, and interactive studies across student success, enrollment strategy, policy analysis, and cross-industry analytics.
+      - generic [ref=f1e19]:
+        - region [ref=f1e20]:
+          - generic [ref=f1e21]:
+            - heading "Student Success & Retention" [level=2] [ref=f1e22]
+            - paragraph [ref=f1e23]: Projects focused on persistence, engagement, interventions, and post-graduation outcomes.
+          - generic [ref=f1e24]:
+            - link "Student Retention and Early Alert Dashboard A dashboard that helps teams spot students who may be at risk of leaving and shows where support could make the biggest difference. Retention Early Alerts Student Support Dashboard" [ref=f1e25] [cursor=pointer]:
+              - /url: projects/retention-early-alert/
+              - heading "Student Retention and Early Alert Dashboard" [level=3] [ref=f1e26]
+              - paragraph [ref=f1e27]: A dashboard that helps teams spot students who may be at risk of leaving and shows where support could make the biggest difference.
+              - generic [ref=f1e28]:
+                - generic [ref=f1e29]: Retention
+                - generic [ref=f1e30]: Early Alerts
+                - generic [ref=f1e31]: Student Support
+                - generic [ref=f1e32]: Dashboard
+            - link "Education to Career Success Dashboard A student outcomes dashboard linking school experiences to job offers, salary, and career readiness after graduation. Student Outcomes Careers Dashboard" [ref=f1e33] [cursor=pointer]:
+              - /url: projects/education_career_success/dashboard-local.html
+              - heading "Education to Career Success Dashboard" [level=3] [ref=f1e34]
+              - paragraph [ref=f1e35]: A student outcomes dashboard linking school experiences to job offers, salary, and career readiness after graduation.
+              - generic [ref=f1e36]:
+                - generic [ref=f1e37]: Student Outcomes
+                - generic [ref=f1e38]: Careers
+                - generic [ref=f1e39]: Dashboard
+            - link "Student CRM and Engagement Analytics A dashboard showing how advising, services, and communication activity connect to student persistence and dropout risk. Student Engagement CRM Retention Analytics" [ref=f1e40] [cursor=pointer]:
+              - /url: projects/crm-engagement-analytics/
+              - heading "Student CRM and Engagement Analytics" [level=3] [ref=f1e41]
+              - paragraph [ref=f1e42]: A dashboard showing how advising, services, and communication activity connect to student persistence and dropout risk.
+              - generic [ref=f1e43]:
+                - generic [ref=f1e44]: Student Engagement
+                - generic [ref=f1e45]: CRM
+                - generic [ref=f1e46]: Retention
+                - generic [ref=f1e47]: Analytics
+            - link "First-Year Dropout Risk Predictor A day-one risk tool that scores a new student profile and suggests the level of outreach or support they may need. Risk Scoring First-Year Students Interventions Predictive Model" [ref=f1e48] [cursor=pointer]:
+              - /url: projects/day1-first-year-dropout-risk/
+              - heading "First-Year Dropout Risk Predictor" [level=3] [ref=f1e49]
+              - paragraph [ref=f1e50]: A day-one risk tool that scores a new student profile and suggests the level of outreach or support they may need.
+              - generic [ref=f1e51]:
+                - generic [ref=f1e52]: Risk Scoring
+                - generic [ref=f1e53]: First-Year Students
+                - generic [ref=f1e54]: Interventions
+                - generic [ref=f1e55]: Predictive Model
+        - region [ref=f1e56]:
+          - generic [ref=f1e57]:
+            - heading "Enrollment, Pricing & Demand" [level=2] [ref=f1e58]
+            - paragraph [ref=f1e59]: Work centered on funnel management, admissions positioning, pricing strategy, and operational demand planning.
+          - generic [ref=f1e60]:
+            - link "See Through Admissions A tool for applicants to compare their profile with past admissions patterns and get a clearer sense of where they may be competitive. Admissions Decision Support Data Product" [ref=f1e61] [cursor=pointer]:
+              - /url: https://seethroughadmissions.me
+              - heading "See Through Admissions" [level=3] [ref=f1e62]
+              - paragraph [ref=f1e63]: A tool for applicants to compare their profile with past admissions patterns and get a clearer sense of where they may be competitive.
+              - generic [ref=f1e64]:
+                - generic [ref=f1e65]: Admissions
+                - generic [ref=f1e66]: Decision Support
+                - generic [ref=f1e67]: Data Product
+            - link "Enrollment Strategy Dashboard A leadership dashboard for tracking class goals, weak points in the funnel, scholarship tradeoffs, and planning scenarios in one place. Enrollment Planning Dashboard Scenarios" [ref=f1e68] [cursor=pointer]:
+              - /url: projects/enrollment-strategy-dashboard/
+              - heading "Enrollment Strategy Dashboard" [level=3] [ref=f1e69]
+              - paragraph [ref=f1e70]: A leadership dashboard for tracking class goals, weak points in the funnel, scholarship tradeoffs, and planning scenarios in one place.
+              - generic [ref=f1e71]:
+                - generic [ref=f1e72]: Enrollment
+                - generic [ref=f1e73]: Planning
+                - generic [ref=f1e74]: Dashboard
+                - generic [ref=f1e75]: Scenarios
+            - link "Enrollment Funnel Benchmark Dashboard A board-ready view of the path from inquiry to enrollment, with conversion rates, segment comparisons, and what-if planning. Enrollment Funnel Benchmarks Planning Dashboard" [ref=f1e76] [cursor=pointer]:
+              - /url: projects/enrollment-funnel-benchmark/
+              - heading "Enrollment Funnel Benchmark Dashboard" [level=3] [ref=f1e77]
+              - paragraph [ref=f1e78]: A board-ready view of the path from inquiry to enrollment, with conversion rates, segment comparisons, and what-if planning.
+              - generic [ref=f1e79]:
+                - generic [ref=f1e80]: Enrollment Funnel
+                - generic [ref=f1e81]: Benchmarks
+                - generic [ref=f1e82]: Planning
+                - generic [ref=f1e83]: Dashboard
+            - link "University Registrar Intelligence Dashboard A current-term operations dashboard for registration blockers, seat pressure, degree-audit risk, and graduation follow-up. Registrar Ops Degree Audit Course Demand Dashboard" [ref=f1e84] [cursor=pointer]:
+              - /url: projects/university-registrar-intelligence-dashboard/
+              - heading "University Registrar Intelligence Dashboard" [level=3] [ref=f1e85]
+              - paragraph [ref=f1e86]: A current-term operations dashboard for registration blockers, seat pressure, degree-audit risk, and graduation follow-up.
+              - generic [ref=f1e87]:
+                - generic [ref=f1e88]: Registrar Ops
+                - generic [ref=f1e89]: Degree Audit
+                - generic [ref=f1e90]: Course Demand
+                - generic [ref=f1e91]: Dashboard
+            - link "Scholarship Optimization Model A planning model that shows when scholarship discounts may help enrollment and when they may reduce net revenue too much. Scholarships Revenue Enrollment Pricing" [ref=f1e92] [cursor=pointer]:
+              - /url: projects/scholarship-optimization/
+              - heading "Scholarship Optimization Model" [level=3] [ref=f1e93]
+              - paragraph [ref=f1e94]: A planning model that shows when scholarship discounts may help enrollment and when they may reduce net revenue too much.
+              - generic [ref=f1e95]:
+                - generic [ref=f1e96]: Scholarships
+                - generic [ref=f1e97]: Revenue
+                - generic [ref=f1e98]: Enrollment
+                - generic [ref=f1e99]: Pricing
+        - region [ref=f1e100]:
+          - generic [ref=f1e101]:
+            - heading "Policy, Mobility & Market Intelligence" [level=2] [ref=f1e102]
+            - paragraph [ref=f1e103]: Interactive studies and comparative analysis on mobility, outcomes, affordability, and shifting education markets.
+          - generic [ref=f1e104]:
+            - link "Global Student Highways An interactive atlas of global student mobility from 2013 to 2023, followed by Europe's Erasmus+ learning-mobility network through 2024. Student Mobility Global Atlas Erasmus+ Interactive Story" [ref=f1e105] [cursor=pointer]:
+              - /url: projects/global-mobility/
+              - heading "Global Student Highways" [level=3] [ref=f1e106]
+              - paragraph [ref=f1e107]: An interactive atlas of global student mobility from 2013 to 2023, followed by Europe's Erasmus+ learning-mobility network through 2024.
+              - generic [ref=f1e108]:
+                - generic [ref=f1e109]: Student Mobility
+                - generic [ref=f1e110]: Global Atlas
+                - generic [ref=f1e111]: Erasmus+
+                - generic [ref=f1e112]: Interactive Story
+            - link "Degree Value and Earnings Dashboard A dashboard comparing college cost, debt, completion, and earnings to help explain which institutions deliver stronger financial value. College Value Cost and Earnings Dashboard Higher Ed" [ref=f1e113] [cursor=pointer]:
+              - /url: projects/degree-roi-value/
+              - heading "Degree Value and Earnings Dashboard" [level=3] [ref=f1e114]
+              - paragraph [ref=f1e115]: A dashboard comparing college cost, debt, completion, and earnings to help explain which institutions deliver stronger financial value.
+              - generic [ref=f1e116]:
+                - generic [ref=f1e117]: College Value
+                - generic [ref=f1e118]: Cost and Earnings
+                - generic [ref=f1e119]: Dashboard
+                - generic [ref=f1e120]: Higher Ed
+            - link "The Enrollment Squeeze A scrollytelling analysis of demographic contraction, international recruitment friction, and institutional exposure across U.S. higher education markets. Enrollment Markets Demographics Scrollytelling Higher Ed" [ref=f1e121] [cursor=pointer]:
+              - /url: projects/Enrollment_Mapping/
+              - heading "The Enrollment Squeeze" [level=3] [ref=f1e122]
+              - paragraph [ref=f1e123]: A scrollytelling analysis of demographic contraction, international recruitment friction, and institutional exposure across U.S. higher education markets.
+              - generic [ref=f1e124]:
+                - generic [ref=f1e125]: Enrollment Markets
+                - generic [ref=f1e126]: Demographics
+                - generic [ref=f1e127]: Scrollytelling
+                - generic [ref=f1e128]: Higher Ed
+            - link "The Geography of Opportunity An interactive metro comparison that shows how employment, earnings, rent, education depth, broadband access, and population momentum shape opportunity across U.S. cities. Opportunity Map ACS Data Metro Comparison Interactive Story" [ref=f1e129] [cursor=pointer]:
+              - /url: projects/Education%20Opportunity%20Map/
+              - heading "The Geography of Opportunity" [level=3] [ref=f1e130]
+              - paragraph [ref=f1e131]: An interactive metro comparison that shows how employment, earnings, rent, education depth, broadband access, and population momentum shape opportunity across U.S. cities.
+              - generic [ref=f1e132]:
+                - generic [ref=f1e133]: Opportunity Map
+                - generic [ref=f1e134]: ACS Data
+                - generic [ref=f1e135]: Metro Comparison
+                - generic [ref=f1e136]: Interactive Story
+            - link "IPEDS Major Trends A trends dashboard showing which majors grew or shrank over time, with national comparisons and state-by-state views. Majors Trends IPEDS Dashboard" [ref=f1e137] [cursor=pointer]:
+              - /url: projects/ipeds-major-trends/
+              - heading "IPEDS Major Trends" [level=3] [ref=f1e138]
+              - paragraph [ref=f1e139]: A trends dashboard showing which majors grew or shrank over time, with national comparisons and state-by-state views.
+              - generic [ref=f1e140]:
+                - generic [ref=f1e141]: Majors
+                - generic [ref=f1e142]: Trends
+                - generic [ref=f1e143]: IPEDS
+                - generic [ref=f1e144]: Dashboard
+        - region [ref=f1e145]:
+          - generic [ref=f1e146]:
+            - heading "Cross-Industry Analytics" [level=2] [ref=f1e147]
+            - paragraph [ref=f1e148]: Analytics work beyond higher education, including property, sales, marketing, and e-commerce performance.
+          - generic [ref=f1e149]:
+            - link "Singapore Condo Investments A dashboard for comparing condo projects by price, rent, district, size, tenure, and estimated payback period. Condo Search Property Comparison Payback Period Singapore" [ref=f1e150] [cursor=pointer]:
+              - /url: projects/condo-roi/
+              - heading "Singapore Condo Investments" [level=3] [ref=f1e151]
+              - paragraph [ref=f1e152]: A dashboard for comparing condo projects by price, rent, district, size, tenure, and estimated payback period.
+              - generic [ref=f1e153]:
+                - generic [ref=f1e154]: Condo Search
+                - generic [ref=f1e155]: Property Comparison
+                - generic [ref=f1e156]: Payback Period
+                - generic [ref=f1e157]: Singapore
+            - link "Maven Sales Challenge An interactive B2B sales pipeline dashboard that explores revenue concentration, win/loss trends, product mix, and open-opportunity prioritization. Sales Analytics Dash Plotly CRM" [ref=f1e158] [cursor=pointer]:
+              - /url: projects/Maven-sales-challenge/
+              - heading "Maven Sales Challenge" [level=3] [ref=f1e159]
+              - paragraph [ref=f1e160]: An interactive B2B sales pipeline dashboard that explores revenue concentration, win/loss trends, product mix, and open-opportunity prioritization.
+              - generic [ref=f1e161]:
+                - generic [ref=f1e162]: Sales Analytics
+                - generic [ref=f1e163]: Dash
+                - generic [ref=f1e164]: Plotly
+                - generic [ref=f1e165]: CRM
+            - link "Marketing Attribution Dashboard A marketing analysis project that looks at channel quality, assisted conversions, transactions, and multi-touch customer paths. Marketing Attribution Google Analytics Dashboard" [ref=f1e166] [cursor=pointer]:
+              - /url: projects/marketing-attribution-dashboard/
+              - heading "Marketing Attribution Dashboard" [level=3] [ref=f1e167]
+              - paragraph [ref=f1e168]: A marketing analysis project that looks at channel quality, assisted conversions, transactions, and multi-touch customer paths.
+              - generic [ref=f1e169]:
+                - generic [ref=f1e170]: Marketing
+                - generic [ref=f1e171]: Attribution
+                - generic [ref=f1e172]: Google Analytics
+                - generic [ref=f1e173]: Dashboard
+            - link "E-commerce Growth Diagnostics Lab A GA4 BigQuery sample dataset project focused on funnel conversion, channel efficiency, product performance, and revenue concentration. GA4 BigQuery E-commerce Funnel Analytics" [ref=f1e174] [cursor=pointer]:
+              - /url: projects/ecommerce-growth-diagnostics-lab/
+              - heading "E-commerce Growth Diagnostics Lab" [level=3] [ref=f1e175]
+              - paragraph [ref=f1e176]: A GA4 BigQuery sample dataset project focused on funnel conversion, channel efficiency, product performance, and revenue concentration.
+              - generic [ref=f1e177]:
+                - generic [ref=f1e178]: GA4
+                - generic [ref=f1e179]: BigQuery
+                - generic [ref=f1e180]: E-commerce
+                - generic [ref=f1e181]: Funnel Analytics
