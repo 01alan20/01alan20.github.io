@@ -14,6 +14,8 @@
       matches(row.scope, opts.scope) &&
       matches(row.state, opts.state) &&
       (!opts.institutionId || String(row.unitid) === String(opts.institutionId)) &&
+      (!Number.isFinite(opts.exposureMin) || Number(row.exposureScore) >= opts.exposureMin) &&
+      (!Number.isFinite(opts.exposureMax) || Number(row.exposureScore) <= opts.exposureMax) &&
       (!opts.financeOnly || row.hasFinance),
     );
   }
