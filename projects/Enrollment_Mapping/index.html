@@ -15,7 +15,6 @@
       <a href="#story">Story</a>
       <a href="#explorer">Explorer</a>
       <a href="#method">Method</a>
-      <a class="nav-download" href="downloads/future_college_market_financial_model.xlsx">Model</a>
     </nav>
   </header>
 
@@ -129,6 +128,8 @@
         <label>Year<select id="inst-year"><option>2030</option><option selected>2035</option><option>2041</option></select></label>
         <label>Control<select id="inst-control"><option value="All">All</option><option>Public</option><option>Private nonprofit</option></select></label>
         <label>Scope<select id="inst-scope"><option value="All">All</option><option>Regional</option><option>Statewide</option><option>National</option></select></label>
+        <label class="search-control">Search institution<input id="exposure-institution" list="exposure-institution-options" placeholder="All institutions" autocomplete="off"></label>
+        <datalist id="exposure-institution-options"></datalist>
       </div>
       <div class="map-layout">
         <div id="institution-map" class="plot map-plot"></div>
@@ -149,10 +150,15 @@
         <div><label>Market-share adjustment <output id="share-out">0.0%</output><input id="share-slider" type="range" min="-5" max="5" step="0.5" value="0"></label></div>
         <div><label>Variable instructional cost <output id="variable-out">30%</output><input id="variable-slider" type="range" min="15" max="50" step="5" value="30"></label></div>
       </div>
+      <div class="control-bar finance-filters">
+        <label>State<select id="finance-state"><option value="All">All states</option></select></label>
+        <label class="search-control">Search institution<input id="finance-institution" list="finance-institution-options" placeholder="All institutions" autocomplete="off"></label>
+        <datalist id="finance-institution-options"></datalist>
+      </div>
       <div class="finance-layout">
         <div id="finance-chart" class="plot"></div>
         <div class="ranking-card">
-          <div class="ranking-head"><div><p class="kicker">Modeled exposure</p><h3>Highest-pressure institutions</h3></div><span class="model-tag warning">Not closure predictions</span></div>
+          <div class="ranking-head"><div><p class="kicker">Modeled exposure</p><h3>Highest-pressure institutions</h3></div></div>
           <div class="table-wrap"><table><thead><tr><th>Institution</th><th>State</th><th>Gap</th><th>Exposure</th></tr></thead><tbody id="risk-table"></tbody></table></div>
         </div>
       </div>
@@ -163,7 +169,7 @@
         <p class="kicker">The likely outcome</p>
         <h2>The squeeze will not make every college smaller by the same percentage.</h2>
         <p class="lead">It will redistribute students toward institutions with stronger brands, broader recruitment markets and deeper resources. Institutions already losing enrollment, heavily dependent on tuition and located in shrinking markets face elevated risk of downsizing, merger or closure.</p>
-        <div class="callout"><strong>Important:</strong> the current ranking measures modeled exposure, not a probability of closure. A defensible closure-risk model still requires current IPEDS balance-sheet, margin, debt, liquidity, endowment and multi-year enrollment data.</div>
+        <div class="callout"><strong>Important:</strong> the current ranking measures modeled exposure, not a probability of closure.</div>
       </div>
     </section>
 
@@ -172,11 +178,6 @@
         <div><p class="kicker">Method and transparency</p><h2>What is observed, modeled and still missing.</h2></div>
       </div>
       <div class="method-grid" id="data-status"></div>
-      <div class="download-row">
-        <a class="button" href="downloads/future_college_market_financial_model.xlsx">Download the scenario model</a>
-        <a class="button secondary" href="downloads/methodology_model.md">Read methodology</a>
-        <a class="button secondary" href="downloads/data_dictionary.csv">Data dictionary</a>
-      </div>
     </section>
   </main>
 
@@ -185,5 +186,7 @@
     <div><p>Sources: WICHE, U.S. Census Bureau, U.S. Department of Education / College Scorecard, NCES IPEDS, IIE Open Doors, U.S. Department of State.</p></div>
   </footer>
   <script src="app.js"></script>
+  <script src="filters-core.js"></script>
+  <script src="filters.js"></script>
 </body>
 </html>
