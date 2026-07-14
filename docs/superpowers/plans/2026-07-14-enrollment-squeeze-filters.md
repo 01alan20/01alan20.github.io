@@ -13,7 +13,7 @@
 ### Task 1: Add filter controls and remove outdated copy
 
 **Files:**
-- Modify: `projects/Enrollment_Mapping/index.html:123-180`
+- Modify: `projects/The Enrollment Squeeze/index.html:123-180`
 
 - [ ] Add a state selector and searchable institution input to the finance controls, plus a searchable institution input to the exposure controls.
 - [ ] Remove the `Not closure predictions` badge.
@@ -23,8 +23,8 @@
 ### Task 2: Add shared filter state and institution search behavior
 
 **Files:**
-- Add: `projects/Enrollment_Mapping/filters-core.js`
-- Add: `projects/Enrollment_Mapping/filters.js`
+- Add: `projects/The Enrollment Squeeze/filters-core.js`
+- Add: `projects/The Enrollment Squeeze/filters.js`
 
 - [x] Add `financeState`, `financeInstitution`, and `exposureInstitution` state variables.
 - [x] Build state and institution option lists from `DATA.institutions`.
@@ -36,7 +36,7 @@
 ### Task 3: Style and browser verification
 
 **Files:**
-- Modify: `projects/Enrollment_Mapping/styles.css`
+- Modify: `projects/The Enrollment Squeeze/styles.css`
 
 - [ ] Add responsive styling for the new searchable controls using the existing control-bar system.
 - [ ] Run the local static server and verify the root story URL loads the national chart, state map, institution map, finance chart, and table.
