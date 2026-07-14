@@ -8,9 +8,17 @@
 | County distribution | Census Vintage 2025 single-year age cohorts | Loaded; county values are allocations of state projections |
 | College-entry market | Central college-going and four-year participation assumptions | Loaded as editable model assumptions |
 | International context | Open Doors 2025 and Fall 2025 Snapshot | Loaded as observed indicators |
-| Institution enrollment | College Scorecard March 2024 snapshot | Loaded, but should be refreshed |
+| Institution enrollment | College Scorecard annual files through 2024–25 | Loaded; UGDS and GRADS are modeled separately |
 | Institution finance | Scorecard-derived April 2022 finance snapshot | Loaded, but too old for a final risk publication |
 | Interactive site | Static HTML, CSS, JavaScript, bundled Plotly, local map geometry | Operational |
+
+## Current draft interpretation
+
+- Undergraduate and graduate history are each shown with their own balanced Scorecard panel, so changing reporting coverage is not presented as enrollment change.
+- Institution projections combine a domestic market-reach proxy, damped performance relative to state-and-scope peers, a visible undergraduate nonresident-alien scenario based on `UGDS_NRA`, and a user adjustment.
+- `UGDS_NRA` is undergraduate degree-seeking nonresident-alien share, not total international enrollment.
+- The tuition result is gross undergraduate tuition sensitivity: projected students changed multiplied by tuition per student. One student is treated as one FTE. It is not realized net revenue or a full institutional budget forecast.
+- Existing map coordinates cover the institutions shown on the map. The annual Scorecard files do not provide usable coordinates for expanding that coverage; a separate validated geographic join is required.
 
 ## Required before publishing a closure-risk ranking
 
@@ -28,7 +36,7 @@ The current institutional ranking is an exposure screen, not a probability of cl
 
 ## Recommended refresh
 
-1. Replace the March 2024 institution snapshot with the June 2026 College Scorecard institution file.
+1. Refresh the annual Scorecard history when the next complete institution file is available.
 2. Replace the April 2022 finance proxy with FY2024 IPEDS Finance.
 3. Build three- and five-year enrollment trends from IPEDS Fall Enrollment.
 4. Separate market exposure from financial resilience.
@@ -36,4 +44,4 @@ The current institutional ranking is an exposure screen, not a probability of cl
 
 ## Interpretation boundary
 
-The financial-pressure output estimates undergraduate net-tuition contribution at risk after an assumed variable instructional-cost adjustment. It is not an audited operating deficit, liquidity forecast or debt-default model.
+The financial-pressure output estimates gross undergraduate tuition sensitivity: projected undergraduate students changed multiplied by tuition per student. One student is treated as one FTE. It is not realized net revenue, an audited operating deficit, a liquidity forecast, or a debt-default model.

@@ -26,8 +26,10 @@ Then open `http://localhost:8000`.
 
 - Demographic and state/county market layers are operational.
 - International indicators use Open Doors 2025 and the Fall 2025 Snapshot.
-- Institution enrollment inputs currently use a March 2024 Scorecard snapshot.
+- Institution enrollment inputs now use annual College Scorecard files through 2024–25. UGDS is undergraduate enrollment and GRADS is graduate enrollment.
 - Finance inputs currently use an April 2022 Scorecard-derived snapshot.
+- Undergraduate and graduate histories use separate balanced panels. `UGDS_NRA` is used only as undergraduate nonresident-alien exposure in a visible international scenario; it is not total international enrollment.
+- The finance view is gross undergraduate tuition sensitivity: projected students changed multiplied by tuition per student. It is not realized net revenue or a full institutional budget forecast.
 - The institutional ranking is **modeled exposure**, not a closure probability.
 
 Before final publication, update institution enrollment and finance inputs using the June 10, 2026 College Scorecard release and FY2024 IPEDS finance/enrollment files.

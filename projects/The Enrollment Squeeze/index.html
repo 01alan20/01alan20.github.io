@@ -6,7 +6,10 @@
   <meta name="description" content="The Enrollment Squeeze: an interactive analysis of demographic contraction, international recruitment friction, institutional exposure, and financial pressure in U.S. higher education." />
   <title>The Enrollment Squeeze</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="assets/plotly.min.js"></script>
+  <style>
+    .map-key{display:flex;gap:.6rem;align-items:center;justify-content:center;flex-wrap:wrap}.map-key span{display:inline-block;width:1rem;height:.7rem;border-radius:2px}.key-red{background:#b53f3f}.key-neutral{background:#f6e7d4}.key-green{background:#1e9b72}.institution-map-plot{max-width:1250px;margin:auto}.institution-scenario-controls{max-width:1250px;margin:1.25rem auto 0;padding:1.1rem 1.35rem;display:grid;grid-template-columns:1.3fr 1fr;gap:1.25rem;align-items:end;background:#fff;border:1px solid #d9e0eb;border-radius:1.1rem}.institution-scenario-controls label{font-size:.8rem;font-weight:700;letter-spacing:.04em;color:#52627d}.institution-scenario-controls output{float:right;color:#ff6b35}.institution-scenario-controls select{width:100%}.reset-scenario{padding:.7rem 1rem;white-space:nowrap}.sticky-controls .reset-scenario{align-self:end;margin-bottom:0}.scenario-prompt{max-width:1250px;margin:12px auto 0}.institution-analysis{max-width:1250px;margin:1.5rem auto 0;display:grid;grid-template-columns:1.45fr .55fr;gap:1.25rem;align-items:stretch}.institution-analysis[hidden]{display:none}.decomposition-panel{padding:1.5rem;border:1px solid #d9e0eb;border-radius:1.25rem;background:#fff}.decomposition-panel .plot{min-height:360px}.institution-analysis .detail-panel{min-height:100%}.capacity-section .section-head>p,.capacity-section>.figure-note,.capacity-section .exposure-explainer{display:none}.finance-section .scenario-box>div:last-child,.finance-equation{display:none}@media(max-width:760px){.institution-scenario-controls,.institution-analysis{grid-template-columns:1fr}.decomposition-panel{margin-inline:0}.decomposition-panel .plot{min-height:300px}}
+  </style>
+  <script src="assets/plotly.min.js?v=20260715-1"></script>
 </head>
 <body>
   <header class="site-nav">
@@ -14,7 +17,6 @@
     <nav>
       <a href="#story">Story</a>
       <a href="#explorer">Explorer</a>
-      <a href="#method">Method</a>
     </nav>
   </header>
 
@@ -46,26 +48,37 @@
       <div class="scrolly-copy">
         <article class="step is-active" data-step="0">
           <span class="chapter">01</span>
-          <h3>A smaller domestic pipeline</h3>
-          <p>The class of 2026 is the baseline. By 2041, the projected number of high-school graduates is materially smaller.</p>
+          <h3>One smaller domestic pipeline</h3>
+          <p>The 2026 class is the baseline. The chart compares the projected high-school cohort with the transparent college-entry conversions used in the central scenario.</p>
         </article>
         <article class="step" data-step="1">
           <span class="chapter">02</span>
-          <h3>Graduates are not the same as entrants</h3>
-          <p>Only a portion enrolls immediately in college, and roughly two-thirds of those entrants are assumed to choose four-year institutions in the central scenario.</p>
+          <h3>Entry behavior is an assumption</h3>
+          <p>Immediate enrollment and four-year attendance are fixed conversion assumptions here, not separate demographic forecasts.</p>
         </article>
         <article class="step" data-step="2">
           <span class="chapter">03</span>
-          <h3>The squeeze compounds over time</h3>
-          <p>Even if college-going behavior holds steady, the four-year market contracts because the underlying cohort is smaller.</p>
+          <h3>The four-year pool contracts</h3>
+          <p>Even if college-going behavior holds steady, fewer high-school graduates means fewer likely four-year entrants.</p>
         </article>
       </div>
       <div class="scrolly-figure">
         <div class="figure-card">
           <div class="figure-head"><div><p class="kicker">National outlook</p><h3 id="national-title">Projected high-school graduates</h3></div><span class="model-tag">Central scenario</span></div>
           <div id="national-chart" class="plot"></div>
-          <p class="figure-note">WICHE graduate projections; college-entry estimates apply explicit behavioral assumptions.</p>
+          <p class="figure-note">WICHE projections; immediate-entry and four-year attendance are explicit central-scenario assumptions.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="enrollment-trends" id="enrollment-trends">
+      <div class="section-head">
+        <div><p class="kicker">The institution-level record</p><h2>Undergraduate and graduate markets are not the same story.</h2></div>
+        <p>The College Scorecard reports institutional enrollment separately. Undergraduate enrollment is the population-sensitive core of this model; graduate enrollment is shown as a distinct historical market with a non-compounding uncertainty band in the institution explorer.</p>
+      </div>
+      <div class="trend-grid">
+        <article class="figure-card"><div class="figure-head"><div><p class="kicker">Undergraduate students</p><h3>Undergraduate enrollment</h3></div><span class="model-tag">4,968 institutions</span></div><div id="undergraduate-trend-chart" class="plot"></div><p class="figure-note" id="undergraduate-history-change">2015–2023 change: —</p></article>
+        <article class="figure-card"><div class="figure-head"><div><p class="kicker">Graduate students</p><h3>Graduate enrollment</h3></div><span class="model-tag">1,797 institutions</span></div><div id="graduate-trend-chart" class="plot"></div><p class="figure-note" id="graduate-history-change">2015–2023 change: —</p></article>
       </div>
     </section>
 
@@ -88,10 +101,10 @@
     <section class="map-section" id="state-markets">
       <div class="section-head">
         <div><p class="kicker">Geography matters</p><h2>The national decline hides different state markets.</h2></div>
-        <p>Some states retain or grow their local pipeline. Others become increasingly dependent on interstate, international, transfer, adult or online demand.</p>
+        <p>Some states retain or grow their modeled student pipeline. This is a projection of high-school graduates and likely entrants—not a claim that total state population grows. Positive values reflect the source cohort and migration assumptions.</p>
       </div>
       <div class="control-bar">
-        <label>Year<select id="state-year"><option>2026</option><option>2030</option><option selected>2035</option><option>2041</option></select></label>
+        <label>Year<select id="state-year"><option>2030</option><option selected>2035</option><option>2041</option></select></label>
         <label>Metric<select id="state-metric"><option value="change">Change from 2026</option><option value="coverage">Local pool coverage</option><option value="fourYearEntrants">Likely four-year entrants</option></select></label>
       </div>
       <div class="map-layout">
@@ -102,6 +115,7 @@
           <p>The local pool coverage proxy compares likely four-year entrants with the state’s annualized undergraduate scale. It is a pressure indicator, not a count of empty seats.</p>
         </aside>
       </div>
+      <p class="figure-note map-key"><span class="key-red"></span>Fewer expected entrants <span class="key-neutral"></span>About unchanged <span class="key-green"></span>More expected entrants</p>
     </section>
 
     <section class="local-section" id="local-markets">
@@ -121,50 +135,50 @@
 
     <section class="capacity-section" id="explorer">
       <div class="section-head">
-        <div><p class="kicker">Institutional exposure</p><h2>More institutions are competing for a smaller market.</h2></div>
-        <p>Institutions with national brands can take share from weaker competitors. Smaller regional and tuition-dependent colleges are more exposed to local contraction.</p>
+        <div><p class="kicker">Enrollment pressure</p><h2>More institutions are competing for a smaller market.</h2></div>
+        <p>The model separates a population-market baseline from each institution’s observed undergraduate trend. National brands may hold or grow; institutions already losing ground can continue to fall faster than the market around them.</p>
       </div>
       <div class="control-bar sticky-controls">
         <label>Year<select id="inst-year"><option>2030</option><option selected>2035</option><option>2041</option></select></label>
         <label>Control<select id="inst-control"><option value="All">All</option><option>Public</option><option>Private nonprofit</option></select></label>
         <label>Scope<select id="inst-scope"><option value="All">All</option><option>Regional</option><option>Statewide</option><option>National</option></select></label>
-        <label>Exposure score<select id="exposure-score"><option value="All">All scores</option><option value="0-25">0–25</option><option value="25-50">25–50</option><option value="50-75">50–75</option><option value="75-100">75–100</option></select></label>
+        <label>Enrollment pressure<select id="exposure-score"><option value="All">All levels</option><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option><option value="Very high">Very high</option></select></label>
         <label class="search-control">Search institution<input id="exposure-institution" list="exposure-institution-options" placeholder="All institutions" autocomplete="off"></label>
         <datalist id="exposure-institution-options"></datalist>
+        <button class="button secondary reset-scenario" id="reset-institution-scenario" type="button">Reset scenario</button>
       </div>
-      <div class="map-layout">
-        <div id="institution-map" class="plot map-plot"></div>
-        <aside class="detail-panel" id="institution-detail">
-          <p class="kicker">Institution explorer</p>
-          <h3>Select an institution.</h3>
-          <p>Point size reflects current undergraduate enrollment. Color reflects modeled market change under a constant-share scenario.</p>
-        </aside>
+      <div id="institution-map" class="plot map-plot institution-map-plot"></div>
+      <div class="institution-scenario-controls" aria-label="Institution scenario controls">
+        <label>Institution scenario adjustment <output id="share-out">0.0%</output><input id="share-slider" type="range" min="-5" max="5" step="0.5" value="0"></label>
+        <label>International recovery<select id="institution-international-recovery"><option value="smaller">Smaller return</option><option value="normal" selected>Return to 2018-20 level</option><option value="larger">Larger return</option></select></label>
       </div>
-      <div class="ranking-card exposure-ranking-card">
-        <div class="ranking-head"><div><p class="kicker">Exposure ranking</p><h3>Top 20 institutions by exposure score</h3></div></div>
-        <div id="exposure-ranking-chart" class="plot"></div>
+      <p class="figure-note scenario-prompt">Select a university above to view its scenario breakdown.</p>
+      <div class="institution-analysis" id="institution-analysis" hidden>
+        <div class="decomposition-panel" id="institution-decomposition"><p>Selected institution scenario.</p><div id="institution-decomposition-chart" class="plot"></div></div>
+        <aside class="detail-panel" id="institution-detail"></aside>
       </div>
     </section>
 
     <section class="finance-section" id="finance">
       <div class="section-head">
         <div><p class="kicker">From students to dollars</p><h2>Enrollment loss becomes financial pressure.</h2></div>
-        <p>The model translates undergraduate FTE change into net-tuition exposure, then allows a limited portion of instructional cost to adjust. It is not a full institutional budget forecast.</p>
+        <p>The model uses current undergraduate enrollment, estimates the change by the selected year, and translates each student change directly into tuition pressure. One student is treated as one FTE; tuition and fee changes are adjustable. This is an undergraduate tuition sensitivity, not a full institutional budget forecast.</p>
       </div>
       <div class="scenario-box">
-        <div><label>Market-share adjustment <output id="share-out">0.0%</output><input id="share-slider" type="range" min="-5" max="5" step="0.5" value="0"></label></div>
-        <div><label>Variable instructional cost <output id="variable-out">30%</output><input id="variable-slider" type="range" min="15" max="50" step="5" value="30"></label></div>
+        <div><label>Tuition and fee change <output id="tuition-out">0.0%</output><input id="tuition-slider" type="range" min="-10" max="10" step="0.5" value="0"></label></div>
+        <div><label>International recovery<select id="international-recovery"><option value="smaller">Smaller return</option><option value="normal" selected>Return to 2018–20 level</option><option value="larger">Larger return</option></select></label></div>
       </div>
       <div class="control-bar finance-filters">
         <label>State<select id="finance-state"><option value="All">All states</option></select></label>
+        <label>Enrollment pressure<select id="finance-exposure"><option value="All">All levels</option><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option><option value="Very high">Very high</option></select></label>
         <label class="search-control">Search institution<input id="finance-institution" list="finance-institution-options" placeholder="All institutions" autocomplete="off"></label>
         <datalist id="finance-institution-options"></datalist>
       </div>
       <div class="finance-layout">
-        <div id="finance-chart" class="plot"></div>
+        <div><div id="finance-chart" class="plot"></div><p class="figure-note">Institutions are ordered by estimated annual tuition pressure under the current settings. Bars show current undergraduate enrollment and projected undergraduate enrollment.</p></div>
         <div class="ranking-card">
-          <div class="ranking-head"><div><p class="kicker">Modeled exposure</p><h3>Highest-pressure institutions</h3></div></div>
-          <div class="table-wrap"><table><thead><tr><th>Institution</th><th>State</th><th>Gap</th><th>Exposure</th></tr></thead><tbody id="risk-table"></tbody></table></div>
+          <div class="ranking-head"><div><p class="kicker">Scenario results</p><h3>Highest annual tuition pressure</h3></div></div>
+          <div class="table-wrap"><table><thead><tr><th>Institution</th><th>State</th><th>Projected change</th><th>Students changed</th><th>Annual pressure</th><th>Enrollment pressure</th></tr></thead><tbody id="risk-table"></tbody></table></div>
         </div>
       </div>
     </section>
@@ -174,24 +188,18 @@
         <p class="kicker">The likely outcome</p>
         <h2>The squeeze will not make every college smaller by the same percentage.</h2>
         <p class="lead">It will redistribute students toward institutions with stronger brands, broader recruitment markets and deeper resources. Institutions already losing enrollment, heavily dependent on tuition and located in shrinking markets face elevated risk of downsizing, merger or closure.</p>
-        <div class="callout"><strong>Important:</strong> the current ranking measures modeled exposure, not a probability of closure.</div>
+        <div class="callout"><strong>Important:</strong> enrollment pressure is a modeled scenario, not a probability of closure.</div>
       </div>
     </section>
 
-    <section class="method-section" id="method">
-      <div class="section-head">
-        <div><p class="kicker">Method and transparency</p><h2>What is observed, modeled and still missing.</h2></div>
-      </div>
-      <div class="method-grid" id="data-status"></div>
-    </section>
   </main>
 
   <footer>
     <div><strong>The Enrollment Squeeze</strong><p>A reproducible, static-data project designed for GitHub Pages.</p></div>
     <div><p>Sources: WICHE, U.S. Census Bureau, U.S. Department of Education / College Scorecard, NCES IPEDS, IIE Open Doors, U.S. Department of State.</p></div>
   </footer>
-  <script src="app.js"></script>
-  <script src="filters-core.js"></script>
-  <script src="filters.js"></script>
+  <script src="app.js?v=20260715-1"></script>
+  <script src="filters-core.js?v=20260715-1"></script>
+  <script src="filters.js?v=20260715-1"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@ This package now contains the original demographic work plus a simplified higher
 - State and county estimates of likely college and four-year entrants
 - State comparison of future local demand against current four-year undergraduate scale
 - Institution-level 2030, 2035 and 2041 market exposure
-- Institutional annual net-tuition and instructional-expense pressure proxies
+- Gross undergraduate tuition-sensitivity scenarios based on projected student change
 - Interactive dashboard
 - Scenario financial-model workbook
 
@@ -63,10 +63,14 @@ These figures are scenario proxies and should not be treated as official institu
 
 ## Critical limitation
 
-The official College Scorecard is newer than the institutional snapshots used here. Enrollment is from a March 2024 elements file; finance proxies are from an April 2022 processed file. The WICHE and Census demographic sources are more current. See `METHODOLOGY_PHASE3_5.md`.
+Institution enrollment now uses annual College Scorecard files through 2024–25. `UGDS` is undergraduate enrollment and `GRADS` is graduate enrollment; finance proxies remain from an April 2022 processed file. The WICHE and Census demographic sources are more current. See `METHODOLOGY_PHASE3_5.md`.
+
+## Current draft model
+
+The live draft uses annual College Scorecard files through 2024-25. `UGDS` is undergraduate enrollment and `GRADS` is graduate enrollment; each history chart uses its own balanced panel to prevent reporting changes from being presented as enrollment change. Institution projections combine a domestic market-reach proxy, damped peer-relative performance, an undergraduate nonresident-alien scenario using `UGDS_NRA`, and a visible user adjustment. Tuition results are gross undergraduate tuition sensitivity, not realized net revenue.
 
 ## GitHub site
 
 The current GitHub Pages build is stored in `site/`. It includes the complete narrative scaffold, interactive state and institution maps, county explorer, scenario controls and transparency documentation.
 
-The institutional exposure layer is operational. The final financial-resilience / closure-risk layer still requires the June 2026 College Scorecard institution file and FY2024 IPEDS finance and enrollment histories.
+The institutional exposure layer is operational. The final financial-resilience / closure-risk layer still requires FY2024 IPEDS finance inputs and additional institution-level recruitment geography.
