@@ -58,9 +58,22 @@ Create a separate audit file containing:
 
 Only `high` and `medium` results populate the plotting file.
 
+## Website analysis
+
+After collection, join qualifying outcomes to `institution_diagnostics.json` by UNITID and add a scatter plot to the institution section:
+
+- X-axis: career outcomes percentage.
+- Y-axis: observed undergraduate enrollment change from 2015–16 through 2024–25, using the same `change` field as the institution map.
+- Bubble size: current undergraduate enrollment.
+- Color: institution control.
+- Hover detail: institution name, career outcomes percentage, source year, observed undergraduate change, and current undergraduate enrollment.
+
+The chart must state the number of institutions represented and must not describe correlation as causation. Institutions without a qualifying career outcomes result remain in the explorer and map but are omitted from this scatter plot.
+
 ## Verification
 
 - Unit tests cover institution matching, undergraduate inclusion, graduate and program-level exclusion, percentage extraction, year selection, and output generation.
 - A stratified pilot validates the crawler before the full run.
 - The final report states total coverage and counts by confidence classification.
 - A manual sample checks source accuracy across institution controls, sizes, and regions.
+- Website contract tests confirm the plot uses the existing observed undergraduate change field and qualifying career outcomes records joined by UNITID.
