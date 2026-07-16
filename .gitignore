@@ -1,2 +1,9 @@
 projects/The Enrollment Squeeze/data/collegeboard history/*.csv
 **/__pycache__/
+**/.pytest_cache/
+output/playwright/enrollment-squeeze-*.png
+projects/The Enrollment Squeeze/dashboards/
+projects/The Enrollment Squeeze/downloads/
+projects/The Enrollment Squeeze/financial_model/
+projects/The Enrollment Squeeze/data/generated/
+projects/The Enrollment Squeeze/site/

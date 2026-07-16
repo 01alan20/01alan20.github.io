@@ -8,6 +8,23 @@ const institutionsPath = path.join(project, 'data', 'institutions.json');
 const stateDiagnosticsPath = path.join(project, 'data', 'state_diagnostics.json');
 const institutionDiagnosticsPath = path.join(project, 'data', 'institution_diagnostics.json');
 const builderPath = path.join(project, 'scripts', 'build_scorecard_history.py');
+const projectReadme = fs.readFileSync(path.join(project, 'README.md'), 'utf8');
+const dataReadme = fs.readFileSync(path.join(project, 'data', 'README.md'), 'utf8');
+
+for (const staleReference of ['dashboards/', 'financial_model/', 'The current GitHub Pages build is stored in `site/`', 'domestic market-reach proxy']) {
+  assert.equal(projectReadme.includes(staleReference), false, `README must not reference removed or retired content: ${staleReference}`);
+}
+assert.match(projectReadme, /python -m http\.server 8765/);
+assert.match(dataReadme, /--input-dir/);
+assert.match(dataReadme, /not stored in this repository/i);
+assert.equal(fs.existsSync(path.join(project, 'manifest_phases3_5.json')), false, 'duplicate legacy manifest must not remain');
+const projectManifest = JSON.parse(fs.readFileSync(path.join(project, 'manifest.json'), 'utf8'));
+assert.equal(projectManifest.project, 'The Enrollment Squeeze');
+assert.equal(projectManifest.package, 'GitHub Pages static data story');
+const phase1Manifest = JSON.parse(fs.readFileSync(path.join(project, 'data', 'phase1', 'manifest.json'), 'utf8'));
+assert.equal(phase1Manifest.generated_files.includes('future_freshman_state_maps.html'), false, 'phase 1 manifest must not list the removed duplicate dashboard');
+const phase2Readme = fs.readFileSync(path.join(project, 'README_PHASE2.md'), 'utf8');
+assert.equal(phase2Readme.includes('`dashboards/`'), false, 'historical phase notes must not point to the removed dashboard directory');
 
 assert.equal(fs.existsSync(path.join(project, 'data', 'collegescorecard')), false, 'raw Scorecard directory must not be required');
 assert.equal(fs.existsSync(path.join(project, 'data', 'institution_history.json')), false, 'redundant history artifact must not remain');
@@ -82,7 +99,15 @@ for (const question of [
 assert.match(indexHtml, /Participation increase required to maintain the 2026 entrant pool/);
 assert.match(indexHtml, /Observed institution change versus projected state entrant change/);
 assert.equal(indexHtml.includes('Largest modeled gross tuition declines'), false, 'provisional finance ranking must be removed');
-assert.match(indexHtml, /The squeeze is unlikely to affect every college equally/);
+assert.equal(indexHtml.includes('The squeeze is unlikely to affect every college equally'), false);
+assert.match(indexHtml, /<title>The Enrollment Squeeze: Preparing to Compete<\/title>/);
+assert.match(indexHtml, /Institutions will compete on brand, value, outcomes, and student experience/);
+assert.match(indexHtml, /widen their admissions pools beyond their traditional geographic and demographic reach/);
+assert.match(indexHtml, /both domestically and internationally/);
+assert.match(indexHtml, /continuing trend toward urbanization/);
+assert.equal(indexHtml.includes('The pool sets the constraint. Competition and revenue models determine the consequence.'), false);
+const endingHtml = indexHtml.match(/<section class="ending">([\s\S]*?)<\/section>/)?.[1] || '';
+assert.equal(endingHtml.includes('—'), false, 'closing copy must not contain em dashes');
 assert.equal(indexHtml.includes('4,968 institutions'), false, 'chart institution-count badge must be removed');
 assert.equal(indexHtml.includes('1,797 institutions'), false, 'chart institution-count badge must be removed');
 assert.equal(indexHtml.includes('Undergraduate students</p><h3>Undergraduate enrollment'), false, 'undergraduate chart title must not repeat the same concept');
@@ -112,5 +137,13 @@ assert.equal(filtersSource.includes('finance-warning'), false);
 assert.equal(filtersSource.includes("'Largest markets'"), false, 'county summary must not repeat the active view label');
 assert.equal(indexHtml.includes('Bubble size is current undergraduate enrollment.'), false);
 assert.equal(indexHtml.includes('id="institution-map-coverage"'), false);
+for (const finding of [
+  '61% of institutions declined by more than 2.5%',
+  '31% grew by more than 2.5%, while 8% remained within ±2.5%.',
+  'Size produced the clearest divide:',
+  'More selective, higher-retention institutions performed better:',
+  'Location also mattered:',
+]) assert.equal(indexHtml.includes(finding), true, `missing approved institution finding: ${finding}`);
+assert.equal(indexHtml.includes('Y-axis: observed undergraduate change'), false);
 
 console.log('Scorecard data contract tests passed');

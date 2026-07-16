@@ -1,17 +1,55 @@
-# Compact Scorecard data
+# Data artifacts
 
-`scorecard_compact.json` is the checked-in runtime/build artifact for the institution model. It contains the 2015-16 through 2024-25 Scorecard history for the 1,849 institutions represented in the site's 5,547 institution-year projection rows.
+The published page loads compact JSON files from this directory. Large annual College Scorecard source files are not stored in this repository.
 
-Only the fields used by the current model are retained: `UGDS`, `GRADS`, `ADM_RATE`, `RET_FT4`, `C150_4`, `PCTPELL`, `TUITIONFEE_IN`, `TUITIONFEE_OUT`, `PPTUG_EF`, `UG25ABV`, `UGDS_NRA`, `LATITUDE`, and `LONGITUDE`.
+## Runtime files
 
-`scripts/build_scorecard_history.py` reads this compact artifact and refreshes `institutions.json`. The broader national enrollment panel remains a separate precomputed artifact in `national_enrollment.json` so the national history retains its balanced 4,968-undergraduate and 1,797-graduate institution panels. The original annual CSV files and dictionary are not required by the site or the current build path.
+The browser loads:
 
-Tuition fields are price inputs, not realized net tuition revenue. `UGDS_NRA` is undergraduate degree-seeking nonresident-alien share, not total international enrollment.
+- `national.json` and `national_enrollment.json` for the national pipeline and observed histories.
+- `states.json`, `state_diagnostics.json`, and `state_shapes.json` for state scenarios and maps.
+- `counties.json` for county projections.
+- `institutions.json` and `institution_diagnostics.json` for the observed institution explorer.
+- `international.json` and `context.json` for international and source context.
+- `map_meta.json` for shared projected-map bounds.
 
-`ipeds_residence_2024.json` is a compact reduction of the official NCES IPEDS `EF2024C` Fall 2024 provisional file. Its in-state and other-state shares describe first-time degree/certificate-seeking undergraduates with known residence in a U.S. state or the District of Columbia. Foreign-country, outlying-area, and unknown-residence counts are kept outside that denominator. These entering-class residence measures are not interchangeable with the Scorecard `UGDS_NRA` undergraduate stock measure.
+## Compact College Scorecard history
 
-## Institution-model research archive
+`scorecard_compact.json` retains the 2015–16 through 2024–25 history required by the current public institution analysis for 1,849 institutions.
 
-The local `collegeboard history` folder contains annual Scorecard files from 2005-06 through 2025-26. The supplied 2025-26 file has no usable `UGDS` observation, so the research model currently uses 2005-06 through 2024-25. The raw CSVs are intentionally ignored by Git because the archive is too large for the website repository.
+Retained fields include `UGDS`, `GRADS`, `ADM_RATE`, `RET_FT4`, `C150_4`, `PCTPELL`, `TUITIONFEE_IN`, `TUITIONFEE_OUT`, `PPTUG_EF`, `UG25ABV`, `UGDS_NRA`, `LATITUDE`, and `LONGITUDE`.
 
-Run `python scripts/institution_model_research.py` to build `data/research/institution_model_backtest.json`. This report compares no-change, state-market, recent-trend, and expanded ridge models on rolling 2020-24 holdouts. It is a research result, not a public forecast artifact; the public page should only adopt the expanded model if it improves out-of-sample error.
+Run:
+
+```powershell
+python scripts/build_scorecard_history.py
+```
+
+to refresh `institutions.json` and `national_enrollment.json`. The original annual CSV files are not required by the published page or this compact rebuild.
+
+Tuition fields are price inputs, not realized net tuition revenue. `UGDS_NRA` is the share of degree-seeking undergraduates reported as nonresident aliens, not total international enrollment or new international intake.
+
+## First-time residence
+
+`ipeds_residence_2024.json` is a compact reduction of the NCES IPEDS `EF2024C` Fall 2024 provisional file.
+
+Its within-state and other-state shares use first-time degree/certificate-seeking undergraduates with known residence in a U.S. state or the District of Columbia. Foreign-country, outlying-area, and unknown-residence counts remain outside that denominator.
+
+## Research-only annual archive
+
+The 2005–06 through 2025–26 annual College Scorecard files are not stored in this repository. The checked-in `research/institution_model_backtest.json` preserves the current backtest result.
+
+To rerun that research from an external copy of the annual archive:
+
+```powershell
+python scripts/institution_model_research.py --input-dir "C:\path\to\collegeboard history"
+```
+
+The supplied 2025–26 file does not contain usable `UGDS` observations, so the research model uses 2005–06 through 2024–25. The expanded model remains research-only unless it demonstrates stable out-of-sample improvement over the simpler baselines.
+
+## Supporting phase data
+
+- `phase1/` contains state graduate projections and backtests.
+- `phase2/` contains county age transitions, projections, and validation outputs.
+- `phase3/` contains the college-going and four-year entrant scenarios.
+- `phase4/` and `phase5/` are retained historical development artifacts and are not loaded by the current page.

@@ -1,24 +1,39 @@
 {
-  "project": "The Future College Market",
-  "build": "Phases 1-5 cumulative",
-  "assumptions": {
-    "college_going": 0.628,
-    "four_year_share": 0.6666666666666666,
-    "cohort_divisor": 4.25,
-    "fte_factor": 0.85,
-    "variable_instructional_expense_share": 0.3
+  "project": "The Enrollment Squeeze",
+  "package": "GitHub Pages static data story",
+  "runtime": {
+    "entrypoint": "index.html",
+    "scripts": [
+      "assets/plotly.min.js",
+      "diagnostics-core.js",
+      "filters-core.js",
+      "app.js",
+      "filters.js"
+    ],
+    "data": [
+      "data/national.json",
+      "data/national_enrollment.json",
+      "data/states.json",
+      "data/state_diagnostics.json",
+      "data/counties.json",
+      "data/institutions.json",
+      "data/institution_diagnostics.json",
+      "data/international.json",
+      "data/context.json",
+      "data/state_shapes.json",
+      "data/map_meta.json"
+    ]
   },
-  "counts": {
-    "states_and_dc": 51,
-    "county_year_rows": 12576,
-    "four_year_institutions": 1849,
-    "institution_year_exposure_rows": 5547,
-    "institutions_with_finance_proxy": 1430,
-    "finance_year_rows": 4290
+  "observed_period": "2015-16 through 2024-25",
+  "projection_horizon": 2041,
+  "public_model": {
+    "state_and_county": "demographic and participation scenarios",
+    "institutions": "observed enrollment diagnostics and peer comparisons",
+    "finance": "5%, 10%, and 20% gross tuition sensitivity scenarios"
   },
-  "institution_vintages": {
-    "enrollment": "March 2024 Scorecard elements snapshot",
-    "finance": "April 2022 Scorecard-derived snapshot",
-    "official_latest_reference": "College Scorecard updated June 10, 2026; not ingested"
-  }
+  "research_only": [
+    "data/research/institution_model_backtest.json",
+    "data/phase4/",
+    "data/phase5/"
+  ]
 }

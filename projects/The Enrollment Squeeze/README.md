@@ -1,78 +1,87 @@
-# The Future College Market
+# The Enrollment Squeeze
 
-## Current cumulative build: Phases 1–5
+An interactive, static data story about the contraction of the traditional U.S. college pipeline and how institutions have moved differently within that market.
 
-This package now contains the original demographic work plus a simplified higher-education market and finance model.
+The published page combines national enrollment history, projected high-school graduates, state and county entrant scenarios, observed institution enrollment performance, international context, and transparent tuition-sensitivity examples.
 
-## Headline central scenario
+## What the public page does
 
-- 2026 estimated four-year entrants: **1,610,658**
-- 2041 estimated four-year entrants: **1,433,268**
-- National change by 2041: **-11.0%**
-- Institutions modeled for market exposure: **1,849**
-- Institutions with observed finance proxies: **1,430**
+- Traces projected high-school graduates into likely college and four-year entrants under explicit participation assumptions.
+- Compares percentage and absolute changes across states and counties.
+- Shows the participation increase required to maintain each state's 2026 entrant pool.
+- Compares observed institution enrollment change from 2015–16 through 2024–25 with state and peer context.
+- Maps observed institution size, admissions, retention, student mix, and first-time student residence.
+- Translates defined 5%, 10%, and 20% undergraduate enrollment losses into gross tuition-revenue sensitivity.
 
-## What is new
+The institution map is descriptive. It does not publish an institution-level enrollment forecast, risk score, closure prediction, or measured recruitment catchment.
 
-- State and county estimates of likely college and four-year entrants
-- State comparison of future local demand against current four-year undergraduate scale
-- Institution-level 2030, 2035 and 2041 market exposure
-- Gross undergraduate tuition-sensitivity scenarios based on projected student change
-- Interactive dashboard
-- Scenario financial-model workbook
+## Run locally
 
-## Largest projected state graduate-pool contractions by 2041
+From the repository root:
 
-- Hawaii: -31.2%
-- Illinois: -28.7%
-- California: -27.3%
-- New York: -25.0%
-- Wyoming: -24.8%
-- West Virginia: -22.8%
-- New Mexico: -22.8%
-- Oregon: -22.3%
-- Mississippi: -19.9%
-- Alaska: -19.2%
+```powershell
+python -m http.server 8765
+```
 
-## Largest modeled annual institution gaps in 2035
+Then open:
 
-These figures are scenario proxies and should not be treated as official institutional deficits.
+```text
+http://127.0.0.1:8765/projects/The%20Enrollment%20Squeeze/index.html
+```
 
-- New York University (NY): $46,594,448
-- Syracuse University (NY): $31,233,852
-- Excelsior College (NY): $27,717,072
-- DePaul University (IL): $25,861,130
-- Temple University (PA): $25,536,979
-- University of California-Berkeley (CA): $23,943,085
-- Drexel University (PA): $22,528,715
-- University of Southern California (CA): $22,274,944
-- University of Michigan-Ann Arbor (MI): $21,606,741
-- Michigan State University (MI): $20,868,897
+No build step is required for the published page.
 
-## Folder guide
+## Repository layout
 
-- `data/phase1/` — state demographic projections and early validation
-- `data/phase2/` — county demographic allocations
-- `data/phase3/` — college-going and four-year entrant market estimates
-- `data/phase4/` — institutional market exposure
-- `data/phase5/` — financial-pressure proxy
-- `dashboards/` — interactive HTML dashboards
-- `financial_model/` — editable Excel scenario model
-- `sources/` — source files and manifests
-- `scripts/` — reproducible build scripts
+- `index.html`, `styles.css`, `app.js` — narrative structure and national/state/county views.
+- `filters.js`, `diagnostics-core.js`, `filters-core.js` — institution explorer, grouped map measures, profiles, and finance scenarios.
+- `assets/plotly.min.js` — local charting dependency for GitHub Pages.
+- `data/*.json` — compact files loaded directly by the page.
+- `data/phase1/`, `data/phase2/`, `data/phase3/` — supporting demographic projections and validation outputs.
+- `data/research/` — research-only institution-model backtest results; these do not drive the public forecast.
+- `sources/` — WICHE, Census, and other source material retained for reproducibility.
+- `scripts/` — data preparation, diagnostics, research, and browser-QA utilities.
+- `tests/` — JavaScript data contracts and Python model/data tests.
 
-## Critical limitation
+Historical phase 4–5 files remain for provenance but are not loaded by the current public page.
 
-Institution enrollment now uses annual College Scorecard files through 2024–25. `UGDS` is undergraduate enrollment and `GRADS` is graduate enrollment; finance proxies remain from an April 2022 processed file. The WICHE and Census demographic sources are more current. See `METHODOLOGY_PHASE3_5.md`.
+## Rebuild the compact institution artifacts
 
-## Current draft model
+```powershell
+cd "projects/The Enrollment Squeeze"
+python scripts/build_scorecard_history.py
+python scripts/build_market_diagnostics.py
+```
 
-The live draft uses annual College Scorecard files through 2024-25. `UGDS` is undergraduate enrollment and `GRADS` is graduate enrollment; each history chart uses its own balanced panel to prevent reporting changes from being presented as enrollment change. Institution projections combine a domestic market-reach proxy, damped peer-relative performance, an undergraduate nonresident-alien scenario using `UGDS_NRA`, and a visible user adjustment. Tuition results are gross undergraduate tuition sensitivity, not realized net revenue.
+The first command refreshes the institution history and current institution records from `data/scorecard_compact.json`. The second rebuilds the observed state and institution diagnostics, including the compact Fall 2024 IPEDS residence measures.
 
-The public institution explorer also uses Fall 2024 IPEDS `EF2024C` to show the observed share of first-time degree/certificate-seeking undergraduates from within the institution's state and from other U.S. states. Those shares use students with known U.S. state or District of Columbia residence as the denominator. They describe current entering-class composition, not proven future recruitment reach. The separate `UGDS_NRA` view remains an undergraduate enrollment-stock measure.
+## Verification
 
-## GitHub site
+```powershell
+node --check app.js
+node --check filters.js
+node --check diagnostics-core.js
+node --test tests/data_contract.test.js tests/diagnostics_core.test.js tests/filter_logic.test.js
+python -m pytest tests/test_ipeds_residence.py tests/test_market_diagnostics.py tests/test_institution_model_research.py -q
+python scripts/render_diagnostics_qa.py
+```
 
-The current GitHub Pages build is stored in `site/`. It includes the complete narrative scaffold, interactive state and institution maps, county explorer, scenario controls and transparency documentation.
+The browser QA script exercises the filters and scenarios, checks desktop and mobile errors, and creates a local full-page screenshot under `output/playwright/`. That screenshot is generated and is not part of the repository package.
 
-The institutional exposure layer is operational. The final financial-resilience / closure-risk layer still requires FY2024 IPEDS finance inputs and additional institution-level recruitment geography.
+## Data sources
+
+- WICHE high-school graduate projections.
+- U.S. Census Bureau county age estimates.
+- U.S. Department of Education College Scorecard.
+- NCES IPEDS Fall Enrollment residence data.
+- IIE Open Doors and U.S. Department of State international context.
+
+See `data/README.md`, the phase methodology files, and `sources/source_manifest.csv` for artifact-level notes.
+
+## Important limitations
+
+- College-going and four-year attendance rates are scenarios, not separate demographic forecasts.
+- First-time residence shares describe the observed entering class; they do not establish an institution's future recruitment reach.
+- `UGDS_NRA` is an undergraduate nonresident-alien stock measure, not new international intake.
+- Institution outcomes are observed associations and do not establish causation.
+- Tuition results are gross sensitivity estimates, not complete budget forecasts or immediately avoidable costs.
