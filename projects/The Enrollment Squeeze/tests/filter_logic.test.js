@@ -34,8 +34,8 @@ assert.deepEqual(
   filterInstitutions(rows, { year: 2035, exposureMin: 50, exposureMax: 100 }).map(row => row.unitid),
   [2],
 );
-assert.deepEqual(calculateTuitionPressure({ currentUG: 1000, tuitionPerFTE: 12000 }, -0.10, 0.05), { projectedChange: -0.10, studentsChange: -100, fteChange: -100, annualTuitionPressure: 660000 });
-assert.ok(calculateTuitionPressure({ currentUG: 1000, tuitionPerFTE: 12000 }, -0.10, 0.05).annualTuitionPressure < calculateTuitionPressure({ currentUG: 1000, tuitionPerFTE: 12000 }, -0.10, 0).annualTuitionPressure);
+assert.deepEqual(calculateTuitionPressure({ currentUG: 1000, tuitionPerFTE: 12000 }, -0.10, 0.05), { projectedChange: -0.10, studentsChange: -100, fteChange: -100, baselineTuition: 12000000, projectedTuition: 11340000, grossTuitionChange: -660000, grossTuitionChangePct: -0.055 });
+assert.ok(calculateTuitionPressure({ currentUG: 1000, tuitionPerFTE: 12000 }, -0.10, 0.05).grossTuitionChange > calculateTuitionPressure({ currentUG: 1000, tuitionPerFTE: 12000 }, -0.10, 0).grossTuitionChange);
 assert.ok(Math.abs(annualizeEndpointChange(-0.10, 5) - (-0.0208516376)) < 1e-8);
 assert.equal(Math.round(projectEnrollment(4291, -0.05, 5)), 3320);
 assert.deepEqual(enrollmentBand(1000, 0.05), { lower: 950, baseline: 1000, upper: 1050 });
@@ -57,19 +57,27 @@ const appSource = fs.readFileSync(require('node:path').join(__dirname, '..', 'ap
 const filtersSource = fs.readFileSync(require('node:path').join(__dirname, '..', 'filters.js'), 'utf8');
 assert.equal(indexHtml.includes('href="#method"'), false);
 assert.equal(appSource.includes('function renderStatus()'), false);
-assert.match(indexHtml, /id="institution-decomposition"/);
-assert.match(filtersSource, /analysis\.hidden = true/);
-assert.match(filtersSource, /analysis\.hidden = false/);
-assert.match(indexHtml, /\.capacity-section \.section-head>p,\.capacity-section>\.figure-note,\.capacity-section \.exposure-explainer\{display:none\}/);
-assert.match(indexHtml, /Institution scenario adjustment/);
-assert.match(indexHtml, /id="reset-institution-scenario"/);
-assert.match(indexHtml, /id="institution-international-recovery"/);
-assert.match(indexHtml, /id="institution-analysis" hidden/);
-assert.match(filtersSource, /institution-analysis/);
-assert.match(filtersSource, /reset-institution-scenario/);
+assert.match(indexHtml, /id="exposure-state"/);
+assert.match(indexHtml, /id="exposure-size"/);
+assert.match(indexHtml, /id="exposure-trend"/);
+assert.match(indexHtml, /id="competition-quadrant"/);
+assert.match(indexHtml, /id="institution-map-metric"/);
+assert.match(indexHtml, /id="replacement-tool"/);
 assert.match(indexHtml, /id="undergraduate-history-change"/);
 assert.match(indexHtml, /id="graduate-history-change"/);
 assert.match(appSource, /changeAnnotation/);
-assert.match(appSource, /from 2015 to 2023/);
+assert.match(appSource, /displayYears\[endIndex\]/);
+assert.match(appSource, /state_diagnostics/);
+assert.match(appSource, /requiredParticipationPoints/);
+assert.match(appSource, /renderReplacementTool/);
+assert.match(appSource, /EnrollmentDiagnosticsCore\.clampAllocation/);
+assert.match(filtersSource, /institution_diagnostics/);
+assert.match(filtersSource, /competition-quadrant/);
+assert.match(filtersSource, /peerMedian/);
+assert.match(filtersSource, /institution-map-metric/);
+assert.equal(filtersSource.includes('exposureScore'), false, 'public institution explorer must not use a synthetic exposure score');
+assert.equal(filtersSource.includes('projectedUGBehavioral'), false, 'public institution explorer must not use a projected institution enrollment');
+assert.match(filtersSource, /function quantile/);
+assert.match(filtersSource, /range: \[yMin, yMax\]/);
 
 console.log('filter logic tests passed');

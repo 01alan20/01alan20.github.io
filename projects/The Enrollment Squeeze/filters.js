@@ -1,148 +1,207 @@
 (() => {
-  const {
-    filterInstitutions,
-    listStates,
-    listInstitutionNames,
-    calculateTuitionPressure,
-    annualizeEndpointChange,
-    projectEnrollment,
-    enrollmentBand,
-    combineAnnualRates,
-    regularizeTrendRate,
-    dampedPeerAdjustment,
-    internationalScenarioChange,
-  } = EnrollmentFilterCore;
   const $ = id => document.getElementById(id);
-  const state = { financeState: 'All', financeInstitutionId: '', financePressureBand: 'All', exposureInstitutionId: '', exposurePressureBand: 'All' };
-  const fmtInt = n => new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(n || 0);
-  const fmtMoney = n => n == null ? '—' : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 }).format(n);
-  const fmtPct = n => n == null ? '—' : new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 1, signDisplay: 'exceptZero' }).format(n);
-  const limit = (x, a, b) => Math.max(a, Math.min(b, x));
-  const pressureBand = change => change >= 0 ? 'Low' : change > -0.10 ? 'Medium' : change > -0.25 ? 'High' : 'Very high';
-  const scenarioSettings = () => ({ share: Number($('share-slider')?.value || 0) / 100, recovery: $('institution-international-recovery')?.value || $('international-recovery')?.value || 'normal' });
-  const pressureMatches = (row, selected) => {
-    const scenario = scenarioSettings();
-    return selected === 'All' || pressureBand(projectRow(row, scenario.share, scenario.recovery).projectedChange) === selected;
-  };
+  const state = { selectedId: '', exposureState: 'All', exposureSize: 'All', exposureTrend: 'All', financeState: 'All', financeId: '', mapMetric: 'change' };
+  const fmtInt = value => value == null ? 'Not available' : new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(value);
+  const fmtPct = value => value == null ? 'Not available' : new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 1, signDisplay: 'exceptZero' }).format(value);
+  const fmtMoney = value => value == null ? 'Not available' : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
+  const fmtCompactMoney = value => value == null ? 'Not available' : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 }).format(value);
+  const safe = value => String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
-  function exposureRows() {
-    return filterInstitutions(DATA.institutions, { year: +$('inst-year').value, control: $('inst-control').value, scope: $('inst-scope').value, institutionId: state.exposureInstitutionId }).filter(row => row.mapX != null && row.mapY != null && pressureMatches(row, state.exposurePressureBand || 'All'));
+  function observedTrend(row) {
+    if (!Number.isFinite(row.change)) return 'Not available';
+    return row.change < -0.025 ? 'Declining' : row.change > 0.025 ? 'Growing' : 'Little change';
+  }
+
+  function diagnosticRows() { return DATA.institution_diagnostics || []; }
+  function filteredRows() {
+    const control = $('inst-control').value;
+    return diagnosticRows().filter(row =>
+      (control === 'All' || row.control === control)
+      && (state.exposureState === 'All' || row.state === state.exposureState)
+      && (state.exposureSize === 'All' || row.sizeBand === state.exposureSize)
+      && (state.exposureTrend === 'All' || observedTrend(row) === state.exposureTrend));
   }
 
   function financeRows() {
-    return filterInstitutions(DATA.institutions, { year: +$('inst-year').value, control: $('inst-control').value, scope: $('inst-scope').value, state: state.financeState, institutionId: state.financeInstitutionId, financeOnly: true }).filter(row => pressureMatches(row, state.financePressureBand || 'All'));
+    return diagnosticRows().filter(row =>
+      Number.isFinite(row.currentUG) && Number.isFinite(row.tuitionPerFTE)
+      && (state.financeState === 'All' || row.state === state.financeState));
   }
 
-  const selectivityBand = rate => {
-    if (!Number.isFinite(Number(rate))) return '80%+ (assumed)';
-    const value = Number(rate);
-    if (value < 0.10) return '<10%';
-    if (value < 0.25) return '10–24%';
-    if (value < 0.50) return '25–49%';
-    if (value < 0.80) return '50–79%';
-    return '80%+';
-  };
-
-  function projectRow(row, share = 0, internationalRecovery = 'normal') {
-    const currentUG = Number(row.latestScorecardUG || row.currentUG) || 0;
-    const currentPG = Number(row.latestScorecardPG || row.currentPG) || 0;
-    const horizon = Math.max(1, Number(row.year) - 2025);
-    // The user scenario is a separate, visible waterfall component below. Do
-    // not fold it into the market baseline or it would be applied twice.
-    const demographicEndpoint = Number(row.marketChange) || 0;
-    const demographicAnnual = annualizeEndpointChange(demographicEndpoint, horizon);
-    const peerAnnual = dampedPeerAdjustment(row.historicalResidual, row.historyYears, horizon);
-    const internationalChange = internationalScenarioChange({ currentShare: row.internationalUGShare, preCovidShare: row.preCovidInternationalUGShare, year: row.year, recovery: internationalRecovery });
-    const marketUG = projectEnrollment(currentUG, demographicAnnual, horizon);
-    const peerAdjustedUG = projectEnrollment(marketUG, peerAnnual, horizon);
-    const peerStudentsChange = peerAdjustedUG - marketUG;
-    const internationalStudentsChange = currentUG * internationalChange;
-    const userStudentsChange = currentUG * Number(share || 0);
-    const blendedUG = Math.max(0, peerAdjustedUG + internationalStudentsChange + userStudentsChange);
-    const pgBaseline = currentPG > 0 && Number.isFinite(Number(row.graduateCagr)) ? projectEnrollment(currentPG, Number(row.graduateCagr), horizon) : null;
-    const pgBand = pgBaseline == null ? null : enrollmentBand(pgBaseline, 0.05);
-    return { ...row, currentUG, currentPG, marketUG, demographicUG: marketUG, blendedUG, projectedChange: currentUG ? (blendedUG / currentUG) - 1 : 0, demographicAnnual, peerAnnual, peerStudentsChange, internationalChange, internationalStudentsChange, userStudentsChange, selectivity: selectivityBand(row.latestAdmissionRate ?? row.admitRate), pgBaseline, pgBand };
-  }
-
-  function setOptions(id, names) {
-    $(id).innerHTML = names.map(name => `<option value="${name.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}"></option>`).join('');
+  function setDatalist(id, rows) {
+    $(id).innerHTML = rows.slice().sort((a, b) => a.name.localeCompare(b.name)).map(row => `<option value="${safe(row.name)}"></option>`).join('');
   }
 
   function refreshSearchLists() {
-    const year = +$('inst-year').value, control = $('inst-control').value, scope = $('inst-scope').value;
-    setOptions('exposure-institution-options', listInstitutionNames(DATA.institutions, { year, control, scope }));
-    setOptions('finance-institution-options', listInstitutionNames(DATA.institutions, { year, state: state.financeState, financeOnly: true }));
+    setDatalist('exposure-institution-options', filteredRows());
+    setDatalist('finance-institution-options', financeRows());
   }
 
-  function showExposureDetail(row, count) {
-    const model = row && projectRow(row);
-    $('institution-detail').innerHTML = row
-      ? `<p class="kicker">${row.control} · ${row.scope}</p><h3>${row.name}</h3><p>${row.city}, ${row.state}</p><div class="detail-stat"><span>Current undergraduate / graduate</span><strong>${fmtInt(model.currentUG)} / ${fmtInt(model.currentPG)}</strong></div><div class="detail-stat"><span>Population-market UG estimate</span><strong>${fmtInt(model.demographicUG)}</strong></div><div class="detail-stat"><span>Projected undergraduate enrollment</span><strong>${fmtInt(model.blendedUG)} · ${fmtPct(model.projectedChange)}</strong></div><div class="detail-stat"><span>Graduate estimate</span><strong>${model.pgBaseline == null ? 'Not available' : `${fmtInt(model.pgBaseline)} · range ${fmtInt(model.pgBand.lower)}–${fmtInt(model.pgBand.upper)}`}</strong></div><div class="detail-stat"><span>Historical UG trend</span><strong>${row.historyYears ? fmtPct(row.enrollmentCagr) : 'Not available'}</strong></div><div class="detail-stat"><span>Enrollment pressure</span><strong>${pressureBand(model.projectedChange)} · ${fmtPct(model.projectedChange)}</strong></div>`
-      : `<p class="kicker">Institution explorer</p><h3>Search for an institution.</h3><p>${count} institutions are shown on the map. Point size reflects current undergraduate enrollment; color reflects projected undergraduate change.</p>`;
+  function situation(row) {
+    if (!Number.isFinite(row.change) || !Number.isFinite(row.statePoolChange2041)) return 'Insufficient comparison data';
+    if (row.change >= 0 && row.statePoolChange2041 >= 0) return 'Growing institution / expanding state pool';
+    if (row.change >= 0) return 'Growing institution / contracting state pool';
+    if (row.statePoolChange2041 >= 0) return 'Declining institution / expanding state pool';
+    return 'Declining institution / contracting state pool';
   }
 
-  function showInstitutionStory(row, count, share, recovery) {
-    const model = row && projectRow(row, share, recovery);
-    $('institution-detail').innerHTML = row
-      ? `<p class="kicker">${row.control} · ${row.scope}</p><h3>${row.name}</h3><p>${row.city}, ${row.state}</p><div class="detail-stat"><span>Current undergraduate / graduate</span><strong>${fmtInt(model.currentUG)} / ${fmtInt(model.currentPG)}</strong></div><div class="detail-stat"><span>Market-reach proxy</span><strong>${row.scope}</strong></div><div class="detail-stat"><span>Selectivity category</span><strong>${model.selectivity}</strong></div><div class="detail-stat"><span>International UG exposure</span><strong>${model.internationalUGShare == null ? 'Not reported' : fmtPct(model.internationalUGShare)}</strong></div><div class="detail-stat"><span>Projected undergraduate enrollment</span><strong>${fmtInt(model.blendedUG)} · ${fmtPct(model.projectedChange)}</strong></div><div class="detail-stat"><span>Graduate estimate</span><strong>${model.pgBaseline == null ? 'Not available' : `${fmtInt(model.pgBaseline)} · range ${fmtInt(model.pgBand.lower)}–${fmtInt(model.pgBand.upper)}`}</strong></div><div class="detail-stat"><span>Enrollment pressure</span><strong>${pressureBand(model.projectedChange)} · ${fmtPct(model.projectedChange)}</strong></div>`
-      : `<p class="kicker">Institution explorer</p><h3>Search for an institution.</h3><p>${count} institutions are shown on the map. Point size reflects current undergraduate enrollment; color reflects projected undergraduate change.</p>`;
+  function situationColor(row) {
+    const label = situation(row);
+    if (label.startsWith('Growing institution / contracting')) return '#218a9a';
+    if (label.startsWith('Growing institution')) return '#2f6fed';
+    if (label.startsWith('Declining institution / expanding')) return '#8b78a8';
+    if (label.startsWith('Declining institution')) return '#d66a3a';
+    return '#aab1bf';
   }
 
-  function renderExposure() {
-    const { share, recovery } = scenarioSettings();
-    const rows = exposureRows(), models = rows.map(row => projectRow(row, share, recovery)), selected = rows.find(row => String(row.unitid) === state.exposureInstitutionId);
-    if (state.exposureInstitutionId && !selected) { state.exposureInstitutionId = ''; $('exposure-institution').value = ''; }
+  function quantile(values, probability) {
+    const sorted = values.filter(Number.isFinite).slice().sort((a, b) => a - b);
+    if (!sorted.length) return 0;
+    const index = (sorted.length - 1) * probability;
+    const lower = Math.floor(index);
+    const fraction = index - lower;
+    return sorted[lower + 1] == null ? sorted[lower] : sorted[lower] + fraction * (sorted[lower + 1] - sorted[lower]);
+  }
+
+  function selectInstitution(unitid) {
+    state.selectedId = String(unitid || '');
+    const row = diagnosticRows().find(item => String(item.unitid) === state.selectedId);
+    $('exposure-institution').value = row?.name || '';
+    renderInstitutionViews();
+  }
+
+  function renderQuadrant() {
+    const rows = filteredRows().filter(row => Number.isFinite(row.change) && Number.isFinite(row.statePoolChange2041));
+    const selected = rows.find(row => String(row.unitid) === state.selectedId);
+    const yLow = quantile(rows.map(row => row.change), 0.01);
+    const yHigh = quantile(rows.map(row => row.change), 0.99);
+    const yPad = Math.max(0.05, (yHigh - yLow) * 0.08);
+    const yMin = yLow - yPad;
+    const yMax = yHigh + yPad;
+    const xLow = quantile(rows.map(row => row.statePoolChange2041), 0.01);
+    const xHigh = quantile(rows.map(row => row.statePoolChange2041), 0.99);
+    const xPad = Math.max(0.02, (xHigh - xLow) * 0.08);
+    const traces = [{
+      type: 'scattergl', mode: 'markers', x: rows.map(row => row.statePoolChange2041), y: rows.map(row => row.change), text: rows.map(row => row.name),
+      customdata: rows.map(row => [row.unitid, row.peerMedian, row.relativePerformance, situation(row), row.currentUG]),
+      marker: { size: rows.map(row => Math.max(7, Math.min(25, Math.sqrt(row.currentUG || 0) / 4))), color: rows.map(situationColor), opacity: 0.68, line: { color: '#fff', width: 0.5 } },
+      hovertemplate: '<b>%{text}</b><br>Observed institution change: %{y:.1%}<br>Projected state entrant change: %{x:.1%}<br>Peer median: %{customdata[1]:.1%}<br>%{customdata[3]}<br>Current UG: %{customdata[4]:,.0f}<extra></extra>',
+    }];
+    if (selected) traces.push({ type: 'scatter', mode: 'markers', x: [selected.statePoolChange2041], y: [selected.change], marker: { size: 30, color: 'rgba(255,255,255,0)', line: { color: '#14213d', width: 4 } }, hoverinfo: 'skip', showlegend: false });
+    Plotly.react('competition-quadrant', traces, {
+      margin: { l: 78, r: 25, t: 35, b: 70 }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: { family: 'DM Sans', color: '#14213d' }, showlegend: false,
+      xaxis: { title: 'Projected state four-year entrant change, 2026–2041', range: [xLow - xPad, xHigh + xPad], tickformat: '.0%', gridcolor: '#e5e8ef', zeroline: true, zerolinecolor: '#14213d', zerolinewidth: 1.5 },
+      yaxis: { title: 'Observed institution UG change, 2015–16 to 2024–25', range: [yMin, yMax], tickformat: '.0%', gridcolor: '#e5e8ef', zeroline: true, zerolinecolor: '#14213d', zerolinewidth: 1.5 },
+      annotations: [
+        { xref: 'paper', yref: 'paper', x: .02, y: .98, text: 'Growing despite contraction', showarrow: false, font: { color: '#218a9a', size: 11 } },
+        { xref: 'paper', yref: 'paper', x: .98, y: .98, text: 'Growing with expansion', showarrow: false, xanchor: 'right', font: { color: '#2f6fed', size: 11 } },
+        { xref: 'paper', yref: 'paper', x: .02, y: .02, text: 'Combined contraction', showarrow: false, font: { color: '#b44e2a', size: 11 } },
+        { xref: 'paper', yref: 'paper', x: .98, y: .02, text: 'Declining despite expansion', showarrow: false, xanchor: 'right', font: { color: '#7c6799', size: 11 } },
+      ],
+    }, plotConfig());
+    const chart = $('competition-quadrant');
+    chart.removeAllListeners?.('plotly_click');
+    chart.on('plotly_click', event => { const unitid = event.points[0]?.customdata?.[0]; if (unitid) selectInstitution(unitid); });
+  }
+
+  function mapScale(rows, metric) {
+    const meta = EnrollmentDiagnosticsCore.institutionMetricMeta(metric);
+    const values = rows.map(row => row[metric]).filter(Number.isFinite);
+    if (meta.scale === 'diverging') {
+      const limit = Math.max(0.05, ...values.map(Math.abs));
+      return { cmin: -limit, cmax: limit, cmid: 0, colorscale: [[0, '#d66a3a'], [.5, '#e7e2d8'], [1, '#218a9a']] };
+    }
+    return { cmin: Math.min(...values), cmax: Math.max(...values), colorscale: [[0, '#e6eef8'], [1, '#174f9b']] };
+  }
+
+  function renderInstitutionMap() {
+    const rows = filteredRows().filter(row => row.mapX != null && row.mapY != null);
+    const metric = state.mapMetric;
+    const meta = EnrollmentDiagnosticsCore.institutionMetricMeta(metric);
+    const valid = rows.filter(row => Number.isFinite(row[metric]));
+    const missing = rows.filter(row => !Number.isFinite(row[metric]));
     const base = DATA.state_shapes.map(shape => ({ type: 'scatter', mode: 'lines', x: shape.x, y: shape.y, fill: 'toself', fillcolor: '#eef0f4', line: { color: '#fff', width: 1 }, hoverinfo: 'skip', showlegend: false }));
-    const markerValues = models.map(row => row.projectedChange);
-    const markers = { type: 'scattergl', mode: 'markers', x: models.map(row => row.mapX), y: models.map(row => row.mapY), text: models.map(row => row.name), customdata: models.map(row => [row.unitid, pressureBand(row.projectedChange), row.projectedChange]), marker: { size: models.map(row => limit(Math.sqrt(row.currentUG) / 3, 4, 24)), color: markerValues, colorscale: [[0, '#b53f3f'], [.5, '#f6e7d4'], [1, '#1e9b72']], cmin: -.75, cmax: .75, cmid: 0, colorbar: { title: 'Projected UG change', tickvals: [-.75, -.5, -.25, 0, .25, .5, .75], ticktext: ['-75%', '-50%', '-25%', '0%', '25%', '50%', '75%'] }, opacity: .76, line: { width: .4, color: '#fff' } }, hovertemplate: '<b>%{text}</b><br>Enrollment pressure: %{customdata[1]} (%{customdata[2]:.1%})<extra></extra>' };
-    const traces = [...base, markers];
-    if (selected) traces.push({ type: 'scatter', mode: 'markers', x: [selected.mapX], y: [selected.mapY], marker: { size: 34, color: 'rgba(255,255,255,0)', line: { color: '#ff6b35', width: 4 } }, hoverinfo: 'skip', showlegend: false });
+    const scale = mapScale(valid, metric);
+    const markers = valid.length ? [{
+      type: 'scattergl', mode: 'markers', x: valid.map(row => row.mapX), y: valid.map(row => row.mapY), text: valid.map(row => row.name), customdata: valid.map(row => [row.unitid, row[metric], row.currentUG, observedTrend(row)]),
+      marker: { size: valid.map(row => Math.max(5, Math.min(25, Math.sqrt(row.currentUG || 0) / 3.5))), color: valid.map(row => row[metric]), ...scale, colorbar: { title: meta.label }, opacity: .76, line: { width: .4, color: '#fff' } },
+      hovertemplate: `<b>%{text}</b><br>${meta.label}: %{customdata[1]${meta.format === 'percent' ? ':.1%' : meta.format === 'money' ? ':$,.0f' : ':,.0f'}}<br>Current UG: %{customdata[2]:,.0f}<br>%{customdata[3]}<extra></extra>`,
+    }] : [];
+    if (missing.length) markers.push({ type: 'scattergl', mode: 'markers', x: missing.map(row => row.mapX), y: missing.map(row => row.mapY), text: missing.map(row => row.name), customdata: missing.map(row => [row.unitid, row.currentUG]), marker: { size: missing.map(row => Math.max(5, Math.min(25, Math.sqrt(row.currentUG || 0) / 3.5))), color: '#aab1bf', opacity: .45 }, hovertemplate: `<b>%{text}</b><br>${meta.label}: Not available<br>Current UG: %{customdata[1]:,.0f}<extra></extra>`, showlegend: false });
+    const selected = rows.find(row => String(row.unitid) === state.selectedId);
+    const traces = [...base, ...markers];
+    if (selected) traces.push({ type: 'scatter', mode: 'markers', x: [selected.mapX], y: [selected.mapY], marker: { size: 34, color: 'rgba(255,255,255,0)', line: { color: '#14213d', width: 4 } }, hoverinfo: 'skip', showlegend: false });
     Plotly.react('institution-map', traces, mapLayout(), plotConfig());
     const map = $('institution-map');
     map.removeAllListeners?.('plotly_click');
-    map.on('plotly_click', event => { const point = event.points[0]; if (!point?.customdata) return; state.exposureInstitutionId = String(point.customdata[0]); const row = rows.find(item => String(item.unitid) === state.exposureInstitutionId); $('exposure-institution').value = row?.name || ''; renderExposure(); });
-    showInstitutionStory(selected, rows.length, share, recovery);
-    renderInstitutionDecomposition(selected ? projectRow(selected, share, recovery) : null);
+    map.on('plotly_click', event => { const unitid = event.points[0]?.customdata?.[0]; if (unitid) selectInstitution(unitid); });
   }
 
-  function renderInstitutionDecomposition(model) {
-    const panel = $('institution-decomposition');
-    const analysis = $('institution-analysis');
-    if (!model) {
-      analysis.hidden = true;
-      panel.innerHTML = '<p>Selected institution scenario.</p><div id="institution-decomposition-chart" class="plot"></div>';
+  function detailStat(label, value) { return `<div class="detail-stat"><span>${label}</span><strong>${value}</strong></div>`; }
+  function profileStat(label, value) { return `<div class="profile-stat"><span>${label}</span><strong>${value}</strong></div>`; }
+  function percentileItem(label, raw, percentile) {
+    const width = Number.isFinite(percentile) ? percentile : 0;
+    return `<div class="percentile-item"><span>${label}<br><small>${raw}</small></span><div class="percentile-track"><div class="percentile-fill" style="width:${width}%"></div></div><strong>${Number.isFinite(percentile) ? `${Math.round(percentile)}th` : '—'}</strong></div>`;
+  }
+
+  function renderProfile() {
+    const row = diagnosticRows().find(item => String(item.unitid) === state.selectedId);
+    if (!row) {
+      $('institution-detail').innerHTML = `<p class="kicker">Institution explorer</p><h3>${fmtInt(filteredRows().length)} institutions shown</h3><p>Select a point or search for an institution to compare it with its state and peers.</p>`;
+      $('institution-profile').hidden = true;
       return;
     }
-    analysis.hidden = false;
-    panel.querySelector('p:first-child').textContent = `${model.name}: how the selected scenario changes current undergraduate enrollment.`;
-    const components = [model.marketUG - model.currentUG, model.peerStudentsChange, model.internationalStudentsChange, model.userStudentsChange];
-    Plotly.react('institution-decomposition-chart', [{ type: 'waterfall', measure: ['absolute', 'relative', 'relative', 'relative', 'relative', 'total'], x: ['Current UG', 'Domestic market', 'Peer position', 'International', 'User change', 'Projected UG'], y: [model.currentUG, ...components, 0], connector: { line: { color: '#9aa7bb' } }, increasing: { marker: { color: '#1e9b72' } }, decreasing: { marker: { color: '#b53f3f' } }, totals: { marker: { color: '#2f6fed' } }, hovertemplate: '<b>%{x}</b><br>%{y:,.0f} undergraduate students<extra></extra>' }], { margin: { l: 50, r: 20, t: 24, b: 80 }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: { family: 'DM Sans', color: '#14213d' }, yaxis: { title: { text: 'Undergraduate students' }, gridcolor: '#e5e8ef' } }, plotConfig());
+    $('institution-detail').innerHTML = `<p class="kicker">${situation(row)}</p><h3>${safe(row.name)}</h3><p>${safe(row.city)}, ${safe(row.state)}</p>
+      ${detailStat('Observed UG change', fmtPct(row.change))}${detailStat('Comparable-institution median', fmtPct(row.peerMedian))}${detailStat('State institution median', fmtPct(row.stateMedian))}${detailStat('Relative performance', row.relativePerformance == null ? 'Not available' : `${(row.relativePerformance * 100).toFixed(1)} pp`)}${detailStat('Projected state entrant change by 2041', fmtPct(row.statePoolChange2041))}`;
+    const profile = $('institution-profile');
+    profile.hidden = false;
+    profile.innerHTML = `<div class="profile-header"><div><p class="kicker">Observed institution profile</p><h3>${safe(row.name)}</h3><p>${safe(row.control)} · ${safe(row.sizeBand)} · ${safe(row.admissionBand)}</p></div><p>${fmtInt(row.peerCount)} peers<br><small>${safe(row.peerDefinition)}</small></p></div>
+      <div class="profile-grid">${profileStat('Current undergraduates', fmtInt(row.currentUG))}${profileStat('Current graduate students', fmtInt(row.currentPG))}${profileStat('Retention', fmtPct(row.retention))}${profileStat('Admissions rate', fmtPct(row.admitRate))}${profileStat('Adult share', fmtPct(row.adultUGShare))}${profileStat('Part-time share', fmtPct(row.partTimeUGShare))}${profileStat('International UG share', fmtPct(row.internationalUGShare))}${profileStat('Net tuition per FTE', fmtMoney(row.tuitionPerFTE))}${profileStat('Instruction per FTE', fmtMoney(row.instructionPerFTE))}</div>
+      <div class="percentile-grid">${percentileItem('Observed enrollment momentum', fmtPct(row.change), row.percentiles.momentum)}${percentileItem('Retention', fmtPct(row.retention), row.percentiles.retention)}${percentileItem('Adult share', fmtPct(row.adultUGShare), row.percentiles.adultShare)}${percentileItem('Part-time share', fmtPct(row.partTimeUGShare), row.percentiles.partTimeShare)}${percentileItem('Net tuition per FTE', fmtMoney(row.tuitionPerFTE), row.percentiles.tuitionPerFTE)}</div>
+      <p class="profile-description">${EnrollmentDiagnosticsCore.describeInstitution(row)}</p>`;
+  }
+
+  function renderInstitutionViews() { renderQuadrant(); renderInstitutionMap(); renderProfile(); }
+
+  function selectedLossRate() { return Number(document.querySelector('input[name="finance-loss"]:checked')?.value || 0.10); }
+  function chooseDefaultFinanceInstitution() {
+    const rows = financeRows();
+    if (!rows.some(row => String(row.unitid) === state.financeId)) state.financeId = String(rows.slice().sort((a, b) => b.currentUG - a.currentUG)[0]?.unitid || '');
+    const row = rows.find(item => String(item.unitid) === state.financeId);
+    $('finance-institution').value = row?.name || '';
   }
 
   function renderFinance() {
-    const { share, recovery } = scenarioSettings(), tuitionFeeChange = +$('tuition-slider').value / 100;
-    const rows = financeRows().map(row => { const model = projectRow(row, share, recovery), pressure = calculateTuitionPressure(model, model.projectedChange, tuitionFeeChange); return { ...model, ...pressure, scenarioGap: pressure.annualTuitionPressure, scenarioGapPct: pressure.annualTuitionPressure / Math.max(1, model.currentUG * model.tuitionPerFTE) }; });
-    const chartRows = rows.sort((a, b) => b.scenarioGap - a.scenarioGap).slice(0, 20);
-    Plotly.react('finance-chart', [{ type: 'bar', orientation: 'h', name: 'Current undergraduate', y: chartRows.map(row => row.name).reverse(), x: chartRows.map(row => row.currentUG).reverse(), marker: { color: '#c7cfdd' }, customdata: chartRows.map(row => [row.blendedUG, row.projectedChange, row.annualTuitionPressure]).reverse(), hovertemplate: '<b>%{y}</b><br>Current undergraduate: %{x:,.0f}<br>Projected undergraduate: %{customdata[0]:,.0f}<br>Change: %{customdata[1]:.1%}<br>Annual tuition pressure: $%{customdata[2]:,.0f}<extra></extra>' }, { type: 'bar', orientation: 'h', name: 'Projected undergraduate', y: chartRows.map(row => row.name).reverse(), x: chartRows.map(row => row.blendedUG).reverse(), marker: { color: '#2f6fed' }, customdata: chartRows.map(row => [row.currentUG, row.projectedChange, row.annualTuitionPressure]).reverse(), hovertemplate: '<b>%{y}</b><br>Current undergraduate: %{customdata[0]:,.0f}<br>Projected undergraduate: %{x:,.0f}<br>Change: %{customdata[1]:.1%}<br>Annual tuition pressure: $%{customdata[2]:,.0f}<extra></extra>' }], { title: { text: 'Current undergraduate enrollment → projected undergraduate enrollment', x: .02 }, barmode: 'group', margin: { l: 230, r: 20, t: 55, b: 70 }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: { family: 'DM Sans' }, xaxis: { title: { text: 'Undergraduate students' }, separatethousands: true, gridcolor: '#e5e8ef' }, yaxis: { automargin: true }, legend: { orientation: 'h', y: -0.2 } }, plotConfig());
-    $('risk-table').innerHTML = rows.sort((a, b) => b.annualTuitionPressure - a.annualTuitionPressure).slice(0, 25).map(row => `<tr><td>${row.name}</td><td>${row.state}</td><td>${fmtPct(row.projectedChange)}</td><td>${fmtInt(row.studentsChange)}</td><td>${fmtMoney(row.annualTuitionPressure)}</td><td><span class="band">${pressureBand(row.projectedChange)}</span></td></tr>`).join('');
-    $('share-out').textContent = `${(+ $('share-slider').value).toFixed(1)}%`;
-    $('tuition-out').textContent = `${(+ $('tuition-slider').value).toFixed(1)}%`;
+    const row = financeRows().find(item => String(item.unitid) === state.financeId);
+    if (!row) {
+      $('finance-chart').innerHTML = '';
+      $('finance-summary').innerHTML = '<p class="kicker">No finance record selected</p><h3>Search for an institution with available tuition data.</h3>';
+      return;
+    }
+    const result = EnrollmentDiagnosticsCore.tuitionCounterfactual(row, selectedLossRate(), 0.85);
+    Plotly.react('finance-chart', [{ type: 'bar', orientation: 'h', y: ['Associated instructional expenditure', 'Gross tuition reduction', 'Current tuition base'], x: [result.associatedInstructionalExpenditure, result.grossTuitionReduction, result.currentTuitionBase], marker: { color: ['#8a94a8', '#d66a3a', '#2f6fed'] }, text: [fmtCompactMoney(result.associatedInstructionalExpenditure), fmtCompactMoney(result.grossTuitionReduction), fmtCompactMoney(result.currentTuitionBase)], textposition: 'auto', hovertemplate: '<b>%{y}</b><br>%{x:$,.0f}<extra></extra>' }], { margin: { l: 235, r: 20, t: 30, b: 55 }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: { family: 'DM Sans' }, xaxis: { title: 'Estimated dollars', tickformat: '$~s', gridcolor: '#e5e8ef' } }, plotConfig());
+    $('finance-summary').innerHTML = `<p class="kicker">${Math.round(result.lossRate * 100)}% enrollment-loss counterfactual</p><h3>${safe(row.name)}</h3><p>${safe(row.city)}, ${safe(row.state)}</p><div class="finance-metrics"><div class="finance-metric"><span>Students represented</span><strong>${fmtInt(result.lostStudents)}</strong></div><div class="finance-metric"><span>FTE represented</span><strong>${fmtInt(result.lostFTE)}</strong></div><div class="finance-metric"><span>Gross tuition reduction</span><strong>${fmtCompactMoney(result.grossTuitionReduction)}</strong></div><div class="finance-metric"><span>Share of tuition base</span><strong>${fmtPct(result.grossReductionPct)}</strong></div><div class="finance-metric"><span>Associated instruction</span><strong>${fmtCompactMoney(result.associatedInstructionalExpenditure)}</strong></div><div class="finance-metric"><span>Current undergraduate enrollment</span><strong>${fmtInt(row.currentUG)}</strong></div></div><p class="finance-warning"><strong>Immediately avoidable cost: Not estimated.</strong><br>Associated instructional expenditure is shown for scale and is not subtracted from the gross tuition reduction.</p>`;
   }
 
   function install() {
-    if (typeof DATA === 'undefined' || !DATA.institutions?.length || !DATA.state_shapes?.length || !$('finance-state')) return false;
-    $('finance-state').innerHTML = '<option value="All">All states</option>' + listStates(DATA.institutions).map(code => `<option value="${code}">${code}</option>`).join('');
+    if (typeof DATA === 'undefined' || !DATA.institution_diagnostics?.length || !DATA.state_shapes?.length || !$('finance-state')) return false;
+    const states = [...new Set(diagnosticRows().map(row => row.state).filter(Boolean))].sort();
+    $('exposure-state').innerHTML = '<option value="All">All states</option>' + states.map(code => `<option>${code}</option>`).join('');
+    $('finance-state').innerHTML = '<option value="All">All states</option>' + states.map(code => `<option>${code}</option>`).join('');
     refreshSearchLists();
-    ['inst-year', 'inst-control', 'inst-scope'].forEach(id => $(id).addEventListener('change', () => { refreshSearchLists(); renderExposure(); renderFinance(); }));
-    $('exposure-score').addEventListener('change', event => { state.exposurePressureBand = event.target.value; refreshSearchLists(); renderExposure(); });
-    $('finance-exposure').addEventListener('change', event => { state.financePressureBand = event.target.value; renderFinance(); });
-    ['share-slider', 'tuition-slider'].forEach(id => $(id).addEventListener('input', () => { renderFinance(); renderExposure(); }));
-    ['international-recovery', 'institution-international-recovery'].forEach(id => $(id)?.addEventListener('change', () => { renderFinance(); renderExposure(); }));
-    $('reset-institution-scenario').addEventListener('click', () => { $('share-slider').value = '0'; $('institution-international-recovery').value = 'normal'; renderFinance(); renderExposure(); });
-    $('finance-state').addEventListener('change', event => { state.financeState = event.target.value; state.financeInstitutionId = ''; $('finance-institution').value = ''; refreshSearchLists(); renderFinance(); });
-    $('finance-institution').addEventListener('change', event => { const row = DATA.institutions.find(item => item.name === event.target.value && (state.financeState === 'All' || item.state === state.financeState)); state.financeInstitutionId = row ? String(row.unitid) : ''; if (!row) event.target.value = ''; renderFinance(); });
-    $('exposure-institution').addEventListener('change', event => { const row = exposureRows().find(item => item.name === event.target.value); state.exposureInstitutionId = row ? String(row.unitid) : ''; if (!row) event.target.value = ''; renderExposure(); });
-    renderExposure();
+    ['inst-control', 'exposure-state', 'exposure-size', 'exposure-trend'].forEach(id => $(id).addEventListener('change', event => {
+      if (id === 'exposure-state') state.exposureState = event.target.value;
+      if (id === 'exposure-size') state.exposureSize = event.target.value;
+      if (id === 'exposure-trend') state.exposureTrend = event.target.value;
+      refreshSearchLists(); renderInstitutionViews();
+    }));
+    $('institution-map-metric').addEventListener('change', event => { state.mapMetric = event.target.value; renderInstitutionMap(); });
+    $('exposure-institution').addEventListener('change', event => { const row = diagnosticRows().find(item => item.name === event.target.value); selectInstitution(row?.unitid || ''); });
+    $('finance-state').addEventListener('change', event => { state.financeState = event.target.value; state.financeId = ''; refreshSearchLists(); chooseDefaultFinanceInstitution(); renderFinance(); });
+    $('finance-institution').addEventListener('change', event => { const row = financeRows().find(item => item.name === event.target.value); state.financeId = String(row?.unitid || ''); if (!row) event.target.value = ''; renderFinance(); });
+    document.querySelectorAll('input[name="finance-loss"]').forEach(input => input.addEventListener('change', renderFinance));
+    chooseDefaultFinanceInstitution();
+    renderInstitutionViews();
     renderFinance();
     return true;
   }

@@ -36,7 +36,7 @@
     const baselineTuition = currentUG * tuitionRate;
     const projectedUG = Math.max(0, currentUG + studentsChange);
     const projectedTuition = projectedUG * tuitionRate * (1 + Number(tuitionFeeChange || 0));
-    return { projectedChange: Number(projectedChange || 0), studentsChange, fteChange, annualTuitionPressure: Math.max(0, baselineTuition - projectedTuition) };
+    return { projectedChange: Number(projectedChange || 0), studentsChange, fteChange, baselineTuition, projectedTuition, grossTuitionChange: projectedTuition - baselineTuition, grossTuitionChangePct: baselineTuition ? (projectedTuition - baselineTuition) / baselineTuition : 0 };
   }
 
   function annualizeEndpointChange(endpointChange, years) {
