@@ -7,6 +7,14 @@
   const fmtCompactMoney = value => value == null ? 'Not available' : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 }).format(value);
   const safe = value => String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
+  function formatPointDifference(value) {
+    if (!Number.isFinite(value)) return 'Not available';
+    const points = Math.abs(value * 100).toFixed(1);
+    if (value > 0) return `${points} percentage points above the peer median`;
+    if (value < 0) return `${points} percentage points below the peer median`;
+    return 'In line with the peer median';
+  }
+
   function observedTrend(row) {
     if (!Number.isFinite(row.change)) return 'Not available';
     return row.change < -0.025 ? 'Declining' : row.change > 0.025 ? 'Growing' : 'Little change';
@@ -104,14 +112,9 @@
     chart.on('plotly_click', event => { const unitid = event.points[0]?.customdata?.[0]; if (unitid) selectInstitution(unitid); });
   }
 
-  function mapScale(rows, metric) {
-    const meta = EnrollmentDiagnosticsCore.institutionMetricMeta(metric);
+  function mapGrouping(rows, metric) {
     const values = rows.map(row => row[metric]).filter(Number.isFinite);
-    if (meta.scale === 'diverging') {
-      const limit = Math.max(0.05, ...values.map(Math.abs));
-      return { cmin: -limit, cmax: limit, cmid: 0, colorscale: [[0, '#d66a3a'], [.5, '#e7e2d8'], [1, '#218a9a']] };
-    }
-    return { cmin: Math.min(...values), cmax: Math.max(...values), colorscale: [[0, '#e6eef8'], [1, '#174f9b']] };
+    return EnrollmentDiagnosticsCore.institutionMapGrouping(metric, values);
   }
 
   function renderInstitutionMap() {
@@ -121,11 +124,22 @@
     const valid = rows.filter(row => Number.isFinite(row[metric]));
     const missing = rows.filter(row => !Number.isFinite(row[metric]));
     const base = DATA.state_shapes.map(shape => ({ type: 'scatter', mode: 'lines', x: shape.x, y: shape.y, fill: 'toself', fillcolor: '#eef0f4', line: { color: '#fff', width: 1 }, hoverinfo: 'skip', showlegend: false }));
-    const scale = mapScale(valid, metric);
+    const grouping = mapGrouping(valid, metric);
+    const residenceHover = `<b>%{text}</b><br>${meta.label}: %{customdata[1]:.1%}<br>Within-state first-time students: %{customdata[4]:,.0f}<br>Other-state first-time students: %{customdata[5]:,.0f}<br>Foreign-country residence: %{customdata[6]:,.0f}<br>Unknown residence: %{customdata[7]:,.0f}<br>Known domestic denominator: %{customdata[8]:,.0f}<br>Source: Fall %{customdata[9]:.0f} IPEDS EF-C<br>Current UG: %{customdata[2]:,.0f}<extra></extra>`;
+    const standardHover = `<b>%{text}</b><br>${meta.label}: %{customdata[1]${meta.format === 'percent' ? ':.1%' : meta.format === 'money' ? ':$,.0f' : ':,.0f'}}<br>Current UG: %{customdata[2]:,.0f}<br>%{customdata[3]}${meta.population === 'scorecard' ? '<br>Source: latest College Scorecard undergraduate stock measure' : ''}<extra></extra>`;
     const markers = valid.length ? [{
-      type: 'scattergl', mode: 'markers', x: valid.map(row => row.mapX), y: valid.map(row => row.mapY), text: valid.map(row => row.name), customdata: valid.map(row => [row.unitid, row[metric], row.currentUG, observedTrend(row)]),
-      marker: { size: valid.map(row => Math.max(5, Math.min(25, Math.sqrt(row.currentUG || 0) / 3.5))), color: valid.map(row => row[metric]), ...scale, colorbar: { title: meta.label }, opacity: .76, line: { width: .4, color: '#fff' } },
-      hovertemplate: `<b>%{text}</b><br>${meta.label}: %{customdata[1]${meta.format === 'percent' ? ':.1%' : meta.format === 'money' ? ':$,.0f' : ':,.0f'}}<br>Current UG: %{customdata[2]:,.0f}<br>%{customdata[3]}<extra></extra>`,
+      type: 'scattergl', mode: 'markers', x: valid.map(row => row.mapX), y: valid.map(row => row.mapY), text: valid.map(row => row.name), customdata: valid.map(row => [row.unitid, row[metric], row.currentUG, observedTrend(row), row.firstTimeHomeStateCount, row.firstTimeOtherStateCount, row.firstTimeForeignCountryCount, row.firstTimeUnknownResidenceCount, row.firstTimeKnownDomesticCount, row.residenceSourceYear]),
+      marker: {
+        size: valid.map(row => Math.max(5, Math.min(25, Math.sqrt(row.currentUG || 0) / 3.5))),
+        color: valid.map(row => grouping.indexFor(row[metric])),
+        cmin: grouping.cmin,
+        cmax: grouping.cmax,
+        colorscale: grouping.colorscale,
+        colorbar: { title: { text: meta.label, side: 'top' }, tickmode: 'array', tickvals: grouping.tickvals, ticktext: grouping.ticktext, thickness: 18, len: .82 },
+        opacity: .82,
+        line: { width: .4, color: '#fff' },
+      },
+      hovertemplate: meta.population === 'residence' ? residenceHover : standardHover,
     }] : [];
     if (missing.length) markers.push({ type: 'scattergl', mode: 'markers', x: missing.map(row => row.mapX), y: missing.map(row => row.mapY), text: missing.map(row => row.name), customdata: missing.map(row => [row.unitid, row.currentUG]), marker: { size: missing.map(row => Math.max(5, Math.min(25, Math.sqrt(row.currentUG || 0) / 3.5))), color: '#aab1bf', opacity: .45 }, hovertemplate: `<b>%{text}</b><br>${meta.label}: Not available<br>Current UG: %{customdata[1]:,.0f}<extra></extra>`, showlegend: false });
     const selected = rows.find(row => String(row.unitid) === state.selectedId);
@@ -152,16 +166,29 @@
       return;
     }
     $('institution-detail').innerHTML = `<p class="kicker">${situation(row)}</p><h3>${safe(row.name)}</h3><p>${safe(row.city)}, ${safe(row.state)}</p>
-      ${detailStat('Observed UG change', fmtPct(row.change))}${detailStat('Comparable-institution median', fmtPct(row.peerMedian))}${detailStat('State institution median', fmtPct(row.stateMedian))}${detailStat('Relative performance', row.relativePerformance == null ? 'Not available' : `${(row.relativePerformance * 100).toFixed(1)} pp`)}${detailStat('Projected state entrant change by 2041', fmtPct(row.statePoolChange2041))}`;
+      ${detailStat('Observed UG change', fmtPct(row.change))}${detailStat('Comparable-institution median', fmtPct(row.peerMedian))}${detailStat('State institution median', fmtPct(row.stateMedian))}${detailStat('Relative performance', formatPointDifference(row.relativePerformance))}${detailStat('Projected state entrant change by 2041', fmtPct(row.statePoolChange2041))}`;
     const profile = $('institution-profile');
     profile.hidden = false;
-    profile.innerHTML = `<div class="profile-header"><div><p class="kicker">Observed institution profile</p><h3>${safe(row.name)}</h3><p>${safe(row.control)} · ${safe(row.sizeBand)} · ${safe(row.admissionBand)}</p></div><p>${fmtInt(row.peerCount)} peers<br><small>${safe(row.peerDefinition)}</small></p></div>
-      <div class="profile-grid">${profileStat('Current undergraduates', fmtInt(row.currentUG))}${profileStat('Current graduate students', fmtInt(row.currentPG))}${profileStat('Retention', fmtPct(row.retention))}${profileStat('Admissions rate', fmtPct(row.admitRate))}${profileStat('Adult share', fmtPct(row.adultUGShare))}${profileStat('Part-time share', fmtPct(row.partTimeUGShare))}${profileStat('International UG share', fmtPct(row.internationalUGShare))}${profileStat('Net tuition per FTE', fmtMoney(row.tuitionPerFTE))}${profileStat('Instruction per FTE', fmtMoney(row.instructionPerFTE))}</div>
+    profile.innerHTML = `<div class="profile-header"><div><h3>${safe(row.name)}</h3><p>${safe(row.control)} · ${safe(row.sizeBand)} · Admissions rate: ${safe(row.admissionBand)}</p></div></div>
+      <div class="profile-grid">${profileStat('Current undergraduates', fmtInt(row.currentUG))}${profileStat('Current graduate students', fmtInt(row.currentPG))}${profileStat('Retention', fmtPct(row.retention))}${profileStat('Admissions rate', fmtPct(row.admitRate))}${profileStat('Adult share', fmtPct(row.adultUGShare))}${profileStat('Part-time share', fmtPct(row.partTimeUGShare))}${profileStat('Net tuition per FTE', fmtMoney(row.tuitionPerFTE))}${profileStat('Instruction per FTE', fmtMoney(row.instructionPerFTE))}</div>
+      <section class="profile-subsection"><h4>Recruitment composition</h4><p>Fall 2024 residence measures describe first-time degree/certificate-seeking undergraduates with known U.S. residence. The nonresident-alien measure describes the latest undergraduate enrollment stock.</p><div class="profile-grid recruitment-grid">${profileStat('From within institution state', fmtPct(row.firstTimeHomeStateShare))}${profileStat('From other U.S. states', fmtPct(row.firstTimeOtherStateShare))}${profileStat('Known domestic first-time students', fmtInt(row.firstTimeKnownDomesticCount))}${profileStat('Foreign-country residence', fmtInt(row.firstTimeForeignCountryCount))}${profileStat('Unknown residence', fmtInt(row.firstTimeUnknownResidenceCount))}${profileStat('Undergraduate nonresident-alien share', fmtPct(row.internationalUGShare))}${profileStat('Residence source year', row.residenceSourceYear ? `Fall ${row.residenceSourceYear}` : 'Not available')}</div></section>
       <div class="percentile-grid">${percentileItem('Observed enrollment momentum', fmtPct(row.change), row.percentiles.momentum)}${percentileItem('Retention', fmtPct(row.retention), row.percentiles.retention)}${percentileItem('Adult share', fmtPct(row.adultUGShare), row.percentiles.adultShare)}${percentileItem('Part-time share', fmtPct(row.partTimeUGShare), row.percentiles.partTimeShare)}${percentileItem('Net tuition per FTE', fmtMoney(row.tuitionPerFTE), row.percentiles.tuitionPerFTE)}</div>
       <p class="profile-description">${EnrollmentDiagnosticsCore.describeInstitution(row)}</p>`;
   }
 
   function renderInstitutionViews() { renderQuadrant(); renderInstitutionMap(); renderProfile(); }
+
+  function resetInstitutionFilters() {
+    $('inst-control').value = 'All';
+    $('exposure-state').value = 'All';
+    $('exposure-size').value = 'All';
+    $('exposure-trend').value = 'All';
+    $('exposure-institution').value = '';
+    $('institution-map-metric').value = 'change';
+    Object.assign(state, { selectedId: '', exposureState: 'All', exposureSize: 'All', exposureTrend: 'All', mapMetric: 'change' });
+    refreshSearchLists();
+    renderInstitutionViews();
+  }
 
   function selectedLossRate() { return Number(document.querySelector('input[name="finance-loss"]:checked')?.value || 0.10); }
   function chooseDefaultFinanceInstitution() {
@@ -180,11 +207,11 @@
     }
     const result = EnrollmentDiagnosticsCore.tuitionCounterfactual(row, selectedLossRate(), 0.85);
     Plotly.react('finance-chart', [{ type: 'bar', orientation: 'h', y: ['Associated instructional expenditure', 'Gross tuition reduction', 'Current tuition base'], x: [result.associatedInstructionalExpenditure, result.grossTuitionReduction, result.currentTuitionBase], marker: { color: ['#8a94a8', '#d66a3a', '#2f6fed'] }, text: [fmtCompactMoney(result.associatedInstructionalExpenditure), fmtCompactMoney(result.grossTuitionReduction), fmtCompactMoney(result.currentTuitionBase)], textposition: 'auto', hovertemplate: '<b>%{y}</b><br>%{x:$,.0f}<extra></extra>' }], { margin: { l: 235, r: 20, t: 30, b: 55 }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: { family: 'DM Sans' }, xaxis: { title: 'Estimated dollars', tickformat: '$~s', gridcolor: '#e5e8ef' } }, plotConfig());
-    $('finance-summary').innerHTML = `<p class="kicker">${Math.round(result.lossRate * 100)}% enrollment-loss counterfactual</p><h3>${safe(row.name)}</h3><p>${safe(row.city)}, ${safe(row.state)}</p><div class="finance-metrics"><div class="finance-metric"><span>Students represented</span><strong>${fmtInt(result.lostStudents)}</strong></div><div class="finance-metric"><span>FTE represented</span><strong>${fmtInt(result.lostFTE)}</strong></div><div class="finance-metric"><span>Gross tuition reduction</span><strong>${fmtCompactMoney(result.grossTuitionReduction)}</strong></div><div class="finance-metric"><span>Share of tuition base</span><strong>${fmtPct(result.grossReductionPct)}</strong></div><div class="finance-metric"><span>Associated instruction</span><strong>${fmtCompactMoney(result.associatedInstructionalExpenditure)}</strong></div><div class="finance-metric"><span>Current undergraduate enrollment</span><strong>${fmtInt(row.currentUG)}</strong></div></div><p class="finance-warning"><strong>Immediately avoidable cost: Not estimated.</strong><br>Associated instructional expenditure is shown for scale and is not subtracted from the gross tuition reduction.</p>`;
+    $('finance-summary').innerHTML = `<h3>${safe(row.name)}</h3><p>${safe(row.city)}, ${safe(row.state)}</p><div class="finance-metrics"><div class="finance-metric"><span>Students represented</span><strong>${fmtInt(result.lostStudents)}</strong></div><div class="finance-metric"><span>FTE represented</span><strong>${fmtInt(result.lostFTE)}</strong></div><div class="finance-metric"><span>Gross tuition reduction</span><strong>${fmtCompactMoney(result.grossTuitionReduction)}</strong></div><div class="finance-metric"><span>Share of tuition base</span><strong>${fmtPct(result.grossReductionPct)}</strong></div><div class="finance-metric"><span>Associated instruction</span><strong>${fmtCompactMoney(result.associatedInstructionalExpenditure)}</strong></div><div class="finance-metric"><span>Current undergraduate enrollment</span><strong>${fmtInt(row.currentUG)}</strong></div></div>`;
   }
 
   function install() {
-    if (typeof DATA === 'undefined' || !DATA.institution_diagnostics?.length || !DATA.state_shapes?.length || !$('finance-state')) return false;
+    if (typeof DATA === 'undefined' || !DATA.institution_diagnostics?.length || !DATA.state_shapes?.length || !DATA.map_meta?.extent || !$('finance-state')) return false;
     const states = [...new Set(diagnosticRows().map(row => row.state).filter(Boolean))].sort();
     $('exposure-state').innerHTML = '<option value="All">All states</option>' + states.map(code => `<option>${code}</option>`).join('');
     $('finance-state').innerHTML = '<option value="All">All states</option>' + states.map(code => `<option>${code}</option>`).join('');
@@ -196,6 +223,7 @@
       refreshSearchLists(); renderInstitutionViews();
     }));
     $('institution-map-metric').addEventListener('change', event => { state.mapMetric = event.target.value; renderInstitutionMap(); });
+    $('institution-filter-reset').addEventListener('click', resetInstitutionFilters);
     $('exposure-institution').addEventListener('change', event => { const row = diagnosticRows().find(item => item.name === event.target.value); selectInstitution(row?.unitid || ''); });
     $('finance-state').addEventListener('change', event => { state.financeState = event.target.value; state.financeId = ''; refreshSearchLists(); chooseDefaultFinanceInstitution(); renderFinance(); });
     $('finance-institution').addEventListener('change', event => { const row = financeRows().find(item => item.name === event.target.value); state.financeId = String(row?.unitid || ''); if (!row) event.target.value = ''; renderFinance(); });

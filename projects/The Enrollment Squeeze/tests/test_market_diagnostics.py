@@ -1,12 +1,43 @@
 import pytest
 
 from scripts.build_market_diagnostics import (
+    build_institution_diagnostics,
     choose_peer_values,
     classify_state,
     endpoint_change,
     percentile_rank,
     participation_requirement,
 )
+
+
+def test_institution_diagnostics_join_residence_by_unitid():
+    compact = {
+        "sourceYears": ["2015_16", "2024_25"],
+        "institutions": [{
+            "unitid": "1",
+            "name": "Test College",
+            "years": {"2015_16": {"UGDS": 100}, "2024_25": {"UGDS": 90}},
+        }],
+    }
+    institutions = [{
+        "unitid": "1", "name": "Test College", "state": "AL", "year": 2024,
+        "control": "Private nonprofit", "currentUG": 90, "hasFinance": False,
+    }]
+    states = [{"state": "AL", "year": 2041, "change": -0.1}]
+    residence = [{
+        "unitid": "1", "firstTimeHomeStateCount": 60, "firstTimeOtherStateCount": 20,
+        "firstTimeForeignCountryCount": 5, "firstTimeUnknownResidenceCount": 3,
+        "firstTimeOtherUSAreaCount": 1, "firstTimeKnownDomesticCount": 80,
+        "firstTimeHomeStateShare": 0.75, "firstTimeOtherStateShare": 0.25,
+        "residenceSourceYear": 2024,
+    }]
+
+    row = build_institution_diagnostics(compact, institutions, states, residence)[0]
+
+    assert row["firstTimeHomeStateShare"] == 0.75
+    assert row["firstTimeOtherStateShare"] == 0.25
+    assert row["firstTimeKnownDomesticCount"] == 80
+    assert row["residenceSourceYear"] == 2024
 
 
 def test_participation_requirement_offsets_decline():

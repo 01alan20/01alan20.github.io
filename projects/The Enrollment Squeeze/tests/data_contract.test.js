@@ -33,6 +33,11 @@ assert.ok(stateDiagnostics.every(row => ['graduateLoss', 'entrantLoss', 'require
 assert.ok(institutionDiagnostics.length > 0);
 assert.equal(new Set(institutionDiagnostics.map(row => String(row.unitid))).size, institutionDiagnostics.length, 'institution diagnostics must contain one record per unitid');
 assert.ok(institutionDiagnostics.every(row => ['change', 'peerMedian', 'stateMedian', 'relativePerformance', 'peerCount', 'percentiles'].every(key => Object.hasOwn(row, key))));
+assert.ok(institutionDiagnostics.every(row => ['firstTimeHomeStateShare', 'firstTimeOtherStateShare', 'firstTimeKnownDomesticCount', 'residenceSourceYear'].every(key => Object.hasOwn(row, key))));
+const residencePayload = JSON.parse(fs.readFileSync(path.join(project, 'data', 'ipeds_residence_2024.json'), 'utf8'));
+assert.equal(residencePayload.table, 'EF2024C');
+assert.equal(residencePayload.collection, 'Fall 2024');
+assert.ok(residencePayload.records.every(row => row.firstTimeKnownDomesticCount === 0 || Math.abs(row.firstTimeHomeStateShare + row.firstTimeOtherStateShare - 1) < 1e-9));
 assert.equal(international.originConcentration2024_25.total, 1177766);
 assert.equal(international.originConcentration2024_25.groups.reduce((sum, row) => sum + row.students, 0), 1177766);
 
@@ -64,9 +69,18 @@ assert.match(appSource, /customdata.*1%/s);
 for (const id of ['part-pool', 'part-geography', 'part-competition', 'part-alternatives', 'part-finance']) {
   assert.match(indexHtml, new RegExp(`id="${id}"`), `missing analytical chapter ${id}`);
 }
+assert.equal(/>Part [IVX]+</.test(indexHtml), false, 'chapter transitions must use questions instead of numbered parts');
+for (const question of [
+  'How many likely entrants will exist?',
+  'Where is the loss concentrated, and how much participation would offset it?',
+  'Which institutions are moving differently from their markets and peers?',
+  'Can other student groups plausibly replace the missing pool?',
+  'What would a defined enrollment loss mean for gross tuition revenue?',
+]) {
+  assert.match(indexHtml, new RegExp(`<h2[^>]*>${question.replace(/[?]/g, '\\?')}</h2>`), `chapter question must be the transition heading: ${question}`);
+}
 assert.match(indexHtml, /Participation increase required to maintain the 2026 entrant pool/);
 assert.match(indexHtml, /Observed institution change versus projected state entrant change/);
-assert.match(indexHtml, /Immediately avoidable cost[^<]*not estimated/i);
 assert.equal(indexHtml.includes('Largest modeled gross tuition declines'), false, 'provisional finance ranking must be removed');
 assert.match(indexHtml, /The squeeze is unlikely to affect every college equally/);
 assert.equal(indexHtml.includes('4,968 institutions'), false, 'chart institution-count badge must be removed');
@@ -75,8 +89,28 @@ assert.equal(indexHtml.includes('Undergraduate students</p><h3>Undergraduate enr
 assert.equal(indexHtml.includes('class="model-tag"'), false, 'chart upper-right scenario bubbles must be removed');
 assert.equal(indexHtml.includes('<p class="kicker">National outlook</p>'), false, 'national chart subtitle must be removed');
 assert.equal(indexHtml.includes('<p class="kicker">Observed history</p>'), false, 'enrollment chart subtitles must be removed');
+assert.equal(indexHtml.includes('Grounded counterfactual'), false, 'finance section subtitle must be removed');
+assert.equal(filtersSource.includes('Observed institution profile'), false, 'institution profile subtitle must be removed');
+assert.match(indexHtml, /id="institution-filter-reset"/, 'institution explorer must include a reset button');
+assert.match(indexHtml, /value="firstTimeHomeStateShare">First-time students from within the institution state/);
+assert.match(indexHtml, /value="firstTimeOtherStateShare">First-time students from other U\.S\. states/);
+assert.match(indexHtml, /value="internationalUGShare">Undergraduate nonresident-alien share/);
+assert.equal(/\bpp\b/.test(appSource), false, 'state profiles must spell out percentage points');
+assert.equal(/\bpp\b/.test(filtersSource), false, 'institution profiles must spell out percentage points');
 assert.equal((indexHtml.match(/data-step="/g) || []).length, 0, 'national chart steps must be consolidated into one message');
 assert.equal(appSource.includes('from 2015 to 2023'), false, 'chart callouts must use the latest plotted year');
 assert.match(appSource, /displayYears\[endIndex\]/);
+assert.equal(indexHtml.includes('One smaller class moves through every stage.'), false);
+assert.equal(indexHtml.includes('The chart compares the 2026 baseline with 2041.'), false);
+assert.match(appSource, /Likely college entrants/);
+assert.equal(indexHtml.includes('id="undergraduate-history-change"'), false);
+assert.equal(indexHtml.includes('id="graduate-history-change"'), false);
+assert.equal(/class="[^"]*chapter-light[^"]*" id="part-geography"/.test(indexHtml), false, 'geography transition must use the dark chapter color');
+assert.equal(indexHtml.includes('Immediately avoidable cost: Not estimated.'), false);
+assert.equal(filtersSource.includes('enrollment-loss counterfactual'), false);
+assert.equal(filtersSource.includes('finance-warning'), false);
+assert.equal(filtersSource.includes("'Largest markets'"), false, 'county summary must not repeat the active view label');
+assert.equal(indexHtml.includes('Bubble size is current undergraduate enrollment.'), false);
+assert.equal(indexHtml.includes('id="institution-map-coverage"'), false);
 
 console.log('Scorecard data contract tests passed');

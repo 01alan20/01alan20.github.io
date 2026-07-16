@@ -36,24 +36,17 @@
 
     <section class="opening" id="story">
       <div class="prose wide">
-        <p class="kicker">The analytical question</p>
         <h2>How much adaptation would it take to keep enrollment level?</h2>
         <p class="lead">The demographic decline is visible. The harder questions are how far participation must rise, which institutions are already outperforming their markets, and how many students or tuition dollars must be replaced.</p>
       </div>
     </section>
 
     <section class="chapter-band" id="part-pool" aria-labelledby="pool-heading">
-      <div><span>Part I</span><h2 id="pool-heading">The pool</h2></div>
-      <p>How many likely entrants will exist?</p>
+      <h2 id="pool-heading">How many likely entrants will exist?</h2>
     </section>
 
     <section class="evidence-section national-section" id="national-story">
-      <div class="finding"><strong>One smaller class moves through every stage.</strong><span>Under fixed participation assumptions, fewer graduates produce fewer immediate college entrants and fewer likely four-year entrants.</span></div>
-      <div class="evidence-grid">
-        <div class="evidence-copy">
-          <h3>A smaller pipeline from high school to four-year college</h3>
-          <p>The chart compares the 2026 baseline with 2041. Immediate enrollment and four-year attendance are transparent conversion assumptions, not separate demographic forecasts.</p>
-        </div>
+      <div class="evidence-grid chart-only">
         <div class="figure-card">
           <div class="figure-head"><h3 id="national-title">A smaller pipeline from high school to four-year college</h3></div>
           <div id="national-chart" class="plot primary-plot"></div>
@@ -64,23 +57,21 @@
 
     <section class="enrollment-trends" id="enrollment-trends">
       <div class="section-head">
-        <div><p class="kicker">Observed context</p><h2>Undergraduate and graduate markets have moved differently.</h2></div>
-        <p>These balanced-panel histories describe institutions reporting in both 2015–16 and 2024–25. They are observed context, not forecasts.</p>
+        <div><h2>Undergraduate and graduate markets have moved differently.</h2></div>
       </div>
       <div class="trend-grid">
-        <article class="figure-card"><div class="figure-head"><h3>Undergraduate enrollment</h3></div><div id="undergraduate-trend-chart" class="plot"></div><p class="figure-note" id="undergraduate-history-change">Latest available change: —</p></article>
-        <article class="figure-card"><div class="figure-head"><h3>Graduate enrollment</h3></div><div id="graduate-trend-chart" class="plot"></div><p class="figure-note" id="graduate-history-change">Latest available change: —</p></article>
+        <article class="figure-card"><div class="figure-head"><h3>Undergraduate enrollment</h3></div><div id="undergraduate-trend-chart" class="plot"></div></article>
+        <article class="figure-card"><div class="figure-head"><h3>Graduate enrollment</h3></div><div id="graduate-trend-chart" class="plot"></div></article>
       </div>
     </section>
 
-    <section class="chapter-band chapter-light" id="part-geography" aria-labelledby="geography-heading">
-      <div><span>Part II</span><h2 id="geography-heading">The geography</h2></div>
-      <p>Where is the loss concentrated, and how much participation would offset it?</p>
+    <section class="chapter-band" id="part-geography" aria-labelledby="geography-heading">
+      <h2 id="geography-heading">Where is the loss concentrated, and how much participation would offset it?</h2>
     </section>
 
     <section class="map-section" id="state-markets">
       <div class="section-head">
-        <div><p class="kicker">Future student supply</p><h2>Percentage decline and absolute loss tell different stories.</h2></div>
+        <div><h2>Percentage decline and absolute loss tell different stories.</h2></div>
         <p>Participation increase required to maintain the 2026 entrant pool shows how far the assumed college-going rate would need to rise while the four-year share remains fixed.</p>
       </div>
       <div class="finding" id="state-finding"><strong>The national total conceals different policy challenges.</strong><span>Switch measures to separate concentrated percentage declines from large-volume losses.</span></div>
@@ -97,7 +88,7 @@
 
     <section class="local-section" id="local-markets">
       <div class="section-head">
-        <div><p class="kicker">County concentration</p><h2>Local markets show where the remaining pool is concentrated.</h2></div>
+        <div><h2>Local markets show where the remaining pool is concentrated.</h2></div>
         <p>County estimates allocate state projections using age cohorts and recent geographic movement. They support recruitment planning, not school-level forecasts.</p>
       </div>
       <div class="control-bar">
@@ -109,14 +100,13 @@
     </section>
 
     <section class="chapter-band" id="part-competition" aria-labelledby="competition-heading">
-      <div><span>Part III</span><h2 id="competition-heading">Competition and redistribution</h2></div>
-      <p>Which institutions are moving differently from their markets and peers?</p>
+      <h2 id="competition-heading">Which institutions are moving differently from their markets and peers?</h2>
     </section>
 
     <section class="competition-section" id="explorer">
       <div class="section-head">
-        <div><p class="kicker">Observed performance</p><h2>Institutions are not moving with their markets equally.</h2></div>
-        <p>Observed institution change versus projected state entrant change separates historical institutional momentum from future state-pipeline conditions. It is descriptive, not a forecast of individual enrollment.</p>
+        <div><h2>Institutions are not moving with their markets equally.</h2></div>
+        <p>Observed performance and recruitment composition show how institutions have moved and which entering-student pools they currently draw from. These measures describe present position, not proven future reach.</p>
       </div>
       <div class="finding"><strong>Some institutions are already diverging sharply from comparable colleges.</strong><span>Peer comparisons use control, undergraduate size, and admissions profile, with transparent fallbacks.</span></div>
       <div class="control-bar sticky-controls">
@@ -126,27 +116,27 @@
         <label>Observed undergraduate trend<select id="exposure-trend"><option value="All">All trends</option><option>Growing</option><option>Little change</option><option>Declining</option></select></label>
         <label class="search-control">Search institution<input id="exposure-institution" list="exposure-institution-options" placeholder="All institutions" autocomplete="off"></label>
         <datalist id="exposure-institution-options"></datalist>
+        <button type="button" id="institution-filter-reset" class="filter-reset">Reset filters</button>
       </div>
       <div class="competition-grid">
         <article class="figure-card"><div class="figure-head"><h3>Observed institution change versus projected state entrant change</h3></div><div id="competition-quadrant" class="plot primary-plot"></div><p class="figure-note">Y-axis: observed undergraduate change, 2015–16 to 2024–25. X-axis: projected state four-year entrant change, 2026 to 2041.</p></article>
         <aside class="detail-panel" id="institution-detail"><p class="kicker">Select an institution</p><h3>Click a point or map marker.</h3><p>The profile compares the institution with its state and observed peers.</p></aside>
       </div>
       <div class="map-control-row">
-        <div><h3>Where observed performance is concentrated</h3><p>Bubble size is current undergraduate enrollment.</p></div>
-        <label>Map color<select id="institution-map-metric"><option value="change">Observed undergraduate change</option><option value="currentUG">Current undergraduate enrollment</option><option value="admitRate">Admissions rate</option><option value="retention">Retention rate</option><option value="adultUGShare">Adult student share</option><option value="partTimeUGShare">Part-time share</option><option value="tuitionPerFTE">Net tuition revenue per FTE</option></select></label>
+        <div><h3>Where observed performance is concentrated</h3></div>
+        <label>Map color<select id="institution-map-metric"><option value="change">Observed undergraduate change</option><option value="firstTimeHomeStateShare">First-time students from within the institution state</option><option value="firstTimeOtherStateShare">First-time students from other U.S. states</option><option value="internationalUGShare">Undergraduate nonresident-alien share</option><option value="currentUG">Current undergraduate enrollment</option><option value="admitRate">Admissions rate</option><option value="retention">Retention rate</option><option value="adultUGShare">Adult student share</option><option value="partTimeUGShare">Part-time share</option><option value="tuitionPerFTE">Net tuition revenue per FTE</option></select></label>
       </div>
       <div id="institution-map" class="plot map-plot institution-map-plot"></div>
       <div id="institution-profile" class="profile-shell" hidden></div>
     </section>
 
     <section class="chapter-band chapter-dark" id="part-alternatives" aria-labelledby="alternatives-heading">
-      <div><span>Part IV</span><h2 id="alternatives-heading">Alternative markets</h2></div>
-      <p>Can other student groups plausibly replace the missing pool?</p>
+      <h2 id="alternatives-heading">Can other student groups plausibly replace the missing pool?</h2>
     </section>
 
     <section class="dark-section" id="international">
       <div class="section-head dark-head">
-        <div><p class="kicker light">International concentration</p><h2>The international cushion is large, concentrated, and less predictable.</h2></div>
+        <div><h2>The international cushion is large, concentrated, and less predictable.</h2></div>
         <p class="light-text">International enrollment stock and new-student flow are different measures. The concentration view describes who is enrolled; the intake snapshot describes the newest cohort.</p>
       </div>
       <div class="metric-grid" id="international-metrics"></div>
@@ -158,7 +148,7 @@
 
     <section class="replacement-section" id="replacement-tool">
       <div class="section-head">
-        <div><p class="kicker">Replacement requirement</p><h2>What would it take to replace the missing entrants?</h2></div>
+        <div><h2>What would it take to replace the missing entrants?</h2></div>
         <p>This allocation exercise does not estimate achievable recruitment. It makes the size of the response explicit and leaves any unallocated students visible.</p>
       </div>
       <div class="control-bar">
@@ -178,13 +168,12 @@
     </section>
 
     <section class="chapter-band" id="part-finance" aria-labelledby="finance-heading">
-      <div><span>Part V</span><h2 id="finance-heading">The financial consequence</h2></div>
-      <p>What would a defined enrollment loss mean for gross tuition revenue?</p>
+      <h2 id="finance-heading">What would a defined enrollment loss mean for gross tuition revenue?</h2>
     </section>
 
     <section class="finance-section" id="finance">
       <div class="section-head">
-        <div><p class="kicker">Grounded counterfactual</p><h2>Translate a 5%, 10%, or 20% enrollment loss into dollars.</h2></div>
+        <div><h2>Translate a 5%, 10%, or 20% enrollment loss into dollars.</h2></div>
         <p>This is gross tuition sensitivity, not a budget forecast. Instructional expenditure associated with the affected FTEs is shown separately and is not assumed removable.</p>
       </div>
       <div class="control-bar finance-filters">
@@ -194,14 +183,13 @@
       </div>
       <fieldset class="scenario-options"><legend>Undergraduate enrollment-loss scenario</legend><label><input type="radio" name="finance-loss" value="0.05"> 5%</label><label><input type="radio" name="finance-loss" value="0.10" checked> 10%</label><label><input type="radio" name="finance-loss" value="0.20"> 20%</label></fieldset>
       <div class="finance-layout">
-        <article class="figure-card"><div class="figure-head"><h3>Tuition base and modeled gross reduction</h3></div><div id="finance-chart" class="plot"></div><p class="figure-note">Immediately avoidable cost: Not estimated. Associated instructional expenditure is not subtracted from the gross tuition reduction.</p></article>
+        <article class="figure-card"><div class="figure-head"><h3>Tuition base and modeled gross reduction</h3></div><div id="finance-chart" class="plot"></div></article>
         <aside class="finance-summary" id="finance-summary"><p class="kicker">Select an institution</p><h3>Search above to calculate a counterfactual.</h3></aside>
       </div>
     </section>
 
     <section class="ending">
       <div class="prose wide">
-        <p class="kicker">The conclusion</p>
         <h2>The pool sets the constraint. Competition and revenue models determine the consequence.</h2>
         <p class="lead">The squeeze is unlikely to affect every college equally. Stronger institutions may preserve enrollment by gaining market share, while institutions already losing students and dependent on shrinking markets may face greater pressure.</p>
         <div class="callout">Sustained enrollment and revenue weakness can contribute to program reductions, staffing cuts, consolidation, merger or closure, but this analysis does not predict those outcomes for individual institutions.</div>

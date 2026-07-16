@@ -190,6 +190,7 @@ def build_institution_diagnostics(
     compact_payload: dict,
     institutions: list[dict],
     states: list[dict],
+    residence_records: list[dict] | None = None,
 ) -> list[dict]:
     source_years = compact_payload["sourceYears"]
     compact = {str(row["unitid"]): row for row in compact_payload["institutions"]}
@@ -197,6 +198,13 @@ def build_institution_diagnostics(
     for row in sorted(institutions, key=lambda item: item.get("year", 0), reverse=True):
         meta.setdefault(str(row["unitid"]), row)
     state_2041 = {row["state"]: row["change"] for row in states if row["year"] == 2041}
+    residence = {str(row["unitid"]): row for row in (residence_records or [])}
+    residence_fields = (
+        "firstTimeHomeStateCount", "firstTimeOtherStateCount",
+        "firstTimeForeignCountryCount", "firstTimeUnknownResidenceCount",
+        "firstTimeOtherUSAreaCount", "firstTimeKnownDomesticCount",
+        "firstTimeHomeStateShare", "firstTimeOtherStateShare", "residenceSourceYear",
+    )
 
     rows: list[dict] = []
     for unitid, item in meta.items():
@@ -231,6 +239,8 @@ def build_institution_diagnostics(
             "mapY": item.get("mapY"),
             "statePoolChange2041": state_2041.get(item.get("state")),
         }
+        residence_row = residence.get(unitid, {})
+        row.update({field: residence_row.get(field) for field in residence_fields})
         row["sizeBand"] = size_band(row["currentUG"])
         row["admissionBand"] = admission_band(admit_rate)
         rows.append(row)
@@ -280,8 +290,11 @@ def build() -> tuple[list[dict], list[dict]]:
     compact_payload = json.loads((DATA / "scorecard_compact.json").read_text(encoding="utf-8"))
     institutions = json.loads((DATA / "institutions.json").read_text(encoding="utf-8"))
     states = json.loads((DATA / "states.json").read_text(encoding="utf-8"))
+    residence_payload = json.loads((DATA / "ipeds_residence_2024.json").read_text(encoding="utf-8"))
     state_diagnostics = build_state_diagnostics(states)
-    institution_diagnostics = build_institution_diagnostics(compact_payload, institutions, states)
+    institution_diagnostics = build_institution_diagnostics(
+        compact_payload, institutions, states, residence_payload["records"]
+    )
     write_json(DATA / "state_diagnostics.json", state_diagnostics)
     write_json(DATA / "institution_diagnostics.json", institution_diagnostics)
     print(

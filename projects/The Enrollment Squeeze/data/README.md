@@ -8,6 +8,8 @@ Only the fields used by the current model are retained: `UGDS`, `GRADS`, `ADM_RA
 
 Tuition fields are price inputs, not realized net tuition revenue. `UGDS_NRA` is undergraduate degree-seeking nonresident-alien share, not total international enrollment.
 
+`ipeds_residence_2024.json` is a compact reduction of the official NCES IPEDS `EF2024C` Fall 2024 provisional file. Its in-state and other-state shares describe first-time degree/certificate-seeking undergraduates with known residence in a U.S. state or the District of Columbia. Foreign-country, outlying-area, and unknown-residence counts are kept outside that denominator. These entering-class residence measures are not interchangeable with the Scorecard `UGDS_NRA` undergraduate stock measure.
+
 ## Institution-model research archive
 
 The local `collegeboard history` folder contains annual Scorecard files from 2005-06 through 2025-26. The supplied 2025-26 file has no usable `UGDS` observation, so the research model currently uses 2005-06 through 2024-25. The raw CSVs are intentionally ignored by Git because the archive is too large for the website repository.

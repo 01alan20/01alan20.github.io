@@ -69,6 +69,8 @@ Institution enrollment now uses annual College Scorecard files through 2024–25
 
 The live draft uses annual College Scorecard files through 2024-25. `UGDS` is undergraduate enrollment and `GRADS` is graduate enrollment; each history chart uses its own balanced panel to prevent reporting changes from being presented as enrollment change. Institution projections combine a domestic market-reach proxy, damped peer-relative performance, an undergraduate nonresident-alien scenario using `UGDS_NRA`, and a visible user adjustment. Tuition results are gross undergraduate tuition sensitivity, not realized net revenue.
 
+The public institution explorer also uses Fall 2024 IPEDS `EF2024C` to show the observed share of first-time degree/certificate-seeking undergraduates from within the institution's state and from other U.S. states. Those shares use students with known U.S. state or District of Columbia residence as the denominator. They describe current entering-class composition, not proven future recruitment reach. The separate `UGDS_NRA` view remains an undergraduate enrollment-stock measure.
+
 ## GitHub site
 
 The current GitHub Pages build is stored in `site/`. It includes the complete narrative scaffold, interactive state and institution maps, county explorer, scenario controls and transparency documentation.

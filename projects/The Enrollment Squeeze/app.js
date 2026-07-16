@@ -1,6 +1,6 @@
 const fmtInt = value => new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Number(value) || 0);
 const fmtPct = value => value == null ? '—' : new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 1, signDisplay: 'exceptZero' }).format(value);
-const fmtPoints = value => value == null ? '—' : `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 1, signDisplay: 'exceptZero' }).format(value)} pp`;
+const fmtPoints = value => value == null ? '—' : `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 1, signDisplay: 'exceptZero' }).format(value)} percentage points`;
 const clamp = (value, lower, upper) => Math.max(lower, Math.min(upper, value));
 const DATA_VERSION = '20260716-1';
 let DATA = {};
@@ -26,7 +26,7 @@ function mapLayout() {
 function renderNationalPipeline() {
   const start = DATA.national.find(row => row.year === 2026);
   const end = DATA.national.find(row => row.year === 2041);
-  const labels = ['High-school graduates', 'Immediate college entrants', 'Likely four-year entrants'];
+  const labels = ['High-school graduates', 'Likely college entrants', 'Likely four-year entrants'];
   const startValues = [start.graduates, start.collegeEntrants, start.fourYearEntrants];
   const endValues = [end.graduates, end.collegeEntrants, end.fourYearEntrants];
   const losses = startValues.map((value, index) => value - endValues[index]);
@@ -50,8 +50,6 @@ function renderEnrollmentTrends() {
   const endIndex = years.length - 1;
   const change = values => values[startIndex] ? values[endIndex] / values[startIndex] - 1 : null;
   const periodLabel = `from ${displayYears[startIndex]} to ${displayYears[endIndex]}`;
-  document.querySelector('#undergraduate-history-change').textContent = `${fmtPct(change(undergraduate))} ${periodLabel}`;
-  document.querySelector('#graduate-history-change').textContent = `${fmtPct(change(graduate))} ${periodLabel}`;
   const changeAnnotation = values => ({ x: displayYears[endIndex], y: values[endIndex], text: `<b>${fmtPct(change(values))}</b><br>${periodLabel}`, showarrow: true, arrowcolor: '#d66a3a', arrowhead: 2, ax: -65, ay: -50, bgcolor: '#fff', bordercolor: '#d66a3a', borderwidth: 1, borderpad: 7 });
   const common = {
     margin: { l: 78, r: 22, t: 35, b: 52 }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: { family: 'DM Sans', color: '#14213d' },
@@ -161,7 +159,7 @@ function renderCountyComparison() {
   ], { margin: { l: 145, r: 25, t: 55, b: 65 }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: { family: 'DM Sans' }, xaxis: { gridcolor: '#e4e8ef', title: 'Likely four-year entrants' }, legend: { orientation: 'h', y: -0.14 } }, plotConfig());
   const currentTotal = currentRows.reduce((sum, row) => sum + row.fourYearEntrants, 0);
   const baselineTotal = [...baseline.values()].reduce((sum, row) => sum + row.fourYearEntrants, 0);
-  document.querySelector('#county-summary').innerHTML = `<p class="kicker">${sortMode === 'decline' ? 'Largest declines' : 'Largest markets'}</p><h3>${currentRows[0]?.stateName || state}</h3><p>Likely four-year entrant pool in ${year}: <strong>${fmtInt(currentTotal)}</strong>.</p><p>Change from 2026: <strong>${baselineTotal ? fmtPct(currentTotal / baselineTotal - 1) : '—'}</strong>.</p>`;
+  document.querySelector('#county-summary').innerHTML = `<h3>${currentRows[0]?.stateName || state}</h3><p>Likely four-year entrant pool in ${year}: <strong>${fmtInt(currentTotal)}</strong>.</p><p>Change from 2026: <strong>${baselineTotal ? fmtPct(currentTotal / baselineTotal - 1) : '—'}</strong>.</p>`;
 }
 
 function replacementInputs() {
