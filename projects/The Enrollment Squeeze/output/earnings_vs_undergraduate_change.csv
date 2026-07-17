@@ -1,0 +1,1545 @@
+unitid,name,state,control,current_ug,observed_ug_change,median_earnings_10_years
+222178,Abilene Christian University,TX,Private nonprofit,3195.0,-0.13531799729364002,41400.0
+126182,Adams State University,CO,Public,1250.0,-0.39525882922109334,34200.0
+188429,Adelphi University,NY,Private nonprofit,5276.0,0.096197797631415,55200.0
+168528,Adrian College,MI,Private nonprofit,1604.0,-0.011097410604192337,36900.0
+133872,Adventist University of Health Sciences,FL,Private nonprofit,1361.0,-0.20129107981220662,51400.0
+138600,Agnes Scott College,GA,Private nonprofit,836.0,-0.011820330969267157,36500.0
+100654,Alabama A & M University,AL,Public,6124.0,0.40846366145354196,29900.0
+100724,Alabama State University,AL,Public,3477.0,-0.2664556962025316,26700.0
+102669,Alaska Pacific University,AK,Private nonprofit,457.0,0.7576923076923077,39000.0
+188526,Albany College of Pharmacy and Health Sciences,NY,Private nonprofit,481.0,-0.5194805194805194,122600.0
+138716,Albany State University,GA,Public,5956.0,1.0196676839606647,31500.0
+128498,Albertus Magnus College,CT,Private nonprofit,991.0,-0.16582491582491588,51200.0
+168546,Albion College,MI,Private nonprofit,1300.0,-0.044117647058823484,46200.0
+210571,Albright College,PA,Private nonprofit,1217.0,-0.453770197486535,44700.0
+175342,Alcorn State University,MS,Public,2363.0,-0.18825145997938852,30100.0
+188641,Alfred University,NY,Private nonprofit,1423.0,-0.18871151653363738,39100.0
+156189,Alice Lloyd College,KY,Private nonprofit,558.0,-0.0941558441558441,31300.0
+210669,Allegheny College,PA,Private nonprofit,1156.0,-0.39029535864978904,49200.0
+152798,Allen College,IA,Private nonprofit,261.0,-0.2945945945945946,47500.0
+217624,Allen University,SC,Private nonprofit,576.0,-0.07840000000000003,21800.0
+168591,Alma College,MI,Private nonprofit,1148.0,-0.1464684014869888,42800.0
+210775,Alvernia University,PA,Private nonprofit,2152.0,-0.011483693155718844,42800.0
+238193,Alverno College,WI,Private nonprofit,631.0,-0.5870418848167539,37100.0
+164447,American International College,MA,Private nonprofit,1017.0,-0.31190798376184037,43200.0
+131159,American University,DC,Private nonprofit,7266.0,-0.0046575342465753344,59200.0
+164465,Amherst College,MA,Private nonprofit,1911.0,0.06462395543175492,59700.0
+100690,Amridge University,AL,Private nonprofit,241.0,-0.21753246753246758,40100.0
+217633,Anderson University,SC,Private nonprofit,3183.0,0.20934650455927062,34300.0
+150066,Anderson University,IN,Private nonprofit,1057.0,-0.39943181818181817,36300.0
+168740,Andrews University,MI,Private nonprofit,1224.0,-0.1910112359550562,38200.0
+222831,Angelo State University,TX,Public,5643.0,0.05971830985915494,38500.0
+164492,Anna Maria College,MA,Private nonprofit,906.0,-0.19323241317898487,42900.0
+245838,Antioch University-Los Angeles,CA,Private nonprofit,60.0,-0.6363636363636364,36700.0
+245892,Antioch University-Midwest,OH,Private nonprofit,77.0,0.5098039215686274,36700.0
+245847,Antioch University-Santa Barbara,CA,Private nonprofit,55.0,-0.6726190476190477,36700.0
+245883,Antioch University-Seattle,WA,Private nonprofit,74.0,-0.2952380952380952,36700.0
+237136,Appalachian Bible College,WV,Private nonprofit,193.0,0.11560693641618491,27300.0
+197869,Appalachian State University,NC,Public,19444.0,0.2057546818801934,36800.0
+168786,Aquinas College,MI,Private nonprofit,1083.0,-0.3599290780141844,35500.0
+211088,Arcadia University,PA,Private nonprofit,1948.0,-0.22111155537784888,42500.0
+105899,Arizona Christian University,AZ,Private nonprofit,1165.0,0.8090062111801242,33600.0
+483124,Arizona State University-Skysong,AZ,Public,53782.0,2.315987422159196,45400.0
+104151,Arizona State University-Tempe,AZ,Public,64674.0,0.5689195090000485,45400.0
+106458,Arkansas State University-Main Campus,AR,Public,9110.0,0.022561454708721618,31700.0
+106467,Arkansas Tech University,AR,Public,5388.0,-0.38765768837367887,33000.0
+222877,Arlington Baptist College,TX,Private nonprofit,284.0,0.5434782608695652,34300.0
+201061,Art Academy of Cincinnati,OH,Private nonprofit,205.0,0.03535353535353525,28400.0
+109651,Art Center College of Design,CA,Private nonprofit,2017.0,0.06719576719576725,50300.0
+156213,Asbury University,KY,Private nonprofit,1420.0,-0.0743155149934811,35100.0
+201104,Ashland University,OH,Private nonprofit,2199.0,-0.31665630826600377,39100.0
+164562,Assumption College,MA,Private nonprofit,1669.0,-0.23580586080586086,53000.0
+100812,Athens State University,AL,Public,2446.0,-0.15771349862258954,38500.0
+241216,Atlantic University College,PR,Private nonprofit,1451.0,-0.005483207676490798,19900.0
+100858,Auburn University,AL,Public,26816.0,0.24430420862140978,47100.0
+100830,Auburn University at Montgomery,AL,Public,2542.0,-0.386286817962337,33500.0
+173045,Augsburg College,MN,Private nonprofit,2494.0,0.026337448559670795,47300.0
+482149,Augusta University,GA,Public,5613.0,0.17598994343180396,58500.0
+143084,Augustana College,IL,Private nonprofit,2490.0,0.014669926650366705,48500.0
+219000,Augustana University,SD,Private nonprofit,1965.0,0.2571976967370442,41600.0
+143118,Aurora University,IL,Private nonprofit,3974.0,0.11410148584244473,40000.0
+222983,Austin College,TX,Private nonprofit,1165.0,-0.05515004055150041,48300.0
+219602,Austin Peay State University,TN,Public,7560.0,-0.15199102636006734,34100.0
+231420,Averett University,VA,Private nonprofit,1231.0,0.41820276497695863,41500.0
+176628,Avila University,MO,Private nonprofit,1312.0,-0.041636230825420006,42500.0
+109785,Azusa Pacific University,CA,Private nonprofit,2759.0,-0.5310215876253612,50500.0
+164580,Babson College,MA,Private nonprofit,2728.0,0.2741709481550678,91400.0
+154688,Baker University,KS,Private nonprofit,1100.0,-0.2777413000656599,49800.0
+201195,Baldwin Wallace University,OH,Private nonprofit,2842.0,-0.1387878787878788,44300.0
+150136,Ball State University,IN,Public,13988.0,-0.108419912040283,39400.0
+176664,Baptist Bible College,MO,Private nonprofit,381.0,0.09482758620689657,28200.0
+219639,Baptist Memorial College of Health Sciences,TN,Private nonprofit,770.0,-0.2857142857142857,52200.0
+155070,Barclay College,KS,Private nonprofit,168.0,-0.27896995708154504,28000.0
+189088,Bard College,NY,Private nonprofit,2414.0,0.22165991902834015,35900.0
+189097,Barnard College,NY,Private nonprofit,3264.0,0.2870662460567823,56400.0
+177719,Barnes-Jewish College Goldfarb School of Nursing,MO,Private nonprofit,446.0,-0.2106194690265487,53200.0
+132471,Barry University,FL,Private nonprofit,2212.0,-0.4026465028355387,44300.0
+197911,Barton College,NC,Private nonprofit,982.0,0.007179487179487243,35500.0
+235547,Bastyr University,WA,Private nonprofit,39.0,-0.8581818181818182,38600.0
+160977,Bates College,ME,Private nonprofit,1760.0,-0.017857142857142905,55700.0
+164632,Bay Path University,MA,Private nonprofit,1108.0,-0.400757166035695,41000.0
+223232,Baylor University,TX,Private nonprofit,14785.0,0.04568922837541556,49400.0
+175421,Belhaven University,MS,Private nonprofit,1471.0,-0.456794682422452,35700.0
+156286,Bellarmine University,KY,Private nonprofit,2161.0,-0.16369969040247678,46000.0
+180814,Bellevue University,NE,Private nonprofit,10220.0,0.7027657447517495,52800.0
+238324,Bellin College,WI,Private nonprofit,372.0,0.16981132075471694,55800.0
+197984,Belmont Abbey College,NC,Private nonprofit,1276.0,-0.1390013495276653,35700.0
+219709,Belmont University,TN,Private nonprofit,7137.0,0.20293274903084435,43000.0
+238333,Beloit College,WI,Private nonprofit,926.0,-0.2714398111723053,41500.0
+173124,Bemidji State University,MN,Public,3139.0,-0.2833333333333333,39600.0
+217721,Benedict College,SC,Private nonprofit,1536.0,-0.3768762677484787,22100.0
+154712,Benedictine College,KS,Private nonprofit,2272.0,0.21627408993576025,39100.0
+145619,Benedictine University,IL,Private nonprofit,1942.0,-0.4111582777440873,48900.0
+197993,Bennett College,NC,Private nonprofit,178.0,-0.6496062992125984,28900.0
+230816,Bennington College,VT,Private nonprofit,780.0,0.14202049780380666,26000.0
+164739,Bentley University,MA,Private nonprofit,4474.0,0.081459995165579,80600.0
+156295,Berea College,KY,Private nonprofit,1513.0,-0.05021971123666036,31800.0
+164748,Berklee College of Music,MA,Private nonprofit,7468.0,0.46087636932707365,29100.0
+139144,Berry College,GA,Private nonprofit,2245.0,0.07467687888942076,38600.0
+183804,Beth Medrash Govoha,NJ,Private nonprofit,4027.0,0.4659628685839097,24800.0
+154721,Bethany College,KS,Private nonprofit,569.0,-0.09682539682539681,39500.0
+237181,Bethany College,WV,Private nonprofit,614.0,-0.12285714285714289,39100.0
+173142,Bethany Lutheran College,MN,Private nonprofit,669.0,0.3597560975609757,34600.0
+150145,Bethel College-Indiana,IN,Private nonprofit,1008.0,-0.29805013927576607,35500.0
+154749,Bethel College-North Newton,KS,Private nonprofit,504.0,-0.040000000000000036,39900.0
+219718,Bethel University,TN,Private nonprofit,1547.0,-0.6471259124087592,38100.0
+173160,Bethel University,MN,Private nonprofit,1871.0,-0.3492173913043478,45100.0
+132602,Bethune-Cookman University,FL,Private nonprofit,2732.0,-0.2547735951991271,28400.0
+139153,Beulah Heights University,GA,Private nonprofit,138.0,-0.7166324435318275,27700.0
+110097,Biola University,CA,Private nonprofit,3474.0,-0.17658212846646126,43100.0
+219046,Black Hills State University,SD,Public,1928.0,-0.32327132327132324,34900.0
+143288,Blackburn College,IL,Private nonprofit,471.0,-0.18652849740932642,37600.0
+143297,Blessing Rieman College of Nursing and Health Sciences,IL,Private nonprofit,176.0,-0.2786885245901639,44400.0
+183822,Bloomfield College,NJ,Private nonprofit,781.0,-0.596799173980382,35900.0
+175430,Blue Mountain College,MS,Private nonprofit,498.0,0.14220183486238525,30100.0
+231554,Bluefield College,VA,Private nonprofit,614.0,-0.3054298642533937,40300.0
+237215,Bluefield State College,WV,Public,1042.0,-0.2858122001370802,26700.0
+201371,Bluffton University,OH,Private nonprofit,582.0,-0.3013205282112845,37600.0
+142090,Boise Bible College,ID,Private nonprofit,93.0,-0.3496503496503497,28400.0
+142115,Boise State University,ID,Public,17674.0,0.10746287361363493,36100.0
+233356,Bon Secours Memorial College of Nursing,VA,Private nonprofit,591.0,0.18199999999999994,61600.0
+164872,Boston Architectural College,MA,Private nonprofit,280.0,-0.23287671232876717,46400.0
+164614,Boston Baptist College,MA,Private nonprofit,19.0,-0.7323943661971831,26000.0
+164924,Boston College,MA,Private nonprofit,10085.0,0.06258560741755348,70000.0
+164988,Boston University,MA,Private nonprofit,18248.0,0.1088964511424404,62000.0
+161004,Bowdoin College,ME,Private nonprofit,1873.0,0.04403567447045709,58700.0
+162007,Bowie State University,MD,Public,5043.0,0.18547249647390696,46400.0
+201441,Bowling Green State University-Main Campus,OH,Public,12812.0,-0.07827338129496408,39400.0
+143358,Bradley University,IL,Private nonprofit,3574.0,-0.19431920649233547,51200.0
+165015,Brandeis University,MA,Private nonprofit,3618.0,0.00221606648199435,55300.0
+139199,Brenau University,GA,Private nonprofit,1029.0,-0.3386889460154242,40700.0
+156356,Brescia University,KY,Private nonprofit,545.0,-0.4672531769305963,37400.0
+198066,Brevard College,NC,Private nonprofit,815.0,0.12413793103448278,29100.0
+139205,Brewton-Parker College,GA,Private nonprofit,774.0,0.9111111111111112,29500.0
+152992,Briar Cliff University,IA,Private nonprofit,624.0,-0.3368756641870351,40300.0
+231581,Bridgewater College,VA,Private nonprofit,1400.0,-0.23203510696653862,41100.0
+165024,Bridgewater State University,MA,Public,7829.0,-0.17563441086658949,43800.0
+230047,Brigham Young University-Hawaii,HI,Private nonprofit,2889.0,0.12983965584669543,41000.0
+142522,Brigham Young University-Idaho,ID,Private nonprofit,44397.0,0.5601433742137261,39900.0
+230038,Brigham Young University-Provo,UT,Private nonprofit,32952.0,0.0903676251613117,56800.0
+217156,Brown University,RI,Private nonprofit,7226.0,0.14335443037974693,63100.0
+180878,Bryan College of Health Sciences,NE,Private nonprofit,553.0,-0.08139534883720934,48500.0
+219790,Bryan College-Dayton,TN,Private nonprofit,814.0,-0.15909090909090906,34900.0
+217165,Bryant University,RI,Private nonprofit,3194.0,-0.06880466472303204,66200.0
+211273,Bryn Mawr College,PA,Private nonprofit,1359.0,0.01342281879194629,53100.0
+211291,Bucknell University,PA,Private nonprofit,3876.0,0.10051107325383302,66200.0
+153001,Buena Vista University,IA,Private nonprofit,1366.0,-0.27068873465029364,38800.0
+150163,Butler University,IN,Private nonprofit,4317.0,0.07898025493626593,54700.0
+190512,CUNY Bernard M Baruch College,NY,Public,16154.0,0.08445220193340486,55300.0
+190549,CUNY Brooklyn College,NY,Public,10543.0,-0.19959003947767995,43500.0
+190567,CUNY City College,NY,Public,12505.0,0.0029675970484439596,45800.0
+190594,CUNY Hunter College,NY,Public,16289.0,0.05328160362107992,45100.0
+190600,CUNY John Jay College of Criminal Justice,NY,Public,11590.0,-0.07612594659226779,43300.0
+190637,CUNY Lehman College,NY,Public,10696.0,0.08324893660117483,41200.0
+190646,CUNY Medgar Evers College,NY,Public,3233.0,-0.48329870544989617,34800.0
+190655,CUNY New York City College of Technology,NY,Public,13580.0,-0.1667178008222372,38900.0
+190664,CUNY Queens College,NY,Public,12550.0,-0.17150778980723524,47400.0
+190691,CUNY York College,NY,Public,4345.0,-0.40184471365638763,39200.0
+215114,Cairn University-Langhorne,PA,Private nonprofit,775.0,0.0038860103626943143,33500.0
+183910,Caldwell University,NJ,Private nonprofit,1575.0,-0.0006345177664974777,41700.0
+110361,California Baptist University,CA,Private nonprofit,8179.0,0.2384918231374924,40700.0
+110370,California College of the Arts,CA,Private nonprofit,990.0,-0.33601609657947684,34500.0
+110404,California Institute of Technology,CA,Private nonprofit,987.0,-0.013986013986013957,74200.0
+111081,California Institute of the Arts,CA,Private nonprofit,860.0,-0.08704883227176219,36500.0
+110413,California Lutheran University,CA,Private nonprofit,2296.0,-0.18058529621698782,52800.0
+110422,California Polytechnic State University-San Luis Obispo,CA,Public,21996.0,0.10134187863008215,63100.0
+110529,California State Polytechnic University-Pomona,CA,Public,25042.0,0.13651629300172452,51100.0
+111188,California State University Maritime Academy,CA,Public,804.0,-0.25,79000.0
+110486,California State University-Bakersfield,CA,Public,8577.0,0.06308874566187406,46600.0
+441937,California State University-Channel Islands,CA,Public,5013.0,-0.15278012506337668,45500.0
+110538,California State University-Chico,CA,Public,13631.0,-0.14286612588819725,45600.0
+110547,California State University-Dominguez Hills,CA,Public,12538.0,-0.003655435473617241,43600.0
+110574,California State University-East Bay,CA,Public,9809.0,-0.2443571373545952,50500.0
+110556,California State University-Fresno,CA,Public,21605.0,0.025099639400265605,43300.0
+110565,California State University-Fullerton,CA,Public,38546.0,0.1677421309339877,44500.0
+110583,California State University-Long Beach,CA,Public,35924.0,0.12174863387978152,47100.0
+110592,California State University-Los Angeles,CA,Public,19562.0,-0.16487363387978138,43900.0
+409698,California State University-Monterey Bay,CA,Public,6819.0,0.06413857677902612,42200.0
+110608,California State University-Northridge,CA,Public,32691.0,-0.11595770572487085,43400.0
+110617,California State University-Sacramento,CA,Public,28350.0,0.037587380595103026,47200.0
+110510,California State University-San Bernardino,CA,Public,15023.0,-0.14242493435323667,44800.0
+366711,California State University-San Marcos,CA,Public,14877.0,0.22919937205651486,45100.0
+110495,California State University-Stanislaus,CA,Public,8385.0,0.036080563449895076,43800.0
+150172,Calumet College of Saint Joseph,IN,Private nonprofit,529.0,-0.36798088410991636,39700.0
+176789,Calvary University,MO,Private nonprofit,154.0,-0.31858407079646023,32600.0
+169080,Calvin College,MI,Private nonprofit,3193.0,-0.15707497360084477,43300.0
+165167,Cambridge College,MA,Private nonprofit,532.0,-0.46639919759277837,38100.0
+198136,Campbell University,NC,Private nonprofit,2680.0,-0.3910474892069984,44200.0
+156365,Campbellsville University,KY,Private nonprofit,2840.0,0.35367016205910384,32400.0
+189705,Canisius College,NY,Private nonprofit,1685.0,-0.33973354231974917,46100.0
+201548,Capital University,OH,Private nonprofit,1585.0,-0.4027882441597589,43200.0
+162061,Capitol Technology University,MD,Private nonprofit,315.0,-0.22604422604422603,70700.0
+241377,Caribbean University-Bayamon,PR,Private nonprofit,639.0,-0.5978602894902454,17400.0
+363907,Caribbean University-Ponce,PR,Private nonprofit,414.0,-0.5455543358946213,17400.0
+173258,Carleton College,MN,Private nonprofit,2086.0,0.04561403508771922,52600.0
+132842,Carlos Albizu University-Miami,FL,Private nonprofit,287.0,0.4207920792079207,30700.0
+241331,Carlos Albizu University-San Juan,PR,Private nonprofit,728.0,1.7471698113207546,30700.0
+211431,Carlow University,PA,Private nonprofit,1348.0,-0.021060275962236696,38100.0
+211440,Carnegie Mellon University,PA,Private nonprofit,7304.0,0.22468142186452056,81800.0
+180106,Carroll College,MT,Private nonprofit,1092.0,-0.23529411764705888,43500.0
+238458,Carroll University,WI,Private nonprofit,2523.0,-0.14358452138492872,41400.0
+219806,Carson-Newman University,TN,Private nonprofit,1387.0,-0.18936294564582112,36300.0
+238476,Carthage College,WI,Private nonprofit,2660.0,-0.07058001397624036,44500.0
+201645,Case Western Reserve University,OH,Private nonprofit,6437.0,0.27743599920619166,69900.0
+198215,Catawba College,NC,Private nonprofit,1235.0,-0.015151515151515138,38300.0
+131283,Catholic University of America,DC,Private nonprofit,3154.0,-0.08896591565569034,55800.0
+211468,Cedar Crest College,PA,Private nonprofit,834.0,-0.3867647058823529,45800.0
+201654,Cedarville University,OH,Private nonprofit,4024.0,0.31460307089186546,40200.0
+158477,Centenary College of Louisiana,LA,Private nonprofit,685.0,0.3173076923076923,44700.0
+183974,Centenary University,NJ,Private nonprofit,910.0,-0.41214470284237725,43800.0
+106713,Central Baptist College,AR,Private nonprofit,484.0,-0.3770913770913771,33700.0
+154855,Central Christian College of Kansas,KS,Private nonprofit,380.0,-0.6695652173913044,30500.0
+176910,Central Christian College of the Bible,MO,Private nonprofit,154.0,-0.43173431734317347,29300.0
+153108,Central College,IA,Private nonprofit,1070.0,-0.12653061224489792,43200.0
+128771,Central Connecticut State University,CT,Public,7822.0,-0.18171356836489172,46000.0
+445267,Central Methodist University-College of Graduate and Extended Studies,MO,Private nonprofit,2092.0,0.1488193300384404,34700.0
+176947,Central Methodist University-College of Liberal Arts and Sciences,MO,Private nonprofit,1040.0,-0.04674610449129235,34700.0
+169248,Central Michigan University,MI,Public,10035.0,-0.4970933146236344,40200.0
+201690,Central State University,OH,Public,2620.0,0.46778711484593827,24400.0
+234827,Central Washington University,WA,Public,7833.0,-0.22453222453222454,44900.0
+189857,Central Yeshiva Tomchei Tmimim Lubavitz,NY,Private nonprofit,863.0,0.6822612085769981,21800.0
+156408,Centre College,KY,Private nonprofit,1400.0,0.03321033210332103,44100.0
+180948,Chadron State College,NE,Public,1540.0,-0.26631729394949977,37000.0
+141486,Chaminade University of Honolulu,HI,Private nonprofit,1672.0,-0.05696559503666099,38900.0
+230852,Champlain College,VT,Private nonprofit,2752.0,-0.15297014465989534,40800.0
+111948,Chapman University,CA,Private nonprofit,7478.0,0.19057474924375106,51900.0
+217688,Charleston Southern University,SC,Private nonprofit,2893.0,-0.07037275064267356,35900.0
+128780,Charter Oak State College,CT,Public,1821.0,0.11444308445532436,39800.0
+211556,Chatham University,PA,Private nonprofit,1232.0,0.772661870503597,34000.0
+211583,Chestnut Hill College,PA,Private nonprofit,815.0,-0.4199288256227758,41900.0
+211608,Cheyney University of Pennsylvania,PA,Public,617.0,-0.1005830903790087,29200.0
+144005,Chicago State University,IL,Public,1384.0,-0.5973232470177481,34300.0
+198303,Chowan University,NC,Private nonprofit,603.0,-0.6017173051519155,32600.0
+219833,Christian Brothers University,TN,Private nonprofit,905.0,-0.35724431818181823,43900.0
+231712,Christopher Newport University,VA,Public,4365.0,-0.1339285714285714,43600.0
+217864,Citadel Military College of South Carolina,SC,Public,2705.0,0.03402140672782883,54900.0
+234915,City University of Seattle,WA,Private nonprofit,1137.0,0.13359920239282164,46600.0
+217873,Claflin University,SC,Private nonprofit,1706.0,-0.07483731019522777,28100.0
+112260,Claremont McKenna College,CA,Private nonprofit,1388.0,0.04754716981132079,75000.0
+138947,Clark Atlanta University,GA,Private nonprofit,3603.0,0.314483765049252,34800.0
+165334,Clark University,MA,Private nonprofit,2214.0,-0.050193050193050204,44500.0
+153126,Clarke University,IA,Private nonprofit,742.0,-0.14120370370370372,40000.0
+180832,Clarkson College,NE,Private nonprofit,622.0,-0.11647727272727271,48900.0
+190044,Clarkson University,NY,Private nonprofit,2196.0,-0.3035204567078973,68900.0
+139311,Clayton  State University,GA,Public,4348.0,-0.26554054054054055,37600.0
+156417,Clear Creek Baptist Bible College,KY,Private nonprofit,159.0,0.1777777777777778,26700.0
+169327,Cleary University,MI,Private nonprofit,738.0,0.621978021978022,49200.0
+217882,Clemson University,SC,Public,23300.0,0.3134160090191658,50900.0
+202046,Cleveland Institute of Art,OH,Private nonprofit,539.0,-0.10166666666666668,35900.0
+202073,Cleveland Institute of Music,OH,Private nonprofit,159.0,-0.33472803347280333,34100.0
+202134,Cleveland State University,OH,Public,8969.0,-0.23065705952993654,39700.0
+177038,Cleveland University-Kansas City,KS,Private nonprofit,95.0,1.1111111111111112,38900.0
+218724,Coastal Carolina University,SC,Public,10377.0,0.11712778555280434,37100.0
+153144,Coe College,IA,Private nonprofit,1164.0,-0.12939416604338072,44100.0
+217907,Coker College,SC,Private nonprofit,840.0,-0.23006416131989005,31500.0
+161086,Colby College,ME,Private nonprofit,2407.0,0.29617662897145935,55000.0
+182634,Colby-Sawyer College,NH,Private nonprofit,771.0,-0.3601659751037345,39900.0
+190099,Colgate University,NY,Private nonprofit,3180.0,0.12208892025405782,61300.0
+169442,College for Creative Studies,MI,Private nonprofit,1230.0,-0.11764705882352944,40200.0
+388520,College of Biblical Studies-Houston,TX,Private nonprofit,419.0,0.04228855721393043,39900.0
+217819,College of Charleston,SC,Public,10558.0,0.05232731984451311,39700.0
+193399,College of Mount Saint Vincent,NY,Private nonprofit,2692.0,0.6973518284993694,50100.0
+167394,College of Our Lady of the Elms,MA,Private nonprofit,949.0,-0.25157728706624605,44700.0
+174747,College of Saint Benedict,MN,Private nonprofit,1370.0,-0.29490478641276374,50000.0
+186618,College of Saint Elizabeth,NJ,Private nonprofit,557.0,-0.28406169665809766,42800.0
+181604,College of Saint Mary,NE,Private nonprofit,445.0,-0.36879432624113473,38800.0
+190558,College of Staten Island CUNY,NY,Public,9657.0,-0.21621621621621623,40200.0
+231624,College of William and Mary,VA,Public,7055.0,0.1269968051118211,55400.0
+160959,College of the Atlantic,ME,Private nonprofit,353.0,0.06006006006006004,24300.0
+166124,College of the Holy Cross,MA,Private nonprofit,3106.0,0.1512231282431431,65200.0
+178697,College of the Ozarks,MO,Private nonprofit,1444.0,0.002081887578070818,32800.0
+126669,Colorado Christian University,CO,Private nonprofit,5549.0,0.4283140283140283,36900.0
+126678,Colorado College,CO,Private nonprofit,2014.0,-0.03912213740458015,41900.0
+127556,Colorado Mesa University,CO,Public,8143.0,-0.05588405797101448,35400.0
+126775,Colorado School of Mines,CO,Public,6155.0,0.3581200353045013,82100.0
+126818,Colorado State University-Fort Collins,CO,Public,25538.0,0.1236854842258106,45000.0
+128106,Colorado State University-Pueblo,CO,Public,3042.0,-0.22870182555780938,36000.0
+177065,Columbia College,MO,Private nonprofit,4950.0,-0.6310925622298404,37400.0
+217934,Columbia College,SC,Private nonprofit,1343.0,-0.030324909747292406,33500.0
+144281,Columbia College Chicago,IL,Private nonprofit,5368.0,-0.36787564766839376,33400.0
+112570,Columbia College-Hollywood,CA,Private nonprofit,71.0,-0.7822085889570553,31700.0
+217925,Columbia International University,SC,Private nonprofit,716.0,0.323475046210721,29900.0
+190150,Columbia University in the City of New York,NY,Private nonprofit,8973.0,0.10750431992100706,78200.0
+202170,Columbus College of Art and Design,OH,Private nonprofit,882.0,-0.2032520325203252,31100.0
+139366,Columbus State University,GA,Public,5625.0,-0.1658015720005932,34600.0
+237330,Concord University,WV,Public,1504.0,-0.28821580690960724,30600.0
+173300,Concordia College at Moorhead,MN,Private nonprofit,1829.0,-0.13070342205323193,42400.0
+169363,Concordia University-Ann Arbor,MI,Private nonprofit,702.0,0.1020408163265305,35800.0
+144351,Concordia University-Chicago,IL,Private nonprofit,1323.0,-0.08569454042847269,39000.0
+112075,Concordia University-Irvine,CA,Private nonprofit,1536.0,-0.17552334943639292,44300.0
+180984,Concordia University-Nebraska,NE,Private nonprofit,1283.0,0.02231075697211149,36900.0
+173328,Concordia University-Saint Paul,MN,Private nonprofit,3018.0,0.31847968545216254,50700.0
+224004,Concordia University-Texas,TX,Private nonprofit,1185.0,-0.291267942583732,40900.0
+238616,Concordia University-Wisconsin,WI,Private nonprofit,2197.0,-0.4615196078431373,42800.0
+128902,Connecticut College,CT,Private nonprofit,1937.0,0.044768069039913705,53400.0
+217961,Converse College,SC,Private nonprofit,1173.0,0.4773299748110831,31000.0
+190372,Cooper Union for the Advancement of Science and Art,NY,Private nonprofit,842.0,-0.03550973654066436,54000.0
+162283,Coppin State University,MD,Public,1844.0,-0.29965818458032667,35000.0
+210331,Corban University,OR,Private nonprofit,678.0,-0.3102746693794507,36500.0
+153162,Cornell College,IA,Private nonprofit,1086.0,0.049275362318840665,41200.0
+190415,Cornell University,NY,Private nonprofit,15995.0,0.12434978208913261,73600.0
+170037,Cornerstone University,MI,Private nonprofit,1298.0,-0.32112970711297073,36400.0
+235024,Cornish College of the Arts,WA,Private nonprofit,488.0,-0.3222222222222222,27200.0
+139393,Covenant College,GA,Private nonprofit,939.0,-0.06752730883813307,39100.0
+176770,Cox College,MO,Private nonprofit,540.0,-0.3014230271668823,40400.0
+181002,Creighton University,NE,Private nonprofit,4348.0,0.06568627450980391,56100.0
+174862,Crown College,MN,Private nonprofit,796.0,-0.1271929824561403,32800.0
+177144,Culver-Stockton College,MO,Private nonprofit,807.0,-0.170606372045221,36500.0
+219949,Cumberland University,TN,Private nonprofit,2104.0,0.8391608391608392,38300.0
+165529,Curry College,MA,Private nonprofit,1780.0,-0.3385358602749907,44900.0
+190716,D'Youville College,NY,Private nonprofit,1258.0,-0.2630345635618043,48300.0
+190725,Daemen College,NY,Private nonprofit,1643.0,-0.16514227642276424,39600.0
+219082,Dakota State University,SD,Public,2071.0,0.09229957805907163,36700.0
+219091,Dakota Wesleyan University,SD,Private nonprofit,670.0,-0.1572327044025157,35500.0
+224226,Dallas Baptist University,TX,Private nonprofit,2403.0,-0.2537267080745341,42500.0
+224244,Dallas Christian College,TX,Private nonprofit,224.0,-0.28888888888888886,37100.0
+139463,Dalton State College,GA,Public,4553.0,-0.0502711722987067,30500.0
+182670,Dartmouth College,NH,Private nonprofit,4541.0,0.0775984812529662,70000.0
+169479,Davenport University,MI,Private nonprofit,3134.0,-0.45722202978870796,29400.0
+198385,Davidson College,NC,Private nonprofit,1867.0,0.04946599213041036,54600.0
+237358,Davis & Elkins College,WV,Private nonprofit,661.0,-0.16645649432534682,35600.0
+194569,Davis College,NY,Private nonprofit,106.0,-0.5411255411255411,29400.0
+144740,DePaul University,IL,Private nonprofit,14090.0,-0.10157495377159986,51000.0
+150400,DePauw University,IN,Private nonprofit,1905.0,-0.14535666218034993,50700.0
+210739,DeSales University,PA,Private nonprofit,2128.0,-0.07114797031863818,47400.0
+202514,Defiance College,OH,Private nonprofit,499.0,-0.24164133738601823,38900.0
+130934,Delaware State University,DE,Public,4398.0,0.19316332067281605,34300.0
+211981,Delaware Valley University,PA,Private nonprofit,1628.0,-0.14135021097046419,39900.0
+175616,Delta State University,MS,Public,1620.0,-0.33606557377049184,33600.0
+202523,Denison University,OH,Private nonprofit,2380.0,0.05590062111801242,48400.0
+212009,Dickinson College,PA,Private nonprofit,2273.0,-0.045359092818143654,54800.0
+200059,Dickinson State University,ND,Public,1090.0,-0.03880070546737213,39200.0
+158802,Dillard University,LA,Private nonprofit,1063.0,-0.10295358649789033,32800.0
+181020,Doane University-Arts & Sciences,NE,Private nonprofit,978.0,-0.07122507122507127,44200.0
+190761,Dominican College of Blauvelt,NY,Private nonprofit,1105.0,-0.2796610169491526,45900.0
+148496,Dominican University,IL,Private nonprofit,2561.0,0.14279339580544392,45600.0
+113698,Dominican University of California,CA,Private nonprofit,1114.0,-0.17967599410898383,51900.0
+153250,Dordt College,IA,Private nonprofit,1597.0,0.17686072218128235,39100.0
+153269,Drake University,IA,Private nonprofit,2543.0,-0.22208626491281735,56800.0
+184348,Drew University,NJ,Private nonprofit,1533.0,0.13893016344725106,50800.0
+212054,Drexel University,PA,Private nonprofit,13233.0,-0.18450730264374193,66600.0
+177214,Drury University,MO,Private nonprofit,1383.0,-0.5512654120700844,31500.0
+198419,Duke University,NC,Private nonprofit,6442.0,-0.009075526842024284,77900.0
+212106,Duquesne University,PA,Private nonprofit,5350.0,-0.09978125525828707,56300.0
+150455,Earlham College,IN,Private nonprofit,670.0,-0.28342245989304815,34500.0
+198464,East Carolina University,NC,Public,19896.0,-0.08300686730884455,39300.0
+207041,East Central University,OK,Public,2467.0,-0.3042865200225606,35100.0
+212115,East Stroudsburg University of Pennsylvania,PA,Public,4814.0,-0.21146601146601152,43300.0
+220075,East Tennessee State University,TN,Public,10004.0,-0.08722627737226274,34600.0
+224527,East Texas Baptist University,TX,Private nonprofit,1352.0,0.16151202749140903,38900.0
+144883,East-West University,IL,Private nonprofit,468.0,-0.1428571428571429,24100.0
+129215,Eastern Connecticut State University,CT,Public,3418.0,-0.28298720369204955,44200.0
+144892,Eastern Illinois University,IL,Public,4188.0,-0.4070508282599462,40100.0
+156620,Eastern Kentucky University,KY,Public,12318.0,-0.0870821907655821,34800.0
+232043,Eastern Mennonite University,VA,Private nonprofit,754.0,-0.3685092127303182,38600.0
+169798,Eastern Michigan University,MI,Public,10055.0,-0.41794500723589,37500.0
+165644,Eastern Nazarene College,MA,Private nonprofit,23.0,-0.9735327963176065,42200.0
+187648,Eastern New Mexico University-Main Campus,NM,Public,3357.0,-0.07444168734491319,29300.0
+208646,Eastern Oregon University,OR,Public,2172.0,-0.21446654611211569,38900.0
+212133,Eastern University,PA,Private nonprofit,2404.0,0.11141932501155805,40500.0
+235097,Eastern Washington University,WA,Public,6222.0,-0.4218009478672986,42500.0
+133492,Eckerd College,FL,Private nonprofit,1888.0,-0.0569430569430569,41200.0
+238661,Edgewood College,WI,Private nonprofit,1107.0,-0.37030716723549484,42400.0
+133526,Edward Waters College,FL,Private nonprofit,1087.0,0.16881720430107516,23300.0
+198507,Elizabeth City State University,NC,Public,1975.0,0.31229235880398676,29600.0
+212197,Elizabethtown College,PA,Private nonprofit,1868.0,0.06015891032917131,49100.0
+144962,Elmhurst College,IL,Private nonprofit,3006.0,0.09229651162790709,47300.0
+190983,Elmira College,NY,Private nonprofit,708.0,-0.43450479233226835,42600.0
+198516,Elon University,NC,Private nonprofit,6452.0,0.09300355751312894,49000.0
+133553,Embry-Riddle Aeronautical University-Daytona Beach,FL,Private nonprofit,7860.0,0.49799885648942244,62400.0
+104586,Embry-Riddle Aeronautical University-Prescott,AZ,Private nonprofit,3218.0,0.46739626082991337,62400.0
+426314,Embry-Riddle Aeronautical University-Worldwide,FL,Private nonprofit,9139.0,-0.06839959225280323,62400.0
+165662,Emerson College,MA,Private nonprofit,3870.0,0.022997620935765184,43700.0
+165671,Emmanuel College,MA,Private nonprofit,1854.0,-0.0058981233243967646,47400.0
+139630,Emmanuel College,GA,Private nonprofit,775.0,0.01572739187418093,29800.0
+232025,Emory & Henry College,VA,Private nonprofit,1078.0,0.06732673267326739,38300.0
+139658,Emory University,GA,Private nonprofit,7298.0,0.07799113737075336,61500.0
+155025,Emporia State University,KS,Public,2239.0,-0.39973190348525467,36600.0
+165699,Endicott College,MA,Private nonprofit,3125.0,0.05218855218855212,49800.0
+124487,Epic Bible College,CA,Private nonprofit,66.0,-0.5925925925925926,28100.0
+217998,Erskine College,SC,Private nonprofit,766.0,0.23948220064724923,37500.0
+241951,Escuela de Artes Plasticas y Diseno de Puerto Rico,PR,Public,466.0,-0.18673647469458987,18600.0
+144971,Eureka College,IL,Private nonprofit,522.0,-0.237956204379562,34000.0
+177339,Evangel University,MO,Private nonprofit,1229.0,-0.2867092280905398,34400.0
+385619,Everglades University,FL,Private nonprofit,2789.0,1.1520061728395063,41300.0
+129242,Fairfield University,CT,Private nonprofit,5373.0,0.3908879109500387,69800.0
+184694,Fairleigh Dickinson University-Florham Campus,NJ,Private nonprofit,1990.0,-0.2059058260175579,48400.0
+184603,Fairleigh Dickinson University-Metropolitan Campus,NJ,Private nonprofit,2627.0,-0.2913407067709738,48400.0
+237367,Fairmont State University,WV,Public,2590.0,-0.2946623093681917,32100.0
+153320,Faith Baptist Bible College and Theological Seminary,IA,Private nonprofit,405.0,0.8925233644859814,32800.0
+196042,Farmingdale State College,NY,Public,9552.0,0.19744264761188424,48600.0
+101189,Faulkner University,AL,Private nonprofit,1549.0,-0.3212094653812445,35900.0
+198543,Fayetteville State University,NC,Public,5762.0,0.13269117357971294,29900.0
+184612,Felician University,NJ,Private nonprofit,1774.0,0.1087499999999999,41900.0
+169910,Ferris State University,MI,Public,8106.0,-0.35518256304192186,42700.0
+232089,Ferrum College,VA,Private nonprofit,699.0,-0.473644578313253,36600.0
+165802,Fisher College,MA,Private nonprofit,1167.0,-0.27425373134328357,33200.0
+220181,Fisk University,TN,Private nonprofit,1035.0,0.28411910669975193,33200.0
+165820,Fitchburg State University,MA,Public,2752.0,-0.33782483156881615,41900.0
+133711,Flagler College-St Augustine,FL,Private nonprofit,2391.0,-0.11181277860326899,36700.0
+133650,Florida Agricultural and Mechanical University,FL,Public,7582.0,-0.01596365996106419,35800.0
+133669,Florida Atlantic University,FL,Public,23757.0,-0.019440316988608264,41500.0
+433660,Florida Gulf Coast University,FL,Public,13874.0,0.01752841950861761,41000.0
+133881,Florida Institute of Technology,FL,Private nonprofit,3404.0,0.025301204819277112,61200.0
+480569,Florida Institute of Technology-Online,FL,Private nonprofit,475.0,-0.7729445506692161,61200.0
+133951,Florida International University,FL,Public,39508.0,-0.017409470752089096,44200.0
+133979,Florida Memorial University,FL,Private nonprofit,1183.0,-0.15439599714081487,25900.0
+134079,Florida Southern College,FL,Private nonprofit,2656.0,0.05438666137356085,39300.0
+134097,Florida State University,FL,Public,32212.0,-0.0005274752552049122,44900.0
+177418,Fontbonne University,MO,Private nonprofit,207.0,-0.8093922651933702,40800.0
+191241,Fordham University,NY,Private nonprofit,10512.0,0.20813699574761513,57400.0
+155061,Fort Hays State University,KS,Public,9733.0,-0.15387290272102927,37100.0
+127185,Fort Lewis College,CO,Public,3079.0,-0.13486934532171957,34300.0
+139719,Fort Valley State University,GA,Public,2684.0,0.2090090090090091,28200.0
+165866,Framingham State University,MA,Public,2566.0,-0.4015858208955224,45500.0
+218061,Francis Marion University,SC,Public,2628.0,-0.1933701657458563,32500.0
+205957,Franciscan University of Steubenville,OH,Private nonprofit,2901.0,0.4248526522593321,36100.0
+150604,Franklin College,IN,Private nonprofit,900.0,-0.12706110572259943,41200.0
+182795,Franklin Pierce University,NH,Private nonprofit,992.0,-0.40276941601444916,37500.0
+202806,Franklin University,OH,Private nonprofit,5562.0,0.37367251173129157,48100.0
+212577,Franklin and Marshall College,PA,Private nonprofit,1799.0,-0.18927444794952686,53600.0
+220215,Freed-Hardeman University,TN,Private nonprofit,1212.0,-0.03809523809523807,36300.0
+114813,Fresno Pacific University,CA,Private nonprofit,1544.0,-0.340734415029889,41000.0
+155089,Friends University,KS,Private nonprofit,1048.0,-0.17219589257503953,41600.0
+162584,Frostburg State University,MD,Public,2909.0,-0.40020618556701026,43900.0
+218070,Furman University,SC,Private nonprofit,2379.0,-0.12214022140221403,45900.0
+131450,Gallaudet University,DC,Private nonprofit,812.0,-0.17896865520728011,29200.0
+212601,Gannon University,PA,Private nonprofit,2365.0,-0.11090225563909772,45800.0
+198561,Gardner-Webb University,NC,Private nonprofit,1856.0,-0.2932216298552932,37100.0
+212656,Geneva College,PA,Private nonprofit,1096.0,-0.2488005483207677,38900.0
+208822,George Fox University,OR,Private nonprofit,2699.0,0.051421893260615414,43300.0
+232186,George Mason University,VA,Public,27752.0,0.2440380132687825,58100.0
+131469,George Washington University,DC,Private nonprofit,11182.0,0.025777451609944046,67100.0
+156745,Georgetown College,KY,Private nonprofit,1097.0,0.12512820512820522,40400.0
+131496,Georgetown University,DC,Private nonprofit,7569.0,0.055943080357142794,90100.0
+139861,Georgia College and State University,GA,Public,5947.0,0.0023596831282657327,39300.0
+139755,Georgia Institute of Technology-Main Campus,GA,Public,18785.0,0.2988315010717002,75800.0
+139931,Georgia Southern University,GA,Public,21790.0,0.26885226809526586,40300.0
+139764,Georgia Southwestern State University,GA,Public,2424.0,0.0534550195567145,34700.0
+139940,Georgia State University,GA,Public,26623.0,0.09016829777650393,41200.0
+184773,Georgian Court University,NJ,Private nonprofit,1195.0,-0.11612426035502954,42800.0
+212674,Gettysburg College,PA,Private nonprofit,2099.0,-0.14045864045864043,53400.0
+237385,Glenville State College,WV,Public,1096.0,-0.11826226870474654,30100.0
+202903,Gods Bible School and College,OH,Private nonprofit,281.0,0.15163934426229497,23600.0
+115083,Golden Gate University-San Francisco,CA,Private nonprofit,259.0,-0.4257206208425721,69200.0
+130989,Goldey-Beacom College,DE,Private nonprofit,691.0,0.11093247588424426,39700.0
+235316,Gonzaga University,WA,Private nonprofit,5198.0,0.04692849949647537,54100.0
+165936,Gordon College,MA,Private nonprofit,1278.0,-0.23197115384615385,39800.0
+150668,Goshen College,IN,Private nonprofit,773.0,0.022486772486772555,37000.0
+162654,Goucher College,MD,Private nonprofit,964.0,-0.3424283765347885,46700.0
+145336,Governors State University,IL,Public,2556.0,-0.2750992626205332,39500.0
+170000,Grace Bible College,MI,Private nonprofit,716.0,-0.09252217997465151,28100.0
+150677,Grace College and Theological Seminary,IN,Private nonprofit,1464.0,-0.07808564231738035,35400.0
+153366,Graceland University-Lamoni,IA,Private nonprofit,798.0,-0.41879096868171883,37400.0
+159009,Grambling State University,LA,Public,4164.0,0.16736753574432295,28000.0
+170082,Grand Valley State University,MI,Public,18854.0,-0.1386541185070127,41000.0
+153375,Grand View University,IA,Private nonprofit,1486.0,-0.2133403917416623,41800.0
+183257,Granite State College,NH,Public,1157.0,-0.36147902869757176,33800.0
+170091,Great Lakes Christian College,MI,Private nonprofit,197.0,0.24683544303797467,25700.0
+198598,Greensboro College,NC,Private nonprofit,708.0,-0.06596306068601587,34900.0
+145372,Greenville College,IL,Private nonprofit,955.0,-0.08349328214971208,36300.0
+153384,Grinnell College,IA,Private nonprofit,1729.0,0.0396873120865906,44300.0
+198613,Guilford College,NC,Private nonprofit,1001.0,-0.4338235294117647,36200.0
+173647,Gustavus Adolphus College,MN,Private nonprofit,1878.0,-0.20726044744617977,48400.0
+212832,Gwynedd Mercy University,PA,Private nonprofit,1067.0,-0.44857881136950906,53300.0
+191515,Hamilton College,NY,Private nonprofit,2030.0,0.09081139172487918,59400.0
+173665,Hamline University,MN,Private nonprofit,1776.0,-0.180433779418551,47600.0
+232256,Hampden-Sydney College,VA,Private nonprofit,946.0,-0.1297148114075437,48700.0
+166018,Hampshire College,MA,Private nonprofit,839.0,-0.39899713467048714,31800.0
+232265,Hampton University,VA,Private nonprofit,3727.0,0.09521010872759339,41700.0
+177542,Hannibal-LaGrange University,MO,Private nonprofit,410.0,-0.5159386068476978,33700.0
+150756,Hanover College,IN,Private nonprofit,1031.0,-0.08518189884649507,42500.0
+225247,Hardin-Simmons University,TX,Private nonprofit,1283.0,-0.18539682539682545,40500.0
+107044,Harding University,AR,Private nonprofit,3382.0,-0.24,38600.0
+177551,Harris-Stowe State University,MO,Public,960.0,-0.29567131327953045,26800.0
+191533,Hartwick College,NY,Private nonprofit,1087.0,-0.2145953757225434,42800.0
+166027,Harvard University,MA,Private nonprofit,7601.0,0.03654711577798997,90900.0
+115409,Harvey Mudd College,CA,Private nonprofit,921.0,0.13423645320197042,74200.0
+181127,Hastings College,NE,Private nonprofit,891.0,-0.1922030825022666,41700.0
+212911,Haverford College,PA,Private nonprofit,1430.0,0.16354759967453214,56300.0
+141644,Hawaii Pacific University,HI,Private nonprofit,2392.0,-0.3928934010152284,44900.0
+145497,Hebrew Theological College,IL,Private nonprofit,90.0,-0.8109243697478992,21400.0
+203085,Heidelberg University,OH,Private nonprofit,915.0,-0.09495548961424327,36700.0
+107071,Henderson State University,AR,Public,1456.0,-0.5297157622739018,34900.0
+107080,Hendrix College,AR,Private nonprofit,1100.0,-0.15579432079815814,40600.0
+235422,Heritage University,WA,Private nonprofit,812.0,-0.008547008547008517,32200.0
+198695,High Point University,NC,Private nonprofit,5129.0,0.17583677212287951,38200.0
+191621,Hilbert College,NY,Private nonprofit,921.0,0.053775743707093815,41000.0
+203128,Hiram College,OH,Private nonprofit,777.0,-0.26904985888993416,38400.0
+191630,Hobart William Smith Colleges,NY,Private nonprofit,1786.0,-0.20868409392999554,51200.0
+191649,Hofstra University,NY,Private nonprofit,6488.0,-0.03394877903513993,52400.0
+232308,Hollins University,VA,Private nonprofit,665.0,0.05555555555555558,32200.0
+150774,Holy Cross College,IN,Private nonprofit,639.0,0.1746323529411764,36300.0
+212984,Holy Family University,PA,Private nonprofit,2464.0,0.3508771929824561,48900.0
+162760,Hood College,MD,Private nonprofit,1194.0,-0.042502004811547756,42800.0
+170301,Hope College,MI,Private nonprofit,3288.0,0.010448678549477508,43500.0
+120537,Hope International University,CA,Private nonprofit,564.0,-0.33096085409252674,35800.0
+191676,Houghton College,NY,Private nonprofit,753.0,-0.257396449704142,39900.0
+225399,Houston Baptist University,TX,Private nonprofit,2886.0,0.2883928571428571,46600.0
+225548,Howard Payne University,TX,Private nonprofit,713.0,-0.3222433460076045,36600.0
+131520,Howard University,DC,Private nonprofit,10108.0,0.4873454973513831,46800.0
+115755,Humboldt State University,CA,Public,5612.0,-0.3178558405251003,34700.0
+115773,Humphreys University-Stockton and Modesto Campuses,CA,Private nonprofit,149.0,-0.6598173515981736,26800.0
+101435,Huntingdon College,AL,Private nonprofit,879.0,-0.24224137931034484,36800.0
+150941,Huntington University,IN,Private nonprofit,1082.0,0.16846652267818585,34000.0
+225575,Huston-Tillotson University,TX,Private nonprofit,1005.0,0.038223140495867725,31800.0
+142276,Idaho State University,ID,Public,7583.0,-0.15453227784591372,34600.0
+145691,Illinois College,IL,Private nonprofit,930.0,-0.01273885350318471,39900.0
+145725,Illinois Institute of Technology,IL,Private nonprofit,2833.0,-0.030790283954840958,69800.0
+145813,Illinois State University,IL,Public,19057.0,0.03892493049119561,45500.0
+145646,Illinois Wesleyan University,IL,Private nonprofit,1582.0,-0.13740458015267176,55600.0
+213011,Immaculata University,PA,Private nonprofit,1320.0,-0.22031896042528054,51800.0
+151290,Indiana Institute of Technology,IN,Private nonprofit,1441.0,-0.7875571281144036,41200.0
+151324,Indiana State University,IN,Public,6188.0,-0.423675142032225,36700.0
+213020,Indiana University of Pennsylvania-Main Campus,PA,Public,6764.0,-0.401256970877224,39000.0
+151351,Indiana University-Bloomington,IN,Public,37806.0,0.15635896494769685,46100.0
+151388,Indiana University-East,IN,Public,2589.0,-0.1840529467381028,30100.0
+151333,Indiana University-Kokomo,IN,Public,2352.0,-0.1533477321814255,35100.0
+151360,Indiana University-Northwest,IN,Public,2661.0,-0.35365557444741313,35900.0
+151102,Indiana University-Purdue University-Fort Wayne,IN,Public,5484.0,-0.37297050080036587,35200.0
+151111,Indiana University-Purdue University-Indianapolis,IN,Public,13830.0,-0.3481642079464581,41000.0
+151342,Indiana University-South Bend,IN,Public,3933.0,-0.23852855759922553,33400.0
+151379,Indiana University-Southeast,IN,Public,3170.0,-0.39364957918898236,35700.0
+151801,Indiana Wesleyan University-Marion,IN,Private nonprofit,1974.0,-0.8026,48100.0
+242626,Inter American University of Puerto Rico-Aguadilla,PR,Private nonprofit,2906.0,-0.30776560266793707,19100.0
+242635,Inter American University of Puerto Rico-Arecibo,PR,Private nonprofit,2220.0,-0.4484472049689441,19100.0
+242644,Inter American University of Puerto Rico-Barranquitas,PR,Private nonprofit,937.0,-0.5335988053758088,19100.0
+242705,Inter American University of Puerto Rico-Bayamon,PR,Private nonprofit,3476.0,-0.2242802945771033,19100.0
+242680,Inter American University of Puerto Rico-Fajardo,PR,Private nonprofit,1072.0,-0.4770731707317073,19100.0
+242699,Inter American University of Puerto Rico-Guayama,PR,Private nonprofit,2393.0,0.26080084299262385,19100.0
+242653,Inter American University of Puerto Rico-Metro,PR,Private nonprofit,2607.0,-0.5894488188976378,19100.0
+242662,Inter American University of Puerto Rico-Ponce,PR,Private nonprofit,2404.0,-0.52025543803632,19100.0
+242617,Inter American University of Puerto Rico-San German,PR,Private nonprofit,2569.0,-0.3949599623174753,19100.0
+191931,Iona College,NY,Private nonprofit,2951.0,-0.02220013253810471,53400.0
+153603,Iowa State University,IA,Public,25367.0,-0.14068428184281845,48600.0
+191968,Ithaca College,NY,Private nonprofit,4242.0,-0.32441471571906355,50300.0
+175856,Jackson State University,MS,Public,4600.0,-0.38138784292630445,29100.0
+101480,Jacksonville State University,AL,Public,7036.0,0.0620377358490567,35000.0
+134945,Jacksonville University,FL,Private nonprofit,2930.0,-0.011470985155195734,45600.0
+232423,James Madison University,VA,Public,20888.0,0.09827015090172986,53800.0
+225885,Jarvis Christian College,TX,Private nonprofit,577.0,-0.3314020857473928,25000.0
+107141,John Brown University,AR,Private nonprofit,1471.0,-0.1264845605700713,46200.0
+203368,John Carroll University,OH,Private nonprofit,2274.0,-0.2578328981723238,51700.0
+162928,Johns Hopkins University,MD,Private nonprofit,5693.0,-0.028829750938246357,69800.0
+460349,Johnson & Wales University-Online,RI,Private nonprofit,2202.0,8.024590163934427,36600.0
+217235,Johnson & Wales University-Providence,RI,Private nonprofit,3868.0,-0.5431675918270934,36600.0
+198756,Johnson C Smith University,NC,Private nonprofit,1244.0,-0.0926331145149526,28300.0
+220473,Johnson University,TN,Private nonprofit,743.0,-0.1547212741751991,28900.0
+146339,Judson University,IL,Private nonprofit,708.0,-0.3420074349442379,41400.0
+213251,Juniata College,PA,Private nonprofit,1191.0,-0.189795918367347,46800.0
+170532,Kalamazoo College,MI,Private nonprofit,1149.0,-0.18798586572438158,47800.0
+177746,Kansas City Art Institute,MO,Private nonprofit,812.0,0.2647975077881619,30200.0
+155399,Kansas State University,KS,Public,15142.0,-0.22121071851051788,43800.0
+155414,Kansas Wesleyan University,KS,Private nonprofit,956.0,0.437593984962406,39200.0
+185262,Kean University,NJ,Public,11433.0,-0.027392598894087627,46000.0
+183062,Keene State College,NH,Public,2699.0,-0.3552317247969422,41200.0
+203517,Kent State University at Kent,OH,Public,19320.0,-0.15185038851573818,36300.0
+157100,Kentucky Christian University,KY,Private nonprofit,429.0,-0.18903591682419663,31400.0
+157058,Kentucky State University,KY,Public,1309.0,0.017884914463452528,28600.0
+157076,Kentucky Wesleyan College,KY,Private nonprofit,842.0,0.2185238784370478,34000.0
+203535,Kenyon College,OH,Private nonprofit,1732.0,0.020023557126030544,44300.0
+203544,Kettering College,OH,Private nonprofit,549.0,-0.13132911392405067,52700.0
+169983,Kettering University,MI,Private nonprofit,1205.0,-0.3312985571587126,78600.0
+192192,Keuka College,NY,Private nonprofit,966.0,-0.4370629370629371,41500.0
+213303,Keystone College,PA,Private nonprofit,771.0,-0.41811320754716985,29900.0
+220516,King University,TN,Private nonprofit,908.0,-0.6147645311837081,42100.0
+213321,King's College,PA,Private nonprofit,1484.0,-0.20172135556750936,48700.0
+146427,Knox College,IL,Private nonprofit,1127.0,-0.18155410312273057,38200.0
+213349,Kutztown University of Pennsylvania,PA,Public,6180.0,-0.2503639010189228,40900.0
+171881,Kuyper College,MI,Private nonprofit,145.0,-0.43137254901960786,27200.0
+192448,LIU Post,NY,Private nonprofit,5520.0,0.603252977054894,46400.0
+213358,La Roche College,PA,Private nonprofit,751.0,-0.44738778513612953,40400.0
+213367,La Salle University,PA,Private nonprofit,1953.0,-0.4861878453038674,54300.0
+117627,La Sierra University,CA,Private nonprofit,1116.0,-0.4475247524752475,45100.0
+140234,LaGrange College,GA,Private nonprofit,636.0,-0.2972375690607735,40200.0
+213385,Lafayette College,PA,Private nonprofit,2757.0,0.10059880239520957,67500.0
+117168,Laguna College of Art and Design,CA,Private nonprofit,746.0,0.3064798598949212,31000.0
+203580,Lake Erie College,OH,Private nonprofit,852.0,0.08121827411167515,33500.0
+146481,Lake Forest College,IL,Private nonprofit,1813.0,0.16292495189223866,49000.0
+170639,Lake Superior State University,MI,Public,1325.0,-0.3675417661097852,36200.0
+238980,Lakeland University,WI,Private nonprofit,1212.0,-0.44959128065395093,41100.0
+146533,Lakeview College of Nursing,IL,Private nonprofit,66.0,-0.7821782178217822,53600.0
+226091,Lamar University,TX,Public,8150.0,-0.09524866785079933,39400.0
+213400,Lancaster Bible College,PA,Private nonprofit,1569.0,0.1304034582132565,33000.0
+218229,Lander University,SC,Public,3397.0,0.30353031465848046,33600.0
+220598,Lane College,TN,Private nonprofit,736.0,-0.4651162790697675,23300.0
+207209,Langston University,OK,Public,1742.0,-0.18560074801309023,27000.0
+166391,Lasell College,MA,Private nonprofit,1226.0,-0.32265193370165746,39900.0
+170675,Lawrence Technological University,MI,Private nonprofit,1668.0,-0.218369259606373,55400.0
+239017,Lawrence University,WI,Private nonprofit,1396.0,-0.08578912901113289,41700.0
+192323,Le Moyne College,NY,Private nonprofit,2439.0,-0.11917659804983749,49100.0
+220604,Le Moyne-Owen College,TN,Private nonprofit,581.0,-0.3851851851851852,27700.0
+226231,LeTourneau University,TX,Private nonprofit,1468.0,-0.24055871702017584,47700.0
+213507,Lebanon Valley College,PA,Private nonprofit,1684.0,0.019987886129618326,45000.0
+220613,Lee University,TN,Private nonprofit,2617.0,-0.369549506143098,33600.0
+198808,Lees-McRae College,NC,Private nonprofit,873.0,-0.15406976744186052,33000.0
+213543,Lehigh University,PA,Private nonprofit,5898.0,0.16699643846458256,77200.0
+198835,Lenoir-Rhyne University,NC,Private nonprofit,1359.0,-0.037535410764872545,36300.0
+166452,Lesley University,MA,Private nonprofit,1122.0,-0.3931855056787452,35900.0
+209056,Lewis & Clark College,OR,Private nonprofit,2120.0,0.015812170579779572,43600.0
+146612,Lewis University,IL,Private nonprofit,4015.0,-0.11349083682932215,47300.0
+142328,Lewis-Clark State College,ID,Public,2385.0,-0.20843013607699967,33800.0
+232557,Liberty University,VA,Private nonprofit,50012.0,0.009486900004036958,35200.0
+117104,Life Pacific College,CA,Private nonprofit,456.0,-0.12307692307692308,28700.0
+140252,Life University,GA,Private nonprofit,893.0,0.23855755894590835,35400.0
+218238,Limestone College,SC,Private nonprofit,1482.0,-0.4984771573604061,36700.0
+220631,Lincoln Memorial University,TN,Private nonprofit,1572.0,0.07892930679478383,36600.0
+213598,Lincoln University,PA,Public,1539.0,-0.08880994671403197,33300.0
+177940,Lincoln University,MO,Public,1392.0,-0.3829787234042553,28900.0
+177968,Lindenwood University,MO,Private nonprofit,4624.0,-0.40618980351868494,39200.0
+157216,Lindsey Wilson College,KY,Private nonprofit,1585.0,-0.24487851357789425,27000.0
+209065,Linfield College-McMinnville Campus,OR,Private nonprofit,1621.0,-0.02525556223692127,52400.0
+219976,Lipscomb University,TN,Private nonprofit,2997.0,-0.008928571428571397,39800.0
+198862,Livingstone College,NC,Private nonprofit,924.0,-0.267248215701824,21400.0
+177986,Logan University,MO,Private nonprofit,229.0,3.403846153846154,46100.0
+117636,Loma Linda University,CA,Private nonprofit,909.0,-0.13263358778625955,79100.0
+232566,Longwood University,VA,Public,3015.0,-0.3146169583996363,39900.0
+153825,Loras College,IA,Private nonprofit,1083.0,-0.25,42400.0
+159568,Louisiana College,LA,Private nonprofit,672.0,-0.23723041997729855,40500.0
+159373,Louisiana State University Health Sciences Center-New Orleans,LA,Public,862.0,-0.01710376282782211,66500.0
+435000,Louisiana State University Health Sciences Center-Shreveport,LA,Public,21.0,-0.46153846153846156,122500.0
+159391,Louisiana State University and Agricultural & Mechanical College,LA,Public,30594.0,0.22847735303565697,47600.0
+159382,Louisiana State University-Alexandria,LA,Public,5632.0,1.2636655948553055,33000.0
+159416,Louisiana State University-Shreveport,LA,Public,2153.0,-0.1183456183456183,34600.0
+159647,Louisiana Tech University,LA,Public,8312.0,0.08952680561017168,41000.0
+203757,Lourdes University,OH,Private nonprofit,543.0,-0.5362937660119556,34600.0
+117946,Loyola Marymount University,CA,Private nonprofit,7094.0,0.1512495942875689,55800.0
+146719,Loyola University Chicago,IL,Private nonprofit,11737.0,0.14217594394706112,52000.0
+163046,Loyola University Maryland,MD,Private nonprofit,3869.0,-0.04018853882411311,64800.0
+159656,Loyola University New Orleans,LA,Private nonprofit,2812.0,0.09331259720062213,46100.0
+226383,Lubbock Christian University,TX,Private nonprofit,1252.0,-0.14010989010989006,40800.0
+153834,Luther College,IA,Private nonprofit,1379.0,-0.39676290463692043,43500.0
+135364,Luther Rice College & Seminary,GA,Private nonprofit,165.0,-0.5965770171149144,42500.0
+213668,Lycoming College,PA,Private nonprofit,996.0,-0.20952380952380956,45700.0
+232609,Lynchburg College,VA,Private nonprofit,1577.0,-0.23594961240310075,42100.0
+132657,Lynn University,FL,Private nonprofit,2859.0,0.46090955544200307,38400.0
+106342,Lyon College,AR,Private nonprofit,648.0,-0.040000000000000036,40500.0
+166656,MCPHS University,MA,Private nonprofit,3451.0,-0.10987877224658238,112700.0
+173902,Macalester College,MN,Private nonprofit,2131.0,-0.008375988832014847,45300.0
+170806,Madonna University,MI,Private nonprofit,1632.0,-0.3982300884955752,39600.0
+153861,Maharishi University of Management,IA,Private nonprofit,922.0,1.6802325581395348,23300.0
+161509,Maine College of Art,ME,Private nonprofit,415.0,-0.03488372093023251,24300.0
+161299,Maine Maritime Academy,ME,Public,942.0,-0.05326633165829142,84000.0
+203775,Malone University,OH,Private nonprofit,798.0,-0.382830626450116,41200.0
+151777,Manchester University,IN,Private nonprofit,936.0,-0.2451612903225806,38800.0
+155496,Manhattan Christian College,KS,Private nonprofit,146.0,-0.5034013605442177,31800.0
+192703,Manhattan College,NY,Private nonprofit,2744.0,-0.23266219239373598,62800.0
+192712,Manhattan School of Music,NY,Private nonprofit,539.0,0.31463414634146347,21300.0
+192749,Manhattanville College,NY,Private nonprofit,1362.0,-0.21903669724770647,45900.0
+239071,Maranatha Baptist University,WI,Private nonprofit,541.0,-0.2862796833773087,31600.0
+151786,Marian University,IN,Private nonprofit,2266.0,0.15083798882681565,42800.0
+239080,Marian University,WI,Private nonprofit,1010.0,-0.34330299089726923,39700.0
+203845,Marietta College,OH,Private nonprofit,952.0,-0.21646090534979423,40100.0
+192819,Marist College,NY,Private nonprofit,5182.0,-0.00461006530925856,54700.0
+239105,Marquette University,WI,Private nonprofit,7660.0,-0.05931474886405497,59000.0
+198899,Mars Hill University,NC,Private nonprofit,1044.0,-0.22838137472283815,30300.0
+237525,Marshall University,WV,Public,7266.0,-0.17243735763097945,34300.0
+173452,Martin Luther College,MN,Private nonprofit,725.0,-0.029451137884872858,36900.0
+220701,Martin Methodist College,TN,Private nonprofit,864.0,-0.21311475409836067,32200.0
+151810,Martin University,IN,Private nonprofit,150.0,-0.4755244755244755,23000.0
+232672,Mary Baldwin University,VA,Private nonprofit,1090.0,-0.13833992094861658,36200.0
+163295,Maryland Institute College of Art,MD,Private nonprofit,1189.0,-0.344542447629548,35700.0
+192864,Marymount Manhattan College,NY,Private nonprofit,1577.0,-0.15893333333333337,40400.0
+232706,Marymount University,VA,Private nonprofit,1810.0,-0.2147505422993492,52300.0
+220710,Maryville College,TN,Private nonprofit,1005.0,-0.1417591801878736,37000.0
+178059,Maryville University of Saint Louis,MO,Private nonprofit,5658.0,1.09322974472808,46200.0
+213826,Marywood University,PA,Private nonprofit,1784.0,-0.01978021978021982,37200.0
+166674,Massachusetts College of Art and Design,MA,Public,1831.0,0.054723502304147464,34600.0
+167288,Massachusetts College of Liberal Arts,MA,Public,713.0,-0.49894588896697123,34900.0
+166683,Massachusetts Institute of Technology,MA,Private nonprofit,4535.0,0.013634331694233337,94200.0
+166692,Massachusetts Maritime Academy,MA,Public,1395.0,-0.09238776837996099,79300.0
+200226,Mayville State University,ND,Public,733.0,-0.10500610500610497,36300.0
+164270,McDaniel College,MD,Private nonprofit,1617.0,0.002479851208927464,47900.0
+147013,McKendree University,IL,Private nonprofit,1752.0,-0.23560209424083767,45800.0
+226587,McMurry University,TX,Private nonprofit,1176.0,0.17365269461077837,38400.0
+159717,McNeese State University,LA,Public,5005.0,-0.23130087544156042,37300.0
+155511,McPherson College,KS,Private nonprofit,872.0,0.35614307931570766,41400.0
+218335,Medical University of South Carolina,SC,Public,303.0,-0.06481481481481477,81200.0
+118693,Menlo College,CA,Private nonprofit,752.0,-0.04081632653061229,46400.0
+140447,Mercer University,GA,Private nonprofit,4500.0,-0.012291483757682187,46700.0
+193016,Mercy College,NY,Private nonprofit,5735.0,-0.10530421216848673,37000.0
+213987,Mercyhurst University,PA,Private nonprofit,2191.0,-0.12008032128514057,39700.0
+198950,Meredith College,NC,Private nonprofit,1188.0,-0.28043609933373714,36500.0
+166850,Merrimack College,MA,Private nonprofit,3916.0,0.2515180568871844,54800.0
+417752,Messenger College,TX,Private nonprofit,24.0,-0.7798165137614679,18800.0
+213996,Messiah College,PA,Private nonprofit,2259.0,-0.17040029379361,43200.0
+198969,Methodist University,NC,Private nonprofit,1448.0,-0.33364012885411876,38700.0
+190114,Metropolitan College of New York,NY,Private nonprofit,402.0,-0.4839537869062901,37800.0
+174020,Metropolitan State University,MN,Public,5616.0,-0.22473771397018227,46000.0
+127565,Metropolitan State University of Denver,CO,Public,15002.0,-0.23650058527151507,38400.0
+204006,Miami University-Hamilton,OH,Public,2043.0,-0.27911079745942136,45200.0
+204015,Miami University-Middletown,OH,Public,837.0,-0.4378777703156481,45200.0
+204024,Miami University-Oxford,OH,Public,16656.0,0.04262910798122066,45200.0
+171100,Michigan State University,MI,Public,40922.0,0.05325200113247375,51500.0
+171128,Michigan Technological University,MI,Public,5955.0,0.0590432153654632,64700.0
+245953,Mid-America Christian University,OK,Private nonprofit,1666.0,-0.1585858585858586,38700.0
+199458,Mid-Atlantic Christian University,NC,Private nonprofit,132.0,-0.3497536945812808,28500.0
+155520,MidAmerica Nazarene University,KS,Private nonprofit,983.0,-0.26034612490594433,40800.0
+482158,Middle Georgia State University,GA,Public,6574.0,-0.09010380622837366,32400.0
+220978,Middle Tennessee State University,TN,Public,16301.0,-0.16172991874935716,37000.0
+230959,Middlebury College,VT,Private nonprofit,2738.0,0.08823529411764697,55600.0
+119058,Middlebury Institute of International Studies at Monterey,CA,Private nonprofit,4.0,-0.7647058823529411,55600.0
+181330,Midland University,NE,Private nonprofit,1159.0,-0.050000000000000044,38800.0
+157377,Midway University,KY,Private nonprofit,1262.0,0.3599137931034482,35600.0
+226833,Midwestern State University,TX,Public,4087.0,-0.22697181766597319,39100.0
+101675,Miles College,AL,Private nonprofit,1155.0,-0.3820224719101124,25300.0
+214041,Millersville University of Pennsylvania,PA,Public,5728.0,-0.1760644418872267,43100.0
+147244,Millikin University,IL,Private nonprofit,1382.0,-0.3131212723658051,42200.0
+118888,Mills College,CA,Private nonprofit,464.0,-0.45539906103286387,39600.0
+175980,Millsaps College,MS,Private nonprofit,549.0,-0.27476882430647287,46300.0
+239309,Milwaukee Institute of Art & Design,WI,Private nonprofit,837.0,0.34134615384615374,33700.0
+239318,Milwaukee School of Engineering,WI,Private nonprofit,2654.0,-0.005247376311844132,67400.0
+174127,Minneapolis College of Art and Design,MN,Private nonprofit,705.0,0.0553892215568863,34500.0
+174358,Minnesota State University Moorhead,MN,Public,3072.0,-0.39108027750247765,38000.0
+173920,Minnesota State University-Mankato,MN,Public,11703.0,-0.045354433477445166,43100.0
+200253,Minot State University,ND,Public,2062.0,-0.19421649081672532,38900.0
+214069,Misericordia University,PA,Private nonprofit,1672.0,-0.28608027327070884,49600.0
+176053,Mississippi College,MS,Private nonprofit,2518.0,-0.13112491373360935,38400.0
+176080,Mississippi State University,MS,Public,18397.0,0.10082575394925808,40300.0
+176035,Mississippi University for Women,MS,Public,1605.0,-0.2677919708029197,33100.0
+176044,Mississippi Valley State University,MS,Public,1439.0,-0.18562535370684774,22700.0
+178244,Missouri Baptist University,MO,Private nonprofit,1488.0,-0.1448275862068965,34600.0
+178341,Missouri Southern State University,MO,Public,3019.0,-0.4196462898885044,32500.0
+179566,Missouri State University-Springfield,MO,Public,13313.0,-0.19883252091231873,37400.0
+178411,Missouri University of Science and Technology,MO,Public,5521.0,-0.18171038980287535,67100.0
+178369,Missouri Valley College,MO,Private nonprofit,1443.0,0.0388768898488121,33400.0
+178387,Missouri Western State University,MO,Public,2219.0,-0.4979638009049774,33100.0
+129774,Mitchell College,CT,Private nonprofit,377.0,-0.4279210925644916,31300.0
+193292,Molloy College,NY,Private nonprofit,3162.0,-0.06255558849688703,57500.0
+147341,Monmouth College,IL,Private nonprofit,702.0,-0.40153452685422,39900.0
+185572,Monmouth University,NJ,Private nonprofit,3684.0,-0.20961167131516845,50300.0
+180461,Montana State University,MT,Public,14451.0,0.07139679715302494,40400.0
+180179,Montana State University-Billings,MT,Public,2626.0,-0.29541185940434667,33800.0
+180522,Montana State University-Northern,MT,Public,761.0,-0.34055459272097055,35100.0
+180416,Montana Tech of the University of Montana,MT,Public,1480.0,-0.22023182297154897,41100.0
+185590,Montclair State University,NJ,Public,18376.0,0.13931427862855728,48900.0
+199032,Montreat College,NC,Private nonprofit,762.0,0.05248618784530379,36600.0
+166911,Montserrat College of Art,MA,Private nonprofit,226.0,-0.36871508379888274,30900.0
+214148,Moore College of Art and Design,PA,Private nonprofit,535.0,0.32098765432098775,32400.0
+214157,Moravian College,PA,Private nonprofit,1949.0,0.10424929178470266,48200.0
+157386,Morehead State University,KY,Public,4578.0,-0.34953111679454385,31400.0
+140553,Morehouse College,GA,Private nonprofit,2844.0,0.3148404993065188,42500.0
+163453,Morgan State University,MD,Public,9019.0,0.43295201779472503,39200.0
+154004,Morningside College,IA,Private nonprofit,1163.0,-0.10400616332819723,42400.0
+218399,Morris College,SC,Private nonprofit,383.0,-0.5051679586563307,23300.0
+204176,Mount Carmel College of Nursing,OH,Private nonprofit,532.0,-0.4069119286510591,56100.0
+166939,Mount Holyoke College,MA,Private nonprofit,2169.0,0.033349213911386455,46100.0
+219198,Mount Marty College,SD,Private nonprofit,697.0,0.19145299145299144,33800.0
+239390,Mount Mary University,WI,Private nonprofit,631.0,-0.14149659863945574,39300.0
+154013,Mount Mercy University,IA,Private nonprofit,1107.0,-0.27882736156351795,43900.0
+204200,Mount Saint Joseph University,OH,Private nonprofit,1129.0,-0.18601297764960345,41300.0
+193353,Mount Saint Mary College,NY,Private nonprofit,1148.0,-0.4635514018691589,47900.0
+119173,Mount Saint Mary's University,CA,Private nonprofit,1719.0,-0.3787495482471991,52000.0
+163462,Mount St Mary's University,MD,Private nonprofit,1768.0,-0.010632344711807518,53600.0
+204194,Mount Vernon Nazarene University,OH,Private nonprofit,1358.0,-0.19454329774614476,41600.0
+214175,Muhlenberg College,PA,Private nonprofit,1727.0,-0.25879828326180254,55300.0
+157401,Murray State University,KY,Public,6688.0,-0.15245216068939293,35700.0
+204264,Muskingum University,OH,Private nonprofit,1376.0,-0.12911392405063293,37700.0
+127653,Naropa University,CO,Private nonprofit,339.0,-0.14393939393939392,21400.0
+147536,National Louis University,IL,Private nonprofit,4406.0,2.641322314049587,42800.0
+119605,National University,CA,Private nonprofit,10794.0,0.261718293395675,58300.0
+147590,National University of Health Sciences,IL,Private nonprofit,13.0,-0.8289473684210527,39400.0
+127714,Nazarene Bible College,CO,Private nonprofit,284.0,-0.6082758620689654,29300.0
+193584,Nazareth College,NY,Private nonprofit,1873.0,-0.09865255052935518,43900.0
+181297,Nebraska Methodist College of Nursing & Allied Health,NE,Private nonprofit,781.0,0.020915032679738488,47100.0
+181446,Nebraska Wesleyan University,NE,Private nonprofit,1453.0,-0.18416619876473894,45300.0
+214272,Neumann University,PA,Private nonprofit,1533.0,-0.3498727735368957,41500.0
+182980,New England College,NH,Private nonprofit,1022.0,-0.45811240721102864,34100.0
+208725,New Hope Christian College-Eugene,OR,Private nonprofit,56.0,-0.6,26700.0
+185129,New Jersey City University,NJ,Public,3681.0,-0.40638606676342526,42100.0
+185828,New Jersey Institute of Technology,NJ,Public,9019.0,0.27947226556958427,65900.0
+187897,New Mexico Highlands University,NM,Public,1451.0,-0.3181390977443609,35600.0
+187967,New Mexico Institute of Mining and Technology,NM,Public,995.0,-0.3375499334221038,52900.0
+188030,New Mexico State University-Main Campus,NM,Public,11946.0,0.004963405400858045,33400.0
+194091,New York Institute of Technology,NY,Private nonprofit,3440.0,-0.12933434573525693,53400.0
+194116,New York School of Interior Design,NY,Private nonprofit,427.0,0.278443113772455,40800.0
+193900,New York University,NY,Private nonprofit,28663.0,0.13229833293829496,59600.0
+218414,Newberry College,SC,Private nonprofit,1479.0,0.4112595419847329,32200.0
+155335,Newman University,KS,Private nonprofit,851.0,-0.24422735346358793,43500.0
+193973,Niagara University,NY,Private nonprofit,2653.0,-0.15320778806255986,40500.0
+159966,Nicholls State University,LA,Public,4737.0,-0.09840121811952796,36000.0
+167260,Nichols College,MA,Private nonprofit,1163.0,-0.07404458598726116,48100.0
+232937,Norfolk State University,VA,Public,5392.0,0.20437793165065887,33200.0
+199102,North Carolina A & T State University,NC,Public,12182.0,0.34816290393979643,33100.0
+199157,North Carolina Central University,NC,Public,6081.0,0.048990857340003524,32200.0
+199193,North Carolina State University at Raleigh,NC,Public,27371.0,0.2187639148633005,49300.0
+199209,North Carolina Wesleyan College,NC,Private nonprofit,1214.0,-0.4251893939393939,37600.0
+147660,North Central College,IL,Private nonprofit,2428.0,-0.07785795670338014,45000.0
+174437,North Central University,MN,Private nonprofit,709.0,-0.2966269841269841,30800.0
+200332,North Dakota State University-Main Campus,ND,Public,9471.0,-0.191825241061524,46600.0
+218441,North Greenville University,SC,Private nonprofit,1819.0,-0.20149253731343286,31300.0
+147679,North Park University,IL,Private nonprofit,1818.0,-0.15007012622720894,42400.0
+147776,Northeastern Illinois University,IL,Public,3982.0,-0.500939967414463,36700.0
+207263,Northeastern State University,OK,Public,4772.0,-0.29699469652327637,35300.0
+167358,Northeastern University,MA,Private nonprofit,17326.0,0.27209985315712193,64000.0
+482705,Northeastern University Professional Advancement Network,MA,Private nonprofit,1802.0,-0.12140419307654804,64000.0
+105330,Northern Arizona University,AZ,Public,22903.0,-0.08358674775928299,39300.0
+147703,Northern Illinois University,IL,Public,11301.0,-0.2441813804173355,43900.0
+157447,Northern Kentucky University,KY,Public,8246.0,-0.27039462042116436,36200.0
+171456,Northern Michigan University,MI,Public,6556.0,-0.0992030777686177,34000.0
+219259,Northern State University,SD,Public,1273.0,-0.18449711723254325,34100.0
+239512,Northland College,WI,Private nonprofit,269.0,-0.48069498069498073,33000.0
+217606,Northpoint Bible College,MA,Private nonprofit,86.0,-0.7142857142857143,27400.0
+209409,Northwest Christian University,OR,Private nonprofit,517.0,-0.02083333333333337,42600.0
+178624,Northwest Missouri State University,MO,Public,4378.0,-0.17208774583963693,37800.0
+142461,Northwest Nazarene University,ID,Private nonprofit,1024.0,-0.20373250388802489,36200.0
+236133,Northwest University,WA,Private nonprofit,645.0,-0.29276315789473684,38400.0
+154101,Northwestern College,IA,Private nonprofit,1175.0,0.08394833948339486,37200.0
+174507,Northwestern Health Sciences University,MN,Private nonprofit,271.0,0.6625766871165644,45500.0
+207306,Northwestern Oklahoma State University,OK,Public,1498.0,-0.17465564738292017,35700.0
+160038,Northwestern State University of Louisiana,LA,Public,5519.0,-0.19265652428320656,33500.0
+147767,Northwestern University,IL,Private nonprofit,9201.0,0.07287779850746268,65900.0
+171492,Northwood University,MI,Private nonprofit,1974.0,-0.3202479338842975,45100.0
+230995,Norwich University,VT,Private nonprofit,2428.0,-0.13440285204991087,48500.0
+120184,Notre Dame de Namur University,CA,Private nonprofit,33.0,-0.9699179580674567,54400.0
+163578,Notre Dame of Maryland University,MD,Private nonprofit,709.0,-0.2917082917082917,47400.0
+136215,Nova Southeastern University,FL,Private nonprofit,7240.0,0.5859802847754656,44200.0
+174525,Oak Hills Christian College,MN,Private nonprofit,75.0,-0.33628318584070793,23900.0
+152099,Oakland City University,IN,Private nonprofit,499.0,-0.08941605839416056,34200.0
+171571,Oakland University,MI,Public,12351.0,-0.24652269399707172,41900.0
+101912,Oakwood University,AL,Private nonprofit,1153.0,-0.31653823355068167,32200.0
+204501,Oberlin College,OH,Private nonprofit,2887.0,-0.008585164835164805,40200.0
+120254,Occidental College,CA,Private nonprofit,1877.0,-0.06009013520280415,49700.0
+140696,Oglethorpe University,GA,Private nonprofit,1352.0,0.18596491228070167,40700.0
+201964,Ohio Christian University,OH,Private nonprofit,862.0,-0.7526542324246772,30600.0
+204617,Ohio Dominican University,OH,Private nonprofit,760.0,-0.3734542456718879,38300.0
+204635,Ohio Northern University,OH,Private nonprofit,2489.0,0.1762759924385633,62800.0
+204796,Ohio State University-Main Campus,OH,Public,45638.0,0.034148331105118945,43700.0
+204699,Ohio State University-Marion Campus,OH,Public,794.0,-0.21850393700787396,43700.0
+204857,Ohio University-Main Campus,OH,Public,19633.0,-0.1488337813231596,39900.0
+204909,Ohio Wesleyan University,OH,Private nonprofit,1516.0,-0.08948948948948954,43500.0
+207403,Oklahoma Baptist University,OK,Private nonprofit,1308.0,-0.2801320858558063,37700.0
+207324,Oklahoma Christian University,OK,Private nonprofit,1885.0,-0.03234086242299794,36800.0
+207458,Oklahoma City University,OK,Private nonprofit,1514.0,-0.15466219988833052,40300.0
+207351,Oklahoma Panhandle State University,OK,Public,917.0,-0.1389671361502347,35600.0
+207388,Oklahoma State University-Main Campus,OK,Public,21773.0,0.04652727709685167,44300.0
+206835,Oklahoma Wesleyan University,OK,Private nonprofit,673.0,-0.446546052631579,49100.0
+232982,Old Dominion University,VA,Public,17514.0,-0.11857070961248117,42600.0
+171599,Olivet College,MI,Private nonprofit,892.0,-0.028322440087146017,36400.0
+147828,Olivet Nazarene University,IL,Private nonprofit,2603.0,-0.23192682207140747,38300.0
+207582,Oral Roberts University,OK,Private nonprofit,3487.0,0.14178127046496392,34900.0
+209490,Oregon Health & Science University,OR,Public,836.0,0.010882708585247869,81100.0
+209506,Oregon Institute of Technology,OR,Public,2892.0,-0.19262981574539362,52900.0
+209542,Oregon State University,OR,Public,30743.0,0.2995857287791681,46900.0
+440828,Oregon State University-Cascades Campus,OR,Public,1044.0,0.22248243559718972,46900.0
+120403,Otis College of Art and Design,CA,Private nonprofit,1223.0,0.11282984531392182,44100.0
+155636,Ottawa University-Kansas City,KS,Private nonprofit,219.0,-0.28664495114006516,40100.0
+428259,Ottawa University-Milwaukee,WI,Private nonprofit,41.0,-0.7388535031847134,40100.0
+454582,Ottawa University-Online,KS,Private nonprofit,259.0,-0.02631578947368418,40100.0
+155627,Ottawa University-Ottawa,KS,Private nonprofit,870.0,0.3919999999999999,40100.0
+204936,Otterbein University,OH,Private nonprofit,2157.0,-0.03489932885906044,41100.0
+107512,Ouachita Baptist University,AR,Private nonprofit,1602.0,0.08905506458191703,38400.0
+160074,Our Lady of the Lake College,LA,Private nonprofit,821.0,-0.42827298050139273,45100.0
+227331,Our Lady of the Lake University,TX,Private nonprofit,1066.0,-0.2883845126835781,38600.0
+178679,Ozark Christian College,MO,Private nonprofit,602.0,-0.11209439528023601,28700.0
+194310,Pace University-New York,NY,Private nonprofit,7665.0,-0.08433878867518818,57000.0
+236230,Pacific Lutheran University,WA,Private nonprofit,2401.0,-0.145247419010324,47700.0
+209603,Pacific Northwest College of Art,OR,Private nonprofit,420.0,0.05263157894736836,25100.0
+120768,Pacific Oaks College,CA,Private nonprofit,312.0,-0.425414364640884,43100.0
+457484,Pacific Rim Christian University,HI,Private nonprofit,129.0,0.34375,26700.0
+120865,Pacific Union College,CA,Private nonprofit,805.0,-0.4661803713527851,50200.0
+209612,Pacific University,OR,Private nonprofit,1516.0,-0.19532908704883223,42700.0
+140720,Paine College,GA,Private nonprofit,388.0,-0.2958257713248639,26700.0
+136330,Palm Beach Atlantic University,FL,Private nonprofit,2603.0,0.006184770003865525,39400.0
+154174,Palmer College of Chiropractic,IA,Private nonprofit,43.0,0.34375,38600.0
+178721,Park University,MO,Private nonprofit,4555.0,-0.5492330529440871,45300.0
+243823,Parker University,TX,Private nonprofit,607.0,3.244755244755245,38200.0
+227429,Paul Quinn College,TX,Private nonprofit,620.0,0.4761904761904763,27100.0
+194392,Paul Smiths College of Arts and Science,NY,Private nonprofit,579.0,-0.34576271186440677,34400.0
+214883,Peirce College,PA,Private nonprofit,799.0,-0.5073982737361282,46500.0
+215053,Pennsylvania College of Art and Design,PA,Private nonprofit,400.0,0.8018018018018018,23900.0
+214777,Pennsylvania State University-Main Campus,PA,Public,42284.0,0.05239055227855349,48500.0
+214801,Pennsylvania State University-Penn State Abington,PA,Public,2877.0,-0.17564469914040115,48500.0
+214689,Pennsylvania State University-Penn State Altoona,PA,Public,2367.0,-0.37248144220572643,48500.0
+214698,Pennsylvania State University-Penn State Beaver,PA,Public,482.0,-0.24569640062597808,48500.0
+214704,Pennsylvania State University-Penn State Berks,PA,Public,1872.0,-0.32613390928725705,48500.0
+214731,Pennsylvania State University-Penn State Brandywine,PA,Public,1223.0,-0.052672347017815646,48500.0
+214591,Pennsylvania State University-Penn State Erie-Behrend College,PA,Public,3240.0,-0.2082111436950147,48500.0
+214759,Pennsylvania State University-Penn State Fayette- Eberly,PA,Public,402.0,-0.40089418777943364,48500.0
+214786,Pennsylvania State University-Penn State Greater Allegheny,PA,Public,349.0,-0.34398496240601506,48500.0
+214713,Pennsylvania State University-Penn State Harrisburg,PA,Public,4031.0,0.07780748663101611,48500.0
+214670,Pennsylvania State University-Penn State Lehigh Valley,PA,Public,859.0,0.11125485122897794,48500.0
+214625,Pennsylvania State University-Penn State New Kensington,PA,Public,416.0,-0.30434782608695654,48500.0
+214810,Pennsylvania State University-Penn State Schuylkill,PA,Public,620.0,-0.13888888888888884,48500.0
+214643,Pennsylvania State University-Penn State Wilkes-Barre,PA,Public,313.0,-0.3195652173913044,48500.0
+214652,Pennsylvania State University-Penn State Worthington Scranton,PA,Public,793.0,-0.1799379524301965,48500.0
+214829,Pennsylvania State University-Penn State York,PA,Public,668.0,-0.2855614973262032,48500.0
+479956,Pennsylvania State University-World Campus,PA,Public,7877.0,0.1732201370271076,48500.0
+121150,Pepperdine University,CA,Private nonprofit,3553.0,0.011098463289698435,61100.0
+181534,Peru State College,NE,Public,1092.0,-0.2551159618008185,35600.0
+199306,Pfeiffer University,NC,Private nonprofit,655.0,-0.2794279427942794,35900.0
+107600,Philander Smith College,AR,Private nonprofit,751.0,0.28595890410958913,23800.0
+140818,Piedmont College,GA,Private nonprofit,1117.0,-0.1300623052959502,39300.0
+155681,Pittsburg State University,KS,Public,4210.0,-0.26140350877192986,38100.0
+121257,Pitzer College,CA,Private nonprofit,1227.0,0.14995313964386137,47100.0
+183080,Plymouth State University,NH,Public,3153.0,-0.21175,38600.0
+121309,Point Loma Nazarene University,CA,Private nonprofit,3188.0,0.15381831342743402,49100.0
+215442,Point Park University,PA,Private nonprofit,2331.0,-0.2576433121019108,35800.0
+138868,Point University,GA,Private nonprofit,1996.0,0.4928945400149589,32800.0
+456481,Polytechnic University of Puerto Rico-Miami,FL,Private nonprofit,19.0,-0.6346153846153846,28100.0
+456490,Polytechnic University of Puerto Rico-Orlando,FL,Private nonprofit,96.0,-0.020408163265306145,28100.0
+121345,Pomona College,CA,Private nonprofit,1666.0,0.01585365853658538,56600.0
+241395,Pontifical Catholic University of Puerto Rico-Arecibo,PR,Private nonprofit,273.0,-0.5659777424483307,17400.0
+243586,Pontifical Catholic University of Puerto Rico-Mayaguez,PR,Private nonprofit,555.0,-0.5963636363636364,17400.0
+241410,Pontifical Catholic University of Puerto Rico-Ponce,PR,Private nonprofit,3874.0,-0.2861617836742215,17400.0
+209807,Portland State University,OR,Public,13182.0,-0.32909201954397393,42900.0
+227526,Prairie View A & M University,TX,Public,8877.0,0.28187725631768945,34900.0
+194578,Pratt Institute-Main,NY,Private nonprofit,3910.0,0.16507747318235988,43500.0
+218539,Presbyterian College,SC,Private nonprofit,852.0,-0.11526479750778817,42000.0
+105589,Prescott College,AZ,Private nonprofit,219.0,-0.4483627204030227,32500.0
+186131,Princeton University,NJ,Private nonprofit,5709.0,0.08536121673003794,80500.0
+217402,Providence College,RI,Private nonprofit,4229.0,0.07117527862208717,60700.0
+241766,Puerto Rico Conservatory of Music,PR,Public,307.0,-0.25304136253041365,16900.0
+243780,Purdue University-Main Campus,IN,Public,44503.0,0.4720007938345516,55000.0
+199412,Queens University of Charlotte,NC,Private nonprofit,1211.0,-0.21921341070277245,37600.0
+148131,Quincy University,IL,Private nonprofit,1010.0,-0.05164319248826288,37800.0
+130226,Quinnipiac University,CT,Private nonprofit,6531.0,-0.057711729909104004,60600.0
+194666,Rabbinical College Bobover Yeshiva Bnei Zion,NY,Private nonprofit,473.0,0.6538461538461537,13400.0
+186186,Rabbinical College of America,NJ,Private nonprofit,181.0,-0.29844961240310075,30500.0
+405854,Rabbinical College of Ohr Shimon Yisroel,NY,Private nonprofit,232.0,0.19587628865979378,12400.0
+233277,Radford University,VA,Public,6038.0,-0.3168910510238715,42300.0
+186201,Ramapo College of New Jersey,NJ,Public,4898.0,-0.0971428571428572,48000.0
+207157,Randall University,OK,Private nonprofit,267.0,-0.14968152866242035,34800.0
+233301,Randolph College,VA,Private nonprofit,658.0,-0.010526315789473717,40900.0
+233295,Randolph-Macon College,VA,Private nonprofit,1639.0,0.16654804270462642,46200.0
+209922,Reed College,OR,Private nonprofit,1320.0,-0.054441260744985676,37900.0
+231651,Regent University,VA,Private nonprofit,4729.0,0.7284356725146199,41200.0
+167598,Regis College,MA,Private nonprofit,956.0,-0.2259109311740891,45300.0
+127918,Regis University,CO,Private nonprofit,2627.0,-0.41072229699416773,51700.0
+140872,Reinhardt University,GA,Private nonprofit,1066.0,-0.1389337641357028,36300.0
+194824,Rensselaer Polytechnic Institute,NY,Private nonprofit,5714.0,-0.011589690364988803,77900.0
+217420,Rhode Island College,RI,Public,5049.0,-0.3003048780487805,39600.0
+217493,Rhode Island School of Design,RI,Private nonprofit,2084.0,0.0347567030784508,46800.0
+221351,Rhodes College,TN,Private nonprofit,1836.0,-0.09601181683899562,49600.0
+227757,Rice University,TX,Private nonprofit,4776.0,0.23124516627996905,64300.0
+186283,Rider University,NJ,Private nonprofit,3106.0,-0.2309977717256747,50200.0
+136774,Ringling College of Art and Design,FL,Private nonprofit,1662.0,0.32114467408585057,33500.0
+239628,Ripon College,WI,Private nonprofit,688.0,-0.11907810499359794,43900.0
+183211,Rivier University,NH,Private nonprofit,1231.0,-0.08407738095238093,43100.0
+233426,Roanoke College,VA,Private nonprofit,1767.0,-0.09892911779704228,43000.0
+215655,Robert Morris University,PA,Private nonprofit,2896.0,-0.35429208472686735,44400.0
+194958,Roberts Wesleyan College,NY,Private nonprofit,1149.0,-0.10374414976599067,41000.0
+170967,Rochester College,MI,Private nonprofit,792.0,-0.2040201005025125,34400.0
+195003,Rochester Institute of Technology,NY,Private nonprofit,13215.0,0.02656723374504777,60600.0
+148405,Rockford University,IL,Private nonprofit,972.0,-0.05905130687318494,43100.0
+179043,Rockhurst University,MO,Private nonprofit,1580.0,0.016077170418006492,47900.0
+180595,Rocky Mountain College,MT,Private nonprofit,840.0,-0.07284768211920534,37500.0
+217518,Roger Williams University,RI,Private nonprofit,3946.0,-0.1300705467372134,48900.0
+207661,Rogers State University,OK,Public,2657.0,-0.2746382746382746,32300.0
+136950,Rollins College,FL,Private nonprofit,2631.0,-0.0175504107542942,43700.0
+148487,Roosevelt University,IL,Private nonprofit,2849.0,-0.10885204879574606,42700.0
+152318,Rose-Hulman Institute of Technology,IN,Private nonprofit,2309.0,0.03496190049305237,79200.0
+215691,Rosemont College,PA,Private nonprofit,486.0,-0.05813953488372092,44700.0
+184782,Rowan University,NJ,Public,15841.0,0.22684324659231714,49400.0
+148511,Rush University,IL,Private nonprofit,138.0,0.029850746268656803,78200.0
+176318,Rust College,MS,Private nonprofit,467.0,-0.45443925233644855,22900.0
+186371,Rutgers University-Camden,NJ,Public,3753.0,-0.2229813664596273,56400.0
+186380,Rutgers University-New Brunswick,NJ,Public,37751.0,0.075465785425332,56400.0
+186399,Rutgers University-Newark,NJ,Public,7709.0,0.06950610432852389,56400.0
+196130,SUNY Buffalo State,NY,Public,5097.0,-0.4347970725216235,38600.0
+196121,SUNY College at Brockport,NY,Public,5784.0,-0.17336001143347146,41200.0
+196167,SUNY College at Geneseo,NY,Public,3869.0,-0.3026315789473685,46700.0
+196237,SUNY College at Old Westbury,NY,Public,4162.0,0.04102051025512754,43900.0
+196194,SUNY College at Oswego,NY,Public,5473.0,-0.2232472324723247,41500.0
+196246,SUNY College at Plattsburgh,NY,Public,3769.0,-0.2850910470409712,40300.0
+196200,SUNY College at Potsdam,NY,Public,1823.0,-0.4929068150208623,37300.0
+196033,SUNY College of Agriculture and Technology at Cobleskill,NY,Public,1904.0,-0.21322314049586777,33400.0
+196103,SUNY College of Environmental Science and Forestry,NY,Public,1839.0,0.053264604810996596,42200.0
+196149,SUNY Cortland,NY,Public,5901.0,-0.05975143403441685,45400.0
+196255,SUNY Downstate Medical Center,NY,Public,293.0,-0.1556195965417867,125900.0
+196264,SUNY Empire State College,NY,Public,7585.0,-0.2279898218829517,40400.0
+196291,SUNY Maritime College,NY,Public,1285.0,-0.22915416916616682,76700.0
+196185,SUNY Oneonta,NY,Public,4643.0,-0.20291845493562233,42000.0
+196112,SUNY Polytechnic Institute,NY,Public,1849.0,-0.051794871794871744,48300.0
+196060,SUNY at Albany,NY,Public,12564.0,-0.010552842967396447,50600.0
+196079,SUNY at Binghamton,NY,Public,14655.0,0.08837727441515031,59200.0
+196158,SUNY at Fredonia,NY,Public,2755.0,-0.39343901365037426,39800.0
+196219,SUNY at Purchase College,NY,Public,3197.0,-0.18318855390904443,35800.0
+130253,Sacred Heart University,CT,Private nonprofit,7087.0,0.38715991387747106,54300.0
+172051,Saginaw Valley State University,MI,Public,5989.0,-0.28989803177614415,37600.0
+154235,Saint Ambrose University,IA,Private nonprofit,1916.0,-0.22145469321414057,44700.0
+183239,Saint Anselm College,NH,Private nonprofit,2087.0,0.09381551362683438,55500.0
+149028,Saint Anthony College of Nursing,IL,Private nonprofit,172.0,-0.2803347280334728,58200.0
+199582,Saint Augustine's University,NC,Private nonprofit,172.0,-0.7876543209876543,25100.0
+174783,Saint Cloud State University,MN,Public,5088.0,-0.5204524033930255,42900.0
+227845,Saint Edward's University,TX,Private nonprofit,2493.0,-0.3795420607267297,45800.0
+148575,Saint Francis Medical Center College of Nursing,IL,Private nonprofit,273.0,-0.32089552238805974,55400.0
+215743,Saint Francis University,PA,Private nonprofit,1557.0,-0.09159859976662776,48200.0
+195720,Saint John Fisher College,NY,Private nonprofit,2565.0,-0.07800143781452196,45600.0
+174792,Saint Johns University,MN,Private nonprofit,1395.0,-0.19919632606199766,59100.0
+161518,Saint Joseph's College of Maine,ME,Private nonprofit,964.0,-0.41003671970624234,40100.0
+215770,Saint Joseph's University,PA,Private nonprofit,4948.0,-0.05716463414634143,57600.0
+137032,Saint Leo University,FL,Private nonprofit,6721.0,-0.4193520518358531,42800.0
+179159,Saint Louis University,MO,Private nonprofit,7267.0,-0.031324980005331904,54400.0
+236452,Saint Martin's University,WA,Private nonprofit,1158.0,-0.045342126957955475,45000.0
+152390,Saint Mary's College,IN,Private nonprofit,1458.0,-0.06478511866581138,46100.0
+123554,Saint Mary's College of California,CA,Private nonprofit,1947.0,-0.33230452674897115,56600.0
+174817,Saint Mary's University of Minnesota,MN,Private nonprofit,1073.0,-0.37579988365328676,44200.0
+152381,Saint Mary-of-the-Woods College,IN,Private nonprofit,853.0,0.47322970639032813,30900.0
+231059,Saint Michael's College,VT,Private nonprofit,1092.0,-0.43740340030911906,46900.0
+239716,Saint Norbert College,WI,Private nonprofit,1662.0,-0.1900584795321637,45100.0
+186432,Saint Peter's University,NJ,Private nonprofit,2135.0,-0.11922442244224418,44500.0
+215798,Saint Vincent College,PA,Private nonprofit,1259.0,-0.21115288220551376,47400.0
+148627,Saint Xavier University,IL,Private nonprofit,3096.0,0.04383007417397167,44400.0
+199607,Salem College,NC,Private nonprofit,423.0,-0.5412147505422993,32300.0
+167729,Salem State University,MA,Public,4291.0,-0.3948667324777887,41000.0
+163851,Salisbury University,MD,Public,6057.0,-0.20428271150814503,47800.0
+217536,Salve Regina University,RI,Private nonprofit,2121.0,-0.00047125353440147233,50700.0
+227881,Sam Houston State University,TX,Public,17743.0,0.019654042871099398,42600.0
+102049,Samford University,AL,Private nonprofit,4206.0,0.33736089030206684,46300.0
+122296,Samuel Merritt University,CA,Private nonprofit,718.0,0.4189723320158103,106700.0
+112084,San Diego Christian College,CA,Private nonprofit,87.0,-0.9038674033149171,34900.0
+122409,San Diego State University,CA,Public,35377.0,0.23484240287619107,48300.0
+122506,San Francisco Conservatory of Music,CA,Private nonprofit,226.0,0.4394904458598725,25400.0
+122597,San Francisco State University,CA,Public,18639.0,-0.2794293887965361,48000.0
+122755,San Jose State University,CA,Public,27601.0,0.034908136482939556,53700.0
+122931,Santa Clara University,CA,Private nonprofit,6552.0,0.2260479041916168,69600.0
+195304,Sarah Lawrence College,NY,Private nonprofit,1530.0,0.19251753702260332,39900.0
+140951,Savannah College of Art and Design,GA,Private nonprofit,15243.0,0.6179811060396985,35300.0
+140960,Savannah State University,GA,Public,2833.0,-0.37309139190086305,31000.0
+143048,School of the Art Institute of Chicago,IL,Private nonprofit,2805.0,-0.013366162504396817,32100.0
+228042,Schreiner University,TX,Private nonprofit,1053.0,-0.06316725978647686,38800.0
+123165,Scripps College,CA,Private nonprofit,1113.0,0.14979338842975198,49700.0
+236577,Seattle Pacific University,WA,Private nonprofit,1762.0,-0.4471289614057107,47200.0
+236595,Seattle University,WA,Private nonprofit,4062.0,-0.11445389143230866,55500.0
+232885,Sentara College of Health Sciences,VA,Private nonprofit,242.0,-0.4561797752808989,54600.0
+186584,Seton Hall University,NJ,Private nonprofit,6036.0,0.03746992093502932,56400.0
+215947,Seton Hill University,PA,Private nonprofit,1492.0,-0.05629348513598986,39400.0
+221519,Sewanee-The University of the South,TN,Private nonprofit,1607.0,-0.048549437537004136,40600.0
+199643,Shaw University,NC,Private nonprofit,875.0,-0.41860465116279066,27100.0
+205443,Shawnee State University,OH,Public,2247.0,-0.3479396401625072,33400.0
+233541,Shenandoah University,VA,Private nonprofit,2116.0,0.06278252134605733,41400.0
+237792,Shepherd University,WV,Public,2344.0,-0.2939759036144578,38800.0
+216010,Shippensburg University of Pennsylvania,PA,Public,4086.0,-0.3136233831681505,44400.0
+140988,Shorter University,GA,Private nonprofit,1028.0,-0.23568773234200746,44200.0
+195474,Siena College,NY,Private nonprofit,3409.0,0.11332462442847802,54500.0
+172264,Siena Heights University,MI,Private nonprofit,1495.0,-0.37132043734230447,38900.0
+167783,Simmons College,MA,Private nonprofit,1670.0,-0.021101992966002348,49000.0
+154350,Simpson College,IA,Private nonprofit,1227.0,-0.22927135678391963,44400.0
+123457,Simpson University,CA,Private nonprofit,809.0,-0.1564129301355579,32800.0
+195526,Skidmore College,NY,Private nonprofit,2694.0,0.028636884306987298,47100.0
+216038,Slippery Rock University of Pennsylvania,PA,Public,6788.0,-0.09020238573917705,39600.0
+167835,Smith College,MA,Private nonprofit,2544.0,0.029542695265074803,44900.0
+123572,Sonoma State University,CA,Public,5166.0,-0.39853300733496333,45000.0
+218733,South Carolina State University,SC,Public,2934.0,0.21742738589211608,28400.0
+219347,South Dakota School of Mines and Technology,SD,Public,2071.0,-0.22550486163051608,54200.0
+219356,South Dakota State University,SD,Public,9198.0,-0.06381679389312978,42000.0
+179557,Southeast Missouri State University,MO,Public,6373.0,-0.29951637722576385,36100.0
+160612,Southeastern Louisiana University,LA,Public,9514.0,-0.13697387518142234,36000.0
+207847,Southeastern Oklahoma State University,OK,Public,3018.0,-0.03424000000000005,34400.0
+137564,Southeastern University,FL,Private nonprofit,4813.0,0.4106096131301289,33200.0
+221661,Southern Adventist University,TN,Private nonprofit,2773.0,0.09302325581395343,37200.0
+107983,Southern Arkansas University Main Campus,AR,Public,2708.0,-0.05281566981462049,34300.0
+123952,Southern California Institute of Architecture,CA,Private nonprofit,236.0,-0.07450980392156858,44400.0
+130493,Southern Connecticut State University,CT,Public,6295.0,-0.22341475450283743,42700.0
+149222,Southern Illinois University-Carbondale,IL,Public,8494.0,-0.33939959558251676,41800.0
+149231,Southern Illinois University-Edwardsville,IL,Public,8750.0,-0.2532218144576257,41000.0
+228246,Southern Methodist University,TX,Private nonprofit,7277.0,0.14634530560806547,57300.0
+206862,Southern Nazarene University,OK,Private nonprofit,1455.0,-0.11388550548112053,46300.0
+183026,Southern New Hampshire University,NH,Private nonprofit,163164.0,2.8861525270328205,41700.0
+210146,Southern Oregon University,OR,Public,2751.0,-0.3626042632066728,37200.0
+160621,Southern University and A & M College,LA,Public,5519.0,0.05606582472254118,33800.0
+160630,Southern University at New Orleans,LA,Public,1055.0,-0.44764397905759157,28200.0
+230603,Southern Utah University,UT,Public,9289.0,0.5541241425464281,38400.0
+233611,Southern Virginia University,VA,Private nonprofit,936.0,0.2857142857142858,34900.0
+217776,Southern Wesleyan University,SC,Private nonprofit,747.0,-0.4090189873417721,40200.0
+179326,Southwest Baptist University,MO,Private nonprofit,1341.0,-0.4398496240601504,32900.0
+175078,Southwest Minnesota State University,MN,Public,2315.0,0.006521739130434856,37100.0
+228468,Southwestern Adventist University,TX,Private nonprofit,570.0,-0.21270718232044195,39200.0
+228325,Southwestern Assemblies of God University,TX,Private nonprofit,1479.0,-0.09762050030506408,33200.0
+207856,Southwestern Christian University,OK,Private nonprofit,377.0,-0.47198879551820727,25800.0
+155900,Southwestern College,KS,Private nonprofit,924.0,-0.19582245430809397,46200.0
+207865,Southwestern Oklahoma State University,OK,Public,3514.0,-0.1497701427534479,38300.0
+228343,Southwestern University,TX,Private nonprofit,1440.0,-0.04950495049504955,50000.0
+157757,Spalding University,KY,Private nonprofit,583.0,-0.48039215686274506,43700.0
+141060,Spelman College,GA,Private nonprofit,3414.0,0.5938375350140057,46800.0
+172334,Spring Arbor University,MI,Private nonprofit,1010.0,-0.5627705627705628,38900.0
+102234,Spring Hill College,AL,Private nonprofit,782.0,-0.4194506310319228,42400.0
+167899,Springfield College,MA,Private nonprofit,1751.0,-0.17947516401124652,43000.0
+475273,Springfield College-School of Professional and Continuing Studies,MA,Private nonprofit,176.0,-0.8478824546240277,43000.0
+199698,St Andrews University,NC,Private nonprofit,628.0,0.012903225806451646,33000.0
+195164,St Bonaventure University,NY,Private nonprofit,2012.0,0.22907758094074526,44400.0
+175005,St Catherine University,MN,Private nonprofit,2473.0,-0.24257274119448702,46700.0
+195173,St Francis College,NY,Private nonprofit,1684.0,-0.34678044996121027,44400.0
+163976,St John's College,MD,Private nonprofit,471.0,0.16009852216748777,34400.0
+195809,St John's University-New York,NY,Private nonprofit,9477.0,-0.15715048025613665,53300.0
+195216,St Lawrence University,NY,Private nonprofit,1918.0,-0.18278653600340866,46500.0
+163912,St Mary's College of Maryland,MD,Public,1603.0,-0.04809976247030878,48100.0
+174844,St Olaf College,MN,Private nonprofit,3093.0,0.029284525790349347,47300.0
+137476,St Thomas University,FL,Private nonprofit,2214.0,1.510204081632653,45600.0
+245652,St. John's College,NM,Private nonprofit,368.0,0.1358024691358024,29900.0
+195544,St. Joseph's College-New York,NY,Private nonprofit,3144.0,-0.17975476128358991,52100.0
+228149,St. Mary's University,TX,Private nonprofit,1951.0,-0.14877835951134377,45400.0
+195243,St. Thomas Aquinas College,NY,Private nonprofit,972.0,-0.16923076923076918,45400.0
+243744,Stanford University,CA,Private nonprofit,7554.0,0.08006863025450395,85700.0
+196176,State University of New York at New Paltz,NY,Public,6086.0,-0.06340412434595255,43700.0
+228431,Stephen F Austin State University,TX,Public,8728.0,-0.173641355803825,40000.0
+179548,Stephens College,MO,Private nonprofit,391.0,-0.4492957746478873,33400.0
+155937,Sterling College,KS,Private nonprofit,538.0,-0.18608169440242062,34400.0
+137546,Stetson University,FL,Private nonprofit,2297.0,-0.24490466798159105,40500.0
+186867,Stevens Institute of Technology,NJ,Private nonprofit,4222.0,0.42828146143437085,87300.0
+164173,Stevenson University,MD,Private nonprofit,3102.0,-0.15407690209980907,49500.0
+102270,Stillman College,AL,Private nonprofit,706.0,-0.16251482799525507,27200.0
+186876,Stockton University,NJ,Public,7537.0,-0.02936252414681262,46800.0
+167996,Stonehill College,MA,Private nonprofit,2528.0,0.05906996229576866,58700.0
+196097,Stony Brook University,NY,Public,18101.0,0.09153952843273228,55100.0
+168005,Suffolk University,MA,Private nonprofit,4268.0,-0.20254110612855003,51800.0
+228501,Sul Ross State University,TX,Public,1396.0,-0.3476635514018691,36900.0
+216278,Susquehanna University,PA,Private nonprofit,2163.0,0.01932139491046181,52500.0
+216287,Swarthmore College,PA,Private nonprofit,1613.0,0.030012771392081694,52500.0
+233718,Sweet Briar College,VA,Private nonprofit,443.0,0.8771186440677967,36800.0
+196413,Syracuse University,NY,Private nonprofit,15477.0,0.05861833105335168,58400.0
+155973,Tabor College,KS,Private nonprofit,494.0,-0.26158445440956657,41200.0
+102298,Talladega College,AL,Private nonprofit,701.0,-0.2372143634385201,23800.0
+137777,Talmudic College of Florida,FL,Private nonprofit,27.0,-0.4130434782608695,33900.0
+196431,Talmudical Seminary Oholei Torah,NY,Private nonprofit,400.0,0.14613180515759305,18200.0
+228529,Tarleton State University,TX,Public,12673.0,0.1789933947343938,41600.0
+152530,Taylor University,IN,Private nonprofit,2025.0,0.0731319554848966,36000.0
+216339,Temple University,PA,Public,20970.0,-0.2506164456991745,48600.0
+221838,Tennessee State University,TN,Public,4848.0,-0.33177119228118535,34400.0
+221847,Tennessee Technological University,TN,Public,8698.0,-0.08200527704485483,37600.0
+221731,Tennessee Wesleyan University,TN,Private nonprofit,846.0,-0.1506024096385542,37700.0
+226152,Texas A & M International University,TX,Public,6667.0,0.05008662781540396,43800.0
+228723,Texas A & M University-College Station,TX,Public,59615.0,0.2239513827581252,55500.0
+224554,Texas A & M University-Commerce,TX,Public,9912.0,0.2615502100038183,37600.0
+224147,Texas A & M University-Corpus Christi,TX,Public,8034.0,-0.1589195979899497,41500.0
+228705,Texas A & M University-Kingsville,TX,Public,4748.0,-0.1566607460035524,40000.0
+224545,Texas A&M University-Texarkana,TX,Public,1982.0,0.4197707736389684,35500.0
+228875,Texas Christian University,TX,Private nonprofit,11026.0,0.2457349452039317,49900.0
+228884,Texas College,TX,Private nonprofit,614.0,-0.2801875732708089,24300.0
+228981,Texas Lutheran University,TX,Private nonprofit,1304.0,-0.012121212121212088,44200.0
+229063,Texas Southern University,TX,Public,6844.0,0.022102747909199527,30500.0
+227377,Texas Southmost College,TX,Public,3372.0,0.06506632975363225,31100.0
+228459,Texas State University,TX,Public,36177.0,0.08055555555555549,44400.0
+229115,Texas Tech University,TX,Public,32394.0,0.12214216433421088,49300.0
+229337,Texas Tech University Health Sciences Center,TX,Public,1482.0,0.012295081967213184,72500.0
+229160,Texas Wesleyan University,TX,Private nonprofit,1741.0,-0.025741466144376002,42000.0
+229179,Texas Woman's University,TX,Public,8767.0,-0.06684406599254922,44000.0
+132408,The Baptist College of Florida,FL,Private nonprofit,360.0,-0.21225382932166303,32100.0
+142294,The College of Idaho,ID,Private nonprofit,1041.0,0.0067698259187620735,39300.0
+187134,The College of New Jersey,NJ,Public,7105.0,0.0781487101669196,56200.0
+174899,The College of Saint Scholastica,MN,Private nonprofit,1765.0,-0.35981138919114986,51000.0
+206589,The College of Wooster,OH,Private nonprofit,1730.0,-0.1461006910167818,45400.0
+235167,The Evergreen State College,WA,Public,2160.0,-0.43470295734101017,34300.0
+192110,The Juilliard School,NY,Private nonprofit,468.0,-0.042944785276073594,30600.0
+439701,The King's University,TX,Private nonprofit,251.0,-0.530841121495327,35300.0
+117751,The Master's University and Seminary,CA,Private nonprofit,1622.0,0.44049733570159866,38600.0
+167057,The New England Conservatory of Music,MA,Private nonprofit,393.0,0.04244031830238737,26800.0
+193654,The New School,NY,Private nonprofit,6563.0,-0.027991706161137442,43100.0
+195128,The Sage Colleges,NY,Private nonprofit,1244.0,-0.22492211838006226,41700.0
+100751,The University of Alabama,AL,Public,33227.0,0.07166586034510569,42700.0
+202763,The University of Findlay,OH,Private nonprofit,2223.0,-0.2286606523247745,41500.0
+180489,The University of Montana,MT,Public,7488.0,-0.26407862407862404,34700.0
+180692,The University of Montana-Western,MT,Public,1198.0,-0.11456023651145597,29600.0
+137847,The University of Tampa,FL,Private nonprofit,10572.0,0.497238351508285,45800.0
+221740,The University of Tennessee-Chattanooga,TN,Public,10074.0,0.009823576583801064,37100.0
+221759,The University of Tennessee-Knoxville,TN,Public,30418.0,0.40427496422141185,43400.0
+221768,The University of Tennessee-Martin,TN,Public,4866.0,-0.18737474949899802,35000.0
+229300,The University of Texas Health Science Center at Houston,TX,Public,465.0,-0.3131462333825702,83000.0
+228644,The University of Texas Health Science Center at San Antonio,TX,Public,930.0,0.17276166456494324,77800.0
+416801,The University of Texas MD Anderson Cancer Center,TX,Public,334.0,0.09868421052631571,76400.0
+228653,The University of Texas Medical Branch,TX,Public,545.0,-0.2684563758389261,71900.0
+227368,The University of Texas Rio Grande Valley,TX,Public,28666.0,0.1713316716381319,40200.0
+228769,The University of Texas at Arlington,TX,Public,32294.0,0.06377231701693131,46700.0
+228778,The University of Texas at Austin,TX,Public,42855.0,0.09724249174283739,54900.0
+228787,The University of Texas at Dallas,TX,Public,21751.0,0.39796902114531774,51100.0
+228796,The University of Texas at El Paso,TX,Public,21005.0,0.0500399920015997,38900.0
+229027,The University of Texas at San Antonio,TX,Public,30580.0,0.2783746498892188,44000.0
+228802,The University of Texas at Tyler,TX,Public,7440.0,0.22792540023106134,42300.0
+229018,The University of Texas of the Permian Basin,TX,Public,3911.0,0.10887439750496175,44400.0
+233897,The University of Virginia's College at Wise,VA,Public,1101.0,-0.20961952620244073,37300.0
+138354,The University of West Florida,FL,Public,9330.0,-0.04630481447408774,36600.0
+216357,Thiel College,PA,Private nonprofit,788.0,-0.10758776896942246,36900.0
+124292,Thomas Aquinas College,CA,Private nonprofit,566.0,0.5013262599469497,40100.0
+161563,Thomas College,ME,Private nonprofit,647.0,-0.24854819976771192,37100.0
+187046,Thomas Edison State University,NJ,Public,6707.0,-0.4539607587722869,50000.0
+216366,Thomas Jefferson University,PA,Private nonprofit,3755.0,4.088075880758808,87400.0
+157809,Thomas More College,KY,Private nonprofit,1293.0,-0.011467889908256867,46100.0
+141167,Thomas University,GA,Private nonprofit,998.0,0.3395973154362417,34900.0
+206048,Tiffin University,OH,Private nonprofit,2051.0,-0.11019522776572666,37500.0
+141185,Toccoa Falls College,GA,Private nonprofit,875.0,0.1319534282018111,26600.0
+176406,Tougaloo College,MS,Private nonprofit,639.0,-0.25350467289719625,25900.0
+196592,Touro College,NY,Private nonprofit,4040.0,-0.32271584241408213,29100.0
+164076,Towson University,MD,Public,16136.0,-0.13354454169575258,49800.0
+157818,Transylvania University,KY,Private nonprofit,1005.0,-0.04467680608365021,41700.0
+221892,Trevecca Nazarene University,TN,Private nonprofit,1737.0,-0.014188422247446097,39500.0
+152567,Trine University,IN,Private nonprofit,2324.0,0.3566841798015179,41700.0
+414878,Trine University-Regional/Non-Traditional Campuses,IN,Private nonprofit,607.0,0.4591346153846154,41700.0
+137953,Trinity Baptist College,FL,Private nonprofit,386.0,0.007832898172323688,28200.0
+200484,Trinity Bible College and Graduate School,ND,Private nonprofit,141.0,-0.24193548387096775,27400.0
+149505,Trinity Christian College,IL,Private nonprofit,820.0,-0.2881944444444444,42000.0
+130590,Trinity College,CT,Private nonprofit,2146.0,-0.046645935139937755,58800.0
+137962,Trinity College of Florida,FL,Private nonprofit,148.0,-0.270935960591133,28100.0
+146755,Trinity College of Nursing & Health Sciences,IL,Private nonprofit,56.0,-0.7419354838709677,45100.0
+149514,Trinity International University-Illinois,IL,Private nonprofit,55.0,-0.9343675417661098,41000.0
+229267,Trinity University,TX,Private nonprofit,2505.0,0.13194758246723914,54600.0
+131876,Trinity Washington University,DC,Private nonprofit,1414.0,-0.09648562300319485,36600.0
+102368,Troy University,AL,Public,9805.0,-0.30287948809100607,35800.0
+141237,Truett McConnell University,GA,Private nonprofit,744.0,-0.010638297872340385,31500.0
+178615,Truman State University,MO,Public,2513.0,-0.5249527410207939,43700.0
+168148,Tufts University,MA,Private nonprofit,7061.0,0.3485485103132162,66500.0
+160755,Tulane University of Louisiana,LA,Private nonprofit,7767.0,-0.009437571738298733,56200.0
+221953,Tusculum College,TN,Private nonprofit,785.0,-0.5151327980234712,37300.0
+102377,Tuskegee University,AL,Private nonprofit,2630.0,0.057924376508447395,35300.0
+196866,Union College,NY,Private nonprofit,2046.0,-0.07252946509519498,63200.0
+181738,Union College,NE,Private nonprofit,471.0,-0.38188976377952755,40400.0
+157863,Union College,KY,Private nonprofit,746.0,-0.06045340050377834,31000.0
+221971,Union University,TN,Private nonprofit,1607.0,-0.282268870031264,41200.0
+197027,United States Merchant Marine Academy,NY,Public,962.0,0.06415929203539816,78900.0
+197018,United Talmudical Seminary,NY,Private nonprofit,2241.0,0.06917938931297707,15200.0
+161572,Unity College,ME,Private nonprofit,6483.0,9.082426127527215,33000.0
+241191,Universidad Adventista de las Antillas,PR,Private nonprofit,830.0,-0.36349693251533743,19200.0
+241225,Universidad Central de Bayamon,PR,Private nonprofit,539.0,-0.6019202363367799,18700.0
+241739,Universidad Metropolitana,PR,Private nonprofit,4540.0,-0.6082492018293209,18800.0
+243577,Universidad Politecnica de Puerto Rico,PR,Private nonprofit,3594.0,0.034244604316546745,28100.0
+241614,Universidad Teologica del Caribe,PR,Private nonprofit,173.0,-0.2791666666666667,19200.0
+243346,Universidad del Este,PR,Private nonprofit,4468.0,-0.6221564482029598,18200.0
+243443,Universidad del Sagrado Corazon,PR,Private nonprofit,4442.0,0.006115515288788176,19300.0
+243601,Universidad del Turabo,PR,Private nonprofit,7868.0,-0.4646162221012521,18700.0
+196088,University at Buffalo,NY,Public,20112.0,0.021328458257160232,49900.0
+200800,University of Akron Main Campus,OH,Public,9052.0,-0.4749419953596288,35000.0
+100663,University of Alabama at Birmingham,AL,Public,11635.0,0.03247848078800253,40200.0
+100706,University of Alabama in Huntsville,AL,Public,6591.0,0.13072568193515188,45600.0
+102553,University of Alaska Anchorage,AK,Public,7212.0,-0.4159378036929058,43300.0
+102614,University of Alaska Fairbanks,AK,Public,4207.0,-0.22551546391752575,37100.0
+102632,University of Alaska Southeast,AK,Public,907.0,-0.3389212827988338,36800.0
+104179,University of Arizona,AZ,Public,42537.0,0.2904077175100108,45800.0
+106397,University of Arkansas,AR,Public,28677.0,0.31455420582168236,43100.0
+106245,University of Arkansas at Little Rock,AR,Public,4949.0,-0.37259127789046653,33500.0
+106412,University of Arkansas at Pine Bluff,AR,Public,1807.0,-0.284639746634996,26700.0
+106263,University of Arkansas for Medical Sciences,AR,Public,1571.0,1.0643889618922469,60700.0
+108092,University of Arkansas-Fort Smith,AR,Public,4091.0,-0.28901633646159197,31300.0
+161873,University of Baltimore,MD,Public,1133.0,-0.6573934079225885,55100.0
+128744,University of Bridgeport,CT,Private nonprofit,1534.0,-0.4704867103900586,42100.0
+110635,University of California-Berkeley,CA,Public,33068.0,0.20264765784114047,61800.0
+110644,University of California-Davis,CA,Public,32253.0,0.1421438436205249,56300.0
+110653,University of California-Irvine,CA,Public,30197.0,0.19615765498118432,55100.0
+110662,University of California-Los Angeles,CA,Public,33475.0,0.13163855177309758,58700.0
+110671,University of California-Riverside,CA,Public,22593.0,0.21487336667204393,47300.0
+110680,University of California-San Diego,CA,Public,34948.0,0.3146253385495035,58600.0
+110705,University of California-Santa Barbara,CA,Public,23113.0,0.12166359312821506,52500.0
+110714,University of California-Santa Cruz,CA,Public,17940.0,0.10529234181504532,43700.0
+106704,University of Central Arkansas,AR,Public,7762.0,-0.16895074946466815,36900.0
+132903,University of Central Florida,FL,Public,59146.0,0.09345362444769001,43300.0
+176965,University of Central Missouri,MO,Public,5648.0,-0.3737664929593081,36700.0
+206941,University of Central Oklahoma,OK,Public,10170.0,-0.2873160476524177,38400.0
+237312,University of Charleston,WV,Private nonprofit,2259.0,0.32415005861664703,41800.0
+144050,University of Chicago,IL,Private nonprofit,7569.0,0.2896575225762481,65500.0
+201885,University of Cincinnati-Main Campus,OH,Public,29882.0,0.24166874428654528,39500.0
+126614,University of Colorado Boulder,CO,Public,31939.0,0.20542723429951693,48100.0
+126580,University of Colorado Colorado Springs,CO,Public,8697.0,-0.0858734496531427,41100.0
+126562,University of Colorado Denver/Anschutz Medical Campus,CO,Public,10519.0,-0.03095347766006451,53700.0
+129020,University of Connecticut,CT,Public,19835.0,0.0750094845807816,55800.0
+436827,University of Connecticut-Avery Point,CT,Public,454.0,-0.33915574963609896,55800.0
+436836,University of Connecticut-Stamford,CT,Public,2432.0,0.7006993006993008,55800.0
+436818,University of Connecticut-Tri-Campus,CT,Public,733.0,-0.6656021897810219,55800.0
+224323,University of Dallas,TX,Private nonprofit,1403.0,0.050149700598802305,44500.0
+202480,University of Dayton,OH,Private nonprofit,7682.0,-0.10215053763440862,51600.0
+130943,University of Delaware,DE,Public,19071.0,0.0391216694818286,55100.0
+127060,University of Denver,CO,Private nonprofit,6025.0,0.04637026745397699,53800.0
+169716,University of Detroit Mercy,MI,Private nonprofit,2438.0,-0.057231245166279976,46100.0
+153278,University of Dubuque,IA,Private nonprofit,1440.0,-0.2148309705561614,38400.0
+150534,University of Evansville,IN,Private nonprofit,1539.0,-0.2757647058823529,40300.0
+134130,University of Florida,FL,Public,35629.0,0.10047566098344451,53100.0
+139959,University of Georgia,GA,Public,32137.0,0.1756722151088348,48500.0
+180258,University of Great Falls,MT,Private nonprofit,528.0,-0.4980988593155894,32300.0
+240754,University of Guam,GU,Public,2515.0,-0.3103921030984371,28800.0
+129525,University of Hartford,CT,Private nonprofit,4146.0,-0.17541766109785206,45200.0
+141565,University of Hawaii at Hilo,HI,Public,2160.0,-0.3085787451984635,34500.0
+141574,University of Hawaii at Manoa,HI,Public,15029.0,0.1283033033033032,43600.0
+141981,University of Hawaii-West Oahu,HI,Public,2519.0,0.0007945967421534306,40000.0
+160065,University of Holy Cross,LA,Private nonprofit,471.0,-0.44260355029585796,39500.0
+225511,University of Houston,TX,Public,38380.0,0.15255255255255262,49900.0
+225414,University of Houston-Clear Lake,TX,Public,6078.0,0.12493059411438079,47100.0
+225432,University of Houston-Downtown,TX,Public,12555.0,-0.04167620792305926,42800.0
+225502,University of Houston-Victoria,TX,Public,2513.0,-0.1492890995260664,39200.0
+142285,University of Idaho,ID,Public,7747.0,-0.010094556606184524,41000.0
+145600,University of Illinois at Chicago,IL,Public,22170.0,0.27648549055734684,52200.0
+148654,University of Illinois at Springfield,IL,Public,2263.0,-0.20791039551977597,43000.0
+145637,University of Illinois at Urbana-Champaign,IL,Public,36258.0,0.12707491451663033,57600.0
+151263,University of Indianapolis,IN,Private nonprofit,3005.0,-0.2739792220343078,40300.0
+153658,University of Iowa,IA,Public,22264.0,0.013381884387801524,50200.0
+200156,University of Jamestown,ND,Private nonprofit,1041.0,0.2090592334494774,42400.0
+155317,University of Kansas,KS,Public,21217.0,0.12952512776831338,46500.0
+157085,University of Kentucky,KY,Public,24763.0,0.11309390030116417,43000.0
+117140,University of La Verne,CA,Private nonprofit,3050.0,-0.4066147859922179,48900.0
+160658,University of Louisiana at Lafayette,LA,Public,12428.0,-0.17646279239281693,38300.0
+159993,University of Louisiana at Monroe,LA,Public,5022.0,-0.15695820043646136,36800.0
+157289,University of Louisville,KY,Public,14727.0,-0.007881972514147129,40300.0
+161253,University of Maine,ME,Public,8496.0,-0.020859744151204285,40800.0
+161217,University of Maine at Augusta,ME,Public,2659.0,-0.32921291624621596,27500.0
+161226,University of Maine at Farmington,ME,Public,1140.0,-0.35447338618346547,33800.0
+161235,University of Maine at Fort Kent,ME,Public,599.0,-0.39494949494949494,33200.0
+161341,University of Maine at Presque Isle,ME,Public,1913.0,1.296518607442977,29600.0
+200217,University of Mary,ND,Private nonprofit,2416.0,0.2885333333333333,46200.0
+226471,University of Mary Hardin-Baylor,TX,Private nonprofit,2759.0,-0.13047589032461393,41600.0
+232681,University of Mary Washington,VA,Public,3566.0,-0.16330361332707644,50500.0
+163259,University of Maryland Baltimore,MD,Public,958.0,0.11395348837209296,83000.0
+163338,University of Maryland Eastern Shore,MD,Public,2391.0,-0.3306270996640538,36200.0
+163268,University of Maryland-Baltimore County,MD,Public,10701.0,-0.03975233309404169,54100.0
+163286,University of Maryland-College Park,MD,Public,30760.0,0.14396221503216933,61700.0
+163204,University of Maryland-University College,MD,Public,49664.0,0.37501038234724104,49900.0
+166629,University of Massachusetts-Amherst,MA,Public,23671.0,0.056505244365097074,49700.0
+166638,University of Massachusetts-Boston,MA,Public,11512.0,-0.07138823909010239,47000.0
+167987,University of Massachusetts-Dartmouth,MA,Public,5221.0,-0.25985256592004535,46600.0
+166513,University of Massachusetts-Lowell,MA,Public,11434.0,-0.12664222425908955,50800.0
+220862,University of Memphis,TN,Public,12701.0,-0.18337298270430147,36400.0
+135726,University of Miami,FL,Private nonprofit,12913.0,0.20356044365737724,57800.0
+170976,University of Michigan-Ann Arbor,MI,Public,34177.0,0.2153982930298719,60100.0
+171137,University of Michigan-Dearborn,MI,Public,5952.0,-0.13046018991964936,46600.0
+171146,University of Michigan-Flint,MI,Public,4411.0,-0.2948041566746603,40000.0
+174075,University of Minnesota-Crookston,MN,Public,1729.0,-0.07737459978655281,41300.0
+174233,University of Minnesota-Duluth,MN,Public,7336.0,-0.17840743644305068,45300.0
+174251,University of Minnesota-Morris,MN,Public,936.0,-0.4623779437105112,39500.0
+456959,University of Minnesota-Rochester,MN,Public,568.0,0.4129353233830846,49800.0
+174066,University of Minnesota-Twin Cities,MN,Public,31855.0,0.04404968699813172,49800.0
+176017,University of Mississippi,MS,Public,21473.0,0.16246210480727585,41100.0
+178396,University of Missouri-Columbia,MO,Public,23929.0,-0.1264556638557296,46100.0
+178402,University of Missouri-Kansas City,MO,Public,6817.0,-0.1454180769712925,43900.0
+178420,University of Missouri-St Louis,MO,Public,5024.0,-0.3928700906344411,40600.0
+101693,University of Mobile,AL,Private nonprofit,1307.0,-0.09046624913013224,35000.0
+101709,University of Montevallo,AL,Public,2151.0,-0.15746180963572265,33100.0
+199069,University of Mount Olive,NC,Private nonprofit,1796.0,-0.43020304568527923,37000.0
+204185,University of Mount Union,OH,Private nonprofit,1995.0,-0.03202328966521106,42200.0
+181428,University of Nebraska Medical Center,NE,Public,938.0,0.08439306358381504,67300.0
+181215,University of Nebraska at Kearney,NE,Public,4088.0,-0.1516912222452791,39100.0
+181394,University of Nebraska at Omaha,NE,Public,11488.0,-0.06502807845690572,42300.0
+181464,University of Nebraska-Lincoln,NE,Public,19178.0,-0.04974729957387769,43700.0
+182281,University of Nevada-Las Vegas,NV,Public,24622.0,0.05560557341907835,43200.0
+182290,University of Nevada-Reno,NV,Public,15599.0,-0.09806302399537437,45000.0
+161457,University of New England,ME,Private nonprofit,2135.0,-0.059885512989872325,45000.0
+183071,University of New Hampshire at Manchester,NH,Public,443.0,-0.3635057471264368,47700.0
+183044,University of New Hampshire-Main Campus,NH,Public,11261.0,-0.11947767612792248,47700.0
+129941,University of New Haven,CT,Private nonprofit,4841.0,-0.02043707001214079,49400.0
+187985,University of New Mexico-Main Campus,NM,Public,17244.0,-0.13285728653323947,34900.0
+159939,University of New Orleans,LA,Public,4638.0,-0.2501212611156023,37800.0
+101879,University of North Alabama,AL,Public,5811.0,0.01983151983151976,36400.0
+199184,University of North Carolina School of the Arts,NC,Public,945.0,0.11176470588235299,31400.0
+199218,University of North Carolina Wilmington,NC,Public,14922.0,0.15041245856140617,39600.0
+199111,University of North Carolina at Asheville,NC,Public,2910.0,-0.16975748930099854,34200.0
+199120,University of North Carolina at Chapel Hill,NC,Public,20752.0,0.15603587543869413,54100.0
+199139,University of North Carolina at Charlotte,NC,Public,24453.0,0.07788944723618085,42700.0
+199148,University of North Carolina at Greensboro,NC,Public,14062.0,-0.0723050534371289,35600.0
+199281,University of North Carolina at Pembroke,NC,Public,5330.0,-0.03231663035584609,32600.0
+200280,University of North Dakota,ND,Public,9981.0,-0.07660283097418819,46800.0
+136172,University of North Florida,FL,Public,13359.0,-0.014968293761982054,42100.0
+482680,University of North Georgia,GA,Public,16146.0,0.00610667996011971,40600.0
+227216,University of North Texas,TX,Public,34341.0,0.12471751875020476,43300.0
+127741,University of Northern Colorado,CO,Public,5598.0,-0.37206954570947837,40200.0
+154095,University of Northern Iowa,IA,Public,7529.0,-0.2420978457821623,42800.0
+174491,University of Northwestern-St Paul,MN,Private nonprofit,1442.0,-0.2620266120777891,36600.0
+152080,University of Notre Dame,IN,Private nonprofit,8818.0,0.04664688427299701,71600.0
+207342,University of Oklahoma-Health Sciences Center,OK,Public,1214.0,0.4538922155688623,48700.0
+207500,University of Oklahoma-Norman Campus,OK,Public,22734.0,0.09884479675189706,48700.0
+209551,University of Oregon,OR,Public,20497.0,0.013699307616221512,43200.0
+215062,University of Pennsylvania,PA,Private nonprofit,10650.0,-0.0015000937558596883,82400.0
+157535,University of Pikeville,KY,Private nonprofit,1135.0,-0.087620578778135,28400.0
+215266,University of Pittsburgh-Bradford,PA,Public,995.0,-0.2997888810696693,50700.0
+215275,University of Pittsburgh-Greensburg,PA,Public,1305.0,-0.16292495189223866,50700.0
+215284,University of Pittsburgh-Johnstown,PA,Public,1808.0,-0.357498223169865,50700.0
+215293,University of Pittsburgh-Pittsburgh Campus,PA,Public,20370.0,0.09193245778611625,50700.0
+209825,University of Portland,OR,Private nonprofit,2957.0,-0.20956963378775728,56600.0
+236328,University of Puget Sound,WA,Private nonprofit,1594.0,-0.3562197092084006,49000.0
+121691,University of Redlands,CA,Private nonprofit,2049.0,-0.4064310544611819,52100.0
+217484,University of Rhode Island,RI,Public,13381.0,0.002923099985009836,49800.0
+233374,University of Richmond,VA,Private nonprofit,2980.0,-0.07165109034267914,60700.0
+195030,University of Rochester,NY,Private nonprofit,6331.0,0.03363265306122454,57500.0
+152336,University of Saint Francis-Fort Wayne,IN,Private nonprofit,1567.0,-0.10200573065902574,38400.0
+130314,University of Saint Joseph,CT,Private nonprofit,838.0,-0.07300884955752207,48800.0
+155812,University of Saint Mary,KS,Private nonprofit,925.0,0.16352201257861632,37100.0
+122436,University of San Diego,CA,Private nonprofit,5671.0,0.02161772653575933,59300.0
+122612,University of San Francisco,CA,Private nonprofit,5287.0,-0.20876982939239752,59900.0
+207722,University of Science and Arts of Oklahoma,OK,Public,941.0,0.10705882352941187,32300.0
+215929,University of Scranton,PA,Private nonprofit,3554.0,-0.06301080938571046,56600.0
+219383,University of Sioux Falls,SD,Private nonprofit,1218.0,0.02784810126582271,38800.0
+102094,University of South Alabama,AL,Public,8879.0,-0.21970296159592229,37000.0
+218645,University of South Carolina-Aiken,SC,Public,2962.0,-0.03202614379084967,35800.0
+218654,University of South Carolina-Beaufort,SC,Public,2052.0,0.07042253521126751,33000.0
+218663,University of South Carolina-Columbia,SC,Public,29820.0,0.1956216671344373,43000.0
+218742,University of South Carolina-Upstate,SC,Public,4038.0,-0.20730270906949355,36300.0
+219471,University of South Dakota,SD,Public,5439.0,-0.12344883158742948,40200.0
+137351,University of South Florida-Main Campus,FL,Public,37207.0,0.22868370649230574,41800.0
+123961,University of Southern California,CA,Private nonprofit,20443.0,0.10389329877423181,70400.0
+151306,University of Southern Indiana,IN,Public,5292.0,-0.3343396226415094,35200.0
+161554,University of Southern Maine,ME,Public,4222.0,-0.212166448964359,37900.0
+176372,University of Southern Mississippi,MS,Public,10075.0,-0.141603476186419,35800.0
+148584,University of St Francis,IL,Private nonprofit,1223.0,-0.2551766138855055,47600.0
+174914,University of St Thomas,MN,Private nonprofit,6245.0,0.02781435154707035,55600.0
+227863,University of St Thomas,TX,Private nonprofit,3220.0,0.8742724097788126,48900.0
+206084,University of Toledo,OH,Public,9770.0,-0.3481886716925745,41800.0
+207971,University of Tulsa,OK,Private nonprofit,2813.0,-0.18463768115942025,45100.0
+230764,University of Utah,UT,Public,27264.0,0.19783840780282058,51000.0
+216542,University of Valley Forge,PA,Private nonprofit,471.0,-0.3556771545827634,29900.0
+231174,University of Vermont,VT,Public,11743.0,0.16486459676619392,45200.0
+234076,University of Virginia-Main Campus,VA,Public,17597.0,0.11458069419812511,60700.0
+377555,University of Washington-Bothell Campus,WA,Public,5457.0,0.17103004291845503,54800.0
+236948,University of Washington-Seattle Campus,WA,Public,31942.0,0.06395310105922314,54800.0
+377564,University of Washington-Tacoma Campus,WA,Public,4185.0,0.0774974253347065,54800.0
+101587,University of West Alabama,AL,Public,2974.0,0.5546262415054888,36200.0
+141334,University of West Georgia,GA,Public,7520.0,-0.27054030458822387,37200.0
+240268,University of Wisconsin-Eau Claire,WI,Public,8895.0,-0.09640390085331163,44000.0
+240277,University of Wisconsin-Green Bay,WI,Public,6341.0,0.15249000363504184,38900.0
+240329,University of Wisconsin-La Crosse,WI,Public,9277.0,-0.01955189177763683,44700.0
+240444,University of Wisconsin-Madison,WI,Public,36902.0,0.24757429257243313,54200.0
+240453,University of Wisconsin-Milwaukee,WI,Public,16758.0,-0.19898666411739396,42300.0
+240365,University of Wisconsin-Oshkosh,WI,Public,6877.0,-0.30919136112506274,41200.0
+240374,University of Wisconsin-Parkside,WI,Public,2844.0,-0.316017316017316,37800.0
+240462,University of Wisconsin-Platteville,WI,Public,5837.0,-0.25022479126525365,45400.0
+240471,University of Wisconsin-River Falls,WI,Public,4205.0,-0.2045024593265229,40200.0
+240480,University of Wisconsin-Stevens Point,WI,Public,7306.0,-0.16340318332760795,39000.0
+240417,University of Wisconsin-Stout,WI,Public,5842.0,-0.28929440389294403,44300.0
+240426,University of Wisconsin-Superior,WI,Public,1807.0,-0.20326278659611996,35700.0
+240189,University of Wisconsin-Whitewater,WI,Public,9405.0,-0.11390616167326173,41900.0
+240727,University of Wyoming,WY,Public,7944.0,-0.19284698232066655,46200.0
+156541,University of the Cumberlands,KY,Private nonprofit,6941.0,2.817931793179318,32900.0
+131399,University of the District of Columbia,DC,Public,3351.0,-0.20176274416388762,33100.0
+225627,University of the Incarnate Word,TX,Private nonprofit,4440.0,-0.28948631781084977,44400.0
+107558,University of the Ozarks,AR,Private nonprofit,767.0,0.19843750000000004,38700.0
+120883,University of the Pacific,CA,Private nonprofit,3204.0,-0.1387096774193548,69300.0
+188182,University of the Southwest,NM,Private nonprofit,346.0,-0.22421524663677128,38900.0
+243665,University of the Virgin Islands,VI,Public,1518.0,-0.24925816023738867,32200.0
+154493,Upper Iowa University,IA,Private nonprofit,1994.0,-0.504226752859274,40500.0
+196307,Upstate Medical University,NY,Public,159.0,-0.26728110599078336,74700.0
+216524,Ursinus College,PA,Private nonprofit,1491.0,-0.0847145488029466,53700.0
+206349,Ursuline College,OH,Private nonprofit,670.0,0.045241809672387,44000.0
+230728,Utah State University,UT,Public,20272.0,-0.08951268807545476,42400.0
+230737,Utah Valley University,UT,Public,28453.0,0.10492796396256465,43100.0
+197045,Utica College,NY,Private nonprofit,2278.0,-0.25090430779348893,44100.0
+141264,Valdosta State University,GA,Public,6622.0,-0.23815002300966404,36800.0
+200572,Valley City State University,ND,Public,958.0,-0.01642710472279263,38500.0
+152600,Valparaiso University,IN,Private nonprofit,2083.0,-0.33343999999999996,48700.0
+221999,Vanderbilt University,TN,Private nonprofit,7208.0,0.05118856642846725,64500.0
+123651,Vanguard University of Southern California,CA,Private nonprofit,1933.0,0.04148706896551735,36800.0
+197133,Vassar College,NY,Private nonprofit,2444.0,0.012427506213753103,51400.0
+197142,Villa Maria College,NY,Private nonprofit,603.0,0.11460258780036958,26100.0
+216597,Villanova University,PA,Private nonprofit,6938.0,0.01506949524506207,74500.0
+234030,Virginia Commonwealth University,VA,Public,20753.0,-0.07307159765956495,42200.0
+234085,Virginia Military Institute,VA,Public,1527.0,-0.110658124635993,63200.0
+233921,Virginia Polytechnic Institute and State University,VA,Public,30923.0,0.22094997433568908,60500.0
+234155,Virginia State University,VA,Public,5074.0,0.2150383141762453,33300.0
+234164,Virginia Union University,VA,Private nonprofit,1203.0,-0.16167247386759587,31400.0
+234173,Virginia Wesleyan College,VA,Private nonprofit,1256.0,-0.10413694721825961,39300.0
+240107,Viterbo University,WI,Private nonprofit,1249.0,-0.3255939524838013,41100.0
+218919,Voorhees College,SC,Private nonprofit,440.0,0.01382488479262678,24100.0
+152673,Wabash College,IN,Private nonprofit,866.0,0.0,53600.0
+197197,Wagner College,NY,Private nonprofit,1651.0,-0.05549199084668188,55300.0
+199847,Wake Forest University,NC,Private nonprofit,5485.0,0.1272092067406494,60200.0
+236896,Walla Walla University,WA,Private nonprofit,1252.0,-0.229064039408867,43100.0
+172608,Walsh College of Accountancy and Business Administration,MI,Private nonprofit,445.0,-0.5260915867944622,56900.0
+206437,Walsh University,OH,Private nonprofit,1390.0,-0.3552875695732839,41500.0
+210304,Warner Pacific College,OR,Private nonprofit,375.0,-0.2774566473988439,36500.0
+480198,Warner Pacific College Adult Degree Program,OR,Private nonprofit,144.0,-0.7583892617449665,36500.0
+138275,Warner University,FL,Private nonprofit,756.0,-0.26315789473684215,39200.0
+199865,Warren Wilson College,NC,Private nonprofit,707.0,-0.05607476635514019,27000.0
+154527,Wartburg College,IA,Private nonprofit,1452.0,-0.030060120240480992,42900.0
+156082,Washburn University,KS,Public,4562.0,-0.06897959183673474,38800.0
+216667,Washington & Jefferson College,PA,Private nonprofit,1295.0,-0.009181331293037442,51600.0
+162210,Washington Adventist University,MD,Private nonprofit,452.0,-0.4091503267973856,43900.0
+164216,Washington College,MD,Private nonprofit,891.0,-0.3571428571428571,45300.0
+236939,Washington State University,WA,Public,21099.0,-0.12452282157676353,48600.0
+179867,Washington University in St Louis,MO,Private nonprofit,7857.0,0.11732081911262804,66300.0
+234207,Washington and Lee University,VA,Private nonprofit,1881.0,0.02006507592190898,72300.0
+229780,Wayland Baptist University,TX,Private nonprofit,2041.0,-0.4668234064785789,40000.0
+181783,Wayne State College,NE,Public,3010.0,0.08156665468918423,35400.0
+172644,Wayne State University,MI,Public,15587.0,-0.06820899091343857,39900.0
+216694,Waynesburg University,PA,Private nonprofit,1009.0,-0.290436005625879,43600.0
+138293,Webber International University,FL,Private nonprofit,813.0,0.19383259911894268,33000.0
+230782,Weber State University,UT,Public,16360.0,-0.028849578534963838,43300.0
+179894,Webster University,MO,Private nonprofit,2304.0,-0.26857142857142857,41100.0
+220206,Welch College,TN,Private nonprofit,226.0,-0.13409961685823757,28500.0
+168218,Wellesley College,MA,Private nonprofit,2300.0,-0.018771331058020424,60100.0
+168227,Wentworth Institute of Technology,MA,Private nonprofit,3747.0,-0.12616604477611937,60300.0
+141325,Wesleyan College,GA,Private nonprofit,400.0,-0.30915371329879104,33300.0
+130697,Wesleyan University,CT,Private nonprofit,3067.0,0.08797445902802403,49200.0
+216764,West Chester University of Pennsylvania,PA,Public,14164.0,0.01417728769869675,46700.0
+237932,West Liberty University,WV,Public,1511.0,-0.24975173783515392,34500.0
+229814,West Texas A & M University,TX,Public,6917.0,-0.04803192953481972,40600.0
+237899,West Virginia State University,WV,Public,1321.0,-0.35022134776192815,29200.0
+238032,West Virginia University,WV,Public,17385.0,-0.19439295644114918,44000.0
+237950,West Virginia University Institute of Technology,WV,Public,981.0,-0.12096774193548387,44000.0
+237969,West Virginia Wesleyan College,WV,Private nonprofit,954.0,-0.3041575492341356,40200.0
+200004,Western Carolina University,NC,Public,10024.0,0.16544587838623426,36200.0
+130776,Western Connecticut State University,CT,Public,3511.0,-0.30899429246211374,43300.0
+433387,Western Governors University,UT,Private nonprofit,155088.0,1.8334338174842424,38800.0
+149772,Western Illinois University,IL,Public,4410.0,-0.5175582540203478,41500.0
+157951,Western Kentucky University,KY,Public,12155.0,-0.1960447119518487,33800.0
+172699,Western Michigan University,MI,Public,12568.0,-0.3086528411903845,43700.0
+168254,Western New England University,MA,Private nonprofit,2603.0,-0.04512105649303011,54900.0
+188304,Western New Mexico University,NM,Public,2026.0,0.08574490889603426,30600.0
+210429,Western Oregon University,OR,Public,3103.0,-0.35097259987450324,37500.0
+128391,Western State Colorado University,CO,Public,1586.0,-0.18457583547557843,36200.0
+237011,Western Washington University,WA,Public,13544.0,-0.0552455357142857,44400.0
+168263,Westfield State University,MA,Public,3615.0,-0.33779080417658913,43900.0
+216807,Westminster College,PA,Private nonprofit,1041.0,-0.057065217391304324,42200.0
+230807,Westminster College,UT,Private nonprofit,823.0,-0.614519906323185,47900.0
+179946,Westminster College,MO,Private nonprofit,638.0,-0.3212765957446808,41600.0
+125727,Westmont College,CA,Private nonprofit,1302.0,0.004629629629629539,49200.0
+168281,Wheaton College,MA,Private nonprofit,1773.0,0.13290734824281158,46700.0
+149781,Wheaton College,IL,Private nonprofit,2121.0,-0.13322435635472007,45200.0
+238078,Wheeling Jesuit University,WV,Private nonprofit,589.0,-0.4248046875,42100.0
+237057,Whitman College,WA,Private nonprofit,1531.0,0.06098406098406106,46600.0
+125763,Whittier College,CA,Private nonprofit,764.0,-0.5349969567863664,43100.0
+237066,Whitworth University,WA,Private nonprofit,1858.0,-0.19913793103448274,41000.0
+475200,Whitworth University-Adult Degree Programs,WA,Private nonprofit,145.0,-0.5454545454545454,41000.0
+156125,Wichita State University,KS,Public,10780.0,-0.02425778421433744,39600.0
+216852,Widener University,PA,Private nonprofit,2951.0,-0.09032059186189889,53200.0
+206491,Wilberforce University,OH,Private nonprofit,822.0,0.40273037542662116,31500.0
+229887,Wiley College,TX,Private nonprofit,712.0,-0.39249146757679176,25800.0
+216931,Wilkes University,PA,Private nonprofit,1985.0,-0.15818490245971162,50300.0
+210401,Willamette University,OR,Private nonprofit,1592.0,-0.17298701298701302,49100.0
+176479,William Carey University,MS,Private nonprofit,2201.0,0.07523204689789931,34700.0
+122728,William Jessup University,CA,Private nonprofit,1294.0,0.1838975297346752,35200.0
+179955,William Jewell College,MO,Private nonprofit,924.0,-0.12250712250712248,44200.0
+187444,William Paterson University of New Jersey,NJ,Public,6614.0,-0.2872076732406509,44300.0
+199272,William Peace University,NC,Private nonprofit,666.0,-0.35838150289017345,34000.0
+154590,William Penn University,IA,Private nonprofit,1301.0,-0.1082933516106922,40000.0
+179964,William Woods University,MO,Private nonprofit,1300.0,0.3429752066115703,34700.0
+107877,Williams Baptist College,AR,Private nonprofit,478.0,-0.024489795918367308,32100.0
+168342,Williams College,MA,Private nonprofit,2076.0,0.0028985507246377384,54100.0
+206507,Wilmington College,OH,Private nonprofit,1006.0,-0.09532374100719421,38500.0
+131113,Wilmington University,DE,Private nonprofit,7906.0,-0.08854046575974173,40600.0
+217013,Wilson College,PA,Private nonprofit,865.0,0.536412078152753,33600.0
+199962,Wingate University,NC,Private nonprofit,2668.0,0.3240694789081886,40400.0
+175272,Winona State University,MN,Public,5144.0,-0.3432912038810162,42700.0
+199999,Winston-Salem State University,NC,Public,4170.0,-0.10264686894770825,31800.0
+218964,Winthrop University,SC,Public,3523.0,-0.263894692854158,36200.0
+240338,Wisconsin Lutheran College,WI,Private nonprofit,943.0,-0.1070075757575758,40900.0
+206525,Wittenberg University,OH,Private nonprofit,1215.0,-0.3268698060941828,41900.0
+218973,Wofford College,SC,Private nonprofit,1816.0,0.0986085904416214,50000.0
+125897,Woodbury University,CA,Private nonprofit,779.0,-0.37429718875502005,46100.0
+168421,Worcester Polytechnic Institute,MA,Private nonprofit,5447.0,0.30404596600430933,82600.0
+168430,Worcester State University,MA,Public,3930.0,-0.22162804515745693,45600.0
+206613,Wright State University-Lake Campus,OH,Public,892.0,-0.10080645161290325,38200.0
+206604,Wright State University-Main Campus,OH,Public,6762.0,-0.43837209302325586,38200.0
+206622,Xavier University,OH,Private nonprofit,4207.0,-0.05672645739910309,47500.0
+160904,Xavier University of Louisiana,LA,Private nonprofit,2628.0,0.12116040955631391,47900.0
+130794,Yale University,CT,Private nonprofit,6758.0,0.22250361794500728,83200.0
+375230,Yeshiva Gedolah Imrei Yosef D'spinka,NY,Private nonprofit,226.0,1.073394495412844,13100.0
+197708,Yeshiva University,NY,Private nonprofit,2852.0,0.04087591240875921,55900.0
+197674,Yeshiva of Nitra Rabbinical College,NY,Private nonprofit,243.0,0.1045454545454545,14700.0
+197735,Yeshivath Viznitz,NY,Private nonprofit,1159.0,1.272549019607843,12800.0
+181853,York College,NE,Private nonprofit,428.0,0.05940594059405946,36000.0
+217059,York College Pennsylvania,PA,Private nonprofit,3265.0,-0.26147930332503955,48000.0
+141361,Young Harris College,GA,Private nonprofit,755.0,-0.3524871355060034,37100.0
+206695,Youngstown State University,OH,Public,7961.0,-0.21920360925853277,34000.0

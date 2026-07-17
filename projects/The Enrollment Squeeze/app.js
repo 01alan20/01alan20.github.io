@@ -190,6 +190,58 @@ function renderReplacementTool(reset = false) {
     : `<span>Unfilled students</span><strong>${fmtInt(result.unfilled)}</strong><p>${fmtInt(result.allocated)} of ${fmtInt(required)} projected missing entrants allocated. This is a user scenario, not an estimate of achievable recruitment.</p>`;
 }
 
+function competitiveRank(values) {
+  const indexed = values.map((value, index) => ({ value, index })).sort((a, b) => a.value - b.value);
+  const ranks = Array(values.length);
+  let start = 0;
+  while (start < indexed.length) {
+    let end = start;
+    while (end + 1 < indexed.length && indexed[end + 1].value === indexed[start].value) end += 1;
+    const rank = (start + end + 2) / 2;
+    for (let index = start; index <= end; index += 1) ranks[indexed[index].index] = rank;
+    start = end + 1;
+  }
+  return ranks;
+}
+
+function competitiveSpearman(rows, key) {
+  const valid = rows.filter(row => Number.isFinite(Number(row[key])) && Number.isFinite(Number(row.change)));
+  if (valid.length < 3) return null;
+  const x = competitiveRank(valid.map(row => Number(row[key])));
+  const y = competitiveRank(valid.map(row => Number(row.change)));
+  const mean = values => values.reduce((sum, value) => sum + value, 0) / values.length;
+  const xMean = mean(x); const yMean = mean(y);
+  const numerator = x.reduce((sum, value, index) => sum + ((value - xMean) * (y[index] - yMean)), 0);
+  const denominator = Math.sqrt(x.reduce((sum, value) => sum + ((value - xMean) ** 2), 0) * y.reduce((sum, value) => sum + ((value - yMean) ** 2), 0));
+  return denominator ? numerator / denominator : null;
+}
+
+function renderCompetitiveConditions() {
+  const container = document.querySelector('#competitive-conditions-grid');
+  if (!container) return;
+  const features = [
+    ['retention', 'Retention', 'Full-time retention rate'],
+    ['firstTimeOtherStateShare', 'Out-of-state recruitment', 'First-time students from other states'],
+    ['admitRate', 'Admission rate', 'Applicants admitted'],
+    ['adultUGShare', 'Adult-student share', 'Undergraduate students age 25 or older'],
+  ];
+  const rows = (DATA.institution_diagnostics || []).map(row => ({ ...row, change: Number(row.change) })).filter(row => Number.isFinite(row.change));
+  const median = values => { const sorted = values.slice().sort((a, b) => a - b); const middle = Math.floor(sorted.length / 2); return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2; };
+  const groupRows = rows.filter(row => row.change < -0.025 || row.change > 0.025);
+  container.innerHTML = features.map(([key, title, description]) => {
+    const valid = groupRows.filter(row => Number.isFinite(Number(row[key])));
+    const decline = valid.filter(row => row.change < -0.025).map(row => Number(row[key]));
+    const growth = valid.filter(row => row.change > 0.025).map(row => Number(row[key]));
+    if (!decline.length || !growth.length) return '';
+    const declineMedian = median(decline); const growthMedian = median(growth); const gap = growthMedian - declineMedian;
+    const correlation = competitiveSpearman(valid, key);
+    const formatShare = value => new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 1 }).format(value);
+    const formatGap = value => `${value >= 0 ? '+' : ''}${(value * 100).toFixed(1)} percentage points`;
+    const scale = value => `${Math.max(4, Math.min(96, value * 100))}%`;
+    return `<article class="competitive-condition-panel"><h3>${title}</h3><p>${description}</p><div class="condition-group decline"><span>Declined</span><strong>${formatShare(declineMedian)}</strong><div class="condition-bar"><i style="width:${scale(declineMedian)}"></i></div></div><div class="condition-group growth"><span>Grew</span><strong>${formatShare(growthMedian)}</strong><div class="condition-bar"><i style="width:${scale(growthMedian)}"></i></div></div></article>`;
+  }).join('');
+}
+
 function init() {
   const latest = DATA.national.find(row => row.year === 2041);
   document.querySelector('#hero-grad').textContent = fmtInt(latest.graduates);
@@ -201,6 +253,7 @@ function init() {
   renderStateMap();
   renderCountyComparison();
   renderReplacementTool(true);
+  renderCompetitiveConditions();
   document.querySelector('#state-year').addEventListener('change', renderStateMap);
   document.querySelector('#state-metric').addEventListener('change', renderStateMap);
   document.querySelector('#county-state').addEventListener('change', renderCountyComparison);
