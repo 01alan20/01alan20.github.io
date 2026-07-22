@@ -1,0 +1,75 @@
+file_code,tier,year,purpose
+HD2016,core,2016,"Institution identity, location, control, sector and universe"
+EF2016A,core,2016,"Fall enrollment by level, attendance status and U.S. nonresident status"
+EF2016C,core,2016,First-time student residence and institution-by-origin migration flows
+EF2016D,core,2016,"Entering class, first-time enrollment and retention"
+ADM2016,core,2016,"Applications, admissions, enrolled entrants, admission rate and yield"
+HD2018,core,2018,"Institution identity, location, control, sector and universe"
+EF2018A,core,2018,"Fall enrollment by level, attendance status and U.S. nonresident status"
+EF2018C,core,2018,First-time student residence and institution-by-origin migration flows
+EF2018D,core,2018,"Entering class, first-time enrollment and retention"
+ADM2018,core,2018,"Applications, admissions, enrolled entrants, admission rate and yield"
+HD2020,core,2020,"Institution identity, location, control, sector and universe"
+EF2020A,core,2020,"Fall enrollment by level, attendance status and U.S. nonresident status"
+EF2020C,core,2020,First-time student residence and institution-by-origin migration flows
+EF2020D,core,2020,"Entering class, first-time enrollment and retention"
+ADM2020,core,2020,"Applications, admissions, enrolled entrants, admission rate and yield"
+HD2022,core,2022,"Institution identity, location, control, sector and universe"
+EF2022A,core,2022,"Fall enrollment by level, attendance status and U.S. nonresident status"
+EF2022C,core,2022,First-time student residence and institution-by-origin migration flows
+EF2022D,core,2022,"Entering class, first-time enrollment and retention"
+ADM2022,core,2022,"Applications, admissions, enrolled entrants, admission rate and yield"
+HD2024,core,2024,"Institution identity, location, control, sector and universe"
+EF2024A,core,2024,"Fall enrollment by level, attendance status and U.S. nonresident status"
+EF2024C,core,2024,First-time student residence and institution-by-origin migration flows
+EF2024D,core,2024,"Entering class, first-time enrollment and retention"
+ADM2024,core,2024,"Applications, admissions, enrolled entrants, admission rate and yield"
+EF2024B,core,2024,Age composition and traditional-age dependence
+EF2024A_DIST,core,2024,Fall distance-education enrollment by student level
+EFFY2024,core,2024,2023-24 unduplicated 12-month headcount
+EFFY2024_DIST,core,2024,2023-24 12-month distance-education enrollment
+EFIA2024,core,2024,Instructional activity used for 12-month FTE
+DRVEF2024,core,2024,Derived Fall 2024 enrollment and retention indicators
+DRVEF122024,core,2024,Derived 12-month headcount and FTE indicators
+DRVADM2024,core,2024,Derived selectivity and admissions-yield indicators
+F2324_F1A,core,2024,FY2024 public institution finance under GASB
+F2324_F2,core,2024,FY2024 private nonprofit and FASB public finance
+DRVF2024,core,2024,Derived FY2024 revenues and expenditures
+SFA2324,core,2024,"2023-24 financial aid, Pell participation and net price"
+COST1_2024,core,2024,"Published tuition, fees, housing and food charges"
+COST2_2024,core,2024,Public in-state tuition status and living arrangements
+DRVCOST2024,core,2024,Derived cost-of-attendance indicators
+IC2024,extended,2024,"Educational offerings, services and institutional characteristics"
+C2024_A,extended,2024,Awards by six-digit CIP field and award level
+C2024DEP,extended,2024,Programs offered and distance-program availability
+DRVC2024,extended,2024,Derived completions and awards indicators
+S2024_OC,extended,2024,Full- and part-time staff by occupational category
+S2024_SIS,extended,2024,"Instructional staff by faculty, tenure and rank status"
+EAP2024,extended,2024,Employees by assigned position
+SAL2024_IS,extended,2024,Instructional-staff counts and salary outlays
+SAL2024_NIS,extended,2024,Noninstructional-staff counts and salary outlays
+DRVHR2024,extended,2024,"Derived staffing, salary and FTE indicators"
+GR2024,extended,2024,Graduation rates for first-time cohorts
+GR2024_PELL_SSL,extended,2024,Graduation rates by Pell and subsidized-loan status
+GR200_24,extended,2024,Graduation rates within 200 percent of normal time
+DRVGR2024,extended,2024,Derived graduation-rate indicators
+OM2024,extended,2024,Outcomes for first-time/non-first-time and full-/part-time cohorts
+DRVOM2024,extended,2024,Derived Outcome Measures indicators
+F1819_F1A,finance_history,2019,Historical public institution finance
+F1819_F2,finance_history,2019,Historical private nonprofit/FASB finance
+DRVF2019,finance_history,2019,Historical derived revenues and expenditures
+F1920_F1A,finance_history,2020,Historical public institution finance
+F1920_F2,finance_history,2020,Historical private nonprofit/FASB finance
+DRVF2020,finance_history,2020,Historical derived revenues and expenditures
+F2021_F1A,finance_history,2021,Historical public institution finance
+F2021_F2,finance_history,2021,Historical private nonprofit/FASB finance
+DRVF2021,finance_history,2021,Historical derived revenues and expenditures
+F2122_F1A,finance_history,2022,Historical public institution finance
+F2122_F2,finance_history,2022,Historical private nonprofit/FASB finance
+DRVF2022,finance_history,2022,Historical derived revenues and expenditures
+F2223_F1A,finance_history,2023,Historical public institution finance
+F2223_F2,finance_history,2023,Historical private nonprofit/FASB finance
+DRVF2023,finance_history,2023,Historical derived revenues and expenditures
+F2324_F1A,finance_history,2024,Historical public institution finance
+F2324_F2,finance_history,2024,Historical private nonprofit/FASB finance
+DRVF2024,finance_history,2024,Historical derived revenues and expenditures

@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Enrollment Squeeze — working editorial prototype</title>
+  <meta name="description" content="A working editorial prototype tracing the U.S. student pipeline from demographics to institution-level enrollment and tuition consequences through 2041.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top">The Enrollment Squeeze</a>
+    <nav aria-label="Story chapters">
+      <a href="#pool">The pool</a>
+      <a href="#markets">State markets</a>
+      <a href="#institutions">Institutions</a>
+      <a href="#forecast">2041 forecast</a>
+    </nav>
+    <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell reveal">
+      <div class="eyebrow">U.S. higher education through 2041</div>
+      <div class="hero-grid">
+        <div>
+          <h1>The Enrollment <em>Squeeze</em></h1>
+          <p class="dek">Fewer traditional-age students. Uneven state markets. Institutions competing for a changing mix of resident, out-of-state, and international entrants.</p>
+          <p class="hero-copy">This prototype follows the student pool from the national demographic peak to an individual institution’s entering class, replacement burden, and gross tuition consequence.</p>
+          <a class="story-link" href="#pool">Follow the student pool <span>↓</span></a>
+        </div>
+        <div class="hero-stat-panel">
+          <div class="hero-stat">
+            <strong id="hero-2041">3.42m</strong>
+            <span>projected high-school graduates in 2041</span>
+          </div>
+          <div class="hero-stat">
+            <strong id="hero-loss">−424k</strong>
+            <span>graduates compared with 2026</span>
+          </div>
+          <div class="hero-stat">
+            <strong>−17%</strong>
+            <span>new international enrollment in the Fall 2025 snapshot</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-chart-wrap">
+        <div class="chart-label-row"><span>Observed history</span><span class="projected-key">Projected</span></div>
+        <svg id="hero-chart" class="chart-svg" role="img" aria-label="Historical and projected U.S. high-school graduates"></svg>
+      </div>
+    </section>
+
+    <section id="pool" class="chapter section-shell">
+      <div class="chapter-copy reveal">
+        
+        <h2>The student pipeline has peaked.</h2>
+        <p>High-school graduates are only the first stage. A smaller graduating class becomes a smaller, but still consequential, pool of likely college and four-year entrants.</p>
+        <aside class="takeaway" id="pipeline-takeaway">By 2041, the United States is projected to produce 423,702 fewer high-school graduates and 177,390 fewer likely four-year entrants than in 2026.</aside>
+      </div>
+      <div class="editorial-surface reveal">
+        <div class="card-head">
+          <div>
+            
+            <h3>How much of the pipeline remains?</h3>
+          </div>
+          <label>Compare year
+            <select id="pipeline-year">
+              <option value="2030">2030</option>
+              <option value="2035">2035</option>
+              <option value="2041" selected>2041</option>
+            </select>
+          </label>
+        </div>
+        <div id="pipeline-chart" class="pipeline-chart" role="img" aria-label="Pipeline from high-school graduates to likely four-year entrants"></div>
+      </div>
+    </section>
+
+    <section id="markets" class="chapter chapter-tint">
+      <div class="section-shell">
+        <div class="chapter-copy narrow reveal">
+          
+          <h2>The future student pool changes shape before it meets the current system.</h2>
+          <p>Start with the national geography. The 2041 student pool grows in a smaller group of states while much of the Midwest and Northeast contracts.</p>
+          <aside class="takeaway">Only after seeing where the pool changes should we ask whether each state’s resident supply can sustain its current entering classes.</aside>
+        </div>
+
+        <article class="editorial-surface map-surface reveal">
+          <div class="section-kicker">
+            <div>
+              
+              <h3>How the student pool changes across the country</h3>
+              <p>Projected percentage change in likely four-year entrants from 2026 to 2041.</p>
+            </div>
+            <div class="continuous-legend" aria-label="Projected change color scale">
+              <span>Decline</span>
+              <i></i>
+              <span>Near zero</span>
+              <i></i>
+              <span>Growth</span>
+            </div>
+          </div>
+          <div id="state-grid-map" class="state-grid-map" role="img" aria-label="State grid map of projected change in likely four-year entrants through 2041"></div>
+          <p class="data-note">Red indicates projected contraction, green indicates projected growth, and the warm neutral marks little change.</p>
+        </article>
+
+        <article class="editorial-surface coverage-surface reveal">
+          <div class="section-kicker coverage-kicker">
+            <div>
+              
+              <h3>Which state systems have enough resident supply in 2041?</h3>
+              <p>Resident-pool coverage compares projected resident four-year entrants with the current annual first-time intake of four-year institutions. At 1.0×, projected resident supply equals current entering-class demand.</p>
+            </div>
+          </div>
+          <div class="coverage-axis-note">
+            <span>Below 1.0×: supply falls short</span>
+            <span>Above 1.0×: supply exceeds current intake</span>
+          </div>
+          <div class="coverage-scroll">
+            <svg id="state-coverage-ranking" class="coverage-svg" role="img" aria-label="Horizontal ranking of states by resident-pool coverage with a reference line at one"></svg>
+          </div>
+        </article>
+
+        <div class="state-detail-intro reveal">
+          
+          <h3>State supply meets current entering-class demand.</h3>
+          <p>The state detail shows what current intake looks like and how much already comes from outside the home market.</p>
+        </div>
+
+        <div class="state-layout reveal">
+          <div class="editorial-surface state-selector-card">
+            <div class="card-head">
+              <div>
+                
+                <h3>Resident supply versus current intake</h3>
+              </div>
+              <div class="control-row">
+                <label>State
+                  <select id="state-select"></select>
+                </label>
+                <label>Year
+                  <select id="state-year">
+                    <option>2030</option>
+                    <option>2035</option>
+                    <option selected>2041</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            <div class="state-balance">
+              <div>
+                
+                <strong id="state-supply">—</strong>
+              </div>
+              <div class="balance-divider"></div>
+              <div>
+                
+                <strong id="state-demand">—</strong>
+              </div>
+              <div class="coverage-gauge">
+                <span>Resident-pool coverage</span>
+                <strong id="state-coverage">—</strong>
+                <div class="gauge-track"><span id="coverage-fill"></span><i></i></div>
+                <small id="coverage-interpretation">Projected supply divided by current intake.</small>
+              </div>
+            </div>
+            <div class="origin-stack">
+              <div class="stack-labels">
+                <span>Current entering-class composition</span>
+                <span id="origin-total">—</span>
+              </div>
+              <div class="stack-bar" id="state-origin-bar"></div>
+              <div class="legend">
+                <span><i class="home"></i>Home state</span>
+                <span><i class="other"></i>Other U.S.</span>
+                <span><i class="intl"></i>International</span>
+                <span><i class="unknown"></i>Unknown</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="state-summary-panel">
+            
+            <h3 id="state-title">State market profile</h3>
+            <p id="state-summary">Loading state data…</p>
+            <dl class="metric-list">
+              <div><dt>Projected change</dt><dd id="state-change">—</dd></div>
+              <div><dt>Domestic import share</dt><dd id="state-import">—</dd></div>
+              <div><dt>International entry share</dt><dd id="state-intl">—</dd></div>
+              <div><dt>Current institutions</dt><dd id="state-institutions">—</dd></div>
+            </dl>
+            <p class="data-note" id="state-data-note">Coverage uses projected resident entrants divided by current first-time intake.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="institutions" class="chapter section-shell">
+      <div class="chapter-copy reveal">
+        
+        <h2>Urbanization and institutional reputation appear to underpin observed growth.</h2>
+        <p>Large, selective, higher-retention institutions and colleges in cities and suburbs grew more often. These are visible signals of market reach and reputation, while smaller, broadly admitting, rural, and town-based institutions declined more often.</p>
+        <aside class="takeaway">Reputation is not measured directly. Size, selectivity, retention, and metropolitan location are treated as observable signals of institutional strength and reach. The relationships show concentration, not causation.</aside>
+      </div>
+
+      <div class="performance-grid reveal">
+        <article class="performance-card wide">
+          <div class="performance-head">
+            
+            <strong>The scale divide</strong>
+          </div>
+          <div id="size-bars" class="diverging-bars"></div>
+        </article>
+        <article class="performance-card">
+          
+          <strong>More selective institutions grew more often</strong>
+          <div class="paired-stat">
+            <div class="negative-stat"><b>72%</b><span>declined among institutions admitting 80%+</span></div>
+            <div class="positive-stat"><b>70%</b><span>grew among institutions admitting 10–24%</span></div>
+          </div>
+        </article>
+        <article class="performance-card">
+          
+          <strong>Persistence and growth moved together</strong>
+          <div class="single-stat"><b>62%</b><span>of institutions retaining at least 85% of full-time students grew</span></div>
+        </article>
+        <article class="performance-card">
+          
+          <strong>Geography changed the starting point</strong>
+          <div class="paired-stat compact">
+            <div><b>74%</b><span>declined in the Midwest</span></div>
+            <div><b>53%</b><span>declined in the West</span></div>
+          </div>
+        </article>
+        <article class="performance-card">
+          
+          <strong>Rural and town institutions declined more often</strong>
+          <div class="urban-bars">
+            <span style="--value:72%">Rural <b>72%</b></span>
+            <span style="--value:69%">Town <b>69%</b></span>
+            <span style="--value:58%">City <b>58%</b></span>
+            <span style="--value:57%">Suburb <b>57%</b></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="forecast" class="chapter forecast-section">
+      <div class="section-shell">
+        <div class="chapter-copy narrow">
+          
+          <h2>What might 2041 look like for an individual institution?</h2>
+          <p>The model starts with the institution’s current entering-class mix, resizes its domestic markets, carries forward a bounded share of its recent relative trend, and lets international intake recover from 2030 onward.</p>
+          
+        </div>
+
+        <div class="forecast-shell reveal">
+          <div class="forecast-controls">
+            <label class="search-label">Institution
+              <input id="institution-search" list="institution-options" value="The University of Alabama" autocomplete="off">
+              <datalist id="institution-options"></datalist>
+            </label>
+            <label>Target year
+              <select id="forecast-year">
+                <option>2030</option>
+                <option>2035</option>
+                <option selected>2041</option>
+              </select>
+            </label>
+            <label>International recovery
+              <select id="international-path">
+                <option value="limited">Limited</option>
+                <option value="central" selected>Central</option>
+                <option value="strong">Strong</option>
+              </select>
+            </label>
+            <label>Trend persistence
+              <input id="momentum-slider" type="range" min="0" max="70" value="35">
+              <output id="momentum-output">35%</output>
+              <span class="control-help">How much of the institution’s recent performance relative to peers persists after 2024. 0% reverts to a flat share; 35% carries roughly one-third forward.</span>
+            </label>
+          </div>
+
+          <div class="institution-header">
+            <div>
+              
+              <h3 id="institution-name">The University of Alabama</h3>
+              <p id="institution-context">Historically growing · future state contraction</p>
+            </div>
+            <div class="header-results">
+              <div class="confidence-panel">
+                <div class="confidence-summary">
+                  <span>Forecast confidence</span>
+                  <strong id="confidence-label">—</strong>
+                  <div class="confidence-track"><i id="confidence-fill"></i></div>
+                  <p class="confidence-includes">Includes: data coverage, historical stability, residence-market coverage, and finance coverage.</p>
+                </div>
+              </div>
+              <div class="headline-result">
+                <span>Modeled undergraduate enrollment</span>
+                <strong id="headline-enrollment">—</strong>
+                <em id="headline-change">—</em>
+              </div>
+            </div>
+          </div>
+
+          <div class="forecast-grid">
+            <article class="forecast-card">
+              <div class="card-head compact-head">
+                <div>
+                  
+                  <h4>Where the students come from</h4>
+                </div>
+              </div>
+              <div id="entry-comparison" class="entry-comparison"></div>
+              <div class="legend">
+                <span><i class="home"></i>Home state</span>
+                <span><i class="other"></i>Other U.S.</span>
+                <span><i class="intl"></i>International</span>
+                <span><i class="unknown"></i>Other / unknown</span>
+              </div>
+            </article>
+
+            <article class="forecast-card">
+              <div class="card-head compact-head">
+                <div>
+                  
+                  <h4>What changes the entering class</h4>
+                </div>
+              </div>
+              <div id="waterfall" class="waterfall"></div>
+            </article>
+
+            <article class="forecast-card tuition-card">
+              <div class="card-head compact-head">
+                <div>
+                  
+                  <h4>What does the modeled enrollment path mean in dollars?</h4>
+                </div>
+              </div>
+              <div class="financial-layout">
+                <div>
+                  <div class="tuition-result">
+                    <p>Annual gross tuition consequence before replacement</p>
+                    <strong id="tuition-impact">—</strong>
+                    <small id="tuition-share">—</small>
+                  </div>
+                  <div class="tuition-result recovered-result">
+                    <p>After the selected replacement mix</p>
+                    <strong id="adjusted-tuition-impact">—</strong>
+                    <small id="recovered-tuition-note">—</small>
+                  </div>
+                </div>
+                <div id="enrollment-path" class="enrollment-path"></div>
+              </div>
+              <div class="sensitivity-row" id="sensitivity-row"></div>
+              <p class="data-note">International replacement is valued at the out-of-state price for public institutions. Private nonprofit institutions use one institution-wide net tuition rate.</p>
+            </article>
+
+            <article class="forecast-card replacement-card">
+              <div class="card-head compact-head">
+                <div>
+                  
+                  <h4>How should the institution try to replace the missing students?</h4>
+                </div>
+                <div class="replacement-total"><span>Students to replace</span><strong id="replacement-total">—</strong></div>
+              </div>
+              <div class="replacement-mix">
+                <label>Home-state recruitment <output id="home-mix-output">40%</output>
+                  <input id="home-mix" type="range" min="0" max="100" value="40">
+                </label>
+                <label>Other U.S. recruitment <output id="other-mix-output">35%</output>
+                  <input id="other-mix" type="range" min="0" max="100" value="35">
+                </label>
+                <label>International recruitment <output id="intl-mix-output">25%</output>
+                  <input id="intl-mix" type="range" min="0" max="100" value="25">
+                </label>
+                <div class="mix-stack" id="replacement-mix-stack"></div>
+                
+              </div>
+              <div id="replacement-table"></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="conclusion" class="chapter conclusion-chapter">
+      <div class="section-shell">
+        <div class="conclusion-opening reveal">
+          <h2>Growth will have to be built, not assumed.</h2>
+          <div class="conclusion-copy">
+            <p>The next phase of enrollment competition will be shaped by geography, value, and access. Urban and suburban institutions often sit closer to population growth, employers, transport, and services. Institutions in shrinking local markets will need to recruit farther from home and secure more durable student pipelines.</p>
+            <p>Students and families are also looking more closely at value. Institutions that connect academic learning to careers through employer partnerships, work-integrated learning, applied projects, and experiential teaching will be better placed to compete.</p>
+          </div>
+        </div>
+
+        <div class="conclusion-actions reveal" aria-label="Strategic implications">
+          <article>
+            <h3>Expand reach</h3>
+            <p>Build stronger domestic, international, adult, transfer, and employer-supported recruitment pipelines.</p>
+          </article>
+          <article>
+            <h3>Prove value</h3>
+            <p>Connect learning to careers, employers, industry projects, and real-world experience.</p>
+          </article>
+          <article>
+            <h3>Remove friction</h3>
+            <p>Simplify application, credit recognition, progression, and the path from interest to enrollment.</p>
+          </article>
+        </div>
+
+        <article class="conclusion-signal reveal">
+          <div class="signal-copy">
+            <h3>Population growth is concentrating in metropolitan America.</h3>
+            <p>In 2024, 86.4% of the U.S. population lived in metropolitan areas. Metro areas accounted for 96% of national population growth between 2023 and 2024, reinforcing the advantage of institutions located near expanding labor markets and services.</p>
+            <div class="signal-metrics">
+              <div><strong>86.4%</strong><span>of the U.S. population lives in metro areas</span></div>
+              <div><strong>96%</strong><span>of 2023–24 national growth occurred in metro areas</span></div>
+              <div><strong>341 of 387</strong><span>metro areas gained population</span></div>
+            </div>
+          </div>
+          <figure class="metro-map-figure">
+            <img src="assets/metro_population_growth_2023_2024.png" alt="Map of the United States showing the ten metropolitan areas with the largest numeric population gains from 2023 to 2024.">
+            <figcaption>Circle size represents numeric population growth from 2023 to 2024. The map shows where recent gains accumulated; it is not an origin-to-destination migration map.</figcaption>
+          </figure>
+        </article>
+
+        <article class="conclusion-signal application-signal reveal">
+          <div class="signal-copy">
+            <h3>Institutions are widening the top of the funnel.</h3>
+            <p>Lowering application friction can encourage more students to apply, although more applications do not automatically produce more enrollments, stronger yield, or better student fit.</p>
+          </div>
+
+          <div class="application-examples">
+            <section class="application-example">
+              <div class="example-head">
+                <div>
+                  <span>University of Virginia</span>
+                  <h4>Applications reached a record 82,118.</h4>
+                </div>
+                <strong>+27%</strong>
+              </div>
+              <div class="application-bars" aria-label="University of Virginia application comparison">
+                <div>
+                  <span>Class of 2029</span>
+                  <div class="application-track"><i style="width:78%"></i></div>
+                  <b>64,000+</b>
+                </div>
+                <div>
+                  <span>Class of 2030</span>
+                  <div class="application-track"><i style="width:100%"></i></div>
+                  <b>82,118</b>
+                </div>
+              </div>
+              <p>UVA removed its supplemental essay before the record cycle. The timing is notable, but it does not establish that the essay change caused the increase.</p>
+            </section>
+
+            <section class="application-example">
+              <div class="example-head">
+                <div>
+                  <span>University of Georgia · Fall 2027</span>
+                  <h4>One required essay instead of two.</h4>
+                </div>
+              </div>
+              <div class="essay-change" aria-label="UGA essay requirement change">
+                <div><span>Common App essay</span><strong>Retained</strong></div>
+                <div class="essay-removed"><span>UGA supplemental essay</span><strong>Removed</strong></div>
+              </div>
+              <p>UGA said the single Common Application essay provides the information needed for review and should reduce stress for applicants and families.</p>
+            </section>
+          </div>
+        </article>
+
+        <blockquote class="conclusion-quote reveal">
+          The winners of the next enrollment era will not be those waiting for students to return. They will be the institutions that make themselves easier to enter, easier to justify, and harder to ignore.
+        </blockquote>
+
+        <p class="conclusion-source reveal">Sources: U.S. Census Bureau Vintage 2024 Population Estimates; UVA Today; UGA Admissions. Supporting values and source links are included in <code>data/conclusion_signals.json</code>.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>
+      <strong>The Enrollment Squeeze</strong>
+      <p>Working model built from the current project structure. National values use the project’s existing WICHE-based series. The institution forecast is an explicit prototype model, not an official projection.</p>
+    </div>
+    <div>
+      <span>Sources represented in the project</span>
+      <p>WICHE, U.S. Census Bureau, College Scorecard, NCES IPEDS, and IIE Open Doors.</p>
+    </div>
+  </footer>
+
+  <script src="data/national_projection.js"></script>
+  <script src="data/state_market_2041.js"></script>
+  <script src="data/institution_examples.js"></script>
+  <script src="data/state_grid_layout.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

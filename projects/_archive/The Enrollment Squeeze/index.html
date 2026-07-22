@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The Enrollment Squeeze: Preparing to Compete examines how demographic change, participation, institutional value, student outcomes, and tuition dependence interact across U.S. higher education.">
+  <title>The Enrollment Squeeze: Preparing to Compete</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+  <script src="assets/plotly.min.js?v=20260716-1"></script>
+</head>
+<body>
+  <header class="site-nav">
+    <a class="brand" href="#top">The Enrollment Squeeze</a>
+    <nav aria-label="Story chapters">
+      <a href="#part-pool">The pool</a>
+      <a href="#part-competition">Competition</a>
+      <a href="#part-finance">Finance</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <p class="eyebrow">U.S. higher education through 2041</p>
+        <h1>The Enrollment Squeeze:<br><span>Preparing to Compete</span></h1>
+        <p class="hero-deck">Demography sets the size of the market. Participation determines who enters it. Competition determines where students enroll. Revenue models determine what happens when they do not.</p>
+        <div class="hero-stats">
+          <article><strong id="hero-grad">—</strong><span>projected high-school graduates in 2041</span></article>
+          <article><strong id="hero-change">—</strong><span>change from the class of 2026</span></article>
+          <article><strong>−17%</strong><span>new international enrollment in the Fall 2025 snapshot</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="opening" id="story">
+      <div class="prose wide">
+        <h2>How much adaptation would it take to keep enrollment level?</h2>
+        <p class="lead">The demographic decline is visible. The harder questions are how far participation must rise, which institutions are already outperforming their markets, and how many students or tuition dollars must be replaced.</p>
+      </div>
+    </section>
+
+    <section class="chapter-band" id="part-pool" aria-labelledby="pool-heading">
+      <h2 id="pool-heading">How many likely entrants will exist?</h2>
+    </section>
+
+    <section class="evidence-section national-section" id="national-story">
+      <div class="evidence-grid chart-only">
+        <div class="figure-card">
+          <div class="figure-head"><h3 id="national-title">A smaller pipeline from high school to four-year college</h3></div>
+          <div id="national-chart" class="plot primary-plot"></div>
+          <p class="figure-note">WICHE projections; college-going and four-year attendance use the central assumptions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="enrollment-trends" id="enrollment-trends">
+      <div class="section-head">
+        <div><h2>Undergraduate and graduate markets have moved differently.</h2></div>
+      </div>
+      <div class="trend-grid">
+        <article class="figure-card"><div class="figure-head"><h3>Undergraduate enrollment</h3></div><div id="undergraduate-trend-chart" class="plot"></div></article>
+        <article class="figure-card"><div class="figure-head"><h3>Graduate enrollment</h3></div><div id="graduate-trend-chart" class="plot"></div></article>
+      </div>
+    </section>
+
+    <section class="chapter-band" id="part-geography" aria-labelledby="geography-heading">
+      <h2 id="geography-heading">Where is the loss concentrated, and how much participation would offset it?</h2>
+    </section>
+
+    <section class="map-section" id="state-markets">
+      <div class="section-head">
+        <div><h2>Percentage decline and absolute loss tell different stories.</h2></div>
+        <p>Participation increase required to maintain the 2026 entrant pool shows how far the assumed college-going rate would need to rise while the four-year share remains fixed.</p>
+      </div>
+      <div class="finding" id="state-finding"><strong>The national total conceals different policy challenges.</strong><span>Switch measures to separate concentrated percentage declines from large-volume losses.</span></div>
+      <div class="control-bar">
+        <label>Year<select id="state-year"><option>2030</option><option>2035</option><option selected>2041</option></select></label>
+        <label>Measure<select id="state-metric"><option value="change">Projected entrant change</option><option value="graduateLoss">High-school graduates lost</option><option value="entrantLoss">Likely four-year entrants lost</option><option value="requiredParticipationPoints">Required participation increase</option></select></label>
+      </div>
+      <div class="map-layout">
+        <div id="state-map" class="plot map-plot"></div>
+        <aside class="detail-panel" id="state-detail"><p class="kicker">Select a state</p><h3>Click the map to inspect the response required.</h3><p>The profile will show absolute losses, required participation, and a descriptive state situation.</p></aside>
+      </div>
+      <p class="figure-note map-key"><span class="key-decline" id="state-key-swatch-left"></span><span id="state-key-left">Larger decline</span><span class="key-neutral" id="state-key-swatch-mid"></span><span id="state-key-mid">Little change</span><span class="key-growth" id="state-key-swatch-right"></span><span id="state-key-right">Growth</span></p>
+    </section>
+
+    <section class="local-section" id="local-markets">
+      <div class="section-head">
+        <div><h2>Local markets show where the remaining pool is concentrated.</h2></div>
+        <p>County estimates allocate state projections using age cohorts and recent geographic movement. They support recruitment planning, not school-level forecasts.</p>
+      </div>
+      <div class="control-bar">
+        <label>State<select id="county-state"></select></label>
+        <label>Year<select id="county-year"><option>2026</option><option>2030</option><option>2035</option><option selected>2041</option></select></label>
+        <label>View<select id="county-sort"><option value="size">Largest markets</option><option value="decline">Largest declines</option></select></label>
+      </div>
+      <div class="split-card"><div id="county-chart" class="plot"></div><div class="county-summary" id="county-summary"></div></div>
+    </section>
+
+    <section class="chapter-band" id="part-competition" aria-labelledby="competition-heading">
+      <h2 id="competition-heading">Which institutions are moving differently from their markets and peers?</h2>
+    </section>
+
+    <section class="competition-section" id="explorer">
+      <div class="section-head">
+        <div><h2>Institutions are not moving with their markets equally.</h2></div>
+        <p>Observed performance and recruitment composition show how institutions have moved and which entering-student pools they currently draw from. These measures describe present position, not proven future reach.</p>
+      </div>
+      <div class="finding"><strong>Some institutions are already diverging sharply from comparable colleges.</strong><span>Peer comparisons use control, undergraduate size, and admissions profile, with transparent fallbacks.</span></div>
+      <div class="control-bar sticky-controls">
+        <label>Control<select id="inst-control"><option value="All">All</option><option>Public</option><option>Private nonprofit</option></select></label>
+        <label>State<select id="exposure-state"><option value="All">All states</option></select></label>
+        <label>Current undergraduate size<select id="exposure-size"><option value="All">All sizes</option><option>Under 5,000</option><option>5,000–19,999</option><option>20,000 or more</option></select></label>
+        <label>Observed undergraduate trend<select id="exposure-trend"><option value="All">All trends</option><option>Growing</option><option>Little change</option><option>Declining</option></select></label>
+        <label class="search-control">Search institution<input id="exposure-institution" list="exposure-institution-options" placeholder="All institutions" autocomplete="off"></label>
+        <datalist id="exposure-institution-options"></datalist>
+        <button type="button" id="institution-filter-reset" class="filter-reset">Reset filters</button>
+      </div>
+      <div class="competition-grid">
+        <article class="figure-card"><div class="figure-head"><h3>Observed institution change versus projected state entrant change</h3></div><div id="competition-quadrant" class="plot primary-plot"></div></article>
+        <aside class="detail-panel" id="institution-detail"><p class="kicker">Select an institution</p><h3>Click a point or map marker.</h3><p>The profile compares the institution with its state and observed peers.</p></aside>
+      </div>
+      <div class="map-control-row">
+        <div class="map-control-copy">
+          <h3>Where observed performance is concentrated</h3>
+          <ul class="map-findings">
+            <li><strong>61% of institutions declined by more than 2.5%</strong> between 2015–16 and 2024–25. <strong>31% grew by more than 2.5%, while 8% remained within ±2.5%.</strong></li>
+            <li><strong>Size produced the clearest divide:</strong> 74% of institutions with fewer than 1,000 undergraduates declined, while 84% of institutions enrolling at least 20,000 grew.</li>
+            <li><strong>More selective, higher-retention institutions performed better:</strong> 72% of institutions admitting at least 80% of applicants declined, compared with growth at 70% of institutions admitting 10–24%. Among institutions retaining at least 85% of full-time students, 62% grew.</li>
+            <li><strong>Location also mattered:</strong> 74% of Midwestern institutions declined, compared with 53% in the West. Declines affected 72% of rural institutions and 69% of town institutions, versus 58% in cities and 57% in suburbs.</li>
+          </ul>
+        </div>
+        <label>Map color<select id="institution-map-metric"><option value="change">Observed undergraduate change</option><option value="firstTimeHomeStateShare">First-time students from within the institution state</option><option value="firstTimeOtherStateShare">First-time students from other U.S. states</option><option value="internationalUGShare">Undergraduate nonresident-alien share</option><option value="currentUG">Current undergraduate enrollment</option><option value="admitRate">Admissions rate</option><option value="retention">Retention rate</option><option value="adultUGShare">Adult student share</option><option value="partTimeUGShare">Part-time share</option><option value="tuitionPerFTE">Net tuition revenue per FTE</option></select></label>
+      </div>
+      <div id="institution-map" class="plot map-plot institution-map-plot"></div>
+      <div id="institution-profile" class="profile-shell" hidden></div>
+    </section>
+
+    <section class="chapter-band chapter-dark" id="part-alternatives" aria-labelledby="alternatives-heading">
+      <h2 id="alternatives-heading">Can other student groups plausibly replace the missing pool?</h2>
+    </section>
+
+    <section class="dark-section" id="international">
+      <div class="section-head dark-head">
+        <div><h2>The international cushion is large, concentrated, and less predictable.</h2></div>
+        <p class="light-text">International enrollment stock and new-student flow are different measures. The concentration view describes who is enrolled; the intake snapshot describes the newest cohort.</p>
+      </div>
+      <div class="metric-grid" id="international-metrics"></div>
+      <div class="international-grid">
+        <article class="dark-card"><h3>Two origins account for more than half of the stock</h3><div id="international-concentration-chart" class="plot"></div><p class="figure-note light-text" id="international-concentration-note"></p></article>
+        <div class="policy-panel"><div><p class="kicker light">Policy context</p><h3>Recruitment now carries more uncertainty.</h3></div><div id="policy-timeline" class="timeline"></div></div>
+      </div>
+    </section>
+
+    <section class="replacement-section" id="replacement-tool">
+      <div class="section-head">
+        <div><h2>What would it take to replace the missing entrants?</h2></div>
+        <p>This allocation exercise does not estimate achievable recruitment. It makes the size of the response explicit and leaves any unallocated students visible.</p>
+      </div>
+      <div class="control-bar">
+        <label>State<select id="replacement-state"></select></label>
+        <label>Year<select id="replacement-year"><option>2030</option><option>2035</option><option selected>2041</option></select></label>
+      </div>
+      <div class="replacement-layout">
+        <div class="allocator-card">
+          <div class="allocator-total"><span>Projected missing likely four-year entrants</span><strong id="replacement-required">—</strong></div>
+          <label>Higher in-state participation <output id="replacement-participation-out">0</output><input id="replacement-participation" type="range" min="0" max="100" value="0"></label>
+          <label>Out-of-state recruitment <output id="replacement-out-state-out">0</output><input id="replacement-out-state" type="range" min="0" max="100" value="0"></label>
+          <label>International recruitment <output id="replacement-international-out">0</output><input id="replacement-international" type="range" min="0" max="100" value="0"></label>
+          <label>Transfers and adult students <output id="replacement-transfer-adult-out">0</output><input id="replacement-transfer-adult" type="range" min="0" max="100" value="0"></label>
+        </div>
+        <aside class="replacement-summary" id="replacement-summary"><span>Unfilled</span><strong>—</strong><p>Allocate the projected gap across possible channels.</p></aside>
+      </div>
+    </section>
+
+    <section class="chapter-band" id="part-finance" aria-labelledby="finance-heading">
+      <h2 id="finance-heading">What would a defined enrollment loss mean for gross tuition revenue?</h2>
+    </section>
+
+    <section class="finance-section" id="finance">
+      <div class="section-head">
+        <div><h2>Translate a 5%, 10%, or 20% enrollment loss into dollars.</h2></div>
+        <p>This is gross tuition sensitivity, not a budget forecast. Instructional expenditure associated with the affected FTEs is shown separately and is not assumed removable.</p>
+      </div>
+      <div class="control-bar finance-filters">
+        <label>State<select id="finance-state"><option value="All">All states</option></select></label>
+        <label class="search-control">Institution<input id="finance-institution" list="finance-institution-options" placeholder="Search an institution" autocomplete="off"></label>
+        <datalist id="finance-institution-options"></datalist>
+      </div>
+      <fieldset class="scenario-options"><legend>Undergraduate enrollment-loss scenario</legend><label><input type="radio" name="finance-loss" value="0.05"> 5%</label><label><input type="radio" name="finance-loss" value="0.10" checked> 10%</label><label><input type="radio" name="finance-loss" value="0.20"> 20%</label></fieldset>
+      <div class="finance-layout">
+        <article class="figure-card"><div class="figure-head"><h3>Tuition base and modeled gross reduction</h3></div><div id="finance-chart" class="plot"></div></article>
+        <aside class="finance-summary" id="finance-summary"><p class="kicker">Select an institution</p><h3>Search above to calculate a counterfactual.</h3></aside>
+      </div>
+    </section>
+
+    <section class="competitive-conditions" id="competitive-conditions" aria-labelledby="competitive-conditions-heading">
+      <div class="section-head">
+        <div><h2 id="competitive-conditions-heading">What helps institutions compete for students?</h2></div>
+      </div>
+      <div id="competitive-conditions-grid" class="competitive-conditions-grid"></div>
+      <p class="figure-note competitive-conditions-note">Observed undergraduate change from 2015-16 to 2024-25. Declining institutions lost more than 2.5%; growing institutions gained more than 2.5%. The comparisons show association, not causation.</p>
+    </section>
+
+    <section class="ending">
+      <div class="prose wide">
+        <h2>Institutions will compete on brand, value, outcomes, and student experience</h2>
+        <p>An institution's brand is built on the value it delivers, the outcomes its graduates achieve, the price students pay, and the quality of the student experience.</p>
+        <p>As the traditional student population contracts, institutions that prepare students for employment and meaningful careers will be better positioned to sustain demand. Strong employment outcomes can reinforce reputation, strengthen the institution's brand, and support future admissions.</p>
+        <p>Institutions will also need to widen their admissions pools beyond their traditional geographic and demographic reach, both domestically and internationally. This may require stronger domestic recruitment across state and regional boundaries, along with sustainable international recruitment. Success will depend on whether institutions can communicate a compelling value proposition and provide the support that students from different backgrounds and locations need to succeed.</p>
+        <p>Students and families will increasingly compare tuition, financial aid, debt, completion rates, career preparation, and employment outcomes. Institutions will need to demonstrate that their programs provide sufficient value relative to their cost.</p>
+        <p>Student support will also become more important. Academic advising, career services, work-based learning, mental health services, and other forms of support can improve retention, completion, and career readiness.</p>
+        <p>Institutions in growing urban areas may benefit from access to larger student populations, employers, internships, professional networks, and the continuing trend toward urbanization. Location alone is not enough. Institutions must connect students to these opportunities and demonstrate that those connections produce meaningful outcomes.</p>
+        <p>The institutions best positioned to compete will be those that can clearly connect price, educational quality, student support, and career outcomes. Together, these factors will shape institutional brand and future demand.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer><div><strong>The Enrollment Squeeze</strong><p>A reproducible static-data project designed for GitHub Pages.</p></div><div><p>Sources: WICHE, U.S. Census Bureau, College Scorecard, NCES IPEDS, IIE Open Doors, and the U.S. Department of State.</p></div></footer>
+  <script src="diagnostics-core.js?v=20260716-1"></script>
+  <script src="filters-core.js?v=20260715-1"></script>
+  <script src="app.js?v=20260716-1"></script>
+  <script src="filters.js?v=20260716-1"></script>
+</body>
+</html>

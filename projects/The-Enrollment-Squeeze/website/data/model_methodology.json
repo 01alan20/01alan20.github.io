@@ -1,0 +1,22 @@
+{
+  "prototype_status": "Illustrative working prototype, not an official institutional forecast.",
+  "resident_pool_coverage": "Projected resident four-year entrants divided by current first-time four-year intake.",
+  "internal_confidence_weights": {
+    "data_coverage": 0.4,
+    "historical_stability": 0.3,
+    "residence_market_coverage": 0.2,
+    "finance_coverage": 0.1
+  },
+  "channel_feasibility_prototype": {
+    "low_required_growth": "10% or less of the current channel.",
+    "moderate_required_growth": "Above 10% and no more than 35% of the current channel.",
+    "high_required_growth": "Above 35% of the current channel."
+  },
+  "public_display_note": "The website shows confidence categories but not numerical weights.",
+  "public_confidence_components": [
+    "Data coverage",
+    "Historical stability",
+    "Residence-market coverage",
+    "Finance coverage"
+  ]
+}

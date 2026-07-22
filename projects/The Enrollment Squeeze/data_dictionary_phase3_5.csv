@@ -1,7 +1,0 @@
-file,field,definition
-state_college_market_2026_2041.csv,likely_four_year_entrants,Projected graduates multiplied by the central college-going and four-year-share assumptions
-state_college_market_2026_2041.csv,local_pool_coverage_proxy,Likely local four-year entrants divided by current undergraduate enrollment / cohort divisor
-institution_market_exposure_2030_2041.csv,blended_market_change,Weighted combination of state and national graduate-pool change
-institution_market_exposure_2030_2041.csv,projected_undergraduate_enrollment,Current undergraduate enrollment scaled by blended market change under constant market share
-institution_budget_pressure_2030_2041.csv,annual_funding_gap_proxy,Positive amount of modeled tuition contribution decline remaining after adjustable instructional expense change
-institution_budget_pressure_2030_2041.csv,additional_students_to_close_gap,Additional undergraduate headcount needed to offset the modeled gap at current per-FTE contribution
