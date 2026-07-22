@@ -1,0 +1,115 @@
+{
+  "title": "Population growth is concentrating in metropolitan America.",
+  "period": "2023\u20132024",
+  "metro_population_share": 86.4,
+  "metro_share_of_national_growth": 96,
+  "metros_gaining_population": 341,
+  "total_metros": 387,
+  "metros": [
+    {
+      "rank": 1,
+      "name": "New York\u2013Newark\u2013Jersey City",
+      "short_name": "New York",
+      "growth": 213403,
+      "lat": 40.713,
+      "lon": -74.006,
+      "x_pct": 94.7179,
+      "y_pct": 41.0902
+    },
+    {
+      "rank": 2,
+      "name": "Houston\u2013Pasadena\u2013The Woodlands",
+      "short_name": "Houston",
+      "growth": 198171,
+      "lat": 29.76,
+      "lon": -95.37,
+      "x_pct": 60.4218,
+      "y_pct": 87.4187
+    },
+    {
+      "rank": 3,
+      "name": "Dallas\u2013Fort Worth\u2013Arlington",
+      "short_name": "Dallas\u2013Fort Worth",
+      "growth": 177922,
+      "lat": 32.777,
+      "lon": -96.797,
+      "x_pct": 57.7833,
+      "y_pct": 76.5645
+    },
+    {
+      "rank": 4,
+      "name": "Miami\u2013Fort Lauderdale\u2013West Palm Beach",
+      "short_name": "Miami",
+      "growth": 123471,
+      "lat": 25.762,
+      "lon": -80.192,
+      "x_pct": 90.4614,
+      "y_pct": 97.4288
+    },
+    {
+      "rank": 5,
+      "name": "Washington\u2013Arlington\u2013Alexandria",
+      "short_name": "Washington",
+      "growth": 90608,
+      "lat": 38.907,
+      "lon": -77.037,
+      "x_pct": 90.7085,
+      "y_pct": 49.2177
+    },
+    {
+      "rank": 6,
+      "name": "Phoenix\u2013Mesa\u2013Chandler",
+      "short_name": "Phoenix",
+      "growth": 84938,
+      "lat": 33.448,
+      "lon": -112.074,
+      "x_pct": 30.4282,
+      "y_pct": 69.935
+    },
+    {
+      "rank": 7,
+      "name": "Orlando\u2013Kissimmee\u2013Sanford",
+      "short_name": "Orlando",
+      "growth": 75969,
+      "lat": 28.538,
+      "lon": -81.379,
+      "x_pct": 87.1619,
+      "y_pct": 88.1093
+    },
+    {
+      "rank": 8,
+      "name": "Atlanta\u2013Sandy Springs\u2013Roswell",
+      "short_name": "Atlanta",
+      "growth": 75134,
+      "lat": 33.749,
+      "lon": -84.388,
+      "x_pct": 80.0087,
+      "y_pct": 70.8889
+    },
+    {
+      "rank": 9,
+      "name": "Chicago\u2013Naperville\u2013Elgin",
+      "short_name": "Chicago",
+      "growth": 70762,
+      "lat": 41.878,
+      "lon": -87.63,
+      "x_pct": 72.6193,
+      "y_pct": 43.0693
+    },
+    {
+      "rank": 10,
+      "name": "Seattle\u2013Tacoma\u2013Bellevue",
+      "short_name": "Seattle",
+      "growth": 66666,
+      "lat": 47.606,
+      "lon": -122.332,
+      "x_pct": 21.1779,
+      "y_pct": 14.3584
+    }
+  ],
+  "source": {
+    "publisher": "U.S. Census Bureau",
+    "title": "Growth in Metro Areas Outpaced Nation",
+    "url": "https://www.census.gov/newsroom/press-releases/2025/population-estimates-counties-metro-micro.html"
+  }
+}
