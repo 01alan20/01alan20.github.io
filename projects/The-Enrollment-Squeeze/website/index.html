@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Enrollment Squeeze â€” working editorial prototype</title>
+  <title>The Enrollment Squeeze - working editorial prototype</title>
   <meta name="description" content="A working editorial prototype tracing the U.S. student pipeline from demographics to institution-level enrollment and tuition consequences through 2041.">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="metro-map.css">
+  <link rel="stylesheet" href="urban-map.css">
 </head>
 <body>
   <header class="topbar">
@@ -27,8 +27,8 @@
         <div>
           <h1>The Enrollment <em>Squeeze</em></h1>
           <p class="dek">Fewer traditional-age students. Uneven state markets. Institutions competing for a changing mix of resident, out-of-state, and international entrants.</p>
-          <p class="hero-copy">This prototype follows the student pool from the national demographic peak to an individual institutionâ€™s entering class, replacement burden, and gross tuition consequence.</p>
-          <a class="story-link" href="#pool">Follow the student pool <span>â†“</span></a>
+          <p class="hero-copy">An interactive data investigation of demographic change, state student supply, institutional competition, and enrollment pressure in U.S. higher education through 2041.</p>
+          <a class="story-link" href="#pool">Follow the student pool <span>down</span></a>
         </div>
         <div class="hero-stat-panel">
           <div class="hero-stat">
@@ -36,11 +36,11 @@
             <span>projected high-school graduates in 2041</span>
           </div>
           <div class="hero-stat">
-            <strong id="hero-loss">âˆ’424k</strong>
-            <span>graduates compared with 2026</span>
+            <strong id="hero-loss">-11%</strong>
+            <span>change from the class of 2026</span>
           </div>
           <div class="hero-stat">
-            <strong>âˆ’17%</strong>
+            <strong>-17%</strong>
             <span>new international enrollment in the Fall 2025 snapshot</span>
           </div>
         </div>
@@ -410,62 +410,58 @@
           </article>
         </div>
 
-        <section class="metro-growth reveal" data-metro-growth>
-          <div class="metro-growth__shell">
-            <header class="metro-growth__header">
-              <h2>Population growth is concentrating in metropolitan America.</h2>
-            </header>
-
-            <div class="metro-growth__metrics">
-              <div class="metro-growth__metric">
-                <strong>86.4%</strong>
-                <span>of the U.S. population lives in metro areas</span>
+        <div class="urban-map-demo reveal">
+          <article class="urban-future" data-urban-future>
+            <div class="urban-future__intro">
+              <div>
+                <span class="eyebrow">Projected total population · 2025-2041</span>
+                <h3>The urban map is likely to keep shifting through 2041.</h3>
               </div>
-              <div class="metro-growth__metric">
-                <strong>96%</strong>
-                <span>of 2023-24 national growth occurred in metro areas</span>
-              </div>
-              <div class="metro-growth__metric">
-                <strong>341 of 387</strong>
-                <span>metro areas gained population</span>
+              <div class="urban-future__copy">
+                <p>United Nations World Urbanization Prospects 2025 provides annual population projections for cities and urban centres through 2050. Among the 346 U.S. centres with comparable values in both 2025 and 2041, 287 are projected to grow. The largest numeric gains are concentrated in Houston, Los Angeles, San Antonio, Austin, and Phoenix.</p>
+                <aside class="urban-future__caution"><strong>Do not read this as an enrollment forecast.</strong> These are UN-defined cities or urban centres, not U.S. Census metropolitan statistical areas. The figures describe total population, not college-age population, student migration, or institution-level demand.</aside>
               </div>
             </div>
 
-            <div class="metro-growth__layout">
+            <div class="urban-future__metrics" aria-label="Urban-centre projection summary">
+              <div><strong>287 of 346</strong><span>comparable U.S. urban centres are projected to grow from 2025 to 2041</span></div>
+              <div><strong>+11.4%</strong><span>aggregate projected growth across centres with values in both years</span></div>
+              <div><strong>+1.07m</strong><span>Houston's projected gain, the largest numeric increase in the dataset</span></div>
+            </div>
+
+            <div class="urban-future__controls" role="group" aria-label="Choose urban projection view">
+              <button type="button" data-urban-mode="size" aria-pressed="true">2041 population</button>
+              <button type="button" data-urban-mode="growth" aria-pressed="false">2025-2041 change</button>
+            </div>
+
+            <div class="urban-future__layout">
               <div>
-                <div class="metro-growth__map-wrap" data-map-wrap>
-                  <img
-                    class="metro-growth__map"
-                    src="assets/us_metro_basemap.png"
-                    alt="Map of the contiguous United States showing the ten metropolitan areas with the largest numeric population gains from 2023 to 2024."
-                  >
-                  <div class="metro-growth__tooltip" data-tooltip></div>
+                <div class="urban-future__map" data-urban-map>
+                  <img src="assets/us_contiguous_basemap.png" alt="Map of the contiguous United States with projected city and urban-centre populations through 2041.">
+                  <div class="urban-future__points" data-urban-points></div>
+                  <div class="urban-future__labels" data-urban-labels></div>
+                  <div class="urban-future__tooltip" data-urban-tooltip></div>
                 </div>
-                <p class="metro-growth__caption">
-                  Circle size represents numeric population growth from 2023 to 2024.
-                  The map shows where recent gains accumulated; it is not an
-                  origin-to-destination migration map.
-                </p>
+                <p class="urban-future__caption" data-urban-caption></p>
               </div>
 
-              <aside class="metro-growth__detail" aria-live="polite">
-                <div>
-                  <span class="metro-growth__detail-label">Selected metro</span>
-                  <h3 data-detail-name>New York-Newark-Jersey City</h3>
-                  <strong class="metro-growth__detail-value" data-detail-value>+213,403</strong>
-                  <p data-detail-rank>Ranked No. 1 for numeric population growth, 2023-2024.</p>
+              <aside class="urban-future__detail" aria-live="polite">
+                <span class="mini-label">Selected urban centre</span>
+                <h4 data-urban-detail-name>New York City</h4>
+                <p class="urban-future__detail-status" data-urban-detail-status></p>
+                <div class="urban-future__detail-grid">
+                  <div><span>2025 population</span><strong data-urban-detail-2025></strong></div>
+                  <div><span>2041 population</span><strong data-urban-detail-2041></strong></div>
+                  <div><span>Projected change</span><strong data-urban-detail-change></strong></div>
                 </div>
+                <p class="urban-future__detail-note" data-urban-detail-note></p>
+                <ol class="urban-future__ranking" data-urban-ranking></ol>
               </aside>
             </div>
 
-            <p class="metro-growth__source">
-              Source:
-              <a href="https://www.census.gov/newsroom/press-releases/2025/population-estimates-counties-metro-micro.html">
-                U.S. Census Bureau, Vintage 2024 Population Estimates
-              </a>
-            </p>
-          </div>
-        </section>
+            <p class="urban-future__source">Source: <a href="https://population.un.org/wup/downloads?tab=Cities">United Nations, Department of Economic and Social Affairs, Population Division, World Urbanization Prospects 2025, F21</a>. The 2041 values are direct annual projections from the source workbook, not interpolations. The normalized records are included in <code>data/us_urban_centres_2041.json</code> and <code>data/us_urban_centres_2025_2041.csv</code>.</p>
+          </article>
+        </div>
 
         <article class="conclusion-signal application-signal reveal">
           <div class="signal-copy">
@@ -514,7 +510,7 @@
         </article>
 
         <blockquote class="conclusion-quote reveal">
-          The winners of the next enrollment era will not be those waiting for students to return. They will be the institutions that make themselves easier to enter, easier to justify, and better able to build stronger pathways through higher education.
+          The institutions best positioned for next enrollment era will not be those waiting for students to return. They will be the institutions that make themselves easier to enter, easier to justify, and better able to build stronger pathways through higher education.
         </blockquote>
 
         <p class="conclusion-source reveal">Sources: U.S. Census Bureau Vintage 2024 Population Estimates; UVA Today; UGA Admissions. Supporting values and source links are included in <code>data/conclusion_signals.json</code>.</p>
@@ -538,8 +534,8 @@
   <script src="data/state_market_2041.js"></script>
   <script src="data/institution_examples.js"></script>
   <script src="data/state_grid_layout.js"></script>
-  <script src="data/metro_population_growth.js"></script>
-  <script src="metro-map.js"></script>
+  <script src="data/us_urban_centres_2041.js"></script>
+  <script src="urban-map.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
