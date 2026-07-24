@@ -82,7 +82,7 @@
           
           <h2>The future student pool changes shape before it meets the current system.</h2>
           <p>Start with the national geography. The 2041 student pool grows in a smaller group of states while much of the Midwest and Northeast contracts.</p>
-          <aside class="takeaway">Only after seeing where the pool changes should we ask whether each stateâ€™s resident supply can sustain its current entering classes.</aside>
+          <aside class="takeaway">Only after seeing where the pool changes should we ask whether each state's resident supply can sustain its current entering classes.</aside>
         </div>
 
         <article class="editorial-surface map-surface reveal">
@@ -109,12 +109,12 @@
             <div>
               
               <h3>Which state systems have enough resident supply in 2041?</h3>
-              <p>Resident-pool coverage compares projected resident four-year entrants with the current annual first-time intake of four-year institutions. At 1.0Ã—, projected resident supply equals current entering-class demand.</p>
+              <p>Resident-pool coverage compares projected resident four-year entrants with the current annual first-time intake of four-year institutions. At 1.0x, projected resident supply equals current entering-class demand.</p>
             </div>
           </div>
           <div class="coverage-axis-note">
-            <span>Below 1.0Ã—: supply falls short</span>
-            <span>Above 1.0Ã—: supply exceeds current intake</span>
+              <span>Below 1.0x: supply falls short</span>
+              <span>Above 1.0x: supply exceeds current intake</span>
           </div>
           <div class="coverage-scroll">
             <svg id="state-coverage-ranking" class="coverage-svg" role="img" aria-label="Horizontal ranking of states by resident-pool coverage with a reference line at one"></svg>
@@ -150,16 +150,16 @@
             <div class="state-balance">
               <div>
                 
-                <strong id="state-supply">â€”</strong>
+              <strong id="state-supply">--</strong>
               </div>
               <div class="balance-divider"></div>
               <div>
                 
-                <strong id="state-demand">â€”</strong>
+              <strong id="state-demand">--</strong>
               </div>
               <div class="coverage-gauge">
                 <span>Resident-pool coverage</span>
-                <strong id="state-coverage">â€”</strong>
+              <strong id="state-coverage">--</strong>
                 <div class="gauge-track"><span id="coverage-fill"></span><i></i></div>
                 <small id="coverage-interpretation">Projected supply divided by current intake.</small>
               </div>
@@ -167,7 +167,7 @@
             <div class="origin-stack">
               <div class="stack-labels">
                 <span>Current entering-class composition</span>
-                <span id="origin-total">â€”</span>
+              <span id="origin-total">--</span>
               </div>
               <div class="stack-bar" id="state-origin-bar"></div>
               <div class="legend">
@@ -182,12 +182,12 @@
           <div class="state-summary-panel">
             
             <h3 id="state-title">State market profile</h3>
-            <p id="state-summary">Loading state dataâ€¦</p>
+          <p id="state-summary">Loading state data...</p>
             <dl class="metric-list">
-              <div><dt>Projected change</dt><dd id="state-change">â€”</dd></div>
-              <div><dt>Domestic import share</dt><dd id="state-import">â€”</dd></div>
-              <div><dt>International entry share</dt><dd id="state-intl">â€”</dd></div>
-              <div><dt>Current institutions</dt><dd id="state-institutions">â€”</dd></div>
+              <div><dt>Projected change</dt><dd id="state-change">--</dd></div>
+              <div><dt>Domestic import share</dt><dd id="state-import">--</dd></div>
+              <div><dt>International entry share</dt><dd id="state-intl">--</dd></div>
+              <div><dt>Current institutions</dt><dd id="state-institutions">--</dd></div>
             </dl>
             <p class="data-note" id="state-data-note">Coverage uses projected resident entrants divided by current first-time intake.</p>
           </div>
@@ -216,7 +216,7 @@
           <strong>More selective institutions grew more often</strong>
           <div class="paired-stat">
             <div class="negative-stat"><b>72%</b><span>declined among institutions admitting 80%+</span></div>
-            <div class="positive-stat"><b>70%</b><span>grew among institutions admitting 10â€“24%</span></div>
+            <div class="positive-stat"><b>70%</b><span>grew among institutions admitting 10-24%</span></div>
           </div>
         </article>
         <article class="performance-card">
@@ -250,7 +250,7 @@
         <div class="chapter-copy narrow">
           
           <h2>What might 2041 look like for an individual institution?</h2>
-          <p>The model starts with the institutionâ€™s current entering-class mix, resizes its domestic markets, carries forward a bounded share of its recent relative trend, and lets international intake recover from 2030 onward.</p>
+          <p>The model starts with the institution's current entering-class mix, resizes its domestic markets, carries forward a bounded share of its recent relative trend, and lets international intake recover from 2030 onward.</p>
           
         </div>
 
@@ -277,7 +277,7 @@
             <label>Trend persistence
               <input id="momentum-slider" type="range" min="0" max="70" value="35">
               <output id="momentum-output">35%</output>
-              <span class="control-help">How much of the institutionâ€™s recent performance relative to peers persists after 2024. 0% reverts to a flat share; 35% carries roughly one-third forward.</span>
+              <span class="control-help">How much of the institution's recent performance relative to peers persists after 2024. 0% reverts to a flat share; 35% carries roughly one-third forward.</span>
             </label>
           </div>
 
@@ -285,21 +285,21 @@
             <div>
               
               <h3 id="institution-name">The University of Alabama</h3>
-              <p id="institution-context">Historically growing Â· future state contraction</p>
+              <p id="institution-context">Historically growing / future state contraction</p>
             </div>
             <div class="header-results">
               <div class="confidence-panel">
                 <div class="confidence-summary">
                   <span>Forecast confidence</span>
-                  <strong id="confidence-label">â€”</strong>
+              <strong id="confidence-label">--</strong>
                   <div class="confidence-track"><i id="confidence-fill"></i></div>
                   <p class="confidence-includes">Includes: data coverage, historical stability, residence-market coverage, and finance coverage.</p>
                 </div>
               </div>
               <div class="headline-result">
                 <span>Modeled undergraduate enrollment</span>
-                <strong id="headline-enrollment">â€”</strong>
-                <em id="headline-change">â€”</em>
+              <strong id="headline-enrollment">--</strong>
+              <em id="headline-change">--</em>
               </div>
             </div>
           </div>
@@ -342,13 +342,13 @@
                 <div>
                   <div class="tuition-result">
                     <p>Annual gross tuition consequence before replacement</p>
-                    <strong id="tuition-impact">â€”</strong>
-                    <small id="tuition-share">â€”</small>
+              <strong id="tuition-impact">--</strong>
+              <small id="tuition-share">--</small>
                   </div>
                   <div class="tuition-result recovered-result">
                     <p>After the selected replacement mix</p>
-                    <strong id="adjusted-tuition-impact">â€”</strong>
-                    <small id="recovered-tuition-note">â€”</small>
+              <strong id="adjusted-tuition-impact">--</strong>
+              <small id="recovered-tuition-note">--</small>
                   </div>
                 </div>
                 <div id="enrollment-path" class="enrollment-path"></div>
@@ -363,7 +363,7 @@
                   
                   <h4>How should the institution try to replace the missing students?</h4>
                 </div>
-                <div class="replacement-total"><span>Students to replace</span><strong id="replacement-total">â€”</strong></div>
+              <div class="replacement-total"><span>Students to replace</span><strong id="replacement-total">--</strong></div>
               </div>
               <div class="replacement-mix">
                 <label>Home-state recruitment <output id="home-mix-output">40%</output>
@@ -496,7 +496,7 @@
             <section class="application-example">
               <div class="example-head">
                 <div>
-                  <span>University of Georgia Â· Fall 2027</span>
+              <span>University of Georgia / Fall 2027</span>
                   <h4>One required essay instead of two.</h4>
                 </div>
               </div>
@@ -522,7 +522,7 @@
   <footer>
     <div>
       <strong>The Enrollment Squeeze</strong>
-      <p>Working model built from the current project structure. National values use the projectâ€™s existing WICHE-based series. The institution forecast is an explicit prototype model, not an official projection.</p>
+      <p>Working model built from the current project structure. National values use the project's existing WICHE-based series. The institution forecast is an explicit prototype model, not an official projection.</p>
     </div>
     <div>
       <span>Sources represented in the project</span>
