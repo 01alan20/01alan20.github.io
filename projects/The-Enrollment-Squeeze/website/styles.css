@@ -476,6 +476,13 @@ input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid rgba(
 .essay-change .essay-removed{opacity:.55}
 .essay-change .essay-removed strong{text-decoration:line-through}
 .conclusion-quote{max-width:980px;margin:4rem auto 2rem;font-family:var(--display);font-size:clamp(1.45rem,2.7vw,3rem);line-height:1.12;text-align:center}
+.conclusion-contact{max-width:860px;margin:1.5rem auto 0;padding:1.8rem 0 2rem;border-top:1px solid rgba(13,35,64,.22);border-bottom:1px solid rgba(13,35,64,.12);text-align:center}
+.conclusion-contact p{max-width:680px;margin:0 auto 1.1rem;color:#405366;font-size:clamp(1rem,1.7vw,1.24rem);line-height:1.55}
+.contact-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem}
+.contact-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.78rem 1rem;border:1px solid rgba(13,35,64,.28);color:var(--ink);font-weight:800;text-decoration:none}
+.contact-actions a:first-child{background:var(--ink);color:#fff;border-color:var(--ink)}
+.contact-actions a:hover{border-color:var(--teal);color:var(--teal)}
+.contact-actions a:first-child:hover{background:var(--teal);color:#fff}
 .conclusion-source{max-width:900px;margin:4rem auto 0;color:#687685;font-size:.67rem;text-align:center}
 @media(max-width:900px){
   .conclusion-opening,.conclusion-signal,.application-signal .signal-copy{grid-template-columns:1fr;gap:2rem}
@@ -488,4 +495,5 @@ input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid rgba(
   .application-bars>div{grid-template-columns:90px 1fr}
   .application-bars b{grid-column:2}
   .essay-change{grid-template-columns:1fr}
+  .contact-actions{display:grid}
 }
