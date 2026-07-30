@@ -5,6 +5,12 @@ const FALLBACK_STATES = window.ENROLLMENT_STATES || [];
 
 const FALLBACK_INSTITUTIONS = window.ENROLLMENT_INSTITUTIONS || [];
 
+const ADULT_UG_SHARES = window.ENROLLMENT_ADULT_UG_SHARES || {};
+
+const ADULT_POP_INDEX = window.ENROLLMENT_ADULT_POP_INDEX || {};
+
+const ADULT_POP_INDEX_BY_STATE = window.ENROLLMENT_ADULT_POP_INDEX_BY_STATE || {};
+
 let stateRows = FALLBACK_STATES;
 let institutions = FALLBACK_INSTITUTIONS;
 let selectedInstitution = FALLBACK_INSTITUTIONS[0];
@@ -108,6 +114,7 @@ function normalizeInstitution(row){
     outStatePriceFactor:Number(row.outStatePriceFactor ?? row.out_state_price_factor ?? row.tuitionOutStateRatio ?? 1.55),
     city:row.city ?? "",
     currentUG,
+    adultUGShare:clamp(Number(row.adultUGShare ?? ADULT_UG_SHARES[String(row.unitid ?? row.UNITID ?? row.id ?? row.name)] ?? 0),0,1),
     currentPG:+(row.latestScorecardPG ?? row.currentPG ?? row.grads ?? 0),
     firstTimeClass:first,
     homeShare:clamp(home,0,1),
@@ -304,11 +311,15 @@ function modelInstitution(inst,year,path,momentumShare){
   const retention=clamp(inst.retention||.75,.35,.99);
   const stockWeight=.62+.18*retention;
   const projectedUG=Math.max(0,inst.currentUG*(1-stockWeight+stockWeight*firstRatio));
-  const ugChange=inst.currentUG?projectedUG/inst.currentUG-1:0;
+  const adultShare=clamp(inst.adultUGShare||0,0,1);
+  const adultIndex=Number(ADULT_POP_INDEX_BY_STATE[inst.state]?.[String(year)] ?? ADULT_POP_INDEX[String(year)] ?? 1);
+  const adultAdjustedUG=projectedUG*(1-adultShare)+inst.currentUG*adultShare*adultIndex;
+  const finalProjectedUG=Math.max(0,adultAdjustedUG);
+  const ugChange=inst.currentUG?finalProjectedUG/inst.currentUG-1:0;
   const fteRatio=.86;
-  const tuition=(projectedUG-inst.currentUG)*fteRatio*(inst.tuitionPerFTE||15000);
+  const tuition=(finalProjectedUG-inst.currentUG)*fteRatio*(inst.tuitionPerFTE||15000);
   const currentTuition=inst.currentUG*fteRatio*(inst.tuitionPerFTE||15000);
-  return {first,home0,other0,intl0,unknown0,home,other,intl,unknown,projectedFirst,firstRatio,projectedUG,ugChange,tuition,currentTuition,stateIdx,natIdx,momentum};
+  return {first,home0,other0,intl0,unknown0,home,other,intl,unknown,projectedFirst,firstRatio,projectedUG:finalProjectedUG,ugChange,tuition,currentTuition,stateIdx,natIdx,momentum};
 }
 
 function findInstitution(name){
