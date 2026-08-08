@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Are Degrees Keeping Up? An editorial data story about higher education, durable capabilities, changing work, applied experience, and the transition into careers." name="description"/>
+<title>Are Degrees Keeping Up?</title>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+<div aria-hidden="true" class="reading-progress" id="reading-progress"></div>
+<header class="site-header">
+<a class="wordmark" href="#top">Are Degrees Keeping Up?</a>
+<nav aria-label="Story sections">
+<a href="#foundation">01 Foundation</a>
+<a href="#transition">02 Transition</a>
+<a href="#work">03 Work</a>
+<a href="#experience">04 WIL</a>
+<a href="#response">05 Respond</a>
+</nav>
+</header>
+<main id="top">
+<section class="hero page-width">
+<div class="hero-kicker">Higher education and the changing world of work</div>
+<h1>Are Degrees<br/>Keeping Up?</h1>
+<p class="hero-thesis">A university degree does not need to train someone for one specific job. But universities do have a responsibility to help students turn what they learn into the <em>skills, experience and evidence</em> employers can recognize.</p>
+<div class="hero-support"><p>Degrees should provide disciplinary depth and durable capabilities. Universities then need to help students apply them and make the transition into work without turning every program into vocational training.</p></div>
+<nav aria-label="Story path" class="story-path">
+<a href="#foundation"><span>01</span><strong>The degree is a foundation</strong></a>
+<a href="#transition"><span>02</span><strong>The first transition is uneven</strong></a>
+<a href="#work"><span>03</span><strong>Work is changing</strong></a>
+<a href="#experience"><span>04</span><strong>Experience builds the bridge</strong></a>
+<a href="#response"><span>05</span><strong>What universities should do</strong></a>
+</nav>
+</section>
+<section class="act page-width" id="foundation">
+<div class="act-heading-grid">
+<p class="section-label">01 / The degree is a foundation</p>
+<h2>A degree should open possibilities, not prepare someone for only one job.</h2>
+</div>
+<div class="lede-grid"><p class="lede">Some degrees lead directly into professions. Others lead across industries. Both can provide disciplinary knowledge and durable capabilities that travel with graduates.</p></div>
+<section aria-labelledby="foundation-map-title" class="foundation-map">
+<div class="visual-eyebrow">The foundation</div>
+<h3 id="foundation-map-title">What a degree can provide</h3>
+<div class="foundation-flow">
+<div class="flow-column">
+<span class="flow-number">01</span>
+<h4>What you study</h4>
+<div class="tag-cloud disciplines">
+<span>History</span><span>Engineering</span><span>Psychology</span><span>Computer science</span><span>Biology</span><span>Economics</span><span>Art</span><span>Business</span>
+</div>
+</div>
+<div aria-hidden="true" class="flow-arrow">→</div>
+<div class="flow-column capability-column">
+<span class="flow-number">02</span>
+<h4>What you develop</h4>
+<div class="tag-cloud capabilities">
+<span>Disciplinary knowledge</span><span>Analytical thinking</span><span>Research</span><span>Communication</span><span>Quantitative reasoning</span><span>Problem solving</span><span>Collaboration</span><span>Adaptability</span>
+</div>
+</div>
+<div aria-hidden="true" class="flow-arrow">→</div>
+<div class="flow-column">
+<span class="flow-number">03</span>
+<h4>Where it can be used</h4>
+<div class="tag-cloud destinations">
+<span>Different occupations</span><span>Different industries</span><span>Further study</span><span>Public service</span><span>Entrepreneurship</span><span>Careers that change over time</span>
+</div>
+</div>
+</div>
+<p class="visual-conclusion">The goal is to <strong>develop a foundation graduates can use.</strong> It is not one degree to one job.</p>
+</section>
+<div class="chart-story-grid">
+<div class="chart-copy">
+<p class="chart-kicker">Degree production</p>
+<h3>Bachelor's degree production changed only modestly overall.</h3>
+<div class="endpoint-pair">
+<div><span>2014 bachelor's awards</span><strong>1.99m</strong></div>
+<div><span>2024 bachelor's awards</span><strong>2.07m</strong></div>
+<div><span>2024 adults age 25+ with bachelor's or higher</span><strong>36.8%</strong></div>
+</div>
+</div>
+<figure class="chart-block flush">
+<div aria-label="Line chart of bachelor's degrees awarded annually from 2014 to 2024" class="chart production-chart" id="production-chart" role="img"></div>
+<figcaption>Sources: IPEDS; U.S. Census Bureau.</figcaption>
+</figure>
+</div>
+<div class="field-shift-header">
+<div>
+<p class="chart-kicker">Below the total</p>
+<h3>The mix of fields moved much more.</h3>
+</div>
+</div>
+<figure class="chart-block">
+<div class="chart-heading">
+<h3>Where bachelor's degree production changed most, 2014 to 2024</h3>
+<div class="legend-inline"><span><i class="dot old"></i>2014</span><span><i class="dot new"></i>2024</span></div>
+</div>
+<div class="shift-grid">
+<section><h4>Largest increases</h4><div class="chart shift-chart" id="shift-chart-growers"></div></section>
+<section><h4>Largest declines</h4><div class="chart shift-chart" id="shift-chart-losers"></div></section>
+</div>
+<figcaption>Source: IPEDS.</figcaption>
+</figure>
+<section aria-labelledby="field-explorer-title" class="explorer-strip">
+<div>
+<p class="section-label">Explore</p>
+<h3 id="field-explorer-title">How did a field change?</h3>
+</div>
+<div class="explorer-control">
+<label for="field-select">Field</label>
+<select id="field-select"></select>
+<div aria-live="polite" class="field-result" id="field-result"></div>
+</div>
+</section>
+<p class="transition-line">What matters next is how graduates move into work.</p>
+</section>
+<section class="act dark-act" id="transition">
+<div class="page-width">
+<p class="section-label light">02 / The first transition is uneven</p>
+<h2>The first transition into work is uneven.</h2>
+<p class="dark-lede">Employment and degree-level employment are different outcomes.</p>
+<div aria-label="2024 annual New York Fed graduate outcomes" class="outcome-gap">
+<div class="outcome-card unemployment">
+<span class="outcome-label">Recent-graduate unemployment</span>
+<strong>4.8%</strong>
+<p><small>2024 annual average</small></p>
+</div>
+<div class="versus">vs</div>
+<div class="outcome-card underemployment">
+<span class="outcome-label">Recent-graduate underemployment</span>
+<strong>40.3%</strong>
+<p><small>2024 annual average</small></p>
+</div>
+</div>
+<p class="dark-lede definition-inline"><strong>Underemployment</strong> means working in an occupation that typically does not require a college degree.</p>
+<figure class="chart-block dark-chart-block">
+<div class="chart-heading"><h3>Finding a job and entering degree-level work are different outcomes.</h3><span>Annual trend, 2014 to 2024</span></div>
+<div class="chart employment-chart" id="employment-chart"></div>
+<figcaption>Source: New York Fed.</figcaption>
+</figure>
+<div class="scatter-intro">
+<h3>Early-career outcomes vary sharply by major.</h3>
+</div>
+<figure class="chart-block dark-chart-block scatter-wrap">
+<div class="scatter-controls">
+<label for="major-search">Search major</label>
+<input autocomplete="off" id="major-search" placeholder="Try nursing or computer science" type="search"/>
+<button id="major-reset" type="button">Reset</button>
+</div>
+<div class="chart chart-scatter" id="major-chart"></div>
+<div aria-live="polite" class="major-detail" id="major-detail"></div>
+<figcaption>Source: New York Fed.</figcaption>
+</figure>
+<div class="argument-break"><strong>A degree does not need one fixed destination. Graduates need capabilities they can carry into changing work.</strong><p class="transition-line dark-transition">That makes changing work the next question.</p></div>
+</div>
+</section>
+<section class="act page-width" id="work">
+<p class="section-label">03 / Work is changing</p>
+<h2>Work is changing. So are the capabilities it requires.</h2>
+<div aria-label="BLS bachelor's-level employment projections" class="degree-work-stats">
+<div><strong>5.6%</strong><span>projected growth</span></div>
+<div><strong>+2.38m</strong><span>projected jobs</span></div>
+<div><strong>$92,260</strong><span>2024 median wage</span></div>
+</div>
+<figure class="chart-block occupation-block">
+<div class="chart-heading occupation-heading">
+<div><p class="chart-kicker">BLS 2024 to 2034</p><h3>Where bachelor's-level work is projected to grow</h3></div>
+<div aria-label="Occupation chart measure" class="toggle-row" role="group">
+<button class="metric-toggle active" data-metric="change" type="button">Jobs added</button>
+<button class="metric-toggle" data-metric="growth" type="button">Growth rate</button>
+</div>
+</div>
+<div class="chart occupation-chart" id="occupation-chart"></div>
+<figcaption>Source: BLS.</figcaption>
+</figure>
+<section aria-labelledby="skills-title" class="skills-story">
+<div class="skills-story-head">
+<p class="section-label">Under the job titles</p>
+<h3 id="skills-title">Different jobs. Shared foundations.</h3>
+<p>Different jobs repeatedly draw on technical, analytical, communication and adaptive capabilities.</p>
+</div>
+<div class="skills-matrix" id="skills-matrix"></div>
+<div aria-label="Capabilities repeated across selected growing occupations" class="skill-frequency" id="skill-frequency"></div>
+<p class="visual-conclusion large">Different jobs. <strong>Shared foundations.</strong></p>
+</section>
+<section class="wef-band">
+<strong>39%</strong>
+<div>
+<h3>of workers' core skills are expected by surveyed employers to change by 2030.</h3>
+<small>Source: World Economic Forum.</small>
+</div>
+</section>
+<p class="transition-line">Capabilities matter. So does evidence that students can use them.</p>
+</section>
+<section class="act experience-act" id="experience">
+<div class="page-width">
+<p class="section-label">04 / Work Integrated Learning</p>
+<h2>Work Integrated Learning gives students opportunities to move from knowing to doing before they graduate.</h2>
+<section aria-labelledby="internship-title" class="internship-hero">
+<p class="visual-eyebrow">The observed transition into degree-level work</p>
+<h3 id="internship-title">Paid internships are associated with a much stronger first transition.</h3>
+<div class="internship-comparison">
+<div class="internship-group paid">
+<div class="internship-bar" style="--value:73"><span>73%</span></div>
+<strong>Graduates with a paid internship</strong>
+<p>first job that required a college degree</p>
+</div>
+<div class="gap-marker">
+<strong>29</strong><span>percentage-point gap</span>
+</div>
+<div class="internship-group none">
+<div class="internship-bar" style="--value:44"><span>44%</span></div>
+<strong>Graduates without an internship</strong>
+<p>first job that required a college degree</p>
+</div>
+</div>
+</section>
+<section class="access-gap">
+<div class="access-number"><strong>37%</strong><span>of seniors had completed a paid internship</span></div>
+<div class="access-copy">
+<h3>Paid experience is still far from universal.</h3>
+</div>
+</section>
+<div class="applied-intro">
+<h3>An internship is only one form of connected academia to careers.</h3>
+<p>The principle is the same: apply learning and leave with evidence of capability.</p>
+</div>
+<div class="applied-grid">
+<article><span>01</span><h4>Work Integrated Learning Programs</h4><p>Connected academic learning and career experience.</p></article>
+<article><span>02</span><h4>Projects</h4><p>Real or authentic problems.</p></article>
+<article><span>03</span><h4>Co-op</h4><p>Sustained professional experience.</p></article>
+<article><span>04</span><h4>Clinical experience</h4><p>Supervised professional practice.</p></article>
+<article><span>05</span><h4>Undergraduate research</h4><p>Research and evidence.</p></article>
+<article><span>06</span><h4>Fieldwork</h4><p>Learning outside the classroom.</p></article>
+<article><span>07</span><h4>Employer-sponsored assignments</h4><p>Real external briefs.</p></article>
+<article><span>08</span><h4>Studios and portfolios</h4><p>Evidence of capability.</p></article>
+</div>
+<div class="bridge-statement">
+<span>KNOW</span><i>→</i><span>APPLY</span><i>→</i><span>SHOW</span><i>→</i><span>TRANSITION</span>
+</div>
+</div>
+</section>
+<section class="act response-act" id="response">
+<div class="page-width">
+<p class="section-label light">05 / What universities should do</p>
+<h2>Preserve depth. Strengthen the path into work.</h2>
+<p class="response-lede response-lede-intro">The response should happen in four places.</p>
+<div class="response-steps">
+<article>
+<div class="step-no">01</div>
+<div><h3>Renew what universities offer</h3><p>Use evidence about labor-market change alongside academic mission, research strengths, public need, student demand and institutional capability to decide where programs should be created, combined, redesigned or retired.</p><p>Not every shift requires a new degree. Sometimes the better response is a concentration, minor, interdisciplinary pathway, new module or redesign of an existing program.</p></div>
+</article>
+<article>
+<div class="step-no">02</div>
+<div><h3>Make the foundation visible across the curriculum</h3><p>Students should develop disciplinary expertise alongside analytical thinking, communication, research, problem solving, collaboration, adaptability and judgment.</p><p>Do not bolt these onto a generic employability module. Build and assess them through the academic work students are already doing.</p></div>
+</article>
+<article>
+<div class="step-no">03</div>
+<div><h3>Make meaningful applied experience part of the degree</h3><p>Projects, placements, co-op, clinical work, fieldwork, research, studios and employer-sponsored assignments should give students repeated opportunities to use what they learn.</p><p>Not every student needs the same experience. But meaningful applied experience should become normal rather than exceptional.</p></div>
+</article>
+<article>
+<div class="step-no">04</div>
+<div><h3>Career preparation should begin before the final semester</h3><p>Universities can help students explore occupations earlier, meet employers and alumni, build networks and portfolios, identify their capabilities, prepare for recruitment, and translate academic and applied work into evidence employers understand.</p></div>
+</article>
+</div>
+<section class="examples-section">
+<h3>What this can look like in practice.</h3>
+<div class="examples-grid">
+<article>
+<div class="example-heading"><span>Applied learning</span><h4>Worcester Polytechnic Institute</h4></div>
+<p>Authentic problems and sustained project work.</p>
+<a href="https://www.wpi.edu/project-based-learning" rel="noreferrer" target="_blank">Learn More ↗</a>
+</article>
+<article>
+<div class="example-heading"><span>Experiential learning</span><h4>Northeastern University</h4></div>
+<p>Co-op and experiential projects with external partners.</p>
+<a href="https://experientiallearning.northeastern.edu/experiential-opportunities/academic/" rel="noreferrer" target="_blank">Learn More ↗</a>
+</article>
+<article>
+<div class="example-heading"><span>Portfolio renewal</span><h4>Arizona State University</h4></div>
+<p>A new degree organized around changing digital work.</p>
+<a href="https://degrees.apps.asu.edu/bachelors/major/ASU00/TECRBBA/content-creation" rel="noreferrer" target="_blank">Learn More ↗</a>
+</article>
+</div>
+</section>
+<section class="final-sequence"><p>A degree provides the <strong>foundation.</strong></p><p>Work <strong>changes.</strong></p><p>Work Integrated Learning turns <strong>knowledge into evidence.</strong></p><p>Career support helps students <strong>make the transition.</strong></p></section>
+<div class="final-copy"><blockquote>A university degree does not need to train someone for one job. It should help students turn education into opportunity.</blockquote></div>
+</div>
+</section>
+<section class="sources page-width" id="sources">
+
+<h2>Sources</h2>
+<div class="source-link-grid"><a href="https://nces.ed.gov/ipeds/" rel="noreferrer" target="_blank">IPEDS</a><a href="https://www.census.gov/" rel="noreferrer" target="_blank">U.S. Census Bureau</a><a href="https://www.newyorkfed.org/" rel="noreferrer" target="_blank">New York Fed</a><a href="https://www.bls.gov/" rel="noreferrer" target="_blank">BLS</a><a href="https://www.weforum.org/" rel="noreferrer" target="_blank">World Economic Forum</a><a href="https://www.strada.org/" rel="noreferrer" target="_blank">Strada</a></div>
+</section>
+</main>
+<section class="contact-section">
+<div class="page-width contact-inner">
+<p>Want to talk through Work Integrated Learning Programs, student services, enrollment strategy, analytics, forecasting, or related consulting support? I would be glad to compare notes.</p>
+<div class="contact-actions">
+<a class="contact-primary" href="https://www.linkedin.com/in/alancromlish/" rel="noreferrer" target="_blank">Connect on LinkedIn</a>
+<a class="contact-secondary" href="mailto:acromlish86@alumni.usc.edu">Email acromlish86@alumni.usc.edu</a>
+</div>
+</div>
+</section>
+<footer class="footer page-width"><span>Are Degrees Keeping Up?</span><a href="#top">Back to top ↑</a></footer>
+<div aria-live="polite" class="tooltip" id="tooltip" role="status"></div>
+<script src="data/story_data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

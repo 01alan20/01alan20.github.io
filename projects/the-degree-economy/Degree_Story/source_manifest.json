@@ -1,0 +1,65 @@
+{
+  "project": "Are Degrees Keeping Up? v4",
+  "sources": [
+    {
+      "group": "Degree production",
+      "name": "IPEDS",
+      "url": "https://nces.ed.gov/ipeds/"
+    },
+    {
+      "group": "Educational attainment",
+      "name": "U.S. Census Bureau",
+      "url": "https://www.census.gov/"
+    },
+    {
+      "group": "Graduate outcomes",
+      "name": "New York Fed",
+      "url": "https://www.newyorkfed.org/"
+    },
+    {
+      "group": "Occupational demand",
+      "name": "BLS",
+      "url": "https://www.bls.gov/"
+    },
+    {
+      "group": "Changing skills",
+      "name": "BLS",
+      "url": "https://www.bls.gov/"
+    },
+    {
+      "group": "Changing skills",
+      "name": "World Economic Forum",
+      "url": "https://www.weforum.org/"
+    },
+    {
+      "group": "Work-integrated learning",
+      "name": "Strada",
+      "url": "https://www.strada.org/"
+    },
+    {
+      "group": "Institutional examples",
+      "name": "Northeastern University experiential learning",
+      "url": "https://experientiallearning.northeastern.edu/experiential-opportunities/academic/"
+    },
+    {
+      "group": "Institutional examples",
+      "name": "Worcester Polytechnic Institute project-based learning",
+      "url": "https://www.wpi.edu/project-based-learning"
+    },
+    {
+      "group": "Institutional examples",
+      "name": "Arizona State University BA in Content Creation",
+      "url": "https://degrees.apps.asu.edu/bachelors/major/ASU00/TECRBBA/content-creation"
+    },
+    {
+      "group": "Institutional examples",
+      "name": "UTSA BA in Digital Media Influence",
+      "url": "https://future.utsa.edu/programs/undergraduate/digital-media-influence/"
+    },
+    {
+      "group": "Institutional examples",
+      "name": "Syracuse University Center for the Creator Economy",
+      "url": "https://creatoreconomy.syracuse.edu/"
+    }
+  ]
+}
