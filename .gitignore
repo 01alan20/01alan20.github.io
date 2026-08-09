@@ -13,3 +13,6 @@ projects/The Enrollment Squeeze/site/
 data/raw/
 **/data/raw/
 **/archive/
+output/playwright/
+unused - condo-roi/
+data/generated/
