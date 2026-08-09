@@ -1,7 +1,0 @@
-source,use,vintage,url,local_location
-"WICHE Knocking at the College Door, 11th Edition",State high-school graduate projections,11th edition; projections through 2041,https://www.wiche.edu/knocking/data/,sources/raw/wiche/wiche_knocking_11th.xlsx
-U.S. Census Bureau Vintage 2025 county single-year age estimates,County allocation of future graduate cohorts,2020-2025,https://www.census.gov/data/tables/time-series/demo/popest/2020s-counties-detail.html,sources/raw/census_single_age/
-BLS College Enrollment and Work Activity of Recent High School and College Graduates,62.8% college-going assumption and approximately two-thirds four-year share,"October 2024 outcomes; released April 22, 2025",https://www.bls.gov/news.release/hsgec.htm,External source; assumptions documented in outputs
-College Scorecard elements snapshot,"Institution location, control and undergraduate enrollment","Dataset mirror updated March 25, 2024",https://catalog.data.gov/dataset/most-recent-cohorts-scorecard-elements,sources/raw/scorecard/scorecard_elements_march_2024.csv
-Processed College Scorecard institution snapshot,"Net tuition revenue per FTE, instructional expenditure per FTE and admission rate","Source file dated April 20, 2022",https://github.com/LastMileNow/opendata,sources/raw/scorecard/scorecard_finance_snapshot_april_2022.csv
-Official College Scorecard Data Home,Current-release reference and variable documentation,"Updated June 10, 2026",https://collegescorecard.ed.gov/data/,Current 2026 archive not ingested in this build
