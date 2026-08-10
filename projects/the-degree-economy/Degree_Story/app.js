@@ -112,10 +112,14 @@ function shiftChart(){
 function fieldExplorer(){
   const select=$('field-select');
   select.innerHTML='';
+  select.add(new Option('Select a Field','',true,true));
   DATA.major_shifts.slice().sort((a,b)=>a.field.localeCompare(b.field)).forEach(row=>select.add(new Option(row.field,row.field)));
   const render=()=>{
-    const row=DATA.major_shifts.find(item=>item.field===select.value)||DATA.major_shifts[0];
-    if(!row)return;
+    const row=DATA.major_shifts.find(item=>item.field===select.value);
+    if(!row){
+      $('field-result').innerHTML='';
+      return;
+    }
     $('field-result').innerHTML=`<div><span>2014 awards</span><strong>${fmt.format(row.awards_2014)}</strong></div><div><span>2024 awards</span><strong>${fmt.format(row.awards_2024)}</strong></div><div><span>Numeric change</span><strong>${row.absolute_change>=0?'+':''}${fmt.format(row.absolute_change)}</strong></div><div><span>Percentage change</span><strong>${row.percent_change==null?'N/A':`${row.percent_change>=0?'+':''}${row.percent_change.toFixed(1)}%`}</strong></div>`;
   };
   select.addEventListener('change',render);render();
