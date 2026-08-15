@@ -38,6 +38,12 @@ const POSTS = [
 const WRITINGS = [
   {
     bucket: "Academic Journals",
+    title: "More Support, Limited Impact: Holistic Support Services and Student Success at U.S. Four-Year Colleges",
+    year: "2026",
+    url: "https://journals.sagepub.com/doi/abs/10.1177/15210251261464168"
+  },
+  {
+    bucket: "Academic Journals",
     title: "Assessing student burnout using the AllWell? survey at Aalto University: an evaluation study",
     year: "2019",
     url: "https://digitallibrary.usc.edu/asset-management/2A3BF1W21RX8?&WS"
