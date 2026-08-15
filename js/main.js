@@ -40,54 +40,64 @@ const WRITINGS = [
     bucket: "Academic Journals",
     title: "More Support, Limited Impact: Holistic Support Services and Student Success at U.S. Four-Year Colleges",
     year: "2026",
+    summary: "A national IPEDS panel study examining whether expanded holistic student support was associated with retention and completion recovery after the pandemic-era disruption.",
     url: "https://journals.sagepub.com/doi/abs/10.1177/15210251261464168"
   },
   {
     bucket: "Academic Journals",
     title: "Assessing student burnout using the AllWell? survey at Aalto University: an evaluation study",
     year: "2019",
+    summary: "An evaluation of student burnout measurement using the AllWell? survey and its usefulness for understanding wellbeing in a university setting.",
     url: "https://digitallibrary.usc.edu/asset-management/2A3BF1W21RX8?&WS"
   },
   {
     bucket: "Academic Journals",
     title: "Anonymous Online Learning in Korea: Considerations and Approaches to Integrating Anonymous Learning Elements into Online, Blended and Face to Face Courses",
     year: "2018",
+    summary: "A practical look at how anonymity can shape participation, psychological safety, and course design across online, blended, and face-to-face learning.",
     path: "writings/Finals/Anony_Online_Learning_FINAL.pdf"
   },
   {
     bucket: "Academic Journals",
     title: "Coaching Based on Hope Theory to Address Hopelessness",
+    summary: "A coaching-oriented paper exploring how hope theory can be used to support people experiencing hopelessness and improve goal-directed thinking.",
     path: "writings/Finals/Coach_Based_on_Hope_Theory_Address_Hopelessness_June_4_2017.pdf"
   },
   {
     bucket: "Academic Journals",
     title: "Reframing Solutions to Mental Health in Higher Education",
     year: "2020",
+    summary: "A higher-education mental health paper arguing for broader, preventive, and systems-level responses rather than relying only on clinical treatment.",
     path: "writings/Finals/Reframing Solutions to Mental Health in Higher Education.pdf"
   },
   {
     bucket: "Newspaper",
     title: "PERMA and Well-Being",
+    summary: "A public-facing article connecting the PERMA framework to practical wellbeing habits and everyday mental health.",
     path: "writings/Newspaper/2018 11 PERMA - Well-Being_Alan Cromlish.pdf"
   },
   {
     bucket: "Newspaper",
     title: "Take a Break",
+    summary: "A short public article on rest, recovery, and the value of taking breaks before stress becomes unmanageable.",
     path: "writings/Newspaper/2018 12 Take a Break_Alan Cromlish.pdf"
   },
   {
     bucket: "Newspaper",
     title: "Strait Times - Health Promotion",
+    summary: "A newspaper piece making the case for health promotion as a practical complement to treatment-focused healthcare.",
     path: "writings/Newspaper/2018 12 18 Strait Times - Health Promotion.docx"
   },
   {
     bucket: "Newspaper",
     title: "Strait Times - Reduce Healthcare Costs Through Health Promotion",
+    summary: "A public policy argument that prevention and health promotion can reduce long-term healthcare costs and improve population wellbeing.",
     path: "writings/Newspaper/2019 02 16 Strait Times - Reduce healthcare costs through health promotion.docx"
   },
   {
     bucket: "Times Higher Education",
     title: "Universities Must Shift from Treating Mental Illness to Promoting Mental Health",
+    summary: "A Times Higher Education article arguing that universities should invest upstream in mental health promotion, not only downstream treatment.",
     path: "writings/times higher education/2019 june 5 cromlish - final - Universities must shift from treating mental illness to promoting mental health.pdf"
   }
 ];
@@ -275,7 +285,7 @@ function renderWritings() {
                 <h3>${item.title}</h3>
                 ${yearMarkup}
               </div>
-              <p class="writing-source">${item.bucket}</p>
+              <p class="writing-summary">${item.summary || ""}</p>
               <a class="writing-link" href="${linkTarget}" target="_blank" rel="noopener">${linkLabel}</a>
             </article>
           `;
