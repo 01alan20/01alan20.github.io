@@ -1,0 +1,16 @@
+{
+  "title": "The Living University: How Demand, Completion, and Value Are Reshaping Higher Education",
+  "theme": "midnight",
+  "size": "16:9",
+  "fps": 30,
+  "voice": "af_heart",
+  "pace": 1,
+  "music": "calm",
+  "sfx": "minimal",
+  "captions": true,
+  "transition": "fade",
+  "lead": 0.35,
+  "hold": 0.7,
+  "end": 1.4,
+  "watermark": "explainroo.com"
+}

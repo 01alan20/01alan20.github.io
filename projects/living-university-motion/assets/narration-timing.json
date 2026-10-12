@@ -1,0 +1,110 @@
+﻿[
+    {
+        "id":  "s01-opening",
+        "duration":  12.669
+    },
+    {
+        "id":  "s02-majors",
+        "duration":  23.594
+    },
+    {
+        "id":  "s03-fields",
+        "duration":  16.384
+    },
+    {
+        "id":  "s04-portfolio",
+        "duration":  11.824
+    },
+    {
+        "id":  "s05-geography",
+        "duration":  12.054
+    },
+    {
+        "id":  "s06-demographics",
+        "duration":  13.454
+    },
+    {
+        "id":  "s07-regions",
+        "duration":  13.814
+    },
+    {
+        "id":  "s07a-three-institutions",
+        "duration":  19.529
+    },
+    {
+        "id":  "s07b-harvard",
+        "duration":  20.664
+    },
+    {
+        "id":  "s07c-charlotte",
+        "duration":  22.989
+    },
+    {
+        "id":  "s07d-salem",
+        "duration":  24.239
+    },
+    {
+        "id":  "s07e-perspective",
+        "duration":  18.834
+    },
+    {
+        "id":  "s08-arrival",
+        "duration":  11.629
+    },
+    {
+        "id":  "s09-onehundred",
+        "duration":  11.089
+    },
+    {
+        "id":  "s10-outcomes",
+        "duration":  16.879
+    },
+    {
+        "id":  "s11-risk",
+        "duration":  14.869
+    },
+    {
+        "id":  "s12-network",
+        "duration":  17.804
+    },
+    {
+        "id":  "s13-friction",
+        "duration":  14.704
+    },
+    {
+        "id":  "s14-response",
+        "duration":  14.354
+    },
+    {
+        "id":  "s15-pillars",
+        "duration":  17.729
+    },
+    {
+        "id":  "s16-scenario",
+        "duration":  14.949
+    },
+    {
+        "id":  "s17-cost",
+        "duration":  13.139
+    },
+    {
+        "id":  "s18-paths",
+        "duration":  14.864
+    },
+    {
+        "id":  "s19-earnings",
+        "duration":  18.954
+    },
+    {
+        "id":  "s20-value",
+        "duration":  12.014
+    },
+    {
+        "id":  "s21-feedback",
+        "duration":  16.584
+    },
+    {
+        "id":  "s22-close",
+        "duration":  13.909
+    }
+]

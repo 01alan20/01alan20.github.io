@@ -1,66 +1,40 @@
-﻿const data = {
-  kpis: {
-    sessions: 128430,
-    views: 61240,
-    cart: 16210,
-    purchases: 6240,
-    revenue: 417380,
-    aov: 66.89
-  },
-  funnel: [
-    { step: 'Session', value: 128430 },
-    { step: 'View Item', value: 61240 },
-    { step: 'Add to Cart', value: 16210 },
-    { step: 'Begin Checkout', value: 9820 },
-    { step: 'Purchase', value: 6240 }
-  ],
-  channel: [
-    { name: 'Organic Search', sessions: 40220, conv: 0.058, revenue: 143600 },
-    { name: 'Direct', sessions: 33410, conv: 0.064, revenue: 132800 },
-    { name: 'Paid Search', sessions: 24500, conv: 0.041, revenue: 76200 },
-    { name: 'Referral', sessions: 18400, conv: 0.053, revenue: 49600 },
-    { name: 'Email', sessions: 11900, conv: 0.072, revenue: 15200 }
-  ],
-  categories: [
-    { name: 'Apparel', revenue: 122400, viewToPurchase: 0.092 },
-    { name: 'Accessories', revenue: 96400, viewToPurchase: 0.081 },
-    { name: 'Drinkware', revenue: 74120, viewToPurchase: 0.076 },
-    { name: 'Office', revenue: 61480, viewToPurchase: 0.062 },
-    { name: 'Lifestyle', revenue: 52980, viewToPurchase: 0.055 }
-  ],
-  pareto: [18.2, 33.4, 45.9, 56.1, 64.6, 71.3, 76.8, 81.1, 84.9, 88.6, 91.4, 93.8, 95.6, 97.1, 98.3, 99.2, 99.7, 100.0],
-  device: [
-    { name: 'Desktop', conv: 0.067 },
-    { name: 'Mobile', conv: 0.039 },
-    { name: 'Tablet', conv: 0.051 }
-  ],
-  geo: [
-    { country: 'United States', revenue: 173400 },
-    { country: 'India', revenue: 42600 },
-    { country: 'United Kingdom', revenue: 37200 },
-    { country: 'Canada', revenue: 31500 },
-    { country: 'Germany', revenue: 24800 }
-  ],
-  loyalty: [
-    { segment: 'No Purchase', users: 56200 },
-    { segment: 'One-Time Buyer', users: 4830 },
-    { segment: 'Repeat Buyer', users: 1410 }
-  ]
-};
+const data = window.ga4LiveSummary;
 
 const fmtInt = new Intl.NumberFormat('en-US');
 const fmtMoney = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-const fmtPct = (n) => `${(n * 100).toFixed(1)}%`;
+const fmtPct = (n) => `${((n || 0) * 100).toFixed(1)}%`;
+const fmtNumber = (n, digits = 1) => Number(n || 0).toFixed(digits);
 
 const palette = {
-  channel: ['#1d4ed8', '#7c3aed', '#db2777', '#ea580c', '#0f766e'],
-  channelBars: ['#1d4ed8', '#6d28d9', '#be185d', '#c2410c', '#0f766e'],
+  channel: ['#1d4ed8', '#7c3aed', '#db2777', '#ea580c', '#0f766e', '#64748b', '#0891b2', '#9333ea'],
+  channelBars: ['#1d4ed8', '#6d28d9', '#be185d', '#c2410c', '#0f766e', '#475569', '#0891b2', '#7e22ce'],
   device: ['#0f766e', '#0284c7', '#8b5cf6'],
-  geo: ['#1e3a8a', '#1d4ed8', '#2563eb', '#3b82f6', '#60a5fa'],
+  geo: ['#1e3a8a', '#1d4ed8', '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#bae6fd', '#dbeafe'],
   loyalty: ['#94a3b8', '#f59e0b', '#16a34a']
 };
 
-function setText(id, value) { document.getElementById(id).textContent = value; }
+function setText(id, value) {
+  const element = document.getElementById(id);
+  if (element) element.textContent = value;
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[char]));
+}
+
+function publicName(value) {
+  const text = String(value || '').trim();
+  if (!text) return 'this segment';
+  if (text.toLowerCase().includes('data deleted')) return 'a redacted high-quality channel';
+  if (text.includes('<Other>')) return 'other referral traffic';
+  return text;
+}
 
 function initTabs() {
   document.querySelectorAll('.tab-btn').forEach((btn) => {
@@ -74,21 +48,131 @@ function initTabs() {
   });
 }
 
+function largestFunnelDrop() {
+  let maxDrop = -1;
+  let step = '';
+  for (let i = 1; i < data.funnel.length; i++) {
+    const drop = 1 - (data.funnel[i].value / data.funnel[i - 1].value);
+    if (drop > maxDrop) {
+      maxDrop = drop;
+      step = `${data.funnel[i - 1].step} to ${data.funnel[i].step}`;
+    }
+  }
+  return { step, maxDrop };
+}
+
+function getAnalysis() {
+  return data.optimization_analysis || {};
+}
+
+function productByQuadrant(quadrant) {
+  return (getAnalysis().product_opportunity_matrix || []).find((row) => row.quadrant === quadrant);
+}
+
 function renderKpis() {
   const k = data.kpis;
   setText('kpi-sessions', fmtInt.format(k.sessions));
-  setText('kpi-views', fmtInt.format(k.views));
-  setText('kpi-cart', fmtInt.format(k.cart));
+  setText('kpi-views', fmtInt.format(k.product_views));
+  setText('kpi-cart', fmtInt.format(k.cart_events));
   setText('kpi-purchase', fmtInt.format(k.purchases));
   setText('kpi-revenue', fmtMoney.format(k.revenue));
   setText('kpi-aov', `$${k.aov.toFixed(2)}`);
 
-  setText('kpi-sessions-foot', 'Top of funnel traffic volume');
-  setText('kpi-views-foot', `${fmtPct(k.views / k.sessions)} of sessions reached product pages`);
-  setText('kpi-cart-foot', `${fmtPct(k.cart / k.views)} view-to-cart rate`);
-  setText('kpi-purchase-foot', `${fmtPct(k.purchases / k.sessions)} session-to-purchase rate`);
-  setText('kpi-revenue-foot', 'Estimated total purchase revenue');
-  setText('kpi-aov-foot', 'Revenue per purchase event');
+  setText('kpi-sessions-foot', `${fmtInt.format(k.users)} users, ${k.days} days`);
+  setText('kpi-views-foot', 'Product-detail views');
+  setText('kpi-cart-foot', `${fmtPct(k.view_to_cart_rate)} view-to-cart`);
+  setText('kpi-purchase-foot', `${fmtPct(k.session_to_purchase_rate)} of sessions`);
+  setText('kpi-revenue-foot', 'Sample revenue');
+  setText('kpi-aov-foot', 'Per purchase');
+}
+
+function renderNarrative() {
+  const topChannel = data.channel.slice().sort((a, b) => b.revenue - a.revenue)[0];
+  const worstStepDrop = largestFunnelDrop();
+
+  setText('brief-title', `${fmtPct(data.kpis.session_to_purchase_rate)} session-to-purchase`);
+  setText(
+    'brief-copy',
+    `${worstStepDrop.step} is the main leak. ${publicName(topChannel.name)} is the largest revenue source, so the next move is conversion work before broader traffic scaling.`
+  );
+
+  setText('insight-funnel', `${worstStepDrop.step} loses ${fmtPct(worstStepDrop.maxDrop)} of eligible sessions. Start with product-page clarity, offer confidence, and cart intent.`);
+  setText('insight-channel', `${publicName(topChannel.name)} leads sample revenue. Compare channel quality before increasing spend, because volume and conversion quality are not the same question.`);
+  setText('insight-product', 'Category performance separates two jobs: protect products that already convert, and improve pages that attract attention but underperform at purchase.');
+  setText('insight-segment', 'Device and geography are useful checks, but the public sample does not justify overclaiming a single mobile or market problem.');
+}
+
+function renderSolutions() {
+  const list = document.getElementById('solution-list');
+  if (!list) return;
+
+  const analysis = getAnalysis();
+  const worstStepDrop = largestFunnelDrop();
+  const topQualityChannel = (analysis.channel_quality_scorecard || [])[0] || {};
+  const productToFix = productByQuadrant('Fix conversion') || (analysis.product_opportunity_matrix || [])[0] || {};
+  const productToPromote = productByQuadrant('Increase visibility') || productToFix;
+
+  const cards = [
+    {
+      title: 'Fix the product-page to cart decision',
+      metric: `${worstStepDrop.step} loses ${fmtPct(worstStepDrop.maxDrop)} of sessions.`,
+      body: 'Before buying more traffic, improve the moment where product interest fails to become cart intent. Review product detail content, shipping clarity, reviews, bundles, and offer confidence.'
+    },
+    {
+      title: `Resolve the ${publicName(productToFix.name)} conversion gap`,
+      metric: `${publicName(productToFix.name)} is marked for conversion work in the product matrix.`,
+      body: 'Treat attention and purchase intent separately. High-attention categories that do not convert need page, price, assortment, or trust fixes before they get more placement.'
+    },
+    {
+      title: 'Scale only after quality is protected',
+      metric: `${publicName(topQualityChannel.name)} has the strongest channel quality score.`,
+      body: `Use channel quality to decide where to test growth. If ${publicName(productToPromote.name)} already converts well, give it more visibility through homepage, email, or remarketing modules.`
+    }
+  ];
+
+  list.innerHTML = cards.map((card) => `
+    <article class="solution-card">
+      <h3>${escapeHtml(card.title)}</h3>
+      <p>${escapeHtml(card.body)}</p>
+      <div class="card-metric">${escapeHtml(card.metric)}</div>
+    </article>
+  `).join('');
+}
+
+function renderExperimentCards() {
+  const list = document.getElementById('experiment-card-list');
+  if (!list) return;
+
+  const worstStepDrop = largestFunnelDrop();
+  const productToFix = productByQuadrant('Fix conversion') || {};
+  const productToPromote = productByQuadrant('Increase visibility') || {};
+
+  const cards = [
+    {
+      title: 'Product-page confidence test',
+      body: `Change the product-detail experience at the ${worstStepDrop.step} step: clearer delivery expectations, stronger product proof, and a more visible add-to-cart path.`,
+      metric: 'Primary metric: product view to add-to-cart rate.'
+    },
+    {
+      title: 'Cart-friction test',
+      body: 'Reduce uncertainty after cart add with clearer shipping, returns, payment reassurance, and checkout start prompts.',
+      metric: 'Primary metric: add-to-cart to begin-checkout rate.'
+    },
+    {
+      title: 'Merchandising visibility test',
+      body: `${publicName(productToPromote.name || productToFix.name)} is the category to test for better placement or sharper offer framing.`,
+      metric: 'Primary metric: category revenue per exposed session.'
+    }
+  ];
+
+  list.innerHTML = cards.map((card, index) => `
+    <article class="experiment-card">
+      <div class="experiment-number">${index + 1}</div>
+      <h3>${escapeHtml(card.title)}</h3>
+      <p>${escapeHtml(card.body)}</p>
+      <div class="card-metric">${escapeHtml(card.metric)}</div>
+    </article>
+  `).join('');
 }
 
 function baseLayout() {
@@ -119,6 +203,7 @@ function renderCharts() {
     textposition: 'outside'
   }], { ...baseLayout(), yaxis: { tickformat: '.0%', range: [0, 1] } }, { displayModeBar: false, responsive: true });
 
+  const channelMax = Math.max(...data.channel.map((d) => d.conv), 0.01);
   Plotly.newPlot('chart-channel-conv', [{
     type: 'bar',
     x: data.channel.map((d) => d.name),
@@ -126,7 +211,7 @@ function renderCharts() {
     marker: { color: palette.channelBars },
     text: data.channel.map((d) => fmtPct(d.conv)),
     textposition: 'outside'
-  }], { ...baseLayout(), yaxis: { tickformat: '.0%', range: [0, 0.09] } }, { displayModeBar: false, responsive: true });
+  }], { ...baseLayout(), yaxis: { tickformat: '.0%', range: [0, channelMax * 1.35] } }, { displayModeBar: false, responsive: true });
 
   Plotly.newPlot('chart-channel-revenue', [{
     type: 'pie',
@@ -165,6 +250,7 @@ function renderCharts() {
     yaxis: { title: 'Cumulative Revenue Share', ticksuffix: '%', range: [0, 100] }
   }, { displayModeBar: false, responsive: true });
 
+  const deviceMax = Math.max(...data.device.map((d) => d.conv), 0.01);
   Plotly.newPlot('chart-device', [{
     type: 'bar',
     x: data.device.map((d) => d.name),
@@ -172,7 +258,7 @@ function renderCharts() {
     marker: { color: palette.device },
     text: data.device.map((d) => fmtPct(d.conv)),
     textposition: 'outside'
-  }], { ...baseLayout(), yaxis: { tickformat: '.0%', range: [0, 0.08] } }, { displayModeBar: false, responsive: true });
+  }], { ...baseLayout(), yaxis: { tickformat: '.0%', range: [0, deviceMax * 1.45] } }, { displayModeBar: false, responsive: true });
 
   Plotly.newPlot('chart-geo', [{
     type: 'bar',
@@ -189,32 +275,16 @@ function renderCharts() {
   }], { ...baseLayout(), margin: { l: 8, r: 8, t: 8, b: 8 } }, { displayModeBar: false, responsive: true });
 }
 
-function renderNarrative() {
-  const topChannel = data.channel.slice().sort((a, b) => b.revenue - a.revenue)[0];
-  const worstStepDrop = (() => {
-    let maxDrop = -1;
-    let step = '';
-    for (let i = 1; i < data.funnel.length; i++) {
-      const drop = 1 - (data.funnel[i].value / data.funnel[i - 1].value);
-      if (drop > maxDrop) { maxDrop = drop; step = `${data.funnel[i - 1].step} -> ${data.funnel[i].step}`; }
-    }
-    return { step, maxDrop };
-  })();
-
-  setText('brief-title', `${fmtPct(data.kpis.purchases / data.kpis.sessions)} Session-to-Purchase Conversion`);
-  setText('brief-copy', `${topChannel.name} currently contributes the highest revenue share. The biggest funnel leakage is at ${worstStepDrop.step}.`);
-
-  setText('insight-funnel', `The largest revenue leakage occurs from ${worstStepDrop.step} (${fmtPct(worstStepDrop.maxDrop)} drop). Prioritize checkout UX clarity and cart persistence before scaling paid traffic.`);
-  setText('insight-channel', `${topChannel.name} is your strongest revenue channel. Email shows the best conversion rate but lower volume, making it a high-efficiency candidate for lifecycle expansion.`);
-  setText('insight-product', 'Top categories drive a disproportionate share of revenue. Bundle high-converting accessories with top apparel SKUs and test category-level remarketing sequences.');
-  setText('insight-segment', 'Mobile conversion trails desktop meaningfully. Prioritize mobile PDP speed and checkout form simplification while expanding repeat-buyer programs in top countries.');
-}
-
 function init() {
+  if (!data) {
+    throw new Error('GA4 live summary data was not loaded.');
+  }
   initTabs();
   renderKpis();
-  renderCharts();
   renderNarrative();
+  renderSolutions();
+  renderExperimentCards();
+  renderCharts();
 }
 
 document.addEventListener('DOMContentLoaded', init);

@@ -1,0 +1,183 @@
+{
+  "title": "Three Universities, Three Enrollment Realities",
+  "as_of": "2026-10-11",
+  "years": [
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "data_status": "OBSERVED institution-reported annual enrollment (no year is interpolated)",
+  "definitions_warning": "Harvard counts university-wide degree students, Charlotte and Salem State counts all fall enrollees. Each index is within-institution; do not infer between-institution equivalent scope. IPEDS EF harmonization is a separate refinement.",
+  "institutions": {
+    "harvard": {
+      "name": "Harvard University",
+      "measure": "Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total",
+      "source": "https://bpb-us-e1.wpmucdn.com/sites.harvard.edu/dist/6/210/files/2026/01/enrollment_historical_headcount_Fact-Book-2025-26.pdf"
+    },
+    "unc_charlotte": {
+      "name": "University of North Carolina at Charlotte",
+      "measure": "UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total",
+      "source": "https://www.northcarolina.edu/apps/bog/doc.php?code=bog&id=68257",
+      "source_2025": "https://inside.charlotte.edu/2025/09/04/record-breaking-enrollment-football-and-a-concert-on-saturday-iron-phi-bikes-across-north-carolina-and-more/"
+    },
+    "salem_state": {
+      "name": "Salem State University",
+      "measure": "Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree",
+      "sources": [
+        "https://www.salemstate.edu/sites/default/files/pdfs/FY16-20_Fact_Book_ENROLLMENT.pdf",
+        "https://records.salemstate.edu/sites/default/files/reports/2025-12/FY21-25_Fact_Book_Enrollment_WEB.pdf"
+      ]
+    }
+  },
+  "observations": [
+    {
+      "year": 2016,
+      "harvard": 22434,
+      "harvard_index_2016_100": 100.0,
+      "harvard_yoy_pct": null,
+      "unc_charlotte": 28721,
+      "unc_charlotte_index_2016_100": 100.0,
+      "unc_charlotte_yoy_pct": null,
+      "salem_state": 9001,
+      "salem_state_index_2016_100": 100.0,
+      "salem_state_yoy_pct": null
+    },
+    {
+      "year": 2017,
+      "harvard": 22947,
+      "harvard_index_2016_100": 102.287,
+      "harvard_yoy_pct": 2.287,
+      "unc_charlotte": 29317,
+      "unc_charlotte_index_2016_100": 102.075,
+      "unc_charlotte_yoy_pct": 2.075,
+      "salem_state": 8702,
+      "salem_state_index_2016_100": 96.678,
+      "salem_state_yoy_pct": -3.322
+    },
+    {
+      "year": 2018,
+      "harvard": 23336,
+      "harvard_index_2016_100": 104.021,
+      "harvard_yoy_pct": 1.695,
+      "unc_charlotte": 29710,
+      "unc_charlotte_index_2016_100": 103.443,
+      "unc_charlotte_yoy_pct": 1.341,
+      "salem_state": 8338,
+      "salem_state_index_2016_100": 92.634,
+      "salem_state_yoy_pct": -4.183
+    },
+    {
+      "year": 2019,
+      "harvard": 23731,
+      "harvard_index_2016_100": 105.781,
+      "harvard_yoy_pct": 1.693,
+      "unc_charlotte": 30615,
+      "unc_charlotte_index_2016_100": 106.594,
+      "unc_charlotte_yoy_pct": 3.046,
+      "salem_state": 7706,
+      "salem_state_index_2016_100": 85.613,
+      "salem_state_yoy_pct": -7.58
+    },
+    {
+      "year": 2020,
+      "harvard": 22273,
+      "harvard_index_2016_100": 99.282,
+      "harvard_yoy_pct": -6.144,
+      "unc_charlotte": 30146,
+      "unc_charlotte_index_2016_100": 104.962,
+      "unc_charlotte_yoy_pct": -1.532,
+      "salem_state": 7242,
+      "salem_state_index_2016_100": 80.458,
+      "salem_state_yoy_pct": -6.021
+    },
+    {
+      "year": 2021,
+      "harvard": 25126,
+      "harvard_index_2016_100": 112.0,
+      "harvard_yoy_pct": 12.809,
+      "unc_charlotte": 30448,
+      "unc_charlotte_index_2016_100": 106.013,
+      "unc_charlotte_yoy_pct": 1.002,
+      "salem_state": 7131,
+      "salem_state_index_2016_100": 79.225,
+      "salem_state_yoy_pct": -1.533
+    },
+    {
+      "year": 2022,
+      "harvard": 25266,
+      "harvard_index_2016_100": 112.624,
+      "harvard_yoy_pct": 0.557,
+      "unc_charlotte": 29551,
+      "unc_charlotte_index_2016_100": 102.89,
+      "unc_charlotte_yoy_pct": -2.946,
+      "salem_state": 6539,
+      "salem_state_index_2016_100": 72.647,
+      "salem_state_yoy_pct": -8.302
+    },
+    {
+      "year": 2023,
+      "harvard": 24596,
+      "harvard_index_2016_100": 109.637,
+      "harvard_yoy_pct": -2.652,
+      "unc_charlotte": 30298,
+      "unc_charlotte_index_2016_100": 105.491,
+      "unc_charlotte_yoy_pct": 2.528,
+      "salem_state": 6239,
+      "salem_state_index_2016_100": 69.315,
+      "salem_state_yoy_pct": -4.588
+    },
+    {
+      "year": 2024,
+      "harvard": 24519,
+      "harvard_index_2016_100": 109.294,
+      "harvard_yoy_pct": -0.313,
+      "unc_charlotte": 31091,
+      "unc_charlotte_index_2016_100": 108.252,
+      "unc_charlotte_yoy_pct": 2.617,
+      "salem_state": 6230,
+      "salem_state_index_2016_100": 69.215,
+      "salem_state_yoy_pct": -0.144
+    },
+    {
+      "year": 2025,
+      "harvard": 24317,
+      "harvard_index_2016_100": 108.394,
+      "harvard_yoy_pct": -0.824,
+      "unc_charlotte": 32207,
+      "unc_charlotte_index_2016_100": 112.137,
+      "unc_charlotte_yoy_pct": 3.589,
+      "salem_state": 6009,
+      "salem_state_index_2016_100": 66.759,
+      "salem_state_yoy_pct": -3.547
+    }
+  ],
+  "motion_spec": {
+    "x": "year",
+    "y": "index_2016_100",
+    "baseline": 2016,
+    "time_per_year_seconds": 1.25,
+    "transition": "continuous between verified observations",
+    "show_headcount": true,
+    "show_yoy_pct": true,
+    "show_index": true,
+    "annotations": {
+      "2020": "COVID-era disruption (context, not attribution)",
+      "2022": "Charlotte enrollment declined vs 2021",
+      "2025": "Verified endpoints for all three institutions"
+    }
+  },
+  "sources": [
+    "https://bpb-us-e1.wpmucdn.com/sites.harvard.edu/dist/6/210/files/2026/01/enrollment_historical_headcount_Fact-Book-2025-26.pdf",
+    "https://www.northcarolina.edu/apps/bog/doc.php?code=bog&id=68257",
+    "https://inside.charlotte.edu/2025/09/04/record-breaking-enrollment-football-and-a-concert-on-saturday-iron-phi-bikes-across-north-carolina-and-more/",
+    "https://www.salemstate.edu/sites/default/files/pdfs/FY16-20_Fact_Book_ENROLLMENT.pdf",
+    "https://records.salemstate.edu/sites/default/files/reports/2025-12/FY21-25_Fact_Book_Enrollment_WEB.pdf"
+  ]
+}

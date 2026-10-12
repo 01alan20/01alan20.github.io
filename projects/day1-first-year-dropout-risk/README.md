@@ -1,6 +1,8 @@
 # Day-1 First-Year Dropout Risk Predictor
 
-Standalone prescriptive risk scoring project for first-year dropout.
+Standalone prescriptive risk scoring project demonstrating a first-year dropout-risk workflow.
+
+> Important: the training target is an IBM Telco Customer Churn label remapped into education-style terminology. It is a churn/persistence proxy, not observed first-year student dropout. The score should not be presented as validated student-risk performance.
 
 ## What it does
 - Scores a student on Day 1 using only enrollment-time inputs.
@@ -34,8 +36,8 @@ The browser scorer uses the exported Day-1 scorecard:
   - moderate risk: `40-69`
   - high risk: `>= 70`
 
-## Data source
-The scorecard is exported from the CRM analytics training set and written into this project's `data/` folder for standalone use.
+## Data source and target
+The scorecard is exported from the CRM analytics training set and written into this project's `data/` folder for standalone use. The underlying observations come from the IBM Telco Customer Churn dataset; the education-style fields and `actual_dropout_flag` label are a translation layer.
 
 ## Notes
 - This is a Day-1 scorecard only.

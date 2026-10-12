@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>E-commerce Growth Diagnostics Lab</title>
-  <meta name="description" content="Interactive GA4 e-commerce diagnostics dashboard for funnel, channel, product, device, geography, checkout leakage, and revenue concentration analysis." />
+  <title>GA4 BigQuery Ecommerce Case Study</title>
+  <meta name="description" content="A GA4 BigQuery ecommerce case study that turns raw event data into a clear growth story and optimization plan." />
   <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,83 +13,137 @@
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-  <div class="bg-orb orb-1" aria-hidden="true"></div>
-  <div class="bg-orb orb-2" aria-hidden="true"></div>
-
   <main class="page-shell">
     <header class="hero panel">
       <div class="hero-copy">
-        <div class="eyebrow">GA4 Public Dataset Project</div>
-        <h1>E-commerce Growth Diagnostics Lab</h1>
-        <p class="hero-lead">Public Web Analytics for Funnel, Product, and Revenue Optimization.</p>
-        <p class="hero-note">Source: <code>bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*</code> | Coverage: November 1, 2020 to January 31, 2021</p>
+        <h1>Where ecommerce growth leaks</h1>
+        <p class="hero-lead">A GA4 BigQuery case study for a team lead who wants the next move, not another wall of analytics.</p>
+        <p class="hero-note">Public GA4 ecommerce sample. November 1, 2020 to January 31, 2021.</p>
         <div class="hero-links">
+          <a class="hero-link primary" href="ga4-bigquery-ecommerce-case-study.ipynb">Notebook</a>
+          <a class="hero-link" href="README.md">README</a>
+          <a class="hero-link" href="sql/">SQL Pack</a>
           <a class="hero-link" href="https://developers.google.com/analytics/bigquery/web-ecommerce-demo-dataset" target="_blank" rel="noopener">Official Dataset Docs</a>
-          <a class="hero-link" href="README.md">Project README</a>
         </div>
       </div>
-      <aside class="hero-brief">
-        <div class="brief-label">Executive Readout</div>
+      <aside class="hero-metric">
         <h2 id="brief-title">Loading...</h2>
-        <p id="brief-copy">Preparing funnel, channel, and revenue diagnostics.</p>
+        <p id="brief-copy">Preparing the recommendation.</p>
       </aside>
     </header>
 
-    <section class="kpi-grid" aria-label="KPI overview">
-      <article class="kpi-card"><span>Sessions</span><strong id="kpi-sessions">-</strong><em id="kpi-sessions-foot">-</em></article>
-      <article class="kpi-card"><span>Product Views</span><strong id="kpi-views">-</strong><em id="kpi-views-foot">-</em></article>
-      <article class="kpi-card"><span>Add to Cart</span><strong id="kpi-cart">-</strong><em id="kpi-cart-foot">-</em></article>
-      <article class="kpi-card"><span>Purchases</span><strong id="kpi-purchase">-</strong><em id="kpi-purchase-foot">-</em></article>
-      <article class="kpi-card"><span>Revenue</span><strong id="kpi-revenue">-</strong><em id="kpi-revenue-foot">-</em></article>
-      <article class="kpi-card"><span>Avg Order Value</span><strong id="kpi-aov">-</strong><em id="kpi-aov-foot">-</em></article>
+    <section class="story-panel panel" aria-labelledby="story-heading">
+      <div class="section-copy">
+        <h2 id="story-heading">The growth story</h2>
+        <p>The page follows a simple path from raw data to decisions, then turns the decision points into tests a team can actually run.</p>
+      </div>
+      <ol class="story-flow">
+        <li>
+          <strong>Raw GA4 events</strong>
+          <p>Start with event rows, nested parameters, product arrays, and daily BigQuery export tables.</p>
+        </li>
+        <li>
+          <strong>Session/item marts</strong>
+          <p>Rebuild sessions and product interactions so the analysis matches how customers move.</p>
+        </li>
+        <li>
+          <strong>Funnel and revenue metrics</strong>
+          <p>Measure where attention becomes cart intent, checkout, purchase, and revenue.</p>
+        </li>
+        <li>
+          <strong>Segment associations</strong>
+          <p>Compare channels, products, devices, countries, and behavior depth against the baseline.</p>
+        </li>
+        <li>
+          <strong>Business actions</strong>
+          <p>Choose where to fix friction, protect revenue, increase visibility, or pause spend.</p>
+        </li>
+        <li>
+          <strong>Experiment backlog</strong>
+          <p>Turn the findings into hypotheses with segments, metrics, and measurement plans.</p>
+        </li>
+      </ol>
     </section>
 
-    <nav class="tabs" aria-label="Dashboard tabs">
-      <button class="tab-btn active" type="button" data-tab="funnel">Funnel & Leakage</button>
-      <button class="tab-btn" type="button" data-tab="channel">Channel & Acquisition</button>
-      <button class="tab-btn" type="button" data-tab="product">Product & Revenue</button>
-      <button class="tab-btn" type="button" data-tab="segment">Device, Geo & Loyalty</button>
-    </nav>
-
-    <section class="tab-pane active" data-tab="funnel">
-      <div class="chart-grid two-up">
-        <article class="chart-card"><h3>Core Funnel Conversion</h3><div id="chart-funnel" class="chart"></div></article>
-        <article class="chart-card"><h3>Checkout Leakage by Step</h3><div id="chart-leakage" class="chart"></div></article>
+    <section class="solution-section panel" aria-labelledby="solutions-heading">
+      <div class="section-copy narrow">
+        <h2 id="solutions-heading">What the team should do next</h2>
+        <p>The live BigQuery output points to three practical moves: fix the biggest funnel loss, separate product visibility from product conversion, and treat channel quality as a budget decision.</p>
       </div>
-      <article class="insight-card"><h3>Funnel Recommendation</h3><p id="insight-funnel">-</p></article>
+      <div id="solution-list" class="solution-grid" aria-live="polite"></div>
     </section>
 
-    <section class="tab-pane" data-tab="channel">
-      <div class="chart-grid two-up">
-        <article class="chart-card"><h3>Channel Session to Purchase Rate</h3><div id="chart-channel-conv" class="chart"></div></article>
-        <article class="chart-card"><h3>Channel Revenue Contribution</h3><div id="chart-channel-revenue" class="chart"></div></article>
+    <section class="experiment-panel panel" aria-labelledby="experiments-heading">
+      <div class="section-copy narrow">
+        <h2 id="experiments-heading">What I would test first</h2>
+        <p>Experiment backlog items should be specific enough that a team can assign an owner, pick a metric, and know what BigQuery query will judge the result.</p>
       </div>
-      <article class="insight-card"><h3>Channel Budget Direction</h3><p id="insight-channel">-</p></article>
+      <div id="experiment-card-list" class="experiment-grid"></div>
     </section>
 
-    <section class="tab-pane" data-tab="product">
-      <div class="chart-grid two-up">
-        <article class="chart-card"><h3>Top Product Categories by Revenue</h3><div id="chart-category" class="chart"></div></article>
-        <article class="chart-card"><h3>Revenue Concentration (Pareto)</h3><div id="chart-pareto" class="chart"></div></article>
+    <section class="evidence-section" aria-label="Compact evidence dashboard">
+      <div class="section-copy">
+        <h2>Evidence dashboard</h2>
+        <p>These are the supporting cuts behind the recommendations. The full SQL path and notebook stay linked above for review.</p>
       </div>
-      <article class="insight-card"><h3>Merchandising Direction</h3><p id="insight-product">-</p></article>
-    </section>
 
-    <section class="tab-pane" data-tab="segment">
-      <div class="chart-grid three-up">
-        <article class="chart-card"><h3>Device Conversion</h3><div id="chart-device" class="chart"></div></article>
-        <article class="chart-card"><h3>Top Countries by Revenue</h3><div id="chart-geo" class="chart"></div></article>
-        <article class="chart-card"><h3>User Loyalty Segments</h3><div id="chart-loyalty" class="chart"></div></article>
-      </div>
-      <article class="insight-card"><h3>Segment Strategy</h3><p id="insight-segment">-</p></article>
+      <section class="kpi-grid" aria-label="KPI overview">
+        <article class="kpi-card"><span>Sessions</span><strong id="kpi-sessions">-</strong><em id="kpi-sessions-foot">-</em></article>
+        <article class="kpi-card"><span>Product Views</span><strong id="kpi-views">-</strong><em id="kpi-views-foot">-</em></article>
+        <article class="kpi-card"><span>Add to Cart</span><strong id="kpi-cart">-</strong><em id="kpi-cart-foot">-</em></article>
+        <article class="kpi-card"><span>Purchases</span><strong id="kpi-purchase">-</strong><em id="kpi-purchase-foot">-</em></article>
+        <article class="kpi-card"><span>Revenue</span><strong id="kpi-revenue">-</strong><em id="kpi-revenue-foot">-</em></article>
+        <article class="kpi-card"><span>Avg Order Value</span><strong id="kpi-aov">-</strong><em id="kpi-aov-foot">-</em></article>
+      </section>
+
+      <nav class="tabs" aria-label="Dashboard tabs">
+        <button class="tab-btn active" type="button" data-tab="funnel">Funnel</button>
+        <button class="tab-btn" type="button" data-tab="channel">Channels</button>
+        <button class="tab-btn" type="button" data-tab="product">Products</button>
+        <button class="tab-btn" type="button" data-tab="segment">Segments</button>
+      </nav>
+
+      <section class="tab-pane active" data-tab="funnel">
+        <div class="chart-grid two-up">
+          <article class="chart-card"><h3>Funnel Conversion</h3><div id="chart-funnel" class="chart"></div></article>
+          <article class="chart-card"><h3>Step Retention</h3><div id="chart-leakage" class="chart"></div></article>
+        </div>
+        <article class="insight-card"><h3>Funnel Read</h3><p id="insight-funnel">-</p></article>
+      </section>
+
+      <section class="tab-pane" data-tab="channel">
+        <div class="chart-grid two-up">
+          <article class="chart-card"><h3>Channel Conversion</h3><div id="chart-channel-conv" class="chart"></div></article>
+          <article class="chart-card"><h3>Channel Revenue</h3><div id="chart-channel-revenue" class="chart"></div></article>
+        </div>
+        <article class="insight-card"><h3>Channel Read</h3><p id="insight-channel">-</p></article>
+      </section>
+
+      <section class="tab-pane" data-tab="product">
+        <div class="chart-grid two-up">
+          <article class="chart-card"><h3>Category Revenue</h3><div id="chart-category" class="chart"></div></article>
+          <article class="chart-card"><h3>Revenue Concentration</h3><div id="chart-pareto" class="chart"></div></article>
+        </div>
+        <article class="insight-card"><h3>Product Read</h3><p id="insight-product">-</p></article>
+      </section>
+
+      <section class="tab-pane" data-tab="segment">
+        <div class="chart-grid three-up">
+          <article class="chart-card"><h3>Device Conversion</h3><div id="chart-device" class="chart"></div></article>
+          <article class="chart-card"><h3>Country Revenue</h3><div id="chart-geo" class="chart"></div></article>
+          <article class="chart-card"><h3>User Loyalty</h3><div id="chart-loyalty" class="chart"></div></article>
+        </div>
+        <article class="insight-card"><h3>Segment Read</h3><p id="insight-segment">-</p></article>
+      </section>
     </section>
 
     <footer class="panel footer-note">
-      <p>This dashboard currently uses modeled example outputs aligned to the GA4 public sample dataset structure. Replace demo arrays in <code>dashboard.js</code> with your exported BigQuery results for production-grade findings.</p>
-      <p>SQL starter pack is available in <a href="sql/">/sql</a>.</p>
+      <p>Recommendations use aggregate outputs generated from the public GA4 BigQuery export. Because the dataset is obfuscated sample data, the page presents an analytics workflow and decision framework, not verified commercial claims about the store.</p>
+      <p>Source table: <code>bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*</code>.</p>
     </footer>
   </main>
 
+  <script src="data/live_ga4_summary.js"></script>
   <script src="dashboard.js"></script>
 </body>
 </html>

@@ -1,0 +1,315 @@
+{
+  "note": "This package provides full observed 2016–2025 annual institution-reported enrollment data. Other datasets such as IPEDS majors/WICHE state observations remain data contracts and need sourcing. Null values are not observations.",
+  "majors": {
+    "source": "NCES IPEDS Completions",
+    "scope": "U.S. bachelor's degrees awarded, historical series planned 2000-2024",
+    "metric": "awards conferred by broad 2-digit CIP group",
+    "rows": [],
+    "requirements": [
+      "Download data before rendering",
+      "Reconcile 2000/2010/2020 CIP taxonomy",
+      "Never invent values",
+      "Label degree awards, not entering student demand"
+    ]
+  },
+  "wiche": {
+    "source": "WICHE Knocking at the College Door, 11th edition, 2024",
+    "national_peak_year_projected": 2025,
+    "projected_percent_change_peak_to_2041": -13,
+    "states_with_declines_2023_to_2041": 38,
+    "state_rows": [],
+    "requirements": [
+      "Download state data before rendering",
+      "Clearly label projections",
+      "Keep peak and state baseline definitions distinct"
+    ]
+  },
+  "cohort": {
+    "source": "National Student Clearinghouse Research Center, Yearly Progress and Completion, 2025 release",
+    "starter_cohort": "fall 2019 U.S. starters",
+    "observation_years": 6,
+    "completed_pct": 61.1,
+    "still_enrolled_pct": 9.0,
+    "not_enrolled_pct": 29.8,
+    "rounded_100_dot_display": {
+      "completed": 61,
+      "still_enrolled": 9,
+      "not_enrolled": 30
+    }
+  },
+  "earnings": {
+    "source": "U.S. Bureau of Labor Statistics, Education Pays, 2025 earnings",
+    "scope": "Median usual weekly earnings of full-time wage and salary workers age 25+; annual 2025 estimate excludes October",
+    "year": 2025,
+    "bachelors_degree_median_weekly_usd": 1578,
+    "some_college_no_degree_median_weekly_usd": 1062,
+    "warning": "Descriptive unadjusted cross-sectional categories, not estimated causal returns to degree completion"
+  },
+  "sources": [
+    "https://nces.ed.gov/ipeds/use-the-data",
+    "https://nces.ed.gov/ipeds/cipcode/resources.aspx?y=56",
+    "https://www.wiche.edu/knocking/",
+    "https://www.studentclearinghouse.org/news/college-completion-rates-hold-steady-at-recent-highs/",
+    "https://collegescorecard.ed.gov/data/",
+    "https://www.bls.gov/emp/tables/unemployment-earnings-education.htm",
+    "https://oira.harvard.edu/factbook/fact-book-enrollment/",
+    "https://ir.charlotte.edu/wp-content/uploads/sites/871/2023/11/fb16012b.pdf",
+    "https://ucomm.charlotte.edu/2025/09/03/september-3-2025-unc-charlottes-enrollment-surge-sets-another-record/",
+    "https://www.salemstate.edu/sites/default/files/pdfs/CDS%20Enrollment%20and%20Persistence%202016-17.pdf",
+    "https://records.salemstate.edu/sites/default/files/reports/2025-12/FY21-25_Fact_Book_Enrollment_WEB.pdf",
+    "https://bpb-us-e1.wpmucdn.com/sites.harvard.edu/dist/6/210/files/2026/01/enrollment_historical_headcount_Fact-Book-2025-26.pdf",
+    "https://www.northcarolina.edu/apps/bog/doc.php?code=bog&id=68257",
+    "https://inside.charlotte.edu/2025/09/04/record-breaking-enrollment-football-and-a-concert-on-saturday-iron-phi-bikes-across-north-carolina-and-more/",
+    "https://www.salemstate.edu/sites/default/files/pdfs/FY16-20_Fact_Book_ENROLLMENT.pdf"
+  ],
+  "institutions": {
+    "scope": "Annual institution-reported fall enrollment, years 2016–2025, ten OBSERVED yearly headcounts per institution; case definitions differ and must be labeled.",
+    "base_year": 2016,
+    "end_year": 2025,
+    "formula": "index = 100*year_headcount/base_year_headcount; percent_change = (end/start-1)*100",
+    "cases": [
+      {
+        "id": "harvard",
+        "name": "Harvard University",
+        "profile": "highly selective private university",
+        "fall_2016": 22434,
+        "fall_2025": 24317,
+        "end_index": 108.39,
+        "institution_measure": "degree-student headcount; deduplicated across schools",
+        "sources": [
+          "https://oira.harvard.edu/factbook/fact-book-enrollment/",
+          "https://bpb-us-e1.wpmucdn.com/sites.harvard.edu/dist/6/210/files/2026/01/enrollment_historical_headcount_Fact-Book-2025-26.pdf"
+        ],
+        "annual_rows": [
+          {
+            "year": 2016,
+            "fall_headcount": 22434,
+            "index_2016_100": 100.0,
+            "yoy_pct": null
+          },
+          {
+            "year": 2017,
+            "fall_headcount": 22947,
+            "index_2016_100": 102.287,
+            "yoy_pct": 2.287
+          },
+          {
+            "year": 2018,
+            "fall_headcount": 23336,
+            "index_2016_100": 104.021,
+            "yoy_pct": 1.695
+          },
+          {
+            "year": 2019,
+            "fall_headcount": 23731,
+            "index_2016_100": 105.781,
+            "yoy_pct": 1.693
+          },
+          {
+            "year": 2020,
+            "fall_headcount": 22273,
+            "index_2016_100": 99.282,
+            "yoy_pct": -6.144
+          },
+          {
+            "year": 2021,
+            "fall_headcount": 25126,
+            "index_2016_100": 112.0,
+            "yoy_pct": 12.809
+          },
+          {
+            "year": 2022,
+            "fall_headcount": 25266,
+            "index_2016_100": 112.624,
+            "yoy_pct": 0.557
+          },
+          {
+            "year": 2023,
+            "fall_headcount": 24596,
+            "index_2016_100": 109.637,
+            "yoy_pct": -2.652
+          },
+          {
+            "year": 2024,
+            "fall_headcount": 24519,
+            "index_2016_100": 109.294,
+            "yoy_pct": -0.313
+          },
+          {
+            "year": 2025,
+            "fall_headcount": 24317,
+            "index_2016_100": 108.394,
+            "yoy_pct": -0.824
+          }
+        ],
+        "observations": 10
+      },
+      {
+        "id": "unc_charlotte",
+        "name": "University of North Carolina at Charlotte",
+        "profile": "growing urban public research university",
+        "fall_2016": 28721,
+        "fall_2025": 32207,
+        "end_index": 112.14,
+        "institution_measure": "institution-reported fall enrollment (confirm scope before IPEDS harmonization)",
+        "sources": [
+          "https://ir.charlotte.edu/wp-content/uploads/sites/871/2023/11/fb16012b.pdf",
+          "https://ucomm.charlotte.edu/2025/09/03/september-3-2025-unc-charlottes-enrollment-surge-sets-another-record/",
+          "https://www.northcarolina.edu/apps/bog/doc.php?code=bog&id=68257",
+          "https://inside.charlotte.edu/2025/09/04/record-breaking-enrollment-football-and-a-concert-on-saturday-iron-phi-bikes-across-north-carolina-and-more/"
+        ],
+        "annual_rows": [
+          {
+            "year": 2016,
+            "fall_headcount": 28721,
+            "index_2016_100": 100.0,
+            "yoy_pct": null
+          },
+          {
+            "year": 2017,
+            "fall_headcount": 29317,
+            "index_2016_100": 102.075,
+            "yoy_pct": 2.075
+          },
+          {
+            "year": 2018,
+            "fall_headcount": 29710,
+            "index_2016_100": 103.443,
+            "yoy_pct": 1.341
+          },
+          {
+            "year": 2019,
+            "fall_headcount": 30615,
+            "index_2016_100": 106.594,
+            "yoy_pct": 3.046
+          },
+          {
+            "year": 2020,
+            "fall_headcount": 30146,
+            "index_2016_100": 104.962,
+            "yoy_pct": -1.532
+          },
+          {
+            "year": 2021,
+            "fall_headcount": 30448,
+            "index_2016_100": 106.013,
+            "yoy_pct": 1.002
+          },
+          {
+            "year": 2022,
+            "fall_headcount": 29551,
+            "index_2016_100": 102.89,
+            "yoy_pct": -2.946
+          },
+          {
+            "year": 2023,
+            "fall_headcount": 30298,
+            "index_2016_100": 105.491,
+            "yoy_pct": 2.528
+          },
+          {
+            "year": 2024,
+            "fall_headcount": 31091,
+            "index_2016_100": 108.252,
+            "yoy_pct": 2.617
+          },
+          {
+            "year": 2025,
+            "fall_headcount": 32207,
+            "index_2016_100": 112.137,
+            "yoy_pct": 3.589
+          }
+        ],
+        "observations": 10
+      },
+      {
+        "id": "salem_state",
+        "name": "Salem State University",
+        "profile": "regional public university facing pronounced enrollment decline",
+        "fall_2016": 9001,
+        "fall_2025": 6009,
+        "end_index": 66.76,
+        "institution_measure": "All-university fall headcount, degree and nondegree; 2016–2025 annual series from Salem official Fact Books.",
+        "sources": [
+          "https://www.salemstate.edu/sites/default/files/pdfs/CDS%20Enrollment%20and%20Persistence%202016-17.pdf",
+          "https://records.salemstate.edu/sites/default/files/reports/2025-12/FY21-25_Fact_Book_Enrollment_WEB.pdf",
+          "https://www.salemstate.edu/pdf/neche-report-2026",
+          "https://www.salemstate.edu/sites/default/files/pdfs/FY16-20_Fact_Book_ENROLLMENT.pdf"
+        ],
+        "annual_rows": [
+          {
+            "year": 2016,
+            "fall_headcount": 9001,
+            "index_2016_100": 100.0,
+            "yoy_pct": null
+          },
+          {
+            "year": 2017,
+            "fall_headcount": 8702,
+            "index_2016_100": 96.678,
+            "yoy_pct": -3.322
+          },
+          {
+            "year": 2018,
+            "fall_headcount": 8338,
+            "index_2016_100": 92.634,
+            "yoy_pct": -4.183
+          },
+          {
+            "year": 2019,
+            "fall_headcount": 7706,
+            "index_2016_100": 85.613,
+            "yoy_pct": -7.58
+          },
+          {
+            "year": 2020,
+            "fall_headcount": 7242,
+            "index_2016_100": 80.458,
+            "yoy_pct": -6.021
+          },
+          {
+            "year": 2021,
+            "fall_headcount": 7131,
+            "index_2016_100": 79.225,
+            "yoy_pct": -1.533
+          },
+          {
+            "year": 2022,
+            "fall_headcount": 6539,
+            "index_2016_100": 72.647,
+            "yoy_pct": -8.302
+          },
+          {
+            "year": 2023,
+            "fall_headcount": 6239,
+            "index_2016_100": 69.315,
+            "yoy_pct": -4.588
+          },
+          {
+            "year": 2024,
+            "fall_headcount": 6230,
+            "index_2016_100": 69.215,
+            "yoy_pct": -0.144
+          },
+          {
+            "year": 2025,
+            "fall_headcount": 6009,
+            "index_2016_100": 66.759,
+            "yoy_pct": -3.547
+          }
+        ],
+        "observations": 10
+      }
+    ],
+    "status": "All 30 observed 2016–2025 institution-reported headcounts verified, with source URLs. A strictly harmonized IPEDS EF alternative remains a follow-on task.",
+    "requirements": [
+      "Animate ALL 10 actual years from 2016 through 2025, do not infer points from endpoints.",
+      "Reveal yearly headcount, same-year 2016-index, and year-over-year percent change.",
+      "Label source population difference: Harvard degree students, UNC Charlotte/Salem State broader fall headcounts.",
+      "Use a harmonized IPEDS EF alternative for strict cross-institution comparisons when available, not a condition on the official-source indexed motion.",
+      "Do not equate enrollment change with quality, retention, graduation, causal policy effects, or student experience.",
+      "Label Salem responses as documented actions and not established reversal of decline."
+    ],
+    "data_path": "data/institution_enrollment_2016_2025.json"
+  }
+}

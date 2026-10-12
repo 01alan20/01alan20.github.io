@@ -1,0 +1,6 @@
+assets/*.wav
+video/out/
+video/.hyperframes/
+video/.hyperframes-cache/
+video/node_modules/
+video/snapshots/

@@ -1,0 +1,11 @@
+{
+  "name": "video",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.146 preview",
+    "check": "npx --yes hyperframes@0.8.146 check",
+    "render": "powershell -NoProfile -File ../render.ps1",
+    "publish": "npx --yes hyperframes@0.8.146 publish"
+  }
+}

@@ -1,0 +1,31 @@
+﻿institution_id,institution,year,fall_headcount,index_2016_100,yoy_pct,definition
+harvard,Harvard University,2016,22434,100.0,,"Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total"
+unc_charlotte,University of North Carolina at Charlotte,2016,28721,100.0,,UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total
+salem_state,Salem State University,2016,9001,100.0,,"Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree"
+harvard,Harvard University,2017,22947,102.2867,2.2867,"Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total"
+unc_charlotte,University of North Carolina at Charlotte,2017,29317,102.0751,2.0751,UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total
+salem_state,Salem State University,2017,8702,96.6781,-3.3219,"Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree"
+harvard,Harvard University,2018,23336,104.0207,1.6952,"Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total"
+unc_charlotte,University of North Carolina at Charlotte,2018,29710,103.4435,1.3405,UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total
+salem_state,Salem State University,2018,8338,92.6342,-4.1829,"Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree"
+harvard,Harvard University,2019,23731,105.7814,1.6927,"Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total"
+unc_charlotte,University of North Carolina at Charlotte,2019,30615,106.5945,3.0461,UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total
+salem_state,Salem State University,2019,7706,85.6127,-7.5798,"Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree"
+harvard,Harvard University,2020,22273,99.2823,-6.1439,"Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total"
+unc_charlotte,University of North Carolina at Charlotte,2020,30146,104.9615,-1.5319,UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total
+salem_state,Salem State University,2020,7242,80.4577,-6.0213,"Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree"
+harvard,Harvard University,2021,25126,111.9996,12.8092,"Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total"
+unc_charlotte,University of North Carolina at Charlotte,2021,30448,106.013,1.0018,UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total
+salem_state,Salem State University,2021,7131,79.2245,-1.5327,"Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree"
+harvard,Harvard University,2022,25266,112.6237,0.5572,"Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total"
+unc_charlotte,University of North Carolina at Charlotte,2022,29551,102.8899,-2.946,UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total
+salem_state,Salem State University,2022,6539,72.6475,-8.3018,"Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree"
+harvard,Harvard University,2023,24596,109.6372,-2.6518,"Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total"
+unc_charlotte,University of North Carolina at Charlotte,2023,30298,105.4908,2.5278,UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total
+salem_state,Salem State University,2023,6239,69.3145,-4.5879,"Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree"
+harvard,Harvard University,2024,24519,109.2939,-0.3131,"Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total"
+unc_charlotte,University of North Carolina at Charlotte,2024,31091,108.2518,2.6173,UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total
+salem_state,Salem State University,2024,6230,69.2145,-0.1443,"Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree"
+harvard,Harvard University,2025,24317,108.3935,-0.8239,"Harvard Office of Institutional Research degree-student headcount, October 15 annual census, deduplicated university total"
+unc_charlotte,University of North Carolina at Charlotte,2025,32207,112.1375,3.5895,UNC System total fall headcount including undergraduate and graduate students (2016–2024); fall 2025 university-reported total
+salem_state,Salem State University,2025,6009,66.7592,-3.5474,"Institution-reported all-university fall headcount, undergraduate and graduate, degree and nondegree"
