@@ -1,0 +1,20 @@
+{
+  "Cnaes.zip": {
+    "archive": "Cnaes.zip",
+    "release": "2026-10",
+    "source_url": "https://arquivos.receitafederal.gov.br/public.php/webdav/2026-10/Cnaes.zip",
+    "source_bytes": 22078,
+    "sha256": "e3cee921b7055c2f77ecb92ab328603ac2adb099f883a94437382673133a36a9",
+    "verified_on": "2026-10-20",
+    "complete_archive_crc_checked": true
+  },
+  "Naturezas.zip": {
+    "archive": "Naturezas.zip",
+    "release": "2026-10",
+    "source_url": "https://arquivos.receitafederal.gov.br/public.php/webdav/2026-10/Naturezas.zip",
+    "source_bytes": 1585,
+    "sha256": "c92728a7d9acc9535baa752a8fce1ebe100155909209df650af3771368e01986",
+    "verified_on": "2026-10-20",
+    "complete_archive_crc_checked": true
+  }
+}

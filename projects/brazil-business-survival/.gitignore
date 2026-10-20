@@ -1,0 +1,7 @@
+data/raw/
+data/work/
+__pycache__/
+.ipynb_checkpoints/
+*.duckdb*
+!research/test_analysis.py
+!research/test_depth.py

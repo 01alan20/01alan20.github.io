@@ -1,0 +1,18 @@
+{
+  "url": "https://arquivos.receitafederal.gov.br/public.php/webdav/cnpj.tar.gz",
+  "bytes": 63954782749,
+  "last_modified": "Wed, 28 Jan 2026 15:22:29 GMT",
+  "inspection": "Bounded HTTP range bytes=0-65535; first two tar headers only",
+  "first_members": [
+    {
+      "name": "2025-05",
+      "type": "directory"
+    },
+    {
+      "name": "2025-05/Cnaes.zip",
+      "bytes": 22078
+    }
+  ],
+  "interpretation": "A separate large bundle begins with monthly-release archives inside the verified directory window. Its whole contents were not indexed. Five-year feasibility refers to the explicitly inventoried monthly releases, not a claim that older copies cannot exist elsewhere.",
+  "retrieved_on": "2026-10-20"
+}

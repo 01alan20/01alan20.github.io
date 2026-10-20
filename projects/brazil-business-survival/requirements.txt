@@ -1,0 +1,10 @@
+duckdb>=1.4,<2
+pyarrow>=18
+pandas>=2.2
+matplotlib>=3.9
+numpy>=2
+requests>=2.32
+nbformat>=5.10
+nbclient>=0.10
+ipykernel>=6
+openpyxl>=3.1

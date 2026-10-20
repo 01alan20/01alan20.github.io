@@ -1,0 +1,82 @@
+{
+  "raw_rows": 1067371,
+  "identical_lines_retained": 34335,
+  "cleaning": [
+    {
+      "Cleaning step": "Raw workbook: both annual sheets",
+      "Rows remaining": 1067371
+    },
+    {
+      "Cleaning step": "Identical lines noted and retained; no duplicate removal",
+      "Rows remaining": 1067371
+    },
+    {
+      "Cleaning step": "Keep valid dates, positive prices and nonzero quantities",
+      "Rows remaining": 1061164
+    },
+    {
+      "Cleaning step": "Customer analysis: require a customer identifier",
+      "Rows remaining": 824293
+    }
+  ],
+  "customers": 5878,
+  "minimum_country_customers": 50,
+  "country_sample_sizes": {
+    "Germany": 84,
+    "France": 66,
+    "United Kingdom": 4557
+  },
+  "top_country_180": "Germany",
+  "first_order_test": {
+    "winner": "Gradient boosting",
+    "brier": 0.24846949323261328,
+    "auc": 0.585278691896339,
+    "customers": 634
+  },
+  "shortest_positive_gap_minutes": 1.0,
+  "zero_time_gaps_excluded": 181,
+  "first_order_groups": [
+    {
+      "Amount spent on the first order": "Less than \u00a350",
+      "Customers in this group": 122,
+      "Bought again within 90 days": 39,
+      "Bought again (%)": 31.967213114754102,
+      "Average first-180-day revenue (\u00a3)": 289.16459016393446
+    },
+    {
+      "Amount spent on the first order": "\u00a350 to under \u00a3100",
+      "Customers in this group": 259,
+      "Bought again within 90 days": 96,
+      "Bought again (%)": 37.06563706563706,
+      "Average first-180-day revenue (\u00a3)": 349.13193050193047
+    },
+    {
+      "Amount spent on the first order": "\u00a3100 to under \u00a3250",
+      "Customers in this group": 1675,
+      "Bought again within 90 days": 661,
+      "Bought again (%)": 39.46268656716418,
+      "Average first-180-day revenue (\u00a3)": 514.7731164179104
+    },
+    {
+      "Amount spent on the first order": "\u00a3250 to under \u00a3500",
+      "Customers in this group": 1801,
+      "Bought again within 90 days": 884,
+      "Bought again (%)": 49.08384230982787,
+      "Average first-180-day revenue (\u00a3)": 987.2061926707386
+    },
+    {
+      "Amount spent on the first order": "\u00a3500 to under \u00a31,000",
+      "Customers in this group": 805,
+      "Bought again within 90 days": 464,
+      "Bought again (%)": 57.639751552795026,
+      "Average first-180-day revenue (\u00a3)": 2169.9220062111804
+    },
+    {
+      "Amount spent on the first order": "\u00a31,000 or more",
+      "Customers in this group": 272,
+      "Bought again within 90 days": 159,
+      "Bought again (%)": 58.45588235294118,
+      "Average first-180-day revenue (\u00a3)": 5763.974569852941
+    }
+  ]
+}

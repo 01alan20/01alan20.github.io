@@ -1,0 +1,19 @@
+{
+  "css_source": "https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400..700&family=Public+Sans:wght@400..700&display=swap",
+  "fonts": [
+    {
+      "family": "Archivo Narrow",
+      "url": "https://fonts.gstatic.com/s/archivonarrow/v35/tss0ApVBdCYD5Q7hcxTE1ArZ0bbwiXw.woff2",
+      "file": "archivo-narrow-latin.woff2",
+      "sha256": "e1097881272dd16039ffb9f8b5108332926750842d1fea1dd059d5396bb83ef2",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "family": "Public Sans",
+      "url": "https://fonts.gstatic.com/s/publicsans/v21/ijwRs572Xtc6ZYQws9YVwnNGfJ4.woff2",
+      "file": "public-sans-latin.woff2",
+      "sha256": "5ed4d31c988e73b258894244f209069ebe77dc7e564861954b21198b6de90d68",
+      "license": "SIL Open Font License 1.1"
+    }
+  ]
+}

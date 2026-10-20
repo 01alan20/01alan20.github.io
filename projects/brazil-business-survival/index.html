@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="An interactive look at business survival in Brazil: official employer survival statistics and the complete national CNPJ snapshot."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23233ee7%27/%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2718%27 fill=%27%23ffffff%27/%3E%3C/svg%3E"
+    />
+    <title>Business endurance | Brazil in time and place</title>
+    <link rel="stylesheet" href="story.css" />
+    <script src="data/story-data.js" defer></script>
+    <script src="assets/brazil-states.js" defer></script>
+    <script src="story.js" defer></script>
+    <script src="depth.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#story">Skip to story</a>
+    <header class="masthead">
+      <a href="../../" class="wordmark" aria-label="Alan data stories home"
+        >ALAN <span>×</span> BRASIL</a
+      >
+      <nav aria-label="Story navigation">
+        <a href="#five-years">Through time</a
+        ><a href="#geography">Across Brazil</a
+        ><a
+          href="https://github.com/caiopizzol/cnpj-data-pipeline"
+          target="_blank"
+          rel="noopener"
+          >Dataset GitHub ↗</a
+        >
+      </nav>
+    </header>
+    <main id="story">
+      <section class="atlas-cover" aria-labelledby="cover-title">
+        <div class="cover-title">
+          <h1 id="cover-title">
+            Business survival<br />
+            in Brazil
+          </h1>
+          <p class="cover-intro">
+            Explore how business survival varies over time, by industry and
+            across states.
+          </p>
+          <a class="cover-link" href="#five-years"
+            >Explore business survival <span aria-hidden="true">↓</span></a
+          >
+        </div>
+        <figure class="cover-cartography">
+          <svg
+            id="atlas-map"
+            viewBox="0 0 600 590"
+            role="group"
+            aria-label="Brazil: five-year survival of employer local units, 2017 to 2022. Select a state to explore."
+          ></svg>
+          <figcaption>
+            <span class="map-key" aria-hidden="true"></span> Five-year survival
+            · employer local units<br />
+            <span
+              >2017 entrants, observed in 2022. Lighter = higher survival.
+              Select a state to compare.</span
+            >
+          </figcaption>
+        </figure>
+        <aside class="cover-readout" aria-live="polite" aria-atomic="true">
+          <span id="atlas-place">Brazil</span><strong id="atlas-rate">—</strong>
+          <p id="atlas-support">Employer local-unit cohort</p>
+          <a href="#geography" id="atlas-explore">Compare this place ↗</a>
+        </aside>
+        <div class="cover-foot">
+          <span>Business / time / territory</span
+          ><span>26 states + the Federal District</span
+          ><span id="release">CNPJ snapshot · October 2026</span>
+        </div>
+      </section>
+      <nav class="story-route" aria-label="Explore the analysis">
+        <a href="#five-years"
+          ><span class="route-symbol" aria-hidden="true">↘</span> Follow a
+          cohort <small>2017 → 2022</small></a
+        ><a href="#geography"
+          ><span class="route-symbol" aria-hidden="true">⌖</span> Compare places
+          <small>27 jurisdictions</small></a
+        ><a href="#methods"
+          ><span class="route-symbol" aria-hidden="true">↗</span> Open the
+          notebook <small>Full analysis</small></a
+        >
+      </nav>
+      <section class="wrap question" id="five-years">
+        <h2>Five-year business survival</h2>
+        <div class="two-col">
+          <p class="lead">
+            The answer starts with a cohort: enterprises that entered the
+            employer population in the same year, followed across the same
+            stretch of time. Entry into this population can mean becoming or
+            returning as an employer, rather than first legal registration.
+          </p>
+          <p>
+            The five-year analysis covers enterprises with salaried employees.
+            Survival requires remaining an employer; leaving the cohort does not
+            necessarily mean closing the business. The 2017&ndash;2022 period
+            includes the pandemic and is not a forecast for new openings. The
+            full CNPJ register also includes entities without employees,
+            nonprofits, public bodies and registrations outside Brazil.
+          </p>
+        </div>
+      </section>
+      <section class="cohort-section" aria-labelledby="cohort-title">
+        <div class="wrap cohort-layout">
+          <div class="cohort-narrative">
+            <h2 id="cohort-title">Changes over five years</h2>
+            <p id="cohort-description">
+              Each mark represents one percentage point of the official
+              employer-enterprise cohort.
+            </p>
+            <div
+              id="year-stations"
+              class="year-stations"
+              role="group"
+              aria-label="Choose a cohort year"
+            ></div>
+            <label for="cohort-age"
+              >Years after entry <strong id="age-value">0</strong></label
+            ><input
+              id="cohort-age"
+              type="range"
+              min="0"
+              max="5"
+              value="0"
+              step="1"
+              aria-describedby="cohort-note"
+            /><button id="play-cohort" class="outline-button" type="button">
+              Play the years <span aria-hidden="true">→</span>
+            </button>
+            <p class="fine" id="cohort-note">
+              Drag the slider or use the arrow keys. Departures accumulate; each
+              year is measured against the original cohort.
+            </p>
+          </div>
+          <figure class="cohort-figure">
+            <div
+              class="cohort-year-stamp"
+              id="cohort-calendar"
+              aria-hidden="true"
+            >
+              2017
+            </div>
+            <div class="cohort-stat">
+              <strong id="cohort-percent">—</strong
+              ><span id="cohort-caption">Official cohort data loading</span>
+            </div>
+            <div class="dot-grid" id="cohort-dots" aria-hidden="true"></div>
+            <figcaption>
+              <span class="legend-dot"></span> Still in employer cohort
+              <span class="legend-dot departed"></span> No longer in the
+              surviving cohort
+            </figcaption>
+            <p id="cohort-live" class="sr-only" aria-live="polite"></p>
+          </figure>
+        </div>
+      </section>
+      <section class="wrap curve-section">
+        <div class="section-heading">
+          <div>
+            <h2>Survival by year</h2>
+          </div>
+          <p>
+            The curve follows the original group. It is not a comparison of
+            today’s young and old businesses.
+          </p>
+        </div>
+        <figure>
+          <div
+            id="survival-curve"
+            class="curve-chart"
+            role="img"
+            aria-label="Official employer enterprise survival by age"
+          ></div>
+          <figcaption id="curve-source">
+            Employer enterprises · same-cohort survival
+          </figcaption>
+        </figure>
+        <p class="takeaway" id="survival-takeaway">
+          A five-year survival rate needs five years of observations. A current
+          registry snapshot cannot supply that history by itself.
+        </p>
+      </section>
+      <section class="wrap factors">
+        <div class="section-heading">
+          <h2>Survival by business size and industry</h2>
+          <p>
+            Employer-enterprise cohorts reveal associations with survival. They
+            do not isolate the effect of hiring more people or entering a
+            different industry.
+          </p>
+        </div>
+        <div class="factor-grid">
+          <figure>
+            <h3>Different employment-size groups</h3>
+            <p class="fine">
+              Five-year employer-enterprise survival by employment size, 2017
+              cohort. These groups should not be treated as characteristics
+              measured at founding.
+            </p>
+            <div id="size-comparisons"></div>
+            <figcaption>
+              These are published cohort groups, not a causal estimate of the
+              return to hiring.
+            </figcaption>
+          </figure>
+          <figure>
+            <h3>Different industries</h3>
+            <p class="fine">
+              Five-year survival across CNAE sections. Same employer-enterprise
+              cohort and observation period.
+            </p>
+            <div id="sector-comparisons"></div>
+            <figcaption>
+              Explore all published sections. Small original cohorts can produce
+              unstable percentages; cohort counts are shown alongside rates.
+            </figcaption>
+          </figure>
+        </div>
+        <p class="takeaway" id="factor-takeaway">
+          A national average combines businesses with different characteristics.
+          Changing the mix can change the average.
+        </p>
+      </section>
+      <section class="snapshot-section">
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <h2>Business registrations</h2>
+            </div>
+            <p>
+              CNPJ describes the national stock of registered establishments. A
+              registration marked active is an administrative status, not proof
+              of revenue, employment, or continuous operation.
+            </p>
+          </div>
+          <div class="stats-strip">
+            <div>
+              <strong id="national-total">—</strong
+              ><span>registered establishments</span>
+            </div>
+            <div>
+              <strong id="national-active">—</strong
+              ><span>currently marked active</span>
+            </div>
+            <div>
+              <strong id="national-share">—</strong
+              ><span>current active share</span>
+            </div>
+          </div>
+          <div class="snapshot-bottom">
+            <p>
+              One company can have a headquarters and several branches. Here the
+              unit is the <strong>establishment</strong>; we do not silently
+              count every branch as an independent company.
+            </p>
+            <div
+              id="status-bars"
+              class="status-bars"
+              aria-label="Registration statuses"
+            ></div>
+          </div>
+        </div>
+      </section>
+      <section class="wrap geography" id="geography">
+        <div class="section-heading">
+          <div>
+            <h2>State comparisons</h2>
+          </div>
+          <p>
+            Change the measure. Compare a state with the national picture.
+            Differences are descriptive: industries, firm sizes and business
+            ages vary across places. &ldquo;Same industry mix&rdquo; applies
+            common sector weights to the 2017&ndash;2022 local-unit cohort.
+          </p>
+        </div>
+        <div class="metric-switch" role="group" aria-label="Map measure">
+          <button type="button" data-metric="active_share" aria-pressed="true">
+            Current active share</button
+          ><button
+            type="button"
+            data-metric="survival_pct"
+            aria-pressed="false"
+            id="survival-map-button"
+          >
+            Five-year survival</button
+          ><button
+            type="button"
+            data-metric="standardised"
+            aria-pressed="false"
+            id="standardised-map-button"
+          >
+            Same industry mix
+          </button>
+        </div>
+        <div class="map-layout">
+          <figure>
+            <svg
+              id="brazil-map"
+              viewBox="0 0 600 590"
+              role="img"
+              aria-label="Map of Brazil’s states; choose a state using the comparison control"
+            ></svg>
+            <figcaption id="map-legend">
+              Lighter → darker: lower → higher current active share
+            </figcaption>
+          </figure>
+          <aside class="state-detail">
+            <label for="state-select">COMPARE A STATE</label
+            ><select id="state-select">
+              <option value="">Select a state</option>
+            </select>
+            <h3 id="state-name">Brazil</h3>
+            <div class="state-value" id="state-value">—</div>
+            <p id="state-metric-label">
+              Current active share of establishments
+            </p>
+            <div class="comparison-line">
+              <span>National comparison</span
+              ><strong id="state-national">—</strong>
+            </div>
+            <p
+              class="sr-only"
+              id="map-live"
+              aria-live="polite"
+              aria-atomic="true"
+            ></p>
+            <p class="fine" id="state-support"></p>
+            <p class="fine" id="state-context">
+              Choose a state on the map or from the menu. The menu offers the
+              same comparison using a keyboard or screen reader.
+            </p>
+          </aside>
+        </div>
+        <p class="geography-summary" id="geography-summary"></p>
+
+        <div class="geography-note">
+          <span>READ THE MAP CAREFULLY</span>
+          <p>
+            A higher observed rate does not identify a “better place” to open a
+            business. A fair location comparison would need historical
+            conditions and comparable business mixes, including industry, size
+            and age.
+          </p>
+        </div>
+      </section>
+      <section class="wrap cohort-register">
+        <div class="section-heading">
+          <h2>Current status by registration year</h2>
+          <p>
+            These opening-year groups are observed in the current CNPJ snapshot.
+            Their active shares are <strong>not</strong> survival probabilities:
+            historical exits, registry coverage and changes in registration
+            rules affect what is visible.
+          </p>
+        </div>
+        <figure>
+          <div id="opening-cohorts" class="opening-cohorts"></div>
+          <figcaption>
+            Opening year · share currently marked active · establishments in the
+            current register
+          </figcaption>
+        </figure>
+      </section>
+      <section class="closing">
+        <div class="wrap">
+          <p>
+            Brazil’s register shows the scale and shape of its businesses. A
+            longitudinal cohort tells us about endurance. Keeping those lenses
+            separate makes both more useful.
+          </p>
+          <a href="#methods" class="text-link"
+            >See how this was built <span>↘</span></a
+          >
+        </div>
+      </section>
+      <section class="wrap methods" id="methods">
+        <h2>Explore the analysis</h2>
+        <p>The notebook contains the full analysis, definitions and methods.</p>
+        <a class="notebook-link" href="brazil-business-survival.ipynb" download
+          >Download the notebook <span>↗</span></a
+        >
+        <a class="notebook-link" href="data/story.json"
+          >View the analysis data <span>↗</span></a
+        >
+        <p id="data-message" class="data-message" role="status"></p>
+      </section>
+    </main>
+    <footer class="wrap">
+      <a href="../../">ALAN / DATA STORIES</a
+      ><span>Business survival in Brazil</span
+      ><a href="#story">Back to top ↑</a>
+    </footer>
+  </body>
+</html>

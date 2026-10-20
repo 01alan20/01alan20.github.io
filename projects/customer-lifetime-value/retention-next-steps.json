@@ -1,0 +1,5184 @@
+{
+  "eligible_first_order_customers": 4934,
+  "first_to_second": [
+    {
+      "Days after first order": 7,
+      "Customers with a later order": 463,
+      "All first-order customers": 4934,
+      "Returned by this point (%)": 9.38386704499392
+    },
+    {
+      "Days after first order": 14,
+      "Customers with a later order": 712,
+      "All first-order customers": 4934,
+      "Returned by this point (%)": 14.430482367247668
+    },
+    {
+      "Days after first order": 30,
+      "Customers with a later order": 1118,
+      "All first-order customers": 4934,
+      "Returned by this point (%)": 22.65910012160519
+    },
+    {
+      "Days after first order": 60,
+      "Customers with a later order": 1856,
+      "All first-order customers": 4934,
+      "Returned by this point (%)": 37.61653830563437
+    },
+    {
+      "Days after first order": 90,
+      "Customers with a later order": 2301,
+      "All first-order customers": 4934,
+      "Returned by this point (%)": 46.635589785164164
+    }
+  ],
+  "second_order_median_days_among_90d_returners": 31.08888888888889,
+  "later_revenue_mean": 816.4088475881637,
+  "later_revenue_median": 213.52500000000003,
+  "later_revenue_by_first_product": [
+    {
+      "Product code": "85123A",
+      "Product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "Customers": 836,
+      "Average later net revenue (\u00a3)": 1013.0280035885168,
+      "Median later net revenue (\u00a3)": 325.3
+    },
+    {
+      "Product code": "22138",
+      "Product": "BAKING SET 9 PIECE RETROSPOT ",
+      "Customers": 481,
+      "Average later net revenue (\u00a3)": 660.617733887734,
+      "Median later net revenue (\u00a3)": 299.6
+    },
+    {
+      "Product code": "21212",
+      "Product": "PACK OF 72 RETRO SPOT CAKE CASES",
+      "Customers": 477,
+      "Average later net revenue (\u00a3)": 1260.6973815513627,
+      "Median later net revenue (\u00a3)": 409.37
+    },
+    {
+      "Product code": "85099B",
+      "Product": "JUMBO BAG RED WHITE SPOTTY ",
+      "Customers": 401,
+      "Average later net revenue (\u00a3)": 1075.4266334164588,
+      "Median later net revenue (\u00a3)": 428.04999999999995
+    },
+    {
+      "Product code": "84879",
+      "Product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "Customers": 360,
+      "Average later net revenue (\u00a3)": 898.8228666666668,
+      "Median later net revenue (\u00a3)": 341.65999999999997
+    },
+    {
+      "Product code": "22139",
+      "Product": "RETRO SPOT TEA SET CERAMIC 11 PC ",
+      "Customers": 357,
+      "Average later net revenue (\u00a3)": 898.2012885154061,
+      "Median later net revenue (\u00a3)": 252.62
+    },
+    {
+      "Product code": "22423",
+      "Product": "REGENCY CAKESTAND 3 TIER",
+      "Customers": 353,
+      "Average later net revenue (\u00a3)": 603.0928611898017,
+      "Median later net revenue (\u00a3)": 265.78000000000003
+    },
+    {
+      "Product code": "21034",
+      "Product": "REX CASH+CARRY JUMBO SHOPPER",
+      "Customers": 333,
+      "Average later net revenue (\u00a3)": 515.2274474474474,
+      "Median later net revenue (\u00a3)": 172.24
+    },
+    {
+      "Product code": "21232",
+      "Product": "STRAWBERRY CERAMIC TRINKET BOX",
+      "Customers": 326,
+      "Average later net revenue (\u00a3)": 1304.7929754601228,
+      "Median later net revenue (\u00a3)": 429.96500000000003
+    },
+    {
+      "Product code": "84991",
+      "Product": "60 TEATIME FAIRY CAKE CASES",
+      "Customers": 319,
+      "Average later net revenue (\u00a3)": 910.4143260188088,
+      "Median later net revenue (\u00a3)": 409.37
+    },
+    {
+      "Product code": "21977",
+      "Product": "PACK OF 60 PINK PAISLEY CAKE CASES",
+      "Customers": 295,
+      "Average later net revenue (\u00a3)": 858.6255932203389,
+      "Median later net revenue (\u00a3)": 315.02
+    },
+    {
+      "Product code": "21754",
+      "Product": "HOME BUILDING BLOCK WORD",
+      "Customers": 288,
+      "Average later net revenue (\u00a3)": 927.4630555555555,
+      "Median later net revenue (\u00a3)": 318.4599999999999
+    },
+    {
+      "Product code": "21790",
+      "Product": "VINTAGE SNAP CARDS",
+      "Customers": 284,
+      "Average later net revenue (\u00a3)": 666.6506338028169,
+      "Median later net revenue (\u00a3)": 279.11
+    },
+    {
+      "Product code": "21733",
+      "Product": "RED HANGING HEART T-LIGHT HOLDER",
+      "Customers": 274,
+      "Average later net revenue (\u00a3)": 960.6982116788321,
+      "Median later net revenue (\u00a3)": 312.87499999999994
+    },
+    {
+      "Product code": "21755",
+      "Product": "LOVE BUILDING BLOCK WORD",
+      "Customers": 273,
+      "Average later net revenue (\u00a3)": 726.3293772893772,
+      "Median later net revenue (\u00a3)": 393.6500000000001
+    },
+    {
+      "Product code": "21080",
+      "Product": "SET/20 RED SPOTTY PAPER NAPKINS ",
+      "Customers": 273,
+      "Average later net revenue (\u00a3)": 820.2501098901099,
+      "Median later net revenue (\u00a3)": 315.02
+    },
+    {
+      "Product code": "20725",
+      "Product": "LUNCH BAG RED SPOTTY",
+      "Customers": 264,
+      "Average later net revenue (\u00a3)": 1236.7472386363636,
+      "Median later net revenue (\u00a3)": 516.0099999999995
+    },
+    {
+      "Product code": "22149",
+      "Product": "FELTCRAFT 6 FLOWER FRIENDS",
+      "Customers": 255,
+      "Average later net revenue (\u00a3)": 1200.7700039215686,
+      "Median later net revenue (\u00a3)": 308.20000000000005
+    },
+    {
+      "Product code": "84836",
+      "Product": "ZINC METAL HEART DECORATION",
+      "Customers": 250,
+      "Average later net revenue (\u00a3)": 1331.43812,
+      "Median later net revenue (\u00a3)": 381.42
+    },
+    {
+      "Product code": "20685",
+      "Product": "RED SPOTTY COIR DOORMAT",
+      "Customers": 249,
+      "Average later net revenue (\u00a3)": 1582.559076305221,
+      "Median later net revenue (\u00a3)": 607.6199999999999
+    },
+    {
+      "Product code": "21843",
+      "Product": "RETRO SPOT CAKE STAND",
+      "Customers": 243,
+      "Average later net revenue (\u00a3)": 1112.3935390946501,
+      "Median later net revenue (\u00a3)": 590.65
+    },
+    {
+      "Product code": "20914",
+      "Product": "SET/5 RED SPOTTY LID GLASS BOWLS",
+      "Customers": 242,
+      "Average later net revenue (\u00a3)": 1342.1002479338842,
+      "Median later net revenue (\u00a3)": 371.37000000000006
+    },
+    {
+      "Product code": "22111",
+      "Product": "SCOTTIE DOG HOT WATER BOTTLE",
+      "Customers": 242,
+      "Average later net revenue (\u00a3)": 1485.1319876033058,
+      "Median later net revenue (\u00a3)": 416.38
+    },
+    {
+      "Product code": "21791",
+      "Product": "VINTAGE HEADS AND TAILS CARD GAME ",
+      "Customers": 239,
+      "Average later net revenue (\u00a3)": 1035.2687866108786,
+      "Median later net revenue (\u00a3)": 313.19000000000005
+    },
+    {
+      "Product code": "48138",
+      "Product": "DOOR MAT UNION FLAG",
+      "Customers": 234,
+      "Average later net revenue (\u00a3)": 959.2659829059828,
+      "Median later net revenue (\u00a3)": 354.1
+    },
+    {
+      "Product code": "84970S",
+      "Product": "HANGING HEART ZINC T-LIGHT HOLDER",
+      "Customers": 234,
+      "Average later net revenue (\u00a3)": 682.1463290598291,
+      "Median later net revenue (\u00a3)": 303.79999999999995
+    },
+    {
+      "Product code": "22382",
+      "Product": "LUNCHBAG SPACEBOY DESIGN ",
+      "Customers": 234,
+      "Average later net revenue (\u00a3)": 786.4223504273504,
+      "Median later net revenue (\u00a3)": 341.45500000000004
+    },
+    {
+      "Product code": "22086",
+      "Product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "Customers": 232,
+      "Average later net revenue (\u00a3)": 1498.0799568965517,
+      "Median later net revenue (\u00a3)": 380.70000000000005
+    },
+    {
+      "Product code": "22090",
+      "Product": "PAPER BUNTING RETRO SPOTS",
+      "Customers": 231,
+      "Average later net revenue (\u00a3)": 959.8628181818182,
+      "Median later net revenue (\u00a3)": 430.91999999999985
+    },
+    {
+      "Product code": "21181",
+      "Product": "PLEASE ONE PERSON  METAL SIGN",
+      "Customers": 229,
+      "Average later net revenue (\u00a3)": 1224.3319650655023,
+      "Median later net revenue (\u00a3)": 451.97
+    },
+    {
+      "Product code": "22114",
+      "Product": "HOT WATER BOTTLE TEA AND SYMPATHY",
+      "Customers": 227,
+      "Average later net revenue (\u00a3)": 1367.259911894273,
+      "Median later net revenue (\u00a3)": 435.36
+    },
+    {
+      "Product code": "22083",
+      "Product": "PAPER CHAIN KIT RETRO SPOT",
+      "Customers": 225,
+      "Average later net revenue (\u00a3)": 1294.0692888888887,
+      "Median later net revenue (\u00a3)": 535.53
+    },
+    {
+      "Product code": "21621",
+      "Product": "VINTAGE UNION JACK BUNTING",
+      "Customers": 222,
+      "Average later net revenue (\u00a3)": 928.4432432432433,
+      "Median later net revenue (\u00a3)": 308.865
+    },
+    {
+      "Product code": "20972",
+      "Product": "PINK CREAM FELT CRAFT TRINKET BOX ",
+      "Customers": 220,
+      "Average later net revenue (\u00a3)": 772.5335454545454,
+      "Median later net revenue (\u00a3)": 351.26499999999993
+    },
+    {
+      "Product code": "47566",
+      "Product": "PARTY BUNTING",
+      "Customers": 219,
+      "Average later net revenue (\u00a3)": 935.1280365296805,
+      "Median later net revenue (\u00a3)": 306.87
+    },
+    {
+      "Product code": "82494L",
+      "Product": "WOODEN FRAME ANTIQUE WHITE ",
+      "Customers": 219,
+      "Average later net revenue (\u00a3)": 1495.3273561643834,
+      "Median later net revenue (\u00a3)": 472.69000000000005
+    },
+    {
+      "Product code": "22457",
+      "Product": "NATURAL SLATE HEART CHALKBOARD ",
+      "Customers": 218,
+      "Average later net revenue (\u00a3)": 637.6330275229358,
+      "Median later net revenue (\u00a3)": 274.46500000000003
+    },
+    {
+      "Product code": "72741",
+      "Product": "GRAND CHOCOLATECANDLE",
+      "Customers": 218,
+      "Average later net revenue (\u00a3)": 790.7582568807339,
+      "Median later net revenue (\u00a3)": 157.42999999999995
+    },
+    {
+      "Product code": "22189",
+      "Product": "CREAM HEART CARD HOLDER",
+      "Customers": 217,
+      "Average later net revenue (\u00a3)": 771.6597695852536,
+      "Median later net revenue (\u00a3)": 448.81
+    },
+    {
+      "Product code": "84992",
+      "Product": "72 SWEETHEART FAIRY CAKE CASES",
+      "Customers": 212,
+      "Average later net revenue (\u00a3)": 1092.6124528301887,
+      "Median later net revenue (\u00a3)": 558.0250000000001
+    },
+    {
+      "Product code": "22147",
+      "Product": "FELTCRAFT BUTTERFLY HEARTS",
+      "Customers": 211,
+      "Average later net revenue (\u00a3)": 867.5904739336493,
+      "Median later net revenue (\u00a3)": 317.93
+    },
+    {
+      "Product code": "20728",
+      "Product": "LUNCH BAG CARS BLUE",
+      "Customers": 208,
+      "Average later net revenue (\u00a3)": 890.7962980769231,
+      "Median later net revenue (\u00a3)": 492.8449999999999
+    },
+    {
+      "Product code": "22112",
+      "Product": "CHOCOLATE HOT WATER BOTTLE",
+      "Customers": 208,
+      "Average later net revenue (\u00a3)": 798.0709134615385,
+      "Median later net revenue (\u00a3)": 349.07499999999993
+    },
+    {
+      "Product code": "22470",
+      "Product": "HEART OF WICKER LARGE",
+      "Customers": 206,
+      "Average later net revenue (\u00a3)": 599.2691747572816,
+      "Median later net revenue (\u00a3)": 246.00000000000006
+    },
+    {
+      "Product code": "20727",
+      "Product": "LUNCH BAG  BLACK SKULL.",
+      "Customers": 205,
+      "Average later net revenue (\u00a3)": 990.8049317073171,
+      "Median later net revenue (\u00a3)": 384.93000000000006
+    },
+    {
+      "Product code": "47591D",
+      "Product": "PINK FAIRY CAKE CHILD'S APRON",
+      "Customers": 203,
+      "Average later net revenue (\u00a3)": 1448.181379310345,
+      "Median later net revenue (\u00a3)": 338.5
+    },
+    {
+      "Product code": "48187",
+      "Product": "DOOR MAT NEW ENGLAND",
+      "Customers": 200,
+      "Average later net revenue (\u00a3)": 1282.08526,
+      "Median later net revenue (\u00a3)": 621.585
+    },
+    {
+      "Product code": "21975",
+      "Product": "PACK OF 60 DINOSAUR CAKE CASES",
+      "Customers": 197,
+      "Average later net revenue (\u00a3)": 928.1461421319798,
+      "Median later net revenue (\u00a3)": 395.38999999999993
+    },
+    {
+      "Product code": "21931",
+      "Product": "JUMBO STORAGE BAG SUKI",
+      "Customers": 196,
+      "Average later net revenue (\u00a3)": 1139.7729081632654,
+      "Median later net revenue (\u00a3)": 404.445
+    },
+    {
+      "Product code": "21485",
+      "Product": "RED SPOT HEART HOT WATER BOTTLE",
+      "Customers": 195,
+      "Average later net revenue (\u00a3)": 1889.7191333333333,
+      "Median later net revenue (\u00a3)": 507.40000000000003
+    },
+    {
+      "Product code": "22197",
+      "Product": "POPCORN HOLDER , SMALL ",
+      "Customers": 193,
+      "Average later net revenue (\u00a3)": 948.5045595854923,
+      "Median later net revenue (\u00a3)": 247.67999999999998
+    },
+    {
+      "Product code": "84946",
+      "Product": "ANTIQUE SILVER TEA GLASS ETCHED",
+      "Customers": 193,
+      "Average later net revenue (\u00a3)": 580.9721761658031,
+      "Median later net revenue (\u00a3)": 180.51
+    },
+    {
+      "Product code": "85099F",
+      "Product": "JUMBO BAG STRAWBERRY",
+      "Customers": 193,
+      "Average later net revenue (\u00a3)": 1035.3052331606218,
+      "Median later net revenue (\u00a3)": 461.20000000000005
+    },
+    {
+      "Product code": "22617",
+      "Product": "BAKING SET SPACEBOY DESIGN",
+      "Customers": 193,
+      "Average later net revenue (\u00a3)": 568.172383419689,
+      "Median later net revenue (\u00a3)": 263.73
+    },
+    {
+      "Product code": "22469",
+      "Product": "HEART OF WICKER SMALL",
+      "Customers": 191,
+      "Average later net revenue (\u00a3)": 583.2048691099477,
+      "Median later net revenue (\u00a3)": 248.2800000000001
+    },
+    {
+      "Product code": "84970L",
+      "Product": "SINGLE HEART ZINC T-LIGHT HOLDER",
+      "Customers": 190,
+      "Average later net revenue (\u00a3)": 834.9064210526316,
+      "Median later net revenue (\u00a3)": 452.23499999999996
+    },
+    {
+      "Product code": "48194",
+      "Product": "DOORMAT HEARTS",
+      "Customers": 189,
+      "Average later net revenue (\u00a3)": 1346.3548148148147,
+      "Median later net revenue (\u00a3)": 461.20000000000005
+    },
+    {
+      "Product code": "20975",
+      "Product": "12 PENCILS SMALL TUBE RED SPOTTY",
+      "Customers": 187,
+      "Average later net revenue (\u00a3)": 822.1408021390375,
+      "Median later net revenue (\u00a3)": 311.85
+    },
+    {
+      "Product code": "22082",
+      "Product": "RIBBON REEL STRIPES DESIGN ",
+      "Customers": 187,
+      "Average later net revenue (\u00a3)": 1613.8917647058825,
+      "Median later net revenue (\u00a3)": 289.08000000000004
+    },
+    {
+      "Product code": "21217",
+      "Product": "RED SPOTTY ROUND CAKE TINS",
+      "Customers": 182,
+      "Average later net revenue (\u00a3)": 1075.1409945054945,
+      "Median later net revenue (\u00a3)": 312.775
+    },
+    {
+      "Product code": "21175",
+      "Product": "GIN + TONIC DIET METAL SIGN",
+      "Customers": 182,
+      "Average later net revenue (\u00a3)": 992.6512087912088,
+      "Median later net revenue (\u00a3)": 499.1700000000001
+    },
+    {
+      "Product code": "84997B",
+      "Product": "RED 3 PIECE MINI DOTS CUTLERY SET",
+      "Customers": 180,
+      "Average later net revenue (\u00a3)": 1135.2953388888889,
+      "Median later net revenue (\u00a3)": 371.74000000000007
+    },
+    {
+      "Product code": "20971",
+      "Product": "PINK BLUE FELT CRAFT TRINKET BOX",
+      "Customers": 180,
+      "Average later net revenue (\u00a3)": 983.1137777777778,
+      "Median later net revenue (\u00a3)": 386.4050000000001
+    },
+    {
+      "Product code": "22178",
+      "Product": "VICTORIAN GLASS HANGING T-LIGHT",
+      "Customers": 179,
+      "Average later net revenue (\u00a3)": 704.2577653631284,
+      "Median later net revenue (\u00a3)": 303.45000000000005
+    },
+    {
+      "Product code": "82482",
+      "Product": "WOODEN PICTURE FRAME WHITE FINISH",
+      "Customers": 179,
+      "Average later net revenue (\u00a3)": 1208.2421284916202,
+      "Median later net revenue (\u00a3)": 412.92999999999995
+    },
+    {
+      "Product code": "21213",
+      "Product": "PACK OF 72 SKULL CAKE CASES",
+      "Customers": 179,
+      "Average later net revenue (\u00a3)": 1058.2722905027933,
+      "Median later net revenue (\u00a3)": 430.91999999999985
+    },
+    {
+      "Product code": "21210",
+      "Product": "SET OF 72 RETRO SPOT PAPER  DOILIES",
+      "Customers": 178,
+      "Average later net revenue (\u00a3)": 1085.023820224719,
+      "Median later net revenue (\u00a3)": 407.8
+    },
+    {
+      "Product code": "84978",
+      "Product": "HANGING HEART JAR T-LIGHT HOLDER",
+      "Customers": 178,
+      "Average later net revenue (\u00a3)": 735.6714606741573,
+      "Median later net revenue (\u00a3)": 368.14
+    },
+    {
+      "Product code": "21535",
+      "Product": "RETRO SPOT SMALL MILK JUG",
+      "Customers": 177,
+      "Average later net revenue (\u00a3)": 1103.293451977401,
+      "Median later net revenue (\u00a3)": 493.45
+    },
+    {
+      "Product code": "85014B",
+      "Product": "RED/WHITE DOTS RUFFLED UMBRELLA",
+      "Customers": 177,
+      "Average later net revenue (\u00a3)": 1251.7984745762712,
+      "Median later net revenue (\u00a3)": 497.63999999999993
+    },
+    {
+      "Product code": "21524",
+      "Product": "SPOTTY  HOME SWEET HOME DOORMAT",
+      "Customers": 175,
+      "Average later net revenue (\u00a3)": 1193.0881142857143,
+      "Median later net revenue (\u00a3)": 553.02
+    },
+    {
+      "Product code": "84997C",
+      "Product": "BLUE 3 PIECE MINI DOTS CUTLERY SET",
+      "Customers": 174,
+      "Average later net revenue (\u00a3)": 1144.2149425287355,
+      "Median later net revenue (\u00a3)": 493.24999999999994
+    },
+    {
+      "Product code": "21156",
+      "Product": "RED SPOTTY CHILDS APRON",
+      "Customers": 174,
+      "Average later net revenue (\u00a3)": 971.7746551724139,
+      "Median later net revenue (\u00a3)": 443.64
+    },
+    {
+      "Product code": "22367",
+      "Product": "CHILDS APRON SPACEBOY DESIGN",
+      "Customers": 173,
+      "Average later net revenue (\u00a3)": 607.2823699421965,
+      "Median later net revenue (\u00a3)": 250.0
+    },
+    {
+      "Product code": "22383",
+      "Product": "LUNCHBAG SUKI  DESIGN ",
+      "Customers": 172,
+      "Average later net revenue (\u00a3)": 845.3368023255814,
+      "Median later net revenue (\u00a3)": 371.66499999999996
+    },
+    {
+      "Product code": "20750",
+      "Product": " RED/WHITE DOT MINI CASES",
+      "Customers": 171,
+      "Average later net revenue (\u00a3)": 989.9370175438597,
+      "Median later net revenue (\u00a3)": 369.71000000000004
+    },
+    {
+      "Product code": "22551",
+      "Product": "PLASTERS IN TIN SPACEBOY",
+      "Customers": 170,
+      "Average later net revenue (\u00a3)": 663.3809411764705,
+      "Median later net revenue (\u00a3)": 193.935
+    },
+    {
+      "Product code": "22487",
+      "Product": "WHITE WOOD GARDEN PLANT LADDER",
+      "Customers": 170,
+      "Average later net revenue (\u00a3)": 626.6708235294117,
+      "Median later net revenue (\u00a3)": 230.51000000000002
+    },
+    {
+      "Product code": "21122",
+      "Product": "SET/10 PINK SPOTTY PARTY CANDLES",
+      "Customers": 169,
+      "Average later net revenue (\u00a3)": 805.0073372781064,
+      "Median later net revenue (\u00a3)": 288.61
+    },
+    {
+      "Product code": "20724",
+      "Product": "RED SPOTTY CHARLOTTE BAG",
+      "Customers": 169,
+      "Average later net revenue (\u00a3)": 1080.992426035503,
+      "Median later net revenue (\u00a3)": 534.76
+    },
+    {
+      "Product code": "84755",
+      "Product": "COLOUR GLASS T-LIGHT HOLDER HANGING",
+      "Customers": 169,
+      "Average later net revenue (\u00a3)": 644.4047337278106,
+      "Median later net revenue (\u00a3)": 289.13
+    },
+    {
+      "Product code": "85152",
+      "Product": "HAND OVER THE CHOCOLATE   SIGN ",
+      "Customers": 168,
+      "Average later net revenue (\u00a3)": 990.5618452380952,
+      "Median later net revenue (\u00a3)": 481.08500000000004
+    },
+    {
+      "Product code": "22077",
+      "Product": "6 RIBBONS RUSTIC CHARM",
+      "Customers": 167,
+      "Average later net revenue (\u00a3)": 609.0067065868263,
+      "Median later net revenue (\u00a3)": 269.70000000000005
+    },
+    {
+      "Product code": "20726",
+      "Product": "LUNCH BAG WOODLAND",
+      "Customers": 167,
+      "Average later net revenue (\u00a3)": 1175.0394071856288,
+      "Median later net revenue (\u00a3)": 461.20000000000005
+    },
+    {
+      "Product code": "22557",
+      "Product": "PLASTERS IN TIN VINTAGE PAISLEY ",
+      "Customers": 166,
+      "Average later net revenue (\u00a3)": 614.9512048192771,
+      "Median later net revenue (\u00a3)": 177.215
+    },
+    {
+      "Product code": "85099C",
+      "Product": "JUMBO  BAG BAROQUE BLACK WHITE",
+      "Customers": 165,
+      "Average later net revenue (\u00a3)": 818.779096969697,
+      "Median later net revenue (\u00a3)": 283.0
+    },
+    {
+      "Product code": "22556",
+      "Product": "PLASTERS IN TIN CIRCUS PARADE ",
+      "Customers": 165,
+      "Average later net revenue (\u00a3)": 761.6254545454545,
+      "Median later net revenue (\u00a3)": 156.19
+    },
+    {
+      "Product code": "21889",
+      "Product": "WOODEN BOX OF DOMINOES",
+      "Customers": 164,
+      "Average later net revenue (\u00a3)": 822.757256097561,
+      "Median later net revenue (\u00a3)": 288.275
+    },
+    {
+      "Product code": "82580",
+      "Product": "BATHROOM METAL SIGN",
+      "Customers": 164,
+      "Average later net revenue (\u00a3)": 828.8059207317074,
+      "Median later net revenue (\u00a3)": 456.53499999999997
+    },
+    {
+      "Product code": "21429",
+      "Product": "RED GINGHAM ROSE JEWELLERY BOX",
+      "Customers": 163,
+      "Average later net revenue (\u00a3)": 957.9800613496933,
+      "Median later net revenue (\u00a3)": 366.65
+    },
+    {
+      "Product code": "21985",
+      "Product": "PACK OF 12 HEARTS DESIGN TISSUES ",
+      "Customers": 163,
+      "Average later net revenue (\u00a3)": 758.2151533742331,
+      "Median later net revenue (\u00a3)": 393.33000000000004
+    },
+    {
+      "Product code": "22084",
+      "Product": "PAPER CHAIN KIT EMPIRE",
+      "Customers": 163,
+      "Average later net revenue (\u00a3)": 891.5048527607362,
+      "Median later net revenue (\u00a3)": 426.9
+    },
+    {
+      "Product code": "22386",
+      "Product": "JUMBO BAG PINK WITH WHITE SPOTS",
+      "Customers": 162,
+      "Average later net revenue (\u00a3)": 698.5161728395061,
+      "Median later net revenue (\u00a3)": 306.44500000000005
+    },
+    {
+      "Product code": "21912",
+      "Product": "VINTAGE SNAKES & LADDERS",
+      "Customers": 161,
+      "Average later net revenue (\u00a3)": 711.4586956521739,
+      "Median later net revenue (\u00a3)": 186.10000000000002
+    },
+    {
+      "Product code": "22384",
+      "Product": "LUNCHBAG PINK RETROSPOT",
+      "Customers": 161,
+      "Average later net revenue (\u00a3)": 792.987453416149,
+      "Median later net revenue (\u00a3)": 399.85
+    },
+    {
+      "Product code": "84378",
+      "Product": "SET OF 3 HEART COOKIE CUTTERS",
+      "Customers": 160,
+      "Average later net revenue (\u00a3)": 591.3160624999999,
+      "Median later net revenue (\u00a3)": 303.82
+    },
+    {
+      "Product code": "21888",
+      "Product": "BINGO SET",
+      "Customers": 160,
+      "Average later net revenue (\u00a3)": 1086.37675,
+      "Median later net revenue (\u00a3)": 301.95000000000005
+    },
+    {
+      "Product code": "21121",
+      "Product": "SET/10 RED SPOTTY PARTY CANDLES",
+      "Customers": 158,
+      "Average later net revenue (\u00a3)": 968.4312658227847,
+      "Median later net revenue (\u00a3)": 413.03999999999996
+    },
+    {
+      "Product code": "21533",
+      "Product": "RETRO SPOT LARGE MILK JUG",
+      "Customers": 157,
+      "Average later net revenue (\u00a3)": 1009.6617898089173,
+      "Median later net revenue (\u00a3)": 442.53000000000003
+    },
+    {
+      "Product code": "21124",
+      "Product": "SET/10 BLUE SPOTTY PARTY CANDLES",
+      "Customers": 156,
+      "Average later net revenue (\u00a3)": 796.2461538461538,
+      "Median later net revenue (\u00a3)": 279.735
+    },
+    {
+      "Product code": "21231",
+      "Product": "SWEETHEART CERAMIC TRINKET BOX",
+      "Customers": 156,
+      "Average later net revenue (\u00a3)": 1562.6226282051282,
+      "Median later net revenue (\u00a3)": 402.30999999999995
+    },
+    {
+      "Product code": "22411",
+      "Product": "JUMBO SHOPPER VINTAGE RED PAISLEY",
+      "Customers": 156,
+      "Average later net revenue (\u00a3)": 694.7780128205128,
+      "Median later net revenue (\u00a3)": 309.59000000000003
+    },
+    {
+      "Product code": "22150",
+      "Product": " 3 STRIPEY MICE FELTCRAFT",
+      "Customers": 155,
+      "Average later net revenue (\u00a3)": 982.4102580645161,
+      "Median later net revenue (\u00a3)": 338.5
+    },
+    {
+      "Product code": "22029",
+      "Product": "SPACE BOY BIRTHDAY CARD",
+      "Customers": 154,
+      "Average later net revenue (\u00a3)": 1222.1107792207792,
+      "Median later net revenue (\u00a3)": 558.825
+    },
+    {
+      "Product code": "21527",
+      "Product": "RETRO SPOT TRADITIONAL TEAPOT ",
+      "Customers": 154,
+      "Average later net revenue (\u00a3)": 1373.3806558441559,
+      "Median later net revenue (\u00a3)": 545.04
+    },
+    {
+      "Product code": "22554",
+      "Product": "PLASTERS IN TIN WOODLAND ANIMALS",
+      "Customers": 154,
+      "Average later net revenue (\u00a3)": 677.8057792207792,
+      "Median later net revenue (\u00a3)": 180.02
+    },
+    {
+      "Product code": "22356",
+      "Product": "CHARLOTTE BAG , PINK/WHITE SPOTS",
+      "Customers": 154,
+      "Average later net revenue (\u00a3)": 921.5542857142856,
+      "Median later net revenue (\u00a3)": 435.115
+    },
+    {
+      "Product code": "21928",
+      "Product": "JUMBO BAG SCANDINAVIAN PAISLEY",
+      "Customers": 153,
+      "Average later net revenue (\u00a3)": 930.4056928104575,
+      "Median later net revenue (\u00a3)": 313.45000000000005
+    },
+    {
+      "Product code": "84029E",
+      "Product": "RED WOOLLY HOTTIE WHITE HEART.",
+      "Customers": 153,
+      "Average later net revenue (\u00a3)": 1321.3524183006537,
+      "Median later net revenue (\u00a3)": 475.5400000000001
+    },
+    {
+      "Product code": "21868",
+      "Product": "POTTING SHED TEA MUG",
+      "Customers": 152,
+      "Average later net revenue (\u00a3)": 1098.1684868421053,
+      "Median later net revenue (\u00a3)": 424.775
+    },
+    {
+      "Product code": "22585",
+      "Product": "PACK OF 6 BIRDY GIFT TAGS",
+      "Customers": 152,
+      "Average later net revenue (\u00a3)": 458.4584868421053,
+      "Median later net revenue (\u00a3)": 74.44999999999999
+    },
+    {
+      "Product code": "71459",
+      "Product": "HANGING JAM JAR T-LIGHT HOLDER",
+      "Customers": 151,
+      "Average later net revenue (\u00a3)": 711.6665562913906,
+      "Median later net revenue (\u00a3)": 318.81999999999994
+    },
+    {
+      "Product code": "21622",
+      "Product": "VINTAGE UNION JACK CUSHION COVER",
+      "Customers": 150,
+      "Average later net revenue (\u00a3)": 1237.2414666666666,
+      "Median later net revenue (\u00a3)": 382.63000000000005
+    },
+    {
+      "Product code": "20754",
+      "Product": "RETRO RED SPOTTY WASHING UP GLOVES",
+      "Customers": 149,
+      "Average later net revenue (\u00a3)": 1213.0759731543624,
+      "Median later net revenue (\u00a3)": 608.5999999999999
+    },
+    {
+      "Product code": "48185",
+      "Product": "DOOR MAT FAIRY CAKE",
+      "Customers": 149,
+      "Average later net revenue (\u00a3)": 1913.8812751677851,
+      "Median later net revenue (\u00a3)": 461.20000000000005
+    },
+    {
+      "Product code": "21980",
+      "Product": "PACK OF 12 RED SPOTTY TISSUES ",
+      "Customers": 148,
+      "Average later net revenue (\u00a3)": 1179.843783783784,
+      "Median later net revenue (\u00a3)": 508.74000000000007
+    },
+    {
+      "Product code": "21976",
+      "Product": "PACK OF 60 MUSHROOM CAKE CASES",
+      "Customers": 148,
+      "Average later net revenue (\u00a3)": 1079.5719594594593,
+      "Median later net revenue (\u00a3)": 436.7
+    },
+    {
+      "Product code": "20974",
+      "Product": "12 PENCILS SMALL TUBE SKULL",
+      "Customers": 148,
+      "Average later net revenue (\u00a3)": 744.7993918918919,
+      "Median later net revenue (\u00a3)": 351.18499999999995
+    },
+    {
+      "Product code": "84997D",
+      "Product": "PINK 3 PIECE MINI DOTS CUTLERY SET",
+      "Customers": 148,
+      "Average later net revenue (\u00a3)": 1743.055277027027,
+      "Median later net revenue (\u00a3)": 488.08500000000004
+    },
+    {
+      "Product code": "22294",
+      "Product": "HEART FILIGREE DOVE  SMALL",
+      "Customers": 147,
+      "Average later net revenue (\u00a3)": 1337.9462585034014,
+      "Median later net revenue (\u00a3)": 352.46999999999997
+    },
+    {
+      "Product code": "21114",
+      "Product": "LAVENDER SCENTED FABRIC HEART",
+      "Customers": 146,
+      "Average later net revenue (\u00a3)": 580.451301369863,
+      "Median later net revenue (\u00a3)": 283.09
+    },
+    {
+      "Product code": "22297",
+      "Product": "HEART IVORY TRELLIS SMALL",
+      "Customers": 145,
+      "Average later net revenue (\u00a3)": 852.0972413793104,
+      "Median later net revenue (\u00a3)": 445.67999999999995
+    },
+    {
+      "Product code": "22417",
+      "Product": "PACK OF 60 SPACEBOY CAKE CASES",
+      "Customers": 144,
+      "Average later net revenue (\u00a3)": 1147.8579861111111,
+      "Median later net revenue (\u00a3)": 477.5200000000001
+    },
+    {
+      "Product code": "22561",
+      "Product": "WOODEN SCHOOL COLOURING SET",
+      "Customers": 144,
+      "Average later net revenue (\u00a3)": 737.6070138888889,
+      "Median later net revenue (\u00a3)": 239.87
+    },
+    {
+      "Product code": "84987",
+      "Product": "SET OF 36 TEATIME PAPER DOILIES",
+      "Customers": 143,
+      "Average later net revenue (\u00a3)": 797.34993006993,
+      "Median later net revenue (\u00a3)": 265.02000000000004
+    },
+    {
+      "Product code": "22273",
+      "Product": "FELTCRAFT DOLL MOLLY",
+      "Customers": 142,
+      "Average later net revenue (\u00a3)": 1649.842542253521,
+      "Median later net revenue (\u00a3)": 258.135
+    },
+    {
+      "Product code": "21731",
+      "Product": "RED TOADSTOOL LED NIGHT LIGHT",
+      "Customers": 142,
+      "Average later net revenue (\u00a3)": 1050.3412676056337,
+      "Median later net revenue (\u00a3)": 415.34999999999997
+    },
+    {
+      "Product code": "21136",
+      "Product": "PAINTED METAL PEARS ASSORTED",
+      "Customers": 141,
+      "Average later net revenue (\u00a3)": 738.8519148936169,
+      "Median later net revenue (\u00a3)": 303.45000000000005
+    },
+    {
+      "Product code": "20718",
+      "Product": "RED SPOTTY SHOPPER BAG",
+      "Customers": 141,
+      "Average later net revenue (\u00a3)": 1057.9073120567375,
+      "Median later net revenue (\u00a3)": 418.39
+    },
+    {
+      "Product code": "20749",
+      "Product": "ASSORTED COLOUR MINI CASES",
+      "Customers": 141,
+      "Average later net revenue (\u00a3)": 904.7596453900709,
+      "Median later net revenue (\u00a3)": 368.99
+    },
+    {
+      "Product code": "85066",
+      "Product": "CREAM SWEETHEART MINI CHEST",
+      "Customers": 140,
+      "Average later net revenue (\u00a3)": 744.3407142857143,
+      "Median later net revenue (\u00a3)": 405.995
+    },
+    {
+      "Product code": "22296",
+      "Product": "HEART IVORY TRELLIS LARGE",
+      "Customers": 138,
+      "Average later net revenue (\u00a3)": 659.2163768115942,
+      "Median later net revenue (\u00a3)": 247.615
+    },
+    {
+      "Product code": "84077",
+      "Product": "WORLD WAR 2 GLIDERS ASSTD DESIGNS",
+      "Customers": 137,
+      "Average later net revenue (\u00a3)": 1191.4086861313867,
+      "Median later net revenue (\u00a3)": 530.31
+    },
+    {
+      "Product code": "21559",
+      "Product": "STRAWBERRY LUNCHBOX WITH CUTLERY",
+      "Customers": 137,
+      "Average later net revenue (\u00a3)": 1158.3055474452553,
+      "Median later net revenue (\u00a3)": 498.70000000000005
+    },
+    {
+      "Product code": "22195",
+      "Product": "HEART MEASURING SPOONS LARGE",
+      "Customers": 137,
+      "Average later net revenue (\u00a3)": 1574.240510948905,
+      "Median later net revenue (\u00a3)": 343.29
+    },
+    {
+      "Product code": "21498",
+      "Product": "RED SPOTS  WRAP ",
+      "Customers": 137,
+      "Average later net revenue (\u00a3)": 916.3359197080292,
+      "Median later net revenue (\u00a3)": 349.57000000000005
+    },
+    {
+      "Product code": "21929",
+      "Product": "JUMBO BAG PINK VINTAGE PAISLEY",
+      "Customers": 136,
+      "Average later net revenue (\u00a3)": 1266.926625,
+      "Median later net revenue (\u00a3)": 487.865
+    },
+    {
+      "Product code": "22379",
+      "Product": "RECYCLING BAG RETROSPOT ",
+      "Customers": 135,
+      "Average later net revenue (\u00a3)": 771.7634888888889,
+      "Median later net revenue (\u00a3)": 436.29999999999995
+    },
+    {
+      "Product code": "22295",
+      "Product": "HEART FILIGREE DOVE LARGE",
+      "Customers": 135,
+      "Average later net revenue (\u00a3)": 691.2588888888889,
+      "Median later net revenue (\u00a3)": 308.26
+    },
+    {
+      "Product code": "21380",
+      "Product": "WOODEN HAPPY BIRTHDAY GARLAND",
+      "Customers": 134,
+      "Average later net revenue (\u00a3)": 795.9695522388059,
+      "Median later net revenue (\u00a3)": 303.235
+    },
+    {
+      "Product code": "22271",
+      "Product": "FELTCRAFT DOLL ROSIE",
+      "Customers": 134,
+      "Average later net revenue (\u00a3)": 1561.0850746268657,
+      "Median later net revenue (\u00a3)": 329.89
+    },
+    {
+      "Product code": "37503",
+      "Product": "TEA TIME CAKE STAND IN GIFT BOX",
+      "Customers": 133,
+      "Average later net revenue (\u00a3)": 1854.207969924812,
+      "Median later net revenue (\u00a3)": 595.23
+    },
+    {
+      "Product code": "84988",
+      "Product": "SET OF 72 PINK HEART PAPER DOILIES",
+      "Customers": 131,
+      "Average later net revenue (\u00a3)": 894.742610687023,
+      "Median later net revenue (\u00a3)": 418.1600000000001
+    },
+    {
+      "Product code": "21523",
+      "Product": "FANCY FONT HOME SWEET HOME DOORMAT",
+      "Customers": 131,
+      "Average later net revenue (\u00a3)": 1384.0342748091603,
+      "Median later net revenue (\u00a3)": 479.87
+    },
+    {
+      "Product code": "22196",
+      "Product": "SMALL HEART MEASURING SPOONS",
+      "Customers": 130,
+      "Average later net revenue (\u00a3)": 1502.527769230769,
+      "Median later net revenue (\u00a3)": 362.945
+    },
+    {
+      "Product code": "20983",
+      "Product": "12 PENCILS TALL TUBE RED SPOTTY",
+      "Customers": 130,
+      "Average later net revenue (\u00a3)": 807.561476923077,
+      "Median later net revenue (\u00a3)": 346.98
+    },
+    {
+      "Product code": "21918",
+      "Product": "SET 12 KIDS COLOUR  CHALK STICKS",
+      "Customers": 129,
+      "Average later net revenue (\u00a3)": 983.8686046511629,
+      "Median later net revenue (\u00a3)": 476.70000000000005
+    },
+    {
+      "Product code": "85150",
+      "Product": "LADIES & GENTLEMEN METAL SIGN",
+      "Customers": 129,
+      "Average later net revenue (\u00a3)": 1084.3324031007753,
+      "Median later net revenue (\u00a3)": 395.48
+    },
+    {
+      "Product code": "21260",
+      "Product": "FIRST AID TIN",
+      "Customers": 129,
+      "Average later net revenue (\u00a3)": 910.5231782945735,
+      "Median later net revenue (\u00a3)": 221.73999999999995
+    },
+    {
+      "Product code": "82600",
+      "Product": "NO SINGING METAL SIGN",
+      "Customers": 127,
+      "Average later net revenue (\u00a3)": 1411.671102362205,
+      "Median later net revenue (\u00a3)": 384.93000000000006
+    },
+    {
+      "Product code": "82581",
+      "Product": "TOILET METAL SIGN",
+      "Customers": 127,
+      "Average later net revenue (\u00a3)": 850.116622047244,
+      "Median later net revenue (\u00a3)": 549.88
+    },
+    {
+      "Product code": "22553",
+      "Product": "PLASTERS IN TIN SKULLS",
+      "Customers": 127,
+      "Average later net revenue (\u00a3)": 475.19992125984254,
+      "Median later net revenue (\u00a3)": 155.92999999999995
+    },
+    {
+      "Product code": "22326",
+      "Product": "ROUND SNACK BOXES ,SET4, WOODLAND ",
+      "Customers": 127,
+      "Average later net revenue (\u00a3)": 945.2807874015748,
+      "Median later net revenue (\u00a3)": 459.1499999999999
+    },
+    {
+      "Product code": "21900",
+      "Product": "KEY FOB , SHED",
+      "Customers": 127,
+      "Average later net revenue (\u00a3)": 878.3203937007875,
+      "Median later net revenue (\u00a3)": 455.2099999999999
+    },
+    {
+      "Product code": "21770",
+      "Product": "OPEN CLOSED METAL SIGN",
+      "Customers": 127,
+      "Average later net revenue (\u00a3)": 1049.504409448819,
+      "Median later net revenue (\u00a3)": 314.5
+    },
+    {
+      "Product code": "21892",
+      "Product": "TRADITIONAL WOODEN CATCH CUP GAME ",
+      "Customers": 127,
+      "Average later net revenue (\u00a3)": 533.726062992126,
+      "Median later net revenue (\u00a3)": 270.46000000000004
+    },
+    {
+      "Product code": "20676",
+      "Product": "RED SPOTTY BOWL",
+      "Customers": 127,
+      "Average later net revenue (\u00a3)": 880.9707874015747,
+      "Median later net revenue (\u00a3)": 387.9
+    },
+    {
+      "Product code": "21974",
+      "Product": "SET OF 36 PAISLEY FLOWER DOILIES",
+      "Customers": 126,
+      "Average later net revenue (\u00a3)": 596.5600793650794,
+      "Median later net revenue (\u00a3)": 105.06500000000003
+    },
+    {
+      "Product code": "84270",
+      "Product": "ASSTD DESIGN BUBBLE GUM RING",
+      "Customers": 126,
+      "Average later net revenue (\u00a3)": 827.8984920634921,
+      "Median later net revenue (\u00a3)": 402.07499999999993
+    },
+    {
+      "Product code": "21481",
+      "Product": "FAWN BLUE HOT WATER BOTTLE",
+      "Customers": 126,
+      "Average later net revenue (\u00a3)": 1250.249126984127,
+      "Median later net revenue (\u00a3)": 526.5
+    },
+    {
+      "Product code": "22352",
+      "Product": "LUNCHBOX WITH CUTLERY RETROSPOT ",
+      "Customers": 125,
+      "Average later net revenue (\u00a3)": 1430.84384,
+      "Median later net revenue (\u00a3)": 675.63
+    },
+    {
+      "Product code": "22499",
+      "Product": "WOODEN UNION JACK BUNTING",
+      "Customers": 125,
+      "Average later net revenue (\u00a3)": 592.43296,
+      "Median later net revenue (\u00a3)": 232.56000000000006
+    },
+    {
+      "Product code": "22348",
+      "Product": "TEA BAG PLATE RED SPOTTY ",
+      "Customers": 124,
+      "Average later net revenue (\u00a3)": 933.4107258064516,
+      "Median later net revenue (\u00a3)": 607.3050000000001
+    },
+    {
+      "Product code": "22584",
+      "Product": "PACK OF 6 PANNETONE GIFT BOXES",
+      "Customers": 123,
+      "Average later net revenue (\u00a3)": 417.3984552845529,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "22027",
+      "Product": "TEA PARTY BIRTHDAY CARD",
+      "Customers": 123,
+      "Average later net revenue (\u00a3)": 1195.128617886179,
+      "Median later net revenue (\u00a3)": 565.03
+    },
+    {
+      "Product code": "22355",
+      "Product": "CHARLOTTE BAG , SUKI DESIGN",
+      "Customers": 123,
+      "Average later net revenue (\u00a3)": 1200.529837398374,
+      "Median later net revenue (\u00a3)": 533.7399999999999
+    },
+    {
+      "Product code": "20982",
+      "Product": "12 PENCILS TALL TUBE SKULLS",
+      "Customers": 122,
+      "Average later net revenue (\u00a3)": 778.2602704918032,
+      "Median later net revenue (\u00a3)": 324.15500000000003
+    },
+    {
+      "Product code": "21174",
+      "Product": "POTTERING IN THE SHED METAL SIGN",
+      "Customers": 122,
+      "Average later net revenue (\u00a3)": 1054.3571393442624,
+      "Median later net revenue (\u00a3)": 479.475
+    },
+    {
+      "Product code": "22666",
+      "Product": "RECIPE BOX PANTRY YELLOW DESIGN",
+      "Customers": 121,
+      "Average later net revenue (\u00a3)": 517.4952892561984,
+      "Median later net revenue (\u00a3)": 178.2
+    },
+    {
+      "Product code": "22219",
+      "Product": "LOVEBIRD HANGING DECORATION WHITE ",
+      "Customers": 121,
+      "Average later net revenue (\u00a3)": 655.2376859504132,
+      "Median later net revenue (\u00a3)": 259.3
+    },
+    {
+      "Product code": "21891",
+      "Product": "TRADITIONAL WOODEN SKIPPING ROPE",
+      "Customers": 121,
+      "Average later net revenue (\u00a3)": 658.2661157024793,
+      "Median later net revenue (\u00a3)": 303.45000000000005
+    },
+    {
+      "Product code": "21166",
+      "Product": "COOK WITH WINE METAL SIGN ",
+      "Customers": 120,
+      "Average later net revenue (\u00a3)": 977.6981666666667,
+      "Median later net revenue (\u00a3)": 342.70500000000004
+    },
+    {
+      "Product code": "20979",
+      "Product": "36 PENCILS TUBE RED SPOTTY",
+      "Customers": 120,
+      "Average later net revenue (\u00a3)": 1274.9349166666666,
+      "Median later net revenue (\u00a3)": 321.535
+    },
+    {
+      "Product code": "22087",
+      "Product": "PAPER BUNTING WHITE LACE",
+      "Customers": 120,
+      "Average later net revenue (\u00a3)": 706.6429166666666,
+      "Median later net revenue (\u00a3)": 281.145
+    },
+    {
+      "Product code": "15056N",
+      "Product": "EDWARDIAN PARASOL NATURAL",
+      "Customers": 119,
+      "Average later net revenue (\u00a3)": 917.9765546218488,
+      "Median later net revenue (\u00a3)": 89.55
+    },
+    {
+      "Product code": "21908",
+      "Product": "CHOCOLATE THIS WAY METAL SIGN",
+      "Customers": 119,
+      "Average later net revenue (\u00a3)": 831.3726050420167,
+      "Median later net revenue (\u00a3)": 516.98
+    },
+    {
+      "Product code": "84029G",
+      "Product": "KNITTED UNION FLAG HOT WATER BOTTLE",
+      "Customers": 118,
+      "Average later net revenue (\u00a3)": 1285.551779661017,
+      "Median later net revenue (\u00a3)": 439.61
+    },
+    {
+      "Product code": "21314",
+      "Product": "SMALL GLASS HEART TRINKET POT",
+      "Customers": 118,
+      "Average later net revenue (\u00a3)": 729.1392372881355,
+      "Median later net revenue (\u00a3)": 302.235
+    },
+    {
+      "Product code": "21238",
+      "Product": "RED SPOTTY CUP",
+      "Customers": 118,
+      "Average later net revenue (\u00a3)": 1431.1274576271187,
+      "Median later net revenue (\u00a3)": 564.885
+    },
+    {
+      "Product code": "22328",
+      "Product": "ROUND SNACK BOXES ,SET 4, FRUITS ",
+      "Customers": 118,
+      "Average later net revenue (\u00a3)": 934.2710169491525,
+      "Median later net revenue (\u00a3)": 489.0150000000001
+    },
+    {
+      "Product code": "21218",
+      "Product": "RED SPOTTY BISCUIT TIN",
+      "Customers": 117,
+      "Average later net revenue (\u00a3)": 1123.5189743589744,
+      "Median later net revenue (\u00a3)": 317.79
+    },
+    {
+      "Product code": "22079",
+      "Product": "RIBBON REEL HEARTS DESIGN ",
+      "Customers": 117,
+      "Average later net revenue (\u00a3)": 710.1552136752138,
+      "Median later net revenue (\u00a3)": 369.71000000000004
+    },
+    {
+      "Product code": "15056BL",
+      "Product": "EDWARDIAN PARASOL BLACK",
+      "Customers": 117,
+      "Average later net revenue (\u00a3)": 1171.2737606837607,
+      "Median later net revenue (\u00a3)": 448.1
+    },
+    {
+      "Product code": "22030",
+      "Product": "SWALLOWS GREETING CARD",
+      "Customers": 116,
+      "Average later net revenue (\u00a3)": 801.0051724137932,
+      "Median later net revenue (\u00a3)": 379.075
+    },
+    {
+      "Product code": "21955",
+      "Product": "UNION JACK GUNS & ROSES  DOORMAT",
+      "Customers": 116,
+      "Average later net revenue (\u00a3)": 1518.2048275862069,
+      "Median later net revenue (\u00a3)": 439.76
+    },
+    {
+      "Product code": "22488",
+      "Product": "NATURAL SLATE RECTANGLE CHALKBOARD",
+      "Customers": 116,
+      "Average later net revenue (\u00a3)": 767.3656034482759,
+      "Median later net revenue (\u00a3)": 191.33999999999997
+    },
+    {
+      "Product code": "21411",
+      "Product": "GINGHAM HEART  DOORSTOP RED",
+      "Customers": 116,
+      "Average later net revenue (\u00a3)": 2528.291896551724,
+      "Median later net revenue (\u00a3)": 432.80999999999995
+    },
+    {
+      "Product code": "85014A",
+      "Product": "BLACK/BLUE DOTS RUFFLED UMBRELLA",
+      "Customers": 115,
+      "Average later net revenue (\u00a3)": 1358.6919130434783,
+      "Median later net revenue (\u00a3)": 566.98
+    },
+    {
+      "Product code": "22624",
+      "Product": "IVORY KITCHEN SCALES",
+      "Customers": 115,
+      "Average later net revenue (\u00a3)": 710.5795652173913,
+      "Median later net revenue (\u00a3)": 111.11000000000001
+    },
+    {
+      "Product code": "21172",
+      "Product": "PARTY METAL SIGN ",
+      "Customers": 115,
+      "Average later net revenue (\u00a3)": 1145.6702608695653,
+      "Median later net revenue (\u00a3)": 380.26
+    },
+    {
+      "Product code": "22555",
+      "Product": "PLASTERS IN TIN STRONGMAN",
+      "Customers": 115,
+      "Average later net revenue (\u00a3)": 947.6835652173913,
+      "Median later net revenue (\u00a3)": 237.13000000000002
+    },
+    {
+      "Product code": "21756",
+      "Product": "BATH BUILDING BLOCK WORD",
+      "Customers": 113,
+      "Average later net revenue (\u00a3)": 768.6637168141593,
+      "Median later net revenue (\u00a3)": 419.83000000000004
+    },
+    {
+      "Product code": "21385",
+      "Product": "IVORY HANGING DECORATION  HEART",
+      "Customers": 113,
+      "Average later net revenue (\u00a3)": 668.5449557522124,
+      "Median later net revenue (\u00a3)": 279.62
+    },
+    {
+      "Product code": "22558",
+      "Product": "CLOTHES PEGS RETROSPOT PACK 24 ",
+      "Customers": 113,
+      "Average later net revenue (\u00a3)": 854.1482300884956,
+      "Median later net revenue (\u00a3)": 449.68
+    },
+    {
+      "Product code": "21479",
+      "Product": "WHITE SKULL HOT WATER BOTTLE ",
+      "Customers": 113,
+      "Average later net revenue (\u00a3)": 1476.9924778761062,
+      "Median later net revenue (\u00a3)": 496.17999999999995
+    },
+    {
+      "Product code": "21890",
+      "Product": "S/6 WOODEN SKITTLES IN COTTON BAG",
+      "Customers": 112,
+      "Average later net revenue (\u00a3)": 562.8544642857142,
+      "Median later net revenue (\u00a3)": 115.20500000000004
+    },
+    {
+      "Product code": "20712",
+      "Product": "JUMBO BAG WOODLAND ANIMALS",
+      "Customers": 112,
+      "Average later net revenue (\u00a3)": 841.8894642857142,
+      "Median later net revenue (\u00a3)": 375.37
+    },
+    {
+      "Product code": "21531",
+      "Product": "RETRO SPOT SUGAR JAM BOWL",
+      "Customers": 112,
+      "Average later net revenue (\u00a3)": 1841.3899999999999,
+      "Median later net revenue (\u00a3)": 451.67499999999995
+    },
+    {
+      "Product code": "21539",
+      "Product": "RETRO SPOTS BUTTER DISH",
+      "Customers": 112,
+      "Average later net revenue (\u00a3)": 1155.6025892857142,
+      "Median later net revenue (\u00a3)": 469.56499999999994
+    },
+    {
+      "Product code": "84050",
+      "Product": "PINK HEART SHAPE EGG FRYING PAN",
+      "Customers": 112,
+      "Average later net revenue (\u00a3)": 2289.5115178571427,
+      "Median later net revenue (\u00a3)": 352.81
+    },
+    {
+      "Product code": "82552",
+      "Product": "WASHROOM METAL SIGN",
+      "Customers": 112,
+      "Average later net revenue (\u00a3)": 800.6582142857143,
+      "Median later net revenue (\u00a3)": 355.22
+    },
+    {
+      "Product code": "22080",
+      "Product": "RIBBON REEL SPOTS DESIGN ",
+      "Customers": 111,
+      "Average later net revenue (\u00a3)": 1068.003063063063,
+      "Median later net revenue (\u00a3)": 329.59999999999997
+    },
+    {
+      "Product code": "84380",
+      "Product": "SET OF 3 BUTTERFLY COOKIE CUTTERS",
+      "Customers": 111,
+      "Average later net revenue (\u00a3)": 1083.1082882882883,
+      "Median later net revenue (\u00a3)": 390.9
+    },
+    {
+      "Product code": "21108",
+      "Product": "FAIRY CAKE FLANNEL ASSORTED COLOUR",
+      "Customers": 111,
+      "Average later net revenue (\u00a3)": 700.8351351351351,
+      "Median later net revenue (\u00a3)": 285.7700000000001
+    },
+    {
+      "Product code": "21901",
+      "Product": "KEY FOB , BACK DOOR ",
+      "Customers": 111,
+      "Average later net revenue (\u00a3)": 810.1756756756756,
+      "Median later net revenue (\u00a3)": 367.74
+    },
+    {
+      "Product code": "20719",
+      "Product": "WOODLAND CHARLOTTE BAG",
+      "Customers": 110,
+      "Average later net revenue (\u00a3)": 1423.331909090909,
+      "Median later net revenue (\u00a3)": 553.4399999999996
+    },
+    {
+      "Product code": "22212",
+      "Product": "FOUR HOOK  WHITE LOVEBIRDS",
+      "Customers": 110,
+      "Average later net revenue (\u00a3)": 1280.1422727272727,
+      "Median later net revenue (\u00a3)": 346.015
+    },
+    {
+      "Product code": "20723",
+      "Product": "STRAWBERRY CHARLOTTE BAG",
+      "Customers": 109,
+      "Average later net revenue (\u00a3)": 1376.7412844036696,
+      "Median later net revenue (\u00a3)": 697.72
+    },
+    {
+      "Product code": "21624",
+      "Product": "VINTAGE UNION JACK DOORSTOP",
+      "Customers": 109,
+      "Average later net revenue (\u00a3)": 1555.8239541284402,
+      "Median later net revenue (\u00a3)": 381.98
+    },
+    {
+      "Product code": "47590B",
+      "Product": "PINK HAPPY BIRTHDAY BUNTING",
+      "Customers": 109,
+      "Average later net revenue (\u00a3)": 949.9900917431193,
+      "Median later net revenue (\u00a3)": 331.35999999999996
+    },
+    {
+      "Product code": "22151",
+      "Product": "PLACE SETTING WHITE HEART",
+      "Customers": 109,
+      "Average later net revenue (\u00a3)": 702.2119266055047,
+      "Median later net revenue (\u00a3)": 384.85
+    },
+    {
+      "Product code": "21259",
+      "Product": "VICTORIAN SEWING BOX SMALL ",
+      "Customers": 109,
+      "Average later net revenue (\u00a3)": 782.5135779816513,
+      "Median later net revenue (\u00a3)": 209.95
+    },
+    {
+      "Product code": "22381",
+      "Product": "TOY TIDY PINK RETROSPOT  ",
+      "Customers": 109,
+      "Average later net revenue (\u00a3)": 817.2981651376147,
+      "Median later net revenue (\u00a3)": 445.67999999999995
+    },
+    {
+      "Product code": "82486",
+      "Product": "WOOD S/3 CABINET ANT WHITE FINISH",
+      "Customers": 108,
+      "Average later net revenue (\u00a3)": 1301.5800925925926,
+      "Median later net revenue (\u00a3)": 416.885
+    },
+    {
+      "Product code": "22413",
+      "Product": "METAL SIGN TAKE IT OR LEAVE IT ",
+      "Customers": 108,
+      "Average later net revenue (\u00a3)": 707.3794444444444,
+      "Median later net revenue (\u00a3)": 324.675
+    },
+    {
+      "Product code": "20981",
+      "Product": "12 PENCILS TALL TUBE WOODLAND",
+      "Customers": 108,
+      "Average later net revenue (\u00a3)": 690.8494537037036,
+      "Median later net revenue (\u00a3)": 313.175
+    },
+    {
+      "Product code": "21484",
+      "Product": "CHICK GREY HOT WATER BOTTLE",
+      "Customers": 108,
+      "Average later net revenue (\u00a3)": 2057.953425925926,
+      "Median later net revenue (\u00a3)": 445.835
+    },
+    {
+      "Product code": "22113",
+      "Product": "GREY HEART HOT WATER BOTTLE",
+      "Customers": 108,
+      "Average later net revenue (\u00a3)": 933.0662037037038,
+      "Median later net revenue (\u00a3)": 389.08
+    },
+    {
+      "Product code": "21590",
+      "Product": "KINGS CHOICE CIGAR BOX MATCHES ",
+      "Customers": 107,
+      "Average later net revenue (\u00a3)": 733.2223364485981,
+      "Median later net revenue (\u00a3)": 201.89999999999998
+    },
+    {
+      "Product code": "84839",
+      "Product": "SWEETHEART KEY CABINET",
+      "Customers": 107,
+      "Average later net revenue (\u00a3)": 809.7002803738317,
+      "Median later net revenue (\u00a3)": 561.8499999999999
+    },
+    {
+      "Product code": "21871",
+      "Product": "SAVE THE PLANET MUG",
+      "Customers": 107,
+      "Average later net revenue (\u00a3)": 976.9464579439253,
+      "Median later net revenue (\u00a3)": 436.29999999999995
+    },
+    {
+      "Product code": "82483",
+      "Product": "WOOD 2 DRAWER CABINET WHITE FINISH",
+      "Customers": 107,
+      "Average later net revenue (\u00a3)": 1174.8394392523364,
+      "Median later net revenue (\u00a3)": 329.45
+    },
+    {
+      "Product code": "22385",
+      "Product": "JUMBO BAG SPACEBOY DESIGN",
+      "Customers": 107,
+      "Average later net revenue (\u00a3)": 782.6343925233646,
+      "Median later net revenue (\u00a3)": 409.5
+    },
+    {
+      "Product code": "84949",
+      "Product": "SILVER HANGING T-LIGHT HOLDER",
+      "Customers": 107,
+      "Average later net revenue (\u00a3)": 838.5160747663551,
+      "Median later net revenue (\u00a3)": 202.52999999999997
+    },
+    {
+      "Product code": "22464",
+      "Product": "HANGING METAL HEART LANTERN",
+      "Customers": 106,
+      "Average later net revenue (\u00a3)": 717.7200943396226,
+      "Median later net revenue (\u00a3)": 320.27
+    },
+    {
+      "Product code": "22507",
+      "Product": "MEMO BOARD RETROSPOT  DESIGN",
+      "Customers": 106,
+      "Average later net revenue (\u00a3)": 608.8622641509434,
+      "Median later net revenue (\u00a3)": 199.22500000000002
+    },
+    {
+      "Product code": "84947",
+      "Product": "ANTIQUE SILVER TEA GLASS ENGRAVED",
+      "Customers": 106,
+      "Average later net revenue (\u00a3)": 456.5563301886792,
+      "Median later net revenue (\u00a3)": 108.61999999999999
+    },
+    {
+      "Product code": "22236",
+      "Product": "CAKE STAND 3 TIER MAGIC GARDEN",
+      "Customers": 106,
+      "Average later net revenue (\u00a3)": 638.9299056603772,
+      "Median later net revenue (\u00a3)": 289.105
+    },
+    {
+      "Product code": "21164",
+      "Product": "HOME SWEET HOME METAL SIGN ",
+      "Customers": 106,
+      "Average later net revenue (\u00a3)": 1268.7728396226416,
+      "Median later net revenue (\u00a3)": 544.3499999999999
+    },
+    {
+      "Product code": "22358",
+      "Product": "KINGS CHOICE TEA CADDY ",
+      "Customers": 105,
+      "Average later net revenue (\u00a3)": 676.0621904761905,
+      "Median later net revenue (\u00a3)": 305.08000000000004
+    },
+    {
+      "Product code": "82578",
+      "Product": "KITCHEN METAL SIGN",
+      "Customers": 105,
+      "Average later net revenue (\u00a3)": 750.637438095238,
+      "Median later net revenue (\u00a3)": 383.00000000000006
+    },
+    {
+      "Product code": "48184",
+      "Product": "DOOR MAT ENGLISH ROSE ",
+      "Customers": 105,
+      "Average later net revenue (\u00a3)": 1290.2840952380955,
+      "Median later net revenue (\u00a3)": 609.39
+    },
+    {
+      "Product code": "20828",
+      "Product": "GLITTER BUTTERFLY CLIPS",
+      "Customers": 104,
+      "Average later net revenue (\u00a3)": 925.42375,
+      "Median later net revenue (\u00a3)": 144.49999999999997
+    },
+    {
+      "Product code": "21899",
+      "Product": "KEY FOB , GARAGE DESIGN",
+      "Customers": 104,
+      "Average later net revenue (\u00a3)": 834.3914423076924,
+      "Median later net revenue (\u00a3)": 480.925
+    },
+    {
+      "Product code": "48188",
+      "Product": "DOOR MAT WELCOME PUPPIES",
+      "Customers": 104,
+      "Average later net revenue (\u00a3)": 2022.6652884615385,
+      "Median later net revenue (\u00a3)": 353.485
+    },
+    {
+      "Product code": "21930",
+      "Product": "JUMBO STORAGE BAG SKULLS",
+      "Customers": 104,
+      "Average later net revenue (\u00a3)": 1082.9211538461539,
+      "Median later net revenue (\u00a3)": 306.44500000000005
+    },
+    {
+      "Product code": "20682",
+      "Product": "RED SPOTTY CHILDS UMBRELLA",
+      "Customers": 104,
+      "Average later net revenue (\u00a3)": 1091.7536538461538,
+      "Median later net revenue (\u00a3)": 348.76500000000004
+    },
+    {
+      "Product code": "22301",
+      "Product": "COFFEE MUG CAT + BIRD DESIGN",
+      "Customers": 104,
+      "Average later net revenue (\u00a3)": 783.5461538461539,
+      "Median later net revenue (\u00a3)": 385.26
+    },
+    {
+      "Product code": "84520B",
+      "Product": "PACK 20 ENGLISH ROSE PAPER NAPKINS",
+      "Customers": 103,
+      "Average later net revenue (\u00a3)": 800.6166990291263,
+      "Median later net revenue (\u00a3)": 279.62
+    },
+    {
+      "Product code": "20713",
+      "Product": "JUMBO BAG OWLS",
+      "Customers": 103,
+      "Average later net revenue (\u00a3)": 805.3079611650486,
+      "Median later net revenue (\u00a3)": 266.85
+    },
+    {
+      "Product code": "22215",
+      "Product": "CAKE STAND WHITE TWO TIER LACE",
+      "Customers": 103,
+      "Average later net revenue (\u00a3)": 833.7621359223301,
+      "Median later net revenue (\u00a3)": 370.71999999999997
+    },
+    {
+      "Product code": "22300",
+      "Product": "COFFEE MUG DOG + BALL DESIGN",
+      "Customers": 103,
+      "Average later net revenue (\u00a3)": 713.5273786407768,
+      "Median later net revenue (\u00a3)": 370.71999999999997
+    },
+    {
+      "Product code": "21078",
+      "Product": "SET/20 STRAWBERRY PAPER NAPKINS ",
+      "Customers": 103,
+      "Average later net revenue (\u00a3)": 668.7950485436893,
+      "Median later net revenue (\u00a3)": 279.62
+    },
+    {
+      "Product code": "21407",
+      "Product": "BROWN CHECK CAT DOORSTOP ",
+      "Customers": 103,
+      "Average later net revenue (\u00a3)": 1208.27572815534,
+      "Median later net revenue (\u00a3)": 308.20000000000005
+    },
+    {
+      "Product code": "21035",
+      "Product": "SET/2 RED SPOTTY TEA TOWELS ",
+      "Customers": 103,
+      "Average later net revenue (\u00a3)": 1106.1900970873787,
+      "Median later net revenue (\u00a3)": 504.2800000000001
+    },
+    {
+      "Product code": "21165",
+      "Product": "BEWARE OF THE CAT METAL SIGN ",
+      "Customers": 102,
+      "Average later net revenue (\u00a3)": 952.2440196078431,
+      "Median later net revenue (\u00a3)": 513.69
+    },
+    {
+      "Product code": "22131",
+      "Product": "FOOD CONTAINER SET 3 LOVE HEART ",
+      "Customers": 102,
+      "Average later net revenue (\u00a3)": 1737.7012745098039,
+      "Median later net revenue (\u00a3)": 309.545
+    },
+    {
+      "Product code": "22607",
+      "Product": "WOODEN ROUNDERS GARDEN SET ",
+      "Customers": 102,
+      "Average later net revenue (\u00a3)": 451.19666666666666,
+      "Median later net revenue (\u00a3)": 235.66000000000003
+    },
+    {
+      "Product code": "47566B",
+      "Product": "TEA TIME PARTY BUNTING",
+      "Customers": 102,
+      "Average later net revenue (\u00a3)": 971.3678431372549,
+      "Median later net revenue (\u00a3)": 357.83000000000004
+    },
+    {
+      "Product code": "48111",
+      "Product": "DOOR MAT 3 SMILEY CATS",
+      "Customers": 102,
+      "Average later net revenue (\u00a3)": 1025.5849019607842,
+      "Median later net revenue (\u00a3)": 353.225
+    },
+    {
+      "Product code": "85049E",
+      "Product": "SCANDINAVIAN REDS RIBBONS",
+      "Customers": 101,
+      "Average later net revenue (\u00a3)": 1173.4040594059406,
+      "Median later net revenue (\u00a3)": 579.02
+    },
+    {
+      "Product code": "79323W",
+      "Product": " WHITE CHERRY LIGHTS",
+      "Customers": 100,
+      "Average later net revenue (\u00a3)": 2712.6917099999996,
+      "Median later net revenue (\u00a3)": 1000.86
+    },
+    {
+      "Product code": "22173",
+      "Product": "METAL 4 HOOK HANGER FRENCH CHATEAU",
+      "Customers": 99,
+      "Average later net revenue (\u00a3)": 777.4494949494949,
+      "Median later net revenue (\u00a3)": 486.63000000000005
+    },
+    {
+      "Product code": "22274",
+      "Product": "FELTCRAFT DOLL EMILY",
+      "Customers": 99,
+      "Average later net revenue (\u00a3)": 1556.4542525252525,
+      "Median later net revenue (\u00a3)": 399.85
+    },
+    {
+      "Product code": "22333",
+      "Product": "RETRO SPORT PARTY BAG + STICKER SET",
+      "Customers": 98,
+      "Average later net revenue (\u00a3)": 722.1727551020409,
+      "Median later net revenue (\u00a3)": 266.055
+    },
+    {
+      "Product code": "22508",
+      "Product": "DOORSTOP RETROSPOT HEART",
+      "Customers": 98,
+      "Average later net revenue (\u00a3)": 771.4592857142857,
+      "Median later net revenue (\u00a3)": 252.35000000000002
+    },
+    {
+      "Product code": "85175",
+      "Product": "CACTI T-LIGHT CANDLES",
+      "Customers": 98,
+      "Average later net revenue (\u00a3)": 791.6878571428572,
+      "Median later net revenue (\u00a3)": 430.6
+    },
+    {
+      "Product code": "20977",
+      "Product": "36 PENCILS TUBE WOODLAND",
+      "Customers": 98,
+      "Average later net revenue (\u00a3)": 875.8547959183674,
+      "Median later net revenue (\u00a3)": 402.91999999999996
+    },
+    {
+      "Product code": "21500",
+      "Product": "PINK SPOTS  WRAP ",
+      "Customers": 97,
+      "Average later net revenue (\u00a3)": 1142.9860824742268,
+      "Median later net revenue (\u00a3)": 381.98
+    },
+    {
+      "Product code": "22629",
+      "Product": "SPACEBOY LUNCH BOX ",
+      "Customers": 97,
+      "Average later net revenue (\u00a3)": 799.6223711340206,
+      "Median later net revenue (\u00a3)": 199.7
+    },
+    {
+      "Product code": "84406B",
+      "Product": "CREAM CUPID HEARTS COAT HANGER",
+      "Customers": 97,
+      "Average later net revenue (\u00a3)": 685.7712371134021,
+      "Median later net revenue (\u00a3)": 497.90000000000003
+    },
+    {
+      "Product code": "22055",
+      "Product": "MINI CAKE STAND  HANGING STRAWBERY",
+      "Customers": 97,
+      "Average later net revenue (\u00a3)": 1126.919175257732,
+      "Median later net revenue (\u00a3)": 366.65
+    },
+    {
+      "Product code": "15036",
+      "Product": "ASSORTED COLOURS SILK FAN",
+      "Customers": 97,
+      "Average later net revenue (\u00a3)": 670.3158762886598,
+      "Median later net revenue (\u00a3)": 314.95000000000005
+    },
+    {
+      "Product code": "82551",
+      "Product": "LAUNDRY 15C METAL SIGN",
+      "Customers": 96,
+      "Average later net revenue (\u00a3)": 1161.3495833333334,
+      "Median later net revenue (\u00a3)": 414.73
+    },
+    {
+      "Product code": "22380",
+      "Product": "TOY TIDY SPACEBOY  ",
+      "Customers": 96,
+      "Average later net revenue (\u00a3)": 815.1125000000001,
+      "Median later net revenue (\u00a3)": 333.26
+    },
+    {
+      "Product code": "21936",
+      "Product": "RED/WHITE SPOT PICNIC BAG",
+      "Customers": 96,
+      "Average later net revenue (\u00a3)": 879.7846979166667,
+      "Median later net revenue (\u00a3)": 403.0799999999999
+    },
+    {
+      "Product code": "85232B",
+      "Product": "SET/3 RUSSIAN DOLL STACKING TINS",
+      "Customers": 96,
+      "Average later net revenue (\u00a3)": 1473.20396875,
+      "Median later net revenue (\u00a3)": 694.5550000000001
+    },
+    {
+      "Product code": "21115",
+      "Product": "ROSE CARAVAN DOORSTOP",
+      "Customers": 96,
+      "Average later net revenue (\u00a3)": 944.9253125,
+      "Median later net revenue (\u00a3)": 309.55000000000007
+    },
+    {
+      "Product code": "21577",
+      "Product": "SAVE THE PLANET COTTON TOTE BAG",
+      "Customers": 95,
+      "Average later net revenue (\u00a3)": 1000.9324210526316,
+      "Median later net revenue (\u00a3)": 380.86
+    },
+    {
+      "Product code": "22276",
+      "Product": "WASH BAG VINTAGE ROSE PAISLEY",
+      "Customers": 94,
+      "Average later net revenue (\u00a3)": 676.1486170212767,
+      "Median later net revenue (\u00a3)": 273.16999999999996
+    },
+    {
+      "Product code": "21916",
+      "Product": "SET 12 RETRO WHITE CHALK STICKS",
+      "Customers": 93,
+      "Average later net revenue (\u00a3)": 990.7823655913978,
+      "Median later net revenue (\u00a3)": 435.36
+    },
+    {
+      "Product code": "72756",
+      "Product": "FAIRY CAKE CANDLES",
+      "Customers": 93,
+      "Average later net revenue (\u00a3)": 1277.8609677419354,
+      "Median later net revenue (\u00a3)": 609.4
+    },
+    {
+      "Product code": "22130",
+      "Product": "PARTY CONE CHRISTMAS DECORATION ",
+      "Customers": 93,
+      "Average later net revenue (\u00a3)": 639.8702150537634,
+      "Median later net revenue (\u00a3)": 167.39
+    },
+    {
+      "Product code": "20675",
+      "Product": "BLUE SPOTTY BOWL",
+      "Customers": 93,
+      "Average later net revenue (\u00a3)": 996.4115053763442,
+      "Median later net revenue (\u00a3)": 305.08
+    },
+    {
+      "Product code": "20677",
+      "Product": "PINK SPOTTY BOWL",
+      "Customers": 93,
+      "Average later net revenue (\u00a3)": 1061.2550537634409,
+      "Median later net revenue (\u00a3)": 358.65999999999997
+    },
+    {
+      "Product code": "22073",
+      "Product": "RETRO SPOT STORAGE JAR",
+      "Customers": 92,
+      "Average later net revenue (\u00a3)": 986.9716304347826,
+      "Median later net revenue (\u00a3)": 415.265
+    },
+    {
+      "Product code": "21592",
+      "Product": "RETRO SPOT  CIGAR BOX MATCHES ",
+      "Customers": 92,
+      "Average later net revenue (\u00a3)": 648.1957608695652,
+      "Median later net revenue (\u00a3)": 313.95
+    },
+    {
+      "Product code": "22910",
+      "Product": "PAPER CHAIN KIT VINTAGE CHRISTMAS",
+      "Customers": 92,
+      "Average later net revenue (\u00a3)": 518.8654347826088,
+      "Median later net revenue (\u00a3)": 69.45
+    },
+    {
+      "Product code": "21877",
+      "Product": "HOME SWEET HOME MUG",
+      "Customers": 92,
+      "Average later net revenue (\u00a3)": 955.7640217391305,
+      "Median later net revenue (\u00a3)": 511.985
+    },
+    {
+      "Product code": "20978",
+      "Product": "36 PENCILS TUBE SKULLS",
+      "Customers": 92,
+      "Average later net revenue (\u00a3)": 939.2434782608696,
+      "Median later net revenue (\u00a3)": 346.92500000000007
+    },
+    {
+      "Product code": "21907",
+      "Product": "I'M ON HOLIDAY METAL SIGN",
+      "Customers": 92,
+      "Average later net revenue (\u00a3)": 655.5082608695651,
+      "Median later net revenue (\u00a3)": 397.335
+    },
+    {
+      "Product code": "20717",
+      "Product": "STRAWBERRY SHOPPER BAG",
+      "Customers": 92,
+      "Average later net revenue (\u00a3)": 752.2271739130434,
+      "Median later net revenue (\u00a3)": 255.51500000000001
+    },
+    {
+      "Product code": "22560",
+      "Product": "TRADITIONAL MODELLING CLAY",
+      "Customers": 91,
+      "Average later net revenue (\u00a3)": 621.5664835164835,
+      "Median later net revenue (\u00a3)": 239.20000000000005
+    },
+    {
+      "Product code": "82484",
+      "Product": "WOOD BLACK BOARD ANT WHITE FINISH",
+      "Customers": 91,
+      "Average later net revenue (\u00a3)": 717.3689010989011,
+      "Median later net revenue (\u00a3)": 229.24
+    },
+    {
+      "Product code": "21390",
+      "Product": "FILIGRIS HEART WITH BUTTERFLY",
+      "Customers": 91,
+      "Average later net revenue (\u00a3)": 918.8253846153847,
+      "Median later net revenue (\u00a3)": 390.29999999999995
+    },
+    {
+      "Product code": "21242",
+      "Product": "RED SPOTTY PLATE ",
+      "Customers": 91,
+      "Average later net revenue (\u00a3)": 799.9591208791209,
+      "Median later net revenue (\u00a3)": 347.7
+    },
+    {
+      "Product code": "22088",
+      "Product": "PAPER BUNTING COLOURED LACE",
+      "Customers": 91,
+      "Average later net revenue (\u00a3)": 969.5024175824176,
+      "Median later net revenue (\u00a3)": 380.67999999999995
+    },
+    {
+      "Product code": "22357",
+      "Product": "KINGS CHOICE BISCUIT TIN",
+      "Customers": 91,
+      "Average later net revenue (\u00a3)": 1196.8217582417583,
+      "Median later net revenue (\u00a3)": 209.95
+    },
+    {
+      "Product code": "22191",
+      "Product": "EAU DE NIL DINER WALL CLOCK",
+      "Customers": 91,
+      "Average later net revenue (\u00a3)": 996.7725274725275,
+      "Median later net revenue (\u00a3)": 287.71999999999997
+    },
+    {
+      "Product code": "22534",
+      "Product": "MAGIC DRAWING SLATE SPACEBOY ",
+      "Customers": 90,
+      "Average later net revenue (\u00a3)": 785.1133333333333,
+      "Median later net revenue (\u00a3)": 345.9549999999999
+    },
+    {
+      "Product code": "21135",
+      "Product": "VICTORIAN  METAL POSTCARD SPRING",
+      "Customers": 90,
+      "Average later net revenue (\u00a3)": 664.7023333333333,
+      "Median later net revenue (\u00a3)": 227.485
+    },
+    {
+      "Product code": "21154",
+      "Product": "RED SPOTTY OVEN GLOVE ",
+      "Customers": 90,
+      "Average later net revenue (\u00a3)": 936.7392222222222,
+      "Median later net revenue (\u00a3)": 442.65999999999997
+    },
+    {
+      "Product code": "21986",
+      "Product": "PACK OF 12 PINK SPOT TISSUES ",
+      "Customers": 90,
+      "Average later net revenue (\u00a3)": 862.2326666666667,
+      "Median later net revenue (\u00a3)": 301.355
+    },
+    {
+      "Product code": "48129",
+      "Product": "DOOR MAT TOPIARY",
+      "Customers": 90,
+      "Average later net revenue (\u00a3)": 2160.439122222222,
+      "Median later net revenue (\u00a3)": 402.59999999999997
+    },
+    {
+      "Product code": "21715",
+      "Product": "GIRLS VINTAGE TIN SEASIDE BUCKET",
+      "Customers": 90,
+      "Average later net revenue (\u00a3)": 701.9467777777778,
+      "Median later net revenue (\u00a3)": 303.77500000000003
+    },
+    {
+      "Product code": "22489",
+      "Product": "PACK OF 12 TRADITIONAL CRAYONS",
+      "Customers": 90,
+      "Average later net revenue (\u00a3)": 989.0861111111111,
+      "Median later net revenue (\u00a3)": 222.74
+    },
+    {
+      "Product code": "84032B",
+      "Product": "CHARLIE + LOLA RED HOT WATER BOTTLE",
+      "Customers": 89,
+      "Average later net revenue (\u00a3)": 2803.6073033707867,
+      "Median later net revenue (\u00a3)": 344.95000000000005
+    },
+    {
+      "Product code": "82582",
+      "Product": "AREA PATROLLED METAL SIGN",
+      "Customers": 89,
+      "Average later net revenue (\u00a3)": 1248.397640449438,
+      "Median later net revenue (\u00a3)": 633.1500000000001
+    },
+    {
+      "Product code": "22185",
+      "Product": "SLATE TILE NATURAL HANGING",
+      "Customers": 89,
+      "Average later net revenue (\u00a3)": 769.7183146067416,
+      "Median later net revenue (\u00a3)": 291.43
+    },
+    {
+      "Product code": "22646",
+      "Product": "CERAMIC STRAWBERRY CAKE MONEY BANK",
+      "Customers": 89,
+      "Average later net revenue (\u00a3)": 502.5283146067416,
+      "Median later net revenue (\u00a3)": 108.20999999999998
+    },
+    {
+      "Product code": "22568",
+      "Product": "FELTCRAFT CUSHION OWL",
+      "Customers": 89,
+      "Average later net revenue (\u00a3)": 654.8977528089888,
+      "Median later net revenue (\u00a3)": 339.00000000000006
+    },
+    {
+      "Product code": "21155",
+      "Product": "RED SPOTTY PEG BAG",
+      "Customers": 89,
+      "Average later net revenue (\u00a3)": 995.0224719101124,
+      "Median later net revenue (\u00a3)": 463.61
+    },
+    {
+      "Product code": "21584",
+      "Product": "RETRO SPOT SMALL TUBE MATCHES",
+      "Customers": 89,
+      "Average later net revenue (\u00a3)": 587.9887640449438,
+      "Median later net revenue (\u00a3)": 221.73999999999995
+    },
+    {
+      "Product code": "20711",
+      "Product": "JUMBO BAG TOYS ",
+      "Customers": 89,
+      "Average later net revenue (\u00a3)": 2371.806966292135,
+      "Median later net revenue (\u00a3)": 302.0
+    },
+    {
+      "Product code": "21240",
+      "Product": "BLUE  SPOTTY CUP",
+      "Customers": 89,
+      "Average later net revenue (\u00a3)": 868.2044943820224,
+      "Median later net revenue (\u00a3)": 344.95000000000005
+    },
+    {
+      "Product code": "85049A",
+      "Product": "TRADITIONAL CHRISTMAS RIBBONS",
+      "Customers": 89,
+      "Average later net revenue (\u00a3)": 1187.656966292135,
+      "Median later net revenue (\u00a3)": 446.14999999999986
+    },
+    {
+      "Product code": "21381",
+      "Product": "MINI WOODEN HAPPY BIRTHDAY GARLAND",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 712.8167045454545,
+      "Median later net revenue (\u00a3)": 221.955
+    },
+    {
+      "Product code": "22198",
+      "Product": "POPCORN HOLDER , LARGE",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 900.2467045454546,
+      "Median later net revenue (\u00a3)": 284.23
+    },
+    {
+      "Product code": "85049D",
+      "Product": "BRIGHT BLUES RIBBONS ",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 780.4653409090909,
+      "Median later net revenue (\u00a3)": 407.405
+    },
+    {
+      "Product code": "21716",
+      "Product": "BOYS VINTAGE TIN SEASIDE BUCKET",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 742.4435227272727,
+      "Median later net revenue (\u00a3)": 332.155
+    },
+    {
+      "Product code": "22569",
+      "Product": "FELTCRAFT CUSHION BUTTERFLY",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 522.3202272727273,
+      "Median later net revenue (\u00a3)": 265.13
+    },
+    {
+      "Product code": "21239",
+      "Product": "PINK  SPOTTY CUP",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 890.8571590909091,
+      "Median later net revenue (\u00a3)": 363.58
+    },
+    {
+      "Product code": "79321",
+      "Product": "CHILLI LIGHTS",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 1020.2617045454546,
+      "Median later net revenue (\u00a3)": 324.03999999999996
+    },
+    {
+      "Product code": "82583",
+      "Product": "HOT BATHS METAL SIGN",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 1062.5404545454546,
+      "Median later net revenue (\u00a3)": 849.45
+    },
+    {
+      "Product code": "47556B",
+      "Product": "TEA TIME TEA TOWELS ",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 999.8507954545454,
+      "Median later net revenue (\u00a3)": 469.53
+    },
+    {
+      "Product code": "21870",
+      "Product": "I CAN ONLY PLEASE ONE PERSON MUG",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 917.4979545454545,
+      "Median later net revenue (\u00a3)": 381.31500000000005
+    },
+    {
+      "Product code": "21497",
+      "Product": "FANCY FONTS BIRTHDAY WRAP",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 1044.6022727272727,
+      "Median later net revenue (\u00a3)": 435.82
+    },
+    {
+      "Product code": "20751",
+      "Product": "FUNKY WASHING UP GLOVES ASSORTED",
+      "Customers": 88,
+      "Average later net revenue (\u00a3)": 1951.7286363636363,
+      "Median later net revenue (\u00a3)": 407.9599999999999
+    },
+    {
+      "Product code": "22045",
+      "Product": "SPACE BOY GIFT WRAP",
+      "Customers": 87,
+      "Average later net revenue (\u00a3)": 1574.8891954022986,
+      "Median later net revenue (\u00a3)": 727.8699999999999
+    },
+    {
+      "Product code": "21844",
+      "Product": "RETRO SPOT MUG",
+      "Customers": 87,
+      "Average later net revenue (\u00a3)": 1037.632643678161,
+      "Median later net revenue (\u00a3)": 314.5
+    },
+    {
+      "Product code": "22620",
+      "Product": "4 TRADITIONAL SPINNING TOPS",
+      "Customers": 87,
+      "Average later net revenue (\u00a3)": 853.086551724138,
+      "Median later net revenue (\u00a3)": 302.0
+    },
+    {
+      "Product code": "21561",
+      "Product": "DINOSAUR LUNCHBOX WITH CUTLERY",
+      "Customers": 87,
+      "Average later net revenue (\u00a3)": 1054.3741379310345,
+      "Median later net revenue (\u00a3)": 299.6
+    },
+    {
+      "Product code": "71053",
+      "Product": "WHITE METAL LANTERN",
+      "Customers": 87,
+      "Average later net revenue (\u00a3)": 767.9543678160919,
+      "Median later net revenue (\u00a3)": 180.48000000000002
+    },
+    {
+      "Product code": "22180",
+      "Product": "RETRO SPOT LAMP",
+      "Customers": 87,
+      "Average later net revenue (\u00a3)": 779.1739080459771,
+      "Median later net revenue (\u00a3)": 314.5
+    },
+    {
+      "Product code": "47590A",
+      "Product": "BLUE HAPPY BIRTHDAY BUNTING",
+      "Customers": 86,
+      "Average later net revenue (\u00a3)": 871.3415116279069,
+      "Median later net revenue (\u00a3)": 393.135
+    },
+    {
+      "Product code": "21499",
+      "Product": "BLUE SPOTS  WRAP",
+      "Customers": 86,
+      "Average later net revenue (\u00a3)": 856.5861627906977,
+      "Median later net revenue (\u00a3)": 376.70500000000004
+    },
+    {
+      "Product code": "22349",
+      "Product": "DOG BOWL , CHASING BALL DESIGN",
+      "Customers": 86,
+      "Average later net revenue (\u00a3)": 872.798488372093,
+      "Median later net revenue (\u00a3)": 500.63500000000005
+    },
+    {
+      "Product code": "20970",
+      "Product": "PINK FLORAL FELTCRAFT SHOULDER BAG",
+      "Customers": 86,
+      "Average later net revenue (\u00a3)": 856.133488372093,
+      "Median later net revenue (\u00a3)": 268.18999999999994
+    },
+    {
+      "Product code": "22630",
+      "Product": "DOLLY GIRL LUNCH BOX",
+      "Customers": 86,
+      "Average later net revenue (\u00a3)": 790.0212790697675,
+      "Median later net revenue (\u00a3)": 318.66
+    },
+    {
+      "Product code": "22089",
+      "Product": "PAPER BUNTING VINTAGE PAISLEY",
+      "Customers": 86,
+      "Average later net revenue (\u00a3)": 1295.6256976744187,
+      "Median later net revenue (\u00a3)": 387.78
+    },
+    {
+      "Product code": "21216",
+      "Product": "SET 3 RED SPOT TIN TEA,COFFEE,SUGAR",
+      "Customers": 86,
+      "Average later net revenue (\u00a3)": 1142.3297674418604,
+      "Median later net revenue (\u00a3)": 330.45000000000005
+    },
+    {
+      "Product code": "21544",
+      "Product": "SKULLS  WATER TRANSFER TATTOOS ",
+      "Customers": 85,
+      "Average later net revenue (\u00a3)": 937.6948235294118,
+      "Median later net revenue (\u00a3)": 340.32
+    },
+    {
+      "Product code": "85049B",
+      "Product": "LUSH GREENS RIBBONS",
+      "Customers": 85,
+      "Average later net revenue (\u00a3)": 948.5505882352942,
+      "Median later net revenue (\u00a3)": 449.48
+    },
+    {
+      "Product code": "21673",
+      "Product": "WHITE SPOT BLUE CERAMIC DRAWER KNOB",
+      "Customers": 85,
+      "Average later net revenue (\u00a3)": 1427.9617647058824,
+      "Median later net revenue (\u00a3)": 733.8800000000001
+    },
+    {
+      "Product code": "22318",
+      "Product": "FIVE HEART HANGING DECORATION",
+      "Customers": 85,
+      "Average later net revenue (\u00a3)": 814.8821176470587,
+      "Median later net revenue (\u00a3)": 392.27
+    },
+    {
+      "Product code": "22064",
+      "Product": "PINK DOUGHNUT TRINKET POT ",
+      "Customers": 85,
+      "Average later net revenue (\u00a3)": 954.6397647058824,
+      "Median later net revenue (\u00a3)": 516.7699999999999
+    },
+    {
+      "Product code": "84832",
+      "Product": "ZINC WILLIE WINKIE  CANDLE STICK",
+      "Customers": 84,
+      "Average later net revenue (\u00a3)": 856.1878571428572,
+      "Median later net revenue (\u00a3)": 287.84499999999997
+    },
+    {
+      "Product code": "21902",
+      "Product": "KEY FOB , FRONT  DOOR ",
+      "Customers": 84,
+      "Average later net revenue (\u00a3)": 806.5996428571428,
+      "Median later net revenue (\u00a3)": 509.27000000000004
+    },
+    {
+      "Product code": "22353",
+      "Product": "LUNCHBOX WITH CUTLERY FAIRY CAKES ",
+      "Customers": 84,
+      "Average later net revenue (\u00a3)": 1217.4344047619047,
+      "Median later net revenue (\u00a3)": 387.37000000000006
+    },
+    {
+      "Product code": "85038",
+      "Product": "6 CHOCOLATE LOVE HEART T-LIGHTS",
+      "Customers": 84,
+      "Average later net revenue (\u00a3)": 691.3057142857143,
+      "Median later net revenue (\u00a3)": 248.25500000000002
+    },
+    {
+      "Product code": "22444",
+      "Product": "GROW YOUR OWN PLANT IN A CAN ",
+      "Customers": 84,
+      "Average later net revenue (\u00a3)": 536.9713095238095,
+      "Median later net revenue (\u00a3)": 118.52000000000005
+    },
+    {
+      "Product code": "22427",
+      "Product": "ENAMEL FLOWER JUG CREAM",
+      "Customers": 84,
+      "Average later net revenue (\u00a3)": 628.4769047619047,
+      "Median later net revenue (\u00a3)": 209.53499999999997
+    },
+    {
+      "Product code": "20679",
+      "Product": "EDWARDIAN PARASOL RED",
+      "Customers": 84,
+      "Average later net revenue (\u00a3)": 1235.910119047619,
+      "Median later net revenue (\u00a3)": 282.625
+    },
+    {
+      "Product code": "22156",
+      "Product": "HEART DECORATION WITH PEARLS ",
+      "Customers": 84,
+      "Average later net revenue (\u00a3)": 515.4966666666667,
+      "Median later net revenue (\u00a3)": 129.14999999999998
+    },
+    {
+      "Product code": "21094",
+      "Product": "SET/6 RED SPOTTY PAPER PLATES",
+      "Customers": 84,
+      "Average later net revenue (\u00a3)": 1226.8290476190475,
+      "Median later net revenue (\u00a3)": 395.7
+    },
+    {
+      "Product code": "21506",
+      "Product": "FANCY FONT BIRTHDAY CARD, ",
+      "Customers": 83,
+      "Average later net revenue (\u00a3)": 797.8318072289156,
+      "Median later net revenue (\u00a3)": 396.9
+    },
+    {
+      "Product code": "22061",
+      "Product": "LARGE CAKE STAND  HANGING STRAWBERY",
+      "Customers": 83,
+      "Average later net revenue (\u00a3)": 889.6550602409638,
+      "Median later net revenue (\u00a3)": 239.68
+    },
+    {
+      "Product code": "22645",
+      "Product": "CERAMIC HEART FAIRY CAKE MONEY BANK",
+      "Customers": 83,
+      "Average later net revenue (\u00a3)": 684.4978313253011,
+      "Median later net revenue (\u00a3)": 155.92999999999995
+    },
+    {
+      "Product code": "79323P",
+      "Product": "PINK CHERRY LIGHTS",
+      "Customers": 83,
+      "Average later net revenue (\u00a3)": 2491.7180722891567,
+      "Median later net revenue (\u00a3)": 1055.43
+    },
+    {
+      "Product code": "21981",
+      "Product": "PACK OF 12 WOODLAND TISSUES ",
+      "Customers": 83,
+      "Average later net revenue (\u00a3)": 1385.7318072289156,
+      "Median later net revenue (\u00a3)": 631.3700000000001
+    },
+    {
+      "Product code": "71477",
+      "Product": "COLOUR GLASS. STAR T-LIGHT HOLDER",
+      "Customers": 83,
+      "Average later net revenue (\u00a3)": 1365.3406024096387,
+      "Median later net revenue (\u00a3)": 379.11000000000007
+    },
+    {
+      "Product code": "21110",
+      "Product": "LARGE CAKE TOWEL PINK SPOTS",
+      "Customers": 83,
+      "Average later net revenue (\u00a3)": 676.1860240963856,
+      "Median later net revenue (\u00a3)": 285.7700000000001
+    },
+    {
+      "Product code": "22078",
+      "Product": "RIBBON REEL LACE DESIGN ",
+      "Customers": 82,
+      "Average later net revenue (\u00a3)": 2060.8534146341462,
+      "Median later net revenue (\u00a3)": 343.93499999999995
+    },
+    {
+      "Product code": "47559B",
+      "Product": "TEA TIME OVEN GLOVE",
+      "Customers": 82,
+      "Average later net revenue (\u00a3)": 791.6959756097561,
+      "Median later net revenue (\u00a3)": 491.975
+    },
+    {
+      "Product code": "21982",
+      "Product": "PACK OF 12 SUKI TISSUES ",
+      "Customers": 82,
+      "Average later net revenue (\u00a3)": 603.9374390243903,
+      "Median later net revenue (\u00a3)": 232.35
+    },
+    {
+      "Product code": "22109",
+      "Product": "FULL ENGLISH BREAKFAST PLATE",
+      "Customers": 82,
+      "Average later net revenue (\u00a3)": 1292.9003658536585,
+      "Median later net revenue (\u00a3)": 480.52
+    },
+    {
+      "Product code": "22595",
+      "Product": "CHRISTMAS GINGHAM HEART",
+      "Customers": 82,
+      "Average later net revenue (\u00a3)": 533.8813414634146,
+      "Median later net revenue (\u00a3)": 104.44999999999999
+    },
+    {
+      "Product code": "22605",
+      "Product": "WOODEN CROQUET GARDEN SET",
+      "Customers": 82,
+      "Average later net revenue (\u00a3)": 453.0465853658537,
+      "Median later net revenue (\u00a3)": 174.30499999999998
+    },
+    {
+      "Product code": "21668",
+      "Product": "RED STRIPE CERAMIC DRAWER KNOB",
+      "Customers": 81,
+      "Average later net revenue (\u00a3)": 1054.7825925925927,
+      "Median later net revenue (\u00a3)": 607.6199999999999
+    },
+    {
+      "Product code": "84692",
+      "Product": "BOX OF 24 COCKTAIL PARASOLS",
+      "Customers": 81,
+      "Average later net revenue (\u00a3)": 1597.989135802469,
+      "Median later net revenue (\u00a3)": 287.16
+    },
+    {
+      "Product code": "84032A",
+      "Product": "CHARLIE+LOLA PINK HOT WATER BOTTLE",
+      "Customers": 81,
+      "Average later net revenue (\u00a3)": 3230.7685185185187,
+      "Median later net revenue (\u00a3)": 364.84
+    },
+    {
+      "Product code": "37449",
+      "Product": "CERAMIC CAKE STAND + HANGING CAKES",
+      "Customers": 81,
+      "Average later net revenue (\u00a3)": 1421.7995061728395,
+      "Median later net revenue (\u00a3)": 434.09
+    },
+    {
+      "Product code": "21917",
+      "Product": "SET 12 KIDS  WHITE CHALK STICKS",
+      "Customers": 81,
+      "Average later net revenue (\u00a3)": 1103.3372839506171,
+      "Median later net revenue (\u00a3)": 628.7399999999999
+    },
+    {
+      "Product code": "21777",
+      "Product": "RECIPE BOX WITH METAL HEART",
+      "Customers": 81,
+      "Average later net revenue (\u00a3)": 952.763950617284,
+      "Median later net revenue (\u00a3)": 193.81000000000003
+    },
+    {
+      "Product code": "72760B",
+      "Product": "VINTAGE CREAM 3 BASKET CAKE STAND",
+      "Customers": 81,
+      "Average later net revenue (\u00a3)": 788.325925925926,
+      "Median later net revenue (\u00a3)": 296.4
+    },
+    {
+      "Product code": "21911",
+      "Product": "GARDEN METAL SIGN ",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 940.5800125,
+      "Median later net revenue (\u00a3)": 579.7
+    },
+    {
+      "Product code": "21906",
+      "Product": "PHARMACIE FIRST AID TIN",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 1157.87275,
+      "Median later net revenue (\u00a3)": 288.025
+    },
+    {
+      "Product code": "21915",
+      "Product": "RED  HARMONICA IN BOX ",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 1177.659875,
+      "Median later net revenue (\u00a3)": 323.375
+    },
+    {
+      "Product code": "16156S",
+      "Product": "WRAP PINK FAIRY CAKES ",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 927.8412624999999,
+      "Median later net revenue (\u00a3)": 351.28499999999997
+    },
+    {
+      "Product code": "22275",
+      "Product": "WEEKEND BAG VINTAGE ROSE PAISLEY",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 895.825375,
+      "Median later net revenue (\u00a3)": 355.77
+    },
+    {
+      "Product code": "21430",
+      "Product": "SET/3 RED GINGHAM ROSE STORAGE BOX",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 1790.4515,
+      "Median later net revenue (\u00a3)": 354.445
+    },
+    {
+      "Product code": "22505",
+      "Product": "MEMO BOARD COTTAGE DESIGN",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 639.23825,
+      "Median later net revenue (\u00a3)": 263.28
+    },
+    {
+      "Product code": "22467",
+      "Product": "GUMBALL COAT RACK",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 811.3075,
+      "Median later net revenue (\u00a3)": 298.73
+    },
+    {
+      "Product code": "22119",
+      "Product": " PEACE WOODEN BLOCK LETTERS",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 795.11925,
+      "Median later net revenue (\u00a3)": 349.18499999999995
+    },
+    {
+      "Product code": "21432",
+      "Product": "SET OF 3 CASES WOODLAND DESIGN",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 2386.4090125,
+      "Median later net revenue (\u00a3)": 602.415
+    },
+    {
+      "Product code": "21042",
+      "Product": "RED SPOTTY APRON ",
+      "Customers": 80,
+      "Average later net revenue (\u00a3)": 1037.187125,
+      "Median later net revenue (\u00a3)": 335.595
+    },
+    {
+      "Product code": "22635",
+      "Product": "CHILDS BREAKFAST SET DOLLY GIRL ",
+      "Customers": 79,
+      "Average later net revenue (\u00a3)": 877.7443037974684,
+      "Median later net revenue (\u00a3)": 147.08999999999997
+    },
+    {
+      "Product code": "21326",
+      "Product": "AGED GLASS SILVER T-LIGHT HOLDER",
+      "Customers": 79,
+      "Average later net revenue (\u00a3)": 460.71164556962026,
+      "Median later net revenue (\u00a3)": 160.4
+    },
+    {
+      "Product code": "22699",
+      "Product": "ROSES REGENCY TEACUP AND SAUCER ",
+      "Customers": 79,
+      "Average later net revenue (\u00a3)": 759.1739240506329,
+      "Median later net revenue (\u00a3)": 274.44
+    },
+    {
+      "Product code": "21507",
+      "Product": "ELEPHANT, BIRTHDAY CARD, ",
+      "Customers": 79,
+      "Average later net revenue (\u00a3)": 1244.5267088607595,
+      "Median later net revenue (\u00a3)": 590.58
+    },
+    {
+      "Product code": "37495",
+      "Product": "FAIRY CAKE BIRTHDAY CANDLE SET",
+      "Customers": 79,
+      "Average later net revenue (\u00a3)": 716.799746835443,
+      "Median later net revenue (\u00a3)": 265.78000000000003
+    },
+    {
+      "Product code": "79029",
+      "Product": "GLASS HONEYPOT WASP CATCHER",
+      "Customers": 79,
+      "Average later net revenue (\u00a3)": 512.3816455696202,
+      "Median later net revenue (\u00a3)": 220.05
+    },
+    {
+      "Product code": "21509",
+      "Product": "COWBOYS AND INDIANS BIRTHDAY CARD ",
+      "Customers": 79,
+      "Average later net revenue (\u00a3)": 1002.7448101265823,
+      "Median later net revenue (\u00a3)": 565.03
+    },
+    {
+      "Product code": "85065",
+      "Product": "CREAM SWEETHEART TRAYS",
+      "Customers": 78,
+      "Average later net revenue (\u00a3)": 1132.566282051282,
+      "Median later net revenue (\u00a3)": 470.345
+    },
+    {
+      "Product code": "22441",
+      "Product": "GROW YOUR OWN BASIL IN ENAMEL MUG",
+      "Customers": 78,
+      "Average later net revenue (\u00a3)": 616.8434615384615,
+      "Median later net revenue (\u00a3)": 252.805
+    },
+    {
+      "Product code": "21704",
+      "Product": "BAG 250g SWIRLY MARBLES",
+      "Customers": 78,
+      "Average later net revenue (\u00a3)": 848.2997564102564,
+      "Median later net revenue (\u00a3)": 268.58000000000004
+    },
+    {
+      "Product code": "85206A",
+      "Product": "CREAM FELT EASTER EGG BASKET",
+      "Customers": 78,
+      "Average later net revenue (\u00a3)": 517.3153846153846,
+      "Median later net revenue (\u00a3)": 162.39000000000001
+    },
+    {
+      "Product code": "22168",
+      "Product": "ORGANISER WOOD, ANTIQUE WHITE ",
+      "Customers": 78,
+      "Average later net revenue (\u00a3)": 902.635,
+      "Median later net revenue (\u00a3)": 417.77
+    },
+    {
+      "Product code": "22522",
+      "Product": "CHILDS GARDEN FORK BLUE ",
+      "Customers": 78,
+      "Average later net revenue (\u00a3)": 510.4785897435898,
+      "Median later net revenue (\u00a3)": 198.79999999999995
+    },
+    {
+      "Product code": "22125",
+      "Product": "UNION JACK HOT WATER BOTTLE ",
+      "Customers": 78,
+      "Average later net revenue (\u00a3)": 1430.151794871795,
+      "Median later net revenue (\u00a3)": 645.75
+    },
+    {
+      "Product code": "22570",
+      "Product": "FELTCRAFT CUSHION RABBIT",
+      "Customers": 78,
+      "Average later net revenue (\u00a3)": 493.0623076923077,
+      "Median later net revenue (\u00a3)": 265.13
+    },
+    {
+      "Product code": "22583",
+      "Product": "PACK OF 6 HANDBAG GIFT BOXES",
+      "Customers": 78,
+      "Average later net revenue (\u00a3)": 334.86910256410255,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "20969",
+      "Product": "RED FLORAL FELTCRAFT SHOULDER BAG",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 834.6179220779221,
+      "Median later net revenue (\u00a3)": 392.27
+    },
+    {
+      "Product code": "21875",
+      "Product": "KINGS CHOICE MUG",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 1560.1493636363634,
+      "Median later net revenue (\u00a3)": 360.88
+    },
+    {
+      "Product code": "21718",
+      "Product": "RED METAL BEACH SPADE ",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 671.4174025974025,
+      "Median later net revenue (\u00a3)": 301.38
+    },
+    {
+      "Product code": "21745",
+      "Product": "GAOLERS KEYS DECORATIVE GARDEN ",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 684.647012987013,
+      "Median later net revenue (\u00a3)": 299.55
+    },
+    {
+      "Product code": "22456",
+      "Product": "NATURAL SLATE CHALKBOARD LARGE ",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 534.824025974026,
+      "Median later net revenue (\u00a3)": 154.12
+    },
+    {
+      "Product code": "22303",
+      "Product": "COFFEE MUG APPLES DESIGN",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 1015.8261038961039,
+      "Median later net revenue (\u00a3)": 533.7399999999999
+    },
+    {
+      "Product code": "22329",
+      "Product": "ROUND CONTAINER SET OF 5 RETROSPOT",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 1008.9919480519482,
+      "Median later net revenue (\u00a3)": 587.4200000000001
+    },
+    {
+      "Product code": "22242",
+      "Product": "HOOK, 5 HANGER , MAGIC TOADSTOOL",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 1291.097922077922,
+      "Median later net revenue (\u00a3)": 685.52
+    },
+    {
+      "Product code": "21488",
+      "Product": "RED WHITE SCARF  HOT WATER BOTTLE",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 1139.5703896103896,
+      "Median later net revenue (\u00a3)": 464.59000000000003
+    },
+    {
+      "Product code": "22549",
+      "Product": "PICTURE DOMINOES",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 956.2933766233766,
+      "Median later net revenue (\u00a3)": 388.2900000000001
+    },
+    {
+      "Product code": "22418",
+      "Product": "10 COLOUR SPACEBOY PEN",
+      "Customers": 77,
+      "Average later net revenue (\u00a3)": 709.7920779220779,
+      "Median later net revenue (\u00a3)": 223.96000000000004
+    },
+    {
+      "Product code": "21244",
+      "Product": "BLUE  SPOTTY PLATE ",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 685.3534210526316,
+      "Median later net revenue (\u00a3)": 178.865
+    },
+    {
+      "Product code": "21578",
+      "Product": "WOODLAND DESIGN  COTTON TOTE BAG",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 1042.9780263157895,
+      "Median later net revenue (\u00a3)": 380.33000000000004
+    },
+    {
+      "Product code": "21591",
+      "Product": "COSY HOUR CIGAR BOX MATCHES ",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 690.6164473684212,
+      "Median later net revenue (\u00a3)": 131.86499999999998
+    },
+    {
+      "Product code": "21896",
+      "Product": "POTTING SHED TWINE",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 566.0511842105263,
+      "Median later net revenue (\u00a3)": 165.225
+    },
+    {
+      "Product code": "84997A",
+      "Product": "GREEN 3 PIECE MINI DOTS CUTLERY SET",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 1668.8621184210526,
+      "Median later net revenue (\u00a3)": 247.83
+    },
+    {
+      "Product code": "22335",
+      "Product": "HEART DECORATION PAINTED ZINC ",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 1992.3355263157894,
+      "Median later net revenue (\u00a3)": 350.105
+    },
+    {
+      "Product code": "22331",
+      "Product": "WOODLAND PARTY BAG + STICKER SET",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 1182.4734210526315,
+      "Median later net revenue (\u00a3)": 285.70000000000005
+    },
+    {
+      "Product code": "22492",
+      "Product": "MINI PAINT SET VINTAGE ",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 945.2955263157894,
+      "Median later net revenue (\u00a3)": 350.32499999999993
+    },
+    {
+      "Product code": "35961",
+      "Product": "FOLKART ZINC HEART CHRISTMAS DEC",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 1878.1357894736843,
+      "Median later net revenue (\u00a3)": 328.98
+    },
+    {
+      "Product code": "22634",
+      "Product": "CHILDS BREAKFAST SET SPACEBOY ",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 873.8181578947367,
+      "Median later net revenue (\u00a3)": 92.13000000000002
+    },
+    {
+      "Product code": "22071",
+      "Product": "SMALL RETRO SPOT MUG IN BOX  WHITE",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 849.0173815789474,
+      "Median later net revenue (\u00a3)": 322.3950000000001
+    },
+    {
+      "Product code": "22070",
+      "Product": "SMALL RETRO SPOT MUG IN BOX  RED",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 623.6852763157895,
+      "Median later net revenue (\u00a3)": 393.04999999999995
+    },
+    {
+      "Product code": "22241",
+      "Product": "GARLAND , WOODEN  \" HAPPY EASTER\"",
+      "Customers": 76,
+      "Average later net revenue (\u00a3)": 442.5618421052631,
+      "Median later net revenue (\u00a3)": 193.26999999999998
+    },
+    {
+      "Product code": "21672",
+      "Product": "WHITE SPOT RED CERAMIC DRAWER KNOB",
+      "Customers": 75,
+      "Average later net revenue (\u00a3)": 1170.5065333333334,
+      "Median later net revenue (\u00a3)": 769.6800000000001
+    },
+    {
+      "Product code": "22037",
+      "Product": "ROBOT BIRTHDAY CARD",
+      "Customers": 75,
+      "Average later net revenue (\u00a3)": 1088.2861333333335,
+      "Median later net revenue (\u00a3)": 583.87
+    },
+    {
+      "Product code": "20702",
+      "Product": "PINK PADDED MOBILE",
+      "Customers": 75,
+      "Average later net revenue (\u00a3)": 515.322,
+      "Median later net revenue (\u00a3)": 147.08999999999997
+    },
+    {
+      "Product code": "20829",
+      "Product": "GLITTER HANGING BUTTERFLY STRING",
+      "Customers": 75,
+      "Average later net revenue (\u00a3)": 621.8492,
+      "Median later net revenue (\u00a3)": 194.08999999999997
+    },
+    {
+      "Product code": "22283",
+      "Product": "6 EGG HOUSE PAINTED WOOD",
+      "Customers": 75,
+      "Average later net revenue (\u00a3)": 674.4413333333333,
+      "Median later net revenue (\u00a3)": 348.96000000000004
+    },
+    {
+      "Product code": "22567",
+      "Product": "20 DOLLY PEGS RETROSPOT",
+      "Customers": 75,
+      "Average later net revenue (\u00a3)": 881.0945333333333,
+      "Median later net revenue (\u00a3)": 368.36
+    },
+    {
+      "Product code": "22158",
+      "Product": "3 HEARTS HANGING DECORATION RUSTIC",
+      "Customers": 75,
+      "Average later net revenue (\u00a3)": 463.09226666666666,
+      "Median later net revenue (\u00a3)": 106.81
+    },
+    {
+      "Product code": "22694",
+      "Product": "WICKER STAR ",
+      "Customers": 75,
+      "Average later net revenue (\u00a3)": 649.3378666666666,
+      "Median later net revenue (\u00a3)": 237.74
+    },
+    {
+      "Product code": "85049C",
+      "Product": "ROMANTIC PINKS RIBBONS ",
+      "Customers": 75,
+      "Average later net revenue (\u00a3)": 1021.2938666666665,
+      "Median later net revenue (\u00a3)": 609.39
+    },
+    {
+      "Product code": "22244",
+      "Product": "HOOK, 3 HANGER ,MAGIC GARDEN",
+      "Customers": 75,
+      "Average later net revenue (\u00a3)": 1158.5877333333333,
+      "Median later net revenue (\u00a3)": 748.75
+    },
+    {
+      "Product code": "21984",
+      "Product": "PACK OF 12 PINK PAISLEY TISSUES ",
+      "Customers": 74,
+      "Average later net revenue (\u00a3)": 1154.440162162162,
+      "Median later net revenue (\u00a3)": 289.295
+    },
+    {
+      "Product code": "22520",
+      "Product": "CHILDS GARDEN TROWEL BLUE ",
+      "Customers": 74,
+      "Average later net revenue (\u00a3)": 510.7782432432432,
+      "Median later net revenue (\u00a3)": 186.42
+    },
+    {
+      "Product code": "37448",
+      "Product": "CERAMIC CAKE DESIGN SPOTTED MUG",
+      "Customers": 74,
+      "Average later net revenue (\u00a3)": 964.6836486486486,
+      "Median later net revenue (\u00a3)": 309.01
+    },
+    {
+      "Product code": "22636",
+      "Product": "CHILDS BREAKFAST SET CIRCUS PARADE",
+      "Customers": 74,
+      "Average later net revenue (\u00a3)": 942.7466216216217,
+      "Median later net revenue (\u00a3)": 196.93499999999997
+    },
+    {
+      "Product code": "22121",
+      "Product": "NOEL WOODEN BLOCK LETTERS ",
+      "Customers": 74,
+      "Average later net revenue (\u00a3)": 1736.514054054054,
+      "Median later net revenue (\u00a3)": 174.97499999999997
+    },
+    {
+      "Product code": "22623",
+      "Product": "BOX OF VINTAGE JIGSAW BLOCKS ",
+      "Customers": 74,
+      "Average later net revenue (\u00a3)": 777.7882432432433,
+      "Median later net revenue (\u00a3)": 31.12000000000006
+    },
+    {
+      "Product code": "21257",
+      "Product": "VICTORIAN SEWING BOX MEDIUM",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 1144.6223287671235,
+      "Median later net revenue (\u00a3)": 301.5000000000001
+    },
+    {
+      "Product code": "21703",
+      "Product": "BAG 125g SWIRLY MARBLES",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 1190.9213698630135,
+      "Median later net revenue (\u00a3)": 430.91999999999985
+    },
+    {
+      "Product code": "21243",
+      "Product": "PINK  SPOTTY PLATE ",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 2107.351095890411,
+      "Median later net revenue (\u00a3)": 277.25000000000006
+    },
+    {
+      "Product code": "21781",
+      "Product": "MA CAMPAGNE CUTLERY BOX",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 2127.412191780822,
+      "Median later net revenue (\u00a3)": 287.71999999999997
+    },
+    {
+      "Product code": "21431",
+      "Product": "GREEN GINGHAM FLOWER JEWELLERY BOX",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 854.1609589041096,
+      "Median later net revenue (\u00a3)": 443.88
+    },
+    {
+      "Product code": "21086",
+      "Product": "SET/6 RED SPOTTY PAPER CUPS",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 1343.925205479452,
+      "Median later net revenue (\u00a3)": 390.9
+    },
+    {
+      "Product code": "21495",
+      "Product": "SKULLS WRAP",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 962.2739726027397,
+      "Median later net revenue (\u00a3)": 414.51
+    },
+    {
+      "Product code": "22667",
+      "Product": "RECIPE BOX RETRO SPOT DESIGN",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 619.3901369863014,
+      "Median later net revenue (\u00a3)": 224.66000000000008
+    },
+    {
+      "Product code": "22171",
+      "Product": "3 HOOK PHOTO SHELF ANTIQUE WHITE",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 747.5890547945205,
+      "Median later net revenue (\u00a3)": 323.55000000000007
+    },
+    {
+      "Product code": "37370",
+      "Product": "RETRO COFFEE MUGS ASSORTED",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 617.8334246575342,
+      "Median later net revenue (\u00a3)": 170.91000000000008
+    },
+    {
+      "Product code": "21670",
+      "Product": "BLUE SPOT CERAMIC DRAWER KNOB",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 935.2160273972603,
+      "Median later net revenue (\u00a3)": 539.81
+    },
+    {
+      "Product code": "35400",
+      "Product": "WOODEN BOX ADVENT CALENDAR ",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 1040.2268493150684,
+      "Median later net revenue (\u00a3)": 246.85000000000002
+    },
+    {
+      "Product code": "21491",
+      "Product": "SET OF THREE VINTAGE GIFT WRAPS",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 1281.210410958904,
+      "Median later net revenue (\u00a3)": 938.3800000000001
+    },
+    {
+      "Product code": "22622",
+      "Product": "BOX OF VINTAGE ALPHABET BLOCKS",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 844.5647945205479,
+      "Median later net revenue (\u00a3)": 146.0
+    },
+    {
+      "Product code": "72351B",
+      "Product": "SET/6 PINK  BUTTERFLY T-LIGHTS",
+      "Customers": 73,
+      "Average later net revenue (\u00a3)": 725.0421917808219,
+      "Median later net revenue (\u00a3)": 313.21
+    },
+    {
+      "Product code": "22625",
+      "Product": "RED KITCHEN SCALES",
+      "Customers": 72,
+      "Average later net revenue (\u00a3)": 933.685,
+      "Median later net revenue (\u00a3)": 327.66999999999996
+    },
+    {
+      "Product code": "22697",
+      "Product": "GREEN REGENCY TEACUP AND SAUCER",
+      "Customers": 72,
+      "Average later net revenue (\u00a3)": 718.9669444444445,
+      "Median later net revenue (\u00a3)": 249.3
+    },
+    {
+      "Product code": "21832",
+      "Product": "CHOCOLATE CALCULATOR",
+      "Customers": 72,
+      "Average later net revenue (\u00a3)": 625.853888888889,
+      "Median later net revenue (\u00a3)": 160.09500000000003
+    },
+    {
+      "Product code": "72008",
+      "Product": "FROSTED BOX 9 WHITE T-LIGHT CANDLES",
+      "Customers": 72,
+      "Average later net revenue (\u00a3)": 1072.5170833333332,
+      "Median later net revenue (\u00a3)": 450.39
+    },
+    {
+      "Product code": "85231B",
+      "Product": "CINAMMON SET OF 9 T-LIGHTS",
+      "Customers": 72,
+      "Average later net revenue (\u00a3)": 1157.382638888889,
+      "Median later net revenue (\u00a3)": 693.12
+    },
+    {
+      "Product code": "21714",
+      "Product": "CITRONELLA CANDLE GARDEN POT",
+      "Customers": 72,
+      "Average later net revenue (\u00a3)": 476.2347222222222,
+      "Median later net revenue (\u00a3)": 158.72499999999997
+    },
+    {
+      "Product code": "16161P",
+      "Product": "WRAP ENGLISH ROSE ",
+      "Customers": 72,
+      "Average later net revenue (\u00a3)": 1025.2458333333334,
+      "Median later net revenue (\u00a3)": 495.86
+    },
+    {
+      "Product code": "22465",
+      "Product": "HANGING METAL STAR LANTERN",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 586.4335211267605,
+      "Median later net revenue (\u00a3)": 334.53999999999996
+    },
+    {
+      "Product code": "21833",
+      "Product": "CAMOUFLAGE LED TORCH",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 549.2097183098591,
+      "Median later net revenue (\u00a3)": 393.33000000000004
+    },
+    {
+      "Product code": "22272",
+      "Product": "FELTCRAFT DOLL MARIA",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 771.3292957746479,
+      "Median later net revenue (\u00a3)": 313.45000000000005
+    },
+    {
+      "Product code": "22128",
+      "Product": "PARTY CONES CANDY ASSORTED",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 684.9212676056337,
+      "Median later net revenue (\u00a3)": 245.3
+    },
+    {
+      "Product code": "22245",
+      "Product": "HOOK, 1 HANGER ,MAGIC GARDEN",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 886.5340845070423,
+      "Median later net revenue (\u00a3)": 464.3
+    },
+    {
+      "Product code": "22224",
+      "Product": "WHITE LOVEBIRD LANTERN",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 796.8632394366198,
+      "Median later net revenue (\u00a3)": 413.43
+    },
+    {
+      "Product code": "48173C",
+      "Product": "DOOR MAT BLACK FLOCK ",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 926.6349295774648,
+      "Median later net revenue (\u00a3)": 317.52000000000004
+    },
+    {
+      "Product code": "22528",
+      "Product": "GARDENERS KNEELING PAD",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 699.3360563380281,
+      "Median later net revenue (\u00a3)": 349.01000000000005
+    },
+    {
+      "Product code": "20967",
+      "Product": "GREY FLORAL FELTCRAFT SHOULDER BAG",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 842.6409859154929,
+      "Median later net revenue (\u00a3)": 349.57000000000005
+    },
+    {
+      "Product code": "20681",
+      "Product": "PINK SPOTTY CHILDS UMBRELLA",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 1372.57,
+      "Median later net revenue (\u00a3)": 584.4000000000001
+    },
+    {
+      "Product code": "84945",
+      "Product": "MULTI COLOUR SILVER T-LIGHT HOLDER",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 363.00112676056335,
+      "Median later net revenue (\u00a3)": 93.69999999999999
+    },
+    {
+      "Product code": "22047",
+      "Product": "EMPIRE GIFT WRAP",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 843.4355070422536,
+      "Median later net revenue (\u00a3)": 357.61999999999995
+    },
+    {
+      "Product code": "22727",
+      "Product": "ALARM CLOCK BAKELIKE RED ",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 809.3619718309859,
+      "Median later net revenue (\u00a3)": 265.26
+    },
+    {
+      "Product code": "21186",
+      "Product": "WHITE DOVE HONEYCOMB PAPER GARLAND",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 786.9784507042253,
+      "Median later net revenue (\u00a3)": 449.42
+    },
+    {
+      "Product code": "22521",
+      "Product": "CHILDS GARDEN TROWEL PINK",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 518.4438028169014,
+      "Median later net revenue (\u00a3)": 206.94999999999993
+    },
+    {
+      "Product code": "21700",
+      "Product": "BIG DOUGHNUT FRIDGE MAGNETS",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 1693.364957746479,
+      "Median later net revenue (\u00a3)": 377.70000000000005
+    },
+    {
+      "Product code": "21737",
+      "Product": "SET 3 WICKER LOG BASKETS",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 812.4597183098591,
+      "Median later net revenue (\u00a3)": 491.0
+    },
+    {
+      "Product code": "22494",
+      "Product": "EMERGENCY FIRST AID TIN ",
+      "Customers": 71,
+      "Average later net revenue (\u00a3)": 623.7354929577465,
+      "Median later net revenue (\u00a3)": 236.35
+    },
+    {
+      "Product code": "21989",
+      "Product": "PACK OF 20 SKULL PAPER NAPKINS",
+      "Customers": 70,
+      "Average later net revenue (\u00a3)": 939.1300000000001,
+      "Median later net revenue (\u00a3)": 223.30500000000004
+    },
+    {
+      "Product code": "79067",
+      "Product": "CORONA MEXICAN TRAY",
+      "Customers": 70,
+      "Average later net revenue (\u00a3)": 864.9364285714286,
+      "Median later net revenue (\u00a3)": 298.25
+    },
+    {
+      "Product code": "21558",
+      "Product": "SKULL LUNCHBOX WITH CUTLERY ",
+      "Customers": 70,
+      "Average later net revenue (\u00a3)": 1335.001,
+      "Median later net revenue (\u00a3)": 324.15500000000003
+    },
+    {
+      "Product code": "22619",
+      "Product": "SET OF 6 SOLDIER SKITTLES",
+      "Customers": 70,
+      "Average later net revenue (\u00a3)": 671.6062857142857,
+      "Median later net revenue (\u00a3)": 81.45
+    },
+    {
+      "Product code": "22371",
+      "Product": "AIRLINE BAG VINTAGE TOKYO 78",
+      "Customers": 70,
+      "Average later net revenue (\u00a3)": 701.2367142857142,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "47568",
+      "Product": "ENGLISH ROSE DESIGN PEG BAG",
+      "Customers": 69,
+      "Average later net revenue (\u00a3)": 2599.6973913043475,
+      "Median later net revenue (\u00a3)": 517.5400000000001
+    },
+    {
+      "Product code": "22621",
+      "Product": "TRADITIONAL KNITTING NANCY",
+      "Customers": 69,
+      "Average later net revenue (\u00a3)": 592.5488405797101,
+      "Median later net revenue (\u00a3)": 339.00000000000006
+    },
+    {
+      "Product code": "22207",
+      "Product": "FRYING PAN UNION FLAG",
+      "Customers": 69,
+      "Average later net revenue (\u00a3)": 1216.8463768115942,
+      "Median later net revenue (\u00a3)": 443.28
+    },
+    {
+      "Product code": "22220",
+      "Product": "CAKE STAND LOVEBIRD 2 TIER WHITE",
+      "Customers": 69,
+      "Average later net revenue (\u00a3)": 865.2002898550725,
+      "Median later net revenue (\u00a3)": 232.79000000000002
+    },
+    {
+      "Product code": "21829",
+      "Product": "DINOSAUR KEYRINGS ASSORTED",
+      "Customers": 69,
+      "Average later net revenue (\u00a3)": 761.7585507246376,
+      "Median later net revenue (\u00a3)": 344.56
+    },
+    {
+      "Product code": "22523",
+      "Product": "CHILDS GARDEN FORK PINK",
+      "Customers": 69,
+      "Average later net revenue (\u00a3)": 515.3465217391304,
+      "Median later net revenue (\u00a3)": 180.64999999999998
+    },
+    {
+      "Product code": "22188",
+      "Product": "BLACK HEART CARD HOLDER",
+      "Customers": 69,
+      "Average later net revenue (\u00a3)": 475.3601449275362,
+      "Median later net revenue (\u00a3)": 129.29999999999998
+    },
+    {
+      "Product code": "22072",
+      "Product": "TEA CUP AND SAUCER RETRO SPOT",
+      "Customers": 69,
+      "Average later net revenue (\u00a3)": 725.8334782608696,
+      "Median later net revenue (\u00a3)": 314.44999999999993
+    },
+    {
+      "Product code": "85061W",
+      "Product": "WHITE JEWELLED HEART DECORATION",
+      "Customers": 69,
+      "Average later net revenue (\u00a3)": 573.0455072463768,
+      "Median later net revenue (\u00a3)": 289.08000000000004
+    },
+    {
+      "Product code": "21914",
+      "Product": "BLUE HARMONICA IN BOX ",
+      "Customers": 68,
+      "Average later net revenue (\u00a3)": 992.9158823529411,
+      "Median later net revenue (\u00a3)": 282.49499999999995
+    },
+    {
+      "Product code": "22759",
+      "Product": "SET OF 3 NOTEBOOKS IN PARCEL",
+      "Customers": 68,
+      "Average later net revenue (\u00a3)": 424.3936764705882,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "22023",
+      "Product": "EMPIRE BIRTHDAY CARD",
+      "Customers": 68,
+      "Average later net revenue (\u00a3)": 906.288088235294,
+      "Median later net revenue (\u00a3)": 462.765
+    },
+    {
+      "Product code": "22720",
+      "Product": "SET OF 3 CAKE TINS PANTRY DESIGN ",
+      "Customers": 68,
+      "Average later net revenue (\u00a3)": 522.3283823529412,
+      "Median later net revenue (\u00a3)": 222.66500000000002
+    },
+    {
+      "Product code": "21679",
+      "Product": "SKULLS  STICKERS",
+      "Customers": 68,
+      "Average later net revenue (\u00a3)": 778.7538235294118,
+      "Median later net revenue (\u00a3)": 357.44
+    },
+    {
+      "Product code": "22485",
+      "Product": "SET OF 2 WOODEN MARKET CRATES",
+      "Customers": 68,
+      "Average later net revenue (\u00a3)": 880.9748529411764,
+      "Median later net revenue (\u00a3)": 380.99
+    },
+    {
+      "Product code": "21746",
+      "Product": "SMALL RED SPOT  WINDMILL",
+      "Customers": 68,
+      "Average later net revenue (\u00a3)": 677.6423529411765,
+      "Median later net revenue (\u00a3)": 344.20000000000005
+    },
+    {
+      "Product code": "21363",
+      "Product": "HOME SMALL WOOD LETTERS",
+      "Customers": 68,
+      "Average later net revenue (\u00a3)": 732.1754411764706,
+      "Median later net revenue (\u00a3)": 135.16500000000005
+    },
+    {
+      "Product code": "22867",
+      "Product": "HAND WARMER BIRD DESIGN",
+      "Customers": 68,
+      "Average later net revenue (\u00a3)": 350.6164705882353,
+      "Median later net revenue (\u00a3)": 91.00999999999996
+    },
+    {
+      "Product code": "22548",
+      "Product": "HEADS AND TAILS SPORTING FUN",
+      "Customers": 68,
+      "Average later net revenue (\u00a3)": 664.2970588235294,
+      "Median later net revenue (\u00a3)": 268.865
+    },
+    {
+      "Product code": "21669",
+      "Product": "BLUE STRIPE CERAMIC DRAWER KNOB",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 1419.725223880597,
+      "Median later net revenue (\u00a3)": 711.1099999999999
+    },
+    {
+      "Product code": "20973",
+      "Product": "12 PENCIL SMALL TUBE WOODLAND",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 794.7502985074626,
+      "Median later net revenue (\u00a3)": 253.24000000000007
+    },
+    {
+      "Product code": "21586",
+      "Product": "KINGS CHOICE GIANT TUBE MATCHES",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 577.2959701492538,
+      "Median later net revenue (\u00a3)": 83.14000000000001
+    },
+    {
+      "Product code": "22332",
+      "Product": "SKULLS PARTY BAG + STICKER SET",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 826.8401492537314,
+      "Median later net revenue (\u00a3)": 384.93000000000006
+    },
+    {
+      "Product code": "21587",
+      "Product": "COSY HOUR GIANT TUBE MATCHES",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 529.3764179104478,
+      "Median later net revenue (\u00a3)": 201.89999999999998
+    },
+    {
+      "Product code": "22960",
+      "Product": "JAM MAKING SET WITH JARS",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 555.3968656716419,
+      "Median later net revenue (\u00a3)": 234.07
+    },
+    {
+      "Product code": "22606",
+      "Product": "WOODEN SKITTLES GARDEN SET",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 460.9670149253731,
+      "Median later net revenue (\u00a3)": 149.6500000000001
+    },
+    {
+      "Product code": "22170",
+      "Product": "PICTURE FRAME WOOD TRIPLE PORTRAIT",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 634.1614925373134,
+      "Median later net revenue (\u00a3)": 287.95
+    },
+    {
+      "Product code": "22227",
+      "Product": "DECORATION, HANGING HEART+MIRROR ",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 484.7911940298508,
+      "Median later net revenue (\u00a3)": 280.76
+    },
+    {
+      "Product code": "21107",
+      "Product": "CREAM SLICE FLANNEL PINK SPOT ",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 1228.4943283582088,
+      "Median later net revenue (\u00a3)": 219.14999999999998
+    },
+    {
+      "Product code": "84884A",
+      "Product": "ANT WHITE WIRE HEART SPIRAL",
+      "Customers": 67,
+      "Average later net revenue (\u00a3)": 893.2016417910448,
+      "Median later net revenue (\u00a3)": 443.21000000000004
+    },
+    {
+      "Product code": "21258",
+      "Product": "VICTORIAN SEWING BOX LARGE",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 1643.1734848484848,
+      "Median later net revenue (\u00a3)": 436.42999999999995
+    },
+    {
+      "Product code": "84880",
+      "Product": "WHITE WIRE EGG HOLDER",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 1301.010606060606,
+      "Median later net revenue (\u00a3)": 728.5500000000001
+    },
+    {
+      "Product code": "21967",
+      "Product": "PACK OF 12 SKULL TISSUES",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 886.4840909090908,
+      "Median later net revenue (\u00a3)": 319.035
+    },
+    {
+      "Product code": "84792",
+      "Product": "ENCHANTED BIRD COATHANGER 5 HOOK",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 1107.5562272727273,
+      "Median later net revenue (\u00a3)": 498.81000000000006
+    },
+    {
+      "Product code": "22327",
+      "Product": "ROUND SNACK BOXES SET OF 4 SKULLS",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 750.2448484848484,
+      "Median later net revenue (\u00a3)": 299.46000000000004
+    },
+    {
+      "Product code": "10135",
+      "Product": "COLOURING PENCILS BROWN TUBE",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 951.5718181818181,
+      "Median later net revenue (\u00a3)": 356.775
+    },
+    {
+      "Product code": "10002",
+      "Product": "INFLATABLE POLITICAL GLOBE ",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 1249.500303030303,
+      "Median later net revenue (\u00a3)": 441.6149999999999
+    },
+    {
+      "Product code": "85206B",
+      "Product": "PINK FELT EASTER EGG BASKET",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 1183.6604545454545,
+      "Median later net revenue (\u00a3)": 493.64
+    },
+    {
+      "Product code": "20963",
+      "Product": "APPLE BATH SPONGE",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 1211.3810606060606,
+      "Median later net revenue (\u00a3)": 257.205
+    },
+    {
+      "Product code": "84375",
+      "Product": "SET OF 20 KIDS COOKIE CUTTERS",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 1142.9403181818182,
+      "Median later net revenue (\u00a3)": 404.645
+    },
+    {
+      "Product code": "22218",
+      "Product": "CAKE STAND LACE WHITE",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 688.6350000000001,
+      "Median later net revenue (\u00a3)": 356.9
+    },
+    {
+      "Product code": "22502",
+      "Product": "PICNIC BASKET WICKER SMALL",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 518.204696969697,
+      "Median later net revenue (\u00a3)": 242.67000000000002
+    },
+    {
+      "Product code": "21671",
+      "Product": "RED SPOT CERAMIC DRAWER KNOB",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 1452.7036363636364,
+      "Median later net revenue (\u00a3)": 664.335
+    },
+    {
+      "Product code": "85042",
+      "Product": "ANTIQUE LILY FAIRY LIGHTS",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 1965.2789393939395,
+      "Median later net revenue (\u00a3)": 619.655
+    },
+    {
+      "Product code": "22231",
+      "Product": "JIGSAW TREE WITH BIRDHOUSE",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 783.4668181818181,
+      "Median later net revenue (\u00a3)": 355.99
+    },
+    {
+      "Product code": "22115",
+      "Product": "METAL SIGN EMPIRE TEA",
+      "Customers": 66,
+      "Average later net revenue (\u00a3)": 980.6089393939394,
+      "Median later net revenue (\u00a3)": 309.23499999999996
+    },
+    {
+      "Product code": "21534",
+      "Product": "DAIRY MAID LARGE MILK JUG",
+      "Customers": 65,
+      "Average later net revenue (\u00a3)": 863.9772307692307,
+      "Median later net revenue (\u00a3)": 349.24999999999994
+    },
+    {
+      "Product code": "22550",
+      "Product": "HOLIDAY FUN LUDO",
+      "Customers": 65,
+      "Average later net revenue (\u00a3)": 908.1447692307692,
+      "Median later net revenue (\u00a3)": 312.82
+    },
+    {
+      "Product code": "20886",
+      "Product": "BOX OF 9 PEBBLE CANDLES",
+      "Customers": 65,
+      "Average later net revenue (\u00a3)": 556.462,
+      "Median later net revenue (\u00a3)": 129.29999999999998
+    },
+    {
+      "Product code": "48189",
+      "Product": "DOOR MAT FRIENDSHIP ",
+      "Customers": 65,
+      "Average later net revenue (\u00a3)": 1089.5035384615385,
+      "Median later net revenue (\u00a3)": 607.9200000000001
+    },
+    {
+      "Product code": "22127",
+      "Product": "PARTY CONES CARNIVAL ASSORTED",
+      "Customers": 65,
+      "Average later net revenue (\u00a3)": 752.3832307692309,
+      "Median later net revenue (\u00a3)": 157.54000000000002
+    },
+    {
+      "Product code": "79000",
+      "Product": "MOROCCAN TEA GLASS",
+      "Customers": 65,
+      "Average later net revenue (\u00a3)": 800.9554,
+      "Median later net revenue (\u00a3)": 357.15
+    },
+    {
+      "Product code": "22415",
+      "Product": "WHITE TISSUE REAM",
+      "Customers": 65,
+      "Average later net revenue (\u00a3)": 876.2139999999999,
+      "Median later net revenue (\u00a3)": 508.9
+    },
+    {
+      "Product code": "22652",
+      "Product": "TRAVEL SEWING KIT",
+      "Customers": 65,
+      "Average later net revenue (\u00a3)": 415.5981538461539,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "48116",
+      "Product": "DOOR MAT MULTICOLOUR STRIPE",
+      "Customers": 65,
+      "Average later net revenue (\u00a3)": 1155.1141538461538,
+      "Median later net revenue (\u00a3)": 340.96
+    },
+    {
+      "Product code": "21913",
+      "Product": "VINTAGE SEASIDE JIGSAW PUZZLES",
+      "Customers": 64,
+      "Average later net revenue (\u00a3)": 902.4482812499999,
+      "Median later net revenue (\u00a3)": 230.68500000000006
+    },
+    {
+      "Product code": "22637",
+      "Product": "PIGGY BANK RETROSPOT ",
+      "Customers": 64,
+      "Average later net revenue (\u00a3)": 1013.42453125,
+      "Median later net revenue (\u00a3)": 293.365
+    },
+    {
+      "Product code": "21508",
+      "Product": "VINTAGE KID DOLLY CARD ",
+      "Customers": 64,
+      "Average later net revenue (\u00a3)": 1228.6815625,
+      "Median later net revenue (\u00a3)": 584.73
+    },
+    {
+      "Product code": "20961",
+      "Product": "STRAWBERRY BATH SPONGE ",
+      "Customers": 64,
+      "Average later net revenue (\u00a3)": 1238.9084375,
+      "Median later net revenue (\u00a3)": 269.31999999999994
+    },
+    {
+      "Product code": "21588",
+      "Product": "RETRO SPOT GIANT  TUBE MATCHES",
+      "Customers": 64,
+      "Average later net revenue (\u00a3)": 663.4399999999999,
+      "Median later net revenue (\u00a3)": 211.475
+    },
+    {
+      "Product code": "84691",
+      "Product": "PACK 20 DOLLY PEGS",
+      "Customers": 64,
+      "Average later net revenue (\u00a3)": 1541.13125,
+      "Median later net revenue (\u00a3)": 605.1400000000001
+    },
+    {
+      "Product code": "21866",
+      "Product": "UNION JACK FLAG LUGGAGE TAG",
+      "Customers": 64,
+      "Average later net revenue (\u00a3)": 612.54890625,
+      "Median later net revenue (\u00a3)": 247.29500000000002
+    },
+    {
+      "Product code": "84580",
+      "Product": "MOUSE TOY WITH PINK T-SHIRT",
+      "Customers": 64,
+      "Average later net revenue (\u00a3)": 656.744375,
+      "Median later net revenue (\u00a3)": 161.60000000000002
+    },
+    {
+      "Product code": "20665",
+      "Product": "RED SPOTTY PURSE ",
+      "Customers": 64,
+      "Average later net revenue (\u00a3)": 977.26296875,
+      "Median later net revenue (\u00a3)": 328.04
+    },
+    {
+      "Product code": "21713",
+      "Product": "CITRONELLA CANDLE FLOWERPOT",
+      "Customers": 63,
+      "Average later net revenue (\u00a3)": 422.14873015873013,
+      "Median later net revenue (\u00a3)": 8.5
+    },
+    {
+      "Product code": "22302",
+      "Product": "COFFEE MUG PEARS  DESIGN",
+      "Customers": 63,
+      "Average later net revenue (\u00a3)": 1018.3411111111111,
+      "Median later net revenue (\u00a3)": 746.6
+    },
+    {
+      "Product code": "21100",
+      "Product": "CHARLIE AND LOLA CHARLOTTE BAG",
+      "Customers": 63,
+      "Average later net revenue (\u00a3)": 3933.770158730159,
+      "Median later net revenue (\u00a3)": 486.26000000000005
+    },
+    {
+      "Product code": "85049F",
+      "Product": "BABY BOOM RIBBONS ",
+      "Customers": 63,
+      "Average later net revenue (\u00a3)": 855.2953968253968,
+      "Median later net revenue (\u00a3)": 409.37
+    },
+    {
+      "Product code": "22429",
+      "Product": "ENAMEL MEASURING JUG CREAM",
+      "Customers": 63,
+      "Average later net revenue (\u00a3)": 757.3793650793651,
+      "Median later net revenue (\u00a3)": 252.62
+    },
+    {
+      "Product code": "22132",
+      "Product": "RED LOVE HEART SHAPE CUP",
+      "Customers": 63,
+      "Average later net revenue (\u00a3)": 865.7730158730159,
+      "Median later net revenue (\u00a3)": 376.09000000000015
+    },
+    {
+      "Product code": "85049G",
+      "Product": "CHOCOLATE BOX RIBBONS ",
+      "Customers": 63,
+      "Average later net revenue (\u00a3)": 744.8493650793652,
+      "Median later net revenue (\u00a3)": 422.54
+    },
+    {
+      "Product code": "22278",
+      "Product": "OVERNIGHT BAG VINTAGE ROSE PAISLEY",
+      "Customers": 63,
+      "Average later net revenue (\u00a3)": 848.5233333333333,
+      "Median later net revenue (\u00a3)": 218.06
+    },
+    {
+      "Product code": "21937",
+      "Product": "STRAWBERRY   PICNIC BAG",
+      "Customers": 63,
+      "Average later net revenue (\u00a3)": 686.803492063492,
+      "Median later net revenue (\u00a3)": 283.0
+    },
+    {
+      "Product code": "22633",
+      "Product": "HAND WARMER UNION JACK",
+      "Customers": 62,
+      "Average later net revenue (\u00a3)": 452.291935483871,
+      "Median later net revenue (\u00a3)": 97.30499999999998
+    },
+    {
+      "Product code": "22243",
+      "Product": "HOOK, 5 HANGER ,MAGIC TOADSTOOL RED",
+      "Customers": 62,
+      "Average later net revenue (\u00a3)": 1123.2620967741937,
+      "Median later net revenue (\u00a3)": 706.5899999999999
+    },
+    {
+      "Product code": "21935",
+      "Product": "SUKI  SHOULDER BAG",
+      "Customers": 62,
+      "Average later net revenue (\u00a3)": 1195.7024193548389,
+      "Median later net revenue (\u00a3)": 330.185
+    },
+    {
+      "Product code": "22748",
+      "Product": "POPPY'S PLAYHOUSE KITCHEN",
+      "Customers": 62,
+      "Average later net revenue (\u00a3)": 463.6033870967742,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "21623",
+      "Product": "VINTAGE UNION JACK MEMOBOARD",
+      "Customers": 62,
+      "Average later net revenue (\u00a3)": 628.2298387096774,
+      "Median later net revenue (\u00a3)": 220.16500000000002
+    },
+    {
+      "Product code": "47599A",
+      "Product": "PINK PARTY BAGS",
+      "Customers": 62,
+      "Average later net revenue (\u00a3)": 917.8258064516128,
+      "Median later net revenue (\u00a3)": 309.31500000000005
+    },
+    {
+      "Product code": "21329",
+      "Product": "DINOSAURS  WRITING SET ",
+      "Customers": 62,
+      "Average later net revenue (\u00a3)": 3421.210806451613,
+      "Median later net revenue (\u00a3)": 248.115
+    },
+    {
+      "Product code": "20658",
+      "Product": "RED SPOTTY LUGGAGE TAG",
+      "Customers": 62,
+      "Average later net revenue (\u00a3)": 856.3414516129031,
+      "Median later net revenue (\u00a3)": 315.2800000000001
+    },
+    {
+      "Product code": "22865",
+      "Product": "HAND WARMER OWL DESIGN",
+      "Customers": 62,
+      "Average later net revenue (\u00a3)": 325.03629032258067,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "22745",
+      "Product": "POPPY'S PLAYHOUSE BEDROOM ",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 444.5955737704918,
+      "Median later net revenue (\u00a3)": 11.800000000000011
+    },
+    {
+      "Product code": "21179",
+      "Product": "NO JUNK MAIL METAL SIGN",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 1252.3113114754096,
+      "Median later net revenue (\u00a3)": 346.38
+    },
+    {
+      "Product code": "85040A",
+      "Product": "S/4 PINK FLOWER CANDLES IN BOWL",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 753.6927868852459,
+      "Median later net revenue (\u00a3)": 241.91999999999996
+    },
+    {
+      "Product code": "20752",
+      "Product": "RETRO BLUE SPOTTY WASHING UP GLOVES",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 769.8937704918034,
+      "Median later net revenue (\u00a3)": 342.77
+    },
+    {
+      "Product code": "22365",
+      "Product": "DOORMAT RESPECTABLE HOUSE",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 678.0195081967214,
+      "Median later net revenue (\u00a3)": 443.21000000000004
+    },
+    {
+      "Product code": "84347",
+      "Product": "ROTATING SILVER ANGELS T-LIGHT HLDR",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 679.4249180327869,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "85047",
+      "Product": "WHITE BEADED GARLAND STRING 20LIGHT",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 799.1080327868854,
+      "Median later net revenue (\u00a3)": 330.68
+    },
+    {
+      "Product code": "21983",
+      "Product": "PACK OF 12 BLUE PAISLEY TISSUES ",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 959.552,
+      "Median later net revenue (\u00a3)": 479.44000000000005
+    },
+    {
+      "Product code": "22193",
+      "Product": "RED DINER WALL CLOCK",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 1665.8809999999999,
+      "Median later net revenue (\u00a3)": 753.4000000000001
+    },
+    {
+      "Product code": "22424",
+      "Product": "ENAMEL BREAD BIN CREAM",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 794.502131147541,
+      "Median later net revenue (\u00a3)": 355.25
+    },
+    {
+      "Product code": "21126",
+      "Product": "SET OF 6 GIRLS CELEBRATION CANDLES",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 724.7939344262295,
+      "Median later net revenue (\u00a3)": 187.25
+    },
+    {
+      "Product code": "22530",
+      "Product": "MAGIC DRAWING SLATE DOLLY GIRL ",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 799.2888524590164,
+      "Median later net revenue (\u00a3)": 237.74
+    },
+    {
+      "Product code": "22192",
+      "Product": "BLUE DINER WALL CLOCK",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 1729.8260819672132,
+      "Median later net revenue (\u00a3)": 471.43000000000006
+    },
+    {
+      "Product code": "21903",
+      "Product": "MAN FLU METAL SIGN",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 796.7378688524591,
+      "Median later net revenue (\u00a3)": 257.28
+    },
+    {
+      "Product code": "47505",
+      "Product": "MINATURE COLOURED GARDENING SET",
+      "Customers": 61,
+      "Average later net revenue (\u00a3)": 768.1029508196721,
+      "Median later net revenue (\u00a3)": 476.70000000000005
+    },
+    {
+      "Product code": "22285",
+      "Product": "DECORATION HEN ON NEST, HANGING",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 383.2141666666667,
+      "Median later net revenue (\u00a3)": 128.61
+    },
+    {
+      "Product code": "21987",
+      "Product": "PACK OF 6 SKULL PAPER CUPS",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 899.5385,
+      "Median later net revenue (\u00a3)": 223.30500000000004
+    },
+    {
+      "Product code": "20966",
+      "Product": "SANDWICH BATH SPONGE",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 1328.752,
+      "Median later net revenue (\u00a3)": 218.57000000000005
+    },
+    {
+      "Product code": "22969",
+      "Product": "HOMEMADE JAM SCENTED CANDLES",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 491.5991666666667,
+      "Median later net revenue (\u00a3)": 103.32500000000002
+    },
+    {
+      "Product code": "22478",
+      "Product": "BIRDHOUSE GARDEN MARKER ",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 495.88966666666664,
+      "Median later net revenue (\u00a3)": 290.305
+    },
+    {
+      "Product code": "84279B",
+      "Product": "CHERRY BLOSSOM DECORATIVE FLASK",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 804.7183333333334,
+      "Median later net revenue (\u00a3)": 434.03499999999997
+    },
+    {
+      "Product code": "22498",
+      "Product": "WOODEN REGATTA BUNTING",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 496.62766666666664,
+      "Median later net revenue (\u00a3)": 202.285
+    },
+    {
+      "Product code": "21472",
+      "Product": "LADYBIRD + BEE RAFFIA FOOD COVER",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 534.1723333333333,
+      "Median later net revenue (\u00a3)": 300.67499999999995
+    },
+    {
+      "Product code": "22582",
+      "Product": "PACK OF 6 SWEETIE GIFT BOXES",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 437.5826666666666,
+      "Median later net revenue (\u00a3)": 11.045000000000002
+    },
+    {
+      "Product code": "20703",
+      "Product": "BLUE PADDED SOFT MOBILE",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 582.3891666666666,
+      "Median later net revenue (\u00a3)": 251.15500000000003
+    },
+    {
+      "Product code": "22951",
+      "Product": "72 CAKE CASES DOLLY GIRL DESIGN",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 781.6858333333333,
+      "Median later net revenue (\u00a3)": 334.61500000000007
+    },
+    {
+      "Product code": "22952",
+      "Product": "72 CAKE CASES VINTAGE CHRISTMAS",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 385.91016666666667,
+      "Median later net revenue (\u00a3)": 103.34499999999998
+    },
+    {
+      "Product code": "47599B",
+      "Product": "BLUE PARTY BAGS ",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 898.9618333333333,
+      "Median later net revenue (\u00a3)": 296.02
+    },
+    {
+      "Product code": "22616",
+      "Product": "PACK OF 12 LONDON TISSUES ",
+      "Customers": 60,
+      "Average later net revenue (\u00a3)": 1271.5448333333334,
+      "Median later net revenue (\u00a3)": 407.645
+    },
+    {
+      "Product code": "17003",
+      "Product": "BROCADE RING PURSE ",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 522.2477966101695,
+      "Median later net revenue (\u00a3)": 174.14000000000004
+    },
+    {
+      "Product code": "22722",
+      "Product": "SET OF 6 SPICE TINS PANTRY DESIGN",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 630.7132203389831,
+      "Median later net revenue (\u00a3)": 320.68
+    },
+    {
+      "Product code": "21482",
+      "Product": "MUSHROOM BLUE HOT WATER BOTTLE",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 1812.778813559322,
+      "Median later net revenue (\u00a3)": 922.49
+    },
+    {
+      "Product code": "82599",
+      "Product": "FANNY'S REST STOPMETAL SIGN",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 963.1471186440677,
+      "Median later net revenue (\u00a3)": 317.79
+    },
+    {
+      "Product code": "22483",
+      "Product": "RED GINGHAM TEDDY BEAR ",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 632.0506779661017,
+      "Median later net revenue (\u00a3)": 259.3
+    },
+    {
+      "Product code": "21932",
+      "Product": "SCANDINAVIAN PAISLEY PICNIC BAG",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 696.7042372881357,
+      "Median later net revenue (\u00a3)": 311.85
+    },
+    {
+      "Product code": "22179",
+      "Product": "SET 10 LIGHTS NIGHT OWL",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 1148.0957627118644,
+      "Median later net revenue (\u00a3)": 610.5699999999999
+    },
+    {
+      "Product code": "21355",
+      "Product": "TOAST ITS - I LOVE YOU ",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 1371.6623728813559,
+      "Median later net revenue (\u00a3)": 372.44999999999993
+    },
+    {
+      "Product code": "21537",
+      "Product": "RETRO SPOTS PUDDING BOWL",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 877.0593220338983,
+      "Median later net revenue (\u00a3)": 466.1199999999999
+    },
+    {
+      "Product code": "22851",
+      "Product": "SET 20 NAPKINS FAIRY CAKES DESIGN ",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 659.8105084745763,
+      "Median later net revenue (\u00a3)": 274.44
+    },
+    {
+      "Product code": "21328",
+      "Product": "BALLOONS  WRITING SET ",
+      "Customers": 59,
+      "Average later net revenue (\u00a3)": 919.3337288135593,
+      "Median later net revenue (\u00a3)": 118.30000000000003
+    },
+    {
+      "Product code": "22366",
+      "Product": "DOORMAT AIRMAIL ",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 754.643448275862,
+      "Median later net revenue (\u00a3)": 427.9150000000001
+    },
+    {
+      "Product code": "20674",
+      "Product": "GREEN SPOTTY BOWL",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 1154.6581034482758,
+      "Median later net revenue (\u00a3)": 230.35000000000005
+    },
+    {
+      "Product code": "22076",
+      "Product": "6 RIBBONS EMPIRE  ",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 639.0182758620689,
+      "Median later net revenue (\u00a3)": 243.91
+    },
+    {
+      "Product code": "22525",
+      "Product": "CHILDRENS GARDEN GLOVES PINK",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 621.4300000000001,
+      "Median later net revenue (\u00a3)": 233.21
+    },
+    {
+      "Product code": "22203",
+      "Product": "MILK PAN RED RETROSPOT",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 1158.6855172413793,
+      "Median later net revenue (\u00a3)": 699.03
+    },
+    {
+      "Product code": "21041",
+      "Product": "RED SPOTTY OVEN GLOVE DOUBLE",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 1592.1677586206895,
+      "Median later net revenue (\u00a3)": 370.43
+    },
+    {
+      "Product code": "22866",
+      "Product": "HAND WARMER SCOTTY DOG DESIGN",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 387.33344827586205,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "21486",
+      "Product": "PINK HEART DOTS HOT WATER BOTTLE",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 1238.9008620689656,
+      "Median later net revenue (\u00a3)": 326.4
+    },
+    {
+      "Product code": "22059",
+      "Product": "CERAMIC STRWBERRY DESIGN MUG",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 821.6500000000001,
+      "Median later net revenue (\u00a3)": 322.9549999999999
+    },
+    {
+      "Product code": "22662",
+      "Product": "LUNCH BAG DOLLY GIRL DESIGN",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 691.2575862068965,
+      "Median later net revenue (\u00a3)": 176.50500000000002
+    },
+    {
+      "Product code": "16161U",
+      "Product": "WRAP,SUKI AND FRIENDS",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 916.5122413793105,
+      "Median later net revenue (\u00a3)": 547.8000000000001
+    },
+    {
+      "Product code": "22024",
+      "Product": "RAINY LADIES BIRTHDAY CARD",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 1596.8022413793103,
+      "Median later net revenue (\u00a3)": 548.1600000000001
+    },
+    {
+      "Product code": "22776",
+      "Product": "SWEETHEART CAKESTAND 3 TIER",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 507.3072413793103,
+      "Median later net revenue (\u00a3)": 53.849999999999994
+    },
+    {
+      "Product code": "85048",
+      "Product": "15CM CHRISTMAS GLASS BALL 20 LIGHTS",
+      "Customers": 58,
+      "Average later net revenue (\u00a3)": 983.995,
+      "Median later net revenue (\u00a3)": 380.56500000000005
+    },
+    {
+      "Product code": "21658",
+      "Product": "GLASS  BEURRE DISH",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 976.9126315789474,
+      "Median later net revenue (\u00a3)": 471.64
+    },
+    {
+      "Product code": "22350",
+      "Product": "CAT BOWL ",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 1174.3107017543862,
+      "Median later net revenue (\u00a3)": 685.52
+    },
+    {
+      "Product code": "16237",
+      "Product": "SLEEPING CAT ERASERS",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 956.5738596491228,
+      "Median later net revenue (\u00a3)": 203.56
+    },
+    {
+      "Product code": "47591C",
+      "Product": "BLUE FAIRY CAKE CHILD'S APRON",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 1616.6070175438597,
+      "Median later net revenue (\u00a3)": 551.3299999999999
+    },
+    {
+      "Product code": "46000M",
+      "Product": "POLYESTER FILLER PAD 45x45cm",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 1140.3333333333333,
+      "Median later net revenue (\u00a3)": 371.61
+    },
+    {
+      "Product code": "21988",
+      "Product": "PACK OF 6 SKULL PAPER PLATES",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 944.9207017543861,
+      "Median later net revenue (\u00a3)": 253.07000000000002
+    },
+    {
+      "Product code": "85227",
+      "Product": "SET/6 3D KIT CARDS FOR KIDS",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 929.1080701754387,
+      "Median later net revenue (\u00a3)": 368.99
+    },
+    {
+      "Product code": "22524",
+      "Product": "CHILDRENS GARDEN GLOVES BLUE",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 563.1738596491228,
+      "Median later net revenue (\u00a3)": 274.7400000000001
+    },
+    {
+      "Product code": "21361",
+      "Product": "LOVE LARGE WOOD LETTERS ",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 922.2398245614035,
+      "Median later net revenue (\u00a3)": 149.6500000000001
+    },
+    {
+      "Product code": "21383",
+      "Product": "PACK OF 12 STICKY BUNNIES",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 557.3243859649123,
+      "Median later net revenue (\u00a3)": 154.48
+    },
+    {
+      "Product code": "22091",
+      "Product": "EMPIRE TISSUE BOX",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 627.6329824561403,
+      "Median later net revenue (\u00a3)": 292.54999999999995
+    },
+    {
+      "Product code": "22443",
+      "Product": "GROW YOUR OWN HERBS SET OF 3",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 601.8931578947369,
+      "Median later net revenue (\u00a3)": 105.04999999999998
+    },
+    {
+      "Product code": "22435",
+      "Product": "SET OF 9 HEART SHAPED BALLOONS",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 526.7742105263158,
+      "Median later net revenue (\u00a3)": 127.86
+    },
+    {
+      "Product code": "21864",
+      "Product": "UNION JACK FLAG PASSPORT COVER ",
+      "Customers": 57,
+      "Average later net revenue (\u00a3)": 1426.974561403509,
+      "Median later net revenue (\u00a3)": 84.56000000000006
+    },
+    {
+      "Product code": "21625",
+      "Product": "VINTAGE UNION JACK APRON",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 1005.1592857142858,
+      "Median later net revenue (\u00a3)": 384.485
+    },
+    {
+      "Product code": "22907",
+      "Product": "PACK OF 20 NAPKINS PANTRY DESIGN",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 305.94678571428574,
+      "Median later net revenue (\u00a3)": 81.19999999999997
+    },
+    {
+      "Product code": "15060B",
+      "Product": "FAIRY CAKE DESIGN UMBRELLA",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 701.7951785714286,
+      "Median later net revenue (\u00a3)": 158.995
+    },
+    {
+      "Product code": "35004C",
+      "Product": "SET OF 3 COLOURED  FLYING DUCKS",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 1266.342142857143,
+      "Median later net revenue (\u00a3)": 508.8750000000001
+    },
+    {
+      "Product code": "22431",
+      "Product": "WATERING CAN BLUE ELEPHANT",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 497.5653571428571,
+      "Median later net revenue (\u00a3)": 235.26999999999998
+    },
+    {
+      "Product code": "85040B",
+      "Product": "SET/4 BLUE FLOWER CANDLES IN BOWL",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 1181.9658928571428,
+      "Median later net revenue (\u00a3)": 256.18999999999994
+    },
+    {
+      "Product code": "21125",
+      "Product": "SET 6 FOOTBALL CELEBRATION CANDLES",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 781.3201785714285,
+      "Median later net revenue (\u00a3)": 237.66999999999996
+    },
+    {
+      "Product code": "72351A",
+      "Product": "SET/6 TURQUOISE BUTTERFLY T-LIGHTS",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 746.7142857142857,
+      "Median later net revenue (\u00a3)": 220.95
+    },
+    {
+      "Product code": "22222",
+      "Product": "CAKE PLATE LOVEBIRD WHITE",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 669.6476785714285,
+      "Median later net revenue (\u00a3)": 305.195
+    },
+    {
+      "Product code": "22501",
+      "Product": "PICNIC BASKET WICKER LARGE",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 637.8408928571429,
+      "Median later net revenue (\u00a3)": 293.11999999999995
+    },
+    {
+      "Product code": "84078A",
+      "Product": "SET/4 WHITE RETRO STORAGE CUBES ",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 848.2714285714285,
+      "Median later net revenue (\u00a3)": 281.65999999999997
+    },
+    {
+      "Product code": "22334",
+      "Product": "DINOSAUR PARTY BAG + STICKER SET",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 1032.7960714285714,
+      "Median later net revenue (\u00a3)": 298.995
+    },
+    {
+      "Product code": "85178",
+      "Product": "VICTORIAN SEWING KIT",
+      "Customers": 56,
+      "Average later net revenue (\u00a3)": 749.74,
+      "Median later net revenue (\u00a3)": 328.375
+    },
+    {
+      "Product code": "21054",
+      "Product": "NURSE'S BAG SOFT TOY",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 659.532,
+      "Median later net revenue (\u00a3)": 214.69
+    },
+    {
+      "Product code": "47580",
+      "Product": "TEA TIME DES TEA COSY",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 1058.2045454545455,
+      "Median later net revenue (\u00a3)": 265.02000000000004
+    },
+    {
+      "Product code": "84837",
+      "Product": "WHITE SWEETHEARTS CABINET 4 DRAWERS",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 849.6470909090908,
+      "Median later net revenue (\u00a3)": 384.93000000000006
+    },
+    {
+      "Product code": "21333",
+      "Product": "CLASSIC WHITE FRAME",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 905.9236363636364,
+      "Median later net revenue (\u00a3)": 542.97
+    },
+    {
+      "Product code": "21614",
+      "Product": "SET OF 12 ROSE BOTANICAL T-LIGHTS",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 1019.7719999999999,
+      "Median later net revenue (\u00a3)": 341.5
+    },
+    {
+      "Product code": "22169",
+      "Product": "FAMILY ALBUM WHITE PICTURE FRAME",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 2774.051272727273,
+      "Median later net revenue (\u00a3)": 258.00000000000006
+    },
+    {
+      "Product code": "21137",
+      "Product": "BLACK RECORD COVER FRAME",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 802.0820181818182,
+      "Median later net revenue (\u00a3)": 265.26
+    },
+    {
+      "Product code": "46000S",
+      "Product": "POLYESTER FILLER PAD 40x40cm",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 915.3523636363636,
+      "Median later net revenue (\u00a3)": 303.59999999999997
+    },
+    {
+      "Product code": "22199",
+      "Product": "FRYING PAN RED POLKADOT ",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 2934.826181818182,
+      "Median later net revenue (\u00a3)": 798.52
+    },
+    {
+      "Product code": "21519",
+      "Product": "GIN & TONIC DIET GREETING CARD ",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 1070.7918181818181,
+      "Median later net revenue (\u00a3)": 627.9
+    },
+    {
+      "Product code": "22208",
+      "Product": "WOOD STAMP SET THANK YOU",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 852.011090909091,
+      "Median later net revenue (\u00a3)": 318.81999999999994
+    },
+    {
+      "Product code": "22644",
+      "Product": "CERAMIC CHERRY CAKE MONEY BANK",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 458.96036363636364,
+      "Median later net revenue (\u00a3)": 301.03999999999996
+    },
+    {
+      "Product code": "85174",
+      "Product": "S/4 CACTI CANDLES",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 1588.9456363636364,
+      "Median later net revenue (\u00a3)": 226.48999999999998
+    },
+    {
+      "Product code": "21428",
+      "Product": "SET3 BOOK BOX GREEN GINGHAM FLOWER ",
+      "Customers": 55,
+      "Average later net revenue (\u00a3)": 589.01,
+      "Median later net revenue (\u00a3)": 161.25
+    },
+    {
+      "Product code": "22665",
+      "Product": "RECIPE BOX BLUE SKETCHBOOK DESIGN",
+      "Customers": 54,
+      "Average later net revenue (\u00a3)": 341.0062962962963,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "22812",
+      "Product": "PACK 3 BOXES CHRISTMAS PANNETONE",
+      "Customers": 54,
+      "Average later net revenue (\u00a3)": 315.2261111111111,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "79323LP",
+      "Product": "LIGHT PINK CHERRY LIGHTS",
+      "Customers": 54,
+      "Average later net revenue (\u00a3)": 1744.8950185185186,
+      "Median later net revenue (\u00a3)": 935.9549999999999
+    },
+    {
+      "Product code": "21109",
+      "Product": "LARGE CAKE TOWEL, CHOCOLATE SPOTS",
+      "Customers": 54,
+      "Average later net revenue (\u00a3)": 706.7800000000001,
+      "Median later net revenue (\u00a3)": 270.4
+    },
+    {
+      "Product code": "22618",
+      "Product": "COOKING SET RETROSPOT",
+      "Customers": 54,
+      "Average later net revenue (\u00a3)": 867.767962962963,
+      "Median later net revenue (\u00a3)": 303.44000000000005
+    },
+    {
+      "Product code": "84536A",
+      "Product": "ENGLISH ROSE NOTEBOOK A7 SIZE",
+      "Customers": 54,
+      "Average later net revenue (\u00a3)": 570.4387037037037,
+      "Median later net revenue (\u00a3)": 170.58999999999997
+    },
+    {
+      "Product code": "21874",
+      "Product": "GIN AND TONIC MUG",
+      "Customers": 54,
+      "Average later net revenue (\u00a3)": 741.0194444444445,
+      "Median later net revenue (\u00a3)": 346.43
+    },
+    {
+      "Product code": "21171",
+      "Product": "BATHROOM METAL SIGN ",
+      "Customers": 54,
+      "Average later net revenue (\u00a3)": 828.2644444444444,
+      "Median later net revenue (\u00a3)": 608.625
+    },
+    {
+      "Product code": "21272",
+      "Product": "SALLE DE BAIN HOOK",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 796.4541509433963,
+      "Median later net revenue (\u00a3)": 596.63
+    },
+    {
+      "Product code": "37447",
+      "Product": "CERAMIC CAKE DESIGN SPOTTED PLATE",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 757.0422641509433,
+      "Median later net revenue (\u00a3)": 387.9
+    },
+    {
+      "Product code": "21059",
+      "Product": "PARTY INVITES DINOSAURS",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 443.0807547169811,
+      "Median later net revenue (\u00a3)": 223.96000000000004
+    },
+    {
+      "Product code": "21609",
+      "Product": "SET 12 LAVENDER  BOTANICAL T-LIGHTS",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 1093.586603773585,
+      "Median later net revenue (\u00a3)": 4.25
+    },
+    {
+      "Product code": "22148",
+      "Product": "EASTER CRAFT 4 CHICKS ",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 1012.4141509433963,
+      "Median later net revenue (\u00a3)": 435.45
+    },
+    {
+      "Product code": "21933",
+      "Product": "PINK VINTAGE PAISLEY PICNIC BAG",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 789.058679245283,
+      "Median later net revenue (\u00a3)": 283.0
+    },
+    {
+      "Product code": "22536",
+      "Product": "MAGIC DRAWING SLATE PURDEY",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 761.555283018868,
+      "Median later net revenue (\u00a3)": 94.21999999999997
+    },
+    {
+      "Product code": "22315",
+      "Product": "200 RED + WHITE BENDY STRAWS",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 530.7841509433962,
+      "Median later net revenue (\u00a3)": 288.61
+    },
+    {
+      "Product code": "22377",
+      "Product": "BOTTLE BAG RETROSPOT ",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 682.0745283018867,
+      "Median later net revenue (\u00a3)": 366.52
+    },
+    {
+      "Product code": "21241",
+      "Product": "GREEN SPOTTY CUP",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 2282.84358490566,
+      "Median later net revenue (\u00a3)": 408.29999999999995
+    },
+    {
+      "Product code": "22698",
+      "Product": "PINK REGENCY TEACUP AND SAUCER",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 802.0286792452831,
+      "Median later net revenue (\u00a3)": 303.4
+    },
+    {
+      "Product code": "21563",
+      "Product": "RED HEART SHAPE LOVE BUCKET ",
+      "Customers": 53,
+      "Average later net revenue (\u00a3)": 1113.1562264150944,
+      "Median later net revenue (\u00a3)": 553.02
+    },
+    {
+      "Product code": "22172",
+      "Product": "METAL SHELF WITH RAIL ",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 720.868076923077,
+      "Median later net revenue (\u00a3)": 189.535
+    },
+    {
+      "Product code": "22909",
+      "Product": "SET OF 20 VINTAGE CHRISTMAS NAPKINS",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 545.2869230769231,
+      "Median later net revenue (\u00a3)": 143.175
+    },
+    {
+      "Product code": "21098",
+      "Product": "CHRISTMAS TOILET ROLL",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 631.3273076923076,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "37450",
+      "Product": "CERAMIC CAKE BOWL + HANGING CAKES",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 1161.2459615384616,
+      "Median later net revenue (\u00a3)": 470.91999999999996
+    },
+    {
+      "Product code": "22028",
+      "Product": "PENNY FARTHING BIRTHDAY CARD",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 1386.8553846153845,
+      "Median later net revenue (\u00a3)": 733.87
+    },
+    {
+      "Product code": "22835",
+      "Product": "HOT WATER BOTTLE I AM SO POORLY",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 431.6515384615385,
+      "Median later net revenue (\u00a3)": 153.00500000000002
+    },
+    {
+      "Product code": "21717",
+      "Product": "EASTER TIN BUCKET",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 778.0617307692307,
+      "Median later net revenue (\u00a3)": 437.135
+    },
+    {
+      "Product code": "22122",
+      "Product": "SET OF 2 FANCY FONT TEA TOWELS",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 1675.8148076923076,
+      "Median later net revenue (\u00a3)": 397.53
+    },
+    {
+      "Product code": "22284",
+      "Product": "HEN HOUSE DECORATION",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 715.2398076923077,
+      "Median later net revenue (\u00a3)": 403.52
+    },
+    {
+      "Product code": "22291",
+      "Product": "SPRING DEC , HANGING CHICK CREAM",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 592.1084615384615,
+      "Median later net revenue (\u00a3)": 316.445
+    },
+    {
+      "Product code": "22374",
+      "Product": "AIRLINE BAG VINTAGE JET SET RED",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 898.2325,
+      "Median later net revenue (\u00a3)": 136.30999999999995
+    },
+    {
+      "Product code": "22354",
+      "Product": "RETRO SPOT PADDED SEAT CUSHION",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 1282.5321346153846,
+      "Median later net revenue (\u00a3)": 417.29499999999996
+    },
+    {
+      "Product code": "84510A",
+      "Product": "SET OF 4 ENGLISH ROSE COASTERS",
+      "Customers": 52,
+      "Average later net revenue (\u00a3)": 1065.4801923076923,
+      "Median later net revenue (\u00a3)": 280.66499999999996
+    },
+    {
+      "Product code": "22493",
+      "Product": "PAINT YOUR OWN CANVAS SET",
+      "Customers": 51,
+      "Average later net revenue (\u00a3)": 825.5917647058824,
+      "Median later net revenue (\u00a3)": 184.89999999999998
+    },
+    {
+      "Product code": "22746",
+      "Product": "POPPY'S PLAYHOUSE LIVINGROOM ",
+      "Customers": 51,
+      "Average later net revenue (\u00a3)": 416.5199999999999,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "22491",
+      "Product": "PACK OF 12 COLOURED PENCILS",
+      "Customers": 51,
+      "Average later net revenue (\u00a3)": 746.5341176470588,
+      "Median later net revenue (\u00a3)": 339.00000000000006
+    },
+    {
+      "Product code": "22341",
+      "Product": "LOVE GARLAND PAINTED ZINC ",
+      "Customers": 51,
+      "Average later net revenue (\u00a3)": 493.87235294117653,
+      "Median later net revenue (\u00a3)": 268.74
+    },
+    {
+      "Product code": "84670",
+      "Product": "JAPANESE CROCHETED ANIMAL",
+      "Customers": 51,
+      "Average later net revenue (\u00a3)": 588.1615686274511,
+      "Median later net revenue (\u00a3)": 287.16
+    },
+    {
+      "Product code": "72807C",
+      "Product": "SET/3 VANILLA SCENTED CANDLE IN BOX",
+      "Customers": 51,
+      "Average later net revenue (\u00a3)": 574.1237254901961,
+      "Median later net revenue (\u00a3)": 99.15000000000003
+    },
+    {
+      "Product code": "21826",
+      "Product": "EIGHT PIECE DINOSAUR SET",
+      "Customers": 51,
+      "Average later net revenue (\u00a3)": 624.2627450980392,
+      "Median later net revenue (\u00a3)": 119.04000000000008
+    },
+    {
+      "Product code": "85067",
+      "Product": "CREAM SWEETHEART WALL CABINET",
+      "Customers": 51,
+      "Average later net revenue (\u00a3)": 1106.1819607843138,
+      "Median later net revenue (\u00a3)": 372.44999999999993
+    },
+    {
+      "Product code": "22021",
+      "Product": "BLUE FELT EASTER EGG BASKET",
+      "Customers": 51,
+      "Average later net revenue (\u00a3)": 572.2729411764706,
+      "Median later net revenue (\u00a3)": 277.25000000000006
+    },
+    {
+      "Product code": "21878",
+      "Product": "PACK OF 6 SANDCASTLE FLAGS ASSORTED",
+      "Customers": 51,
+      "Average later net revenue (\u00a3)": 735.8909803921567,
+      "Median later net revenue (\u00a3)": 413.05999999999995
+    },
+    {
+      "Product code": "21071",
+      "Product": "VINTAGE BILLBOARD DRINK ME MUG",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 966.6488,
+      "Median later net revenue (\u00a3)": 592.185
+    },
+    {
+      "Product code": "22632",
+      "Product": "HAND WARMER RED POLKA DOT",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 382.27380000000005,
+      "Median later net revenue (\u00a3)": 0.0
+    },
+    {
+      "Product code": "21327",
+      "Product": "SKULLS WRITING SET ",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 976.5196,
+      "Median later net revenue (\u00a3)": 293.63000000000005
+    },
+    {
+      "Product code": "85172",
+      "Product": "HYACINTH BULB T-LIGHT CANDLES",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 443.9522,
+      "Median later net revenue (\u00a3)": 380.705
+    },
+    {
+      "Product code": "21667",
+      "Product": "GLASS CAKE COVER AND PLATE",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 648.8252,
+      "Median later net revenue (\u00a3)": 306.9
+    },
+    {
+      "Product code": "22961",
+      "Product": "JAM MAKING SET PRINTED",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 653.0748,
+      "Median later net revenue (\u00a3)": 241.70499999999998
+    },
+    {
+      "Product code": "21541",
+      "Product": "DINOSAURS WATER TRANSFER TATTOOS ",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 742.1705999999999,
+      "Median later net revenue (\u00a3)": 262.45000000000005
+    },
+    {
+      "Product code": "21830",
+      "Product": "ASSORTED CREEPY CRAWLIES",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 709.0726,
+      "Median later net revenue (\u00a3)": 251.90500000000003
+    },
+    {
+      "Product code": "21611",
+      "Product": "SET OF 12 LILY BOTANICAL T-LIGHTS",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 849.1402,
+      "Median later net revenue (\u00a3)": 375.25
+    },
+    {
+      "Product code": "22544",
+      "Product": "MINI JIGSAW SPACEBOY",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 885.5095999999999,
+      "Median later net revenue (\u00a3)": 237.04500000000002
+    },
+    {
+      "Product code": "21542",
+      "Product": "WOODLAND WATER TRANSFER TATTOOS ",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 1119.9642,
+      "Median later net revenue (\u00a3)": 455.91999999999996
+    },
+    {
+      "Product code": "22360",
+      "Product": "GLASS JAR, ENGLISH CONFECTIONERY",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 554.6264,
+      "Median later net revenue (\u00a3)": 276.005
+    },
+    {
+      "Product code": "21865",
+      "Product": "PINK UNION JACK  PASSPORT COVER ",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 1551.9361999999999,
+      "Median later net revenue (\u00a3)": 172.36499999999998
+    },
+    {
+      "Product code": "20985",
+      "Product": "HEART CALCULATOR",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 633.8342,
+      "Median later net revenue (\u00a3)": 225.71999999999994
+    },
+    {
+      "Product code": "82597",
+      "Product": "BOMBS AWAY METAL SIGN",
+      "Customers": 50,
+      "Average later net revenue (\u00a3)": 811.4608000000001,
+      "Median later net revenue (\u00a3)": 420.605
+    }
+  ],
+  "country_context": [
+    {
+      "country": "France",
+      "Customers": 64,
+      "Returned within 90 days (%)": 57.8125,
+      "Average first-order spending (\u00a3)": 526.20859375,
+      "Average later net revenue (\u00a3)": 939.6590625
+    },
+    {
+      "country": "Germany",
+      "Customers": 84,
+      "Returned within 90 days (%)": 58.333333333333336,
+      "Average first-order spending (\u00a3)": 808.6535833333334,
+      "Average later net revenue (\u00a3)": 1118.1129761904763
+    },
+    {
+      "country": "United Kingdom",
+      "Customers": 4529,
+      "Returned within 90 days (%)": 46.32369176418635,
+      "Average first-order spending (\u00a3)": 388.2539094722897,
+      "Average later net revenue (\u00a3)": 746.6413808787811
+    }
+  ],
+  "season_context": [
+    {
+      "When the customer first bought": "2009 Q4 (Oct\u2013Dec)",
+      "Customers": 948,
+      "Returned within 90 days (%)": 61.39240506329114,
+      "Average first-order spending (\u00a3)": 421.5798312236287,
+      "Average later net revenue (\u00a3)": 2008.991627637131
+    },
+    {
+      "When the customer first bought": "2010 Q1 (Jan\u2013Mar)",
+      "Customers": 1181,
+      "Returned within 90 days (%)": 49.95766299745978,
+      "Average first-order spending (\u00a3)": 399.98753259949194,
+      "Average later net revenue (\u00a3)": 715.5120753598645
+    },
+    {
+      "When the customer first bought": "2010 Q2 (Apr\u2013Jun)",
+      "Customers": 814,
+      "Returned within 90 days (%)": 39.06633906633907,
+      "Average first-order spending (\u00a3)": 414.68842874692876,
+      "Average later net revenue (\u00a3)": 491.5320761670761
+    },
+    {
+      "When the customer first bought": "2010 Q3 (Jul\u2013Sep)",
+      "Customers": 583,
+      "Returned within 90 days (%)": 47.512864493996574,
+      "Average first-order spending (\u00a3)": 444.0084562607204,
+      "Average later net revenue (\u00a3)": 554.296192109777
+    },
+    {
+      "When the customer first bought": "2010 Q4 (Oct\u2013Dec)",
+      "Customers": 774,
+      "Returned within 90 days (%)": 35.65891472868217,
+      "Average first-order spending (\u00a3)": 435.02086563307495,
+      "Average later net revenue (\u00a3)": 325.6689405684755
+    },
+    {
+      "When the customer first bought": "2011 Q1 (Jan\u2013Mar)",
+      "Customers": 374,
+      "Returned within 90 days (%)": 38.770053475935825,
+      "Average first-order spending (\u00a3)": 396.0633422459893,
+      "Average later net revenue (\u00a3)": 490.67745989304814
+    },
+    {
+      "When the customer first bought": "2011 Q2 (Apr\u2013Jun)",
+      "Customers": 260,
+      "Returned within 90 days (%)": 44.230769230769226,
+      "Average first-order spending (\u00a3)": 380.9365769230769,
+      "Average later net revenue (\u00a3)": 460.6711923076923
+    }
+  ],
+  "common_product": "WHITE HANGING HEART T-LIGHT HOLDER",
+  "common_product_by_season": [
+    {
+      "Quarter of first purchase": "2009 Q4 (Oct\u2013Dec)",
+      "Customers": 191,
+      "Returned within 90 days (%)": 68.06282722513089
+    },
+    {
+      "Quarter of first purchase": "2010 Q1 (Jan\u2013Mar)",
+      "Customers": 240,
+      "Returned within 90 days (%)": 56.25
+    },
+    {
+      "Quarter of first purchase": "2010 Q2 (Apr\u2013Jun)",
+      "Customers": 137,
+      "Returned within 90 days (%)": 51.82481751824818
+    },
+    {
+      "Quarter of first purchase": "2010 Q3 (Jul\u2013Sep)",
+      "Customers": 76,
+      "Returned within 90 days (%)": 48.68421052631579
+    },
+    {
+      "Quarter of first purchase": "2010 Q4 (Oct\u2013Dec)",
+      "Customers": 114,
+      "Returned within 90 days (%)": 43.859649122807014
+    }
+  ],
+  "second_order_model_validation": [
+    {
+      "Information available": "First order only",
+      "Algorithm": "Logistic regression",
+      "Validation Brier": 0.2554624272797933
+    },
+    {
+      "Information available": "First order only",
+      "Algorithm": "Gradient boosting",
+      "Validation Brier": 0.26549249542760556
+    },
+    {
+      "Information available": "First order only",
+      "Algorithm": "Training-rate baseline",
+      "Validation Brier": 0.2682598257964272
+    },
+    {
+      "Information available": "First and second orders",
+      "Algorithm": "Logistic regression",
+      "Validation Brier": 0.24464134696460227
+    },
+    {
+      "Information available": "First and second orders",
+      "Algorithm": "Gradient boosting",
+      "Validation Brier": 0.2356395807541854
+    },
+    {
+      "Information available": "First and second orders",
+      "Algorithm": "Training-rate baseline",
+      "Validation Brier": 0.2682598257964272
+    }
+  ],
+  "second_order_model_test": [
+    {
+      "Information available": "First order only",
+      "Selected algorithm": "Logistic regression",
+      "Test customers": 672,
+      "Test Brier": 0.30650099896192645,
+      "Test AUC": 0.5292623843957963
+    },
+    {
+      "Information available": "First and second orders",
+      "Selected algorithm": "Gradient boosting",
+      "Test customers": 672,
+      "Test Brier": 0.2550402893818283,
+      "Test AUC": 0.6353661062433024
+    }
+  ],
+  "second_order_split_counts": {
+    "train": 1469,
+    "validation": 186,
+    "test": 672
+  },
+  "second_order_brier_improvement": 0.05146070958009813,
+  "second_order_improvement_paired_95_ci": [
+    0.038541229544860806,
+    0.06422503992369454
+  ]
+}

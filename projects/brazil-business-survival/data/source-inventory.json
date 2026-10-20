@@ -1,0 +1,417 @@
+{
+  "release": "2026-10",
+  "directories": [
+    {
+      "path": "/public.php/webdav/",
+      "bytes": 0,
+      "last_modified": "Tue, 13 Oct 2026 22:09:31 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2023-05/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2023-06/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2023-07/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2023-08/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2023-09/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2023-10/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2023-11/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2023-12/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-01/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-02/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-03/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-04/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-05/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-06/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-07/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-08/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:45 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-09/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-10/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:46 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-11/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2024-12/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-01/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-02/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-03/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-04/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-05/",
+      "bytes": 0,
+      "last_modified": "Tue, 20 May 2025 20:54:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-06/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-07/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-08/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-09/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-10/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-11/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2025-12/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-01/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-02/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-03/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-04/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-05/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-06/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-07/",
+      "bytes": 0,
+      "last_modified": "Sun, 02 Aug 2026 09:06:42 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-08/",
+      "bytes": 0,
+      "last_modified": "Sun, 09 Aug 2026 18:35:31 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-09/",
+      "bytes": 0,
+      "last_modified": "Mon, 14 Sep 2026 15:08:06 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/",
+      "bytes": 0,
+      "last_modified": "Tue, 13 Oct 2026 22:09:31 GMT"
+    },
+    {
+      "path": "/public.php/webdav/cnpj.tar.gz",
+      "bytes": 63954782749,
+      "last_modified": "Wed, 28 Jan 2026 15:22:29 GMT"
+    }
+  ],
+  "files": [
+    {
+      "path": "/public.php/webdav/2026-10/",
+      "bytes": 0,
+      "last_modified": "Tue, 13 Oct 2026 22:09:31 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Cnaes.zip",
+      "bytes": 22078,
+      "last_modified": "Tue, 13 Oct 2026 22:00:16 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Empresas0.zip",
+      "bytes": 570972127,
+      "last_modified": "Tue, 13 Oct 2026 22:00:54 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Empresas1.zip",
+      "bytes": 77901368,
+      "last_modified": "Tue, 13 Oct 2026 22:01:01 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Empresas2.zip",
+      "bytes": 79125712,
+      "last_modified": "Tue, 13 Oct 2026 22:01:07 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Empresas3.zip",
+      "bytes": 85102880,
+      "last_modified": "Tue, 13 Oct 2026 22:01:14 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Empresas4.zip",
+      "bytes": 90222463,
+      "last_modified": "Tue, 13 Oct 2026 22:01:21 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Empresas5.zip",
+      "bytes": 97310075,
+      "last_modified": "Tue, 13 Oct 2026 22:01:28 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Empresas6.zip",
+      "bytes": 94194819,
+      "last_modified": "Tue, 13 Oct 2026 22:01:36 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Empresas7.zip",
+      "bytes": 98676055,
+      "last_modified": "Tue, 13 Oct 2026 22:01:43 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Empresas8.zip",
+      "bytes": 98736571,
+      "last_modified": "Tue, 13 Oct 2026 22:01:50 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Empresas9.zip",
+      "bytes": 94309858,
+      "last_modified": "Tue, 13 Oct 2026 22:01:57 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Estabelecimentos0.zip",
+      "bytes": 2277696710,
+      "last_modified": "Tue, 13 Oct 2026 22:04:26 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Estabelecimentos1.zip",
+      "bytes": 341948627,
+      "last_modified": "Tue, 13 Oct 2026 22:04:51 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Estabelecimentos2.zip",
+      "bytes": 336288966,
+      "last_modified": "Tue, 13 Oct 2026 22:05:15 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Estabelecimentos3.zip",
+      "bytes": 368597760,
+      "last_modified": "Tue, 13 Oct 2026 22:05:40 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Estabelecimentos4.zip",
+      "bytes": 340413465,
+      "last_modified": "Tue, 13 Oct 2026 22:06:03 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Estabelecimentos5.zip",
+      "bytes": 335452647,
+      "last_modified": "Tue, 13 Oct 2026 22:06:26 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Estabelecimentos6.zip",
+      "bytes": 369782592,
+      "last_modified": "Tue, 13 Oct 2026 22:06:50 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Estabelecimentos7.zip",
+      "bytes": 338419961,
+      "last_modified": "Tue, 13 Oct 2026 22:07:14 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Estabelecimentos8.zip",
+      "bytes": 343568209,
+      "last_modified": "Tue, 13 Oct 2026 22:07:37 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Estabelecimentos9.zip",
+      "bytes": 364761032,
+      "last_modified": "Tue, 13 Oct 2026 22:08:02 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Motivos.zip",
+      "bytes": 1180,
+      "last_modified": "Tue, 13 Oct 2026 22:08:03 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Municipios.zip",
+      "bytes": 43443,
+      "last_modified": "Tue, 13 Oct 2026 22:08:04 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Naturezas.zip",
+      "bytes": 1585,
+      "last_modified": "Tue, 13 Oct 2026 22:08:05 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Paises.zip",
+      "bytes": 2745,
+      "last_modified": "Tue, 13 Oct 2026 22:08:06 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Qualificacoes.zip",
+      "bytes": 980,
+      "last_modified": "Tue, 13 Oct 2026 22:08:07 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Simples.zip",
+      "bytes": 310608217,
+      "last_modified": "Tue, 13 Oct 2026 22:08:29 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Socios0.zip",
+      "bytes": 251430070,
+      "last_modified": "Tue, 13 Oct 2026 22:08:47 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Socios1.zip",
+      "bytes": 49546399,
+      "last_modified": "Tue, 13 Oct 2026 22:08:52 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Socios2.zip",
+      "bytes": 49056863,
+      "last_modified": "Tue, 13 Oct 2026 22:08:56 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Socios3.zip",
+      "bytes": 49011621,
+      "last_modified": "Tue, 13 Oct 2026 22:09:00 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Socios4.zip",
+      "bytes": 49560198,
+      "last_modified": "Tue, 13 Oct 2026 22:09:04 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Socios5.zip",
+      "bytes": 49063747,
+      "last_modified": "Tue, 13 Oct 2026 22:09:08 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Socios6.zip",
+      "bytes": 49147194,
+      "last_modified": "Tue, 13 Oct 2026 22:09:13 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Socios7.zip",
+      "bytes": 49212792,
+      "last_modified": "Tue, 13 Oct 2026 22:09:17 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Socios8.zip",
+      "bytes": 49447177,
+      "last_modified": "Tue, 13 Oct 2026 22:09:21 GMT"
+    },
+    {
+      "path": "/public.php/webdav/2026-10/Socios9.zip",
+      "bytes": 49114756,
+      "last_modified": "Tue, 13 Oct 2026 22:09:25 GMT"
+    }
+  ]
+}
