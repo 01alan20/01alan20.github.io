@@ -271,12 +271,10 @@ function renderWritings() {
       const entries = grouped.get(bucket);
       const cards = entries
         .map((item) => {
-          const linkTarget = item.url || encodeURI(item.path);
-          const linkLabel = item.url
-            ? "Open Link"
-            : /\.docx?$/i.test(item.path || "")
-            ? "Open Word"
-            : "Open PDF";
+          // Local manuscripts stay private; only publisher links are public.
+          const linkMarkup = item.url
+            ? `<a class="writing-link" href="${item.url}" target="_blank" rel="noopener">Open Link</a>`
+            : "";
           const year = item.year || parseYearFromPath(item.path || item.url || "");
           const yearMarkup = year ? `<span class="writing-year">${year}</span>` : "";
           return `
@@ -286,7 +284,7 @@ function renderWritings() {
                 ${yearMarkup}
               </div>
               <p class="writing-summary">${item.summary || ""}</p>
-              <a class="writing-link" href="${linkTarget}" target="_blank" rel="noopener">${linkLabel}</a>
+              ${linkMarkup}
             </article>
           `;
         })
