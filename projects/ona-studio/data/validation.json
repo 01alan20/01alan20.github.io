@@ -1,0 +1,26 @@
+{
+  "people": 46,
+  "layers": {
+    "information": 877,
+    "value": 855,
+    "combined": 959
+  },
+  "relationship_pairs_in_both_layers": 773,
+  "information_only_pairs": 104,
+  "value_only_pairs": 82,
+  "cross_community_pairs_combined": 437,
+  "cross_community_share_combined": 0.455683,
+  "community_B_to_C_combined": 109,
+  "community_C_to_B_combined": 86,
+  "community_sizes": {
+    "0": 22,
+    "2": 11,
+    "1": 13
+  },
+  "checks": [
+    "No self-links",
+    "All relationship endpoints resolve to nodes",
+    "Combined set equals union of information and value",
+    "Case-study counts match current embedded data"
+  ]
+}
